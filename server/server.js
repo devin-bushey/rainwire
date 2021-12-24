@@ -31,10 +31,11 @@ app.listen(port, () => {
 
   let db_connect = dbo.getDb();
 
-  db_connect.collection("test_db").insertOne(tickets, function (err, res) {
+  // comment out for testing
+  /* db_connect.collection("test_db").insertMany(tickets, function (err, res) {
     if (err) throw err;
     console.log(res);
-  });
+  }); */
 
 })();
 
@@ -44,15 +45,17 @@ function extract_data() {
   return new Promise(function (resolve, reject) {
     request('http://www.vertigorecords.ca/showtickets/index.html', (error, response, html) => {
       if (!error && response.statusCode == 200) {
+
+        console.log("[Extract Data from Vertigo Records]");
+
         const $ = cheerio.load(html);
 
         const ticketsRawData = $('#contentarea');
 
-        console.log("TESTING");
-
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-        var ticketsString = '{ "tickets":[ ';
+        //var ticketsString = '{ "tickets":[ ';
+        var ticketsString = "[";
 
         var lines = ticketsRawData.text().split('\n');
         for (var i = 0; i < lines.length; i++) {
@@ -67,7 +70,7 @@ function extract_data() {
 
             if (price.includes('==')) {
               price = lines[i].substring(lines[i].indexOf('$'), lines[i].indexOf('=')).trim();
-              isSoldOut = false;
+              isSoldOut = true;
             }
 
             if (price.includes('(')) {
@@ -76,13 +79,13 @@ function extract_data() {
 
             //console.log(dateMonth + ", " + dateDay + ", " + bandName + ", " + price + ", " + isSoldOut);
 
-            ticketsString += '{ "month": "' + dateMonth + '" , "day": ' + dateDay + ' , "band": "' + bandName + '" , "price": "' + price + '" , "soldout": ' + isSoldOut + '},';
+            ticketsString += '{ "ticket_month": "' + dateMonth + '" , "ticket_day": ' + dateDay + ' , "ticket_band": "' + bandName + '" , "ticket_price": "' + price + '" , "ticket_soldout": ' + isSoldOut + '},';
 
           }
         }
 
         ticketsString = ticketsString.substring(0, ticketsString.length - 1); // remove last comma
-        ticketsString += ']}';
+        ticketsString += ']';
 
         var ticketsJSON = JSON.parse(ticketsString);
 

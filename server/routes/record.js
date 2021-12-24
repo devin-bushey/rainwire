@@ -41,7 +41,7 @@ recordRoutes.route("/record").get(function (req, res) {
   let db_connect = dbo.getDb("RecordShop");
 
   db_connect
-    .collection("tickets")
+    .collection("test_db")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;

@@ -12,7 +12,7 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand" to="/">
-          MongoDB
+          Record Shop
         </NavLink>
         <button
           className="navbar-toggler"
@@ -30,12 +30,12 @@ const Navbar = () => {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/create">
-                Create Record
+                Vancouver
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/update">
-                Update
+                Ottawa
               </NavLink>
             </li>
           </ul>
