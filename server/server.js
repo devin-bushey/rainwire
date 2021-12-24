@@ -8,13 +8,93 @@ app.use(express.json());
 app.use(require("./routes/record"));
 // get driver connection
 const dbo = require("./db/conn");
- 
+
+const request = require('request');
+const cheerio = require('cheerio');
+
 app.listen(port, () => {
   // perform a database connection when server starts
   dbo.connectToServer(function (err) {
     if (err) console.error(err);
- 
   });
+
   console.log(`Server is running on port: ${port}`);
+
 });
+
+
+(async function () {
+
+  let tickets = await extract_data();
+
+  await new Promise(r => setTimeout(r, 2000));
+
+  let db_connect = dbo.getDb();
+
+  db_connect.collection("test_db").insertOne(tickets, function (err, res) {
+    if (err) throw err;
+    console.log(res);
+  });
+
+})();
+
+
+function extract_data() {
+
+  return new Promise(function (resolve, reject) {
+    request('http://www.vertigorecords.ca/showtickets/index.html', (error, response, html) => {
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
+
+        const ticketsRawData = $('#contentarea');
+
+        console.log("TESTING");
+
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        var ticketsString = '{ "tickets":[ ';
+
+        var lines = ticketsRawData.text().split('\n');
+        for (var i = 0; i < lines.length; i++) {
+
+          if (months.some(month => lines[i].substring(0, 3).includes(month)) && lines[i].length > 10) {
+            //console.log(lines[i]);
+            var dateMonth = lines[i].substring(0, 3).trim();
+            var dateDay = lines[i].substring(4, 6).trim();
+            var bandName = lines[i].substring(lines[i].indexOf(':') + 2, lines[i].indexOf('$')).trim();
+            var price = lines[i].substring(lines[i].indexOf('$')).trim();
+            var isSoldOut = false;
+
+            if (price.includes('==')) {
+              price = lines[i].substring(lines[i].indexOf('$'), lines[i].indexOf('=')).trim();
+              isSoldOut = false;
+            }
+
+            if (price.includes('(')) {
+              price = lines[i].substring(lines[i].indexOf('$'), lines[i].indexOf('(')).trim();
+            }
+
+            //console.log(dateMonth + ", " + dateDay + ", " + bandName + ", " + price + ", " + isSoldOut);
+
+            ticketsString += '{ "month": "' + dateMonth + '" , "day": ' + dateDay + ' , "band": "' + bandName + '" , "price": "' + price + '" , "soldout": ' + isSoldOut + '},';
+
+          }
+        }
+
+        ticketsString = ticketsString.substring(0, ticketsString.length - 1); // remove last comma
+        ticketsString += ']}';
+
+        var ticketsJSON = JSON.parse(ticketsString);
+
+        resolve(ticketsJSON);
+
+      }
+      else {
+        console.log('error');
+        reject("error");
+        //console.log(response.statusCode);
+      }
+    })
+  });
+};
 

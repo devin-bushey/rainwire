@@ -13,28 +13,30 @@ export default class Create extends Component {
     this.onSubmit = this.onSubmit.bind(this);
  
     this.state = {
-      person_name: "",
-      person_position: "",
-      person_level: "",
+      ticket_month: "",
+      ticket_day: "",
+      ticket_band: "",
     };
   }
+
+  
  
   // These methods will update the state properties.
   onChangePersonName(e) {
     this.setState({
-      person_name: e.target.value,
+      ticket_month: e.target.value,
     });
   }
  
   onChangePersonPosition(e) {
     this.setState({
-      person_position: e.target.value,
+      ticket_day: e.target.value,
     });
   }
  
   onChangePersonLevel(e) {
     this.setState({
-      person_level: e.target.value,
+      ticket_band: e.target.value,
     });
   }
  
@@ -44,10 +46,29 @@ export default class Create extends Component {
  
     // When post request is sent to the create url, axios will add a new record(newperson) to the database.
     const newperson = {
-      person_name: this.state.person_name,
-      person_position: this.state.person_position,
-      person_level: this.state.person_level,
+      ticket_month: this.state.ticket_month,
+      ticket_day: this.state.ticket_day,
+      ticket_band: this.state.ticket_band,
     };
+
+    console.log("TEST1");
+    const newperson2 = {
+      ticket_month: "testing1",
+      ticket_day: "testing2",
+      ticket_band: "testing3",
+    };
+    
+/*     axios({
+      url: "http://localhost:5000/save",
+      method: "POST",
+      data: newperson
+    })
+      .then(() => {
+          console.log("Data has been sent to the server");
+      })
+      .catch(() => {
+          console.log("Internal server error");
+      }); */
  
     axios
       .post("http://localhost:5000/record/add", newperson)
@@ -55,9 +76,9 @@ export default class Create extends Component {
  
     // We will empty the state after posting the data to the database
     this.setState({
-      person_name: "",
-      person_position: "",
-      person_level: "",
+      ticket_month: "",
+      ticket_day: "",
+      ticket_band: "",
     });
   }
  
@@ -72,7 +93,7 @@ export default class Create extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.person_name}
+              value={this.state.ticket_month}
               onChange={this.onChangePersonName}
             />
           </div>
@@ -81,7 +102,7 @@ export default class Create extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.person_position}
+              value={this.state.ticket_day}
               onChange={this.onChangePersonPosition}
             />
           </div>
@@ -93,7 +114,7 @@ export default class Create extends Component {
                 name="priorityOptions"
                 id="priorityLow"
                 value="Intern"
-                checked={this.state.person_level === "Intern"}
+                checked={this.state.ticket_band === "Intern"}
                 onChange={this.onChangePersonLevel}
               />
               <label className="form-check-label">Intern</label>
@@ -105,7 +126,7 @@ export default class Create extends Component {
                 name="priorityOptions"
                 id="priorityMedium"
                 value="Junior"
-                checked={this.state.person_level === "Junior"}
+                checked={this.state.ticket_band === "Junior"}
                 onChange={this.onChangePersonLevel}
               />
               <label className="form-check-label">Junior</label>
@@ -117,7 +138,7 @@ export default class Create extends Component {
                 name="priorityOptions"
                 id="priorityHigh"
                 value="Senior"
-                checked={this.state.person_level === "Senior"}
+                checked={this.state.ticket_band === "Senior"}
                 onChange={this.onChangePersonLevel}
               />
               <label className="form-check-label">Senior</label>
@@ -135,3 +156,7 @@ export default class Create extends Component {
     );
   }
 }
+
+
+
+
