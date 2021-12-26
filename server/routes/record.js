@@ -49,6 +49,34 @@ recordRoutes.route("/record").get(function (req, res) {
     });
 });
 
+// This section will help you get a list of all the records.
+recordRoutes.route("/ottawa").get(function (req, res) {
+
+  let db_connect = dbo.getDb("RecordShop");
+
+  db_connect
+    .collection("data_ottawa")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+// This section will help you get a list of all the records.
+recordRoutes.route("/vancouver").get(function (req, res) {
+
+  let db_connect = dbo.getDb("RecordShop");
+
+  db_connect
+    .collection("data_vancouver")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
 // This section will help you get a single record by id
 recordRoutes.route("/record/:id").get(function (req, res) {
   let db_connect = dbo.getDb();

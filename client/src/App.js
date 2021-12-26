@@ -8,6 +8,8 @@ import Navbar from "./components/navbar";
 import Create from "./components/create";
 import Update from "./components/update";
 import RecordList from "./components/recordList";
+import Vancouver from "./components/vancouver";
+import Ottawa from "./components/ottawa";
 
 const App = () => {
   return (
@@ -21,6 +23,12 @@ const App = () => {
       </Route>
       <Route path="/update">
         <Update />
+      </Route>
+      <Route path="/van">
+        <Vancouver />
+      </Route>
+      <Route path="/ottawa">
+        <Ottawa />
       </Route>
     </div>
   );

@@ -29,12 +29,12 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/create">
+              <NavLink className="nav-link" to="/van">
                 Vancouver
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/update">
+              <NavLink className="nav-link" to="/ottawa">
                 Ottawa
               </NavLink>
             </li>
