@@ -13,7 +13,7 @@ const scopes = [
 ];
 
 
-export default class RecordList extends Component {
+export default class MainPage extends Component {
   // This is the constructor that shall store our data retrieved from the database
   constructor(props) {
     super(props);

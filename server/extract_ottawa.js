@@ -12,8 +12,6 @@ module.exports = {
          request('http://www.vertigorecords.ca/showtickets/index.html', (error, response, html) => {
             if (!error && response.statusCode == 200) {
 
-               console.log("[Extract Data from Vertigo Records]");
-
                const $ = cheerio.load(html);
 
                const ticketsRawData = $('#contentarea');
@@ -57,10 +55,12 @@ module.exports = {
 
                resolve(ticketsJSON);
 
+               console.log("Extracted Vertigo Records Success");
+
             }
             else {
-               console.log('error');
-               reject("error");
+               console.log("Error : Extracted Vertigo Records Failure");
+               reject("Error : Extracted Vertigo Records Failure");
                //console.log(response.statusCode);
             }
          })

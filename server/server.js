@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
+
 app.use(cors());
 app.use(express.json());
 app.use(require("./routes/record"));
@@ -29,6 +30,8 @@ app.listen(port, () => {
 
 (async function () {
 
+  // TODO: add a while true loop and update db ~ once a day
+
   let tickets_ottawa = await extract_ottawa.extract();
   let tickets_ottawa_linked = await addSpotifyLink(tickets_ottawa);
 
@@ -40,7 +43,7 @@ app.listen(port, () => {
   let db_connect = dbo.getDb();
 
   // comment out for testing  
-  /* db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
+/*   db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
     if (err) throw err;
     console.log(res);
   });
@@ -50,23 +53,18 @@ app.listen(port, () => {
     console.log(res);
   }); */
 
-  /* db_connect.collection("test_db").insertMany(tickets_ottawa_linked, function (err, res) {
-    if (err) throw err;
-    console.log(res);
-  }); */
-
 })();
 
 async function addSpotifyLink(data) {
 
-  var client_id = '276aafa1475e4e5883df3bdf2899fc3a'; // Your client id
-  var client_secret = '4cbc7336bd9b481e804c516926f57126'; // Your secret
+  var client_id = process.env.SP_CLIENT_ID;
+  var client_secret = process.env.SP_CLIENT_S;
 
   // your application requests authorization
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: {
-      'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+      'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
     },
     form: {
       grant_type: 'client_credentials'
@@ -88,8 +86,7 @@ async function addSpotifyLink(data) {
           json: true
         };
         request.get(options, function (error, response, body) {
-          //console.log(body);
-          //console.log(token);
+
           resolve(token);
 
         });

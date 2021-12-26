@@ -5,9 +5,7 @@ import { Route } from "react-router-dom";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
-import Create from "./components/create";
-import Update from "./components/update";
-import RecordList from "./components/recordList";
+import MainPage from "./components/mainpage";
 import Vancouver from "./components/vancouver";
 import Ottawa from "./components/ottawa";
 
@@ -16,13 +14,7 @@ const App = () => {
     <div>
       <Navbar />
       <Route exact path="/">
-        <RecordList />
-      </Route>
-      <Route path="/create">
-        <Create />
-      </Route>
-      <Route path="/update">
-        <Update />
+        <MainPage />
       </Route>
       <Route path="/van">
         <Vancouver />
