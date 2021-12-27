@@ -66,6 +66,7 @@ export default class MainPage extends Component {
 
   async createNewPlaylist(user_id, token) {
 
+    return new Promise(async function (resolve, reject) {
     $.ajax({
       type: 'POST',
       url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
@@ -85,6 +86,8 @@ export default class MainPage extends Component {
           new_playlist_id: result.id,
         })
 
+        resolve(result.id);
+
         console.log('Successfully created a playist');
 
         console.log(result.id);
@@ -96,6 +99,8 @@ export default class MainPage extends Component {
         console.log(error.responseText);
       }
     })
+
+  }.bind(this))
 
   }
 
@@ -149,11 +154,23 @@ export default class MainPage extends Component {
 
   }
 
+  handleClickOttawa = () => {
+
+    /* if (window.confirm('Are you sure you want to create a new playlist?')) {
+      this.createPlaylist(this.state.user_id, this.state.token);
+    } */
+
+    if (window.confirm('Are you sure you want to create a new playlist?')) {
+      this.createPlaylistOttawa(this.state.user_id, this.state.token);
+    }
+
+  }
+
   async createPlaylistVancouver(user_id, token) {
 
-    this.createNewPlaylist(user_id, token);
+    var playlist_id = await this.createNewPlaylist(user_id, token);
 
-    axios
+    await axios
       .get("http://localhost:5000/vancouver/")
       .then((response) => {
         var data = response.data
@@ -175,7 +192,47 @@ export default class MainPage extends Component {
 
         tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-        this.addTracksToPlaylist(this.state.new_playlist_id, tracks, token);
+        this.addTracksToPlaylist(playlist_id, tracks, token);
+
+      })
+      .catch(function (error) {
+        console.log("error axios get Vancouver")
+        console.log(error);
+      });
+
+
+
+
+  }
+
+  
+  async createPlaylistOttawa(user_id, token) {
+
+    var playlist_id = await this.createNewPlaylist(user_id, token);
+
+    axios
+      .get("http://localhost:5000/ottawa/")
+      .then((response) => {
+        var data = response.data
+        var tracks = "";
+
+        for (const element of data) {
+
+          try {
+
+            for (let i = 0; i < 1; i++) {
+              tracks += element.top_tracks[i].uri;
+              tracks += ",";
+            }
+
+          }
+          catch { }
+
+        }
+
+        tracks = tracks.substring(0, tracks.length - 1); // remove last comma
+
+        this.addTracksToPlaylist(playlist_id, tracks, token);
 
       })
       .catch(function (error) {
@@ -213,6 +270,9 @@ export default class MainPage extends Component {
               <p>Hey {this.state.user_name} !</p>
               <button onClick={this.handleClickVancouver}>
                 Create Playlist For Vancouver
+              </button>
+              <button onClick={this.handleClickOttawa}>
+                Create Playlist For Ottawa
               </button>
             </div>
           )}
