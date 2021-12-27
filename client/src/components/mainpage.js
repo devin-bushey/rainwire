@@ -29,6 +29,7 @@ export default class MainPage extends Component {
       user_name: "",
       user_id: "",
       new_playlist_id: "",
+      vancouver_data: null,
     }
 
   }
@@ -63,7 +64,7 @@ export default class MainPage extends Component {
 
   }
 
-  async createPlaylist(user_id, token) {
+  async createNewPlaylist(user_id, token) {
 
     $.ajax({
       type: 'POST',
@@ -79,7 +80,7 @@ export default class MainPage extends Component {
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        
+
         this.setState({
           new_playlist_id: result.id,
         })
@@ -88,7 +89,7 @@ export default class MainPage extends Component {
 
         console.log(result.id);
 
-        this.addTracksToPlaylist(result.id, token);
+        //this.addTracksToPlaylist(result.id, token);
 
       }.bind(this),
       error: function (error) {
@@ -98,28 +99,22 @@ export default class MainPage extends Component {
 
   }
 
-  async addTracksToPlaylist(playlist_id, token){
+  async addTracksToPlaylist(playlist_id, tracks, token) {
 
     $.ajax({
       type: 'POST',
-      url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks",
-      data: JSON.stringify({
-        "uris": [
-          "spotify:track:34jJMESTPsGq0PT8r9yWhj"
-        ],
-        "position": 0
-      }),
-      dataType: 'json',
+      url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
       headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
       success: function (result) {
-        
+
         console.log("successfully added tracks to playlist");
 
       }.bind(this),
       error: function (error) {
+        console.log("error: unsuccessfully added tracks to playlist");
         console.log(error.responseText);
       }
     })
@@ -142,11 +137,54 @@ export default class MainPage extends Component {
 
   }
 
-  handleClick = () => {
+  handleClickVancouver = () => {
+
+    /* if (window.confirm('Are you sure you want to create a new playlist?')) {
+      this.createPlaylist(this.state.user_id, this.state.token);
+    } */
 
     if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createPlaylist(this.state.user_id, this.state.token);
-    } 
+      this.createPlaylistVancouver(this.state.user_id, this.state.token);
+    }
+
+  }
+
+  async createPlaylistVancouver(user_id, token) {
+
+    this.createNewPlaylist(user_id, token);
+
+    axios
+      .get("http://localhost:5000/vancouver/")
+      .then((response) => {
+        var data = response.data
+        var tracks = "";
+
+        for (const element of data) {
+
+          try {
+
+            for (let i = 0; i < 3; i++) {
+              tracks += element.top_tracks[i].uri;
+              tracks += ",";
+            }
+
+          }
+          catch { }
+
+        }
+
+        tracks = tracks.substring(0, tracks.length - 1); // remove last comma
+
+        this.addTracksToPlaylist(this.state.new_playlist_id, tracks, token);
+
+      })
+      .catch(function (error) {
+        console.log("error axios get Vancouver")
+        console.log(error);
+      });
+
+
+
 
   }
 
@@ -173,8 +211,8 @@ export default class MainPage extends Component {
           {this.state.token && this.state.user_id.length > 0 && (
             <div>
               <p>Hey {this.state.user_name} !</p>
-              <button onClick={this.handleClick}>
-                Create Playlist
+              <button onClick={this.handleClickVancouver}>
+                Create Playlist For Vancouver
               </button>
             </div>
           )}
