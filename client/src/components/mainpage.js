@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import hash from "./hash";
 import * as $ from "jquery";
+import styles from './styles/mainpage.module.css';
 
 
 //TODO: - Store in .config file
@@ -16,8 +17,6 @@ const scopes = [
   "playlist-modify-private"
 
 ];
-
-
 
 
 export default class MainPage extends Component {
@@ -48,59 +47,51 @@ export default class MainPage extends Component {
           return;
         }
 
-        //console.log(data);
-        //console.log(data.id);
-
         this.setState({
           user_name: data.display_name,
           user_id: data.id
         })
-
-        //comment out for testing
-        //this.createPlaylist(data.id, token);
 
       }
     });
 
   }
 
-  async createNewPlaylist(user_id, token) {
+  async createBlankPlaylist(user_id, token, city) {
+
+    var playlist_name = "Record Shop - " + city;
 
     return new Promise(async function (resolve, reject) {
-    $.ajax({
-      type: 'POST',
-      url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
-      data: JSON.stringify({
-        "name": "New Playlist",
-        "description": "New playlist description",
-        "public": false
-      }),
-      dataType: 'json',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+        data: JSON.stringify({
+          "name": playlist_name,
+          "description": "a fun description",
+          "public": false
+        }),
+        dataType: 'json',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        success: function (result) {
 
-        this.setState({
-          new_playlist_id: result.id,
-        })
+          this.setState({
+            new_playlist_id: result.id,
+          })
 
-        resolve(result.id);
+          resolve(result.id);
 
-        console.log('Successfully created a playist');
+          console.log('Successfully created a playist: ' + playlist_name);
 
-        console.log(result.id);
+        }.bind(this),
+        error: function (error) {
+          console.log(error.responseText);
+        }
+      })
 
-        //this.addTracksToPlaylist(result.id, token);
-
-      }.bind(this),
-      error: function (error) {
-        console.log(error.responseText);
-      }
-    })
-
-  }.bind(this))
+    }.bind(this))
 
   }
 
@@ -144,43 +135,40 @@ export default class MainPage extends Component {
 
   handleClickVancouver = () => {
 
-    /* if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createPlaylist(this.state.user_id, this.state.token);
-    } */
+    var city = "vancouver";
 
     if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createPlaylistVancouver(this.state.user_id, this.state.token);
+      this.createNewPlaylist(this.state.user_id, this.state.token, city);
     }
 
   }
 
   handleClickOttawa = () => {
 
-    /* if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createPlaylist(this.state.user_id, this.state.token);
-    } */
+    var city = "ottawa";
 
     if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createPlaylistOttawa(this.state.user_id, this.state.token);
+      this.createNewPlaylist(this.state.user_id, this.state.token, city);
     }
 
   }
 
-  async createPlaylistVancouver(user_id, token) {
+  async createNewPlaylist(user_id, token, city) {
 
-    var playlist_id = await this.createNewPlaylist(user_id, token);
+    var playlist_id = await this.createBlankPlaylist(user_id, token, city);
 
     await axios
-      .get("http://localhost:5000/vancouver/")
+      .get("http://localhost:5000/" + city + "/")
       .then((response) => {
         var data = response.data
         var tracks = "";
+        var numTopTracksToAdd = 1;
 
         for (const element of data) {
 
           try {
 
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < numTopTracksToAdd; i++) {
               tracks += element.top_tracks[i].uri;
               tracks += ",";
             }
@@ -199,49 +187,6 @@ export default class MainPage extends Component {
         console.log("error axios get Vancouver")
         console.log(error);
       });
-
-
-
-
-  }
-
-  
-  async createPlaylistOttawa(user_id, token) {
-
-    var playlist_id = await this.createNewPlaylist(user_id, token);
-
-    axios
-      .get("http://localhost:5000/ottawa/")
-      .then((response) => {
-        var data = response.data
-        var tracks = "";
-
-        for (const element of data) {
-
-          try {
-
-            for (let i = 0; i < 1; i++) {
-              tracks += element.top_tracks[i].uri;
-              tracks += ",";
-            }
-
-          }
-          catch { }
-
-        }
-
-        tracks = tracks.substring(0, tracks.length - 1); // remove last comma
-
-        this.addTracksToPlaylist(playlist_id, tracks, token);
-
-      })
-      .catch(function (error) {
-        console.log("error axios get Vancouver")
-        console.log(error);
-      });
-
-
-
 
   }
 
@@ -249,30 +194,35 @@ export default class MainPage extends Component {
   // This following section will display the table with the records of individuals.
   render() {
     return (
-      <div>
+      <div className="styles.body">
+
         <h3>Welcome</h3>
+
         <div>
           {!this.state.token && (
-            <a
-              className="btn btn--loginApp-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
+            <button>
+              <a
+                className="btn btn--loginApp-link"
+                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                  "%20"
+                )}&response_type=token&show_dialog=true`}
+              >
+                Login to Spotify
+              </a>
+            </button>
           )}
         </div>
 
         <div>
           {this.state.token && this.state.user_id.length > 0 && (
             <div>
-              <p>Hey {this.state.user_name} !</p>
-              <button onClick={this.handleClickVancouver}>
-                Create Playlist For Vancouver
+              <p>Hey {this.state.user_name}!</p>
+              <p>Create a new playlist from shows playing in: </p>
+              <button style={{ margin: 10 }} onClick={this.handleClickVancouver}>
+                Vancouver
               </button>
-              <button onClick={this.handleClickOttawa}>
-                Create Playlist For Ottawa
+              <button style={{ margin: 10 }} onClick={this.handleClickOttawa}>
+                Ottawa
               </button>
             </div>
           )}
