@@ -17,6 +17,7 @@ const axios = require('axios');
 const extract_ottawa = require('./extract_ottawa.js');
 const extract_vancouver = require('./extract_vancouver.js');
 
+
 app.listen(port, () => {
   // perform a database connection when server starts
   dbo.connectToServer(function (err) {
