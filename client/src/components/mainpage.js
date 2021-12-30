@@ -6,7 +6,7 @@ import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = process.env.SP_CLIENT_ID;
+const clientId = process.env.REACT_APP_SP_CLIENT_ID;
 const redirectUri = "https://keen-shirley-5b7f87.netlify.app";
 const scopes = [
   "user-read-currently-playing",
