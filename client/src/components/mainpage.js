@@ -4,11 +4,10 @@ import axios from 'axios';
 import hash from "./hash";
 import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
+import configData from "./../../src/config.json";
 
-
-//TODO: - Store in .config file
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = "276aafa1475e4e5883df3bdf2899fc3a";
+const clientId = configData.SP_CLIENT_ID;
 const redirectUri = "http://localhost:3000";
 const scopes = [
   "user-read-currently-playing",
@@ -20,7 +19,7 @@ const scopes = [
 
 
 export default class MainPage extends Component {
-  // This is the constructor that shall store our data retrieved from the database
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +27,6 @@ export default class MainPage extends Component {
       user_name: "",
       user_id: "",
       new_playlist_id: "",
-      vancouver_data: null,
     }
 
   }
@@ -42,7 +40,7 @@ export default class MainPage extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: data => {
-        // Checks if the data is not empty
+        
         if (!data) {
           return;
         }
@@ -190,8 +188,6 @@ export default class MainPage extends Component {
 
   }
 
-
-  // This following section will display the table with the records of individuals.
   render() {
     return (
       <div className="styles.body">
@@ -215,7 +211,7 @@ export default class MainPage extends Component {
 
         <div>
           {this.state.token && this.state.user_id.length > 0 && (
-            <div>
+            <div className="container-sm">
               <p>Hey {this.state.user_name}!</p>
               <p>Create a new playlist from shows playing in: </p>
               <button style={{ margin: 10 }} onClick={this.handleClickVancouver}>

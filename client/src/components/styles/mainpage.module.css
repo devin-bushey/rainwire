@@ -1,12 +1,11 @@
 body{
     font-size: 1.1rem;
     font-family: 'Inconsolata',monospace;
+    /* font-family: 'BenchNine', sans-serif; */
     text-align: center;
+    /* background-color: #f7efd6; */
 }
 
-.button{
-    margin: 100;
-}
 
 /* p{
     margin-bottom: 1.1rem;
