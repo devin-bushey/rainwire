@@ -4,10 +4,9 @@ import axios from 'axios';
 import hash from "./hash";
 import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
-import configData from "./../../src/config.json";
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = configData.SP_CLIENT_ID;
+const clientId = process.env.SP_CLIENT_ID;
 const redirectUri = "http://localhost:3000";
 const scopes = [
   "user-read-currently-playing",
