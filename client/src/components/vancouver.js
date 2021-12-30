@@ -28,7 +28,7 @@ export default class Vancouver extends Component {
 
 
         axios
-            .get("http://localhost:5000/vancouver/")
+            .get("https://record-shop.herokuapp.com/vancouver/")
             .then((response) => {
                 this.setState({ records: response.data, showTable: true })
             })

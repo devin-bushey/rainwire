@@ -28,7 +28,7 @@ export default class Ottawa extends Component {
   async componentDidMount() {
 
     axios
-      .get("http://localhost:5000/ottawa/")
+      .get("https://record-shop.herokuapp.com/ottawa/")
       .then((response) => {
         this.setState({ records : response.data, showTable : true })
       })
