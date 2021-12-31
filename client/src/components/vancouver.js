@@ -26,9 +26,10 @@ export default class Vancouver extends Component {
     // This method will get the data from the database.
     async componentDidMount() {
 
+        //.get("https://record-shop.herokuapp.com/vancouver/") //production
 
         axios
-            .get("https://record-shop.herokuapp.com/vancouver/")
+            .get("http://localhost:5000/vancouver/")
             .then((response) => {
                 this.setState({ records: response.data, showTable: true })
             })

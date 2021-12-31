@@ -27,8 +27,10 @@ export default class Ottawa extends Component {
   // This method will get the data from the database.
   async componentDidMount() {
 
+    //.get("https://record-shop.herokuapp.com/ottawa/") //production
+
     axios
-      .get("https://record-shop.herokuapp.com/ottawa/")
+      .get("http://localhost:5000/ottawa/")
       .then((response) => {
         this.setState({ records : response.data, showTable : true })
       })

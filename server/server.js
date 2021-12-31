@@ -44,7 +44,7 @@ app.listen(port, () => {
   let db_connect = dbo.getDb();
 
   // comment out for testing  
-  db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
+  /* db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
     if (err) throw err;
     console.log(res);
   });
@@ -52,7 +52,7 @@ app.listen(port, () => {
   db_connect.collection("data_vancouver").insertMany(tickets_vancouver_linked, function (err, res) {
     if (err) throw err;
     console.log(res);
-  });
+  }); */
 
 })();
 
