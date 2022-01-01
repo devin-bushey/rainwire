@@ -5,9 +5,13 @@ import hash from "./hash";
 import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
 
+//import configData from "./../../src/config.json"; //development
+//const clientId = configData.SP_CLIENT_ID; //development
+
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = process.env.REACT_APP_SP_CLIENT_ID;
-const redirectUri = "https://recordshopp.netlify.app/";
+const clientId = process.env.REACT_APP_SP_CLIENT_ID; //production
+const redirectUri = "https://recordshopp.netlify.app/"; //production
+//const redirectUri = "http://localhost:3000"; //development
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
@@ -15,7 +19,6 @@ const scopes = [
   "playlist-modify-private"
 
 ];
-
 
 export default class MainPage extends Component {
 
@@ -26,6 +29,28 @@ export default class MainPage extends Component {
       user_name: "",
       user_id: "",
       new_playlist_id: "",
+      err_sp_access: true,
+      tracks_van: null,
+    }
+
+  }
+
+  // This method will get the data from the database.
+  async componentDidMount() {
+
+    //Spotify
+    let _token = hash.access_token;
+    if (_token) {
+      // Set token
+      this.setState({
+        token: _token
+      });
+
+      await this.getSpotifyUserInfo(_token);
+
+    }
+    else {
+      console.log("no token");
     }
 
   }
@@ -39,16 +64,22 @@ export default class MainPage extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: data => {
-        
+
         if (!data) {
           return;
         }
 
+        var firstName = data.display_name.substring(0, data.display_name.indexOf(' ')).trim();
+
         this.setState({
-          user_name: data.display_name,
-          user_id: data.id
+          user_name: firstName,
+          user_id: data.id,
+          err_sp_access: false,
         })
 
+      },
+      error: function (error) {
+        console.log(error.responseText);
       }
     });
 
@@ -113,23 +144,6 @@ export default class MainPage extends Component {
     })
   }
 
-  // This method will get the data from the database.
-  async componentDidMount() {
-
-    //Spotify
-    let _token = hash.access_token;
-    if (_token) {
-      // Set token
-      this.setState({
-        token: _token
-      });
-
-      await this.getSpotifyUserInfo(_token);
-
-    }
-
-  }
-
   handleClickVancouver = () => {
 
     var city = "vancouver";
@@ -154,8 +168,11 @@ export default class MainPage extends Component {
 
     var playlist_id = await this.createBlankPlaylist(user_id, token, city);
 
+    //.get("https://record-shop.herokuapp.com/" + city + "/") //production
+    //.get("http://localhost:5000/" + city + "/") // development
+
     await axios
-      .get("https://record-shop.herokuapp.com/" + city + "/")
+      .get("https://record-shop.herokuapp.com/" + city + "/") //production
       .then((response) => {
         var data = response.data
         var tracks = "";
@@ -181,7 +198,7 @@ export default class MainPage extends Component {
 
       })
       .catch(function (error) {
-        console.log("error axios get Vancouver")
+        console.log("error axios get create new playlist")
         console.log(error);
       });
 
@@ -205,6 +222,15 @@ export default class MainPage extends Component {
                 Login to Spotify
               </a>
             </button>
+          )}
+        </div>
+
+        <div>
+          {this.state.token && this.state.err_sp_access && (
+            <div>
+              <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
+              <p>Please include your name and email associated with your spotify account</p>
+            </div>
           )}
         </div>
 

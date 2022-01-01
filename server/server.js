@@ -39,12 +39,56 @@ app.listen(port, () => {
   let tickets_vancouver = await extract_vancouver.extract();
   let tickets_vancouver_linked = await addSpotifyData(tickets_vancouver);
 
-  await new Promise(r => setTimeout(r, 2000));
+  //await new Promise(r => setTimeout(r, 2000));
 
   let db_connect = dbo.getDb();
 
-  // comment out for testing  
-  db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
+  // TODO: clean up this db stuff
+  db_connect.listCollections({name: "data_ottawa"})
+    .next(function(err, collinfo) {
+
+      //console.log(collName)
+        if (collinfo) {
+
+          db_connect.collection("data_ottawa").drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log(collinfo.name + " deleted");
+            //db_connect.close();
+          });
+
+          db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
+            if (err) throw err;
+            console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
+          });
+
+        }
+
+        
+    });
+
+    db_connect.listCollections({name: "data_vancouver"})
+    .next(function(err, collinfo) {
+
+      //console.log(collName)
+        if (collinfo) {
+
+          db_connect.collection("data_vancouver").drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log(collinfo.name + " deleted");
+            //db_connect.close();
+          });
+
+          db_connect.collection("data_vancouver").insertMany(tickets_vancouver_linked, function (err, res) {
+            if (err) throw err;
+            console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
+          });
+
+        }
+
+        
+    });
+
+  /* db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
     if (err) throw err;
     console.log(res);
   });
@@ -52,7 +96,7 @@ app.listen(port, () => {
   db_connect.collection("data_vancouver").insertMany(tickets_vancouver_linked, function (err, res) {
     if (err) throw err;
     console.log(res);
-  });
+  }); */
 
 })();
 
