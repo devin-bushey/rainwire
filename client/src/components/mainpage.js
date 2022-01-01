@@ -20,7 +20,6 @@ const scopes = [
 
 ];
 
-
 export default class MainPage extends Component {
 
   constructor(props) {
@@ -30,33 +29,33 @@ export default class MainPage extends Component {
       user_name: "",
       user_id: "",
       new_playlist_id: "",
+      err_sp_access: true,
+      tracks_van: null,
     }
 
   }
 
-    // This method will get the data from the database.
-    async componentDidMount() {
+  // This method will get the data from the database.
+  async componentDidMount() {
 
-      //Spotify
-      let _token = hash.access_token;
-      if (_token) {
-        // Set token
-        this.setState({
-          token: _token
-        });
-  
-        await this.getSpotifyUserInfo(_token);
-  
-      }
-      else{
-        console.log("no token");
-      }
-  
+    //Spotify
+    let _token = hash.access_token;
+    if (_token) {
+      // Set token
+      this.setState({
+        token: _token
+      });
+
+      await this.getSpotifyUserInfo(_token);
+
+    }
+    else {
+      console.log("no token");
     }
 
-  async getSpotifyUserInfo(token) {
+  }
 
-    console.log(token);
+  async getSpotifyUserInfo(token) {
 
     $.ajax({
       url: "https://api.spotify.com/v1/me/",
@@ -65,14 +64,17 @@ export default class MainPage extends Component {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
       },
       success: data => {
-        
+
         if (!data) {
           return;
         }
 
+        var firstName = data.display_name.substring(0, data.display_name.indexOf(' ')).trim();
+
         this.setState({
-          user_name: data.display_name,
-          user_id: data.id
+          user_name: firstName,
+          user_id: data.id,
+          err_sp_access: false,
         })
 
       },
@@ -219,6 +221,15 @@ export default class MainPage extends Component {
                 Login to Spotify
               </a>
             </button>
+          )}
+        </div>
+
+        <div>
+          {this.state.token && this.state.err_sp_access && (
+            <div>
+              <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
+              <p>Please include your name and email associated with your spotify account</p>
+            </div>
           )}
         </div>
 

@@ -15,9 +15,28 @@ module.exports = {
                 let data = [];
 
                 $('div[class=ticket]').each(function (index, element) {
+
+                    // try to format band name
+                    // TODO: clean this up
+                    var band_name = $(element).find('h3').text().trim();
+                    var band_name_reduced = "";
+                    const escape_chars = ['(', '-', '&', "vs"];
+
+                    for (let i = 0; i < escape_chars.length; i++){
+
+                        if (band_name.includes(escape_chars[i])){
+                            band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
+                            break;
+                        }
+                        else{
+                            band_name_reduced = band_name;
+                        }
+                        
+                    }
+
                     data.push(
                         {
-                            ticket_band: $(element).find('h3').text().trim(),
+                            ticket_band: band_name_reduced,
                             ticket_date: $(element).find('p.ticket__venue').text().trim(),
                             ticket_price: $(element).find('p.ticket__price').text().trim(),
                         }
@@ -26,7 +45,7 @@ module.exports = {
 
                 //console.log(data);
                 resolve(data);
-                console.log("Extracted Red Cat Records Success");
+                console.log("Successfully extracted Red Cat Records");
 
             }
             catch {
