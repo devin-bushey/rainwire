@@ -8,9 +8,9 @@ import { Route } from "react-router-dom";
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
 import MainPage from "./components/mainpage";
-import DisplayTable from "./components/displayTable";
+import DisplayTable from "./components/DisplayTable";
 
-function getTickets(city) {
+function GetTickets(city) {
 
   const [tickets, setTickets] = useState([]);
 
@@ -40,8 +40,8 @@ const App = () => {
 
   const [showApp, setShowApp] = useState(false);
 
-  const ticketsOttawa = getTickets("ottawa");
-  const ticketsVancouver = getTickets("vancouver");
+  const ticketsOttawa = GetTickets("ottawa");
+  const ticketsVancouver = GetTickets("vancouver");
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
