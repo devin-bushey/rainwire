@@ -1,170 +1,127 @@
-import React, { Component } from "react";
-// This will require to npm install axios
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import hash from "./hash";
-import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = process.env.REACT_APP_SP_CLIENT_ID;
-const redirectUri = process.env.REACT_APP_SITE_URL; 
+const redirectUri = "http://localhost:3000/";
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
   "playlist-modify-public",
   "playlist-modify-private"
-
 ];
 
-export default class MainPage extends Component {
+function MainPage() {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: null,
-      user_name: "",
-      user_id: "",
-      new_playlist_id: "",
-      err_sp_access: true,
-      tracks_van: null,
-    }
+  const [spotifyInfo, setSpotifyInfo] = useState({
 
-  }
+    token: null,
+    user_name: "",
+    user_id: "",
+    new_playlist_id: "",
+    err_sp_access: true,
+    tracks_van: null,
 
-  // This method will get the data from the database.
-  async componentDidMount() {
+  });
 
-    //Spotify
+  // get token
+  useEffect(() => {
+
     let _token = hash.access_token;
     if (_token) {
-      // Set token
-      this.setState({
-        token: _token
-      });
 
-      await this.getSpotifyUserInfo(_token);
+      setSpotifyInfo((prevState) => ({
+        ...prevState,
+        token: _token,
+      }));
+
+      GetSpotifyUserInfo(_token)
 
     }
     else {
+      console.log(spotifyInfo.token);
       console.log("no token");
     }
+  }, []);
 
-  }
+  const GetSpotifyUserInfo = (token) => {
 
-  async getSpotifyUserInfo(token) {
+    axios
+      ({
+        url: 'https://api.spotify.com/v1/me/',
+        method: 'GET',
+        headers: {
+          "Authorization": "Bearer " + token,
+        }
+      })
+      .then((response) => {
 
-    $.ajax({
-      url: "https://api.spotify.com/v1/me/",
-      type: "GET",
-      beforeSend: xhr => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      },
-      success: data => {
-
-        if (!data) {
+        if (!response.data) {
           return;
         }
 
-        var firstName = data.display_name.substring(0, data.display_name.indexOf(' ')).trim();
+        var firstName = response.data.display_name.substring(0, response.data.display_name.indexOf(' ')).trim();
 
-        this.setState({
+        setSpotifyInfo((prevState) => ({
+          ...prevState,
           user_name: firstName,
-          user_id: data.id,
+          user_id: response.data.id,
           err_sp_access: false,
-        })
+        }));
 
-      },
-      error: function (error) {
-        console.log(error.responseText);
-      }
-    });
-
+      })
+      .catch(function (error) {
+        console.log("Error GetSpotifyUserInfo");
+        console.log(error);
+      });
   }
 
-  async createBlankPlaylist(user_id, token, city) {
+  const CreateBlankPlaylist = async (city) => {
 
     var playlist_name = "Record Shop - " + city;
 
-    return new Promise(async function (resolve, reject) {
-      $.ajax({
-        type: 'POST',
-        url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
-        data: JSON.stringify({
+    return new Promise(async function (resolve, reject){
+    axios
+      ({
+        url: 'https://api.spotify.com/v1/users/' + spotifyInfo.user_id + '/playlists',
+        method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + spotifyInfo.token,
+          'Content-Type': 'application/json',
+        },
+        data: {
           "name": playlist_name,
           "description": "a fun description",
           "public": false
-        }),
-        dataType: 'json',
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'application/json'
-        },
-        success: function (result) {
-
-          this.setState({
-            new_playlist_id: result.id,
-          })
-
-          resolve(result.id);
-
-          console.log('Successfully created a playist: ' + playlist_name);
-
-        }.bind(this),
-        error: function (error) {
-          console.log(error.responseText);
         }
       })
+      .then((response) => {
 
-    }.bind(this))
+        setSpotifyInfo((prevState) => ({
+          ...prevState,
+          new_playlist_id: response.data.id,
+        }));
 
-  }
+        resolve(response.data.id);
 
-  async addTracksToPlaylist(playlist_id, tracks, token) {
+        console.log('Successfully created a playist: ' + playlist_name);
 
-    $.ajax({
-      type: 'POST',
-      url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json'
-      },
-      success: function (result) {
-
-        console.log("successfully added tracks to playlist");
-
-      }.bind(this),
-      error: function (error) {
-        console.log("error: unsuccessfully added tracks to playlist");
-        console.log(error.responseText);
-      }
-    })
-  }
-
-  handleClickVancouver = () => {
-
-    var city = "vancouver";
-
-    if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createNewPlaylist(this.state.user_id, this.state.token, city);
-    }
+      })
+      .catch(function (error) {
+        console.log("Error: CreateBlankPlaylist");
+        console.log(error);
+      }); //end axios
+    }); //end promise
 
   }
 
-  handleClickOttawa = () => {
+  const CreateNewPlaylist = async (city) => {
 
-    var city = "ottawa";
+    var playlist_id = await CreateBlankPlaylist(city);
 
-    if (window.confirm('Are you sure you want to create a new playlist?')) {
-      this.createNewPlaylist(this.state.user_id, this.state.token, city);
-    }
-
-  }
-
-  async createNewPlaylist(user_id, token, city) {
-
-    var playlist_id = await this.createBlankPlaylist(user_id, token, city);
-
-    await axios
+    axios
       .get(process.env.REACT_APP_SITE_URL_DB + city + "/")
       .then((response) => {
         var data = response.data
@@ -187,61 +144,97 @@ export default class MainPage extends Component {
 
         tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-        this.addTracksToPlaylist(playlist_id, tracks, token);
+        AddTracksToPlaylist(playlist_id, tracks);
 
       })
       .catch(function (error) {
-        console.log("error axios get create new playlist")
+        console.log("Error CreateNewPlaylist")
         console.log(error);
       });
-
   }
 
-  render() {
-    return (
-      <div className="styles.body">
+  const AddTracksToPlaylist = (playlist_id, tracks) => {
 
-        <h3>Welcome</h3>
+    axios({
+      url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + spotifyInfo.token,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
 
-        <div>
-          {!this.state.token && (
-            <button>
-              <a
-                className="btn btn--loginApp-link"
-                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                  "%20"
-                )}&response_type=token&show_dialog=true`}
-              >
-                Login to Spotify
-              </a>
-            </button>
-          )}
-        </div>
+        console.log("Successfully added tracks to playlist");
 
-        <div>
-          {this.state.token && this.state.err_sp_access && (
-            <div>
-              <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
-              <p>Please include your name and email associated with your spotify account</p>
-            </div>
-          )}
-        </div>
+      })
+      .catch(function (error) {
+        console.log("Error: unsuccessfully added tracks to playlist");
+        console.log(error);
+      });
+  }
 
-        <div>
-          {this.state.token && this.state.user_id.length > 0 && (
-            <div className="container-sm">
-              <p>Hey {this.state.user_name}!</p>
-              <p>Create a new playlist from shows playing in: </p>
-              <button style={{ margin: 10 }} onClick={this.handleClickVancouver}>
-                Vancouver
-              </button>
-              <button style={{ margin: 10 }} onClick={this.handleClickOttawa}>
-                Ottawa
-              </button>
-            </div>
-          )}
-        </div>
+
+  const HandleClickVancouver = () => {
+    if (window.confirm('Are you sure you want to create a new playlist?')) {
+      CreateNewPlaylist("vancouver");
+    }
+  }
+
+  const HandleClickOttawa = () => {
+    if (window.confirm('Are you sure you want to create a new playlist?')) {
+      CreateNewPlaylist("ottawa");
+    }
+  }
+
+
+  return (
+    <div className="styles.body">
+
+      <h3>Welcome</h3>
+
+      <div>
+        {!spotifyInfo.token && (
+          <button>
+            <a
+              className="btn btn--loginApp-link"
+              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                "%20"
+              )}&response_type=token&show_dialog=true`}
+            >
+              Login to Spotify
+            </a>
+          </button>
+        )}
       </div>
-    );
-  }
+
+      <div>
+        {spotifyInfo.token && spotifyInfo.err_sp_access && (
+          <div>
+            <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
+            <p>Please include your name and email associated with your spotify account</p>
+          </div>
+        )}
+      </div>
+
+      <div>
+        {spotifyInfo.token && spotifyInfo.user_id.length > 0 && (
+          <div className="container-sm">
+            <p>Hey {spotifyInfo.user_name}!</p>
+            <p>Create a new playlist from shows playing in: </p>
+            <button style={{ margin: 10 }} onClick={HandleClickVancouver}>
+              Vancouver
+            </button>
+            <button style={{ margin: 10 }} onClick={HandleClickOttawa}>
+              Ottawa
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+
 }
+
+export default MainPage;
