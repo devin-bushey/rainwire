@@ -5,13 +5,9 @@ import hash from "./hash";
 import * as $ from "jquery";
 import styles from './styles/mainpage.module.css';
 
-//import configData from "./../../src/config.json"; //development
-//const clientId = configData.SP_CLIENT_ID; //development
-
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = process.env.REACT_APP_SP_CLIENT_ID; //production
-const redirectUri = "https://recordshopp.netlify.app/"; //production
-//const redirectUri = "http://localhost:3000"; //development
+const clientId = process.env.REACT_APP_SP_CLIENT_ID;
+const redirectUri = process.env.REACT_APP_SITE_URL; 
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
@@ -168,11 +164,8 @@ export default class MainPage extends Component {
 
     var playlist_id = await this.createBlankPlaylist(user_id, token, city);
 
-    //.get("https://record-shop.herokuapp.com/" + city + "/") //production
-    //.get("http://localhost:5000/" + city + "/") // development
-
     await axios
-      .get("https://record-shop.herokuapp.com/" + city + "/") //production
+      .get(process.env.REACT_APP_SITE_URL_DB + city + "/")
       .then((response) => {
         var data = response.data
         var tracks = "";

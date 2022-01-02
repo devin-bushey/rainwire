@@ -17,12 +17,8 @@ function GetTickets(city) {
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     //Runs only on the first render
-
-    //.get("https://record-shop.herokuapp.com/" + city + "/") //production
-    //.get("http://localhost:5000/" + city + "/") //development
-
     axios
-      .get("https://record-shop.herokuapp.com/" + city + "/") //production
+      .get(process.env.REACT_APP_SITE_URL_DB + city + "/") //production
       .then((response) => {
         setTickets(response.data);
       })
