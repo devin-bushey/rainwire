@@ -5,7 +5,7 @@ import styles from './styles/mainpage.module.css';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = process.env.REACT_APP_SP_CLIENT_ID;
-const redirectUri = "http://localhost:3000/";
+const redirectUri = process.env.REACT_APP_SITE_URL;
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
@@ -176,6 +176,7 @@ function MainPage() {
 
 
   const HandleClickVancouver = () => {
+
     if (window.confirm('Are you sure you want to create a new playlist?')) {
       CreateNewPlaylist("vancouver");
     }
