@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-// This will require to npm install axios
-import axios from 'axios';
+import React from "react";
 
 const DisplayTable = (data) => {
 

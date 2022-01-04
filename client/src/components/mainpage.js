@@ -22,7 +22,6 @@ function MainPage() {
     user_id: "",
     new_playlist_id: "",
     err_sp_access: true,
-    tracks_van: null,
 
   });
 
@@ -40,10 +39,7 @@ function MainPage() {
       GetSpotifyUserInfo(_token)
 
     }
-    else {
-      console.log(spotifyInfo.token);
-      console.log("no token");
-    }
+
   }, []);
 
   const GetSpotifyUserInfo = (token) => {
@@ -93,7 +89,7 @@ function MainPage() {
         },
         data: {
           "name": playlist_name,
-          "description": "a fun description",
+          "description": "a mixtape of upcoming concerts --> created by recordshopp.netlify.app",
           "public": false
         }
       })
@@ -177,25 +173,26 @@ function MainPage() {
 
   const HandleClickVancouver = () => {
 
-    if (window.confirm('Are you sure you want to create a new playlist?')) {
+    if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
       CreateNewPlaylist("vancouver");
     }
   }
 
   const HandleClickOttawa = () => {
-    if (window.confirm('Are you sure you want to create a new playlist?')) {
+    if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
       CreateNewPlaylist("ottawa");
     }
   }
 
-
   return (
     <div className="styles.body">
 
-      <h3>Welcome</h3>
-
-      <div>
         {!spotifyInfo.token && (
+
+          <div className="container-sm">
+            <h3>Welcome</h3>
+            <p>Record Shop helps you find new music by displaying concert ticket info from your local record shop 
+              and creates a new playlist on your spotify account with the top track from each artist</p>
           <button>
             <a
               className="btn btn--loginApp-link"
@@ -206,20 +203,10 @@ function MainPage() {
               Login to Spotify
             </a>
           </button>
-        )}
-      </div>
-
-      <div>
-        {spotifyInfo.token && spotifyInfo.err_sp_access && (
-          <div>
-            <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
-            <p>Please include your name and email associated with your spotify account</p>
           </div>
         )}
-      </div>
+        {spotifyInfo.token && !spotifyInfo.err_sp_access && (
 
-      <div>
-        {spotifyInfo.token && spotifyInfo.user_id.length > 0 && (
           <div className="container-sm">
             <p>Hey {spotifyInfo.user_name}!</p>
             <p>Create a new playlist from shows playing in: </p>
@@ -231,7 +218,13 @@ function MainPage() {
             </button>
           </div>
         )}
-      </div>
+        {spotifyInfo.token && spotifyInfo.err_sp_access && (
+          <div>
+            <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
+            <p>Please include your name and email associated with your spotify account</p>
+          </div>
+        )}
+
     </div>
   );
 
