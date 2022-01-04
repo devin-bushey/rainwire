@@ -78,37 +78,37 @@ function MainPage() {
 
     var playlist_name = "Record Shop - " + city;
 
-    return new Promise(async function (resolve, reject){
-    axios
-      ({
-        url: 'https://api.spotify.com/v1/users/' + spotifyInfo.user_id + '/playlists',
-        method: 'POST',
-        headers: {
-          "Authorization": "Bearer " + spotifyInfo.token,
-          'Content-Type': 'application/json',
-        },
-        data: {
-          "name": playlist_name,
-          "description": "a mixtape of upcoming concerts --> created by recordshopp.netlify.app",
-          "public": false
-        }
-      })
-      .then((response) => {
+    return new Promise(async function (resolve, reject) {
+      axios
+        ({
+          url: 'https://api.spotify.com/v1/users/' + spotifyInfo.user_id + '/playlists',
+          method: 'POST',
+          headers: {
+            "Authorization": "Bearer " + spotifyInfo.token,
+            'Content-Type': 'application/json',
+          },
+          data: {
+            "name": playlist_name,
+            "description": "a mixtape of upcoming concerts --> created by recordshopp.netlify.app",
+            "public": false
+          }
+        })
+        .then((response) => {
 
-        setSpotifyInfo((prevState) => ({
-          ...prevState,
-          new_playlist_id: response.data.id,
-        }));
+          setSpotifyInfo((prevState) => ({
+            ...prevState,
+            new_playlist_id: response.data.id,
+          }));
 
-        resolve(response.data.id);
+          resolve(response.data.id);
 
-        console.log('Successfully created a playist: ' + playlist_name);
+          console.log('Successfully created a playist: ' + playlist_name);
 
-      })
-      .catch(function (error) {
-        console.log("Error: CreateBlankPlaylist");
-        console.log(error);
-      }); //end axios
+        })
+        .catch(function (error) {
+          console.log("Error: CreateBlankPlaylist");
+          console.log(error);
+        }); //end axios
     }); //end promise
 
   }
@@ -187,12 +187,18 @@ function MainPage() {
   return (
     <div className="styles.body">
 
-        {!spotifyInfo.token && (
+      {!spotifyInfo.token && (
 
-          <div className="container-sm">
-            <h3>Welcome</h3>
-            <p>Record Shop helps you find new music by displaying concert ticket info from your local record shop 
-              and creates a new playlist on your spotify account with the top track from each artist</p>
+        <div className="container-sm">
+          <h3>Welcome</h3>
+          <br />
+          <p>Record Shop helps you find new music.</p>
+          <br />
+          <p>Pick a city from the tabs above and check out the upcoming concert listings.</p>
+          <p>Record Shop creates a new playlist on your spotify account with the top track from each artist playing in your chosen city</p>
+          <br />
+          <p>Let's start by logging into Spotify.</p>
+          <br />
           <button>
             <a
               className="btn btn--loginApp-link"
@@ -203,27 +209,27 @@ function MainPage() {
               Login to Spotify
             </a>
           </button>
-          </div>
-        )}
-        {spotifyInfo.token && !spotifyInfo.err_sp_access && (
+        </div>
+      )}
+      {spotifyInfo.token && !spotifyInfo.err_sp_access && (
 
-          <div className="container-sm">
-            <p>Hey {spotifyInfo.user_name}!</p>
-            <p>Create a new playlist from shows playing in: </p>
-            <button style={{ margin: 10 }} onClick={HandleClickVancouver}>
-              Vancouver
-            </button>
-            <button style={{ margin: 10 }} onClick={HandleClickOttawa}>
-              Ottawa
-            </button>
-          </div>
-        )}
-        {spotifyInfo.token && spotifyInfo.err_sp_access && (
-          <div>
-            <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
-            <p>Please include your name and email associated with your spotify account</p>
-          </div>
-        )}
+        <div className="container-sm">
+          <p>Hey {spotifyInfo.user_name}!</p>
+          <p>Create a new playlist from shows playing in: </p>
+          <button style={{ margin: 10 }} onClick={HandleClickVancouver}>
+            Vancouver
+          </button>
+          <button style={{ margin: 10 }} onClick={HandleClickOttawa}>
+            Ottawa
+          </button>
+        </div>
+      )}
+      {spotifyInfo.token && spotifyInfo.err_sp_access && (
+        <div>
+          <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
+          <p>Please include your name and email associated with your spotify account</p>
+        </div>
+      )}
 
     </div>
   );
