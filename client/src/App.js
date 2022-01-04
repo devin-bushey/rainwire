@@ -22,7 +22,7 @@ const App = () => {
   // only show app if all ticket data is available
   useEffect(() => {
 
-    if (ticketsOttawa && ticketsVancouver) {
+    if (ticketsOttawa.length > 0 && ticketsVancouver.length > 0) {
       setShowApp(true);
     }
 
@@ -31,6 +31,7 @@ const App = () => {
   if (showApp) {
 
     return (
+
       <div>
         <Navbarr />
         <Route exact path="/">
@@ -50,6 +51,9 @@ const App = () => {
 
     return (
       <div>
+        <br />
+        <br />
+        <br />
         <p>Loading...</p>
       </div>
     );

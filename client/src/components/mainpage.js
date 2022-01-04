@@ -17,30 +17,34 @@ function MainPage() {
 
   const [spotifyInfo, setSpotifyInfo] = useState({
 
-    token: null,
     user_name: "",
     user_id: "",
     new_playlist_id: "",
-    err_sp_access: true,
 
   });
+
+  const [token, setToken] = useState(null);
+  const [access, setAccess] = useState(false);
 
   // get token
   useEffect(() => {
 
     let _token = hash.access_token;
     if (_token) {
-
-      setSpotifyInfo((prevState) => ({
-        ...prevState,
-        token: _token,
-      }));
-
-      GetSpotifyUserInfo(_token)
-
+      setToken(_token);
     }
 
   }, []);
+
+  // set Access
+  // users must be registered through spotify developer
+  useEffect(() => {
+
+    if (token) {
+      GetSpotifyUserInfo(token)
+    }
+
+  }, [token]);
 
   const GetSpotifyUserInfo = (token) => {
 
@@ -64,11 +68,13 @@ function MainPage() {
           ...prevState,
           user_name: firstName,
           user_id: response.data.id,
-          err_sp_access: false,
         }));
+
+        setAccess(true);
 
       })
       .catch(function (error) {
+        setAccess(false);
         console.log("Error GetSpotifyUserInfo");
         console.log(error);
       });
@@ -84,7 +90,7 @@ function MainPage() {
           url: 'https://api.spotify.com/v1/users/' + spotifyInfo.user_id + '/playlists',
           method: 'POST',
           headers: {
-            "Authorization": "Bearer " + spotifyInfo.token,
+            "Authorization": "Bearer " + token,
             'Content-Type': 'application/json',
           },
           data: {
@@ -155,7 +161,7 @@ function MainPage() {
       url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
       method: 'POST',
       headers: {
-        "Authorization": "Bearer " + spotifyInfo.token,
+        "Authorization": "Bearer " + token,
         'Content-Type': 'application/json',
       },
     })
@@ -187,7 +193,7 @@ function MainPage() {
   return (
     <div className="styles.body">
 
-      {!spotifyInfo.token && (
+      {!token && (
 
         <div className="container-sm">
           <h3>Welcome</h3>
@@ -211,7 +217,7 @@ function MainPage() {
           </button>
         </div>
       )}
-      {spotifyInfo.token && !spotifyInfo.err_sp_access && (
+      {access && token && (
 
         <div className="container-sm">
           <p>Hey {spotifyInfo.user_name}!</p>
@@ -224,7 +230,7 @@ function MainPage() {
           </button>
         </div>
       )}
-      {spotifyInfo.token && spotifyInfo.err_sp_access && (
+      {!access && token && (
         <div>
           <p>Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access</p>
           <p>Please include your name and email associated with your spotify account</p>
