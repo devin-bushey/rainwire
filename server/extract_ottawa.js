@@ -28,6 +28,7 @@ module.exports = {
                      //console.log(lines[i]);
                      var dateMonth = lines[i].substring(0, 3).trim();
                      var dateDay = lines[i].substring(4, 6).trim();
+                     var date = dateMonth + " " + dateDay;
                      var bandName = lines[i].substring(lines[i].indexOf(':') + 2, lines[i].indexOf('$')).trim();
                      var price = lines[i].substring(lines[i].indexOf('$')).trim();
                      var isSoldOut = false;
@@ -43,7 +44,7 @@ module.exports = {
 
                      //console.log(dateMonth + ", " + dateDay + ", " + bandName + ", " + price + ", " + isSoldOut);
 
-                     ticketsString += '{ "ticket_month": "' + dateMonth + '" , "ticket_day": ' + dateDay + ' , "ticket_band": "' + bandName + '" , "ticket_price": "' + price + '" , "ticket_soldout": ' + isSoldOut + '},';
+                     ticketsString += '{ "ticket_month": "' + dateMonth + '" , "ticket_day": ' + dateDay + ' , "ticket_date": "' + date + '" , "ticket_band": "' + bandName + '" , "ticket_price": "' + price + '" , "ticket_soldout": ' + isSoldOut + '},';
 
                   }
                }
@@ -53,9 +54,11 @@ module.exports = {
 
                var ticketsJSON = JSON.parse(ticketsString);
 
+               
+
                resolve(ticketsJSON);
 
-               console.log("Extracted Vertigo Records Success");
+               console.log("Successfully extracted Vertigo Records");
 
             }
             else {
