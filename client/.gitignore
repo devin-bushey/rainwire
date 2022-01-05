@@ -25,3 +25,5 @@ yarn-error.log*
 config.env
 config.json
 .env
+
+client/.env
