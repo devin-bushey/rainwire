@@ -168,6 +168,7 @@ function MainPage() {
       .then((response) => {
 
         console.log("Successfully added tracks to playlist");
+        window.alert("Successfully created a new playlist!");
 
       })
       .catch(function (error) {
@@ -191,7 +192,7 @@ function MainPage() {
   }
 
   return (
-    <div className="styles.body">
+    <div className="styles.body" style={{ marginBottom: 100 }}>
 
       {!token && (
 
@@ -215,6 +216,10 @@ function MainPage() {
               Login to Spotify
             </a>
           </button>
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       )}
       {access && token && (

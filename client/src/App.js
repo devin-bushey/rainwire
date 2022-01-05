@@ -1,15 +1,10 @@
-//import React from "react";
 import React, { useState, useEffect } from "react";
-
-// We use Route in order to define the different routes of our application
 import { Route } from "react-router-dom";
 
-// We import all the components we need in our app
 import Navbarr from "./components/navbar";
 import MainPage from "./components/mainpage";
 import DisplayTable from "./components/DisplayTable";
 
-// for get requests
 import axios from 'axios';
 
 const App = () => {
