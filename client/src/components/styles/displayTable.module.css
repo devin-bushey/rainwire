@@ -1,0 +1,46 @@
+.left {
+    float: left;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    float: right;
+    width: 60%;
+    padding: 5px;
+
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    margin-bottom: 0px;
+    padding: 2px;
+}
+
+p.band{
+    font-weight: bold;
+}
+
+p.info{
+    font-size: 0.9rem;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+}
+
+.ticketContainer{
+    height: 240px;
+    background-color: aquamarine;
+    margin: 10px;
+    border-radius: 10px;
+    border-width: thin;
+}
+
