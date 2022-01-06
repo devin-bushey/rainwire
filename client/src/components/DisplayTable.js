@@ -30,7 +30,7 @@ function ticketContainer(props) {
     }
 
     return (
-      <div className="col">
+      <div key={currentTicket._id} className="col">
       <Ticket
         ticket={currentTicket}
         image={imageURL}
