@@ -16,7 +16,9 @@ const DisplayTable = (data) => {
 
 function ticketContainer(props) {
 
-  return props.map((currentTicket) => {
+  const colors = ['hsl(176, 52%, 80%)', 'hsl(284, 57%, 80%)', 'hsl(20, 49%, 80%)']
+
+  return props.map((currentTicket, index) => {
 
     var imageURL;
     try {
@@ -31,6 +33,7 @@ function ticketContainer(props) {
       <Ticket
         ticket={currentTicket}
         image={imageURL}
+        bgcolor = {colors[index % colors.length]}
         key={currentTicket._id}
       />
     );
@@ -42,7 +45,7 @@ function ticketContainer(props) {
 
 const Ticket = (props) => (
 
-  <div className={styles.ticketContainer}>
+  <div className={styles.ticketContainer} style={{backgroundColor: props.bgcolor}}>
 
     <div className={styles.left}>
       <img src={props.image} width="120" height="120" className={styles.img}></img>
