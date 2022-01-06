@@ -198,51 +198,64 @@ function MainPage() {
     }
   }
 
+
   return (
-    <div className="styles.body" style={{ marginBottom: 100 }}>
+    <div className="container-sm" style={{ marginBottom: 50 }}>
 
       {!token && (
 
         <div className="container-sm">
-          <h3>Welcome</h3>
+          <h3>What's Record Shop?</h3>
           <br />
-          <p>Record Shop helps you find new music.</p>
-          <br />
-          <p>Pick a city from the tabs above and check out the upcoming concert listings.</p>
-          <p>Record Shop creates a new playlist on your spotify account with the top track from each artist playing in your chosen city</p>
-          <br />
-          <p>Let's start by logging into Spotify.</p>
-          <br />
-          <button>
-            <a
-              className="btn btn--loginApp-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-          </button>
-          <br />
-          <br />
-          <br />
-          <br />
+          <div className={styles.welcomeContainer}>
+            <p>Record Shop helps you </p>
+            <p><span className={styles.color1}>find new music.</span></p>
+            <br />
+            <p>Pick a city from the tabs above and check out the upcoming concert listings.</p>
+            <br />
+            <p><span className={styles.color1}>Create a new playlist</span> on your spotify account with the top track from each artist playing in your chosen city.</p>
+            <br />
+            <p>Let's start by logging into <span className={styles.color3}>Spotify.</span></p>
+            <br />
+            <button className={styles.login}>
+              <a
+                className="btn btn--loginApp-link"
+                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                  "%20"
+                )}&response_type=token&show_dialog=true`}
+              >
+                Login to Spotify
+              </a>
+            </button>
+            <br/>
+            <br/>
+            <p style={{ fontSize: 15, fontStyle: "italic" }}>by Devin Bushey</p>
+          </div>
         </div>
       )}
       {access && token && (
 
         <div className="container-sm">
-          <p>Hey {spotifyInfo.user_name}!</p>
-          <p>Create a new playlist from shows playing in: </p>
-          <button style={{ margin: 10 }} onClick={HandleClickVictoria}>
-            Victoria
-          </button>
-          <button style={{ margin: 10 }} onClick={HandleClickVancouver}>
-            Vancouver
-          </button>
-          <button style={{ margin: 10 }} onClick={HandleClickOttawa}>
-            Ottawa
-          </button>
+          <h3>Hey {spotifyInfo.user_name}!</h3>
+          <br />
+          <div className={styles.heyContainer}>
+            <p><span className={styles.color1}>Create a new playlist</span> from shows playing in: </p>
+            <br/>
+            <button className={styles.cities} onClick={HandleClickVictoria}>
+              Victoria
+            </button>
+            <button className={styles.cities} onClick={HandleClickVancouver}>
+              Vancouver
+            </button>
+            <button className={styles.cities} onClick={HandleClickOttawa}>
+              Ottawa
+            </button>
+            <br/>
+            <br/>
+            <p>This will create a new playlist right on your account!</p>
+            <br/>
+            <p>Look for <span style={{textDecorationLine: "underline"}}>Record Shop - city</span> on your Spotify.</p>
+          </div>
         </div>
       )}
       {!access && token && (

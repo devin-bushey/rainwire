@@ -1,46 +1,67 @@
 import React from "react";
+import styles from './styles/displayTable.module.css';
 
 const DisplayTable = (data) => {
 
   return (
     <div className="container-sm">
-      <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Band</th>
-            <th>Price</th>
-            {/* <th>Sold Out</th> */}
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>{newRecordList(data.tickets)}</tbody>
-
-      </table>
+      <h3>Tickets</h3>
+      <br />
+      <div className="row">
+        {ticketContainer(data.tickets)}
+      </div>
     </div>
   );
 }
 
-function newRecordList(props) {
+function ticketContainer(props) {
 
-  return props.map((currentrecord) => {
+  const colors = ['hsl(176, 52%, 80%)', 'hsl(284, 57%, 80%)', 'hsl(20, 49%, 80%)']
+
+  return props.map((currentTicket, index) => {
+
+    var imageURL;
+    try {
+      imageURL = currentTicket.top_tracks[0].album.images[1].url;
+    }
+    catch {
+      //TODO: find generic image
+      imageURL = " ";
+    }
+
     return (
-      <Record
-        record={currentrecord}
-        key={currentrecord._id}
+      <div key={currentTicket._id} className="col">
+      <Ticket
+        ticket={currentTicket}
+        image={imageURL}
+        bgcolor = {colors[index % colors.length]}
+        key={currentTicket._id}
       />
+      </div>
     );
+
   });
 
 }
 
-const Record = (props) => (
-  <tr>
-    <td>{props.record.ticket_date}</td>
-    <td>{props.record.ticket_band}</td>
-    <td>{props.record.ticket_price}</td>
-    <td><a href={props.record.link} target="_blank">link</a></td>
-  </tr>
+
+const Ticket = (props) => (
+
+  <div className={styles.ticketContainer} style={{backgroundColor: props.bgcolor}}>
+
+    <div className={styles.left}>
+      <img src={props.image} width="120" height="120" className={styles.img}></img>
+    </div>
+
+    <div className={styles.right}>
+      <div className={styles.rows}>
+      <p className={styles.band}>{props.ticket.ticket_band}</p>
+        <p className={styles.info}>{props.ticket.ticket_date}</p>
+        <p className={styles.info}>{props.ticket.ticket_price}</p>
+        <p className={styles.info}><a href={props.ticket.link} target="_blank">spotify</a></p>
+      </div>
+    </div>
+  </div>
 );
 
 export default DisplayTable;
