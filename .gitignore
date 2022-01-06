@@ -1,4 +1,5 @@
 /config.env
 /server/config.env
+server/config.env
 node_modules
 
