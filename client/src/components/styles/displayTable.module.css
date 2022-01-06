@@ -1,6 +1,6 @@
 .left {
     float: left;
-    width: 40%;
+    width: 43%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -9,8 +9,8 @@
 
 .right {
     float: right;
-    width: 60%;
-    padding: 5px;
+    width: 57%;
+    padding: 7px;
 
     height: 100%;
     display: flex;
@@ -38,6 +38,7 @@ p.info{
 
 .ticketContainer{
     height: 240px;
+    min-width: 300px;
     background-color: aquamarine;
     margin: 10px;
     border-radius: 10px;

@@ -7,7 +7,7 @@ const DisplayTable = (data) => {
     <div className="container-sm">
       <h3>Tickets</h3>
       <br />
-      <div>
+      <div className="row">
         {ticketContainer(data.tickets)}
       </div>
     </div>
@@ -30,12 +30,14 @@ function ticketContainer(props) {
     }
 
     return (
+      <div className="col">
       <Ticket
         ticket={currentTicket}
         image={imageURL}
         bgcolor = {colors[index % colors.length]}
         key={currentTicket._id}
       />
+      </div>
     );
 
   });
