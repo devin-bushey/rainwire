@@ -178,6 +178,13 @@ function MainPage() {
   }
 
 
+  const HandleClickVictoria = () => {
+
+    if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
+      CreateNewPlaylist("victoria");
+    }
+  }
+
   const HandleClickVancouver = () => {
 
     if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
@@ -227,6 +234,9 @@ function MainPage() {
         <div className="container-sm">
           <p>Hey {spotifyInfo.user_name}!</p>
           <p>Create a new playlist from shows playing in: </p>
+          <button style={{ margin: 10 }} onClick={HandleClickVictoria}>
+            Victoria
+          </button>
           <button style={{ margin: 10 }} onClick={HandleClickVancouver}>
             Vancouver
           </button>

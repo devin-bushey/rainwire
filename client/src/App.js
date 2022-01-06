@@ -11,17 +11,18 @@ const App = () => {
 
   const [showApp, setShowApp] = useState(false);
 
+  const ticketsVictoria = GetTickets("victoria");
   const ticketsOttawa = GetTickets("ottawa");
   const ticketsVancouver = GetTickets("vancouver");
 
   // only show app if all ticket data is available
   useEffect(() => {
 
-    if (ticketsOttawa.length > 0 && ticketsVancouver.length > 0) {
+    if (ticketsOttawa.length > 0 && ticketsVancouver.length > 0 && ticketsVictoria.length > 0) {
       setShowApp(true);
     }
 
-  }, [ticketsOttawa, ticketsVancouver]);
+  }, [ticketsOttawa, ticketsVancouver, ticketsVictoria]);
 
   if (showApp) {
 
@@ -31,6 +32,9 @@ const App = () => {
         <Navbarr />
         <Route exact path="/">
           <MainPage />
+        </Route>
+        <Route path="/vic">
+          <DisplayTable tickets={ticketsVictoria} />
         </Route>
         <Route path="/van">
           <DisplayTable tickets={ticketsVancouver} />
