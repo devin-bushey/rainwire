@@ -5,3 +5,63 @@ body{
     text-align: center;
     /* background-color: #f7efd6; */
 }
+
+.welcomeContainer{
+    padding: 30px;
+    background-color: hsl(1, 40%, 80%);
+    
+    border-radius: 10px;
+}
+
+span.color1{
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 3px 10px 3px 10px;
+
+    background-color: hsl(43, 97%, 80%);
+}
+
+span.color2{
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 3px 10px 3px 10px;
+
+    background-color: hsl(176, 52%, 80%);
+}
+
+span.color3{
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 3px 10px 3px 10px;
+
+    background-color: hsl(82, 97%, 80%);
+}
+
+button.login{
+
+    border-color: hsl(178, 47%, 27%);
+    background-color: white;
+    border-radius: 10px;
+}
+
+.login:hover {
+    background-color: hsl(178, 47%, 34%);
+    color: white;
+  }
+
+  .heyContainer{
+    padding: 30px;
+    border-radius: 10px;
+    background-color: hsl(176, 52%, 80%);
+  }
+
+  .cities{
+    margin:10px;
+    padding: 3px 10px 3px 10px;
+    border-radius: 10px;
+  }
+
+  .cities:hover {
+    background-color: hsl(178, 47%, 34%);
+    color: white;
+  }

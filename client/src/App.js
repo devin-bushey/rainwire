@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import Navbarr from "./components/navbar";
 import MainPage from "./components/mainpage";
 import DisplayTable from "./components/DisplayTable";
+import Footer from "./components/footer";
 
 import axios from 'axios';
 
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/ottawa">
           <DisplayTable tickets={ticketsOttawa} />
         </Route>
+
       </div>
     );
 
