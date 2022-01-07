@@ -7,6 +7,11 @@ const DisplayTable = (data) => {
     <div className="container-sm">
       <h3>Tickets</h3>
       <br />
+      <a className={styles.shop} href={data.website} target="_blank">
+                click me to find tickets
+              </a>
+      <br />
+      <br />
       <div className="row">
         {ticketContainer(data.tickets)}
       </div>

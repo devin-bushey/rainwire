@@ -35,13 +35,13 @@ const App = () => {
           <MainPage />
         </Route>
         <Route path="/vic">
-          <DisplayTable tickets={ticketsVictoria} />
+          <DisplayTable tickets={ticketsVictoria} website="https://victoriamusicscene.com/concerts/"/>
         </Route>
         <Route path="/van">
-          <DisplayTable tickets={ticketsVancouver} />
+          <DisplayTable tickets={ticketsVancouver} website="https://redcat.ca/"/>
         </Route>
         <Route path="/ottawa">
-          <DisplayTable tickets={ticketsOttawa} />
+          <DisplayTable tickets={ticketsOttawa} website="http://www.vertigorecords.ca/showtickets/index.html"/>
         </Route>
 
       </div>
