@@ -44,3 +44,22 @@ p.info{
     border-width: thin;
 }
 
+a.shop:link, a.shop:visited {
+
+    background-color: hsl(43, 97%, 80%);
+    color: hsl(178, 79%, 13%);
+    padding: 4px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    border-color: hsl(178, 47%, 27%);
+    border-radius: 10px;
+}
+
+a.shop:hover {
+    background-color: hsl(178, 47%, 34%);
+    color: white;
+  }
+
+
