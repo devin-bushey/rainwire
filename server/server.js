@@ -15,6 +15,7 @@ const axios = require('axios');
 const extract_ottawa = require('./extract_ottawa.js');
 const extract_vancouver = require('./extract_vancouver.js');
 const extract_victoria = require('./extract_victoria.js');
+const extract_capitalBallroom = require('./extract_capitalBallroom.js');
 
 
 app.listen(port, () => {
@@ -40,6 +41,9 @@ app.listen(port, () => {
 
   let tickets_victoria = await extract_victoria.extract();
   let tickets_victoria_linked = await addSpotifyData(tickets_victoria);
+
+  let tickets_capitalBallroom = await extract_capitalBallroom.extract();
+  let tickets_capitalBallroom_linked = await addSpotifyData(tickets_capitalBallroom);
 
   //await new Promise(r => setTimeout(r, 2000));
 
@@ -100,6 +104,11 @@ app.listen(port, () => {
           if (err) throw err;
           if (delOK) console.log(collinfo.name + " deleted");
           //db_connect.close();
+        });
+
+        db_connect.collection("data_victoria").insertMany(tickets_capitalBallroom_linked, function (err, res) {
+          if (err) throw err;
+          console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
         });
 
         db_connect.collection("data_victoria").insertMany(tickets_victoria_linked, function (err, res) {

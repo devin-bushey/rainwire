@@ -1,75 +1,72 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
-const { extract } = require('./extract_ottawa');
 
+module.exports = {
 
-function resolveAfter2Seconds() {
-    return new Promise(async function (resolve, reject) {
-        try {
+    extract: function () {
 
-            console.log("Testing Captial Ballroom");
-            const html = await axios.get('https://thecapitalballroom.com/all-events/');
-            const $ = await cheerio.load(html.data);
+        return new Promise(async function (resolve, reject) {
+            try {
 
-            let data = [];
+                const html = await axios.get('https://thecapitalballroom.com/all-events/');
+                const $ = await cheerio.load(html.data);
 
-            $('div.row.all-events-row').each(function (index, element) {
+                let data = [];
 
-                var band_name = $(element).find('a.title').text().trim();
-                //console.log(band_name);
-                var band_name_reduced = "";
-                const escape_chars = ['w/', '&', '-', "vs", " at "];
-                for (let i = 0; i < escape_chars.length; i++) {
+                $('div.row.all-events-row').each(function (index, element) {
 
-                    if (band_name.includes(escape_chars[i])) {
-                        band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
-                        break;
+                    var band_name = $(element).find('a.title').text().trim();
+                    //console.log(band_name);
+                    var band_name_reduced = "";
+                    //const escape_chars = ['w/', '&', '-', "vs", " at ", "*CANCELLED*",];
+                    const escape_chars = ["–"];
+                    for (let i = 0; i < escape_chars.length; i++) {
+
+                        if (band_name.includes(escape_chars[i])) {
+                            band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
+                            break;
+                        }
+                        else {
+                            band_name_reduced = band_name;
+                        }
+
                     }
-                    else {
-                        band_name_reduced = band_name;
+                    if (band_name.includes("Presents:") || band_name.includes("PRESENTS:")) {
+                        band_name_reduced = band_name.substring((band_name.indexOf(":") + 1)).trim();
                     }
-
-                }
-                console.log(band_name_reduced);
-
-                const venue = "Capital Ballroom";
-
-                var month = $(element).find('p.month').text().trim();
-                var date = $(element).find('p.date').text().trim();
-                var day = $(element).find('p.day').text().trim();
-                var date_reduced = month + " " + date;
-                console.log(date_reduced);
-
-
-
-                data.push(
-                    {
-                        ticket_band: band_name_reduced,
-                        ticket_date: date_reduced + ' @ ' + venue,
+                    if (band_name.includes("*CANCELLED*")) {
+                        band_name_reduced = band_name.substring((band_name.indexOf("D") + 2)).trim();
                     }
-                );
+                    //console.log(band_name_reduced);
 
-            });
+                    const venue = "Capital Ballroom";
 
+                    var month = $(element).find('p.month').text().trim();
+                    var date = $(element).find('p.date').text().trim();
+                    var day = $(element).find('p.day').text().trim();
+                    var date_reduced = month + " " + date;
+                    //console.log(date_reduced);
 
+                    data.push(
+                        {
+                            ticket_band: band_name_reduced,
+                            ticket_date: date_reduced + ' @ ' + venue,
+                        }
+                    );
 
+                });
+                resolve(data);
+                console.log("Successfully extracted https://thecapitalballroom.com/all-events/");
 
-            resolve(data);
-        }
-        catch (err) {
-            console.log("error");
-            console.log(err);
-        }
+            }
+            catch (err) {
+                reject("error: capital ballroom extraction")
+                console.log("error: capital ballroom extraction");
+            }
 
-    });
+        });
+    }
 }
-
-async function asyncCall() {
-    const result = await resolveAfter2Seconds();
-    //console.log(result);
-}
-
-asyncCall();
 
 
 
