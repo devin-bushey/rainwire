@@ -3,20 +3,35 @@ import styles from './styles/displayTable.module.css';
 
 const DisplayTable = (data) => {
 
-  return (
-    <div className="container-sm">
-      <h3>Tickets</h3>
-      <br />
-      <a className={styles.shop} href={data.website} target="_blank">
-                click me to find tickets
-              </a>
-      <br />
-      <br />
-      <div className="row">
-        {ticketContainer(data.tickets)}
+  if (data.tickets == null || data.tickets.length == 0){
+    return (
+      <div className="container-sm">
+        <br />
+        <div className="row">
+          <p>Loading ... </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else{
+    return (
+      <div className="container-sm">
+        <h3>Tickets</h3>
+        <br />
+        <a className={styles.shop} href={data.website} target="_blank">
+                  click me to find tickets
+                </a>
+        <br />
+        <br />
+        <div className="row">
+          {ticketContainer(data.tickets)}
+        </div>
+      </div>
+    );
+
+  }
+
+  
 }
 
 function ticketContainer(props) {
