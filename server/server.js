@@ -33,6 +33,8 @@ app.listen(port, () => {
 
   // TODO: add a while true loop and update db ~ once a day
 
+  /*
+
   
   let tickets_ottawa = await extract_ottawa.extract();
   let tickets_ottawa_linked = await addSpotifyData(tickets_ottawa);
@@ -134,6 +136,8 @@ app.listen(port, () => {
 
 
     });
+
+    */
 
     
 
