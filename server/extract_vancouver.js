@@ -14,7 +14,8 @@ module.exports = {
 
                 let data = [];
 
-                $('div[class=ticket]').each(function (index, element) {
+                $('a.ticket').each(function (index, element) {
+
 
                     // try to format band name
                     // TODO: clean this up

@@ -33,6 +33,7 @@ app.listen(port, () => {
 
   // TODO: add a while true loop and update db ~ once a day
 
+  
   let tickets_ottawa = await extract_ottawa.extract();
   let tickets_ottawa_linked = await addSpotifyData(tickets_ottawa);
 
@@ -44,18 +45,21 @@ app.listen(port, () => {
 
   let tickets_capitalBallroom = await extract_capitalBallroom.extract();
   let tickets_capitalBallroom_linked = await addSpotifyData(tickets_capitalBallroom);
+  
 
   //await new Promise(r => setTimeout(r, 2000));
 
   let db_connect = dbo.getDb();
 
+  
+
   // TODO: clean up this db stuff
   db_connect.listCollections({ name: "data_ottawa" })
     .next(function (err, collinfo) {
 
-      //console.log(collName)
       if (collinfo) {
 
+        
         db_connect.collection("data_ottawa").drop(function (err, delOK) {
           if (err) throw err;
           if (delOK) console.log(collinfo.name + " deleted");
@@ -66,11 +70,13 @@ app.listen(port, () => {
           if (err) throw err;
           console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
         });
+        
 
       }
 
 
     });
+
 
   db_connect.listCollections({ name: "data_vancouver" })
     .next(function (err, collinfo) {
@@ -83,16 +89,20 @@ app.listen(port, () => {
           if (delOK) console.log(collinfo.name + " deleted");
           //db_connect.close();
         });
+        
 
+        
         db_connect.collection("data_vancouver").insertMany(tickets_vancouver_linked, function (err, res) {
           if (err) throw err;
           console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
         });
+    
 
       }
 
 
     });
+
 
     db_connect.listCollections({ name: "data_victoria" })
     .next(function (err, collinfo) {
@@ -100,12 +110,15 @@ app.listen(port, () => {
       //console.log(collName)
       if (collinfo) {
 
+        
         db_connect.collection("data_victoria").drop(function (err, delOK) {
           if (err) throw err;
           if (delOK) console.log(collinfo.name + " deleted");
           //db_connect.close();
         });
+        
 
+        
         db_connect.collection("data_victoria").insertMany(tickets_capitalBallroom_linked, function (err, res) {
           if (err) throw err;
           console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
@@ -115,11 +128,14 @@ app.listen(port, () => {
           if (err) throw err;
           console.log("Successfully added " + res.insertedCount + " records to " + collinfo.name);
         });
+        
 
       }
 
 
     });
+
+    
 
   /* db_connect.collection("data_ottawa").insertMany(tickets_ottawa_linked, function (err, res) {
     if (err) throw err;
