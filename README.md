@@ -8,12 +8,6 @@ Record Shop is developed using the MERN stack, which uses React hooks, MongoDB A
 
 I have currently spent 3 weeks actively developing this project from the ground up. I have been implementing a Trello board to keep the project organized and have been using git for version control, pull requests, and production pipelines. In the future I will be focusing on better database design and management as well as general refactoring to ensure the code meets today’s best practices.
 
-Current issues with the project include:
--	Flickers when switching between ticket view and main view (because of re-renders of the access token state variable)
--	Not all artists are correctly linked to Spotify. (requires better extraction methods of ticket information)
 
-Upcoming features:
--	Faster loading
--	Sort by genre
 
 
