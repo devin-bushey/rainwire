@@ -23,6 +23,7 @@ app.listen(port, () => {
 
 });
 
+/*
 // scheduled for every sunday
 cron.schedule("0 0 * * 0", function(){
 
@@ -32,3 +33,4 @@ cron.schedule("0 0 * * 0", function(){
   }
 
 });
+*/
