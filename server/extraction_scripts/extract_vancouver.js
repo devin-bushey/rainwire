@@ -21,7 +21,7 @@ module.exports = {
                     // TODO: clean this up
                     var band_name = $(element).find('h3').text().trim();
                     var band_name_reduced = "";
-                    const escape_chars = ['(', '-', '&', "vs"];
+                    const escape_chars = ['(', '-', '&', "vs", "ticket"];
 
                     for (let i = 0; i < escape_chars.length; i++){
 
