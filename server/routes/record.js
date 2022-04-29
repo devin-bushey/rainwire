@@ -7,7 +7,7 @@ recordRoutes.route("/ottawa").get(function (req, res) {
   let db_connect = dbo.getDb("RecordShop");
 
   db_connect
-    .collection("data_ottawa")
+    .collection("db_ottawa_spotify")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -20,7 +20,7 @@ recordRoutes.route("/vancouver").get(function (req, res) {
   let db_connect = dbo.getDb("RecordShop");
 
   db_connect
-    .collection("data_vancouver")
+    .collection("db_vancouver_spotify")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -33,7 +33,7 @@ recordRoutes.route("/victoria").get(function (req, res) {
   let db_connect = dbo.getDb("RecordShop");
 
   db_connect
-    .collection("data_victoria")
+    .collection("db_victoria_spotify")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;

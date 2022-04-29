@@ -8,8 +8,6 @@ module.exports = {
 
    extract: function () {
 
-      console.log("extracting ottawa ...");
-
       return new Promise(function (resolve, reject) {
          request('http://www.vertigorecords.ca/showtickets/index.html', (error, response, html) => {
             if (!error && response.statusCode == 200) {
@@ -47,7 +45,7 @@ module.exports = {
 
                      //console.log(dateMonth + ", " + dateDay + ", " + bandName + ", " + price + ", " + isSoldOut);
 
-                     ticketsString += '{ "ticket_month": "' + dateMonth + '" , "ticket_day": "' + dateDay + '" , "ticket_date": "' + date + '" , "ticket_band": "' + bandName + '" , "ticket_price": "' + price + '" , "ticket_soldout": ' + isSoldOut + '},';
+                     ticketsString += '{ "ticket_month": "' + dateMonth + '" , "ticket_day": "' + dateDay + '" , "ticket_date": "' + date + '" , "ticket_band": "' + bandName + '" , "ticket_price": "' + price + '" , "ticket_soldout": ' + isSoldOut + ', "spotify": []},';
 
                   }
                }
