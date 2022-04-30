@@ -7,10 +7,7 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = process.env.REACT_APP_SP_CLIENT_ID;
 const redirectUri = process.env.REACT_APP_SITE_URL;
 const scopes = [
-  "user-read-currently-playing",
-  "user-read-playback-state",
-  "playlist-modify-public",
-  "playlist-modify-private"
+  "playlist-modify-public"
 ];
 
 function MainPage() {
@@ -96,7 +93,7 @@ function MainPage() {
           data: {
             "name": playlist_name,
             "description": "a mixtape of upcoming concerts --> created by recordshopp.netlify.app",
-            "public": false
+            "public": true
           }
         })
         .then((response) => {
