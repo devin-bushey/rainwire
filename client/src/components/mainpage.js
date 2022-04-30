@@ -106,7 +106,7 @@ function MainPage() {
             new_playlist_id: response.data.id,
           }));
 
-          resolve(response.data.id);
+          resolve(response.data);
 
           console.log('Successfully created a playist: ' + playlist_name);
 
@@ -121,7 +121,7 @@ function MainPage() {
 
   const CreateNewPlaylist = async (city) => {
 
-    var playlist_id = await CreateBlankPlaylist(city);
+    var playlist_data = await CreateBlankPlaylist(city);
 
     axios
       .get(process.env.REACT_APP_SITE_URL_DB + city + "/")
@@ -146,7 +146,7 @@ function MainPage() {
 
         tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-        AddTracksToPlaylist(playlist_id, tracks);
+        AddTracksToPlaylist(playlist_data.id, playlist_data.external_urls.spotify, tracks);
 
       })
       .catch(function (error) {
@@ -155,7 +155,7 @@ function MainPage() {
       });
   }
 
-  const AddTracksToPlaylist = (playlist_id, tracks) => {
+  const AddTracksToPlaylist = (playlist_id, playlist_url, tracks) => {
 
     axios({
       url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
@@ -170,6 +170,7 @@ function MainPage() {
         console.log("Successfully added tracks to playlist");
         window.alert("Successfully created a new playlist!");
 
+        window.location.assign(playlist_url);
       })
       .catch(function (error) {
         console.log("Error: unsuccessfully added tracks to playlist");
