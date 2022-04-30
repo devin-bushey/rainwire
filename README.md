@@ -6,7 +6,7 @@ A full-stack web application used to help users find new music. The application 
 
 Record Shop is developed using the MERN stack, which uses React hooks, MongoDB Atlas, Express.js, Node.js, and is hosted on Netlify and Heroku. The application was developed with information security in mind. Users are authorized using the OAuth 2.0 authorization framework and secret keys are hidden through environment variables.
 
-I have currently spent 3 weeks actively developing this project from the ground up. I have been implementing a Trello board to keep the project organized and have been using git for version control, pull requests, and production pipelines. In the future I will be focusing on better database design and management as well as general refactoring to ensure the code meets today’s best practices.
+I have been implementing a Trello board to keep the project organized and have been using git for version control, pull requests, and production pipelines. In the future I will be focusing on better database design and management as well as general refactoring to ensure the code meets today’s best practices.
 
 
 
