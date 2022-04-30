@@ -47,10 +47,15 @@ module.exports = {
                     var date_reduced = month + " " + date;
                     //console.log(date_reduced);
 
+                    const d = new Date();
+                    let year = d.getFullYear();
+                    var date_sort = date_reduced + " " + year;
+
                     data.push(
                         {
                             ticket_band: band_name_reduced,
                             ticket_date: date_reduced + ' @ ' + venue,
+                            date: date_sort,
                         }
                     );
 

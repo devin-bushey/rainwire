@@ -5,6 +5,8 @@ const axios = require('axios');
 // used to run script manually
 // from commandline, enter the following:
 // node -e 'require("./addSpotifyDataToCollection").manualRun("collection_name")'
+// example:
+// node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_04-30-2022")'
 function manualRun(collection_name){
     
     dbo.connectToServer(async function (err) {

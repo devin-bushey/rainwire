@@ -40,6 +40,10 @@ module.exports = {
                     var date_reduced = date.substring(0, date.indexOf('@')).trim();
                     //console.log(date_reduced);
 
+                    const d = new Date();
+                    let year = d.getFullYear();
+                    var date_sort = date_reduced + " " + year;
+
                     var price = $(element).find('span.tribe-events-c-small-cta__price').text().trim();
                     var price_reduced = price;
                     if (price.includes(' ')){
@@ -52,6 +56,7 @@ module.exports = {
                             ticket_band: band_name_reduced,
                             ticket_date: date_reduced + ' @ ' + venue,
                             ticket_price: price_reduced,
+                            date: date_sort,
                         }
                     );
 
