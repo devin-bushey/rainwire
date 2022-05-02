@@ -8,7 +8,20 @@ const DisplayTable = (data) => {
       <div className="container-sm">
         <br />
         <div className="row">
-          <p>Loading ... </p>
+          <p>L O A D I N G</p>
+          <div className={styles.loader}>
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+            <div className={`${styles.wineglass} ${styles.wine_left}`}>
+              <div className={styles.wine_top}></div>
+            </div>
+            <div className={`${styles.wineglass} ${styles.wine_right}`}>
+              <div className={styles.wine_top}></div>
+            </div>
+          </div>
         </div>
       </div>
     );
