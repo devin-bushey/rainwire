@@ -31,6 +31,14 @@ p.info{
     font-size: 0.9rem;
 }
 
+span.spotify_link{
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 3px 15px 3px 15px;
+    
+
+}
+
 .img{
     display: flex;
     justify-content: center;
@@ -62,8 +70,17 @@ a.shop:hover {
     color: white;
   }
 
+  .displayContainer{
+    padding: 30px;
+    /*background-color: hsl(1, 40%, 80%);*/
+    background-color: rgb(241 231 243);
+    border-radius: 10px;
+    text-align: center;
+  }
 
 
+
+  /*  *****  WINE GLASS  ***** */
   .wineglass {
     height: 36px;
     position: relative;
