@@ -244,25 +244,33 @@ function MainPage() {
             <p className={styles.cityMessage}>Create a new playlist from shows playing in: </p>
 
             <button className={styles.cities} onClick={HandleClickVictoria}>
-              Victoria
+              <div className={styles.flex_container}>
+                <div>Victoria</div>
+                <div></div>
+                <div>&gt;</div>
+              </div>
             </button>
             <br />
             <button className={styles.cities} onClick={HandleClickVancouver}>
-              Vancouver
+            <div className={styles.flex_container}>
+                <div>Vancouver</div>
+                <div></div>
+                <div>&gt;</div>
+              </div>
             </button>
             <br />
             <button className={styles.cities} onClick={HandleClickOttawa}>
-              Ottawa
+            <div className={styles.flex_container}>
+                <div>Ottawa</div>
+                <div></div>
+                <div>&gt;</div>
+              </div>
             </button>
             <br />
             <br />
             <p className={styles.cityMessage}>This will create a new playlist right on your account!</p>
           </div>
           <br />
-
-          <div className={styles.heyContainer}>
-            <p>Look for <span style={{textDecorationLine: "underline"}}>Record Shop - city</span> on your Spotify.</p>
-          </div>
         </div>
       )}
       {!access && token && (
