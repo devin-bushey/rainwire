@@ -203,55 +203,64 @@ function MainPage() {
       {!token && (
 
         <div className="container-sm">
-          <h3>What's Record Shop?</h3>
+          
+          <div className={styles.titleContainer}>
+            <h3 className={styles.title}>what's Record Shop?</h3>
+            <br />
+            <p className={styles.subtitle2}>Record Shop helps you find new music</p>
+            <br />
+            <p className={styles.subtitle}>Pick a city from the tabs above and check out the upcoming concert listings.</p>
+            <br />
+            <p className={styles.subtitle2}>Create a new playlist on your spotify account with the top track from each artist playing in your chosen city.</p>
+          </div>
           <br />
           <div className={styles.welcomeContainer}>
-            <p>Record Shop helps you </p>
-            <p><span className={styles.color1}>find new music.</span></p>
-            <br />
-            <p>Pick a city from the tabs above and check out the upcoming concert listings.</p>
-            <br />
-            <p><span className={styles.color1}>Create a new playlist</span> on your spotify account with the top track from each artist playing in your chosen city.</p>
-            <br />
-            <p>Let's start by logging into <span className={styles.color3}>Spotify.</span></p>
-            <br />
+            <p className={styles.loginMessage}>Let's start by logging into Spotify.</p>
+
             <button className={styles.login}>
-              <a
-                className="btn btn--loginApp-link"
-                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                  "%20"
-                )}&response_type=token&show_dialog=true`}
-              >
-                Login to Spotify
-              </a>
-            </button>
-            <br/>
-            <br/>
-            <p style={{ fontSize: 15, fontStyle: "italic" }}>by Devin Bushey</p>
+                <a
+                  className="btn btn--loginApp-link"
+                  href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                    "%20"
+                  )}&response_type=token&show_dialog=true`}
+                >
+                  <p className={styles.buttonText}>Login to Spotify</p>
+                </a>
+              </button>
+
           </div>
+
         </div>
       )}
       {access && token && (
 
         <div className="container-sm">
-          <h3>Hey {spotifyInfo.user_name}!</h3>
+          <div className={styles.titleContainer}>
+            <h3 className={styles.title}>Hey {spotifyInfo.user_name}!</h3>
+          </div>
           <br />
-          <div className={styles.heyContainer}>
-            <p><span className={styles.color1}>Create a new playlist</span> from shows playing in: </p>
-            <br/>
+
+          <div className={styles.welcomeContainer}>
+            <p className={styles.cityMessage}>Create a new playlist from shows playing in: </p>
+
             <button className={styles.cities} onClick={HandleClickVictoria}>
               Victoria
             </button>
+            <br />
             <button className={styles.cities} onClick={HandleClickVancouver}>
               Vancouver
             </button>
+            <br />
             <button className={styles.cities} onClick={HandleClickOttawa}>
               Ottawa
             </button>
-            <br/>
-            <br/>
-            <p>This will create a new playlist right on your account!</p>
-            <br/>
+            <br />
+            <br />
+            <p className={styles.cityMessage}>This will create a new playlist right on your account!</p>
+          </div>
+          <br />
+
+          <div className={styles.heyContainer}>
             <p>Look for <span style={{textDecorationLine: "underline"}}>Record Shop - city</span> on your Spotify.</p>
           </div>
         </div>

@@ -1,16 +1,111 @@
 body{
     font-size: 1.1rem;
     font-family: 'Inconsolata',monospace;
+    /*font-family: 'Poppins',sans-serif;*/
     /* font-family: 'BenchNine', sans-serif; */
     text-align: center;
     /* background-color: #f7efd6; */
+    background-color: rgb(243 244 246);
 }
 
 .welcomeContainer{
     padding: 30px;
-    background-color: hsl(1, 40%, 80%);
-    
+    /*background-color: hsl(1, 40%, 80%);*/
+    background-color: rgb(56 204 255);
     border-radius: 10px;
+    text-align: left;
+}
+
+.titleContainer{
+  padding: 30px;
+  /*background-color: hsl(1, 40%, 80%);*/
+  background-color: rgb(241 231 243);
+  border-radius: 10px;
+  text-align: left;
+}
+
+.loginContainer{
+  padding: 30px;
+  /*background-color: hsl(1, 40%, 80%);*/
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.footerContainer{
+  padding: 30px;
+  /*background-color: hsl(1, 40%, 80%);*/
+  background-color: rgb(241 231 243);
+  border-radius: 10px;
+  text-align: left;
+}
+
+h3.title{
+  font-family: 'Poppins',sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 3px 10px 3px 10px;
+
+  color: rgb(255 94 100);
+  font-size: 3.75rem;
+  font-weight: 800;
+}
+
+.subtitle{
+  font-family: 'Poppins',sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 3px 10px 3px 10px;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  color: rgb(56 204 255);
+}
+
+.subtitle2{
+  font-family: 'Poppins',sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 3px 10px 3px 10px;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(255 163 204);
+}
+
+.loginMessage{
+  font-family: 'Poppins',sans-serif;
+  line-height: 1;
+  max-width: 28rem;
+  text-align: left;
+  margin-bottom: 3rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgb(0 81 116);
+}
+
+.cityMessage{
+  font-family: 'Poppins',sans-serif;
+  line-height: 1;
+  max-width: 28rem;
+  text-align: left;
+  margin-bottom: 1.75rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: rgb(0 81 116);
+}
+
+.devin{
+  font-size: 1rem;
+}
+
+.text-blue{
+  color: rgb(56 204 255);
+}
+
+.text-pink{
+  color: rgb(255 163 204);
 }
 
 span.color1{
@@ -19,6 +114,7 @@ span.color1{
     padding: 3px 10px 3px 10px;
 
     background-color: hsl(43, 97%, 80%);
+    /*background-color: rgb(250 216 105);*/
 }
 
 span.color2{
@@ -37,31 +133,51 @@ span.color3{
     background-color: hsl(82, 97%, 80%);
 }
 
+
+
 button.login{
 
-    border-color: hsl(178, 47%, 27%);
-    background-color: white;
-    border-radius: 10px;
+    /*border-color: hsl(178, 47%, 27%);
+    background-color: white;*/
+    background-color: rgb(250 216 105);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.buttonText{
+
+  color: rgb(0 81 116);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.buttonText:hover{
+
+  color: rgb(255 94 100);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .login:hover {
-    background-color: hsl(178, 47%, 34%);
-    color: white;
-  }
+  /*background-color: hsl(178, 47%, 34%);*/
+  background-color: white;
+  color: white;
+}
 
-  .heyContainer{
-    padding: 30px;
-    border-radius: 10px;
-    background-color: hsl(176, 52%, 80%);
-  }
+.heyContainer{
+  padding: 30px;
+  border-radius: 10px;
+  background-color: hsl(176, 52%, 80%);
+}
 
-  .cities{
-    margin:10px;
-    padding: 3px 10px 3px 10px;
-    border-radius: 10px;
-  }
+.cities{
+  margin:10px;
+  padding: 3px 10px 3px 10px;
+  border-radius: 10px;
+}
 
-  .cities:hover {
-    background-color: hsl(178, 47%, 34%);
-    color: white;
-  }
+.cities:hover {
+  background-color: hsl(178, 47%, 34%);
+  color: white;
+}
