@@ -18,6 +18,7 @@ const App = () => {
 
     <div>
       <Navbarr />
+      <br/>
       <Route exact path="/">
         <MainPage />
       </Route>
