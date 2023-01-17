@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mongo-db:
+    container_name: mongo-db
+    hostname: mongo-db
+    image: mongo:latest
+    ports:
+      - 27017:27017
+
+  backend:
+    container_name: backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      SP_CLIENT_ID: ${SP_CLIENT_ID}
+      SP_MY_USER_ID: ${SP_MY_USER_ID}
+      SP_CLIENT_S: ${SP_CLIENT_S}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    hostname: backend
+    links:
+      - mongo-db
+    ports:
+      - "5000:5000"
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./client/
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    hostname: frontend
+    links:
+      - backend
+    ports:
+      - "3000:3000"

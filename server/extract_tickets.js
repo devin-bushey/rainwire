@@ -11,7 +11,7 @@ const extract_vic_songkick_1 = require('./extraction_scripts/extract_vic_songkic
 const extract_vic_songkick_2 = require('./extraction_scripts/extract_vic_songkick_page2.js');
 
 const addSimpleDataToCollection = require("./db/addSimpleDataToCollection");
-//const addSpotifyDataToCollection = require("./db/addSpotifyDataToCollection");
+const addSpotifyDataToCollection = require("./db/addSpotifyDataToCollection");
 
 dbo.connectToServer(function (err) {
     if (err) {
@@ -49,11 +49,12 @@ async function extractTickets() {
     tickets_victoria = removeDuplicateBands(tickets_victoria);
 
     // create simple data collection
-    //addSimpleDataToCollection.createCollection(("db_victoria" + "_" + date).toString(), tickets_victoria, db_connect);
+    addSimpleDataToCollection.createCollection(("db_victoria" + "_" + date).toString(), tickets_victoria, db_connect);
 
     // run the following command to add Spotify data
-    // node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_04-30-2022")'
+    // node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_01-17-2023")'
 
+    //addSpotifyDataToCollection.manualRun(("db_victoria" + "_" + "spotify").toString());
 
     //
     // ***** VANCOUVER & OTTAWA *****
