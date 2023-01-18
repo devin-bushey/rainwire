@@ -6,7 +6,7 @@ const axios = require('axios');
 // from commandline, enter the following:
 // node -e 'require("./addSpotifyDataToCollection").manualRun("collection_name")'
 // example:
-// node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_04-30-2022")'
+// node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_01-16-2023")'
 function manualRun(collection_name){
     
     dbo.connectToServer(async function (err) {
@@ -32,6 +32,7 @@ async function updateCollectionWithSpotify(collection_name, db_connect) {
 async function createNewCollection(linked_data, collection_name, db_connect){
 
     let name = collection_name.substring(0, collection_name.length-11) + "_spotify";
+    //let name = "db_victoria" + "_" + "spotify";
 
     db_connect.createCollection(name, function (err, res) {
         if (err) throw err;
