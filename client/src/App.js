@@ -7,6 +7,7 @@ import DisplayTable from "./components/DisplayTable";
 import Footer from "./components/footer";
 
 import axios from 'axios';
+import Refresh from "./components/refresh";
 
 const App = () => {
 
@@ -30,6 +31,9 @@ const App = () => {
       </Route>
       <Route path="/ottawa">
         <DisplayTable tickets={ticketsOttawa} website="http://www.vertigorecords.ca/showtickets/index.html"/>
+      </Route>
+      <Route path="/refresh">
+        <Refresh/>
       </Route>
 
     </div>

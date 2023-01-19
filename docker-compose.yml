@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  mongo-db:
-    container_name: mongo-db
-    hostname: mongo-db
+  database:
+    container_name: database
+    hostname: database
     image: mongo:latest
     ports:
       - 27017:27017
@@ -15,6 +15,7 @@ services:
       dockerfile: Dockerfile
     environment:
       NODE_ENV: production
+      ATLAS_URI: mongodb://database:27017/
       SP_CLIENT_ID: ${SP_CLIENT_ID}
       SP_MY_USER_ID: ${SP_MY_USER_ID}
       SP_CLIENT_S: ${SP_CLIENT_S}
@@ -26,7 +27,9 @@ services:
       start_period: 40s
     hostname: backend
     links:
-      - mongo-db
+      - database
+    depends_on:
+      - database
     ports:
       - "5000:5000"
 
@@ -37,6 +40,9 @@ services:
       dockerfile: Dockerfile
     environment:
       NODE_ENV: production
+      REACT_APP_SP_CLIENT_ID: ${REACT_APP_SP_CLIENT_ID}
+      REACT_APP_SITE_URL_DB: ${REACT_APP_SITE_URL_DB}
+      REACT_APP_SITE_URL: ${REACT_APP_SITE_URL}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 1m30s

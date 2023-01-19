@@ -7,7 +7,7 @@ const axios = require('axios');
 // node -e 'require("./addSpotifyDataToCollection").manualRun("collection_name")'
 // example:
 // node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_01-16-2023")'
-function manualRun(collection_name){
+const manualRun = (collection_name) => {
     
     dbo.connectToServer(async function (err) {
         if (err) {
@@ -15,6 +15,7 @@ function manualRun(collection_name){
         }
         else{
             let db_connect = dbo.getDb();
+            console.log("Starting to add Spotify data ...");
             updateCollectionWithSpotify(collection_name.toString(), db_connect);
         }
     });
@@ -42,6 +43,7 @@ async function createNewCollection(linked_data, collection_name, db_connect){
     db_connect.collection(name).insertMany(linked_data, function (err, res) {
         if (err) throw err;
         console.log("Successfully added " + res.insertedCount + " records to " + name);
+        console.log("... Complete!");
     });
 }
 
