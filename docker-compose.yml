@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   database:
@@ -20,7 +20,7 @@ services:
       SP_MY_USER_ID: ${SP_MY_USER_ID}
       SP_CLIENT_S: ${SP_CLIENT_S}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:5000/']
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -31,7 +31,7 @@ services:
     depends_on:
       - database
     ports:
-      - "5000:5000"
+      - '5000:5000'
 
   frontend:
     container_name: frontend
@@ -39,13 +39,13 @@ services:
       context: ./client/
       dockerfile: Dockerfile
     environment:
-      NODE_ENV: production
+      #NODE_ENV: production
       VITE_SP_CLIENT_ID: ${VITE_SP_CLIENT_ID}
       VITE_SITE_URL_DB: ${VITE_SITE_URL_DB}
       VITE_SITE_URL: ${VITE_SITE_URL}
       VITE_PORT: ${VITE_PORT}
     healthcheck:
-      test: ["CMD", "curl", "-f", "${VITE_SITE_URL}"]
+      test: ['CMD', 'curl', '-f', '${VITE_SITE_URL}']
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -54,4 +54,4 @@ services:
     links:
       - backend
     ports:
-      - "${VITE_PORT}:${VITE_PORT}"
+      - '${VITE_PORT}:${VITE_PORT}'
