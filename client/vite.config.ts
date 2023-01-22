@@ -12,12 +12,10 @@ export default ({ mode }) => {
     plugins: [eslint(), react(), viteTsconfigPaths(), svgrPlugin()],
     server: {
       host: true,
-      port: parseInt(process.env.VITE_PORT),
+      port: parseInt(process.env.VITE_PORT || '3000'),
     },
     build: {
       outDir: 'build',
     },
   });
 };
-
-
