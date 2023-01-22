@@ -17,20 +17,9 @@ app.listen(port, () => {
 
   dbo.connectToServer(function (err) {
     if (err) {
-        console.error(err);
+      console.error(err);
     }
   });
 
 });
 
-/*
-// scheduled for every sunday
-cron.schedule("0 0 * * 0", function(){
-
-  console.log("Schedule running");
-  if (shell.exec("node extract_tickets.js").code !== 0){
-      console.log("Error during cron scheduler");
-  }
-
-});
-*/
