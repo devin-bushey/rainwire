@@ -22,7 +22,8 @@
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.15",
     "request": "^2.88.2",
-    "shelljs": "^0.8.5"
+    "shelljs": "^0.8.5",
+    "swagger-ui-express": "^4.6.0"
   },
   "engines": {
     "node": "16.13.1",

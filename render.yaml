@@ -7,9 +7,9 @@ services:
     repo: https://github.com/devin-bushey/RecordShop.git
     region: oregon # optional (defaults to oregon)
     plan: free
-    previewPlan: free
     branch: main # optional (defaults to master)
     rootDir: server
+    healthCheckPath: /healthcheck
     envVars:
       - key: ATLAS_URI
         sync: false
