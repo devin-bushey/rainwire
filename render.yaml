@@ -19,3 +19,4 @@ services:
         sync: false
       - key: PORT
         sync: false
+    autoDeploy: true
