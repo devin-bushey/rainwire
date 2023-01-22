@@ -9,7 +9,7 @@ services:
     plan: free
     branch: main # optional (defaults to master)
     rootDir: server
-    healthCheckPath: /healthcheck
+    healthCheckPath: /
     envVars:
       - key: ATLAS_URI
         sync: false
