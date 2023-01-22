@@ -9,18 +9,13 @@ services:
     branch: main # optional (defaults to master)
     rootDir: server
     envVars:
-      fromGroup: record-shop-group
-
-envVarGroups:
-  - name: record-shop-group
-    envVars:
       - key: ATLAS_URI
-        generateValue: true
+        sync: false
       - key: SP_CLIENT_ID
-        generateValue: true
+        sync: false
       - key: SP_MY_USER_ID
-        generateValue: true
+        sync: false
       - key: SP_CLIENT_S
-        generateValue: true
+        sync: false
       - key: PORT
-        generateValue: true
+        sync: false
