@@ -10,3 +10,16 @@ services:
     rootDir: server
     envVars:
       fromGroup: record-shop-group
+
+envVarGroups:
+  - name: record-shop-group
+    envVars:
+        generateValue: true
+      - key: SP_CLIENT_ID
+        generateValue: true
+      - key: SP_MY_USER_ID
+        generateValue: true
+      - key: SP_CLIENT_S
+        generateValue: true
+      - key: PORT
+        generateValue: true
