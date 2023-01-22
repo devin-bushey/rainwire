@@ -6,7 +6,7 @@ const Refresh = () => {
 
     const handleWebScrape = () => {
         axios
-            .get(process.env.REACT_APP_SITE_URL_DB + "webscrape" + "/")
+            .get(import.meta.env.VITE_SITE_URL_DB + "webscrape" + "/")
             .then((response) => {
                 console.log(response);
             })
@@ -17,7 +17,7 @@ const Refresh = () => {
 
     const handleAddSpotify = () => {
         axios
-            .get(process.env.REACT_APP_SITE_URL_DB + "addspotify" + "/")
+            .get(import.meta.env.VITE_SITE_URL_DB + "addspotify" + "/")
             .then((response) => {
                 console.log(response);
             })
