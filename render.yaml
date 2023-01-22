@@ -14,6 +14,7 @@ services:
 envVarGroups:
   - name: record-shop-group
     envVars:
+      - key: ATLAS_URI
         generateValue: true
       - key: SP_CLIENT_ID
         generateValue: true
