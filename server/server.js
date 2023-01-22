@@ -11,13 +11,14 @@ const dbo = require("./db/conn");
 app.use(cors());
 app.use(express.json());
 app.use(require("./routes/record"));
+app.use('/healthcheck', require('./routes/healthchecker'));
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 
   dbo.connectToServer(function (err) {
     if (err) {
-        console.error(err);
+      console.error(err);
     }
   });
 
