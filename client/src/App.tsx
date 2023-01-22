@@ -7,31 +7,27 @@ import DisplayTable from './components/DisplayTable';
 import Refresh from './components/refresh';
 
 import axios from 'axios';
+import NotFound from './components/NotFound';
 
 const App = () => {
+  const WEBSITE_VIC = 'https://thecapitalballroom.com/';
+  const WEBSITE_VAN = 'https://redcat.ca/';
+  const WEBSITE_OTT = 'http://www.vertigorecords.ca/showtickets/index.html';
+
   const ticketsVictoria = GetTickets('victoria');
   const ticketsOttawa = GetTickets('ottawa');
   const ticketsVancouver = GetTickets('vancouver');
 
   return (
     <Router>
-      <Navbarr />
-      <br />
       <Routes>
-        <Route path="/">
-          <MainPage />
-        </Route>
-        <Route path="/vic">
-          <DisplayTable tickets={ticketsVictoria} website="https://thecapitalballroom.com/" />
-        </Route>
-        <Route path="/van">
-          <DisplayTable tickets={ticketsVancouver} website="https://redcat.ca/" />
-        </Route>
-        <Route path="/ottawa">
-          <DisplayTable tickets={ticketsOttawa} website="http://www.vertigorecords.ca/showtickets/index.html" />
-        </Route>
-        <Route path="/refresh">
-          <Refresh />
+        <Route path="/" element={<Navbarr />}>
+          <Route index element={<MainPage />} />
+          <Route path="/vic" element={<DisplayTable tickets={ticketsVictoria} website={WEBSITE_VIC} />} />
+          <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
+          <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} />
+          <Route path="/refresh" element={<Refresh />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>
