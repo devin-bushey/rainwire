@@ -1,3 +1,5 @@
+import healthchecker from './routes/healthchecker';
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -13,7 +15,7 @@ const records = require('./routes/record');
 app.use(cors());
 app.use(express.json());
 app.use(records);
-//app.set('/', healthchecker);
+app.use('/healthcheck', healthchecker);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
