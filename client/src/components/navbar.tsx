@@ -45,12 +45,12 @@ const Navbarr = () => {
                 <NavLink onClick={toggle} className="nav-link" to="/vic">
                   Victoria
                 </NavLink>
-                <NavLink onClick={toggle} className="nav-link" to="/van" style={{ textAlign: 'center' }}>
+                {/* <NavLink onClick={toggle} className="nav-link" to="/van" style={{ textAlign: 'center' }}>
                   Vancouver
                 </NavLink>
                 <NavLink onClick={toggle} className="nav-link" to="/ottawa" style={{ textAlign: 'center' }}>
                   Ottawa
-                </NavLink>
+                </NavLink> */}
               </Nav>
             </Collapse>
           </Container>

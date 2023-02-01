@@ -1,40 +1,16 @@
-const express = require('express');
-const { manualRun } = require('../db/addSpotifyDataToCollection');
+import express from 'express';
+import { manualRun } from '../db/addSpotifyDataToCollection';
 const recordRoutes = express.Router();
-const dbo = require('../db/conn');
-const { extractTickets, extract } = require('../extract_tickets');
-
-recordRoutes.route('/ottawa').get(function (req, res) {
-  let db_connect = dbo.getDb('RecordShop');
-
-  db_connect
-    .collection('db_ottawa_spotify')
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
-
-recordRoutes.route('/vancouver').get(function (req, res) {
-  let db_connect = dbo.getDb('RecordShop');
-
-  db_connect
-    .collection('db_vancouver_spotify')
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      res.json(result);
-    });
-});
+import { getDb } from '../db/conn';
+import { extract } from '../extract_tickets';
 
 recordRoutes.route('/victoria').get(function (req, res) {
-  let db_connect = dbo.getDb('RecordShop');
+  let db_connect = getDb();
 
   db_connect
     .collection('db_victoria_spotify')
     .find({})
-    .toArray(function (err, result) {
+    .toArray(function (err: any, result: any) {
       if (err) throw err;
       res.json(result);
     });
@@ -43,7 +19,7 @@ recordRoutes.route('/victoria').get(function (req, res) {
 recordRoutes.route('/webscrape').get(async function (req, res) {
   const date = getTodaysDate();
 
-  let db_connect = dbo.getDb('RecordShop');
+  let db_connect = getDb();
 
   db_connect
     .collection('db_victoria_spotify')
@@ -70,6 +46,7 @@ recordRoutes.route('/webscrape').get(async function (req, res) {
         });
     })
     .then(function () {
+      console.log('Starting Web Scraping');
       extract();
     });
 
