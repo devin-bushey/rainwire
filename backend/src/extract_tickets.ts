@@ -6,6 +6,7 @@ import { extract_vic_songkick_1 } from './extraction_scripts/extract_vic_songkic
 import { extract_vic_songkick_2 } from './extraction_scripts/extract_vic_songkick_page2';
 
 import { addSimpleDataToCollection } from './db/addSimpleDataToCollection';
+import { extract_capital_ballroom } from './extraction_scripts/extract_capital_ballroom';
 
 export async function extract() {
   connectToServer(function (err: any) {
@@ -26,10 +27,14 @@ export async function extractTickets() {
   //
   // extract from record shop website
   let tickets_victoria: any[] = [];
+  let tickets_vic_spotify = await extract_capital_ballroom();
   let tickets_vic_songkick_1 = await extract_vic_songkick_1(); //page one of songkick
   let tickets_vic_songkick_2 = await extract_vic_songkick_2(); //page two of songkick
 
   // consolidate tickets
+  tickets_vic_spotify.forEach(function (obj: any) {
+    tickets_victoria.push(obj);
+  });
   tickets_vic_songkick_1.forEach(function (obj: any) {
     tickets_victoria.push(obj);
   });

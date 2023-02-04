@@ -1,6 +1,6 @@
 import express from 'express';
 import { manualRun } from '../db/addSpotifyDataToCollection';
-const recordRoutes = express.Router();
+export const recordRoutes = express.Router();
 import { getDb } from '../db/conn';
 import { extract } from '../extract_tickets';
 
@@ -69,5 +69,3 @@ function getTodaysDate() {
 
   return mm + '-' + dd + '-' + yyyy;
 }
-
-module.exports = recordRoutes;
