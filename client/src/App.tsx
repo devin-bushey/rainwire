@@ -11,12 +11,12 @@ import NotFound from './components/NotFound';
 
 const App = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
-  const WEBSITE_VAN = 'https://redcat.ca/';
-  const WEBSITE_OTT = 'http://www.vertigorecords.ca/showtickets/index.html';
+  // const WEBSITE_VAN = 'https://redcat.ca/';
+  // const WEBSITE_OTT = 'http://www.vertigorecords.ca/showtickets/index.html';
 
   const ticketsVictoria = GetTickets('victoria');
-  const ticketsOttawa = GetTickets('ottawa');
-  const ticketsVancouver = GetTickets('vancouver');
+  //const ticketsOttawa = GetTickets('ottawa');
+  //const ticketsVancouver = GetTickets('vancouver');
 
   return (
     <Router>
@@ -24,8 +24,8 @@ const App = () => {
         <Route path="/" element={<Navbarr />}>
           <Route index element={<MainPage />} />
           <Route path="/vic" element={<DisplayTable tickets={ticketsVictoria} website={WEBSITE_VIC} />} />
-          <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
-          <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} />
+          {/* <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
+          <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
           <Route path="/refresh" element={<Refresh />} />
           <Route path="*" element={<NotFound />} />
         </Route>
