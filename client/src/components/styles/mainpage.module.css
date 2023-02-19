@@ -5,7 +5,8 @@ body{
     /* font-family: 'BenchNine', sans-serif; */
     text-align: center;
     /* background-color: #f7efd6; */
-    background-color: rgb(243 244 246);
+    /*background-color: rgb(243 244 246);*/
+    background-color: #121212;
 }
 
 .welcomeContainer{

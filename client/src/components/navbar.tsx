@@ -3,12 +3,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Collapse } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Navbarr = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const logOut = () => {
+    toggle();
+    localStorage.clear();
+    window.location.reload();
+    navigate('/');
   };
 
   const close = () => {
@@ -19,8 +29,8 @@ const Navbarr = () => {
 
   return (
     <>
-      <div style={{ marginBottom: '2rem' }}>
-        <Navbar bg="transparent" expand="lg" style={{ position: 'fixed', top: 0, width: '100%' }}>
+      <div style={{ marginBottom: '16px' }}>
+        <Navbar bg="transparent" expand="lg" style={{ position: 'sticky', top: 0, width: '100%' }}>
           <Container>
             <NavLink
               className="navbar-brand"
@@ -45,6 +55,13 @@ const Navbarr = () => {
                 <NavLink onClick={toggle} className="nav-link" to="/vic">
                   Victoria
                 </NavLink>
+
+                {localStorage.getItem('encryptedSpotifyToken') && (
+                  <NavLink onClick={logOut} className="nav-link" to="/">
+                    Sign Out
+                  </NavLink>
+                )}
+
                 {/* <NavLink onClick={toggle} className="nav-link" to="/van" style={{ textAlign: 'center' }}>
                   Vancouver
                 </NavLink>

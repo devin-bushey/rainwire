@@ -1,4 +1,4 @@
-import styles from './styles/displayTable.module.css';
+import styles from './styles/DisplayTable.module.css';
 
 const DisplayTable = (data: any) => {
   if (data.tickets == null || data.tickets.length == 0) {
