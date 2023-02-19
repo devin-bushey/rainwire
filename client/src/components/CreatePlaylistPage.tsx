@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import hash from '../utils/hash';
-import styles from './styles/MainPage.module.css';
 import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
 import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
+import { Card, Button, Container } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { Loading } from './Loading';
+import { COLOURS } from '../theme/AppStyles';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -59,35 +61,39 @@ const CreatePlaylistPage = () => {
     }
   };
 
+  if (!token) return <Loading />;
+
   return (
-    <div className="container-sm" style={{ marginBottom: 50 }}>
-      <div className="container-sm">
-        <div className={styles.titleContainer}>
-          <h3 className={styles.title}>Hey {spotifyInfo.user_name}!</h3>
-        </div>
-        <br />
+    <Container>
+      <Card
+        sx={{
+          backgroundColor: COLOURS.light_pink,
+        }}
+      >
+        <Typography variant="h3" sx={{ color: COLOURS.pink }}>
+          Hey {spotifyInfo.firstName}!
+        </Typography>
+      </Card>
 
-        <div className={styles.welcomeContainer}>
-          <p className={styles.cityMessage}>Create a new playlist from shows playing in: </p>
+      <Card
+        sx={{
+          backgroundColor: COLOURS.blue,
+        }}
+      >
+        <Typography>Create a new playlist from shows playing in: </Typography>
+        <Button onClick={HandleClickVictoria} variant="outlined">
+          Victoria
+        </Button>
+      </Card>
 
-          <button className={styles.cities} onClick={HandleClickVictoria}>
-            <div className={styles.flex_container}>
-              <div>Victoria</div>
-              <div></div>
-              <div>&gt;</div>
-            </div>
-          </button>
-
-          <br />
-          <br />
-        </div>
-        <br />
-
-        <div className={styles.createContainer}>
-          <p className={styles.create}>This will create a new playlist right on your account!</p>
-        </div>
-      </div>
-    </div>
+      <Card
+        sx={{
+          backgroundColor: COLOURS.light_pink,
+        }}
+      >
+        <Typography sx={{ color: COLOURS.pink }}>This will create a new playlist right on your account!</Typography>
+      </Card>
+    </Container>
   );
 };
 

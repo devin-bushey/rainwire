@@ -1,11 +1,17 @@
+import { ThemeProvider } from '@emotion/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AppRoutes } from './routes/AppRoutes';
+import { AppTheme } from './theme/AppTheme';
+import { CssBaseline } from '@mui/material/';
 
 const App = () => {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <ThemeProvider theme={AppTheme}>
+      <CssBaseline />
+      <Router>
+        <AppRoutes />
+      </Router>
+    </ThemeProvider>
   );
 };
 

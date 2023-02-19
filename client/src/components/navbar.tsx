@@ -1,80 +1,131 @@
 import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import { NavLink, Outlet } from 'react-router-dom';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { Collapse } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Typography, Menu } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { COLOURS } from '../theme/AppStyles';
 
 const Navbarr = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const navigate = useNavigate();
-
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
-
   const logOut = () => {
-    toggle();
     localStorage.clear();
-    window.location.reload();
     navigate('/');
+    window.location.reload();
   };
 
-  const close = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   return (
     <>
-      <div style={{ marginBottom: '16px' }}>
-        <Navbar bg="transparent" expand="lg" style={{ position: 'sticky', top: 0, width: '100%' }}>
-          <Container>
-            <NavLink
-              className="navbar-brand"
-              to="/"
-              onClick={close}
-              style={{
-                textAlign: 'center',
-                borderRadius: '10px',
-                background: 'hsl(43, 97%, 80%)',
-                padding: '3px 10px 3px 10px',
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Link to="/">
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: COLOURS.white,
+                  textDecoration: 'none',
+                }}
+              >
+                Record Shop
+              </Typography>
+            </Link>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <Button
+                  component={Link}
+                  to="/vic"
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'black', display: 'block' }}
+                >
+                  Victoria
+                </Button>
+              </Menu>
+            </Box>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
               Record Shop
-            </NavLink>
-            <Navbar.Toggle
-              aria-controls="basic-navbar-nav"
-              style={{ background: 'hsl(176, 52%, 80%)', opacity: 1 }}
-              onClick={toggle}
-            />
-            <Collapse isOpen={isOpen} navbar={true} style={{ margin: 10 }}>
-              <Nav className="me-auto" style={{ background: 'white', opacity: 1 }}>
-                <NavLink onClick={toggle} className="nav-link" to="/vic">
-                  Victoria
-                </NavLink>
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Button
+                component={Link}
+                to="/vic"
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Victoria
+              </Button>
+            </Box>
 
-                {localStorage.getItem('encryptedSpotifyToken') && (
-                  <NavLink onClick={logOut} className="nav-link" to="/">
-                    Sign Out
-                  </NavLink>
-                )}
-
-                {/* <NavLink onClick={toggle} className="nav-link" to="/van" style={{ textAlign: 'center' }}>
-                  Vancouver
-                </NavLink>
-                <NavLink onClick={toggle} className="nav-link" to="/ottawa" style={{ textAlign: 'center' }}>
-                  Ottawa
-                </NavLink> */}
-              </Nav>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </div>
-      <br />
-      <Outlet />
+            {localStorage.getItem('encryptedSpotifyToken') && (
+              <Box sx={{ flexGrow: 0 }}>
+                <Button variant="contained" onClick={logOut}>
+                  Sign Out
+                </Button>
+              </Box>
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Container sx={{ marginTop: '24px' }}>
+        <Outlet />
+      </Container>
     </>
   );
 };
