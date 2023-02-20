@@ -6,7 +6,8 @@ export const GetTickets = async (city: string) => {
     .then((response) => {
       return response.data;
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      console.log('Error GetTickets', error);
+      return [];
     });
 };

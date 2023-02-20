@@ -1,10 +1,12 @@
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import './styles/Loading.css';
 
 export const Loading = () => {
   return (
     <Container sx={{ textAlign: 'center' }}>
-      <p>L O A D I N G</p>
+      <Typography variant="h5" sx={{ color: 'black', textAlign: 'center', marginBottom: '8px' }}>
+        L O A D I N G
+      </Typography>
       <div className="loader">
         <ul className="wine_ul">
           <li className="wine_li wine_li_1"></li>

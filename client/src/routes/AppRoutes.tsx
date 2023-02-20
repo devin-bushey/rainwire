@@ -8,6 +8,7 @@ import MainPage from '../components/MainPage';
 import Navbarr from '../components/Navbar';
 import NotFound from '../components/NotFound';
 import Refresh from '../components/Refresh';
+import { Error } from '../components/Error';
 import { getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
 
 export const AppRoutes = () => {
@@ -21,24 +22,42 @@ export const AppRoutes = () => {
 
   const [tickets, setTickets] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    GetTickets('victoria').then((data) => {
-      setTickets(data);
-      setIsLoading(false);
-    });
+    GetTickets('victoria')
+      .then((data) => {
+        setTickets(data);
+        setIsLoading(false);
+        setIsError(false);
+
+        if (!data || data.length == 0) {
+          setIsError(true);
+        }
+      })
+      .catch((error) => {
+        setIsError(true);
+        setIsLoading(false);
+      });
   }, []);
 
   const token = getSpotifyTokenLocalStorage();
+
+  const displayElement = () => {
+    if (isLoading) {
+      return <Loading />;
+    } else if (isError) {
+      return <Error />;
+    } else {
+      return <DisplayTable tickets={tickets} website={WEBSITE_VIC} />;
+    }
+  };
 
   return (
     <Routes>
       <Route path="/" element={<Navbarr />}>
         <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
-        <Route
-          path="/vic"
-          element={!isLoading ? <DisplayTable tickets={tickets} website={WEBSITE_VIC} /> : <Loading />}
-        />
+        <Route path="/vic" element={displayElement()} />
         {/* <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
           <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
         <Route path="/refresh" element={<Refresh />} />
