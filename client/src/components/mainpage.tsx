@@ -23,8 +23,7 @@ const MainPage = memo(() => {
       </Card>
       <Card>
         <Typography sx={{ color: COLOURS.pink }}>
-          Create a new playlist on your spotify account with the top track from each artist playing in your chosen //
-          city.
+          Create a new playlist on your spotify account with the top track from each artist playing in your chosen city.
         </Typography>
       </Card>
 
@@ -35,7 +34,7 @@ const MainPage = memo(() => {
             '%20',
           )}&response_type=token&show_dialog=true`}
           variant="contained"
-          sx={{ color: COLOURS.black, backgroundColor: COLOURS.gold }}
+          sx={{ color: COLOURS.black, backgroundColor: COLOURS.gold, marginTop: '8px' }}
         >
           Login to Spotify
         </Button>

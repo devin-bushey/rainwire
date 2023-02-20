@@ -4,6 +4,7 @@ export interface SpotifyUserDataType {
   user_id: string;
   new_playlist_id: string;
   access: boolean;
+  error?: boolean;
 }
 
 export interface SpotifyPlaylistDataType {

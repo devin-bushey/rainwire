@@ -41,6 +41,12 @@ const CreatePlaylistPage = () => {
 
     // if there is a token, get the user's info
     GetSpotifyUserInfo(_token).then((response) => {
+      if (response.error) {
+        localStorage.clear();
+        window.location.reload();
+        return;
+      }
+
       setSpotifyInfo((prevState) => ({
         ...prevState,
         firstName: response.firstName,

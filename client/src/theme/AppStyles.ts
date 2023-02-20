@@ -11,4 +11,5 @@ export const COLOURS = {
   blue: '#38ccff',
   gold: '#fad869',
   yellow: '#fde19b',
+  light_yellow: 'hsl(43, 97%, 80%)',
 };

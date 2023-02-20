@@ -31,5 +31,12 @@ export const AppTheme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          paddingBottom: '8px',
+        },
+      },
+    },
   },
 });

@@ -2,13 +2,8 @@ import { Box, Card, CardMedia, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
-import { Loading } from './Loading';
 
 const DisplayTable = (data: any) => {
-  if (data.tickets == null || data.tickets.length == 0) {
-    return <Loading />;
-  }
-
   return (
     <>
       <Container maxWidth="lg">
@@ -18,7 +13,9 @@ const DisplayTable = (data: any) => {
             textAlign: 'center',
           }}
         >
-          <Typography sx={{ color: COLOURS.black, textAlign: 'center' }}>Tickets</Typography>
+          <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+            Tickets
+          </Typography>
           <Button href={data.website} sx={{ alignContent: 'center', backgroundColor: COLOURS.yellow }}>
             click me to find tickets
           </Button>

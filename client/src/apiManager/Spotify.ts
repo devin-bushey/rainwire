@@ -21,6 +21,7 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
         user_id: user_id,
         new_playlist_id: '',
         access: true,
+        error: false,
       };
 
       return returnVal;
@@ -35,6 +36,7 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
         user_id: '',
         new_playlist_id: '',
         access: false,
+        error: true,
       };
 
       return returnVal;

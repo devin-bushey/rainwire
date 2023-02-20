@@ -24,35 +24,65 @@ const Navbarr = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Container maxWidth="xl">
+      <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+        <Container>
           <Toolbar disableGutters>
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: 'none' }}>
               <Typography
                 variant="h6"
-                noWrap
                 sx={{
+                  textAlign: 'center',
+                  borderRadius: '10px',
+                  background: COLOURS.light_yellow,
+                  padding: '3px 10px 3px 10px',
+                  marginLeft: '24px',
                   mr: 2,
-                  display: { xs: 'none', md: 'flex' },
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
-                  color: COLOURS.white,
-                  textDecoration: 'none',
+                  color: COLOURS.black,
                 }}
               >
                 Record Shop
               </Typography>
             </Link>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, marginLeft: '24px' }}>
+              <Button
+                component={Link}
+                to="/vic"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '75px',
+                }}
+              >
+                Victoria
+              </Button>
+            </Box>
+
+            {localStorage.getItem('encryptedSpotifyToken') && (
+              <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 0, marginRight: '24px' }}>
+                <Button
+                  variant="contained"
+                  onClick={logOut}
+                  sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black }}
+                >
+                  Sign Out
+                </Button>
+              </Box>
+            )}
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'right' }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                color="primary"
               >
                 <MenuIcon />
               </IconButton>
@@ -78,48 +108,27 @@ const Navbarr = () => {
                   component={Link}
                   to="/vic"
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'black', display: 'block' }}
+                  sx={{
+                    my: 2,
+                    color: 'black',
+                    display: 'block',
+                    maxWidth: '75px',
+                  }}
                 >
                   Victoria
                 </Button>
+
+                {localStorage.getItem('encryptedSpotifyToken') && (
+                  <Button
+                    variant="contained"
+                    onClick={logOut}
+                    sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black }}
+                  >
+                    Sign Out
+                  </Button>
+                )}
               </Menu>
             </Box>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              Record Shop
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                component={Link}
-                to="/vic"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Victoria
-              </Button>
-            </Box>
-
-            {localStorage.getItem('encryptedSpotifyToken') && (
-              <Box sx={{ flexGrow: 0 }}>
-                <Button variant="contained" onClick={logOut}>
-                  Sign Out
-                </Button>
-              </Box>
-            )}
           </Toolbar>
         </Container>
       </AppBar>
