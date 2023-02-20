@@ -15,7 +15,7 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
       const user_id = data.id;
       const firstName = data.display_name.substring(0, data.display_name.indexOf(' ')).trim();
 
-      const returnVal: SpotifyUserDataType = {
+      return {
         firstName: firstName,
         user_name: user_name,
         user_id: user_id,
@@ -23,8 +23,6 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
         access: true,
         error: false,
       };
-
-      return returnVal;
     })
     .catch((error: any) => {
       console.log('Error: GetSpotifyUserInfo');
@@ -41,7 +39,7 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
         };
       }
 
-      const returnVal: SpotifyUserDataType = {
+      return {
         firstName: '',
         user_name: '',
         user_id: '',
@@ -49,8 +47,6 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
         access: false,
         error: true,
       };
-
-      return returnVal;
     });
 };
 

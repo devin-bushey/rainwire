@@ -91,28 +91,29 @@ const Navbarr = () => {
                 anchorEl={anchorElNav}
                 anchorOrigin={{
                   vertical: 'bottom',
-                  horizontal: 'left',
+                  horizontal: 'right',
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: 'top',
-                  horizontal: 'left',
+                  horizontal: 'right',
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  display: { xs: 'flex', md: 'none' },
+                  justifyContent: 'center',
                 }}
               >
                 <Button
+                  variant="outlined"
+                  onClick={handleCloseNavMenu}
                   component={Link}
                   to="/vic"
-                  onClick={handleCloseNavMenu}
                   sx={{
-                    my: 2,
                     color: 'black',
-                    display: 'block',
-                    maxWidth: '75px',
+                    textAlign: 'center',
+                    margin: '0px 4px',
                   }}
                 >
                   Victoria
@@ -122,7 +123,7 @@ const Navbarr = () => {
                   <Button
                     variant="contained"
                     onClick={logOut}
-                    sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black }}
+                    sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black, margin: '0px 4px' }}
                   >
                     Sign Out
                   </Button>
