@@ -1,47 +1,34 @@
-import styles from './styles/displayTable.module.css';
+import { Box, Card, CardMedia, Container } from '@mui/material';
+import Button from '@mui/material/Button/Button';
+import Typography from '@mui/material/Typography';
+import { COLOURS } from '../theme/AppStyles';
 
 const DisplayTable = (data: any) => {
-  if (data.tickets == null || data.tickets.length == 0) {
-    return (
-      <div className="container-sm">
-        <br />
-        <div className="row">
-          <p>L O A D I N G</p>
-          <div className={styles.loader}>
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-            <div className={`${styles.wineglass} ${styles.wine_left}`}>
-              <div className={styles.wine_top}></div>
-            </div>
-            <div className={`${styles.wineglass} ${styles.wine_right}`}>
-              <div className={styles.wine_top}></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="container-sm">
-        <div className={styles.displayContainer}>
-          <h3>Tickets</h3>
-          <br />
-          <a className={styles.shop} href={data.website}>
+  return (
+    <>
+      <Container maxWidth="lg">
+        <Card
+          sx={{
+            backgroundColor: COLOURS.light_pink,
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+            Tickets
+          </Typography>
+          <Button href={data.website} sx={{ alignContent: 'center', backgroundColor: COLOURS.yellow }}>
             click me to find tickets
-          </a>
-          <br />
-          <br />
-        </div>
-        <div className="row">{ticketContainer(data.tickets)}</div>
-      </div>
-    );
-  }
+          </Button>
+        </Card>
+      </Container>
+      <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+        {ticketContainer(data.tickets)}
+      </Container>
+    </>
+  );
 };
 
-function ticketContainer(props: any) {
+const ticketContainer = (props: any) => {
   const colors = ['hsl(176, 52%, 80%)', 'hsl(284, 57%, 80%)', 'hsl(20, 49%, 80%)'];
 
   return props.map((currentTicket: any, index: any) => {
@@ -54,37 +41,36 @@ function ticketContainer(props: any) {
     }
 
     return (
-      <div key={currentTicket._id} className="col">
-        <Ticket
-          ticket={currentTicket}
-          image={imageURL}
-          bgcolor={colors[index % colors.length]}
-          key={currentTicket._id}
-        />
-      </div>
+      <Ticket ticket={currentTicket} image={imageURL} bgcolor={colors[index % colors.length]} key={currentTicket._id} />
     );
   });
-}
+};
 
 const Ticket = (props: any) => (
-  <div className={styles.ticketContainer} style={{ backgroundColor: props.bgcolor }}>
-    <div className={styles.left}>
-      <img src={props.image} alt="ticket" width="120" height="120" className={styles.img}></img>
-    </div>
-
-    <div className={styles.right}>
-      <div className={styles.rows}>
-        <p className={styles.band}>{props.ticket.ticket_band}</p>
-        <p className={styles.info}>{props.ticket.ticket_date}</p>
-        <p className={styles.info}>{props.ticket.ticket_price}</p>
-        <p className={styles.info}>
-          <a href={props.ticket.link}>
-            <span className={styles.spotify_link}>spotify</span>
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
+  <Card
+    sx={{
+      display: 'flex',
+      backgroundColor: props.bgcolor,
+      justifyContent: 'center',
+      maxHeight: '300px',
+      maxWidth: '300px',
+      margin: '8px',
+    }}
+  >
+    <CardMedia component="img" sx={{ width: 120, height: 120 }} image={props.image} alt="Ticket" />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8px', textAlign: 'center' }}>
+      <Typography color="secondary" sx={{ fontWeight: '700' }}>
+        {props.ticket.ticket_band}
+      </Typography>
+      <Typography color="secondary" sx={{ fontSize: '0.9rem' }}>
+        {props.ticket.ticket_date}
+      </Typography>
+      <Typography color="secondary" sx={{ fontSize: '0.9rem' }}>
+        {props.ticket.ticket_price}
+      </Typography>
+      <Button href={props.ticket.link}>spotify</Button>
+    </Box>
+  </Card>
 );
 
 export default DisplayTable;
