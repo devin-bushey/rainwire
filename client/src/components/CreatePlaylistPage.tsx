@@ -43,8 +43,6 @@ const CreatePlaylistPage = () => {
     GetSpotifyUserInfo(_token).then((response) => {
       if (response.error) {
         localStorage.clear();
-        window.location.reload();
-        return;
       }
 
       setSpotifyInfo((prevState) => ({
