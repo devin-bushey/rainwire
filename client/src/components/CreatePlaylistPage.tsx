@@ -3,7 +3,7 @@ import hash from '../utils/hash';
 import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
 import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
-import { Card, Button, Container } from '@mui/material';
+import { Card, Button, Container, Box, Modal } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Loading } from './Loading';
 import { COLOURS } from '../theme/AppStyles';
@@ -20,6 +20,10 @@ const CreatePlaylistPage = () => {
   });
 
   const [token, setToken] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   // get token
   useEffect(() => {
@@ -61,7 +65,7 @@ const CreatePlaylistPage = () => {
         CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
       }
     } else {
-      alert('Whoops! Please send an email to devin.m.bushey@gmail.com to ask for access');
+      handleOpen();
     }
   };
 
@@ -89,6 +93,41 @@ const CreatePlaylistPage = () => {
           Victoria
         </Button>
       </Card>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: COLOURS.black }}>
+            Whoops!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2, color: COLOURS.black }}>
+            Spotify limits the amount of users that I can allow to create playlists. Please send an email to
+            devin.m.bushey@gmail.com to ask for access.
+          </Typography>
+          <Typography id="modal-modal-description2" sx={{ mt: 2, color: COLOURS.black }}>
+            In the meantime, preview an already made playlist:
+          </Typography>
+          <Button variant="contained" href="https://open.spotify.com/playlist/5WLXLKF5xkuBZkCpyidpzW" target="_blank">
+            Preview
+          </Button>
+        </Box>
+      </Modal>
 
       <Card
         sx={{

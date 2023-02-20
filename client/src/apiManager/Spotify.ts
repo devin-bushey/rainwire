@@ -29,6 +29,17 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
     .catch((error: any) => {
       console.log('Error: GetSpotifyUserInfo');
       console.log(error);
+      console.log(error.message);
+
+      if (error.response.status === 403) {
+        return {
+          firstName: '',
+          user_name: '',
+          user_id: '',
+          new_playlist_id: '',
+          access: false,
+        };
+      }
 
       const returnVal: SpotifyUserDataType = {
         firstName: '',
