@@ -6,21 +6,14 @@ import { COLOURS } from '../theme/AppStyles';
 const DisplayTable = (data: any) => {
   return (
     <>
-      <Container maxWidth="lg">
-        <Card
-          sx={{
-            backgroundColor: COLOURS.light_pink,
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-            Tickets
-          </Typography>
-          <Button href={data.website} sx={{ alignContent: 'center', backgroundColor: COLOURS.yellow }}>
-            click me to find tickets
-          </Button>
-        </Card>
-      </Container>
+      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+          Tickets
+        </Typography>
+        <Button href={data.website} variant="outlined">
+          click me to find tickets
+        </Button>
+      </Box>
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer(data.tickets)}
       </Container>
@@ -29,7 +22,7 @@ const DisplayTable = (data: any) => {
 };
 
 const ticketContainer = (props: any) => {
-  const colors = ['hsl(176, 52%, 80%)', 'hsl(284, 57%, 80%)', 'hsl(20, 49%, 80%)'];
+  const colors = COLOURS.card_colours;
 
   return props.map((currentTicket: any, index: any) => {
     let imageURL;
@@ -49,26 +42,67 @@ const ticketContainer = (props: any) => {
 const Ticket = (props: any) => (
   <Card
     sx={{
-      display: 'flex',
       backgroundColor: props.bgcolor,
-      justifyContent: 'center',
-      maxHeight: '300px',
-      maxWidth: '300px',
+      height: '260px',
+      width: '300px',
       margin: '8px',
     }}
   >
-    <CardMedia component="img" sx={{ width: 120, height: 120 }} image={props.image} alt="Ticket" />
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8px', textAlign: 'center' }}>
-      <Typography color="secondary" sx={{ fontWeight: '700' }}>
+    <Box sx={{ minHeight: '60px', marginBottom: '18px', display: 'flex', alignItems: 'center' }}>
+      <Typography
+        sx={{
+          fontWeight: '700',
+          fontSize: '1.25rem',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitLineClamp: '2',
+          WebkitBoxOrient: 'vertical',
+          paddingBottom: '0px',
+          marginBottom: '8px',
+        }}
+      >
         {props.ticket.ticket_band}
       </Typography>
-      <Typography color="secondary" sx={{ fontSize: '0.9rem' }}>
-        {props.ticket.ticket_date}
-      </Typography>
-      <Typography color="secondary" sx={{ fontSize: '0.9rem' }}>
-        {props.ticket.ticket_price}
-      </Typography>
-      <Button href={props.ticket.link}>spotify</Button>
+    </Box>
+
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <CardMedia
+        component="img"
+        sx={{ width: 120, height: 120, borderRadius: '4px' }}
+        image={props.image}
+        alt="Album"
+      />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          margin: '8px',
+          textAlign: 'center',
+          alignContent: 'space-between',
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: '700',
+            fontSize: '0.77rem',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: '4',
+            WebkitBoxOrient: 'vertical',
+            paddingBottom: '0px',
+            marginBottom: '8px',
+          }}
+        >
+          {props.ticket.ticket_date}
+        </Typography>
+        <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography>
+        <Button href={props.ticket.link} target="_blank" variant="outlined">
+          spotify
+        </Button>
+      </Box>
     </Box>
   </Card>
 );
