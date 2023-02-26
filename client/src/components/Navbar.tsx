@@ -33,11 +33,10 @@ const Navbarr = () => {
                 sx={{
                   textAlign: 'center',
                   borderRadius: '10px',
-                  background: COLOURS.light_yellow,
+                  background: COLOURS.accent_01,
                   padding: '3px 10px 3px 10px',
-                  marginLeft: '24px',
+                  marginLeft: '16px',
                   mr: 2,
-                  fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
                   color: COLOURS.black,
@@ -65,11 +64,7 @@ const Navbarr = () => {
 
             {localStorage.getItem('encryptedSpotifyToken') && (
               <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 0, marginRight: '24px' }}>
-                <Button
-                  variant="contained"
-                  onClick={logOut}
-                  sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black }}
-                >
+                <Button variant="outlined" onClick={logOut}>
                   Sign Out
                 </Button>
               </Box>
@@ -123,7 +118,7 @@ const Navbarr = () => {
                   <Button
                     variant="contained"
                     onClick={logOut}
-                    sx={{ backgroundColor: COLOURS.light_yellow, color: COLOURS.black, margin: '0px 4px' }}
+                    sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '0px 4px' }}
                   >
                     Sign Out
                   </Button>

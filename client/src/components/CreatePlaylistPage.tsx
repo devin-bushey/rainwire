@@ -72,27 +72,19 @@ const CreatePlaylistPage = () => {
   if (!token) return <Loading />;
 
   return (
-    <Container>
-      <Card
-        sx={{
-          backgroundColor: COLOURS.light_pink,
-        }}
-      >
-        <Typography variant="h3" sx={{ color: COLOURS.pink }}>
-          Hey {spotifyInfo.firstName}!
-        </Typography>
-      </Card>
+    <Container maxWidth="lg" sx={{ marginBottom: '32px' }}>
+      <Typography variant="h3" sx={{ color: COLOURS.accent_02 }}>
+        Hey {spotifyInfo.firstName}!
+      </Typography>
 
-      <Card
-        sx={{
-          backgroundColor: COLOURS.blue,
-        }}
-      >
+      <Box sx={{ padding: '24px 0' }}>
         <Typography>Create a new playlist from shows playing in: </Typography>
-        <Button onClick={HandleClickVictoria} variant="outlined">
+        <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
           Victoria
         </Button>
-      </Card>
+      </Box>
+
+      <Typography>This will create a new playlist right on your account!</Typography>
 
       <Modal
         open={open}
@@ -113,14 +105,14 @@ const CreatePlaylistPage = () => {
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: COLOURS.black }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             Whoops!
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2, color: COLOURS.black }}>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Spotify limits the amount of users that I can allow to create playlists. Please send an email to
             devin.m.bushey@gmail.com to ask for access.
           </Typography>
-          <Typography id="modal-modal-description2" sx={{ mt: 2, color: COLOURS.black }}>
+          <Typography id="modal-modal-description2" sx={{ mt: 2 }}>
             In the meantime, preview an already made playlist:
           </Typography>
           <Button variant="contained" href="https://open.spotify.com/playlist/5WLXLKF5xkuBZkCpyidpzW" target="_blank">
@@ -128,14 +120,6 @@ const CreatePlaylistPage = () => {
           </Button>
         </Box>
       </Modal>
-
-      <Card
-        sx={{
-          backgroundColor: COLOURS.light_pink,
-        }}
-      >
-        <Typography sx={{ color: COLOURS.pink }}>This will create a new playlist right on your account!</Typography>
-      </Card>
     </Container>
   );
 };
