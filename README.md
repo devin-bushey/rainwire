@@ -33,6 +33,14 @@ VITE_PORT=3000
 
 VITE_HOST='localhost'
 
+VITE_EMAIL_SERVICEID=
+
+VITE_EMAIL_TEMPLATEID=
+
+VITE_EMAIL_PUBKEY=
+
+VITE_SPOTIFY_PREVIEW_PLAYLIST_URL=
+
 ### Docker Compose
 
 - From the root directory where the docker compose yml file is, run:
