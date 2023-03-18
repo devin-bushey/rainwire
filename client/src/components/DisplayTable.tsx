@@ -1,6 +1,7 @@
 import { Box, Card, CardMedia, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
+import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { COLOURS } from '../theme/AppStyles';
 
 const DisplayTable = (data: any) => {
@@ -12,6 +13,14 @@ const DisplayTable = (data: any) => {
         </Typography>
         <Button href={data.website} variant="outlined">
           click me to find tickets
+        </Button>
+      </Box>
+      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+          Preview playlist
+        </Typography>
+        <Button href={SPOTIFY_PREVIEW_PLAYLIST_URL} target="_blank" variant="contained">
+          spotify
         </Button>
       </Box>
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>

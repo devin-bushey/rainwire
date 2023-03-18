@@ -10,6 +10,7 @@ import NotFound from '../components/NotFound';
 import Refresh from '../components/Refresh';
 import { Error } from '../components/Error';
 import { getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
+import SignUp from '../components/SignUp';
 
 export const AppRoutes = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
@@ -62,6 +63,7 @@ export const AppRoutes = () => {
           <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
         <Route path="/refresh" element={<Refresh />} />
         <Route path="/create" element={<CreatePlaylistPage />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
