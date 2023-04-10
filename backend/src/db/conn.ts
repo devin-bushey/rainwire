@@ -7,17 +7,16 @@ const client = new MongoClient(Db, {
 
 var _db: any;
 
-export function connectToServer(callback: any) {
-  client.connect(function (err: any, db: any) {
-    // Verify we got a good "db" object
-    if (db) {
-      _db = db.db('RecordShop');
-      console.log('Successfully connected to MongoDB.');
-    } else {
-      console.log('ERROR: ', err);
-    }
-    return callback(err);
-  });
+export async function connectToServer(callback: any) {
+  try {
+    await client.connect();
+  } catch (e) {
+    console.error(e);
+  }
+
+  _db = client.db('RecordShop');
+
+  return _db === undefined ? false : true;
 }
 
 export function getDb() {
