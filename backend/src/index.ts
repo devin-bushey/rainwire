@@ -13,12 +13,10 @@ app.use(express.json());
 app.use(recordRoutes);
 app.use('/', healthchecker);
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-
-  connectToServer(function (err: any) {
-    if (err) {
-      console.error(err);
-    }
+app.listen(port, async () => {
+  // perform a database connection when server starts
+  await connectToServer(function (err: any) {
+    if (err) console.error(err);
   });
+  console.log(`Server is running on port: ${port}`);
 });

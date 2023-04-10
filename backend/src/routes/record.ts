@@ -4,22 +4,26 @@ export const recordRoutes = express.Router();
 import { getDb } from '../db/conn';
 import { extract } from '../extract_tickets';
 
-recordRoutes.route('/victoria').get(function (req, res) {
-  let db_connect = getDb();
+recordRoutes.route('/victoria').get(async function (req, res) {
+  let db_connect = await getDb();
 
   db_connect
     .collection('db_victoria_spotify')
     .find({})
-    .toArray(function (err: any, result: any) {
-      if (err) throw err;
-      res.json(result);
+    .toArray()
+    .then((data: any) => {
+      console.log('get spotify data');
+      res.json(data);
+    })
+    .catch((err: any) => {
+      console.log('/victoria error:', err);
     });
 });
 
 recordRoutes.route('/webscrape').get(async function (req, res) {
   const date = getTodaysDate();
 
-  let db_connect = getDb();
+  let db_connect = await getDb();
 
   db_connect
     .collection('db_victoria_spotify')
