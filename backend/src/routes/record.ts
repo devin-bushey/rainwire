@@ -7,12 +7,27 @@ import { extract } from '../extract_tickets';
 recordRoutes.route('/victoria').get(async function (req, response) {
   let db_connect = dbo.getDb();
 
+  if (!db_connect) {
+    console.log('reconnecting to db');
+    await dbo.connectToServer(function (err: any) {
+      if (err) {
+        console.log('reconnecting error');
+        console.error(err);
+      }
+    });
+    db_connect = dbo.getDb();
+  }
+
+  if (db_connect) {
+    console.log('db connected');
+  }
+
   db_connect
     .collection('db_victoria_spotify')
     .find({})
     .toArray()
     .then((data: any) => {
-      console.log('get spotify data');
+      console.log('get db_victoria_spotify');
       response.json(data);
     });
 });
