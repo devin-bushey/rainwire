@@ -1,24 +1,45 @@
-const { MongoClient } = require('mongodb');
-const Db = process.env.ATLAS_URI;
-const client = new MongoClient(Db, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+import { MongoClient } from 'mongodb';
 
-var _db: any;
+const Db = process.env.ATLAS_URI || '';
+const client = new MongoClient(Db);
 
-export async function connectToServer(callback: any) {
-  try {
-    await client.connect();
-  } catch (e) {
-    console.error(e);
-  }
+let _db: any;
 
-  _db = client.db('RecordShop');
+export default {
+  connectToServer: async (callback: any) => {
+    try {
+      await client.connect();
+    } catch (e) {
+      console.error(e);
+    }
 
-  return _db === undefined ? false : true;
-}
+    _db = client.db('RecordShop');
 
-export function getDb() {
-  return _db;
-}
+    return _db !== undefined;
+  },
+  getDb: () => _db,
+};
+
+// const { MongoClient } = require('mongodb');
+// const Db = process.env.ATLAS_URI;
+// const client = new MongoClient(Db, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+// let _db: any;
+
+// export default {
+//   connectToServer: async (callback: any) => {
+//     try {
+//       await client.connect();
+//     } catch (e) {
+//       console.error(e);
+//     }
+
+//     _db = client.db('RecordShop');
+
+//     return _db !== undefined;
+//   },
+//   getDb: () => _db,
+// };

@@ -1,11 +1,11 @@
 import express from 'express';
 import { manualRun } from '../db/addSpotifyDataToCollection';
 export const recordRoutes = express.Router();
-import { getDb } from '../db/conn';
+import dbo from '../db/conn';
 import { extract } from '../extract_tickets';
 
-recordRoutes.route('/victoria').get(async function (req, res) {
-  let db_connect = await getDb();
+recordRoutes.route('/victoria').get(async function (req, response) {
+  let db_connect = dbo.getDb();
 
   db_connect
     .collection('db_victoria_spotify')
@@ -13,17 +13,14 @@ recordRoutes.route('/victoria').get(async function (req, res) {
     .toArray()
     .then((data: any) => {
       console.log('get spotify data');
-      res.json(data);
-    })
-    .catch((err: any) => {
-      console.log('/victoria error:', err);
+      response.json(data);
     });
 });
 
 recordRoutes.route('/webscrape').get(async function (req, res) {
   const date = getTodaysDate();
 
-  let db_connect = await getDb();
+  let db_connect = dbo.getDb();
 
   db_connect
     .collection('db_victoria_spotify')

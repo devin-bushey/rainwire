@@ -1,5 +1,5 @@
 require('dotenv').config({ path: '../config.env' });
-import { connectToServer, getDb } from './conn';
+import dbo from './conn';
 import axios from 'axios';
 
 // used to run script manually
@@ -8,11 +8,11 @@ import axios from 'axios';
 // example:
 // node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_01-16-2023")'
 export const manualRun = (collection_name: string) => {
-  connectToServer(async function (err: any) {
+  dbo.connectToServer(async function (err: any) {
     if (err) {
       console.error(err);
     } else {
-      let db_connect = getDb();
+      let db_connect = dbo.getDb();
       console.log('Starting to add Spotify data ...');
       updateCollectionWithSpotify(collection_name.toString(), db_connect);
     }
