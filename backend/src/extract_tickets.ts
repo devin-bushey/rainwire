@@ -1,5 +1,5 @@
 require('dotenv').config({ path: './config.env' });
-import { connectToServer, getDb } from './db/conn';
+import dbo from './db/conn';
 import _ from 'lodash';
 
 import { extract_vic_songkick_1 } from './extraction_scripts/extract_vic_songkick';
@@ -10,7 +10,7 @@ import { extract_capital_ballroom } from './extraction_scripts/extract_capital_b
 import { extract_philips_backyarder } from './extraction_scripts/extract_philips_backyarder';
 
 export async function extract() {
-  connectToServer(function (err: any) {
+  dbo.connectToServer(function (err: any) {
     if (err) {
       console.error('Connect to Server Error on Extract', err);
     } else {
@@ -21,7 +21,7 @@ export async function extract() {
 
 export async function extractTickets() {
   let date = getTodaysDate();
-  let db_connect = getDb();
+  let db_connect = dbo.getDb();
 
   //
   // ***** VICTORIA *****
