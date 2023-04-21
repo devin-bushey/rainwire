@@ -4,47 +4,49 @@ import Typography from '@mui/material/Typography';
 import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { COLOURS } from '../theme/AppStyles';
 import { useEffect, useState } from 'react';
-import spotifyLogo from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
+import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
 import spotifyIconBlack from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 const DisplayTable = (data: any) => {
-  console.log(data);
+  const [loadMore, setLoadMore] = useState(15);
+  const first20Tickets = data.tickets.slice(0, loadMore);
+  const [tickets, setTickets] = useState(first20Tickets);
+  // const [filteredGenres, setFilteredGenres] = useState<any[]>();
 
-  const [tickets, setTickets] = useState(data.tickets);
-  const [filteredGenres, setFilteredGenres] = useState<any[]>();
-
-  const genres: any = [];
-  data.tickets.forEach((ticket: any) => {
-    if (ticket?.genres === undefined) return;
-    ticket.genres.forEach((genre: any) => {
-      if (!genres.includes(genre)) {
-        genres.push(genre);
-      }
-    });
-  });
+  // const genres: any = [];
+  // data.tickets.forEach((ticket: any) => {
+  //   if (ticket?.genres === undefined) return;
+  //   ticket.genres.forEach((genre: any) => {
+  //     if (!genres.includes(genre)) {
+  //       genres.push(genre);
+  //     }
+  //   });
+  // });
 
   useEffect(() => {
-    if (filteredGenres === undefined) {
-      setTickets(data.tickets);
-      return;
-    }
+    setTickets(data.tickets.slice(0, loadMore));
+  }, [loadMore]);
 
-    const filteredTickets = data.tickets.filter((ticket: any) => {
-      let isFound = false;
-      console.log(ticket);
-      if (ticket?.genres === undefined) return false;
-      ticket.genres.forEach((genre: any) => {
-        if (filteredGenres.includes(genre)) {
-          isFound = true;
-        }
-      });
-      return isFound;
-    });
+  // useEffect(() => {
+  //   if (filteredGenres === undefined) {
+  //     setTickets(first20Tickets);
+  //     return;
+  //   }
 
-    setTickets(filteredTickets);
-  }, [filteredGenres]);
+  //   const filteredTickets = data.tickets.filter((ticket: any) => {
+  //     let isFound = false;
+  //     console.log(ticket);
+  //     if (ticket?.genres === undefined) return false;
+  //     ticket.genres.forEach((genre: any) => {
+  //       if (filteredGenres.includes(genre)) {
+  //         isFound = true;
+  //       }
+  //     });
+  //     return isFound;
+  //   });
 
-  console.log(genres);
+  //   setTickets(filteredTickets);
+  // }, [filteredGenres]);
 
   return (
     <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
@@ -90,6 +92,17 @@ const DisplayTable = (data: any) => {
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer(tickets)}
       </Container>
+      {loadMore < data.tickets.length && (
+        <Button
+          variant="outlined"
+          sx={{ marginTop: '24px' }}
+          onClick={() => {
+            setLoadMore(loadMore + 15);
+          }}
+        >
+          Load more
+        </Button>
+      )}
     </Box>
   );
 };
@@ -121,7 +134,11 @@ const Ticket = (props: any) => (
       margin: '8px',
     }}
   >
-    <Box sx={{ minHeight: '60px', marginBottom: '18px', display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', alignItems: 'left' }}>
+      <img src={spotifyLogoBlack} alt="spotify_logo" width="75px" height="auto" style={{ marginBottom: '8px' }} />
+    </Box>
+
+    <Box sx={{ minHeight: '60px', marginBottom: '8px', display: 'flex', alignItems: 'center' }}>
       <Typography
         sx={{
           fontWeight: '700',
