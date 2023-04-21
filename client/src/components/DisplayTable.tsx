@@ -1,12 +1,51 @@
-import { Box, Card, CardMedia, Container } from '@mui/material';
+import { Autocomplete, Box, Card, CardMedia, Container, Grid, TextField } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { COLOURS } from '../theme/AppStyles';
+import { useEffect, useState } from 'react';
 
 const DisplayTable = (data: any) => {
+  console.log(data);
+
+  const [tickets, setTickets] = useState(data.tickets);
+  const [filteredGenres, setFilteredGenres] = useState<any[]>();
+
+  const genres: any = [];
+  data.tickets.forEach((ticket: any) => {
+    if (ticket?.genres === undefined) return;
+    ticket.genres.forEach((genre: any) => {
+      if (!genres.includes(genre)) {
+        genres.push(genre);
+      }
+    });
+  });
+
+  useEffect(() => {
+    if (filteredGenres === undefined) {
+      setTickets(data.tickets);
+      return;
+    }
+
+    const filteredTickets = data.tickets.filter((ticket: any) => {
+      let isFound = false;
+      console.log(ticket);
+      if (ticket?.genres === undefined) return false;
+      ticket.genres.forEach((genre: any) => {
+        if (filteredGenres.includes(genre)) {
+          isFound = true;
+        }
+      });
+      return isFound;
+    });
+
+    setTickets(filteredTickets);
+  }, [filteredGenres]);
+
+  console.log(genres);
+
   return (
-    <>
+    <Box>
       <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
         <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
           Tickets
@@ -23,10 +62,28 @@ const DisplayTable = (data: any) => {
           spotify
         </Button>
       </Box>
+      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+          Filter Artists by Genre
+        </Typography>
+        <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Autocomplete
+            value={filteredGenres}
+            onChange={(event, newValue) => {
+              setFilteredGenres(newValue);
+            }}
+            multiple
+            id="tags-standard"
+            options={genres}
+            getOptionLabel={(option: string) => option}
+            renderInput={(params) => <TextField {...params} variant="standard" placeholder="Genres" />}
+          />
+        </Grid>
+      </Box>
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-        {ticketContainer(data.tickets)}
+        {ticketContainer(tickets)}
       </Container>
-    </>
+    </Box>
   );
 };
 
