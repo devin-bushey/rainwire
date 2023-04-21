@@ -117,6 +117,7 @@ recordRoutes.route('/webscrape').get(async function (req, res) {
 });
 
 recordRoutes.route('/addspotify').get(async function (req, res) {
+  console.log('Starting to add Spotify data ...');
   const date = getTodaysDate();
 
   manualRun('db_victoria_' + date);

@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import axios from 'axios';
 
 export const extract_vic_songkick_1 = async () => {
+  console.log('Extracting song kick 1');
   let data: any[] = [];
 
   await axios
