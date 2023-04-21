@@ -3,12 +3,13 @@ import hash from '../utils/hash';
 import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
 import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
-import { Button, Container, Box, Modal } from '@mui/material';
+import { Button, Container, Box, Modal, Link } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Loading } from './Loading';
 import { COLOURS } from '../theme/AppStyles';
 import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { useNavigate } from 'react-router-dom';
+import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -75,8 +76,6 @@ const CreatePlaylistPage = () => {
 
   if (!token) return <Loading />;
 
-  console.log('spotifyInfo', spotifyInfo);
-
   return (
     <Container maxWidth="lg" sx={{ marginBottom: '32px' }}>
       <Typography variant="h3" sx={{ color: COLOURS.accent_02 }}>
@@ -86,11 +85,16 @@ const CreatePlaylistPage = () => {
       <Box sx={{ padding: '24px 0' }}>
         <Typography>Create a new playlist from shows playing in: </Typography>
         <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
           Victoria
         </Button>
       </Box>
 
       <Typography>This will create a new playlist right on your account!</Typography>
+
+      <Box sx={{ marginTop: '32px' }}>
+        <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
+      </Box>
 
       <Modal
         open={open}
