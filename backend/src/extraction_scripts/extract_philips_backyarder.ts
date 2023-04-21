@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import axios from 'axios';
 
 export const extract_philips_backyarder = async () => {
+  console.log('Extracting philips backyarder');
   let data: any[] = [];
 
   await axios

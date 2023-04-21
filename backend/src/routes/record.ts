@@ -1,8 +1,8 @@
 import express from 'express';
-import { manualRun } from '../db/addSpotifyDataToCollection';
+import { manualRun, updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 export const recordRoutes = express.Router();
 import dbo from '../db/conn';
-import { extract } from '../extract_tickets';
+import { extract, extractTickets } from '../extract_tickets';
 
 recordRoutes.route('/victoria').get(async function (req, response) {
   let db_connect = dbo.getDb();
@@ -30,6 +30,53 @@ recordRoutes.route('/victoria').get(async function (req, response) {
       console.log('get db_victoria_spotify');
       response.json(data);
     });
+});
+
+recordRoutes.route('/drop_db_victoria_').get(async function (req, res) {
+  const date = getTodaysDate();
+
+  let db_connect = dbo.getDb();
+
+  db_connect
+    .collection('db_victoria_' + date)
+    .drop()
+    .then(function () {
+      console.log('db_victoria_' + date + ' DROPPED');
+      // success
+    })
+    .catch(function () {
+      console.log('ERROR db_victoria_' + date + ' NOT DROPPED');
+      // error handling
+    });
+});
+
+recordRoutes.route('/drop_db_victoria_spotify').get(async function (req, res) {
+  let db_connect = dbo.getDb();
+
+  db_connect
+    .collection('db_victoria_spotify')
+    .drop()
+    .then(function () {
+      console.log('db_victoria_spotify DROPPED');
+      // success
+    })
+    .catch(function () {
+      console.log('ERROR db_victoria_spotify NOT DROPPED');
+      // error handling
+    });
+});
+
+recordRoutes.route('/extract').get(async function (req, res) {
+  console.log('Starting Web Scraping');
+  extractTickets();
+});
+
+recordRoutes.route('/updateCollectionWithSpotify').get(async function (req, res) {
+  const date = getTodaysDate();
+  const collection_name = 'db_victoria_' + date;
+  let db_connect = dbo.getDb();
+  console.log('Starting to add Spotify data ...');
+  updateCollectionWithSpotify(collection_name.toString(), db_connect);
 });
 
 recordRoutes.route('/webscrape').get(async function (req, res) {
@@ -63,13 +110,14 @@ recordRoutes.route('/webscrape').get(async function (req, res) {
     })
     .then(function () {
       console.log('Starting Web Scraping');
-      extract();
+      extractTickets();
     });
 
   res.json('Web Scraping Done!');
 });
 
 recordRoutes.route('/addspotify').get(async function (req, res) {
+  console.log('Starting to add Spotify data ...');
   const date = getTodaysDate();
 
   manualRun('db_victoria_' + date);
