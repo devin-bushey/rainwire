@@ -66,7 +66,7 @@ function removeDuplicateBands(arr: any) {
   arr.forEach(function (itm: any) {
     var unique = true;
     cleaned.forEach(function (itm2) {
-      if (_.isEqual(itm.ticket_band, itm2.ticket_band)) unique = false;
+      if (_.isEqual(itm.sp_band_name, itm2.sp_band_name)) unique = false;
     });
     if (unique) cleaned.push(itm);
   });
