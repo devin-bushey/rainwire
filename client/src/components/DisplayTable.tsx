@@ -3,11 +3,13 @@ import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { COLOURS } from '../theme/AppStyles';
+import spotifyLogo from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
+import spotifyIconBlack from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 const DisplayTable = (data: any) => {
   return (
     <>
-      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+      {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
         <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
           Tickets
         </Typography>
@@ -15,14 +17,18 @@ const DisplayTable = (data: any) => {
           click me to find tickets
         </Button>
       </Box>
-      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+      */}
+      {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
         <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
           Preview playlist
         </Typography>
-        <Button href={SPOTIFY_PREVIEW_PLAYLIST_URL} target="_blank" variant="contained">
-          spotify
+        <Button href={SPOTIFY_PREVIEW_PLAYLIST_URL} target="_blank" variant="outlined" sx={{ padding: '12px 24px' }}>
+          <img src={spotifyLogo} alt="spotify_logo" width="100px" height="auto" />
         </Button>
-      </Box>
+      </Box> */}
+      <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+        Preview the artists playing in Victoria
+      </Typography>
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer(data.tickets)}
       </Container>
@@ -109,7 +115,8 @@ const Ticket = (props: any) => (
         </Typography>
         <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography>
         <Button href={props.ticket.link} target="_blank" variant="outlined">
-          spotify
+          <img src={spotifyIconBlack} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          artist
         </Button>
       </Box>
     </Box>
