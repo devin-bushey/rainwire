@@ -109,7 +109,7 @@ const Ticket = (props: any) => (
   <Card
     sx={{
       backgroundColor: props.bgcolor,
-      height: '260px',
+      height: '300px',
       width: '300px',
       margin: '8px',
     }}
@@ -128,7 +128,7 @@ const Ticket = (props: any) => (
           marginBottom: '8px',
         }}
       >
-        {props.ticket.ticket_band}
+        {props.ticket.sp_band_name}
       </Typography>
     </Box>
 
@@ -166,7 +166,8 @@ const Ticket = (props: any) => (
         </Typography>
         <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography>
         <Button href={props.ticket.link} target="_blank" variant="outlined">
-          spotify
+          {/* <img src={spotifyIconBlack} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} /> */}
+          artist
         </Button>
       </Box>
     </Box>

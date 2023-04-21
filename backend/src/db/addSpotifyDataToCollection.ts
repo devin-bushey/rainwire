@@ -87,6 +87,7 @@ async function addSpotifyMainData(element: any, token: any) {
       .then(async function (res) {
         try {
           element.band_id = res.data.artists.items[0].id;
+          element.sp_band_name = res.data.artists.items[0].name;
           element.link = res.data.artists.items[0].external_urls.spotify;
           element.uri = res.data.artists.items[0].uri;
           element.genres = res.data.artists.items[0].genres;
