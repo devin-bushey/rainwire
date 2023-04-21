@@ -147,12 +147,11 @@ const AddTracksToPlaylist = (token: string, playlist_id: string, playlist_url: s
   })
     .then(() => {
       console.log('Successfully added tracks to playlist');
-      window.alert('Successfully created a new playlist!');
-
       window.location.assign(playlist_url);
     })
     .catch(function (error) {
       console.log('Error: unsuccessfully added tracks to playlist');
+      window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(error);
     });
 };
