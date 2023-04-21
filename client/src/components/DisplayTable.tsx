@@ -143,11 +143,12 @@ const Ticket = (props: any) => (
         sx={{
           fontWeight: '700',
           fontSize: '1.25rem',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          display: '-webkit-box',
-          WebkitLineClamp: '2',
-          WebkitBoxOrient: 'vertical',
+          textAlign: 'left',
+          //overflow: 'hidden',
+          //textOverflow: 'ellipsis',
+          //display: '-webkit-box',
+          //WebkitLineClamp: '1',
+          //WebkitBoxOrient: 'vertical',
           paddingBottom: '0px',
           marginBottom: '8px',
         }}
