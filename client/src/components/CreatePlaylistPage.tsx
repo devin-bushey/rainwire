@@ -27,8 +27,13 @@ const CreatePlaylistPage = () => {
   const [token, setToken] = useState('');
 
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const handleConfirmOpen = () => setConfirmOpen(true);
+  const handleConfirmClose = () => setConfirmOpen(false);
 
   // get token
   useEffect(() => {
@@ -66,9 +71,10 @@ const CreatePlaylistPage = () => {
 
   const HandleClickVictoria = () => {
     if (spotifyInfo.access) {
-      if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
-        CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
-      }
+      handleConfirmOpen();
+      // if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
+      //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
+      // }
     } else {
       handleOpen();
     }
@@ -95,6 +101,40 @@ const CreatePlaylistPage = () => {
       <Box sx={{ marginTop: '32px' }}>
         <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
       </Box>
+
+      <Modal
+        open={confirmOpen}
+        onClose={handleConfirmClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Are you sure you want to create a new playlist on your account?
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
+              handleConfirmClose();
+            }}
+          >
+            Confirm!
+          </Button>
+        </Box>
+      </Modal>
 
       <Modal
         open={open}
