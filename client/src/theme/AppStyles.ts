@@ -22,4 +22,6 @@ export const COLOURS = {
   light_yellow: 'hsl(43, 97%, 80%)',
 
   lilac: 'hsl(263, 29%, 32%)',
+
+  spotify_green: '#1DB954',
 };

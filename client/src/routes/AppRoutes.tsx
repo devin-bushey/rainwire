@@ -11,6 +11,8 @@ import Refresh from '../components/Refresh';
 import { Error } from '../components/Error';
 import { getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
 import SignUp from '../components/SignUp';
+import Footer from '../components/Footer';
+import { Box } from '@mui/material';
 
 export const AppRoutes = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
@@ -55,17 +57,22 @@ export const AppRoutes = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<Navbarr />}>
-        <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
-        <Route path="/vic" element={displayElement()} />
-        {/* <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
+    <>
+      <Box sx={{ minHeight: 'calc(100vh - 46px)' }}>
+        <Routes>
+          <Route path="/" element={<Navbarr />}>
+            <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
+            <Route path="/vic" element={displayElement()} />
+            {/* <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
           <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
-        <Route path="/refresh" element={<Refresh />} />
-        <Route path="/create" element={<CreatePlaylistPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+            <Route path="/refresh" element={<Refresh />} />
+            <Route path="/create" element={<CreatePlaylistPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Box>
+      <Footer />
+    </>
   );
 };

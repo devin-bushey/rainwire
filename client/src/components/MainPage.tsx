@@ -5,6 +5,7 @@ import { send } from 'emailjs-com';
 import { memo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { COLOURS } from '../theme/AppStyles';
+import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = import.meta.env.VITE_SP_CLIENT_ID;
@@ -40,7 +41,7 @@ const MainPage = memo(() => {
           <Typography display="inline" sx={{ fontWeight: '700' }}>
             Create a new playlist
           </Typography>{' '}
-          on your spotify account with the top track from each artist playing in your chosen city.
+          on your Spotify account with the top track from each artist playing in your chosen city.
         </Typography>
 
         <Typography>Let&apos;s start by checking out the list of shows playing in Victoria.</Typography>
@@ -49,14 +50,13 @@ const MainPage = memo(() => {
             navigate('/vic');
           }}
           variant="contained"
-          sx={{ backgroundColor: COLOURS.accent_03, marginTop: '8px', marginBottom: '16px' }}
+          color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
         >
           Victoria
         </Button>
 
-        <Typography>
-          Sign up to create your own playlist on your Spotify account. Or if you&apos;re already registered then log in.
-        </Typography>
+        {/* 
         <Button
           onClick={() => {
             navigate('/signup');
@@ -65,15 +65,18 @@ const MainPage = memo(() => {
           sx={{ backgroundColor: COLOURS.accent_03, marginTop: '8px', marginRight: '8px' }}
         >
           Sign Up
-        </Button>
+        </Button> */}
+        <Typography>Log in to create your own playlist on your Spotify account.</Typography>
         <Button
           href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
             '%20',
           )}&response_type=token&show_dialog=true`}
           variant="contained"
-          sx={{ backgroundColor: COLOURS.accent_03, marginTop: '8px' }}
+          color="secondary"
+          sx={{ marginTop: '8px', padding: '8px 16px' }}
         >
-          Login
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          Login with Spotify
         </Button>
       </Box>
     </Container>
