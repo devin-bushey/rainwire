@@ -158,12 +158,7 @@ const Ticket = (props: any) => (
     </Box>
 
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 120, height: 120, borderRadius: '4px' }}
-        image={props.image}
-        alt="Album"
-      />
+      <CardMedia component="img" sx={{ width: 120, height: 120 }} image={props.image} alt="Album" />
       <Box
         sx={{
           display: 'flex',
