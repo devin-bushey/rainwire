@@ -24,6 +24,18 @@ const MainPage = memo(() => {
         Record Shop helps you find new music.
       </Typography>
 
+      <Button
+        href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+          '%20',
+        )}&response_type=token&show_dialog=true`}
+        variant="contained"
+        color="secondary"
+        sx={{ marginTop: '24px', marginBottom: '24px', padding: '8px 16px' }}
+      >
+        <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+        Login with Spotify
+      </Button>
+
       <Box
         sx={{
           width: '75%',
@@ -33,7 +45,7 @@ const MainPage = memo(() => {
           },
         }}
       >
-        <Typography sx={{ paddingTop: '16px' }}>
+        <Typography sx={{ paddingTop: '12px' }}>
           Pick a city from the tabs above and check out the upcoming concert listings.
         </Typography>
 
@@ -47,20 +59,9 @@ const MainPage = memo(() => {
         >
           Sign Up
         </Button> */}
-        <Typography sx={{ paddingTop: '16px', paddingBottom: '24px' }}>
+        <Typography sx={{ paddingTop: '12px', paddingBottom: '24px' }}>
           Then log in to create your own playlist on your Spotify account.
         </Typography>
-        <Button
-          href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-            '%20',
-          )}&response_type=token&show_dialog=true`}
-          variant="contained"
-          color="secondary"
-          sx={{ marginTop: '8px', padding: '8px 16px' }}
-        >
-          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          Login with Spotify
-        </Button>
       </Box>
     </Container>
   );
