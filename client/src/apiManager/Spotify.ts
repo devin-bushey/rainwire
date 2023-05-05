@@ -59,7 +59,7 @@ const CreateBlankPlaylist = async ({
   city: string;
   user_id: string;
 }): Promise<SpotifyPlaylistDataType> => {
-  const playlist_name = 'Record Shop - ' + city;
+  const playlist_name = 'record shop ' + city;
 
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
@@ -70,7 +70,7 @@ const CreateBlankPlaylist = async ({
     },
     data: {
       name: playlist_name,
-      description: 'a mixtape of upcoming concerts --> created by recordshopp.netlify.app',
+      description: 'a mixtape of upcoming concerts created by recordshopp.netlify.app',
       public: true,
     },
   })

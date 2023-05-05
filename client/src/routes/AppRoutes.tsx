@@ -16,24 +16,27 @@ import { Box } from '@mui/material';
 
 export const AppRoutes = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
-  // const WEBSITE_VAN = 'https://redcat.ca/';
+  const WEBSITE_VAN = 'https://redcat.ca/';
   // const WEBSITE_OTT = 'http://www.vertigorecords.ca/showtickets/index.html';
 
   //const ticketsVictoria = GetTickets('victoria');
   //const ticketsOttawa = GetTickets('ottawa');
   //const ticketsVancouver = GetTickets('vancouver');
 
-  const [tickets, setTickets] = useState<any>([]);
+  const [ticketsVictoria, setTicketsVictoria] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+
+  const [ticketsVancouver, setTicketsVancouver] = useState<any>([]);
+  const [isLoadingVan, setIsLoadingVan] = useState(true);
+  const [isErrorVan, setIsErrorVan] = useState(false);
 
   useEffect(() => {
     GetTickets('victoria')
       .then((data) => {
-        setTickets(data);
+        setTicketsVictoria(data);
         setIsLoading(false);
         setIsError(false);
-
         if (!data || data.length == 0) {
           setIsError(true);
         }
@@ -42,17 +45,42 @@ export const AppRoutes = () => {
         setIsError(true);
         setIsLoading(false);
       });
+
+    GetTickets('vancouver')
+      .then((data) => {
+        setTicketsVancouver(data);
+        setIsLoadingVan(false);
+        setIsErrorVan(false);
+
+        if (!data || data.length == 0) {
+          setIsErrorVan(true);
+        }
+      })
+      .catch((error) => {
+        setIsErrorVan(true);
+        setIsLoadingVan(false);
+      });
   }, []);
 
   const token = getSpotifyTokenLocalStorage();
 
-  const displayElement = () => {
+  const displayVictoria = () => {
     if (isLoading) {
       return <Loading />;
     } else if (isError) {
       return <Error />;
     } else {
-      return <DisplayTable tickets={tickets} website={WEBSITE_VIC} />;
+      return <DisplayTable tickets={ticketsVictoria} website={WEBSITE_VIC} city={'Victoria'} />;
+    }
+  };
+
+  const displayVancouver = () => {
+    if (isLoadingVan) {
+      return <Loading />;
+    } else if (isErrorVan) {
+      return <Error />;
+    } else {
+      return <DisplayTable tickets={ticketsVancouver} website={WEBSITE_VIC} city={'Vancouver'} />;
     }
   };
 
@@ -62,9 +90,9 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Navbarr />}>
             <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
-            <Route path="/vic" element={displayElement()} />
-            {/* <Route path="/van" element={<DisplayTable tickets={ticketsVancouver} website={WEBSITE_VAN} />} />
-          <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
+            <Route path="/vic" element={displayVictoria()} />
+            <Route path="/van" element={displayVancouver()} />
+            {/* <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
             <Route path="/refresh" element={<Refresh />} />
             <Route path="/create" element={<CreatePlaylistPage />} />
             <Route path="/signup" element={<SignUp />} />

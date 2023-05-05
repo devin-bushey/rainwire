@@ -60,6 +60,21 @@ const Navbarr = () => {
               >
                 Victoria
               </Button>
+
+              <Button
+                component={Link}
+                to="/van"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '75px',
+                  marginLeft: '16px',
+                }}
+              >
+                Vancouver
+              </Button>
             </Box>
 
             {localStorage.getItem('encryptedSpotifyToken') && (
@@ -112,6 +127,20 @@ const Navbarr = () => {
                   }}
                 >
                   Victoria
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  to="/van"
+                  sx={{
+                    color: 'black',
+                    textAlign: 'center',
+                    margin: '0px 4px',
+                  }}
+                >
+                  Vancouver
                 </Button>
 
                 {localStorage.getItem('encryptedSpotifyToken') && (
