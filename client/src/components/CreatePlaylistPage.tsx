@@ -118,17 +118,17 @@ const CreatePlaylistPage = () => {
           </Typography>{' '}
           on your Spotify account with the top track from each artist playing in your chosen city.
         </Typography>
+      </Box>
 
-        <Box sx={{ padding: '12px 0' }}>
-          <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
-            <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-            Victoria
-          </Button>
-          <Button onClick={HandleClickVancouver} variant="contained" color="secondary" sx={{ marginLeft: '12px' }}>
-            <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-            Vancouver
-          </Button>
-        </Box>
+      <Box sx={{ padding: '12px 0' }}>
+        <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          Victoria
+        </Button>
+        <Button onClick={HandleClickVancouver} variant="contained" color="secondary" sx={{ marginLeft: '12px' }}>
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          Vancouver
+        </Button>
       </Box>
 
       <Typography sx={{ padding: '16px 0' }}>

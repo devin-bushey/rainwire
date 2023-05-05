@@ -115,43 +115,45 @@ const Navbarr = () => {
                   justifyContent: 'center',
                 }}
               >
-                <Button
-                  variant="outlined"
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to="/vic"
-                  sx={{
-                    color: 'black',
-                    textAlign: 'center',
-                    margin: '0px 4px',
-                  }}
-                >
-                  Victoria
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to="/van"
-                  sx={{
-                    color: 'black',
-                    textAlign: 'center',
-                    margin: '0px 4px',
-                  }}
-                >
-                  Vancouver
-                </Button>
-
-                {localStorage.getItem('encryptedSpotifyToken') && (
+                <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
                   <Button
-                    variant="contained"
-                    onClick={logOut}
-                    sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '0px 4px' }}
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/vic"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: '0px 4px',
+                    }}
                   >
-                    Sign Out
+                    Victoria
                   </Button>
-                )}
+
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/van"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '8px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Vancouver
+                  </Button>
+
+                  {localStorage.getItem('encryptedSpotifyToken') && (
+                    <Button
+                      variant="contained"
+                      onClick={logOut}
+                      sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '0px 4px' }}
+                    >
+                      Sign Out
+                    </Button>
+                  )}
+                </Box>
               </Menu>
             </Box>
           </Toolbar>
