@@ -37,25 +37,6 @@ const MainPage = memo(() => {
           Pick a city from the tabs above and check out the upcoming concert listings.
         </Typography>
 
-        <Typography sx={{ padding: '16px 0' }}>
-          <Typography display="inline" sx={{ fontWeight: '700' }}>
-            Create a new playlist
-          </Typography>{' '}
-          on your Spotify account with the top track from each artist playing in your chosen city.
-        </Typography>
-
-        <Typography>Let&apos;s start by checking out the list of shows playing in Victoria.</Typography>
-        <Button
-          onClick={() => {
-            navigate('/vic');
-          }}
-          variant="contained"
-          color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Victoria
-        </Button>
-
         {/* 
         <Button
           onClick={() => {
@@ -66,7 +47,9 @@ const MainPage = memo(() => {
         >
           Sign Up
         </Button> */}
-        <Typography>Log in to create your own playlist on your Spotify account.</Typography>
+        <Typography sx={{ paddingTop: '16px', paddingBottom: '24px' }}>
+          Then log in to create your own playlist on your Spotify account.
+        </Typography>
         <Button
           href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
             '%20',

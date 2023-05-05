@@ -67,6 +67,50 @@ const Refresh = () => {
       });
   };
 
+  const handleExtractVancouver = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'extractVancouver' + '/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleDrop_simple_db_vancouver = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_simple_db_vancouver' + '/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleDrop_spotify_db_vancouver = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_spotify_db_vancouver' + '/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleUpdateVancouverWithSpotify = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'updateVancouverWithSpotify' + '/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <button onClick={handleWebScrape}>Web Scrape</button>
@@ -75,6 +119,10 @@ const Refresh = () => {
       <button onClick={handleDropDB_2}>drop_db_victoria_spotify</button>
       <button onClick={handleExtract}>extract</button>
       <button onClick={handleUpdateCollectionWithSpotify}>updateCollectionWithSpotify</button>
+      <button onClick={handleExtractVancouver}>extract_vancouver</button>
+      <button onClick={handleDrop_simple_db_vancouver}>drop_simple_db_vancouver</button>
+      <button onClick={handleDrop_spotify_db_vancouver}>drop_spotify_db_vancouver</button>
+      <button onClick={handleUpdateVancouverWithSpotify}>updateVancouverWithSpotify</button>
     </>
   );
 };

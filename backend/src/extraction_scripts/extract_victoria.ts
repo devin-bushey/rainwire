@@ -58,7 +58,7 @@ export const extract_victoria = async () => {
       });
 
       console.log('Successfully extracted https://victoriamusicscene.com/concerts/');
-      console.log(data);
+      //console.log(data);
 
       return data;
     })

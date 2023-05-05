@@ -35,6 +35,8 @@ const CreatePlaylistPage = () => {
   const handleConfirmOpen = () => setConfirmOpen(true);
   const handleConfirmClose = () => setConfirmOpen(false);
 
+  const [city, setCity] = useState('');
+
   // get token
   useEffect(() => {
     const localToken = getSpotifyTokenLocalStorage();
@@ -71,6 +73,19 @@ const CreatePlaylistPage = () => {
 
   const HandleClickVictoria = () => {
     if (spotifyInfo.access) {
+      setCity('victoria');
+      handleConfirmOpen();
+      // if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
+      //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
+      // }
+    } else {
+      handleOpen();
+    }
+  };
+
+  const HandleClickVancouver = () => {
+    if (spotifyInfo.access) {
+      setCity('vancouver');
       handleConfirmOpen();
       // if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
       //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
@@ -88,15 +103,37 @@ const CreatePlaylistPage = () => {
         Hey {spotifyInfo.firstName}!
       </Typography>
 
-      <Box sx={{ padding: '24px 0' }}>
-        <Typography>Create a new playlist from shows playing in: </Typography>
-        <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
-          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          Victoria
-        </Button>
+      <Box
+        sx={{
+          width: '75%',
+          maxWidth: '700px',
+          '& .MuiTypography-body1': {
+            fontSize: '1.25rem',
+          },
+        }}
+      >
+        <Typography sx={{ padding: '16px 0' }}>
+          <Typography display="inline" sx={{ fontWeight: '700' }}>
+            Create a new playlist
+          </Typography>{' '}
+          on your Spotify account with the top track from each artist playing in your chosen city.
+        </Typography>
+
+        <Box sx={{ padding: '12px 0' }}>
+          <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
+            <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+            Victoria
+          </Button>
+          <Button onClick={HandleClickVancouver} variant="contained" color="secondary" sx={{ marginLeft: '12px' }}>
+            <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+            Vancouver
+          </Button>
+        </Box>
       </Box>
 
-      <Typography>This will create a new playlist right on your account!</Typography>
+      <Typography sx={{ padding: '16px 0' }}>
+        Clicking one of the above buttons will create a new playlist right on your account!
+      </Typography>
 
       <Box sx={{ marginTop: '32px' }}>
         <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
@@ -127,7 +164,7 @@ const CreatePlaylistPage = () => {
           <Button
             variant="contained"
             onClick={() => {
-              CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
+              CreateNewPlaylist({ city: city, token: token, user_id: spotifyInfo.user_id });
               handleConfirmClose();
             }}
           >

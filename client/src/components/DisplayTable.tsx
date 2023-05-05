@@ -8,10 +8,17 @@ import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
 import spotifyIconBlack from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 const DisplayTable = (data: any) => {
-  const [loadMore, setLoadMore] = useState(15);
+  const loadInterval = 15;
+  const [loadMore, setLoadMore] = useState(loadInterval);
   const first20Tickets = data.tickets.slice(0, loadMore);
   const [tickets, setTickets] = useState(first20Tickets);
   // const [filteredGenres, setFilteredGenres] = useState<any[]>();
+
+  useEffect(() => {
+    console.log(data.tickets);
+    setTickets(data.tickets.slice(0, loadInterval));
+    setLoadMore(loadInterval);
+  }, [data.tickets]);
 
   // const genres: any = [];
   // data.tickets.forEach((ticket: any) => {
@@ -87,7 +94,7 @@ const DisplayTable = (data: any) => {
       </Box>
       </Box> */}
       <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-        Preview the artists playing in Victoria
+        Preview the artists playing in {data.city}
       </Typography>
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer(tickets)}
@@ -97,7 +104,7 @@ const DisplayTable = (data: any) => {
           variant="outlined"
           sx={{ marginTop: '24px' }}
           onClick={() => {
-            setLoadMore(loadMore + 15);
+            setLoadMore(loadMore + loadInterval);
           }}
         >
           Load more
