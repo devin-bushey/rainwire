@@ -69,11 +69,26 @@ const Navbarr = () => {
                   my: 2,
                   color: 'black',
                   display: 'block',
-                  maxWidth: '75px',
+                  maxWidth: '150px',
                   marginLeft: '16px',
                 }}
               >
                 Vancouver
+              </Button>
+
+              <Button
+                component={Link}
+                to="/philips"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                  marginLeft: '16px',
+                }}
+              >
+                Philips Backyard
               </Button>
             </Box>
 
@@ -124,7 +139,7 @@ const Navbarr = () => {
                     sx={{
                       color: 'black',
                       textAlign: 'center',
-                      margin: '0px 4px',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
                     }}
                   >
                     Victoria
@@ -138,17 +153,31 @@ const Navbarr = () => {
                     sx={{
                       color: 'black',
                       textAlign: 'center',
-                      margin: { xs: '8px 4px', md: '0px 4px' },
+                      margin: { xs: '4px 4px', md: '0px 4px' },
                     }}
                   >
                     Vancouver
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/philips"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Philips Backyard
                   </Button>
 
                   {localStorage.getItem('encryptedSpotifyToken') && (
                     <Button
                       variant="contained"
                       onClick={logOut}
-                      sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '0px 4px' }}
+                      sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '4px 4px' }}
                     >
                       Sign Out
                     </Button>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SpotifyPlaylistDataType, SpotifyUserDataType } from '../types/SpotifyTypes';
+import { Festivals } from '../constants/enums';
 
 export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserDataType> => {
   return axios({
@@ -59,7 +60,11 @@ const CreateBlankPlaylist = async ({
   city: string;
   user_id: string;
 }): Promise<SpotifyPlaylistDataType> => {
-  const playlist_name = 'record shop ' + city;
+  let playlist_name = 'record shop ' + city;
+
+  if (city === Festivals.PhilipsBackyard) {
+    playlist_name = 'record shop philips backyard';
+  }
 
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
@@ -103,11 +108,25 @@ const CreateBlankPlaylist = async ({
     }); //end axios
 };
 
-export const CreateNewPlaylist = async ({ token, city, user_id }: { token: string; city: string; user_id: string }) => {
+export const CreateNewPlaylist = async ({
+  token,
+  city,
+  user_id,
+  setIsError,
+}: {
+  token: string;
+  city: string;
+  user_id: string;
+  setIsError: any;
+}) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
 
   axios
-    .get(import.meta.env.VITE_SITE_URL_DB + city + '/')
+    .get(import.meta.env.VITE_SITE_URL_DB + 'tickets/', {
+      params: {
+        city: city,
+      },
+    })
     .then((response) => {
       const data = response.data;
       let tracks = '';
@@ -127,7 +146,13 @@ export const CreateNewPlaylist = async ({ token, city, user_id }: { token: strin
       tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
       if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
-        AddTracksToPlaylist(token, playlist_data.new_playlist_id, playlist_data.external_urls?.spotify, tracks);
+        AddTracksToPlaylist(
+          token,
+          playlist_data.new_playlist_id,
+          playlist_data.external_urls?.spotify,
+          tracks,
+          setIsError,
+        );
       }
     })
     .catch(function (error) {
@@ -136,7 +161,13 @@ export const CreateNewPlaylist = async ({ token, city, user_id }: { token: strin
     });
 };
 
-const AddTracksToPlaylist = (token: string, playlist_id: string, playlist_url: string | URL, tracks: string) => {
+const AddTracksToPlaylist = (
+  token: string,
+  playlist_id: string,
+  playlist_url: string | URL,
+  tracks: string,
+  setIsError: any,
+) => {
   axios({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
     method: 'POST',
@@ -151,7 +182,8 @@ const AddTracksToPlaylist = (token: string, playlist_id: string, playlist_url: s
     })
     .catch(function (error) {
       console.log('Error: unsuccessfully added tracks to playlist');
-      window.alert('Error: unsuccessfully added tracks to playlist');
+      //window.alert('Error: unsuccessfully added tracks to playlist');
+      setIsError(true);
       console.log(error);
     });
 };

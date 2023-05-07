@@ -13,6 +13,7 @@ import { getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
 import SignUp from '../components/SignUp';
 import Footer from '../components/Footer';
 import { Box } from '@mui/material';
+import { Festivals } from '../constants/enums';
 
 export const AppRoutes = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
@@ -30,6 +31,10 @@ export const AppRoutes = () => {
   const [ticketsVancouver, setTicketsVancouver] = useState<any>([]);
   const [isLoadingVan, setIsLoadingVan] = useState(true);
   const [isErrorVan, setIsErrorVan] = useState(false);
+
+  const [ticketsPhilips, setTicketsPhilips] = useState<any>([]);
+  const [isLoadingPhilips, setIsLoadingPhilips] = useState(true);
+  const [isErrorPhilips, setIsErrorPhilips] = useState(false);
 
   useEffect(() => {
     GetTickets('victoria')
@@ -60,6 +65,21 @@ export const AppRoutes = () => {
         setIsErrorVan(true);
         setIsLoadingVan(false);
       });
+
+    GetTickets(Festivals.PhilipsBackyard)
+      .then((data) => {
+        setTicketsPhilips(data);
+        setIsLoadingPhilips(false);
+        setIsErrorPhilips(false);
+
+        if (!data || data.length == 0) {
+          setIsErrorPhilips(true);
+        }
+      })
+      .catch((error) => {
+        setIsErrorPhilips(true);
+        setIsLoadingPhilips(false);
+      });
   }, []);
 
   const token = getSpotifyTokenLocalStorage();
@@ -84,6 +104,16 @@ export const AppRoutes = () => {
     }
   };
 
+  const displayPhilips = () => {
+    if (isLoadingPhilips) {
+      return <Loading />;
+    } else if (isErrorPhilips) {
+      return <Error />;
+    } else {
+      return <DisplayTable tickets={ticketsPhilips} website={''} city={'Philips Backyard'} />;
+    }
+  };
+
   return (
     <>
       <Box sx={{ minHeight: 'calc(100vh - 46px)' }}>
@@ -92,6 +122,7 @@ export const AppRoutes = () => {
             <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
             <Route path="/vic" element={displayVictoria()} />
             <Route path="/van" element={displayVancouver()} />
+            <Route path="/philips" element={displayPhilips()} />
             {/* <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
             <Route path="/refresh" element={<Refresh />} />
             <Route path="/create" element={<CreatePlaylistPage />} />

@@ -1,10 +1,16 @@
 import express from 'express';
-import { manualRun, updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
+import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 export const recordRoutes = express.Router();
 import dbo from '../db/conn';
-import { extract, extractTickets, extractTicketsVancouver } from '../extract_tickets';
+import { extract } from '../extract_tickets';
+import { Cities, Festivals } from '../enums/common';
 
-recordRoutes.route('/victoria').get(async function (req, response) {
+/**
+ * Route to get all tickets from a city, inlcuding spotify data
+ */
+recordRoutes.route('/tickets').get(async (req, response) => {
+  const { city } = req.query;
+
   let db_connect = dbo.getDb();
 
   if (!db_connect) {
@@ -23,189 +29,46 @@ recordRoutes.route('/victoria').get(async function (req, response) {
   }
 
   db_connect
-    .collection('db_victoria_spotify')
+    .collection(`db_${city}_spotify`)
     .find({})
     .toArray()
     .then((data: any) => {
-      console.log('get db_victoria_spotify');
+      console.log(`get db_${city}_spotify`);
       response.json(data);
     });
 });
 
-recordRoutes.route('/vancouver').get(async function (req, response) {
-  let db_connect = dbo.getDb();
-
-  if (!db_connect) {
-    console.log('reconnecting to db');
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log('reconnecting error');
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
-  }
-
-  if (db_connect) {
-    console.log('db connected');
-  }
-
-  db_connect
-    .collection('db_vancouver_spotify')
-    .find({})
-    .toArray()
-    .then((data: any) => {
-      console.log('get db_vancouver_spotify');
-      //console.log(data);
-      response.json(data);
-    });
-});
-
-recordRoutes.route('/drop_simple_db_vancouver').get(async function (req, res) {
-  const date = getTodaysDate();
+recordRoutes.route('/drop').get(async (req, res) => {
+  const { collectionName } = req.query;
 
   let db_connect = dbo.getDb();
 
-  db_connect
-    .collection('db_vancouver_' + date)
+  await db_connect
+    .collection(collectionName)
     .drop()
-    .then(function () {
-      console.log('db_vancouver_' + date + ' DROPPED');
+    .then(() => {
+      console.log(collectionName + ' DROPPED');
+      res.status(200).send(collectionName + ' DROPPED');
       // success
     })
-    .catch(function () {
-      console.log('ERROR db_vancouver_' + date + ' NOT DROPPED');
+    .catch(() => {
+      console.log('ERROR: ' + collectionName + ' NOT DROPPED');
+      res.status(400).send('ERROR: ' + collectionName + ' NOT DROPPED');
       // error handling
     });
 });
 
-recordRoutes.route('/drop_spotify_db_vancouver').get(async function (req, res) {
+recordRoutes.route('/extract').get(async (req, res) => {
+  const { city } = req.query;
+  console.log('Starting Web Scraping for ' + city);
+  const status = await extract(city as Cities | Festivals);
+  res.status(status ? 200 : 400).send('Web Scraping Complete for ' + city);
+});
+
+recordRoutes.route('/spotify').get(async (req, res) => {
+  const { collectionName } = req.query;
+  console.log('Starting to add spotify data to ' + collectionName);
   let db_connect = dbo.getDb();
-
-  db_connect
-    .collection('db_vancouver_spotify')
-    .drop()
-    .then(function () {
-      console.log('db_vancouver_spotify DROPPED');
-      // success
-    })
-    .catch(function () {
-      console.log('ERROR db_vancouver_spotify NOT DROPPED');
-      // error handling
-    });
+  await updateCollectionWithSpotify(collectionName as string, db_connect);
+  //res.status(status ? 200 : 400).send('Adding Spotify data for ' + collectionName + ' complete');
 });
-
-recordRoutes.route('/drop_db_victoria_').get(async function (req, res) {
-  const date = getTodaysDate();
-
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection('db_victoria_' + date)
-    .drop()
-    .then(function () {
-      console.log('db_victoria_' + date + ' DROPPED');
-      // success
-    })
-    .catch(function () {
-      console.log('ERROR db_victoria_' + date + ' NOT DROPPED');
-      // error handling
-    });
-});
-
-recordRoutes.route('/drop_db_victoria_spotify').get(async function (req, res) {
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection('db_victoria_spotify')
-    .drop()
-    .then(function () {
-      console.log('db_victoria_spotify DROPPED');
-      // success
-    })
-    .catch(function () {
-      console.log('ERROR db_victoria_spotify NOT DROPPED');
-      // error handling
-    });
-});
-
-recordRoutes.route('/extract').get(async function (req, res) {
-  console.log('Starting Web Scraping');
-  extractTickets();
-});
-
-recordRoutes.route('/extractVancouver').get(async function (req, res) {
-  console.log('Starting Web Scraping Vancouver');
-  extractTicketsVancouver();
-});
-
-recordRoutes.route('/updateVancouverWithSpotify').get(async function (req, res) {
-  const date = getTodaysDate();
-  const collection_name = 'db_vancouver_' + date;
-  let db_connect = dbo.getDb();
-  console.log('Starting to add Spotify data ...');
-  updateCollectionWithSpotify(collection_name.toString(), db_connect);
-});
-
-recordRoutes.route('/updateCollectionWithSpotify').get(async function (req, res) {
-  const date = getTodaysDate();
-  const collection_name = 'db_victoria_' + date;
-  let db_connect = dbo.getDb();
-  console.log('Starting to add Spotify data ...');
-  updateCollectionWithSpotify(collection_name.toString(), db_connect);
-});
-
-recordRoutes.route('/webscrape').get(async function (req, res) {
-  const date = getTodaysDate();
-
-  let db_connect = dbo.getDb();
-
-  db_connect
-    .collection('db_victoria_spotify')
-    .drop()
-    .then(function () {
-      console.log('db_victoria_spotify DROPPED');
-      // success
-    })
-    .catch(function () {
-      console.log('ERROR db_victoria_spotify NOT DROPPED');
-      // error handling
-    })
-    .then(function () {
-      db_connect
-        .collection('db_victoria_' + date)
-        .drop()
-        .then(function () {
-          console.log('db_victoria_' + date + ' DROPPED');
-          // success
-        })
-        .catch(function () {
-          console.log('ERROR db_victoria_' + date + ' NOT DROPPED');
-          // error handling
-        });
-    })
-    .then(function () {
-      console.log('Starting Web Scraping');
-      extractTickets();
-    });
-
-  res.json('Web Scraping Done!');
-});
-
-recordRoutes.route('/addspotify').get(async function (req, res) {
-  console.log('Starting to add Spotify data ...');
-  const date = getTodaysDate();
-
-  manualRun('db_victoria_' + date);
-
-  res.json('Added Spotify Data!');
-});
-
-function getTodaysDate() {
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
-
-  return mm + '-' + dd + '-' + yyyy;
-}
