@@ -1,21 +1,16 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 
-export const extract_victoria = async () => {
-  console.log('Extracting https://victoriamusicscene.com/concerts/');
+export const extract_victoria = async (url: string) => {
+  console.log('Extracting ' + url);
 
-  let $: any;
   let data: any[] = [];
 
   await axios
-    .get('https://victoriamusicscene.com/concerts/')
-    .then(async (res: any) => {
-      $ = cheerio.load(res.data);
-
-      console.log('res', res);
-      console.log('$', $);
-    })
+    .get(url)
     .then((res: any) => {
+      const $ = cheerio.load(res.data);
+
       $('div.tribe-events-calendar-list__event-details.tribe-common-g-col').each(function (index: any, element: any) {
         var band_name = $(element).find('a').text().trim();
         var band_name_reduced = '';
@@ -47,8 +42,6 @@ export const extract_victoria = async () => {
         if (price.includes(' ')) {
           price_reduced = price.substring(0, price.indexOf(' ')).trim();
         }
-        //console.log(price_reduced);
-
         data.push({
           ticket_band: band_name_reduced,
           ticket_date: date_reduced + ' @ ' + venue,
@@ -57,7 +50,7 @@ export const extract_victoria = async () => {
         });
       });
 
-      console.log('Successfully extracted https://victoriamusicscene.com/concerts/');
+      console.log('Successfully extracted ' + url);
       //console.log(data);
 
       return data;
@@ -67,7 +60,7 @@ export const extract_victoria = async () => {
     })
     .catch((err: any) => {
       console.log(err);
-      console.log('Error: Extracted https://victoriamusicscene.com/concerts/ Failure');
+      console.log('Error: Extracted ' + url + ' Failure');
     });
 
   return data;

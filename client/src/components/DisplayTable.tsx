@@ -12,7 +12,6 @@ const DisplayTable = (data: any) => {
   const [loadMore, setLoadMore] = useState(loadInterval);
   const first20Tickets = data.tickets.slice(0, loadMore);
   const [tickets, setTickets] = useState(first20Tickets);
-  // const [filteredGenres, setFilteredGenres] = useState<any[]>();
 
   useEffect(() => {
     console.log(data.tickets);
@@ -20,79 +19,12 @@ const DisplayTable = (data: any) => {
     setLoadMore(loadInterval);
   }, [data.tickets]);
 
-  // const genres: any = [];
-  // data.tickets.forEach((ticket: any) => {
-  //   if (ticket?.genres === undefined) return;
-  //   ticket.genres.forEach((genre: any) => {
-  //     if (!genres.includes(genre)) {
-  //       genres.push(genre);
-  //     }
-  //   });
-  // });
-
   useEffect(() => {
     setTickets(data.tickets.slice(0, loadMore));
   }, [loadMore]);
 
-  // useEffect(() => {
-  //   if (filteredGenres === undefined) {
-  //     setTickets(first20Tickets);
-  //     return;
-  //   }
-
-  //   const filteredTickets = data.tickets.filter((ticket: any) => {
-  //     let isFound = false;
-  //     console.log(ticket);
-  //     if (ticket?.genres === undefined) return false;
-  //     ticket.genres.forEach((genre: any) => {
-  //       if (filteredGenres.includes(genre)) {
-  //         isFound = true;
-  //       }
-  //     });
-  //     return isFound;
-  //   });
-
-  //   setTickets(filteredTickets);
-  // }, [filteredGenres]);
-
   return (
     <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-      {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-          Tickets
-        </Typography>
-        <Button href={data.website} variant="outlined">
-          click me to find tickets
-        </Button>
-      </Box>
-      */}
-      {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-          Preview playlist
-        </Typography>
-        <Button href={SPOTIFY_PREVIEW_PLAYLIST_URL} target="_blank" variant="outlined" sx={{ padding: '12px 24px' }}>
-          <img src={spotifyLogo} alt="spotify_logo" width="100px" height="auto" />
-        </Button>
-      </Box>
-      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-          Filter Artists by Genre
-        </Typography>
-        <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-          <Autocomplete
-            value={filteredGenres}
-            onChange={(event, newValue) => {
-              setFilteredGenres(newValue);
-            }}
-            multiple
-            id="tags-standard"
-            options={genres}
-            getOptionLabel={(option: string) => option}
-            renderInput={(params) => <TextField {...params} variant="standard" placeholder="Genres" />}
-          />
-        </Grid>
-      </Box>
-      </Box> */}
       <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
         Preview the artists playing in {data.city}
       </Typography>
@@ -151,11 +83,6 @@ const Ticket = (props: any) => (
           fontWeight: '700',
           fontSize: '1.25rem',
           textAlign: 'left',
-          //overflow: 'hidden',
-          //textOverflow: 'ellipsis',
-          //display: '-webkit-box',
-          //WebkitLineClamp: '1',
-          //WebkitBoxOrient: 'vertical',
           paddingBottom: '0px',
           marginBottom: '8px',
         }}
@@ -191,7 +118,7 @@ const Ticket = (props: any) => (
         >
           {props.ticket.ticket_date}
         </Typography>
-        <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography>
+        {/* <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography> */}
         <Button href={props.ticket.link} target="_blank" variant="outlined">
           {/* <img src={spotifyIconBlack} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} /> */}
           artist
