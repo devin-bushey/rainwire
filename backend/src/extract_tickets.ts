@@ -11,6 +11,7 @@ import { extract_philips_backyarder } from './extraction_scripts/extract_philips
 import { extract_van_songkick_1 } from './extraction_scripts/extract_van_songkick';
 import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkick_page2';
 import { Cities, Festivals } from './enums/common';
+import { extract_victoria } from './extraction_scripts/extract_victoria';
 
 export const extract = async (location: Cities | Festivals) => {
   const date = getTodaysDate();
@@ -20,11 +21,25 @@ export const extract = async (location: Cities | Festivals) => {
   let tickets: any[] = [];
 
   if (location === Cities.Victoria) {
+    const tickets_vic_music_scene = await extract_victoria('http://victoriamusicscene.com/concerts/list/');
+    const tickets_vic_music_scene_2 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/2/');
+    const tickets_vic_music_scene_3 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/3/');
+
     const tickets_vic_spotify = await extract_capital_ballroom();
     const tickets_vic_songkick_1 = await extract_vic_songkick_1(); //page one of songkick
     const tickets_vic_songkick_2 = await extract_vic_songkick_2(); //page two of songkick
 
     // consolidate tickets
+    tickets_vic_music_scene.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+    tickets_vic_music_scene_2.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+    tickets_vic_music_scene_3.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+
     tickets_vic_spotify.forEach(function (obj: any) {
       tickets.push(obj);
     });
