@@ -1,9 +1,15 @@
+import { Box } from '@mui/material';
 import axios from 'axios';
+import { Festivals } from '../constants/enums';
 
 const Refresh = () => {
-  const handleWebScrape = () => {
+  const handleExtract = (city: string) => {
     axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'webscrape' + '/')
+      .get(import.meta.env.VITE_SITE_URL_DB + 'extract/', {
+        params: {
+          city: city,
+        },
+      })
       .then((response) => {
         console.log(response);
       })
@@ -12,9 +18,13 @@ const Refresh = () => {
       });
   };
 
-  const handleAddSpotify = () => {
+  const handleDropCollection = (collection: string) => {
     axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'addspotify' + '/')
+      .get(import.meta.env.VITE_SITE_URL_DB + 'drop/', {
+        params: {
+          collectionName: collection,
+        },
+      })
       .then((response) => {
         console.log(response);
       })
@@ -23,9 +33,13 @@ const Refresh = () => {
       });
   };
 
-  const handleDropDB_1 = () => {
+  const handleAddSpotify = (collection: string) => {
     axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_db_victoria_' + '/')
+      .get(import.meta.env.VITE_SITE_URL_DB + 'spotify/', {
+        params: {
+          collectionName: collection,
+        },
+      })
       .then((response) => {
         console.log(response);
       })
@@ -34,95 +48,51 @@ const Refresh = () => {
       });
   };
 
-  const handleDropDB_2 = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_db_victoria_spotify' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  const getTodaysDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
 
-  const handleExtract = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'extract' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleUpdateCollectionWithSpotify = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'updateCollectionWithSpotify' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleExtractVancouver = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'extractVancouver' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleDrop_simple_db_vancouver = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_simple_db_vancouver' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleDrop_spotify_db_vancouver = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'drop_spotify_db_vancouver' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleUpdateVancouverWithSpotify = () => {
-    axios
-      .get(import.meta.env.VITE_SITE_URL_DB + 'updateVancouverWithSpotify' + '/')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    return mm + '-' + dd + '-' + yyyy;
   };
 
   return (
     <>
-      <button onClick={handleWebScrape}>Web Scrape</button>
-      <button onClick={handleAddSpotify}>Add Spotify</button>
-      <button onClick={handleDropDB_1}>drop_db_victoria_</button>
-      <button onClick={handleDropDB_2}>drop_db_victoria_spotify</button>
-      <button onClick={handleExtract}>extract</button>
-      <button onClick={handleUpdateCollectionWithSpotify}>updateCollectionWithSpotify</button>
-      <button onClick={handleExtractVancouver}>extract_vancouver</button>
-      <button onClick={handleDrop_simple_db_vancouver}>drop_simple_db_vancouver</button>
-      <button onClick={handleDrop_spotify_db_vancouver}>drop_spotify_db_vancouver</button>
-      <button onClick={handleUpdateVancouverWithSpotify}>updateVancouverWithSpotify</button>
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection('db_victoria_' + getTodaysDate())}>
+          Drop db_victoria_{getTodaysDate()}
+        </button>
+        <button onClick={() => handleDropCollection('db_victoria_spotify')}>Drop db_victoria_spotify</button>
+        <button onClick={() => handleExtract('victoria')}>Extract Victoria</button>
+        <button onClick={() => handleAddSpotify('db_victoria_' + getTodaysDate())}>
+          Add Spotify to db_victoria_{getTodaysDate()}
+        </button>
+      </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection('db_vancouver_' + getTodaysDate())}>
+          Drop db_vancouver_{getTodaysDate()}
+        </button>
+        <button onClick={() => handleDropCollection('db_vancouver_spotify')}>Drop db_vancouver_spotify</button>
+        <button onClick={() => handleExtract('vancouver')}>Extract Vancouver</button>
+        <button onClick={() => handleAddSpotify('db_vancouver_' + getTodaysDate())}>
+          Add Spotify to db_vancouver_{getTodaysDate()}
+        </button>
+      </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection('db_philipsBackyard_' + getTodaysDate())}>
+          Drop db_philipsBackyard_{getTodaysDate()}
+        </button>
+        <button onClick={() => handleDropCollection('db_philipsBackyard_spotify')}>
+          Drop db_philipsBackyard_spotify
+        </button>
+        <button onClick={() => handleExtract(Festivals.PhilipsBackyard)}>Extract Philips</button>
+        <button onClick={() => handleAddSpotify(`db_${Festivals.PhilipsBackyard}_` + getTodaysDate())}>
+          Add Spotify to db_{Festivals.PhilipsBackyard}_{getTodaysDate()}
+        </button>
+      </Box>
     </>
   );
 };

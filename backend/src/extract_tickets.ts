@@ -8,111 +8,60 @@ import { extract_vic_songkick_2 } from './extraction_scripts/extract_vic_songkic
 import { addSimpleDataToCollection } from './db/addSimpleDataToCollection';
 import { extract_capital_ballroom } from './extraction_scripts/extract_capital_ballroom';
 import { extract_philips_backyarder } from './extraction_scripts/extract_philips_backyarder';
-import { extract_vancouver } from './extraction_scripts/extract_vancouver';
 import { extract_van_songkick_1 } from './extraction_scripts/extract_van_songkick';
 import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkick_page2';
-import { manualRun, updateCollectionWithSpotify } from './db/addSpotifyDataToCollection';
+import { Cities, Festivals } from './enums/common';
 
-export async function extract() {
-  dbo.connectToServer(function (err: any) {
-    if (err) {
-      console.error('Connect to Server Error on Extract', err);
-    } else {
-      extractTickets();
-    }
-  });
-}
+export const extract = async (location: Cities | Festivals) => {
+  const date = getTodaysDate();
+  const db_connect = dbo.getDb();
 
-export async function extractTickets() {
-  let date = getTodaysDate();
-  let db_connect = dbo.getDb();
+  const collectionName = 'db_' + location + '_' + date;
+  let tickets: any[] = [];
 
-  //
-  // ***** VICTORIA *****
-  //
-  // extract from record shop website
-  let tickets_victoria: any[] = [];
-  let tickets_philips_backyarder = await extract_philips_backyarder();
-  let tickets_vic_spotify = await extract_capital_ballroom();
-  let tickets_vic_songkick_1 = await extract_vic_songkick_1(); //page one of songkick
-  let tickets_vic_songkick_2 = await extract_vic_songkick_2(); //page two of songkick
+  if (location === Cities.Victoria) {
+    const tickets_vic_spotify = await extract_capital_ballroom();
+    const tickets_vic_songkick_1 = await extract_vic_songkick_1(); //page one of songkick
+    const tickets_vic_songkick_2 = await extract_vic_songkick_2(); //page two of songkick
 
-  // consolidate tickets
-  tickets_philips_backyarder.forEach(function (obj: any) {
-    tickets_victoria.push(obj);
-  });
-  tickets_vic_spotify.forEach(function (obj: any) {
-    tickets_victoria.push(obj);
-  });
-  tickets_vic_songkick_1.forEach(function (obj: any) {
-    tickets_victoria.push(obj);
-  });
-  tickets_vic_songkick_2.forEach(function (obj: any) {
-    tickets_victoria.push(obj);
-  });
-
-  // sort by date
-  if (tickets_victoria) tickets_victoria.sort(sortByDate);
-
-  // remove duplicates
-  tickets_victoria = removeDuplicateBands(tickets_victoria);
-
-  // create simple data collection
-  addSimpleDataToCollection(('db_victoria' + '_' + date).toString(), tickets_victoria, db_connect);
-}
-
-export async function extractTicketsVancouver() {
-  let date = getTodaysDate();
-  let db_connect = dbo.getDb();
-
-  // extract from record shop website
-  let tickets_vancouver: any[] = [];
-  //let tickets_redcat = await extract_vancouver();
-  let tickets_van_songkick_1 = await extract_van_songkick_1(); //page one of songkick
-  let tickets_van_songkick_2 = await extract_van_songkick_2(); //page two of songkick
-
-  console.log('tickets_van_songkick_1', tickets_van_songkick_1);
-  console.log('tickets_van_songkick_2', tickets_van_songkick_2);
-
-  // consolidate tickets
-  // tickets_redcat.forEach(function (obj: any) {
-  //   tickets_vancouver.push(obj);
-  // });
-  tickets_van_songkick_1.forEach(function (obj: any) {
-    tickets_vancouver.push(obj);
-  });
-  tickets_van_songkick_2.forEach(function (obj: any) {
-    tickets_vancouver.push(obj);
-  });
-
-  // sort by date
-  if (tickets_vancouver) tickets_vancouver.sort(sortByDate);
-
-  // remove duplicates
-  tickets_vancouver = removeDuplicateBands(tickets_vancouver);
-
-  const collection_name = ('db_vancouver' + '_' + date).toString();
-
-  await db_connect.createCollection(collection_name, function (err: any, res: any) {
-    //if (err) throw err;
-    console.log(collection_name + ' created!');
-  });
-
-  await db_connect
-    .collection(collection_name)
-    .insertMany(tickets_vancouver, function (err: any, res: { insertedCount: string }) {
-      if (err) throw err;
-      console.log('Successfully added ' + res.insertedCount + ' records to ' + collection_name);
+    // consolidate tickets
+    tickets_vic_spotify.forEach(function (obj: any) {
+      tickets.push(obj);
     });
+    tickets_vic_songkick_1.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+    tickets_vic_songkick_2.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  } else if (location === Cities.Vancouver) {
+    const tickets_van_songkick_1 = await extract_van_songkick_1(); //page one of songkick
+    const tickets_van_songkick_2 = await extract_van_songkick_2(); //page two of songkick
 
-  //console.log('Starting to add Spotify data ...');
-  //await updateCollectionWithSpotify(collection_name, db_connect);
+    // consolidate tickets
+    tickets_van_songkick_1.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+    tickets_van_songkick_2.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  } else if (location === Festivals.PhilipsBackyard) {
+    const tickets_philips_backyarder = await extract_philips_backyarder();
 
-  //manualRun(collection_name);
+    tickets_philips_backyarder.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  }
 
-  // create simple data collection
-  //addSimpleDataToCollection(('db_vancouver' + '_' + date).toString(), tickets_vancouver, db_connect);
-}
+  // sort by date
+  if (tickets) tickets.sort(sortByDate);
+
+  // remove duplicates
+  tickets = removeDuplicateBands(tickets);
+
+  // create simple data collection, does not included spotify data
+  return await addSimpleDataToCollection(collectionName, tickets, db_connect);
+};
 
 function sortByDate(a: any, b: any) {
   return new Date(a.date).getTime() - new Date(b.date).getTime();

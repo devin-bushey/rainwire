@@ -1,50 +1,32 @@
 require('dotenv').config({ path: '../config.env' });
-import dbo from './conn';
 import axios from 'axios';
 
-// used to run script manually
-// from commandline, enter the following:
-// node -e 'require("./addSpotifyDataToCollection").manualRun("collection_name")'
-// example:
-// node -e 'require("./addSpotifyDataToCollection").manualRun("db_victoria_01-16-2023")'
-export const manualRun = (collection_name: string) => {
-  dbo.connectToServer(async function (err: any) {
-    if (err) {
-      console.error(err);
-    } else {
-      let db_connect = dbo.getDb();
-      console.log('Starting to add Spotify data ...');
-      updateCollectionWithSpotify(collection_name.toString(), db_connect);
-    }
-  });
-};
-
-export async function updateCollectionWithSpotify(collection_name: string, db_connect: any) {
+export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
     .collection(collection_name)
     .find({})
     .toArray(async function (err: any, result: any) {
       if (err) throw err;
-      var linked_data = await addSpotifyData(result);
+      const linked_data = await addSpotifyData(result);
       await createNewCollection(linked_data, collection_name, db_connect);
     });
-}
+};
 
-async function createNewCollection(linked_data: any, collection_name: string, db_connect: any) {
+const createNewCollection = async (linked_data: any, collection_name: string, db_connect: any) => {
   let name = collection_name.substring(0, collection_name.length - 11) + '_spotify';
-  //let name = "db_victoria" + "_" + "spotify";
 
-  db_connect.createCollection(name, function (err: any, res: any) {
-    if (err) throw err;
+  await db_connect.createCollection(name, (err: any, result: any) => {
+    //console.log('createCollection', err, result);
+    //if (err) throw err;
     console.log(name + ' created!');
   });
 
-  db_connect.collection(name).insertMany(linked_data, function (err: any, res: any) {
-    if (err) throw err;
+  await db_connect.collection(name).insertMany(linked_data, (err: any, res: any) => {
+    //console.log('collection', err, res);
+    //if (err) throw err;
     console.log('Successfully added ' + res.insertedCount + ' records to ' + name);
-    console.log('... Complete!');
   });
-}
+};
 
 async function getSpotifyAuth() {
   var client_id = process.env.SP_CLIENT_ID;

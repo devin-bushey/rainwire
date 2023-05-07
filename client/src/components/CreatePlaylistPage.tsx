@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import hash from '../utils/hash';
 import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
@@ -10,6 +10,8 @@ import { COLOURS } from '../theme/AppStyles';
 import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { useNavigate } from 'react-router-dom';
 import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import { Cities, Festivals } from '../constants/enums';
+import { SnackBarContext } from '../App';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -35,7 +37,8 @@ const CreatePlaylistPage = () => {
   const handleConfirmOpen = () => setConfirmOpen(true);
   const handleConfirmClose = () => setConfirmOpen(false);
 
-  const [city, setCity] = useState('');
+  const [isError, setIsError] = useState(false);
+  const snackBar = useContext(SnackBarContext);
 
   // get token
   useEffect(() => {
@@ -71,21 +74,21 @@ const CreatePlaylistPage = () => {
     });
   }, []);
 
-  const HandleClickVictoria = () => {
-    if (spotifyInfo.access) {
-      setCity('victoria');
-      handleConfirmOpen();
-      // if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
-      //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
-      // }
-    } else {
-      handleOpen();
+  useEffect(() => {
+    if (isError) {
+      snackBar.setSnackBar({
+        showSnackbar: true,
+        setShowSnackbar: () => true,
+        message: 'Error creating playlist. Please try again.',
+        isError: true,
+      });
+      setIsError(false);
     }
-  };
+  }, [isError]);
 
-  const HandleClickVancouver = () => {
+  const HandleClickCreate = () => {
     if (spotifyInfo.access) {
-      setCity('vancouver');
+      //setCity('vancouver');
       handleConfirmOpen();
       // if (window.confirm('Are you sure you want to create a new playlist on your account?')) {
       //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
@@ -112,28 +115,62 @@ const CreatePlaylistPage = () => {
           },
         }}
       >
+        <Typography sx={{ padding: '16px 0' }}>Preview the artists playing in:</Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '175px' }}>
+        <Button
+          onClick={() => {
+            navigate('/vic');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          Victoria
+        </Button>
+        <Button
+          onClick={() => {
+            navigate('/van');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          Vancouver
+        </Button>
+        <Button
+          onClick={() => {
+            navigate('/philips');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          Philips Backyard
+        </Button>
+      </Box>
+
+      <Box
+        sx={{
+          width: '75%',
+          maxWidth: '700px',
+          '& .MuiTypography-body1': {
+            fontSize: '1.25rem',
+          },
+        }}
+      >
         <Typography sx={{ padding: '16px 0' }}>
-          <Typography display="inline" sx={{ fontWeight: '700' }}>
-            Create a new playlist
-          </Typography>{' '}
-          on your Spotify account with the top track from each artist playing in your chosen city.
+          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen city.
         </Typography>
       </Box>
 
       <Box sx={{ padding: '12px 0' }}>
-        <Button onClick={HandleClickVictoria} variant="contained" color="secondary">
+        <Button onClick={HandleClickCreate} variant="contained" color="secondary">
           <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          Victoria
-        </Button>
-        <Button onClick={HandleClickVancouver} variant="contained" color="secondary" sx={{ marginLeft: '12px' }}>
-          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          Vancouver
+          Create a new playlist
         </Button>
       </Box>
-
-      <Typography sx={{ padding: '16px 0' }}>
-        Clicking one of the above buttons will create a new playlist right on your account!
-      </Typography>
 
       <Box sx={{ marginTop: '32px' }}>
         <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
@@ -159,17 +196,64 @@ const CreatePlaylistPage = () => {
           }}
         >
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Are you sure you want to create a new playlist on your account?
+            Create a playlist for:
           </Typography>
-          <Button
-            variant="contained"
-            onClick={() => {
-              CreateNewPlaylist({ city: city, token: token, user_id: spotifyInfo.user_id });
-              handleConfirmClose();
-            }}
-          >
-            Confirm!
-          </Button>
+
+          <Box sx={{ display: 'flex', flexDirection: 'column', width: '225px' }}>
+            <Button
+              onClick={() => {
+                CreateNewPlaylist({
+                  city: Cities.Victoria,
+                  token: token,
+                  user_id: spotifyInfo.user_id,
+                  setIsError: setIsError,
+                });
+
+                handleConfirmClose();
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ margin: '8px 0', justifyContent: 'left' }}
+            >
+              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Victoria</Typography>
+            </Button>
+            <Button
+              onClick={() => {
+                CreateNewPlaylist({
+                  city: Cities.Vancouver,
+                  token: token,
+                  user_id: spotifyInfo.user_id,
+                  setIsError: setIsError,
+                });
+                handleConfirmClose();
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ margin: '8px 0', justifyContent: 'left' }}
+            >
+              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Vancouver</Typography>
+            </Button>
+
+            <Button
+              onClick={() => {
+                CreateNewPlaylist({
+                  city: Festivals.PhilipsBackyard,
+                  token: token,
+                  user_id: spotifyInfo.user_id,
+                  setIsError: setIsError,
+                });
+                handleConfirmClose();
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ margin: '8px 0', justifyContent: 'left' }}
+            >
+              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Philips Backyard</Typography>
+            </Button>
+          </Box>
         </Box>
       </Modal>
 

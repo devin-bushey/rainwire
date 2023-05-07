@@ -3,7 +3,11 @@ import moment from 'moment';
 
 export const GetTickets = async (city: string) => {
   return axios
-    .get(import.meta.env.VITE_SITE_URL_DB + city + '/')
+    .get(import.meta.env.VITE_SITE_URL_DB + 'tickets/', {
+      params: {
+        city: city,
+      },
+    })
     .then((response) => {
       response.data.sort((a: any, b: any) => {
         let a_date = a.date;
