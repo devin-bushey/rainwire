@@ -245,7 +245,7 @@ const CreatePlaylistPage = () => {
                   token: token,
                   user_id: spotifyInfo.user_id,
                   setIsError: setIsError,
-                  numTopTracks: 2,
+                  numTopTracks: 5,
                 });
                 handleConfirmClose();
               }}
