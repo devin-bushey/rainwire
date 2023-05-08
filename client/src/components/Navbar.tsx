@@ -49,6 +49,21 @@ const Navbarr = () => {
             <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, marginLeft: '24px' }}>
               <Button
                 component={Link}
+                to="/philips"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                  marginLeft: '16px',
+                }}
+              >
+                Philips Backyard
+              </Button>
+
+              <Button
+                component={Link}
                 to="/vic"
                 onClick={handleCloseNavMenu}
                 sx={{
@@ -78,17 +93,16 @@ const Navbarr = () => {
 
               <Button
                 component={Link}
-                to="/philips"
+                to="/about"
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
                   color: 'black',
                   display: 'block',
-                  maxWidth: '175px',
-                  marginLeft: '16px',
+                  maxWidth: '75px',
                 }}
               >
-                Philips Backyard
+                About
               </Button>
             </Box>
 
@@ -135,6 +149,20 @@ const Navbarr = () => {
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
+                    to="/philips"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Philips Backyard
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
                     to="/vic"
                     sx={{
                       color: 'black',
@@ -163,14 +191,14 @@ const Navbarr = () => {
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
-                    to="/philips"
+                    to="/about"
                     sx={{
                       color: 'black',
                       textAlign: 'center',
                       margin: { xs: '4px 4px', md: '0px 4px' },
                     }}
                   >
-                    Philips Backyard
+                    About
                   </Button>
 
                   {localStorage.getItem('encryptedSpotifyToken') && (

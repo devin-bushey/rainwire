@@ -1,11 +1,9 @@
-import { Autocomplete, Box, Card, CardMedia, Container, Grid, TextField } from '@mui/material';
+import { Box, Card, CardMedia, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
-import { SPOTIFY_PREVIEW_PLAYLIST_URL } from '../constants/constants';
 import { COLOURS } from '../theme/AppStyles';
 import { useEffect, useState } from 'react';
 import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
-import spotifyIconBlack from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 const DisplayTable = (data: any) => {
   const loadInterval = 15;
@@ -14,7 +12,7 @@ const DisplayTable = (data: any) => {
   const [tickets, setTickets] = useState(first20Tickets);
 
   useEffect(() => {
-    console.log(data.tickets);
+    //console.log(data.tickets);
     setTickets(data.tickets.slice(0, loadInterval));
     setLoadMore(loadInterval);
   }, [data.tickets]);

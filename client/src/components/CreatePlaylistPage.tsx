@@ -94,7 +94,14 @@ const CreatePlaylistPage = () => {
       //   CreateNewPlaylist({ city: 'victoria', token: token, user_id: spotifyInfo.user_id });
       // }
     } else {
-      handleOpen();
+      //handleOpen();
+      snackBar.setSnackBar({
+        showSnackbar: true,
+        setShowSnackbar: () => true,
+        message: 'Whoops! Please try to sign in again',
+        isError: true,
+      });
+      setIsError(false);
     }
   };
 
@@ -121,6 +128,17 @@ const CreatePlaylistPage = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '175px' }}>
         <Button
           onClick={() => {
+            navigate('/philips');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          Philips Backyard
+        </Button>
+
+        <Button
+          onClick={() => {
             navigate('/vic');
           }}
           variant="outlined"
@@ -138,16 +156,6 @@ const CreatePlaylistPage = () => {
           sx={{ marginTop: '8px', marginBottom: '16px' }}
         >
           Vancouver
-        </Button>
-        <Button
-          onClick={() => {
-            navigate('/philips');
-          }}
-          variant="outlined"
-          //color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Philips Backyard
         </Button>
       </Box>
 

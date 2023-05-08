@@ -14,6 +14,7 @@ import SignUp from '../components/SignUp';
 import Footer from '../components/Footer';
 import { Box } from '@mui/material';
 import { Festivals } from '../constants/enums';
+import { About } from '../components/About';
 
 export const AppRoutes = () => {
   const WEBSITE_VIC = 'https://thecapitalballroom.com/';
@@ -124,6 +125,7 @@ export const AppRoutes = () => {
             <Route path="/van" element={displayVancouver()} />
             <Route path="/philips" element={displayPhilips()} />
             {/* <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
+            <Route path="/about" element={<About />} />
             <Route path="/refresh" element={<Refresh />} />
             <Route path="/create" element={<CreatePlaylistPage />} />
             <Route path="/signup" element={<SignUp />} />
