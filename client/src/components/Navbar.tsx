@@ -64,13 +64,27 @@ const Navbarr = () => {
 
               <Button
                 component={Link}
+                to="/whistle"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                }}
+              >
+                Whistlemania
+              </Button>
+
+              <Button
+                component={Link}
                 to="/vic"
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
                   color: 'black',
                   display: 'block',
-                  maxWidth: '75px',
+                  maxWidth: '150px',
                 }}
               >
                 Victoria
@@ -85,7 +99,6 @@ const Navbarr = () => {
                   color: 'black',
                   display: 'block',
                   maxWidth: '150px',
-                  marginLeft: '16px',
                 }}
               >
                 Vancouver
@@ -157,6 +170,20 @@ const Navbarr = () => {
                     }}
                   >
                     Philips Backyard
+                  </Button>
+
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/whistle"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Whistlemania
                   </Button>
 
                   <Button
