@@ -30,7 +30,7 @@ const CreatePlaylistPage = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
+  //const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -139,6 +139,17 @@ const CreatePlaylistPage = () => {
 
         <Button
           onClick={() => {
+            navigate('/whistle');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          Whistlemania
+        </Button>
+
+        <Button
+          onClick={() => {
             navigate('/vic');
           }}
           variant="outlined"
@@ -169,7 +180,8 @@ const CreatePlaylistPage = () => {
         }}
       >
         <Typography sx={{ padding: '16px 0' }}>
-          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen city.
+          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen
+          location.
         </Typography>
       </Box>
 
@@ -211,6 +223,43 @@ const CreatePlaylistPage = () => {
             <Button
               onClick={() => {
                 CreateNewPlaylist({
+                  city: Festivals.PhilipsBackyard,
+                  token: token,
+                  user_id: spotifyInfo.user_id,
+                  setIsError: setIsError,
+                });
+                handleConfirmClose();
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ margin: '8px 0', justifyContent: 'left' }}
+            >
+              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Philips Backyard</Typography>
+            </Button>
+
+            <Button
+              onClick={() => {
+                CreateNewPlaylist({
+                  city: Festivals.Whistlemania,
+                  token: token,
+                  user_id: spotifyInfo.user_id,
+                  setIsError: setIsError,
+                  numTopTracks: 2,
+                });
+                handleConfirmClose();
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ margin: '8px 0', justifyContent: 'left' }}
+            >
+              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Whistlemania</Typography>
+            </Button>
+
+            <Button
+              onClick={() => {
+                CreateNewPlaylist({
                   city: Cities.Victoria,
                   token: token,
                   user_id: spotifyInfo.user_id,
@@ -242,24 +291,6 @@ const CreatePlaylistPage = () => {
             >
               <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
               <Typography sx={{ paddingBottom: 0, width: '100%' }}>Vancouver</Typography>
-            </Button>
-
-            <Button
-              onClick={() => {
-                CreateNewPlaylist({
-                  city: Festivals.PhilipsBackyard,
-                  token: token,
-                  user_id: spotifyInfo.user_id,
-                  setIsError: setIsError,
-                });
-                handleConfirmClose();
-              }}
-              variant="contained"
-              color="secondary"
-              sx={{ margin: '8px 0', justifyContent: 'left' }}
-            >
-              <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              <Typography sx={{ paddingBottom: 0, width: '100%' }}>Philips Backyard</Typography>
             </Button>
           </Box>
         </Box>

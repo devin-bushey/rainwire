@@ -1,16 +1,12 @@
-import { Box, Button, Card, CardMedia, Container, Input, Modal, TextField } from '@mui/material';
+import { Box, Button, Card, Container, Input, Modal, TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { send } from 'emailjs-com';
 import { memo, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { COLOURS } from '../theme/AppStyles';
-import profilePic from '../assets/images/profilePic.jpg';
 import coffeeCup from '../assets/images/coffee-cup.png';
 import { SnackBarContext } from '../App';
 
 export const About = memo(() => {
-  const navigate = useNavigate();
-
   const [openEmail, setOpenEmail] = useState(false);
   const handleOpen = () => setOpenEmail(true);
   const handleClose = () => setOpenEmail(false);
@@ -46,7 +42,6 @@ export const About = memo(() => {
           isError: false,
         });
         handleClose();
-        //navigate('/');
       });
   };
 

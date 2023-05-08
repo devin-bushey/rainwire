@@ -6,4 +6,5 @@ export enum Cities {
 export enum Festivals {
   PhilipsBackyard = 'philipsBackyard',
   Rifflandia = 'rifflandia',
+  Whistlemania = 'whistlemania',
 }

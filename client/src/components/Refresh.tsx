@@ -93,6 +93,12 @@ const Refresh = () => {
           Add Spotify to db_{Festivals.PhilipsBackyard}_{getTodaysDate()}
         </button>
       </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleAddSpotify(`db_${Festivals.Whistlemania}_05-08-2023`)}>
+          Add Spotify to db_{Festivals.Whistlemania}_05-08-2023
+        </button>
+      </Box>
     </>
   );
 };

@@ -13,8 +13,6 @@ const redirectUri = import.meta.env.VITE_SITE_URL + 'create';
 const scopes = ['playlist-modify-public'];
 
 const MainPage = memo(() => {
-  const navigate = useNavigate();
-
   return (
     <Container maxWidth="lg" sx={{ marginBottom: '32px' }}>
       <Typography variant="h3" sx={{ fontSize: '4rem' }}>
@@ -46,19 +44,9 @@ const MainPage = memo(() => {
         }}
       >
         <Typography sx={{ paddingTop: '12px' }}>
-          Pick a city from the tabs above and check out the upcoming concert listings.
+          Pick a festival or city from the tabs above and check out the upcoming concert listings.
         </Typography>
 
-        {/* 
-        <Button
-          onClick={() => {
-            navigate('/signup');
-          }}
-          variant="contained"
-          sx={{ backgroundColor: COLOURS.accent_03, marginTop: '8px', marginRight: '8px' }}
-        >
-          Sign Up
-        </Button> */}
         <Typography sx={{ paddingTop: '12px', paddingBottom: '24px' }}>
           Then log in to create your own playlist on your Spotify account.
         </Typography>

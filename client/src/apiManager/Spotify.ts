@@ -75,7 +75,7 @@ const CreateBlankPlaylist = async ({
     },
     data: {
       name: playlist_name,
-      description: 'a mixtape of upcoming concerts created by recordshopp.netlify.app',
+      description: 'a mixtape of upcoming concerts created by recordshop.cool',
       public: true,
     },
   })
@@ -113,11 +113,13 @@ export const CreateNewPlaylist = async ({
   city,
   user_id,
   setIsError,
+  numTopTracks,
 }: {
   token: string;
   city: string;
   user_id: string;
   setIsError: any;
+  numTopTracks?: number;
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
 
@@ -130,7 +132,7 @@ export const CreateNewPlaylist = async ({
     .then((response) => {
       const data = response.data;
       let tracks = '';
-      const numTopTracksToAdd = 1;
+      const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
       for (const element of data) {
         try {

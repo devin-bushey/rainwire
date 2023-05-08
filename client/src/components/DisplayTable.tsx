@@ -26,6 +26,11 @@ const DisplayTable = (data: any) => {
       <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
         Preview the artists playing in {data.city}
       </Typography>
+      {data.website && (
+        <Button variant="outlined" sx={{ marginTop: '12px', marginBottom: '24px' }} href={data.website} target="_blank">
+          Get Tickets
+        </Button>
+      )}
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer(tickets)}
       </Container>
