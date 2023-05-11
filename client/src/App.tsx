@@ -5,12 +5,16 @@ import { AppTheme } from './theme/AppTheme';
 import { CssBaseline } from '@mui/material/';
 import { createContext, Dispatch, useState, useEffect } from 'react';
 import { SnackBar, SnackBarOptions } from './components/SnackBar';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 export const SnackBarContext = createContext({
   setSnackBar: (() => undefined) as Dispatch<SnackBarOptions>,
 });
 
 const App = () => {
+  // react query client for caching
+  const queryClient = new QueryClient();
+
   // Globally used SnackBar component
   const [snackBar, setSnackBar] = useState<SnackBarOptions>({
     showSnackbar: false,
@@ -26,19 +30,20 @@ const App = () => {
 
   return (
     <ThemeProvider theme={AppTheme}>
-      <SnackBarContext.Provider value={{ setSnackBar: setSnackBar }}>
-        <SnackBar
-          showSnackbar={displaySnackBar}
-          setShowSnackbar={setDisplaySnackBar}
-          message={snackBar.message}
-          isError={snackBar.isError}
-        />
-
-        <CssBaseline />
-        <Router>
-          <AppRoutes />
-        </Router>
-      </SnackBarContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <SnackBarContext.Provider value={{ setSnackBar: setSnackBar }}>
+          <SnackBar
+            showSnackbar={displaySnackBar}
+            setShowSnackbar={setDisplaySnackBar}
+            message={snackBar.message}
+            isError={snackBar.isError}
+          />
+          <CssBaseline />
+          <Router>
+            <AppRoutes />
+          </Router>
+        </SnackBarContext.Provider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };

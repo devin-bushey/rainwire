@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { GetTickets } from '../apiManager/RecordShop';
 import CreatePlaylistPage from '../components/CreatePlaylistPage';
@@ -13,136 +13,75 @@ import { getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
 import SignUp from '../components/SignUp';
 import Footer from '../components/Footer';
 import { Box } from '@mui/material';
-import { Festivals } from '../constants/enums';
+import { Cities, Festivals } from '../constants/enums';
 import { About } from '../components/About';
+import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query';
+import { DisplayTickets } from '../components/DisplayTickets';
 
 export const AppRoutes = () => {
-  //const WEBSITE_VIC = 'https://thecapitalballroom.com/';
-  //const WEBSITE_VAN = 'https://redcat.ca/';
-  // const WEBSITE_OTT = 'http://www.vertigorecords.ca/showtickets/index.html';
+  const token = getSpotifyTokenLocalStorage();
+
   const WEBSITE_PHILIPS = 'https://www.phillipsbackyard.com/';
   const WEBSITE_WHISTLE = 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/';
 
-  //const ticketsVictoria = GetTickets('victoria');
-  //const ticketsOttawa = GetTickets('ottawa');
-  //const ticketsVancouver = GetTickets('vancouver');
+  const queryOptions: UseQueryOptions = {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    cacheTime: Infinity,
+    enabled: false,
+  };
 
-  const [ticketsVictoria, setTicketsVictoria] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const victoriaQuery = useQuery({
+    queryKey: [Cities.Victoria],
+    queryFn: () => GetTickets(Cities.Victoria),
+    ...queryOptions,
+  });
 
-  const [ticketsVancouver, setTicketsVancouver] = useState<any>([]);
-  const [isLoadingVan, setIsLoadingVan] = useState(true);
-  const [isErrorVan, setIsErrorVan] = useState(false);
+  const vancouverQuery = useQuery({
+    queryKey: [Cities.Vancouver],
+    queryFn: () => GetTickets(Cities.Vancouver),
+    ...queryOptions,
+  });
 
-  const [ticketsPhilips, setTicketsPhilips] = useState<any>([]);
-  const [isLoadingPhilips, setIsLoadingPhilips] = useState(true);
-  const [isErrorPhilips, setIsErrorPhilips] = useState(false);
+  const philipsQuery = useQuery({
+    queryKey: [Festivals.PhilipsBackyard],
+    queryFn: () => GetTickets(Festivals.PhilipsBackyard),
+    ...queryOptions,
+  });
 
-  const [ticketsWhistle, setTicketsWhistle] = useState<any>([]);
-  const [isLoadingWhistle, setIsLoadingWhistle] = useState(true);
-  const [isErrorWhistle, setIsErrorWhistle] = useState(false);
+  const whistleQuery = useQuery({
+    queryKey: [Festivals.Whistlemania],
+    queryFn: () => GetTickets(Festivals.Whistlemania),
+    ...queryOptions,
+  });
 
   useEffect(() => {
-    GetTickets('victoria')
-      .then((data) => {
-        setTicketsVictoria(data);
-        setIsLoading(false);
-        setIsError(false);
-        if (!data || data.length == 0) {
-          setIsError(true);
-        }
-      })
-      .catch((error) => {
-        setIsError(true);
-        setIsLoading(false);
-      });
-
-    GetTickets('vancouver')
-      .then((data) => {
-        setTicketsVancouver(data);
-        setIsLoadingVan(false);
-        setIsErrorVan(false);
-
-        if (!data || data.length == 0) {
-          setIsErrorVan(true);
-        }
-      })
-      .catch((error) => {
-        setIsErrorVan(true);
-        setIsLoadingVan(false);
-      });
-
-    GetTickets(Festivals.PhilipsBackyard)
-      .then((data) => {
-        setTicketsPhilips(data);
-        setIsLoadingPhilips(false);
-        setIsErrorPhilips(false);
-
-        if (!data || data.length == 0) {
-          setIsErrorPhilips(true);
-        }
-      })
-      .catch((error) => {
-        setIsErrorPhilips(true);
-        setIsLoadingPhilips(false);
-      });
-
-    GetTickets(Festivals.Whistlemania)
-      .then((data) => {
-        setTicketsWhistle(data);
-        setIsLoadingWhistle(false);
-        setIsErrorWhistle(false);
-
-        if (!data || data.length == 0) {
-          setIsErrorWhistle(true);
-        }
-      })
-      .catch((error) => {
-        setIsErrorWhistle(true);
-        setIsLoadingWhistle(false);
-      });
+    victoriaQuery.refetch();
+    vancouverQuery.refetch();
+    philipsQuery.refetch();
+    whistleQuery.refetch();
   }, []);
 
-  const token = getSpotifyTokenLocalStorage();
-
-  const displayVictoria = () => {
-    if (isLoading) {
+  const display = (query: UseQueryResult<any, unknown>, displayName: string, website?: string) => {
+    if (query.isLoading) {
       return <Loading />;
-    } else if (isError) {
+      //else if (query.isError || query.data == null || query.data.length == 0) {
+    } else if (query.isError) {
       return <Error />;
     } else {
-      return <DisplayTable tickets={ticketsVictoria} city={'Victoria'} />;
+      return <DisplayTable tickets={query.data} website={website} city={displayName} />;
     }
   };
 
-  const displayVancouver = () => {
-    if (isLoadingVan) {
+  const display2 = (query: UseQueryResult<any, unknown>, displayName: string, website?: string) => {
+    if (query.isLoading) {
       return <Loading />;
-    } else if (isErrorVan) {
+      //else if (query.isError || query.data == null || query.data.length == 0) {
+    } else if (query.isError) {
       return <Error />;
     } else {
-      return <DisplayTable tickets={ticketsVancouver} city={'Vancouver'} />;
-    }
-  };
-
-  const displayPhilips = () => {
-    if (isLoadingPhilips) {
-      return <Loading />;
-    } else if (isErrorPhilips) {
-      return <Error />;
-    } else {
-      return <DisplayTable tickets={ticketsPhilips} website={WEBSITE_PHILIPS} city={'Philips Backyard'} />;
-    }
-  };
-
-  const displayWhistle = () => {
-    if (isLoadingWhistle) {
-      return <Loading />;
-    } else if (isErrorWhistle) {
-      return <Error />;
-    } else {
-      return <DisplayTable tickets={ticketsWhistle} website={WEBSITE_WHISTLE} city={'Whistle Mania'} />;
+      return <DisplayTickets tickets={query.data} website={website} city={displayName} query={query} />;
     }
   };
 
@@ -152,11 +91,11 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Navbarr />}>
             <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
-            <Route path="/vic" element={displayVictoria()} />
-            <Route path="/van" element={displayVancouver()} />
-            <Route path="/philips" element={displayPhilips()} />
-            <Route path="/whistle" element={displayWhistle()} />
-            {/* <Route path="/ottawa" element={<DisplayTable tickets={ticketsOttawa} website={WEBSITE_OTT} />} /> */}
+            <Route path="/vic" element={display(victoriaQuery, 'Victoria, BC')} />
+            <Route path="/van" element={display(vancouverQuery, 'Vancouver, BC')} />
+            <Route path="/philips" element={display(philipsQuery, 'Philips Backyard', WEBSITE_PHILIPS)} />
+            <Route path="/whistle" element={display(whistleQuery, 'Whistlemania', WEBSITE_WHISTLE)} />
+            <Route path="/tickets" element={display2(philipsQuery, 'Philips Backyard', WEBSITE_PHILIPS)} />
             <Route path="/about" element={<About />} />
             <Route path="/refresh" element={<Refresh />} />
             <Route path="/create" element={<CreatePlaylistPage />} />
