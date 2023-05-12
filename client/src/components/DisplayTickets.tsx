@@ -135,6 +135,7 @@ export const DisplayTickets = (data: any) => {
 
   useEffect(() => {
     if (query.data) {
+      setLoadMore(loadInterval);
       setTotalTickets(query.data);
       setTickets(query.data);
       setIsLoadingTickets(false);
@@ -160,6 +161,7 @@ export const DisplayTickets = (data: any) => {
   useEffect(() => {
     if (filteredGenres === undefined || filteredGenres.length === 0) {
       setShowGenres(false);
+      setLoadMore(loadInterval);
       setTickets(first20Tickets);
       return;
     }
@@ -455,6 +457,11 @@ export const DisplayTickets = (data: any) => {
     );
   };
 
+  console.log('filtered genres', filteredGenres);
+  console.log('ticket', tickets);
+  console.log('totalTickets', totalTickets);
+  console.log('loadMore', loadMore);
+
   return (
     <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
       <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
@@ -514,7 +521,7 @@ export const DisplayTickets = (data: any) => {
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer({ tickets, showGenres, isLoadingTickets, isErrorTickets })}
       </Container>
-      {!filteredGenres && loadMore < totalTickets.length && (
+      {filteredGenres.length === 0 && loadMore < totalTickets.length && (
         <Button
           variant="outlined"
           sx={{ marginTop: '24px' }}
