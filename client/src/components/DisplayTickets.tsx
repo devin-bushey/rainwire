@@ -387,6 +387,21 @@ export const DisplayTickets = (data: any) => {
   const Filter = () => {
     return (
       <Box sx={{ marginBottom: '24px' }}>
+        {/* <Select
+            value={origin}
+            onChange={handleChange}
+            fullWidth
+            sx={{
+              height: '40px',
+            }}
+          >
+            {LOCATIONS.map((location: LocationType) => (
+              <MenuItem key={location.name} value={location.value}>
+                {location.name}
+              </MenuItem>
+            ))}
+          </Select> */}
+
         <Autocomplete
           value={filteredGenres}
           onChange={(event, newValue, reason) => {
@@ -408,9 +423,23 @@ export const DisplayTickets = (data: any) => {
             marginRight: 'auto',
             marginBottom: '24px',
           }}
+          //placeholder="Genres"
+          //inputValue=""
           renderInput={(params) => (
             <div ref={params.InputProps.ref}>
-              <TextField {...params} variant="standard" placeholder="Genres" />
+              <TextField
+                sx={{ caretColor: 'transparent' }}
+                {...params}
+                // inputProps={{
+                //   onKeyPress: (e) => {
+                //     e.preventDefault();
+                //   },
+                // }}
+                //inputProps={{ style: { caretColor: 'transparent' } }}
+                variant="standard"
+                placeholder="Genres"
+                disabled={true}
+              />
             </div>
           )}
         />
