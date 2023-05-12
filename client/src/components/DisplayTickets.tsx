@@ -16,6 +16,7 @@ import { LocationType } from '../types/RecordShopTypes';
 import { Loading } from './Loading';
 import { UseQueryOptions, useQuery } from 'react-query';
 import { GetTickets } from '../apiManager/RecordShop';
+import { Error } from './Error';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = import.meta.env.VITE_SP_CLIENT_ID;
@@ -23,7 +24,6 @@ const redirectUri = import.meta.env.VITE_SITE_URL + 'create';
 const scopes = ['playlist-modify-public'];
 
 export const DisplayTickets = (data: any) => {
-  //console.log('data', data);
   if (!data.tickets) {
     return <Loading />;
   }
@@ -62,7 +62,9 @@ export const DisplayTickets = (data: any) => {
 
   const loadInterval = 15;
   const [loadMore, setLoadMore] = useState(loadInterval);
-  const first20Tickets = data.tickets.slice(0, loadMore);
+
+  const [first20Tickets, setFirst20Tickets] = useState<any>(data.tickets.slice(0, loadMore));
+  const [totalTickets, setTotalTickets] = useState<any>(data.tickets);
   const [tickets, setTickets] = useState(first20Tickets);
 
   const [showSettings, setShowSettings] = useState(false);
@@ -72,8 +74,14 @@ export const DisplayTickets = (data: any) => {
   const [query, setQuery] = useState(philipsQuery);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
+  const [isErrorTickets, setIsErrorTickets] = useState(false);
 
   useEffect(() => {
+    setFirst20Tickets(totalTickets.slice(0, loadMore));
+  }, [totalTickets]);
+
+  useEffect(() => {
+    setFilteredGenres(undefined);
     console.log(origin);
     if (origin === Cities.Victoria) {
       victoriaQuery.refetch();
@@ -98,26 +106,21 @@ export const DisplayTickets = (data: any) => {
   }, [origin]);
 
   useEffect(() => {
-    console.log('query.data', query.data);
     if (query.data) {
+      setTotalTickets(query.data);
       setTickets(query.data);
       setIsLoadingTickets(false);
-    } else {
+      setIsErrorTickets(false);
+    } else if (query.isFetching || query.isLoading) {
       setIsLoadingTickets(true);
+    } else if (query.error) {
+      setIsErrorTickets(true);
     }
-  }, [query.data]);
-
-  if (query.isLoading || isLoadingTickets) {
-    return <Loading />;
-  }
-
-  if (query.isError) {
-    return <div>error</div>;
-  }
+  }, [query]);
 
   const [filteredGenres, setFilteredGenres] = useState<any[]>();
   const genres: any = [];
-  data.tickets.forEach((ticket: any) => {
+  totalTickets.forEach((ticket: any) => {
     if (ticket?.genres === undefined) return;
     ticket.genres.forEach((genre: any) => {
       if (!genres.includes(genre)) {
@@ -127,13 +130,13 @@ export const DisplayTickets = (data: any) => {
   });
 
   useEffect(() => {
-    if (filteredGenres === undefined) {
+    if (filteredGenres === undefined || filteredGenres.length === 0) {
       setShowGenres(false);
       setTickets(first20Tickets);
       return;
     }
 
-    const filteredTickets = data.tickets.filter((ticket: any) => {
+    const filteredTickets = totalTickets.filter((ticket: any) => {
       let isFound = false;
       //console.log(ticket);
       if (ticket?.genres === undefined) return false;
@@ -208,13 +211,13 @@ export const DisplayTickets = (data: any) => {
   }, []);
 
   useEffect(() => {
-    //console.log(data.tickets);
-    setTickets(data.tickets.slice(0, loadInterval));
+    //console.log(totalTickets);
+    setTickets(totalTickets.slice(0, loadInterval));
     setLoadMore(loadInterval);
-  }, [data.tickets]);
+  }, [totalTickets]);
 
   useEffect(() => {
-    setTickets(data.tickets.slice(0, loadMore));
+    setTickets(totalTickets.slice(0, loadMore));
   }, [loadMore]);
 
   const onDelete = (genre: string) => () => {
@@ -309,8 +312,12 @@ export const DisplayTickets = (data: any) => {
       <Box sx={{ marginBottom: '24px' }}>
         <Autocomplete
           value={filteredGenres}
-          onChange={(event, newValue) => {
-            setFilteredGenres(newValue);
+          onChange={(event, newValue, reason) => {
+            if (reason === 'clear') {
+              setFilteredGenres([]);
+            } else {
+              setFilteredGenres(newValue);
+            }
           }}
           multiple
           id="tags-standard"
@@ -398,10 +405,11 @@ export const DisplayTickets = (data: any) => {
       </Box>
 
       {showSettings && <Settings />}
+
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-        {ticketContainer({ tickets, showGenres })}
+        {ticketContainer({ tickets, showGenres, isLoadingTickets, isErrorTickets })}
       </Container>
-      {loadMore < data.tickets.length && (
+      {!filteredGenres && loadMore < totalTickets.length && (
         <Button
           variant="outlined"
           sx={{ marginTop: '24px' }}
@@ -416,8 +424,26 @@ export const DisplayTickets = (data: any) => {
   );
 };
 
-const ticketContainer = ({ tickets, showGenres }: { tickets: any; showGenres: boolean }) => {
+const ticketContainer = ({
+  tickets,
+  showGenres,
+  isLoadingTickets,
+  isErrorTickets,
+}: {
+  tickets: any;
+  showGenres: boolean;
+  isLoadingTickets: boolean;
+  isErrorTickets: boolean;
+}) => {
   const colors = COLOURS.card_colours;
+
+  if (isLoadingTickets) {
+    return <Loading />;
+  }
+
+  if (isErrorTickets || tickets.length === 0) {
+    return <Error />;
+  }
 
   return tickets.map((currentTicket: any, index: any) => {
     let imageURL;
