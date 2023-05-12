@@ -9,11 +9,13 @@ import {
   TextField,
   Select,
   Slider,
+  InputLabel,
+  ClickAwayListener,
 } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { LOCATIONS } from '../constants/constants';
@@ -100,7 +102,7 @@ export const DisplayTickets = (data: any) => {
   }, [totalTickets]);
 
   useEffect(() => {
-    setFilteredGenres(undefined);
+    setFilteredGenres([]);
     if (origin === Cities.Victoria) {
       victoriaQuery.refetch();
       setQuery(victoriaQuery);
@@ -144,7 +146,7 @@ export const DisplayTickets = (data: any) => {
     }
   }, [query]);
 
-  const [filteredGenres, setFilteredGenres] = useState<any[]>();
+  const [filteredGenres, setFilteredGenres] = useState<any[]>([]);
   const genres: any = [];
   totalTickets.forEach((ticket: any) => {
     if (ticket?.genres === undefined) return;
@@ -385,64 +387,59 @@ export const DisplayTickets = (data: any) => {
   };
 
   const Filter = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const spanRef = useRef();
+
     return (
       <Box sx={{ marginBottom: '24px' }}>
-        {/* <Select
-            value={origin}
-            onChange={handleChange}
+        <Box sx={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', display: 'flex', justifyContent: 'center' }}>
+          <Select
+            //ref={spanRef}
+            labelId="demo-multiple-chip-label"
+            id="demo-multiple-chip"
+            multiple
             fullWidth
-            sx={{
-              height: '40px',
+            //placeholder="Genres"
+            displayEmpty
+            renderValue={(selected) => 'Genres'}
+            value={filteredGenres}
+            onChange={(event) => {
+              setFilteredGenres(event.target.value as string[]);
+            }}
+            MenuProps={{
+              // anchorEl: anchorEl,
+              // anchorOrigin: {
+              //   vertical: 'center',
+              //   horizontal: 'center',
+              // },
+              // transformOrigin: {
+              //   vertical: 'center',
+              //   horizontal: 'center',
+              // },
+              style: {
+                maxHeight: '300px',
+                marginLeft: '45px',
+              },
             }}
           >
-            {LOCATIONS.map((location: LocationType) => (
-              <MenuItem key={location.name} value={location.value}>
-                {location.name}
+            {genres.map((genre: string) => (
+              <MenuItem key={genre} value={genre}>
+                {genre}
               </MenuItem>
             ))}
-          </Select> */}
+          </Select>
 
-        <Autocomplete
-          value={filteredGenres}
-          onChange={(event, newValue, reason) => {
-            if (reason === 'clear') {
+          <Button
+            variant="outlined"
+            sx={{ marginLeft: '4px' }}
+            onClick={() => {
               setFilteredGenres([]);
-            } else {
-              setFilteredGenres(newValue);
-            }
-          }}
-          multiple
-          id="tags-standard"
-          fullWidth={true}
-          options={genres}
-          getOptionLabel={(option: string) => option}
-          renderTags={() => null}
-          style={{
-            maxWidth: 340,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            marginBottom: '24px',
-          }}
-          //placeholder="Genres"
-          //inputValue=""
-          renderInput={(params) => (
-            <div ref={params.InputProps.ref}>
-              <TextField
-                sx={{ caretColor: 'transparent' }}
-                {...params}
-                // inputProps={{
-                //   onKeyPress: (e) => {
-                //     e.preventDefault();
-                //   },
-                // }}
-                //inputProps={{ style: { caretColor: 'transparent' } }}
-                variant="standard"
-                placeholder="Genres"
-                disabled={true}
-              />
-            </div>
-          )}
-        />
+            }}
+          >
+            Clear
+          </Button>
+        </Box>
+
         <Box
           mt={3}
           sx={{
@@ -451,7 +448,7 @@ export const DisplayTickets = (data: any) => {
           }}
         >
           {filteredGenres?.map((genre) => (
-            <Chip key={genre} label={genre} onDelete={onDelete(genre)} />
+            <Chip sx={{ margin: '2px' }} key={genre} label={genre} onDelete={onDelete(genre)} />
           ))}
         </Box>
       </Box>
