@@ -457,10 +457,10 @@ export const DisplayTickets = (data: any) => {
     );
   };
 
-  console.log('filtered genres', filteredGenres);
-  console.log('ticket', tickets);
-  console.log('totalTickets', totalTickets);
-  console.log('loadMore', loadMore);
+  // console.log('filtered genres', filteredGenres);
+  // console.log('ticket', tickets);
+  // console.log('totalTickets', totalTickets);
+  // console.log('loadMore', loadMore);
 
   return (
     <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
@@ -479,7 +479,7 @@ export const DisplayTickets = (data: any) => {
                 user_id: spotifyInfo.user_id,
                 setIsError: setIsError,
                 numTopTracks: numTopTracks,
-                tickets: filteredGenres ? tickets : null,
+                tickets: filteredGenres.length > 0 ? tickets : null,
               })
             : (location.href = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
                 '%20',
