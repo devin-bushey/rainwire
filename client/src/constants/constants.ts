@@ -17,10 +17,10 @@ export const LOCATIONS: LocationType[] = [
     name: 'Philips Backyard',
     value: Festivals.PhilipsBackyard,
   },
-  {
-    name: 'Rifflandia',
-    value: Festivals.Rifflandia,
-  },
+  // {
+  //   name: 'Rifflandia',
+  //   value: Festivals.Rifflandia,
+  // },
   {
     name: 'Whistlemania',
     value: Festivals.Whistlemania,

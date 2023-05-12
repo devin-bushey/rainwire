@@ -91,10 +91,10 @@ export const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Navbarr />}>
             <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
-            <Route path="/vic" element={display(victoriaQuery, 'Victoria, BC')} />
+            {/* <Route path="/vic" element={display(victoriaQuery, 'Victoria, BC')} />
             <Route path="/van" element={display(vancouverQuery, 'Vancouver, BC')} />
             <Route path="/philips" element={display(philipsQuery, 'Philips Backyard', WEBSITE_PHILIPS)} />
-            <Route path="/whistle" element={display(whistleQuery, 'Whistlemania', WEBSITE_WHISTLE)} />
+            <Route path="/whistle" element={display(whistleQuery, 'Whistlemania', WEBSITE_WHISTLE)} /> */}
             <Route path="/tickets" element={display2(philipsQuery, 'Philips Backyard', WEBSITE_PHILIPS)} />
             <Route path="/about" element={<About />} />
             <Route path="/refresh" element={<Refresh />} />

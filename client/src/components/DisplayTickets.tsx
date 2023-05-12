@@ -1,4 +1,15 @@
-import { Autocomplete, Box, Card, CardMedia, Chip, Container, MenuItem, TextField, Select } from '@mui/material';
+import {
+  Autocomplete,
+  Box,
+  Card,
+  CardMedia,
+  Chip,
+  Container,
+  MenuItem,
+  TextField,
+  Select,
+  Slider,
+} from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
@@ -20,13 +31,18 @@ import { Error } from './Error';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const clientId = import.meta.env.VITE_SP_CLIENT_ID;
-const redirectUri = import.meta.env.VITE_SITE_URL + 'create';
+const redirectUri = import.meta.env.VITE_SITE_URL + 'tickets';
 const scopes = ['playlist-modify-public'];
 
 export const DisplayTickets = (data: any) => {
   if (!data.tickets) {
     return <Loading />;
   }
+
+  const WEBSITE_PHILIPS = 'https://www.phillipsbackyard.com/';
+  const WEBSITE_WHISTLE = 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/';
+  const WEBSITE_VICTORIA = 'https://victoriamusicscene.com/concerts/';
+  const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -67,11 +83,14 @@ export const DisplayTickets = (data: any) => {
   const [totalTickets, setTotalTickets] = useState<any>(data.tickets);
   const [tickets, setTickets] = useState(first20Tickets);
 
+  const [numTopTracks, setNumTopTracks] = useState(1);
+
   const [showSettings, setShowSettings] = useState(false);
   const [showGenres, setShowGenres] = useState(false);
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
   const [query, setQuery] = useState(philipsQuery);
+  const [website, setWebsite] = useState(WEBSITE_PHILIPS);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
@@ -82,25 +101,32 @@ export const DisplayTickets = (data: any) => {
 
   useEffect(() => {
     setFilteredGenres(undefined);
-    console.log(origin);
     if (origin === Cities.Victoria) {
       victoriaQuery.refetch();
       setQuery(victoriaQuery);
+      setWebsite(WEBSITE_VICTORIA);
       return;
     }
     if (origin === Cities.Vancouver) {
       vancouverQuery.refetch();
       setQuery(vancouverQuery);
+      setWebsite(WEBSITE_VANCOUVER);
       return;
     }
     if (origin === Festivals.PhilipsBackyard) {
       philipsQuery.refetch();
       setQuery(philipsQuery);
+      setWebsite(WEBSITE_PHILIPS);
       return;
     }
     if (origin === Festivals.Whistlemania) {
       whistleQuery.refetch();
       setQuery(whistleQuery);
+      setWebsite(WEBSITE_WHISTLE);
+      return;
+    }
+    if (origin === Festivals.Rifflandia) {
+      //TODO
       return;
     }
   }, [origin]);
@@ -252,6 +278,29 @@ export const DisplayTickets = (data: any) => {
   };
 
   const Settings = () => {
+    const marks = [
+      {
+        value: 1,
+        label: '1',
+      },
+      {
+        value: 2,
+        label: '2',
+      },
+      {
+        value: 3,
+        label: '3',
+      },
+      {
+        value: 4,
+        label: '4',
+      },
+      {
+        value: 5,
+        label: '5',
+      },
+    ];
+
     return (
       <Container
         sx={{
@@ -277,16 +326,44 @@ export const DisplayTickets = (data: any) => {
             </Typography>
           </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '16px' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '16px',
+            }}
+          >
             <Typography variant="h6" sx={{ color: COLOURS.black }}>
               tracks per artist:
             </Typography>
-            <TextField
+            <Box sx={{ width: '90%' }}>
+              <Slider
+                aria-label="Number of tracks per artist"
+                valueLabelDisplay="auto"
+                step={1}
+                marks={marks}
+                min={1}
+                max={5}
+                value={numTopTracks}
+                onChange={(e: any) => {
+                  setNumTopTracks(e.target.value);
+                }}
+              />
+            </Box>
+            {/* <TextField
               id="outlined-basic"
               variant="outlined"
-              placeholder="1"
-              sx={{ width: '50px', marginLeft: '12px' }}
-            />
+              //placeholder="1"
+              value={numTopTracks}
+              onChange={(e: any) => {
+                setNumTopTracks(e.target.value);
+              }}
+              type="number"
+              InputProps={{ inputProps: { min: 0, max: 5 } }}
+              sx={{ width: '75px', marginLeft: '12px' }}
+            /> */}
           </Box>
 
           <Filter />
@@ -368,6 +445,8 @@ export const DisplayTickets = (data: any) => {
                 token: token,
                 user_id: spotifyInfo.user_id,
                 setIsError: setIsError,
+                numTopTracks: numTopTracks,
+                tickets: filteredGenres ? tickets : null,
               })
             : (location.href = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
                 '%20',
@@ -382,11 +461,11 @@ export const DisplayTickets = (data: any) => {
       </Button>
 
       <Box display={'flex'} justifyContent={'center'}>
-        {data.website && (
+        {website && (
           <Button
             variant="outlined"
             sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
-            href={data.website}
+            href={website}
             target="_blank"
           >
             Get Tickets

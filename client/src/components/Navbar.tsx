@@ -49,6 +49,20 @@ const Navbarr = () => {
             <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, marginLeft: '24px' }}>
               <Button
                 component={Link}
+                to="/tickets"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                  marginLeft: '16px',
+                }}
+              >
+                Artists
+              </Button>
+              {/* <Button
+                component={Link}
                 to="/philips"
                 onClick={handleCloseNavMenu}
                 sx={{
@@ -102,7 +116,7 @@ const Navbarr = () => {
                 }}
               >
                 Vancouver
-              </Button>
+              </Button> */}
 
               <Button
                 component={Link}
@@ -162,6 +176,19 @@ const Navbarr = () => {
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
+                    to="/tickets"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Artists
+                  </Button>
+                  {/* <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
                     to="/philips"
                     sx={{
                       color: 'black',
@@ -212,7 +239,7 @@ const Navbarr = () => {
                     }}
                   >
                     Vancouver
-                  </Button>
+                  </Button> */}
 
                   <Button
                     variant="outlined"

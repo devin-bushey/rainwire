@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { Cities, Festivals } from '../constants/enums';
 import { SnackBarContext } from '../App';
+import { About } from './About';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -122,10 +123,44 @@ const CreatePlaylistPage = () => {
           },
         }}
       >
-        <Typography sx={{ padding: '16px 0' }}>Preview the artists playing in:</Typography>
+        <Typography sx={{ padding: '16px 0' }}>
+          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen
+          location!
+        </Typography>
       </Box>
 
+      <Box sx={{ padding: '12px 0' }}>
+        <Button
+          onClick={() => {
+            navigate('/tickets');
+          }}
+          variant="contained"
+          color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '8px', width: '175px' }}
+        >
+          Artists
+        </Button>
+      </Box>
+
+      {/* <Box sx={{ padding: '12px 0' }}>
+        <Button onClick={HandleClickCreate} variant="contained" color="secondary">
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          Create a new playlist
+        </Button>
+      </Box> */}
+
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '175px' }}>
+        <Button
+          onClick={() => {
+            navigate('/about');
+          }}
+          variant="outlined"
+          //color="secondary"
+          sx={{ marginTop: '8px', marginBottom: '16px' }}
+        >
+          About
+        </Button>
+        {/* 
         <Button
           onClick={() => {
             navigate('/philips');
@@ -167,29 +202,7 @@ const CreatePlaylistPage = () => {
           sx={{ marginTop: '8px', marginBottom: '16px' }}
         >
           Vancouver
-        </Button>
-      </Box>
-
-      <Box
-        sx={{
-          width: '75%',
-          maxWidth: '700px',
-          '& .MuiTypography-body1': {
-            fontSize: '1.25rem',
-          },
-        }}
-      >
-        <Typography sx={{ padding: '16px 0' }}>
-          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen
-          location.
-        </Typography>
-      </Box>
-
-      <Box sx={{ padding: '12px 0' }}>
-        <Button onClick={HandleClickCreate} variant="contained" color="secondary">
-          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          Create a new playlist
-        </Button>
+        </Button> */}
       </Box>
 
       <Box sx={{ marginTop: '32px' }}>
