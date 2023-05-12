@@ -24,16 +24,16 @@ recordRoutes.route('/tickets').get(async (req, response) => {
     db_connect = dbo.getDb();
   }
 
-  if (db_connect) {
-    console.log('db connected');
-  }
+  // if (db_connect) {
+  //   console.log('db connected');
+  // }
 
   db_connect
     .collection(`db_${city}_spotify`)
     .find({})
     .toArray()
     .then((data: any) => {
-      console.log(`get db_${city}_spotify`);
+      // console.log(`get db_${city}_spotify`);
       response.json(data);
     });
 });
@@ -43,9 +43,6 @@ recordRoutes.route('/tickets').post(async (req, response) => {
   const tickets = req.body;
 
   const ticketArray: string[] = (tickets as string[]) || [];
-
-  console.log('tickets: ' + tickets);
-  console.log('ticketArray: ' + ticketArray);
 
   let db_connect = dbo.getDb();
 
@@ -60,9 +57,9 @@ recordRoutes.route('/tickets').post(async (req, response) => {
     db_connect = dbo.getDb();
   }
 
-  if (db_connect) {
-    console.log('db connected');
-  }
+  // if (db_connect) {
+  //   console.log('db connected');
+  // }
 
   if (!ticketArray || ticketArray.length === 0) {
     db_connect
@@ -70,16 +67,17 @@ recordRoutes.route('/tickets').post(async (req, response) => {
       .find({})
       .toArray()
       .then((data: any) => {
-        console.log(`get db_${city}_spotify`);
+        // console.log(`get db_${city}_spotify`);
         response.json(data);
       });
   } else {
     db_connect
       .collection(`db_${city}_spotify`)
-      .find({ ticket_band: { $all: ticketArray } })
+      .find({ ticket_band: { $in: ticketArray } })
       .toArray()
       .then((data: any) => {
-        console.log(`get db_${city}_spotify`);
+        // console.log(`get db_${city}_spotify`);
+        // console.log(`data ticketband:  ${data}`);
         response.json(data);
       });
   }

@@ -125,7 +125,6 @@ export const CreateNewPlaylist = async ({
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
 
-  console.log('tickets', tickets);
   const reqBody = [];
 
   if (tickets) {
@@ -133,8 +132,6 @@ export const CreateNewPlaylist = async ({
       reqBody.push(ticket.ticket_band);
     }
   }
-
-  console.log('reqBody', reqBody);
 
   axios
     .post(import.meta.env.VITE_SITE_URL_DB + 'tickets/', reqBody, {
@@ -146,7 +143,6 @@ export const CreateNewPlaylist = async ({
       const data = response.data;
       let tracks = '';
       const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
-
       for (const element of data) {
         try {
           for (let i = 0; i < numTopTracksToAdd; i++) {
