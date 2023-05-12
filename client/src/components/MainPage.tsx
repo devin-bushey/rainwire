@@ -44,7 +44,7 @@ const MainPage = memo(() => {
         }}
       >
         <Typography sx={{ paddingTop: '12px' }}>
-          Pick a festival or city from the tabs above and check out the upcoming concert listings.
+          Check out the upcoming concert listings by clicking &apos;Artists&apos; in the tab above.
         </Typography>
 
         <Typography sx={{ paddingTop: '12px', paddingBottom: '24px' }}>

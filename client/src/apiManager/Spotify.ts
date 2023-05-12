@@ -114,17 +114,30 @@ export const CreateNewPlaylist = async ({
   user_id,
   setIsError,
   numTopTracks,
+  tickets,
 }: {
   token: string;
   city: string;
   user_id: string;
   setIsError: any;
   numTopTracks?: number;
+  tickets?: any;
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
 
+  console.log('tickets', tickets);
+  const reqBody = [];
+
+  if (tickets) {
+    for (const ticket of tickets) {
+      reqBody.push(ticket.ticket_band);
+    }
+  }
+
+  console.log('reqBody', reqBody);
+
   axios
-    .get(import.meta.env.VITE_SITE_URL_DB + 'tickets/', {
+    .post(import.meta.env.VITE_SITE_URL_DB + 'tickets/', reqBody, {
       params: {
         city: city,
       },

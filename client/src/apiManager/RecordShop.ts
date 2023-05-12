@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-export const GetTickets = async (city: string) => {
+export const GetTickets = async (city: string): Promise<any> => {
   return axios
     .get(import.meta.env.VITE_SITE_URL_DB + 'tickets/', {
       params: {
@@ -29,9 +29,9 @@ export const GetTickets = async (city: string) => {
       });
 
       return response.data;
-    })
-    .catch((error) => {
-      console.log('Error GetTickets', error);
-      return [];
     });
+  // .catch((error) => {
+  //   console.log('Error GetTickets', error);
+  //   //return [];
+  // });
 };
