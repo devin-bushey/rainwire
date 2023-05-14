@@ -66,6 +66,10 @@ const CreateBlankPlaylist = async ({
     playlist_name = 'record shop philips backyard';
   }
 
+  if (city === Festivals.LaketownShakedown) {
+    playlist_name = 'record shop laketown shakedown';
+  }
+
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
     method: 'POST',
@@ -123,11 +127,9 @@ export const CreateNewPlaylist = async ({
   numTopTracks?: number;
   tickets?: any;
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
-
   const reqBody = [];
 
-  if (tickets) {
+  if (tickets && tickets.length > 0) {
     for (const ticket of tickets) {
       reqBody.push(ticket.ticket_band);
     }
@@ -139,7 +141,7 @@ export const CreateNewPlaylist = async ({
         city: city,
       },
     })
-    .then((response) => {
+    .then(async (response) => {
       const data = response.data;
       let tracks = '';
       const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
@@ -156,15 +158,52 @@ export const CreateNewPlaylist = async ({
 
       tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-      if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
-        AddTracksToPlaylist(
-          token,
-          playlist_data.new_playlist_id,
-          playlist_data.external_urls?.spotify,
-          tracks,
-          setIsError,
-        );
+      const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
+
+      const array = tracks.split(',');
+      // console.log('tracks: ' + array.length);
+      // console.log('array: ' + array);
+
+      let array1 = array;
+      let array2: string[] = [];
+      let array3: string[] = [];
+      let array4: string[] = [];
+
+      // Max playlist length = 400
+      if (array.length > 100 && array.length < 200) {
+        array1 = array.slice(0, 100);
+        array2 = array.slice(100, array.length);
+      } else if (array.length > 200 && array.length < 300) {
+        array1 = array.slice(0, 100);
+        array2 = array.slice(100, 200);
+        array3 = array.slice(200, array.length);
+      } else {
+        array1 = array.slice(0, 100);
+        array2 = array.slice(100, 200);
+        array3 = array.slice(200, 300);
+        array4 = array.slice(300, 400);
       }
+
+      const arrays = [array1, array2, array3, array4];
+
+      arrays.forEach((array) => {
+        if (array.length === 0) return;
+        let tracks = '';
+        array.forEach((track) => {
+          tracks += track;
+          tracks += ',';
+        });
+        tracks = tracks.substring(0, tracks.length - 1); // remove last comma
+        if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
+          AddTracksToPlaylist(
+            token,
+            playlist_data.new_playlist_id,
+            playlist_data.external_urls?.spotify,
+            tracks,
+            setIsError,
+          );
+        }
+      });
     })
     .catch(function (error) {
       console.log('Error CreateNewPlaylist');
