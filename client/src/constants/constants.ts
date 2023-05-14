@@ -14,7 +14,7 @@ export const SPOTIFY_PREVIEW_PLAYLIST_URL = import.meta.env.VITE_SPOTIFY_PREVIEW
 
 export const LOCATIONS: LocationType[] = [
   {
-    name: 'Philips Backyard',
+    name: 'Phillips Backyard',
     value: Festivals.PhilipsBackyard,
   },
   // {

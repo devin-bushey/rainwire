@@ -63,7 +63,7 @@ const CreateBlankPlaylist = async ({
   let playlist_name = 'record shop ' + city;
 
   if (city === Festivals.PhilipsBackyard) {
-    playlist_name = 'record shop philips backyard';
+    playlist_name = 'record shop phillips backyard';
   }
 
   if (city === Festivals.LaketownShakedown) {
