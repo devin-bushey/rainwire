@@ -46,6 +46,7 @@ export const DisplayTickets = (data: any) => {
   const WEBSITE_VICTORIA = 'https://victoriamusicscene.com/concerts/';
   const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
   const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
+  const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -82,6 +83,12 @@ export const DisplayTickets = (data: any) => {
   const laketownQuery = useQuery({
     queryKey: [Festivals.LaketownShakedown],
     queryFn: () => GetTickets(Festivals.LaketownShakedown),
+    ...queryOptions,
+  });
+
+  const osheagaQuery = useQuery({
+    queryKey: [Festivals.Osheaga],
+    queryFn: () => GetTickets(Festivals.Osheaga),
     ...queryOptions,
   });
 
@@ -137,6 +144,11 @@ export const DisplayTickets = (data: any) => {
     if (origin === Festivals.LaketownShakedown) {
       setQuery(laketownQuery);
       setWebsite(WEBSITE_LAKETOWN);
+      return;
+    }
+    if (origin === Festivals.Osheaga) {
+      setQuery(osheagaQuery);
+      setWebsite(WEBSITE_OSHEAGA);
       return;
     }
     if (origin === Festivals.Rifflandia) {

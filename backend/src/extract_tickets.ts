@@ -13,6 +13,7 @@ import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkic
 import { Cities, Festivals } from './enums/common';
 import { extract_victoria } from './extraction_scripts/extract_victoria';
 import { extract_laketown_shakedown } from './extraction_scripts/extract_laketown_shakedown';
+import { extract_osheaga } from './extraction_scripts/extract_oshaega';
 
 export const extract = async (location: Cities | Festivals) => {
   const date = getTodaysDate();
@@ -71,6 +72,12 @@ export const extract = async (location: Cities | Festivals) => {
     const tickets_laketown = await extract_laketown_shakedown();
 
     tickets_laketown.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  } else if (location === Festivals.Osheaga) {
+    const tickets_osheaga = await extract_osheaga();
+
+    tickets_osheaga.forEach(function (obj: any) {
       tickets.push(obj);
     });
   }

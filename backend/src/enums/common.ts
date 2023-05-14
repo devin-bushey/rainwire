@@ -8,4 +8,5 @@ export enum Festivals {
   Rifflandia = 'rifflandia',
   Whistlemania = 'whistlemania',
   LaketownShakedown = 'laketownShakedown',
+  Osheaga = 'osheaga',
 }
