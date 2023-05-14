@@ -45,7 +45,7 @@ export const DisplayTickets = (data: any) => {
   const WEBSITE_WHISTLE = 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/';
   const WEBSITE_VICTORIA = 'https://victoriamusicscene.com/concerts/';
   const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
-  const WEBSITE_LAKETOWN = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
+  const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
