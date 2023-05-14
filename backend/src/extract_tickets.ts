@@ -12,6 +12,7 @@ import { extract_van_songkick_1 } from './extraction_scripts/extract_van_songkic
 import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkick_page2';
 import { Cities, Festivals } from './enums/common';
 import { extract_victoria } from './extraction_scripts/extract_victoria';
+import { extract_laketown_shakedown } from './extraction_scripts/extract_laketown_shakedown';
 
 export const extract = async (location: Cities | Festivals) => {
   const date = getTodaysDate();
@@ -64,6 +65,12 @@ export const extract = async (location: Cities | Festivals) => {
     const tickets_philips_backyarder = await extract_philips_backyarder();
 
     tickets_philips_backyarder.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  } else if (location === Festivals.LaketownShakedown) {
+    const tickets_laketown = await extract_laketown_shakedown();
+
+    tickets_laketown.forEach(function (obj: any) {
       tickets.push(obj);
     });
   }

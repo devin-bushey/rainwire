@@ -26,6 +26,10 @@ export const LOCATIONS: LocationType[] = [
     value: Festivals.Whistlemania,
   },
   {
+    name: 'Laketown Shakedown',
+    value: Festivals.LaketownShakedown,
+  },
+  {
     name: 'Victoria',
     value: Cities.Victoria,
   },

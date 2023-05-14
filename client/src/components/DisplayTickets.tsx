@@ -45,13 +45,14 @@ export const DisplayTickets = (data: any) => {
   const WEBSITE_WHISTLE = 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/';
   const WEBSITE_VICTORIA = 'https://victoriamusicscene.com/concerts/';
   const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
+  const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
     cacheTime: Infinity,
-    enabled: false,
+    //enabled: false,
   };
 
   const victoriaQuery = useQuery({
@@ -75,6 +76,12 @@ export const DisplayTickets = (data: any) => {
   const whistleQuery = useQuery({
     queryKey: [Festivals.Whistlemania],
     queryFn: () => GetTickets(Festivals.Whistlemania),
+    ...queryOptions,
+  });
+
+  const laketownQuery = useQuery({
+    queryKey: [Festivals.LaketownShakedown],
+    queryFn: () => GetTickets(Festivals.LaketownShakedown),
     ...queryOptions,
   });
 
@@ -104,27 +111,32 @@ export const DisplayTickets = (data: any) => {
   useEffect(() => {
     setFilteredGenres([]);
     if (origin === Cities.Victoria) {
-      victoriaQuery.refetch();
+      //victoriaQuery.refetch();
       setQuery(victoriaQuery);
       setWebsite(WEBSITE_VICTORIA);
       return;
     }
     if (origin === Cities.Vancouver) {
-      vancouverQuery.refetch();
+      //vancouverQuery.refetch();
       setQuery(vancouverQuery);
       setWebsite(WEBSITE_VANCOUVER);
       return;
     }
     if (origin === Festivals.PhilipsBackyard) {
-      philipsQuery.refetch();
+      //philipsQuery.refetch();
       setQuery(philipsQuery);
       setWebsite(WEBSITE_PHILIPS);
       return;
     }
     if (origin === Festivals.Whistlemania) {
-      whistleQuery.refetch();
+      //whistleQuery.refetch();
       setQuery(whistleQuery);
       setWebsite(WEBSITE_WHISTLE);
+      return;
+    }
+    if (origin === Festivals.LaketownShakedown) {
+      setQuery(laketownQuery);
+      setWebsite(WEBSITE_LAKETOWN);
       return;
     }
     if (origin === Festivals.Rifflandia) {
@@ -134,6 +146,10 @@ export const DisplayTickets = (data: any) => {
   }, [origin]);
 
   useEffect(() => {
+    if (!query.data) {
+      query.refetch();
+    }
+
     if (query.data) {
       setLoadMore(loadInterval);
       setTotalTickets(query.data);
@@ -145,7 +161,7 @@ export const DisplayTickets = (data: any) => {
     } else if (query.error) {
       setIsErrorTickets(true);
     }
-  }, [query]);
+  }, [query, query.data]);
 
   const [filteredGenres, setFilteredGenres] = useState<any[]>([]);
   const genres: any = [];

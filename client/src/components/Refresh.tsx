@@ -99,6 +99,21 @@ const Refresh = () => {
           Add Spotify to db_{Festivals.Whistlemania}_05-08-2023
         </button>
       </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection(`db_${Festivals.LaketownShakedown}_` + getTodaysDate())}>
+          Drop db_{Festivals.LaketownShakedown}_{getTodaysDate()}
+        </button>
+        <button onClick={() => handleDropCollection(`db_${Festivals.LaketownShakedown}_spotify`)}>
+          Drop db_{Festivals.LaketownShakedown}_spotify
+        </button>
+        <button onClick={() => handleExtract(Festivals.LaketownShakedown)}>
+          Extract {Festivals.LaketownShakedown}
+        </button>
+        <button onClick={() => handleAddSpotify(`db_${Festivals.LaketownShakedown}_` + getTodaysDate())}>
+          Add Spotify to db_{Festivals.LaketownShakedown}_{getTodaysDate()}
+        </button>
+      </Box>
     </>
   );
 };
