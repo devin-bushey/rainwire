@@ -56,11 +56,18 @@ export const AppRoutes = () => {
     ...queryOptions,
   });
 
+  // const laketownQuery = useQuery({
+  //   queryKey: [Festivals.LaketownShakedown],
+  //   queryFn: () => GetTickets(Festivals.LaketownShakedown),
+  //   ...queryOptions,
+  // });
+
   useEffect(() => {
     victoriaQuery.refetch();
     vancouverQuery.refetch();
     philipsQuery.refetch();
     whistleQuery.refetch();
+    //laketownQuery.refetch();
   }, []);
 
   const display = (query: UseQueryResult<any, unknown>, displayName: string, website?: string) => {
