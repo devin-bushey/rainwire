@@ -127,6 +127,19 @@ const Refresh = () => {
           Add Spotify to db_{Festivals.Osheaga}_{getTodaysDate()}
         </button>
       </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection(`db_${Festivals.Coachella}_` + getTodaysDate())}>
+          Drop db_{Festivals.Coachella}_{getTodaysDate()}
+        </button>
+        <button onClick={() => handleDropCollection(`db_${Festivals.Coachella}_spotify`)}>
+          Drop db_{Festivals.Coachella}_spotify
+        </button>
+        <button onClick={() => handleExtract(Festivals.Coachella)}>Extract {Festivals.Coachella}</button>
+        <button onClick={() => handleAddSpotify(`db_${Festivals.Coachella}_` + getTodaysDate())}>
+          Add Spotify to db_{Festivals.Coachella}_{getTodaysDate()}
+        </button>
+      </Box>
     </>
   );
 };

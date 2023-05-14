@@ -47,6 +47,7 @@ export const DisplayTickets = (data: any) => {
   const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
   const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
   const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
+  const WEBSITE_COACHELLA = 'https://coachella.com/';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -89,6 +90,12 @@ export const DisplayTickets = (data: any) => {
   const osheagaQuery = useQuery({
     queryKey: [Festivals.Osheaga],
     queryFn: () => GetTickets(Festivals.Osheaga),
+    ...queryOptions,
+  });
+
+  const coachellaQuery = useQuery({
+    queryKey: [Festivals.Coachella],
+    queryFn: () => GetTickets(Festivals.Coachella),
     ...queryOptions,
   });
 
@@ -149,6 +156,11 @@ export const DisplayTickets = (data: any) => {
     if (origin === Festivals.Osheaga) {
       setQuery(osheagaQuery);
       setWebsite(WEBSITE_OSHEAGA);
+      return;
+    }
+    if (origin === Festivals.Coachella) {
+      setQuery(coachellaQuery);
+      setWebsite(WEBSITE_COACHELLA);
       return;
     }
     if (origin === Festivals.Rifflandia) {
