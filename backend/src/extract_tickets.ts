@@ -15,6 +15,7 @@ import { extract_victoria } from './extraction_scripts/extract_victoria';
 import { extract_laketown_shakedown } from './extraction_scripts/extract_laketown_shakedown';
 import { extract_osheaga } from './extraction_scripts/extract_oshaega';
 import { extract_coachella } from './extraction_scripts/extract_coachella';
+import { extract_rifflandia } from './extraction_scripts/extract_rifflandia';
 
 export const extract = async (location: Cities | Festivals) => {
   const date = getTodaysDate();
@@ -85,6 +86,16 @@ export const extract = async (location: Cities | Festivals) => {
     const tickets_coachella = await extract_coachella();
 
     tickets_coachella.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+  } else if (location === Festivals.Rifflandia) {
+    const tickets_rifflandia_park = await extract_rifflandia('the-park');
+    const tickets_rifflandia_electric = await extract_rifflandia('electric-avenue');
+
+    tickets_rifflandia_park.forEach(function (obj: any) {
+      tickets.push(obj);
+    });
+    tickets_rifflandia_electric.forEach(function (obj: any) {
       tickets.push(obj);
     });
   }
