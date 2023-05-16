@@ -3,7 +3,7 @@ import hash from '../utils/hash';
 import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
 import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
-import { Button, Container, Box, Modal, Link } from '@mui/material';
+import { Button, Container, Box, Modal, Link, Card } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Loading } from './Loading';
 import { COLOURS } from '../theme/AppStyles';
@@ -13,6 +13,7 @@ import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { Cities, Festivals } from '../constants/enums';
 import { SnackBarContext } from '../App';
 import { About } from './About';
+import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -116,30 +117,73 @@ const CreatePlaylistPage = () => {
 
       <Box
         sx={{
-          width: '75%',
+          width: { sm: '90%', md: '75%' },
           maxWidth: '700px',
           '& .MuiTypography-body1': {
             fontSize: '1.25rem',
           },
         }}
       >
-        <Typography sx={{ padding: '16px 0' }}>
-          Create a new playlist on your Spotify account with the top track from each artist playing in your chosen
-          location!
-        </Typography>
-      </Box>
-
-      <Box sx={{ padding: '12px 0' }}>
-        <Button
-          onClick={() => {
-            navigate('/tickets');
+        <Card
+          sx={{
+            marginTop: '16px',
+            backgroundColor: COLOURS.card_colours[1],
           }}
+        >
+          <Typography sx={{ padding: '16px 0' }}>
+            1. Check out the upcoming festivals and concerts by clicking the button below.
+          </Typography>
+
+          <Button
+            onClick={() => navigate('/tickets')}
+            variant="contained"
+            color="secondary"
+            sx={{ marginTop: '8px', marginBottom: '8px', width: '225px' }}
+          >
+            Artists
+          </Button>
+        </Card>
+
+        <Card
+          sx={{
+            marginTop: '16px',
+            backgroundColor: COLOURS.card_colours[0],
+          }}
+        >
+          <Typography sx={{ padding: '16px 0' }}>
+            2. Filter the artists by genre and select the number of top tracks that you want to add to your playlist.
+          </Typography>
+        </Card>
+
+        {/* <Button
+          onClick={() => navigate('/tickets')}
           variant="contained"
           color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '8px', width: '175px' }}
+          sx={{ width: '225px', marginTop: '8px', justifyContent: 'center' }}
         >
-          Artists
-        </Button>
+          Settings
+        </Button> */}
+
+        <Card
+          sx={{
+            marginTop: '16px',
+            backgroundColor: COLOURS.card_colours[2],
+          }}
+        >
+          <Typography sx={{ padding: '16px 0' }}>
+            3. Finally, create a personalized playlist directly on your Spotify account!
+          </Typography>
+        </Card>
+
+        {/* <Button
+          onClick={() => navigate('/tickets')}
+          variant="contained"
+          color="secondary"
+          sx={{ width: '225px', marginTop: '8px', justifyContent: 'center' }}
+        >
+          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          Create playlist
+        </Button> */}
       </Box>
 
       {/* <Box sx={{ padding: '12px 0' }}>
@@ -149,7 +193,7 @@ const CreatePlaylistPage = () => {
         </Button>
       </Box> */}
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: '175px' }}>
+      {/* <Box sx={{ display: 'flex', flexDirection: 'column', width: '175px' }}>
         <Button
           onClick={() => {
             navigate('/about');
@@ -160,50 +204,7 @@ const CreatePlaylistPage = () => {
         >
           About
         </Button>
-        {/* 
-        <Button
-          onClick={() => {
-            navigate('/philips');
-          }}
-          variant="outlined"
-          //color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Philips Backyard
-        </Button>
-
-        <Button
-          onClick={() => {
-            navigate('/whistle');
-          }}
-          variant="outlined"
-          //color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Whistlemania
-        </Button>
-
-        <Button
-          onClick={() => {
-            navigate('/vic');
-          }}
-          variant="outlined"
-          //color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Victoria
-        </Button>
-        <Button
-          onClick={() => {
-            navigate('/van');
-          }}
-          variant="outlined"
-          //color="secondary"
-          sx={{ marginTop: '8px', marginBottom: '16px' }}
-        >
-          Vancouver
-        </Button> */}
-      </Box>
+      </Box> */}
 
       <Box sx={{ marginTop: '32px' }}>
         <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
