@@ -48,6 +48,7 @@ export const DisplayTickets = (data: any) => {
   const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
   const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
   const WEBSITE_COACHELLA = 'https://coachella.com/';
+  const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/';
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -96,6 +97,12 @@ export const DisplayTickets = (data: any) => {
   const coachellaQuery = useQuery({
     queryKey: [Festivals.Coachella],
     queryFn: () => GetTickets(Festivals.Coachella),
+    ...queryOptions,
+  });
+
+  const rifflandiaQuery = useQuery({
+    queryKey: [Festivals.Rifflandia],
+    queryFn: () => GetTickets(Festivals.Rifflandia),
     ...queryOptions,
   });
 
@@ -164,7 +171,8 @@ export const DisplayTickets = (data: any) => {
       return;
     }
     if (origin === Festivals.Rifflandia) {
-      //TODO
+      setQuery(rifflandiaQuery);
+      setWebsite(WEBSITE_RIFFLANDIA);
       return;
     }
   }, [origin]);
