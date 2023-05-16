@@ -26,6 +26,10 @@ const CreatePlaylistPage = () => {
     access: false,
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const navigate = useNavigate();
 
   const [token, setToken] = useState('');

@@ -1,7 +1,7 @@
 import { Box, Button, Card, Container, Input, Modal, TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { send } from 'emailjs-com';
-import { memo, useContext, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { COLOURS } from '../theme/AppStyles';
 import coffeeCup from '../assets/images/coffee-cup.png';
 import { SnackBarContext } from '../App';
@@ -11,6 +11,10 @@ export const About = memo(() => {
   const handleOpen = () => setOpenEmail(true);
   const handleClose = () => setOpenEmail(false);
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [toSend, setToSend] = useState({
     from_name: '',
