@@ -1,18 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { COLOURS } from './AppStyles';
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
-
 export const AppTheme = createTheme({
   palette: {
     primary: {
@@ -32,11 +20,6 @@ export const AppTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          // [theme.breakpoints.up('sm')]: {
-          //   background: 'linear-gradient(90deg, #2C2A32 30%, #683159 10%)',
-          // },
-
-          // background: '#683159',
           background: '#ece7e1',
         },
       },

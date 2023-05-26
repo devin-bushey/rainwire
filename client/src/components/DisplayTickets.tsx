@@ -1,118 +1,52 @@
-import {
-  Autocomplete,
-  Box,
-  Card,
-  CardMedia,
-  Chip,
-  Container,
-  MenuItem,
-  TextField,
-  Select,
-  Slider,
-  InputLabel,
-  ClickAwayListener,
-} from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
-import { useContext, useEffect, useRef, useState } from 'react';
-import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
+import { useContext, useEffect, useState } from 'react';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { LOCATIONS } from '../constants/constants';
-import { CreateNewPlaylist, GetSpotifyUserInfo } from '../apiManager/Spotify';
-import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
+import { CreateNewPlaylist } from '../apiManager/Spotify';
 import { Cities, Festivals } from '../constants/enums';
-import hash from '../utils/hash';
-import { SpotifyUserDataType } from '../types/SpotifyTypes';
 import { SnackBarContext } from '../App';
-import { LocationType } from '../types/RecordShopTypes';
-import { Loading } from './Loading';
-import { UseQueryOptions, useQuery } from 'react-query';
-import { GetTickets } from '../apiManager/RecordShop';
-import { Error } from './Error';
-
-export const authEndpoint = 'https://accounts.spotify.com/authorize';
-const clientId = import.meta.env.VITE_SP_CLIENT_ID;
-const redirectUri = import.meta.env.VITE_SITE_URL + 'tickets';
-const scopes = ['playlist-modify-public'];
+import useSpotifyAuth from '../hooks/useSpotifyAuth';
+import useTicketQueries from '../hooks/useTicketQueries';
+import {
+  WEBSITE_VICTORIA,
+  WEBSITE_VANCOUVER,
+  WEBSITE_PHILIPS,
+  WEBSITE_WHISTLE,
+  WEBSITE_LAKETOWN,
+  WEBSITE_OSHEAGA,
+  WEBSITE_COACHELLA,
+  WEBSITE_RIFFLANDIA,
+  LOCATIONS,
+} from '../constants/locations';
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
+import { Origin } from './Origin';
+import { ticketContainer } from './TicketsContainer';
+import { Settings } from './Settings';
 
 export const DisplayTickets = (data: any) => {
-  if (!data.tickets) {
-    return <Loading />;
-  }
+  const { token, spotifyInfo } = useSpotifyAuth();
+  const redirectUri = BASE_REDIRECT_URI + 'tickets/';
 
-  const WEBSITE_PHILIPS = 'https://www.phillipsbackyard.com/';
-  const WEBSITE_WHISTLE = 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/';
-  const WEBSITE_VICTORIA = 'https://victoriamusicscene.com/concerts/';
-  const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/vancouver';
-  const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
-  const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
-  const WEBSITE_COACHELLA = 'https://coachella.com/';
-  const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/';
-
-  const queryOptions: UseQueryOptions = {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    cacheTime: Infinity,
-    //enabled: false,
-  };
-
-  const victoriaQuery = useQuery({
-    queryKey: [Cities.Victoria],
-    queryFn: () => GetTickets(Cities.Victoria),
-    ...queryOptions,
-  });
-
-  const vancouverQuery = useQuery({
-    queryKey: [Cities.Vancouver],
-    queryFn: () => GetTickets(Cities.Vancouver),
-    ...queryOptions,
-  });
-
-  const philipsQuery = useQuery({
-    queryKey: [Festivals.PhilipsBackyard],
-    queryFn: () => GetTickets(Festivals.PhilipsBackyard),
-    ...queryOptions,
-  });
-
-  const whistleQuery = useQuery({
-    queryKey: [Festivals.Whistlemania],
-    queryFn: () => GetTickets(Festivals.Whistlemania),
-    ...queryOptions,
-  });
-
-  const laketownQuery = useQuery({
-    queryKey: [Festivals.LaketownShakedown],
-    queryFn: () => GetTickets(Festivals.LaketownShakedown),
-    ...queryOptions,
-  });
-
-  const osheagaQuery = useQuery({
-    queryKey: [Festivals.Osheaga],
-    queryFn: () => GetTickets(Festivals.Osheaga),
-    ...queryOptions,
-  });
-
-  const coachellaQuery = useQuery({
-    queryKey: [Festivals.Coachella],
-    queryFn: () => GetTickets(Festivals.Coachella),
-    ...queryOptions,
-  });
-
-  const rifflandiaQuery = useQuery({
-    queryKey: [Festivals.Rifflandia],
-    queryFn: () => GetTickets(Festivals.Rifflandia),
-    ...queryOptions,
-  });
+  const {
+    rifflandiaQuery,
+    victoriaQuery,
+    vancouverQuery,
+    philipsQuery,
+    whistleQuery,
+    laketownQuery,
+    osheagaQuery,
+    coachellaQuery,
+  } = useTicketQueries();
 
   const loadInterval = 15;
+
   const [loadMore, setLoadMore] = useState(loadInterval);
-
-  const [first20Tickets, setFirst20Tickets] = useState<any>(data.tickets.slice(0, loadMore));
   const [totalTickets, setTotalTickets] = useState<any>(data.tickets);
-  const [tickets, setTickets] = useState(first20Tickets);
+  const [tickets, setTickets] = useState<any>(totalTickets.slice(0, loadMore));
 
+  const [filteredGenres, setFilteredGenres] = useState<any>([]);
   const [numTopTracks, setNumTopTracks] = useState(1);
 
   const [showSettings, setShowSettings] = useState(false);
@@ -120,61 +54,34 @@ export const DisplayTickets = (data: any) => {
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
   const [query, setQuery] = useState(philipsQuery);
-  const [website, setWebsite] = useState(WEBSITE_PHILIPS);
+  const [website, setWebsite] = useState(LOCATIONS[0].website);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
+  const [isError, setIsError] = useState(false);
+  const snackBar = useContext(SnackBarContext);
+
   useEffect(() => {
-    setFirst20Tickets(totalTickets.slice(0, loadMore));
-  }, [totalTickets]);
+    setTotalTickets(data.tickets);
+  }, [data.tickets]);
 
   useEffect(() => {
     setFilteredGenres([]);
-    if (origin === Cities.Victoria) {
-      //victoriaQuery.refetch();
-      setQuery(victoriaQuery);
-      setWebsite(WEBSITE_VICTORIA);
-      return;
-    }
-    if (origin === Cities.Vancouver) {
-      //vancouverQuery.refetch();
-      setQuery(vancouverQuery);
-      setWebsite(WEBSITE_VANCOUVER);
-      return;
-    }
-    if (origin === Festivals.PhilipsBackyard) {
-      //philipsQuery.refetch();
-      setQuery(philipsQuery);
-      setWebsite(WEBSITE_PHILIPS);
-      return;
-    }
-    if (origin === Festivals.Whistlemania) {
-      //whistleQuery.refetch();
-      setQuery(whistleQuery);
-      setWebsite(WEBSITE_WHISTLE);
-      return;
-    }
-    if (origin === Festivals.LaketownShakedown) {
-      setQuery(laketownQuery);
-      setWebsite(WEBSITE_LAKETOWN);
-      return;
-    }
-    if (origin === Festivals.Osheaga) {
-      setQuery(osheagaQuery);
-      setWebsite(WEBSITE_OSHEAGA);
-      return;
-    }
-    if (origin === Festivals.Coachella) {
-      setQuery(coachellaQuery);
-      setWebsite(WEBSITE_COACHELLA);
-      return;
-    }
-    if (origin === Festivals.Rifflandia) {
-      setQuery(rifflandiaQuery);
-      setWebsite(WEBSITE_RIFFLANDIA);
-      return;
-    }
+    const queries: any = {
+      [Cities.Victoria]: { query: victoriaQuery, website: WEBSITE_VICTORIA },
+      [Cities.Vancouver]: { query: vancouverQuery, website: WEBSITE_VANCOUVER },
+      [Festivals.PhilipsBackyard]: { query: philipsQuery, website: WEBSITE_PHILIPS },
+      [Festivals.Whistlemania]: { query: whistleQuery, website: WEBSITE_WHISTLE },
+      [Festivals.LaketownShakedown]: { query: laketownQuery, website: WEBSITE_LAKETOWN },
+      [Festivals.Osheaga]: { query: osheagaQuery, website: WEBSITE_OSHEAGA },
+      [Festivals.Coachella]: { query: coachellaQuery, website: WEBSITE_COACHELLA },
+      [Festivals.Rifflandia]: { query: rifflandiaQuery, website: WEBSITE_RIFFLANDIA },
+    };
+
+    const { query: newQuery, website: newWebsite } = queries[origin];
+    setQuery(newQuery);
+    setWebsite(newWebsite);
   }, [origin]);
 
   useEffect(() => {
@@ -195,55 +102,23 @@ export const DisplayTickets = (data: any) => {
     }
   }, [query, query.data]);
 
-  const [filteredGenres, setFilteredGenres] = useState<any[]>([]);
-  const genres: any = [];
-  totalTickets.forEach((ticket: any) => {
-    if (ticket?.genres === undefined) return;
-    ticket.genres.forEach((genre: any) => {
-      if (!genres.includes(genre)) {
-        genres.push(genre);
-      }
-    });
-  });
-
   useEffect(() => {
     if (filteredGenres === undefined || filteredGenres.length === 0) {
       setShowGenres(false);
       setLoadMore(loadInterval);
-      setTickets(first20Tickets);
+      setTickets(totalTickets.slice(0, loadMore));
       return;
     }
 
     const filteredTickets = totalTickets.filter((ticket: any) => {
-      let isFound = false;
-      //console.log(ticket);
-      if (ticket?.genres === undefined) return false;
-      ticket.genres.forEach((genre: any) => {
-        if (filteredGenres.includes(genre)) {
-          isFound = true;
-        }
-      });
-      return isFound;
+      if (!ticket?.genres) return false;
+      return ticket.genres.some((genre: any) => filteredGenres.includes(genre));
     });
 
-    if (filteredTickets.length > 0) {
-      setShowGenres(true);
-    }
-
+    setShowGenres(filteredTickets.length > 0);
     setTickets(filteredTickets);
   }, [filteredGenres]);
 
-  // get token
-  const [token, setToken] = useState('');
-  const [spotifyInfo, setSpotifyInfo] = useState<SpotifyUserDataType>({
-    firstName: '',
-    user_name: '',
-    user_id: '',
-    new_playlist_id: '',
-    access: false,
-  });
-  const [isError, setIsError] = useState(false);
-  const snackBar = useContext(SnackBarContext);
   useEffect(() => {
     if (isError) {
       snackBar.setSnackBar({
@@ -255,41 +130,8 @@ export const DisplayTickets = (data: any) => {
       setIsError(false);
     }
   }, [isError]);
-  useEffect(() => {
-    const localToken = getSpotifyTokenLocalStorage();
-    let _token;
-
-    // first, check for token in local storage
-    // if not there, check for token in url, and if there, set it in local storage
-    if (localToken) {
-      _token = localToken;
-      setToken(localToken);
-    } else {
-      _token = hash.access_token;
-      if (_token) {
-        encrypt(_token);
-        setToken(_token);
-      }
-    }
-
-    // if there is a token, get the user's info
-    GetSpotifyUserInfo(_token).then((response) => {
-      if (response.error) {
-        localStorage.clear();
-      }
-
-      setSpotifyInfo((prevState) => ({
-        ...prevState,
-        firstName: response.firstName,
-        user_name: response.user_name,
-        user_id: response.user_id,
-        access: response.access,
-      }));
-    });
-  }, []);
 
   useEffect(() => {
-    //console.log(totalTickets);
     setTickets(totalTickets.slice(0, loadInterval));
     setLoadMore(loadInterval);
   }, [totalTickets]);
@@ -298,217 +140,43 @@ export const DisplayTickets = (data: any) => {
     setTickets(totalTickets.slice(0, loadMore));
   }, [loadMore]);
 
-  const onDelete = (genre: string) => () => {
-    setFilteredGenres((value) => value?.filter((v) => v !== genre));
+  const handleDeleteGenre = (genre: string) => () => {
+    setFilteredGenres((value: any) => value?.filter((v: any) => v !== genre));
   };
 
-  const handleChange = (event: any) => {
+  const handleFilteredGenres = (event: any) => {
+    const genres = event.target.value;
+    setFilteredGenres(genres);
+  };
+
+  const handleChangeOrigin = (event: any) => {
     setOrigin(event.target.value);
   };
 
-  const Location = () => {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box sx={{ minWidth: '310px' }}>
-          <Select
-            value={origin}
-            onChange={handleChange}
-            fullWidth
-            sx={{
-              height: '40px',
-            }}
-          >
-            {LOCATIONS.map((location: LocationType) => (
-              <MenuItem key={location.name} value={location.value}>
-                {location.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </Box>
-      </Box>
-    );
+  const handleNumTopTracks = (event: any) => {
+    setNumTopTracks(event.target.value);
   };
 
-  const Settings = () => {
-    const marks = [
-      {
-        value: 1,
-        label: '1',
-      },
-      {
-        value: 2,
-        label: '2',
-      },
-      {
-        value: 3,
-        label: '3',
-      },
-      {
-        value: 4,
-        label: '4',
-      },
-      {
-        value: 5,
-        label: '5',
-      },
-    ];
-
-    return (
-      <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          marginBottom: '24px',
-        }}
-      >
-        <Card
-          sx={{
-            backgroundColor: 'hsl(141, 12%, 80%)',
-            minHeight: '290px',
-            width: '310px',
-            margin: '8px',
-          }}
-        >
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '16px' }}>
-            <Typography variant="h5" sx={{ color: COLOURS.black }}>
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              Settings
-            </Typography>
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginBottom: '16px',
-            }}
-          >
-            <Typography variant="h6" sx={{ color: COLOURS.black }}>
-              tracks per artist:
-            </Typography>
-            <Box sx={{ width: '90%' }}>
-              <Slider
-                aria-label="Number of tracks per artist"
-                valueLabelDisplay="auto"
-                step={1}
-                marks={marks}
-                min={1}
-                max={5}
-                value={numTopTracks}
-                onChange={(e: any) => {
-                  setNumTopTracks(e.target.value);
-                }}
-              />
-            </Box>
-            {/* <TextField
-              id="outlined-basic"
-              variant="outlined"
-              //placeholder="1"
-              value={numTopTracks}
-              onChange={(e: any) => {
-                setNumTopTracks(e.target.value);
-              }}
-              type="number"
-              InputProps={{ inputProps: { min: 0, max: 5 } }}
-              sx={{ width: '75px', marginLeft: '12px' }}
-            /> */}
-          </Box>
-
-          <Filter />
-
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button
-              variant="outlined"
-              sx={{ color: COLOURS.black }}
-              onClick={() => {
-                setShowSettings(false);
-              }}
-            >
-              Close
-            </Button>
-          </Box>
-        </Card>
-      </Container>
-    );
+  const handleCloseSettings = () => {
+    setShowSettings(false);
   };
 
-  const Filter = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const spanRef = useRef();
-
-    return (
-      <Box sx={{ marginBottom: '24px' }}>
-        <Box sx={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', display: 'flex', justifyContent: 'center' }}>
-          <Select
-            //ref={spanRef}
-            labelId="demo-multiple-chip-label"
-            id="demo-multiple-chip"
-            multiple
-            fullWidth
-            //placeholder="Genres"
-            displayEmpty
-            renderValue={(selected) => 'Genres'}
-            value={filteredGenres}
-            onChange={(event) => {
-              setFilteredGenres(event.target.value as string[]);
-            }}
-            MenuProps={{
-              // anchorEl: anchorEl,
-              // anchorOrigin: {
-              //   vertical: 'center',
-              //   horizontal: 'center',
-              // },
-              // transformOrigin: {
-              //   vertical: 'center',
-              //   horizontal: 'center',
-              // },
-              style: {
-                maxHeight: '300px',
-                marginLeft: '45px',
-              },
-            }}
-          >
-            {genres.map((genre: string) => (
-              <MenuItem key={genre} value={genre}>
-                {genre}
-              </MenuItem>
-            ))}
-          </Select>
-
-          <Button
-            variant="outlined"
-            sx={{ marginLeft: '4px' }}
-            onClick={() => {
-              setFilteredGenres([]);
-            }}
-          >
-            Clear
-          </Button>
-        </Box>
-
-        <Box
-          mt={3}
-          sx={{
-            '& > :not(:last-child)': { mr: 1 },
-            '& > *': { mr: 1 },
-          }}
-        >
-          {filteredGenres?.map((genre) => (
-            <Chip sx={{ margin: '2px' }} key={genre} label={genre} onDelete={onDelete(genre)} />
-          ))}
-        </Box>
-      </Box>
-    );
+  const handleCreatePlaylist = () => {
+    if (token && spotifyInfo.access) {
+      CreateNewPlaylist({
+        city: origin,
+        token: token,
+        user_id: spotifyInfo.user_id,
+        setIsError: setIsError,
+        numTopTracks: numTopTracks,
+        tickets: filteredGenres.length > 0 ? tickets : null,
+      });
+    } else {
+      location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
+        '%20',
+      )}&response_type=token&show_dialog=true`;
+    }
   };
-
-  // console.log('filtered genres', filteredGenres);
-  // console.log('ticket', tickets);
-  // console.log('totalTickets', totalTickets);
-  // console.log('loadMore', loadMore);
 
   return (
     <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
@@ -516,23 +184,10 @@ export const DisplayTickets = (data: any) => {
         Preview artists playing in
       </Typography>
 
-      <Location />
+      <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
       <Button
-        onClick={() => {
-          token && spotifyInfo.access
-            ? CreateNewPlaylist({
-                city: origin,
-                token: token,
-                user_id: spotifyInfo.user_id,
-                setIsError: setIsError,
-                numTopTracks: numTopTracks,
-                tickets: filteredGenres.length > 0 ? tickets : null,
-              })
-            : (location.href = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                '%20',
-              )}&response_type=token&show_dialog=true`);
-        }}
+        onClick={handleCreatePlaylist}
         variant="contained"
         color="secondary"
         sx={{ width: '310px', marginTop: '8px', justifyContent: 'center' }}
@@ -559,12 +214,21 @@ export const DisplayTickets = (data: any) => {
             setShowSettings(!showSettings);
           }}
         >
-          {/* <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} /> */}
           Settings
         </Button>
       </Box>
 
-      {showSettings && <Settings />}
+      {showSettings && (
+        <Settings
+          totalTickets={totalTickets}
+          filteredGenres={filteredGenres}
+          numTopTracks={numTopTracks}
+          handleFilteredGenres={handleFilteredGenres}
+          handleNumTopTracks={handleNumTopTracks}
+          handleDeleteGenre={handleDeleteGenre}
+          handleCloseSettings={handleCloseSettings}
+        />
+      )}
 
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
         {ticketContainer({ tickets, showGenres, isLoadingTickets, isErrorTickets })}
@@ -583,126 +247,3 @@ export const DisplayTickets = (data: any) => {
     </Box>
   );
 };
-
-const ticketContainer = ({
-  tickets,
-  showGenres,
-  isLoadingTickets,
-  isErrorTickets,
-}: {
-  tickets: any;
-  showGenres: boolean;
-  isLoadingTickets: boolean;
-  isErrorTickets: boolean;
-}) => {
-  const colors = COLOURS.card_colours;
-
-  if (isLoadingTickets) {
-    return <Loading />;
-  }
-
-  if (isErrorTickets || tickets.length === 0) {
-    return <Error />;
-  }
-
-  return tickets.map((currentTicket: any, index: any) => {
-    let imageURL;
-    try {
-      imageURL = currentTicket.top_tracks[0].album.images[1].url;
-    } catch {
-      //TODO: find generic image
-      imageURL = ' ';
-    }
-
-    return (
-      <Ticket
-        ticket={currentTicket}
-        showGenres={showGenres}
-        image={imageURL}
-        bgcolor={colors[index % colors.length]}
-        key={currentTicket._id}
-      />
-    );
-  });
-};
-
-const Ticket = (props: any) => (
-  <Card
-    sx={{
-      backgroundColor: props.bgcolor,
-      height: props.showGenres ? '330px' : '300px',
-      width: '300px',
-      margin: '8px',
-    }}
-  >
-    <Box sx={{ display: 'flex', alignItems: 'left' }}>
-      <img src={spotifyLogoBlack} alt="spotify_logo" width="75px" height="auto" style={{ marginBottom: '14px' }} />
-    </Box>
-
-    <Box sx={{ height: '60px', display: 'flex', alignItems: 'center', textAlign: 'left' }}>
-      <Typography
-        sx={{
-          fontWeight: '700',
-          fontSize: '1.25rem',
-        }}
-      >
-        {props.ticket.sp_band_name}
-      </Typography>
-    </Box>
-
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <CardMedia component="img" sx={{ width: 120, height: 120 }} image={props.image} alt="Album" />
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          margin: '8px',
-          textAlign: 'center',
-          alignContent: 'space-between',
-        }}
-      >
-        <Typography
-          sx={{
-            fontWeight: '700',
-            fontSize: '0.77rem',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
-            WebkitLineClamp: '4',
-            WebkitBoxOrient: 'vertical',
-            paddingBottom: '0px',
-            marginBottom: '8px',
-          }}
-        >
-          {props.ticket.ticket_date}
-        </Typography>
-        {/* <Typography sx={{ fontSize: '0.9rem' }}>{props.ticket.ticket_price}</Typography> */}
-        <Button href={props.ticket.link} target="_blank" variant="outlined">
-          {/* <img src={spotifyIconBlack} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} /> */}
-          artist
-        </Button>
-      </Box>
-    </Box>
-
-    {props.showGenres && (
-      <Box sx={{ height: '60px', marginTop: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography
-          sx={{
-            //fontWeight: '700',
-            fontSize: '0.75rem',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
-            WebkitLineClamp: '2',
-            WebkitBoxOrient: 'vertical',
-            paddingBottom: '0px',
-            marginBottom: '8px',
-          }}
-        >
-          {props.ticket.genres}
-        </Typography>
-      </Box>
-    )}
-  </Card>
-);
