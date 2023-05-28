@@ -36,8 +36,10 @@ export const CreateNewPlaylist = async ({
       for (const element of data) {
         try {
           for (let i = 0; i < numTopTracksToAdd; i++) {
-            tracks += element.top_tracks[i].uri;
-            tracks += ',';
+            if (element.top_tracks && element.top_tracks[i] && element.top_tracks[i].uri) {
+              tracks += element.top_tracks[i].uri;
+              tracks += ',';
+            }
           }
         } catch (error) {
           console.log(error);
