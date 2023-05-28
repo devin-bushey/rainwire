@@ -1,6 +1,12 @@
-import { Box, MenuItem, Select } from '@mui/material';
+import { Box, ListSubheader, MenuItem, Select } from '@mui/material';
 import { LOCATIONS } from '../constants/locations';
 import { LocationType } from '../types/RecordShopTypes';
+
+function MyListSubheader(props: any) {
+  return <ListSubheader {...props} />;
+}
+
+MyListSubheader.muiSkipListHighlight = true;
 
 export const Origin = ({
   origin,
