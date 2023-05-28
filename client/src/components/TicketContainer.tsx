@@ -2,8 +2,9 @@ import { COLOURS } from '../theme/AppStyles';
 import { Loading } from './Loading';
 import { Ticket } from './Ticket';
 import { Error } from './Error';
+import blank from '../spotifyLogos/test.jpg';
 
-export const ticketContainer = ({
+export const TicketContainer = ({
   tickets,
   showGenres,
   isLoadingTickets,
@@ -25,12 +26,11 @@ export const ticketContainer = ({
   }
 
   return tickets.map((currentTicket: any, index: any) => {
-    let imageURL;
+    let imageURL: any;
     try {
       imageURL = currentTicket.top_tracks[0].album.images[1].url;
     } catch {
-      //TODO: find generic image
-      imageURL = ' ';
+      imageURL = blank;
     }
 
     return (

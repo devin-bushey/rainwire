@@ -10,7 +10,7 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
-    plugins: [eslint(), react(), viteTsconfigPaths(), svgrPlugin()],
+    plugins: [eslint({ cache: false }), react(), viteTsconfigPaths(), svgrPlugin()],
     server: {
       host: true,
       port: parseInt(process.env.VITE_PORT || '3000'),
