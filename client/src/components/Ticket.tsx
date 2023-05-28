@@ -12,7 +12,14 @@ export const Ticket = (props: any) => (
     }}
   >
     <Box sx={{ display: 'flex', alignItems: 'left' }}>
-      <img src={spotifyLogoBlack} alt="spotify_logo" width="75px" height="auto" style={{ marginBottom: '14px' }} />
+      <img
+        src={spotifyLogoBlack}
+        alt="spotify_logo"
+        width="75px"
+        height="22.48px"
+        style={{ marginBottom: '14px' }}
+        loading="lazy"
+      />
     </Box>
 
     <Box sx={{ height: '60px', display: 'flex', alignItems: 'center', textAlign: 'left' }}>
@@ -26,16 +33,25 @@ export const Ticket = (props: any) => (
       </Typography>
     </Box>
 
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <CardMedia component="img" sx={{ width: 120, height: 120 }} image={props.image} alt="Album" />
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center', // Vertically center the items
+        //margin: '8px',
+        //width: '100px',
+      }}
+    >
+      <CardMedia
+        component="img"
+        sx={{ display: 'inline-block', width: 120, height: 120 }}
+        image={props.image}
+        alt="Album"
+      />
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: 'inline-block',
           margin: '8px',
-          textAlign: 'center',
-          alignContent: 'space-between',
+          width: '102px',
         }}
       >
         <Typography

@@ -22,8 +22,8 @@ import {
 } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
 import { Origin } from './Origin';
-import { ticketContainer } from './TicketsContainer';
 import { Settings } from './Settings';
+import { TicketContainer } from './TicketContainer';
 
 export const DisplayTickets = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -100,7 +100,7 @@ export const DisplayTickets = (data: any) => {
     } else if (query.error) {
       setIsErrorTickets(true);
     }
-  }, [query, query.data]);
+  }, [query]);
 
   useEffect(() => {
     if (filteredGenres === undefined || filteredGenres.length === 0) {
@@ -231,7 +231,12 @@ export const DisplayTickets = (data: any) => {
       )}
 
       <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-        {ticketContainer({ tickets, showGenres, isLoadingTickets, isErrorTickets })}
+        <TicketContainer
+          tickets={tickets}
+          showGenres={showGenres}
+          isLoadingTickets={isLoadingTickets}
+          isErrorTickets={isErrorTickets}
+        />
       </Container>
       {filteredGenres.length === 0 && loadMore < totalTickets.length && (
         <Button
