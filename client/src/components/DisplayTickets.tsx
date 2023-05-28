@@ -178,7 +178,7 @@ export const DisplayTickets = (data: any) => {
               message: 'Successfully created a playlist!',
               isError: false,
             });
-            window.open(res.data, '_blank');
+            window.location.assign(res.data);
           } else {
             setIsError(true);
           }
