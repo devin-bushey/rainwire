@@ -1,18 +1,16 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 
-export const extract_vic_songkick_2 = async () => {
-  console.log('Extracting song kick 2');
+export const extract_vic_songkick_3 = async () => {
+  console.log('Extracting song kick 3');
   let data: any[] = [];
 
   await axios
-    .get('https://www.songkick.com/metro-areas/27399-canada-victoria?page=2#metro-area-calendar')
+    .get('https://www.songkick.com/metro-areas/27399-canada-victoria?page=3#metro-area-calendar')
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
-      let data: { ticket_band: string; ticket_date: string; date: any }[] = [];
-
-      $('.event-listings-element').each(function (index: any, element: any) {
+      $('.event-listings-element').each(function (index, element) {
         var band_name = $(element).find('p.artists').text().trim();
 
         var band_name_reduced = '';
@@ -40,9 +38,12 @@ export const extract_vic_songkick_2 = async () => {
       });
       return data;
     })
+    .then((data) => {
+      return data;
+    })
     .catch((error: any) => {
       console.log(error);
-      console.log('Error extracting songkick2');
+      console.log('Error extracting songkick3');
     });
 
   return data;

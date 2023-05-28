@@ -24,6 +24,7 @@ import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constant
 import { Origin } from './Origin';
 import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
+import { groupByLocation } from '../utils/groupByLocation';
 
 export const DisplayTickets = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -184,6 +185,7 @@ export const DisplayTickets = (data: any) => {
           }
         })
         .catch((err) => {
+          console.log(err);
           setIsError(true);
         });
     } else {

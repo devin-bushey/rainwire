@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 
-export const extract_van_songkick_1 = async (url: string) => {
+export const extract_songkick = async (url: string) => {
   console.log('Extracting song kick ' + url);
   let data: any[] = [];
 
