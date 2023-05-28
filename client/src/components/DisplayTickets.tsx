@@ -161,16 +161,31 @@ export const DisplayTickets = (data: any) => {
     setShowSettings(false);
   };
 
-  const handleCreatePlaylist = () => {
+  const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
-      CreateNewPlaylist({
+      await CreateNewPlaylist({
         city: origin,
         token: token,
         user_id: spotifyInfo.user_id,
-        setIsError: setIsError,
         numTopTracks: numTopTracks,
         tickets: filteredGenres.length > 0 ? tickets : null,
-      });
+      })
+        .then((res) => {
+          if (res.status === 201) {
+            snackBar.setSnackBar({
+              showSnackbar: true,
+              setShowSnackbar: () => true,
+              message: 'Successfully created a playlist!',
+              isError: false,
+            });
+            window.open(res.data, '_blank');
+          } else {
+            setIsError(true);
+          }
+        })
+        .catch((err) => {
+          setIsError(true);
+        });
     } else {
       location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
         '%20',
