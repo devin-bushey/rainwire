@@ -4,6 +4,7 @@ export const recordRoutes = express.Router();
 import dbo from '../db/conn';
 import { extract } from '../extract_tickets';
 import { Cities, Festivals } from '../enums/common';
+import { CreateNewPlaylist } from '../createPlaylist';
 
 /**
  * Route to get all tickets from a city, inlcuding spotify data
@@ -24,10 +25,6 @@ recordRoutes.route('/tickets').get(async (req, response) => {
     db_connect = dbo.getDb();
   }
 
-  // if (db_connect) {
-  //   console.log('db connected');
-  // }
-
   db_connect
     .collection(`db_${city}_spotify`)
     .find({})
@@ -38,6 +35,27 @@ recordRoutes.route('/tickets').get(async (req, response) => {
     });
 });
 
+recordRoutes.route('/create').post(async (req, response) => {
+  const { token, city, user_id, numTopTracks, tickets } = req.body;
+  const url = await CreateNewPlaylist({
+    token: token,
+    city: city,
+    user_id: user_id,
+    numTopTracks: numTopTracks,
+    tickets: tickets,
+  }).catch((error) => {
+    console.log(error);
+    response.status(500).json({ error: error.message });
+  });
+
+  if (url) {
+    response.status(201).json(url);
+  } else {
+    response.status(500).json({ error: 'Something went wrong' });
+  }
+});
+
+// Temp: used internally
 recordRoutes.route('/tickets').post(async (req, response) => {
   const { city } = req.query;
   const tickets = req.body;
@@ -56,10 +74,6 @@ recordRoutes.route('/tickets').post(async (req, response) => {
     });
     db_connect = dbo.getDb();
   }
-
-  // if (db_connect) {
-  //   console.log('db connected');
-  // }
 
   if (!ticketArray || ticketArray.length === 0) {
     db_connect
