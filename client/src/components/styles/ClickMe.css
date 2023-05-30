@@ -1,7 +1,7 @@
 .btn--click-me:after {
   content: 'click me';
   display: inline-block;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: #130f40;
   background-color: #38ccff;
   border-radius: 25px;
