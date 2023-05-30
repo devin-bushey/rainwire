@@ -1,12 +1,12 @@
 .btn--click-me:after {
   content: 'click me';
   display: inline-block;
-  font-size: 0.45rem;
+  font-size: 6px;
   color: #130f40;
   background-color: #38ccff;
   border-radius: 25px;
   padding: 5px;
   position: absolute;
   margin-top: -23px; 
-  margin-left: 262px; 
+  margin-left: 269px; 
 }
