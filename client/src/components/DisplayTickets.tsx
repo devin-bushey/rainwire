@@ -25,6 +25,7 @@ import { Origin } from './Origin';
 import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
 import { groupByLocation } from '../utils/groupByLocation';
+import './styles/ClickMe.css';
 
 export const DisplayTickets = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -207,7 +208,8 @@ export const DisplayTickets = (data: any) => {
         onClick={handleCreatePlaylist}
         variant="contained"
         color="secondary"
-        sx={{ width: '310px', marginTop: '8px', justifyContent: 'center' }}
+        className="btn--click-me"
+        sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
       >
         <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
         <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>

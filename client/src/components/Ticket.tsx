@@ -69,7 +69,7 @@ export const Ticket = (props: any) => (
         >
           {props.ticket.ticket_date}
         </Typography>
-        <Button href={props.ticket.link} target="_blank" variant="outlined">
+        <Button sx={{ fontSize: '0.6rem' }} href={props.ticket.link} target="_blank" variant="outlined">
           artist
         </Button>
       </Box>
