@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Modal } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
@@ -24,8 +24,8 @@ import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constant
 import { Origin } from './Origin';
 import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
-import { groupByLocation } from '../utils/groupByLocation';
 import './styles/ClickMe.css';
+import { InAppModal } from './InAppModal';
 
 export const DisplayTickets = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -63,6 +63,10 @@ export const DisplayTickets = (data: any) => {
 
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setTotalTickets(data.tickets);
@@ -163,6 +167,24 @@ export const DisplayTickets = (data: any) => {
     setShowSettings(false);
   };
 
+  const isInAppBrowser = () => {
+    console.log(navigator.userAgent);
+    // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
+    if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
+      // in-app browser detected
+      handleOpen();
+      return true;
+    }
+    handleRedirectToAuth();
+    return false;
+  };
+
+  const handleRedirectToAuth = () => {
+    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
+      '%20',
+    )}&response_type=token&show_dialog=true`;
+  };
+
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
       await CreateNewPlaylist({
@@ -190,84 +212,86 @@ export const DisplayTickets = (data: any) => {
           setIsError(true);
         });
     } else {
-      location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-        '%20',
-      )}&response_type=token&show_dialog=true`;
+      isInAppBrowser();
     }
   };
 
   return (
-    <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-      <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-        Preview artists playing in
-      </Typography>
+    <>
+      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+          Preview artists playing in
+        </Typography>
 
-      <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
+        <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
-      <Button
-        onClick={handleCreatePlaylist}
-        variant="contained"
-        color="secondary"
-        className="btn--click-me"
-        sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
-      >
-        <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-        <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-      </Button>
+        <Button
+          onClick={handleCreatePlaylist}
+          variant="contained"
+          color="secondary"
+          className="btn--click-me"
+          sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
+        >
+          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+        </Button>
 
-      <Box display={'flex'} justifyContent={'center'}>
-        {website && (
+        <Box display={'flex'} justifyContent={'center'}>
+          {website && (
+            <Button
+              variant="outlined"
+              sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
+              href={website}
+              target="_blank"
+            >
+              Get Tickets
+            </Button>
+          )}
           <Button
             variant="outlined"
-            sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
-            href={website}
-            target="_blank"
+            sx={{ marginTop: '12px', marginBottom: '24px', width: '145px' }}
+            onClick={() => {
+              setShowSettings(!showSettings);
+            }}
           >
-            Get Tickets
+            Settings
+          </Button>
+        </Box>
+
+        {showSettings && (
+          <Settings
+            totalTickets={totalTickets}
+            filteredGenres={filteredGenres}
+            numTopTracks={numTopTracks}
+            handleFilteredGenres={handleFilteredGenres}
+            handleNumTopTracks={handleNumTopTracks}
+            handleDeleteGenre={handleDeleteGenre}
+            handleCloseSettings={handleCloseSettings}
+          />
+        )}
+
+        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+          <TicketContainer
+            tickets={tickets}
+            showGenres={showGenres}
+            isLoadingTickets={isLoadingTickets}
+            isErrorTickets={isErrorTickets}
+          />
+        </Container>
+        {filteredGenres.length === 0 && loadMore < totalTickets.length && (
+          <Button
+            variant="outlined"
+            sx={{ marginTop: '24px' }}
+            onClick={() => {
+              setLoadMore(loadMore + loadInterval);
+            }}
+          >
+            Load more
           </Button>
         )}
-        <Button
-          variant="outlined"
-          sx={{ marginTop: '12px', marginBottom: '24px', width: '145px' }}
-          onClick={() => {
-            setShowSettings(!showSettings);
-          }}
-        >
-          Settings
-        </Button>
       </Box>
 
-      {showSettings && (
-        <Settings
-          totalTickets={totalTickets}
-          filteredGenres={filteredGenres}
-          numTopTracks={numTopTracks}
-          handleFilteredGenres={handleFilteredGenres}
-          handleNumTopTracks={handleNumTopTracks}
-          handleDeleteGenre={handleDeleteGenre}
-          handleCloseSettings={handleCloseSettings}
-        />
-      )}
-
-      <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-        <TicketContainer
-          tickets={tickets}
-          showGenres={showGenres}
-          isLoadingTickets={isLoadingTickets}
-          isErrorTickets={isErrorTickets}
-        />
-      </Container>
-      {filteredGenres.length === 0 && loadMore < totalTickets.length && (
-        <Button
-          variant="outlined"
-          sx={{ marginTop: '24px' }}
-          onClick={() => {
-            setLoadMore(loadMore + loadInterval);
-          }}
-        >
-          Load more
-        </Button>
-      )}
-    </Box>
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+    </>
   );
 };
