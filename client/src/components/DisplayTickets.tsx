@@ -175,7 +175,8 @@ export const DisplayTickets = (data: any) => {
       handleOpen();
       return true;
     }
-    handleRedirectToAuth();
+    handleOpen();
+    //handleRedirectToAuth();
     return false;
   };
 
@@ -315,7 +316,11 @@ export const DisplayTickets = (data: any) => {
             Looks like you&apos;re using an in-app browser.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            If you use Google to sign in with Spotify then please open Record Shop with Chrome, Safari, etc.
+            If you use{' '}
+            <Box fontWeight="bold" display="inline">
+              Google to sign in
+            </Box>{' '}
+            with Spotify then please open Record Shop with Chrome, Safari, Firefox, etc.
           </Typography>
 
           <Box
