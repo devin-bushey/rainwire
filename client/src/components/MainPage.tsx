@@ -23,8 +23,7 @@ const MainPage = memo(() => {
       handleOpen();
       return true;
     }
-    handleOpen();
-    //handleRedirectToAuth();
+    handleRedirectToAuth();
     return false;
   };
 
