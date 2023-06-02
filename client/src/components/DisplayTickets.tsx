@@ -202,9 +202,9 @@ export const DisplayTickets = (data: any) => {
         });
     } else {
       isInAppBrowser();
-      location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-        '%20',
-      )}&response_type=token&show_dialog=true`;
+      // location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
+      //   '%20',
+      // )}&response_type=token&show_dialog=true`;
     }
   };
 
