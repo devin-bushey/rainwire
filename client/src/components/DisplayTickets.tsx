@@ -313,7 +313,7 @@ export const DisplayTickets = (data: any) => {
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Looks like you're using an in-app browser.
+            Looks like you&apos;re using an in-app browser.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             If you want to log in with Spotify using Google then please copy/paste this url into your favourite browser
