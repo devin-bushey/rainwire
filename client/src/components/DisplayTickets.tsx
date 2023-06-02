@@ -163,6 +163,17 @@ export const DisplayTickets = (data: any) => {
     setShowSettings(false);
   };
 
+  const isInAppBrowser = () => {
+    console.log(navigator.userAgent);
+    // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
+    if (navigator.userAgent.match(/FBAN|FBAV/i)) {
+      // Facebook in-app browser detected
+      return true;
+    }
+
+    return false;
+  };
+
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
       await CreateNewPlaylist({
@@ -190,6 +201,7 @@ export const DisplayTickets = (data: any) => {
           setIsError(true);
         });
     } else {
+      isInAppBrowser();
       location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
         '%20',
       )}&response_type=token&show_dialog=true`;
