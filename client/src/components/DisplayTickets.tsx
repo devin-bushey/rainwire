@@ -171,10 +171,11 @@ export const DisplayTickets = (data: any) => {
     console.log(navigator.userAgent);
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
     if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
-      // Facebook in-app browser detected
+      // in-app browser detected
       handleOpen();
       return true;
     }
+    handleRedirectToAuth();
     return false;
   };
 
@@ -212,9 +213,6 @@ export const DisplayTickets = (data: any) => {
         });
     } else {
       isInAppBrowser();
-      // location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      //   '%20',
-      // )}&response_type=token&show_dialog=true`;
     }
   };
 
@@ -305,33 +303,48 @@ export const DisplayTickets = (data: any) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: '90%',
+            maxWidth: 400,
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ maxWidth: '70%' }}>
             Looks like you&apos;re using an in-app browser.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            If you want to log in with Spotify using Google then please copy/paste this url into your favourite browser
-            such as Chrome, Safari, etc.
+            If you use Google to sign in with Spotify then please open Record Shop with Chrome, Safari, etc.
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            recordshop.cool
-          </Typography>
-          <Button
-            onClick={handleRedirectToAuth}
-            variant="contained"
-            color="secondary"
-            className="btn--click-me"
-            sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
+
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '10px',
+              alignItems: 'center',
+              marginTop: '10px',
+            }}
           >
-            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-            <Typography sx={{ paddingBottom: 0 }}>Continue</Typography>
-          </Button>
+            <Typography sx={{ paddingBottom: '0px' }}>https://recordshop.cool</Typography>
+            <Button variant="outlined" onClick={() => navigator.clipboard.writeText('recordshop.cool')}>
+              Copy
+            </Button>
+          </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '10px', alignItems: 'center', marginTop: '10px' }}>
+            <Button
+              onClick={handleRedirectToAuth}
+              variant="contained"
+              color="secondary"
+              //className="btn--click-me"
+              sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
+            >
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0 }}>Continue</Typography>
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>
