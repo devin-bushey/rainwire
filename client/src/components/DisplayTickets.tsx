@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, Modal } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
@@ -63,6 +63,10 @@ export const DisplayTickets = (data: any) => {
 
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setTotalTickets(data.tickets);
@@ -166,12 +170,18 @@ export const DisplayTickets = (data: any) => {
   const isInAppBrowser = () => {
     console.log(navigator.userAgent);
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
-    if (navigator.userAgent.match(/FBAN|FBAV/i)) {
+    if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
       // Facebook in-app browser detected
+      handleOpen();
       return true;
     }
-
     return false;
+  };
+
+  const handleRedirectToAuth = () => {
+    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
+      '%20',
+    )}&response_type=token&show_dialog=true`;
   };
 
   const handleCreatePlaylist = async () => {
@@ -209,77 +219,121 @@ export const DisplayTickets = (data: any) => {
   };
 
   return (
-    <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-      <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-        Preview artists playing in
-      </Typography>
+    <>
+      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
+          Preview artists playing in
+        </Typography>
 
-      <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
+        <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
-      <Button
-        onClick={handleCreatePlaylist}
-        variant="contained"
-        color="secondary"
-        className="btn--click-me"
-        sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
-      >
-        <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-        <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-      </Button>
+        <Button
+          onClick={handleCreatePlaylist}
+          variant="contained"
+          color="secondary"
+          className="btn--click-me"
+          sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
+        >
+          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+          <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+        </Button>
 
-      <Box display={'flex'} justifyContent={'center'}>
-        {website && (
+        <Box display={'flex'} justifyContent={'center'}>
+          {website && (
+            <Button
+              variant="outlined"
+              sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
+              href={website}
+              target="_blank"
+            >
+              Get Tickets
+            </Button>
+          )}
           <Button
             variant="outlined"
-            sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
-            href={website}
-            target="_blank"
+            sx={{ marginTop: '12px', marginBottom: '24px', width: '145px' }}
+            onClick={() => {
+              setShowSettings(!showSettings);
+            }}
           >
-            Get Tickets
+            Settings
+          </Button>
+        </Box>
+
+        {showSettings && (
+          <Settings
+            totalTickets={totalTickets}
+            filteredGenres={filteredGenres}
+            numTopTracks={numTopTracks}
+            handleFilteredGenres={handleFilteredGenres}
+            handleNumTopTracks={handleNumTopTracks}
+            handleDeleteGenre={handleDeleteGenre}
+            handleCloseSettings={handleCloseSettings}
+          />
+        )}
+
+        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+          <TicketContainer
+            tickets={tickets}
+            showGenres={showGenres}
+            isLoadingTickets={isLoadingTickets}
+            isErrorTickets={isErrorTickets}
+          />
+        </Container>
+        {filteredGenres.length === 0 && loadMore < totalTickets.length && (
+          <Button
+            variant="outlined"
+            sx={{ marginTop: '24px' }}
+            onClick={() => {
+              setLoadMore(loadMore + loadInterval);
+            }}
+          >
+            Load more
           </Button>
         )}
-        <Button
-          variant="outlined"
-          sx={{ marginTop: '12px', marginBottom: '24px', width: '145px' }}
-          onClick={() => {
-            setShowSettings(!showSettings);
-          }}
-        >
-          Settings
-        </Button>
       </Box>
 
-      {showSettings && (
-        <Settings
-          totalTickets={totalTickets}
-          filteredGenres={filteredGenres}
-          numTopTracks={numTopTracks}
-          handleFilteredGenres={handleFilteredGenres}
-          handleNumTopTracks={handleNumTopTracks}
-          handleDeleteGenre={handleDeleteGenre}
-          handleCloseSettings={handleCloseSettings}
-        />
-      )}
-
-      <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-        <TicketContainer
-          tickets={tickets}
-          showGenres={showGenres}
-          isLoadingTickets={isLoadingTickets}
-          isErrorTickets={isErrorTickets}
-        />
-      </Container>
-      {filteredGenres.length === 0 && loadMore < totalTickets.length && (
-        <Button
-          variant="outlined"
-          sx={{ marginTop: '24px' }}
-          onClick={() => {
-            setLoadMore(loadMore + loadInterval);
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
           }}
         >
-          Load more
-        </Button>
-      )}
-    </Box>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Looks like you're using an in-app browser.
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            If you want to log in with Spotify using Google then please copy/paste this url into your favourite browser
+            such as Chrome, Safari, etc.
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            recordshop.cool
+          </Typography>
+          <Button
+            onClick={handleRedirectToAuth}
+            variant="contained"
+            color="secondary"
+            className="btn--click-me"
+            sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
+          >
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+            <Typography sx={{ paddingBottom: 0 }}>Continue</Typography>
+          </Button>
+        </Box>
+      </Modal>
+    </>
   );
 };
