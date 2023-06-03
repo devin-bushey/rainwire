@@ -6,12 +6,15 @@ import { CssBaseline } from '@mui/material/';
 import { createContext, Dispatch, useState, useEffect } from 'react';
 import { SnackBar, SnackBarOptions } from './components/SnackBar';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import useAnalytics from './hooks/useAnalytics';
 
 export const SnackBarContext = createContext({
   setSnackBar: (() => undefined) as Dispatch<SnackBarOptions>,
 });
 
 const App = () => {
+  useAnalytics();
+
   // react query client for caching
   const queryClient = new QueryClient();
 
