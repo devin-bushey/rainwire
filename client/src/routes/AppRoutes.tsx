@@ -14,12 +14,14 @@ import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import useTicketQueries from '../hooks/useTicketQueries';
 import { WEBSITE_PHILIPS } from '../constants/locations';
 import { CreatePlaylistPage } from '../components/CreatePlaylistPage';
+import useAnalytics from '../hooks/useAnalytics';
 
 /**
  * Loads Phillips Backyyard tickets on app load
  * @returns
  */
 export const AppRoutes = () => {
+  useAnalytics();
   const { token } = useSpotifyAuth();
   const { philipsQuery } = useTicketQueries();
 
