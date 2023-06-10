@@ -11,11 +11,11 @@ import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constant
 import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
 import './styles/ClickMe.css';
-import { InAppModal } from './InAppModal';
 import { RIFFLANDIA_COLOURS } from './Rifflandia/colours';
 import './Rifflandia/styles.css';
 import TITLE from './Rifflandia/title.svg';
 import { Festivals } from '../constants/enums';
+import { InAppModalRifflandia } from './Rifflandia/InAppModalRifflandia';
 
 export const Rifflandia = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -243,7 +243,7 @@ export const Rifflandia = (data: any) => {
           )}
         </Box>
 
-        <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+        <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Box>
     </>
   );
