@@ -12,9 +12,11 @@ import { UseQueryResult } from 'react-query';
 import { DisplayTickets } from '../components/DisplayTickets';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import useTicketQueries from '../hooks/useTicketQueries';
-import { WEBSITE_PHILIPS } from '../constants/locations';
+import { WEBSITE_PHILIPS, WEBSITE_RIFFLANDIA } from '../constants/locations';
 import { CreatePlaylistPage } from '../components/CreatePlaylistPage';
 import useAnalytics from '../hooks/useAnalytics';
+import { Rifflandia } from '../components/Rifflandia';
+import { LoadingRifflandia } from '../components/Rifflandia/LoadingRifflandia';
 
 /**
  * Loads Phillips Backyyard tickets on app load
@@ -23,10 +25,11 @@ import useAnalytics from '../hooks/useAnalytics';
 export const AppRoutes = () => {
   useAnalytics();
   const { token } = useSpotifyAuth();
-  const { philipsQuery } = useTicketQueries();
+  const { philipsQuery, rifflandiaQuery } = useTicketQueries();
 
   useEffect(() => {
     philipsQuery.refetch();
+    rifflandiaQuery.refetch();
   }, []);
 
   const display = (query: UseQueryResult<any, unknown>, displayName: string, website?: string) => {
@@ -36,6 +39,16 @@ export const AppRoutes = () => {
       return <Error />;
     } else {
       return <DisplayTickets tickets={query.data} website={website} city={displayName} query={query} />;
+    }
+  };
+
+  const displayRifflandia = (query: UseQueryResult<any, unknown>, displayName: string, website?: string) => {
+    if (query.isLoading) {
+      return <LoadingRifflandia />;
+    } else if (query.isError) {
+      return <Error />;
+    } else {
+      return <Rifflandia tickets={query.data} website={website} city={displayName} query={query} />;
     }
   };
 
@@ -50,6 +63,7 @@ export const AppRoutes = () => {
             <Route path="/refresh" element={<Refresh />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="/rifflandia" element={displayRifflandia(rifflandiaQuery, 'Rifflandia', WEBSITE_RIFFLANDIA)} />
         </Routes>
       </Box>
     </>

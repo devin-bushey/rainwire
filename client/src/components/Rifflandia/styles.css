@@ -1,0 +1,20 @@
+.sidebar {
+  position: fixed;
+  width: 100px;
+  background-size: 114px 348px;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-svg-park {
+  background-image: url('./background-park.svg');
+  left: 0;
+  background-position-x: right;
+}
+
+.sidebar-svg-electric {
+  background-image: url('./background-electric.svg');
+  right: 0;
+  background-position-x: left;
+}
+
