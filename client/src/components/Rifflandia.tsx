@@ -156,12 +156,9 @@ export const Rifflandia = (data: any) => {
       <div className="sidebar sidebar-svg-park"></div>
       <div className="sidebar sidebar-svg-electric"></div>
       <Box
+        className="riff-background"
         sx={{
           backgroundColor: RIFFLANDIA_COLOURS.background,
-          paddingTop: '75px',
-          paddingLeft: '100px',
-          paddingRight: '100px',
-          paddingBottom: '75px',
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
