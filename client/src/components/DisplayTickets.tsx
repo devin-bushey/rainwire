@@ -1,4 +1,4 @@
-import { Box, Container, Modal } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
@@ -150,6 +150,10 @@ export const DisplayTickets = (data: any) => {
     setFilteredGenres((value: any) => value?.filter((v: any) => v !== genre));
   };
 
+  const handleClearGenres = () => {
+    setFilteredGenres([]);
+  };
+
   const handleFilteredGenres = (event: any) => {
     const genres = event.target.value;
     setFilteredGenres(genres);
@@ -168,7 +172,6 @@ export const DisplayTickets = (data: any) => {
   };
 
   const isInAppBrowser = () => {
-    console.log(navigator.userAgent);
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
     if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
       // in-app browser detected
@@ -218,59 +221,76 @@ export const DisplayTickets = (data: any) => {
 
   return (
     <>
-      <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-        <Typography variant="h5" sx={{ color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}>
-          Preview artists playing in
-        </Typography>
-
-        <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
-
-        <Button
-          onClick={handleCreatePlaylist}
-          variant="contained"
-          color="secondary"
-          className="btn--click-me"
-          sx={{ width: '310px', marginTop: '12px', justifyContent: 'center' }}
-        >
-          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-          <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-        </Button>
-
-        <Box display={'flex'} justifyContent={'center'}>
-          {website && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: '12px', marginBottom: '24px', marginRight: '18px', width: '145px' }}
-              href={website}
-              target="_blank"
-            >
-              Get Tickets
-            </Button>
-          )}
-          <Button
-            variant="outlined"
-            sx={{ marginTop: '12px', marginBottom: '24px', width: '145px' }}
-            onClick={() => {
-              setShowSettings(!showSettings);
+      <Box className="" sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+          <Box
+            sx={{
+              //backgroundColor: COLOURS.accent_02,
+              borderRadius: '10px',
+              //padding: '30px',
+              //marginBottom: '20px',
+              width: '300px',
+              margin: '8px',
             }}
           >
-            Settings
-          </Button>
-        </Box>
+            <Typography
+              variant="h5"
+              sx={{ fontSize: '1.4rem', color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}
+            >
+              Preview artists playing in
+            </Typography>
 
-        {showSettings && (
-          <Settings
-            totalTickets={totalTickets}
-            filteredGenres={filteredGenres}
-            numTopTracks={numTopTracks}
-            handleFilteredGenres={handleFilteredGenres}
-            handleNumTopTracks={handleNumTopTracks}
-            handleDeleteGenre={handleDeleteGenre}
-            handleCloseSettings={handleCloseSettings}
-          />
-        )}
+            <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
-        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+            <Button
+              onClick={handleCreatePlaylist}
+              variant="contained"
+              color="secondary"
+              className="btn--click-me"
+              sx={{ width: '300px', marginTop: '12px', justifyContent: 'center' }}
+            >
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+            </Button>
+
+            <Box display={'flex'} justifyContent={'center'}>
+              {website && (
+                <Button
+                  variant="outlined"
+                  sx={{ marginTop: '12px', marginBottom: '12px', marginRight: '18px', width: '145px' }}
+                  href={website}
+                  target="_blank"
+                >
+                  Get Tickets
+                </Button>
+              )}
+              <Button
+                variant="outlined"
+                sx={{ marginTop: '12px', marginBottom: '12px', width: '145px' }}
+                onClick={() => {
+                  setShowSettings(!showSettings);
+                }}
+              >
+                Settings
+              </Button>
+            </Box>
+          </Box>
+
+          {showSettings && (
+            <div>
+              <Settings
+                totalTickets={totalTickets}
+                filteredGenres={filteredGenres}
+                numTopTracks={numTopTracks}
+                handleFilteredGenres={handleFilteredGenres}
+                handleNumTopTracks={handleNumTopTracks}
+                handleDeleteGenre={handleDeleteGenre}
+                handleCloseSettings={handleCloseSettings}
+                handleClearGenres={handleClearGenres}
+              />
+            </div>
+          )}
+
           <TicketContainer
             tickets={tickets}
             showGenres={showGenres}

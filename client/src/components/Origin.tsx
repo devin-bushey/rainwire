@@ -17,7 +17,7 @@ export const Origin = ({
 }) => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: '310px' }}>
+      <Box sx={{ minWidth: '300px' }}>
         <Select
           value={origin}
           onChange={handleChangeOrigin}

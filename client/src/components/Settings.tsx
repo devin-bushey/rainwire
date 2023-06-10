@@ -29,24 +29,24 @@ export const Settings = (props: any) => {
   ];
 
   return (
-    <Container
+    <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginBottom: '24px',
+        //marginLeft: 'auto',
+        //marginRight: 'auto',
+        //marginBottom: '24px',
       }}
     >
       <Card
         sx={{
           backgroundColor: 'hsl(141, 12%, 80%)',
           minHeight: '290px',
-          width: '310px',
+          width: '300px',
           margin: '8px',
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '16px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '4px' }}>
           <Typography variant="h5" sx={{ color: COLOURS.black }}>
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
             Settings
@@ -84,14 +84,23 @@ export const Settings = (props: any) => {
           filteredGenres={props.filteredGenres}
           handleFilteredGenres={props.handleFilteredGenres}
           handleDeleteGenre={props.handleDeleteGenre}
+          handleClearGenres={props.handleClearGenres}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '-8px',
+            marginBottom: '-8px',
+          }}
+        >
           <Button variant="outlined" sx={{ color: COLOURS.black }} onClick={props.handleCloseSettings}>
             Close
           </Button>
         </Box>
       </Card>
-    </Container>
+    </Box>
   );
 };

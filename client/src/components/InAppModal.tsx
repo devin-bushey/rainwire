@@ -35,16 +35,9 @@ export const InAppModal = ({
           Looks like you&apos;re using an in-app browser.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          If you use{' '}
-          <Box fontWeight="bold" display="inline">
-            Google to sign in
-          </Box>{' '}
-          with Spotify then please open Record Shop with Chrome, Safari, Firefox, etc.
+          If you have trouble signing in with Spotify then please try again by opening Record Shop with Chrome, Safari,
+          Firefox, etc.
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Otherwise, please continue!
-        </Typography>
-
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: '10px', alignItems: 'center' }}>
           <Button
             onClick={handleRedirectToAuth}

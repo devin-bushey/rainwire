@@ -6,11 +6,13 @@ export const Filter = ({
   filteredGenres,
   handleFilteredGenres,
   handleDeleteGenre,
+  handleClearGenres,
 }: {
   totalTickets: string[];
   filteredGenres: string[];
   handleFilteredGenres: (event: any) => void;
   handleDeleteGenre: (genre: string) => () => void;
+  handleClearGenres: () => void;
 }) => {
   const genres: any = [];
   totalTickets.forEach((ticket: any) => {
@@ -34,6 +36,7 @@ export const Filter = ({
           renderValue={() => 'Genres'}
           value={filteredGenres}
           onChange={handleFilteredGenres}
+          sx={{ height: '40px' }}
           MenuProps={{
             style: {
               maxHeight: '300px',
@@ -52,7 +55,7 @@ export const Filter = ({
           variant="outlined"
           sx={{ marginLeft: '4px' }}
           onClick={() => {
-            handleFilteredGenres([]);
+            handleClearGenres();
           }}
         >
           Clear
