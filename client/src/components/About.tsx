@@ -70,10 +70,8 @@ export const About = memo(() => {
       >
         <Typography sx={{ padding: '16px 0' }}>
           Record Shop&apos;s name is inspired by the times when I would visit record stores to browse through concert
-          listings, look up each band on Spotify, and then create a playlist with the top track from each artist.
-        </Typography>
-        <Typography sx={{ padding: '16px 0' }}>
-          Many of the artists and songs were unfamiliar to me. So this was a great way to discover new music.
+          listings, look up each unfamiliar band on Spotify, and then create a playlist with the top track from each
+          artist.
         </Typography>
         <Typography sx={{ padding: '16px 0' }}>
           I would then listen to the playlist throughout the week and if an artist played with a song that I liked, I
@@ -84,7 +82,6 @@ export const About = memo(() => {
           In the end, I was going to more live shows and I would end up with a playlist that I could put on repeat and
           share with friends!
         </Typography>
-        <Typography sx={{ padding: '16px 0' }}>This was all a tedious task.</Typography>
         <Typography sx={{ padding: '16px 0' }}>
           I wanted to automate part of this process - so I created Record Shop.
         </Typography>
