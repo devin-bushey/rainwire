@@ -6,7 +6,7 @@ export const init = () => ga4.initialize(TRACKING_ID);
 
 export const sendEvent = (name: string) =>
   ga4.event('screen_view', {
-    app_name: 'myApp',
+    app_name: 'Record Shop',
     screen_name: name,
   });
 

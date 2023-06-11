@@ -174,7 +174,7 @@ export const Rifflandia = (data: any) => {
               onClick={handleCreatePlaylist}
               variant="contained"
               color="secondary"
-              className="btn--click-me"
+              className="btn--click-me create-playlist"
               sx={{ width: '300px', marginTop: '12px', justifyContent: 'center' }}
             >
               <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
