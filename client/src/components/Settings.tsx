@@ -49,7 +49,7 @@ export const Settings = (props: any) => {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '4px' }}>
           <Typography variant="h5" sx={{ color: COLOURS.black }}>
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-            Settings
+            Options
           </Typography>
         </Box>
 

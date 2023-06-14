@@ -26,6 +26,7 @@ import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
 import './styles/ClickMe.css';
 import { InAppModal } from './InAppModal';
+import { ScrollButton } from './ScrollButton';
 
 export const DisplayTickets = (data: any) => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -235,9 +236,9 @@ export const DisplayTickets = (data: any) => {
           >
             <Typography
               variant="h5"
-              sx={{ fontSize: '1.4rem', color: COLOURS.black, textAlign: 'center', marginBottom: '8px' }}
+              sx={{ fontSize: '1.4rem', color: COLOURS.black, textAlign: 'center', marginBottom: '16px' }}
             >
-              Preview artists playing in
+              Create a new playlist
             </Typography>
 
             <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
@@ -247,33 +248,32 @@ export const DisplayTickets = (data: any) => {
               variant="contained"
               color="secondary"
               className="btn--click-me create-playlist"
-              sx={{ width: '300px', marginTop: '12px', justifyContent: 'center' }}
+              sx={{ width: '300px', marginTop: '24px', justifyContent: 'center' }}
             >
               <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
-            <Box display={'flex'} justifyContent={'center'}>
-              {website && (
-                <Button
-                  variant="outlined"
-                  sx={{ marginTop: '12px', marginBottom: '12px', marginRight: '18px', width: '145px' }}
-                  href={website}
-                  target="_blank"
-                >
-                  Get Tickets
-                </Button>
-              )}
+            <Button
+              variant="outlined"
+              sx={{ marginTop: '12px', marginBottom: '24px', width: '300px' }}
+              onClick={() => {
+                setShowSettings(!showSettings);
+              }}
+            >
+              Options
+            </Button>
+
+            {website && (
               <Button
                 variant="outlined"
-                sx={{ marginTop: '12px', marginBottom: '12px', width: '145px' }}
-                onClick={() => {
-                  setShowSettings(!showSettings);
-                }}
+                sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
+                href={website}
+                target="_blank"
               >
-                Settings
+                Tickets
               </Button>
-            </Box>
+            )}
           </Box>
 
           {showSettings && (
@@ -310,6 +310,8 @@ export const DisplayTickets = (data: any) => {
           </Button>
         )}
       </Box>
+
+      <ScrollButton />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>

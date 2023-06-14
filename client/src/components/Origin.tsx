@@ -1,6 +1,7 @@
 import { Box, ListSubheader, MenuItem, Select } from '@mui/material';
 import { LOCATIONS } from '../constants/locations';
 import { LocationType } from '../types/RecordShopTypes';
+import { COLOURS } from '../theme/AppStyles';
 
 function MyListSubheader(props: any) {
   return <ListSubheader {...props} />;
@@ -24,6 +25,7 @@ export const Origin = ({
           fullWidth
           sx={{
             height: '40px',
+            border: `1px solid ${COLOURS.accent_04}}`,
           }}
         >
           {LOCATIONS.map((location: LocationType) => (
