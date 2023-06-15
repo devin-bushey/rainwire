@@ -9,13 +9,15 @@ export const TicketContainer = ({
   showGenres,
   isLoadingTickets,
   isErrorTickets,
+  cardColours,
 }: {
   tickets: any;
   showGenres: boolean;
   isLoadingTickets: boolean;
   isErrorTickets: boolean;
+  cardColours?: string[];
 }) => {
-  const colors = COLOURS.card_colours;
+  const colors = cardColours ? cardColours : COLOURS.card_colours;
 
   if (isLoadingTickets) {
     return <Loading />;

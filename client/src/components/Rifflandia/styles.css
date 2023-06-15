@@ -25,6 +25,37 @@
   padding-right: 100px;
 }
 
+.fill-pale-pink{
+  fill: rgba(239,180,210,1);
+}
+
+.fill-pale-green{
+  fill: rgba(206,228,169,1);
+}
+
+.fill-bright-green{
+  fill: rgba(112,191,68,1);
+}
+
+.fill-light-orange{
+  fill: rgba(247,216,173,1);
+}
+
+.fill-dark-brown{
+  fill: rgba(53,45,42,1);
+}
+
+.fill-orange{
+  fill: rgba(250,164,26,1);
+}
+
+.fill-bright-pink{
+  fill: rgba(236,0,140,1);
+}
+/* svg {
+  overflow: visible;
+} */
+
 @media only screen and (max-width: 600px) {
   .riff-background {
   padding-left: 20px;
@@ -41,3 +72,4 @@
     right: -70px;
   }
 }
+
