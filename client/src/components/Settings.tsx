@@ -40,7 +40,7 @@ export const Settings = (props: any) => {
     >
       <Card
         sx={{
-          backgroundColor: 'hsl(141, 12%, 80%)',
+          backgroundColor: props.colour ? props.colour : 'hsl(141, 12%, 80%)',
           minHeight: '290px',
           width: '300px',
           margin: '8px',
