@@ -19,6 +19,7 @@
 }
 
 .riff-background {
+  min-height: 100vh;
   padding-top: 75px;
   padding-left: 100px;
   padding-bottom: 75px;

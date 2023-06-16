@@ -23,7 +23,7 @@ export const TicketContainer = ({
     return <Loading />;
   }
 
-  if (isErrorTickets || tickets.length === 0) {
+  if (isErrorTickets || !tickets || tickets.length === 0) {
     return <Error />;
   }
 

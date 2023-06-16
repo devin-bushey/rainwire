@@ -1,14 +1,16 @@
 import axios from 'axios';
 import moment from 'moment';
 
-export const GetTickets = async (city: string): Promise<any> => {
+export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> => {
+  const [_key, { origin }] = queryKey;
+
   return axios
     .get(import.meta.env.VITE_SITE_URL_DB + 'tickets/', {
       params: {
-        city: city,
+        city: origin,
       },
     })
-    .then((response) => {
+    .then(async (response) => {
       response.data.sort((a: any, b: any) => {
         let a_date = a.date;
         let b_date = b.date;
@@ -27,6 +29,10 @@ export const GetTickets = async (city: string): Promise<any> => {
         const dateB = new Date(b_date);
         return dateA.getTime() - dateB.getTime();
       });
+
+      const sleep = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      await sleep(2000);
 
       return response.data;
     });

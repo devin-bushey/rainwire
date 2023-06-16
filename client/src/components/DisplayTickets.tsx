@@ -5,21 +5,9 @@ import { COLOURS } from '../theme/AppStyles';
 import { useContext, useEffect, useState } from 'react';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { CreateNewPlaylist } from '../apiManager/Spotify';
-import { Cities, Festivals } from '../constants/enums';
 import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import useTicketQueries from '../hooks/useTicketQueries';
-import {
-  WEBSITE_VICTORIA,
-  WEBSITE_VANCOUVER,
-  WEBSITE_PHILIPS,
-  WEBSITE_WHISTLE,
-  WEBSITE_LAKETOWN,
-  WEBSITE_OSHEAGA,
-  WEBSITE_COACHELLA,
-  WEBSITE_RIFFLANDIA,
-  LOCATIONS,
-} from '../constants/locations';
+import { LOCATIONS } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
 import { Origin } from './Origin';
 import { Settings } from './Settings';
@@ -27,27 +15,35 @@ import { TicketContainer } from './TicketContainer';
 import './styles/ClickMe.css';
 import { InAppModal } from './InAppModal';
 import { ScrollButton } from './ScrollButton';
+import { UseQueryOptions, useQuery } from 'react-query';
+import { GetTickets } from '../apiManager/RecordShop';
+import { Loading } from './Loading';
 
-export const DisplayTickets = (data: any) => {
+export const DisplayTickets = () => {
+  const queryOptions: UseQueryOptions = {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    cacheTime: Infinity,
+    keepPreviousData: true,
+  };
+
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'tickets/';
 
-  const {
-    rifflandiaQuery,
-    victoriaQuery,
-    vancouverQuery,
-    philipsQuery,
-    whistleQuery,
-    laketownQuery,
-    osheagaQuery,
-    coachellaQuery,
-  } = useTicketQueries();
+  const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
-  const loadInterval = 15;
+  const query = useQuery({
+    queryKey: [origin, { origin }],
+    queryFn: GetTickets,
+    ...queryOptions,
+  });
+
+  const loadInterval = 10;
 
   const [loadMore, setLoadMore] = useState(loadInterval);
-  const [totalTickets, setTotalTickets] = useState<any>(data.tickets);
-  const [tickets, setTickets] = useState<any>(totalTickets.slice(0, loadMore));
+  const [totalTickets, setTotalTickets] = useState<any>([]);
+  const [tickets, setTickets] = useState<any>([]);
 
   const [filteredGenres, setFilteredGenres] = useState<any>([]);
   const [numTopTracks, setNumTopTracks] = useState(1);
@@ -55,8 +51,6 @@ export const DisplayTickets = (data: any) => {
   const [showSettings, setShowSettings] = useState(false);
   const [showGenres, setShowGenres] = useState(false);
 
-  const [origin, setOrigin] = useState(LOCATIONS[0].value);
-  const [query, setQuery] = useState(philipsQuery);
   const [website, setWebsite] = useState(LOCATIONS[0].website);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
@@ -70,36 +64,7 @@ export const DisplayTickets = (data: any) => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    setTotalTickets(data.tickets);
-  }, [data.tickets]);
-
-  useEffect(() => {
-    setFilteredGenres([]);
-    const queries: any = {
-      [Cities.Victoria]: { query: victoriaQuery, website: WEBSITE_VICTORIA },
-      [Cities.Vancouver]: { query: vancouverQuery, website: WEBSITE_VANCOUVER },
-      [Festivals.PhilipsBackyard]: { query: philipsQuery, website: WEBSITE_PHILIPS },
-      [Festivals.Whistlemania]: { query: whistleQuery, website: WEBSITE_WHISTLE },
-      [Festivals.LaketownShakedown]: { query: laketownQuery, website: WEBSITE_LAKETOWN },
-      [Festivals.Osheaga]: { query: osheagaQuery, website: WEBSITE_OSHEAGA },
-      [Festivals.Coachella]: { query: coachellaQuery, website: WEBSITE_COACHELLA },
-      [Festivals.Rifflandia]: { query: rifflandiaQuery, website: WEBSITE_RIFFLANDIA },
-    };
-
-    const { query: newQuery, website: newWebsite } = queries[origin];
-    setQuery(newQuery);
-    setWebsite(newWebsite);
-  }, [origin]);
-
-  useEffect(() => {
-    if (!query.data) {
-      query.refetch();
-    }
-
     if (query.data) {
-      setLoadMore(loadInterval);
-      setTotalTickets(query.data);
-      setTickets(query.data);
       setIsLoadingTickets(false);
       setIsErrorTickets(false);
     } else if (query.isFetching || query.isLoading) {
@@ -108,6 +73,24 @@ export const DisplayTickets = (data: any) => {
       setIsErrorTickets(true);
     }
   }, [query]);
+
+  useEffect(() => {
+    if (query.data) {
+      setLoadMore(loadInterval);
+      setTotalTickets(query.data);
+    }
+  }, [query.data]);
+
+  useEffect(() => {
+    setFilteredGenres([]);
+
+    LOCATIONS.map((location) => {
+      if (location.value === origin) {
+        setWebsite(location.website);
+        return;
+      }
+    });
+  }, [origin]);
 
   useEffect(() => {
     if (filteredGenres === undefined || filteredGenres.length === 0) {
@@ -220,6 +203,10 @@ export const DisplayTickets = (data: any) => {
     }
   };
 
+  if (isLoadingTickets) {
+    return <Loading />;
+  }
+
   return (
     <>
       <Box className="" sx={{ textAlign: 'center', paddingBottom: '24px' }}>
@@ -298,7 +285,7 @@ export const DisplayTickets = (data: any) => {
             isErrorTickets={isErrorTickets}
           />
         </Container>
-        {filteredGenres.length === 0 && loadMore < totalTickets.length && (
+        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
           <Button
             variant="outlined"
             sx={{ marginTop: '24px' }}

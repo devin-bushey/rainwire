@@ -17,22 +17,44 @@ import TITLE from './Rifflandia/title.svg';
 import { ReactComponent as CHERRIES } from './Rifflandia/cherries.svg';
 import { Festivals } from '../constants/enums';
 import { InAppModalRifflandia } from './Rifflandia/InAppModalRifflandia';
+import { UseQueryOptions, useQuery } from 'react-query';
+import { GetTickets } from '../apiManager/RecordShop';
+import { LoadingRifflandia } from './Rifflandia/LoadingRifflandia';
 
-export const Rifflandia = (data: any) => {
+export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
+
+  const origin = Festivals.Rifflandia;
+
+  const queryOptions: UseQueryOptions = {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    cacheTime: Infinity,
+    keepPreviousData: true,
+  };
+
+  const query = useQuery({
+    queryKey: [Festivals.Rifflandia, { origin }],
+    queryFn: GetTickets,
+    ...queryOptions,
+  });
 
   const loadInterval = 15;
 
   const [loadMore, setLoadMore] = useState(loadInterval);
-  const [totalTickets, setTotalTickets] = useState<any>(data.tickets);
-  const [tickets, setTickets] = useState<any>(totalTickets.slice(0, loadMore));
+  const [totalTickets, setTotalTickets] = useState<any>([]);
+  const [tickets, setTickets] = useState<any>([]);
 
   const [filteredGenres, setFilteredGenres] = useState<any>([]);
   const [numTopTracks, setNumTopTracks] = useState(1);
 
   const [showSettings, setShowSettings] = useState(false);
   const [showGenres, setShowGenres] = useState(false);
+
+  const [isLoadingTickets, setIsLoadingTickets] = useState(false);
+  const [isErrorTickets, setIsErrorTickets] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
@@ -42,8 +64,22 @@ export const Rifflandia = (data: any) => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    setTotalTickets(data.tickets);
-  }, [data.tickets]);
+    if (query.data) {
+      setIsLoadingTickets(false);
+      setIsErrorTickets(false);
+    } else if (query.isFetching || query.isLoading) {
+      setIsLoadingTickets(true);
+    } else if (query.error) {
+      setIsErrorTickets(true);
+    }
+  }, [query]);
+
+  useEffect(() => {
+    if (query.data) {
+      setLoadMore(loadInterval);
+      setTotalTickets(query.data);
+    }
+  }, [query.data]);
 
   useEffect(() => {
     if (filteredGenres === undefined || filteredGenres.length === 0) {
@@ -151,6 +187,10 @@ export const Rifflandia = (data: any) => {
       isInAppBrowser();
     }
   };
+
+  if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
+    return <LoadingRifflandia />;
+  }
 
   return (
     <>
@@ -265,7 +305,7 @@ export const Rifflandia = (data: any) => {
             tickets={tickets}
             showGenres={showGenres}
             isLoadingTickets={false}
-            isErrorTickets={false}
+            isErrorTickets={isErrorTickets}
             cardColours={RIFF_CARD_COLOURS}
           />
         </Container>
@@ -274,7 +314,7 @@ export const Rifflandia = (data: any) => {
           {filteredGenres.length === 0 && loadMore < totalTickets.length && (
             <Button
               variant="outlined"
-              sx={{ marginTop: '24px' }}
+              sx={{ marginTop: '24px', marginBottom: '32px' }}
               onClick={() => {
                 setLoadMore(loadMore + loadInterval);
               }}
