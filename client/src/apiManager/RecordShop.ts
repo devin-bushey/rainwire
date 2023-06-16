@@ -30,10 +30,6 @@ export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> 
         return dateA.getTime() - dateB.getTime();
       });
 
-      const sleep = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
-
-      await sleep(2000);
-
       return response.data;
     });
   // .catch((error) => {
