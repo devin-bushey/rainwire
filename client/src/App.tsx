@@ -6,6 +6,8 @@ import { CssBaseline } from '@mui/material/';
 import { createContext, Dispatch, useState, useEffect } from 'react';
 import { SnackBar, SnackBarOptions } from './components/SnackBar';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from './components/ErrorFallback';
 
 export const SnackBarContext = createContext({
   setSnackBar: (() => undefined) as Dispatch<SnackBarOptions>,
@@ -29,22 +31,24 @@ const App = () => {
   }, [snackBar]);
 
   return (
-    <ThemeProvider theme={AppTheme}>
-      <QueryClientProvider client={queryClient}>
-        <SnackBarContext.Provider value={{ setSnackBar: setSnackBar }}>
-          <SnackBar
-            showSnackbar={displaySnackBar}
-            setShowSnackbar={setDisplaySnackBar}
-            message={snackBar.message}
-            isError={snackBar.isError}
-          />
-          <CssBaseline />
-          <Router>
-            <AppRoutes />
-          </Router>
-        </SnackBarContext.Provider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ThemeProvider theme={AppTheme}>
+        <QueryClientProvider client={queryClient}>
+          <SnackBarContext.Provider value={{ setSnackBar: setSnackBar }}>
+            <SnackBar
+              showSnackbar={displaySnackBar}
+              setShowSnackbar={setDisplaySnackBar}
+              message={snackBar.message}
+              isError={snackBar.isError}
+            />
+            <CssBaseline />
+            <Router>
+              <AppRoutes />
+            </Router>
+          </SnackBarContext.Provider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 
