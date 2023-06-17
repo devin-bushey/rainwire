@@ -60,7 +60,6 @@ export const Rifflandia = () => {
   const [numTopTracks, setNumTopTracks] = useState(1);
 
   const [showSettings, setShowSettings] = useState(false);
-  const [showGenres, setShowGenres] = useState(false);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
@@ -199,7 +198,7 @@ export const Rifflandia = () => {
 
   const handleFilterThePark = () => {
     const parkTickets = totalTickets.filter((ticket: any) => {
-      if (ticket.date === 'Sept 15-17') return ticket;
+      if (ticket.ticket_date.includes('Sept 15-17')) return ticket;
     });
     setFilteredDates(parkTickets);
     setSelectedWeekend(Weekend.PARK);
@@ -207,7 +206,7 @@ export const Rifflandia = () => {
 
   const handleFilterElectricAve = () => {
     const electricTickets = totalTickets.filter((ticket: any) => {
-      if (ticket.date === 'Sept 7-9') return ticket;
+      if (ticket.ticket_date.includes('Sept 7-9')) return ticket;
     });
     setFilteredDates(electricTickets);
     setSelectedWeekend(Weekend.ELECTRIC);
@@ -260,6 +259,12 @@ export const Rifflandia = () => {
                   fontSize: '0.75rem',
                   marginTop: '12px',
                   backgroundColor: selectedWeekend === Weekend.ALL ? RIFFLANDIA_COLOURS.fill_light_orange : '',
+                  '&:active': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
+                  '&:focus': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
                 }}
                 onClick={() => {
                   handleClearAllFilters();
@@ -273,6 +278,12 @@ export const Rifflandia = () => {
                   fontSize: '0.75rem',
                   marginTop: '12px',
                   backgroundColor: selectedWeekend === Weekend.ELECTRIC ? RIFFLANDIA_COLOURS.fill_light_orange : '',
+                  '&:active': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
+                  '&:focus': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
                 }}
                 onClick={() => {
                   //add to filter for tickets with dates from sept 7-9
@@ -287,6 +298,12 @@ export const Rifflandia = () => {
                   fontSize: '0.75rem',
                   marginTop: '12px',
                   backgroundColor: selectedWeekend === Weekend.PARK ? RIFFLANDIA_COLOURS.fill_light_orange : '',
+                  '&:active': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
+                  '&:focus': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
                 }}
                 onClick={() => {
                   //add to filter for tickets with dates from sept 15-17
@@ -359,7 +376,7 @@ export const Rifflandia = () => {
           <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}> */}
           <TicketContainer
             tickets={tickets}
-            showGenres={showGenres}
+            showGenres={false}
             isLoadingTickets={false}
             isErrorTickets={isErrorTickets}
             cardColours={RIFF_CARD_COLOURS}
