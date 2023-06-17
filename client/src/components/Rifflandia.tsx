@@ -265,6 +265,9 @@ export const Rifflandia = () => {
                   '&:focus': {
                     background: RIFFLANDIA_COLOURS.fill_light_orange,
                   },
+                  '&:hover': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
                 }}
                 onClick={() => {
                   handleClearAllFilters();
@@ -282,6 +285,9 @@ export const Rifflandia = () => {
                     background: RIFFLANDIA_COLOURS.fill_light_orange,
                   },
                   '&:focus': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
+                  '&:hover': {
                     background: RIFFLANDIA_COLOURS.fill_light_orange,
                   },
                 }}
@@ -302,6 +308,9 @@ export const Rifflandia = () => {
                     background: RIFFLANDIA_COLOURS.fill_light_orange,
                   },
                   '&:focus': {
+                    background: RIFFLANDIA_COLOURS.fill_light_orange,
+                  },
+                  '&:hover': {
                     background: RIFFLANDIA_COLOURS.fill_light_orange,
                   },
                 }}
