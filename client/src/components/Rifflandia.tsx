@@ -8,7 +8,6 @@ import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { WEBSITE_RIFFLANDIA } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { Settings } from './Settings';
 import { TicketContainer } from './TicketContainer';
 import './styles/ClickMe.css';
 import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from './Rifflandia/colours';
@@ -20,10 +19,18 @@ import { InAppModalRifflandia } from './Rifflandia/InAppModalRifflandia';
 import { UseQueryOptions, useQuery } from 'react-query';
 import { GetTickets } from '../apiManager/RecordShop';
 import { LoadingRifflandia } from './Rifflandia/LoadingRifflandia';
+import { StickyButton } from './StickyButton';
+import { Options } from './Rifflandia/Options';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
+
+  enum Weekend {
+    ALL = 'All',
+    PARK = 'Park',
+    ELECTRIC = 'Electric',
+  }
 
   const origin = Festivals.Rifflandia;
 
@@ -44,10 +51,12 @@ export const Rifflandia = () => {
   const loadInterval = 15;
 
   const [loadMore, setLoadMore] = useState(loadInterval);
+  const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(false);
   const [totalTickets, setTotalTickets] = useState<any>([]);
   const [tickets, setTickets] = useState<any>([]);
 
-  const [filteredGenres, setFilteredGenres] = useState<any>([]);
+  const [filteredDates, setFilteredDates] = useState<any>([]);
+  const [selectedWeekend, setSelectedWeekend] = useState<string>(Weekend.ALL);
   const [numTopTracks, setNumTopTracks] = useState(1);
 
   const [showSettings, setShowSettings] = useState(false);
@@ -82,21 +91,13 @@ export const Rifflandia = () => {
   }, [query.data]);
 
   useEffect(() => {
-    if (filteredGenres === undefined || filteredGenres.length === 0) {
-      setShowGenres(false);
+    if (filteredDates === undefined || filteredDates.length === 0 || filteredDates.length === totalTickets.length) {
       setLoadMore(loadInterval);
       setTickets(totalTickets.slice(0, loadMore));
       return;
     }
-
-    const filteredTickets = totalTickets.filter((ticket: any) => {
-      if (!ticket?.genres) return false;
-      return ticket.genres.some((genre: any) => filteredGenres.includes(genre));
-    });
-
-    setShowGenres(filteredTickets.length > 0);
-    setTickets(filteredTickets);
-  }, [filteredGenres]);
+    setTickets(filteredDates);
+  }, [filteredDates]);
 
   useEffect(() => {
     if (isError) {
@@ -120,16 +121,16 @@ export const Rifflandia = () => {
   }, [loadMore]);
 
   const handleDeleteGenre = (genre: string) => () => {
-    setFilteredGenres((value: any) => value?.filter((v: any) => v !== genre));
+    setFilteredDates((value: any) => value?.filter((v: any) => v !== genre));
   };
 
   const handleClearGenres = () => {
-    setFilteredGenres([]);
+    setFilteredDates([]);
   };
 
   const handleFilteredGenres = (event: any) => {
     const genres = event.target.value;
-    setFilteredGenres(genres);
+    setFilteredDates(genres);
   };
 
   const handleNumTopTracks = (event: any) => {
@@ -164,7 +165,8 @@ export const Rifflandia = () => {
         token: token,
         user_id: spotifyInfo.user_id,
         numTopTracks: numTopTracks,
-        tickets: filteredGenres.length > 0 ? tickets : null,
+        // TODO: fix too large of request
+        //tickets: filteredDates.length > 0 ? tickets : null,
       })
         .then((res) => {
           if (res.status === 201) {
@@ -188,6 +190,37 @@ export const Rifflandia = () => {
     }
   };
 
+  const handleClearAllFilters = () => {
+    setSelectedWeekend(Weekend.ALL);
+    setFilteredDates([]);
+    setLoadMore(loadInterval);
+    setTickets(totalTickets.slice(0, loadMore));
+  };
+
+  const handleFilterThePark = () => {
+    const parkTickets = totalTickets.filter((ticket: any) => {
+      if (ticket.date === 'Sept 15-17') return ticket;
+    });
+    setFilteredDates(parkTickets);
+    setSelectedWeekend(Weekend.PARK);
+  };
+
+  const handleFilterElectricAve = () => {
+    const electricTickets = totalTickets.filter((ticket: any) => {
+      if (ticket.date === 'Sept 7-9') return ticket;
+    });
+    setFilteredDates(electricTickets);
+    setSelectedWeekend(Weekend.ELECTRIC);
+  };
+
+  useEffect(() => {
+    if (filteredDates.length === 0 && loadMore < totalTickets.length) {
+      setShowLoadMoreBtn(true);
+    } else {
+      setShowLoadMoreBtn(false);
+    }
+  }, [filteredDates, totalTickets, loadMore]);
+
   if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
     return <LoadingRifflandia />;
   }
@@ -196,11 +229,20 @@ export const Rifflandia = () => {
     <>
       <div className="sidebar sidebar-svg-park"></div>
       <div className="sidebar sidebar-svg-electric"></div>
+
       <Box
         className="riff-background"
         sx={{ textAlign: 'center', paddingBottom: '24px', backgroundColor: RIFFLANDIA_COLOURS.background }}
       >
-        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly',
+            paddingBottom: !showLoadMoreBtn ? '70px' : '',
+          }}
+        >
           <Box
             sx={{
               backgroundColor: RIFFLANDIA_COLOURS.background,
@@ -214,30 +256,44 @@ export const Rifflandia = () => {
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 variant="outlined"
-                sx={{ fontSize: '0.75rem', marginTop: '12px' }}
+                sx={{
+                  fontSize: '0.75rem',
+                  marginTop: '12px',
+                  backgroundColor: selectedWeekend === Weekend.ALL ? RIFFLANDIA_COLOURS.fill_light_orange : '',
+                }}
                 onClick={() => {
-                  //setShowSettings(!showSettings);
+                  handleClearAllFilters();
                 }}
               >
                 All
               </Button>
               <Button
                 variant="outlined"
-                sx={{ fontSize: '0.75rem', marginTop: '12px' }}
-                onClick={() => {
-                  //setShowSettings(!showSettings);
+                sx={{
+                  fontSize: '0.75rem',
+                  marginTop: '12px',
+                  backgroundColor: selectedWeekend === Weekend.ELECTRIC ? RIFFLANDIA_COLOURS.fill_light_orange : '',
                 }}
-              >
-                The Park
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{ fontSize: '0.75rem', marginTop: '12px' }}
                 onClick={() => {
-                  //setShowSettings(!showSettings);
+                  //add to filter for tickets with dates from sept 7-9
+                  handleFilterElectricAve();
                 }}
               >
                 Electric Ave
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  fontSize: '0.75rem',
+                  marginTop: '12px',
+                  backgroundColor: selectedWeekend === Weekend.PARK ? RIFFLANDIA_COLOURS.fill_light_orange : '',
+                }}
+                onClick={() => {
+                  //add to filter for tickets with dates from sept 15-17
+                  handleFilterThePark();
+                }}
+              >
+                The Park
               </Button>
             </Box>
 
@@ -285,9 +341,9 @@ export const Rifflandia = () => {
 
           {showSettings && (
             <div>
-              <Settings
+              <Options
                 totalTickets={totalTickets}
-                filteredGenres={filteredGenres}
+                filteredDates={filteredDates}
                 numTopTracks={numTopTracks}
                 handleFilteredGenres={handleFilteredGenres}
                 handleNumTopTracks={handleNumTopTracks}
@@ -311,10 +367,10 @@ export const Rifflandia = () => {
         </Container>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          {filteredGenres.length === 0 && loadMore < totalTickets.length && (
+          {showLoadMoreBtn && (
             <Button
               variant="outlined"
-              sx={{ marginTop: '24px', marginBottom: '32px' }}
+              sx={{ marginTop: '24px', marginBottom: '85px' }}
               onClick={() => {
                 setLoadMore(loadMore + loadInterval);
               }}
@@ -324,6 +380,13 @@ export const Rifflandia = () => {
           )}
         </Box>
       </Box>
+
+      <StickyButton
+        handleCreatePlaylist={handleCreatePlaylist}
+        backgroundColor={RIFFLANDIA_COLOURS.light_blue}
+        hoverColor={RIFFLANDIA_COLOURS.dark_blue}
+        barColor={RIFFLANDIA_COLOURS.fill_light_orange}
+      />
 
       <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
