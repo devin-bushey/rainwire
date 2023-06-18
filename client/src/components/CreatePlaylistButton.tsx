@@ -27,7 +27,7 @@ export const CreatePlaylistButton = ({
       }}
     >
       <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-      <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+      <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
     </Button>
   );
 };
