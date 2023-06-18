@@ -1,10 +1,17 @@
-import { Card, Typography, Slider, Button } from '@mui/material';
+import { Card, Typography, Slider, Button, Link } from '@mui/material';
 import { Box } from '@mui/system';
 import { COLOURS } from '../../theme/AppStyles';
-import { Filter } from '../Filter';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import { useNavigate } from 'react-router-dom';
 
 export const Options = (props: any) => {
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/rifflandia');
+    window.location.reload();
+  };
+
   const marks = [
     {
       value: 1,
@@ -62,9 +69,7 @@ export const Options = (props: any) => {
             marginBottom: '16px',
           }}
         >
-          <Typography variant="h6" sx={{ color: COLOURS.black }}>
-            tracks per artist:
-          </Typography>
+          <Typography>Top tracks to add per artist:</Typography>
           <Box sx={{ width: '90%' }}>
             <Slider
               aria-label="Number of tracks per artist"
@@ -78,19 +83,34 @@ export const Options = (props: any) => {
             />
           </Box>
         </Box>
+        {/* 
+        <Box sx={{ marginTop: '12px' }}>
+          <Button variant="outlined" onClick={logOut}>
+            Sign Out
+          </Button>
+        </Box> */}
 
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '-8px',
-            marginBottom: '-8px',
+            marginTop: '8px',
+            //marginBottom: '8px',
           }}
         >
-          <Button variant="outlined" sx={{ color: COLOURS.black }} onClick={props.handleCloseSettings}>
+          <Button sx={{ width: '120px' }} variant="outlined" onClick={logOut}>
+            Sign Out
+          </Button>
+          <Button variant="outlined" sx={{ marginLeft: '8px', width: '120px' }} onClick={props.handleCloseSettings}>
             Close
           </Button>
+        </Box>
+
+        <Box sx={{ marginTop: '24px' }}>
+          <Link href="https://www.spotify.com/account/apps">
+            <Typography sx={{ fontSize: '12px' }}>Unsubscribe</Typography>
+          </Link>
         </Box>
       </Card>
     </Box>

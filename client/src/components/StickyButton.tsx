@@ -51,7 +51,7 @@ export const StickyButton = ({
           width: '500px',
           borderRadius: '8px',
           backgroundColor: barColor,
-          marginBottom: '4px',
+          marginBottom: '8px',
         }}
       >
         <CreatePlaylistButton

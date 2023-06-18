@@ -21,6 +21,7 @@ import { GetTickets } from '../apiManager/RecordShop';
 import { LoadingRifflandia } from './Rifflandia/LoadingRifflandia';
 import { StickyButton } from './StickyButton';
 import { Options } from './Rifflandia/Options';
+import { Login } from './Rifflandia/Login';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -224,6 +225,10 @@ export const Rifflandia = () => {
     return <LoadingRifflandia />;
   }
 
+  if (!token || !spotifyInfo) {
+    return <Login />;
+  }
+
   return (
     <>
       <div className="sidebar sidebar-svg-park"></div>
@@ -349,7 +354,7 @@ export const Rifflandia = () => {
               }}
             >
               <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+              <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
             </Button>
 
             <Button
