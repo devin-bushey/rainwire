@@ -57,32 +57,6 @@ export const Login = () => {
           >
             <img src={TITLE} alt="Rifflandia Title" />
 
-            <Card
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.fill_light_orange,
-                marginTop: '24px',
-                //height: '300px',
-                //width: '300px',
-                //margin: '8px',
-              }}
-            >
-              <Typography>
-                Automatically generate a playlist with the top tracks from each artist playing at Rifflandia.
-              </Typography>
-            </Card>
-
-            <Card
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
-                marginTop: '24px',
-                //height: '300px',
-                //width: '300px',
-                //margin: '8px',
-              }}
-            >
-              <Typography>The playlist will be created and pre-populated directly on your Spotify account.</Typography>
-            </Card>
-
             <Button
               onClick={isInAppBrowser}
               variant="contained"
@@ -94,6 +68,7 @@ export const Login = () => {
                 },
                 color: 'black',
                 width: '300px',
+                marginTop: '24px',
                 marginBottom: '24px',
                 justifyContent: 'center',
               }}
@@ -101,6 +76,29 @@ export const Login = () => {
               <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
               <Typography sx={{ paddingBottom: 0 }}>Sign in with Spotify</Typography>
             </Button>
+
+            <Card
+              sx={{
+                backgroundColor: RIFFLANDIA_COLOURS.fill_light_orange,
+              }}
+            >
+              <Typography>
+                Effortlessly generate a playlist on your Spotify account featuring the top tracks from each artist
+                performing at Rifflandia.
+              </Typography>
+            </Card>
+
+            <Card
+              sx={{
+                backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
+                marginTop: '24px',
+              }}
+            >
+              <Typography>
+                Once signed in, the playlist can be generated and pre-filled for you directly on your account, with a
+                single click of a button.
+              </Typography>
+            </Card>
           </Box>
         </Container>
       </Box>

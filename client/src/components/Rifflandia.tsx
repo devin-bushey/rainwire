@@ -22,6 +22,7 @@ import { LoadingRifflandia } from './Rifflandia/LoadingRifflandia';
 import { StickyButton } from './StickyButton';
 import { Options } from './Rifflandia/Options';
 import { Login } from './Rifflandia/Login';
+import './Rifflandia/styles.css';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -32,6 +33,8 @@ export const Rifflandia = () => {
     PARK = 'Park',
     ELECTRIC = 'Electric',
   }
+
+  const DAYS = ['Sept 7', 'Sept 8', 'Sept 9', 'Sept 15', 'Sept 16', 'Sept 17'];
 
   const origin = Festivals.Rifflandia;
 
@@ -58,6 +61,7 @@ export const Rifflandia = () => {
 
   const [filteredDates, setFilteredDates] = useState<any>([]);
   const [selectedWeekend, setSelectedWeekend] = useState<string>(Weekend.ALL);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [numTopTracks, setNumTopTracks] = useState(1);
 
   const [showSettings, setShowSettings] = useState(false);
@@ -197,6 +201,14 @@ export const Rifflandia = () => {
     setTickets(totalTickets.slice(0, loadMore));
   };
 
+  const handleDayClick = (day: string) => {
+    if (selectedDays.includes(day)) {
+      setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
+    } else {
+      setSelectedDays([...selectedDays, day]);
+    }
+  };
+
   const handleFilterThePark = () => {
     const parkTickets = totalTickets.filter((ticket: any) => {
       if (ticket.ticket_date.includes('Sept 15-17')) return ticket;
@@ -257,7 +269,7 @@ export const Rifflandia = () => {
           >
             <img src={TITLE} alt="Rifflandia Title" />
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            {/* <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button
                 variant="outlined"
                 sx={{
@@ -326,11 +338,39 @@ export const Rifflandia = () => {
               >
                 The Park
               </Button>
+            </Box> */}
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+              {DAYS.map((day) => (
+                <Button
+                  variant="outlined"
+                  key={day}
+                  onClick={() => handleDayClick(day)}
+                  sx={{
+                    width: '90px',
+                    fontSize: '0.6rem',
+                    margin: '8px 0px',
+                    marginBottom: '2px',
+                    background: selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
+                    // '&:active': {
+                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
+                    // },
+                    // '&:focus': {
+                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
+                    // },
+                    // '&:hover': {
+                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
+                    // },
+                  }}
+                >
+                  {day}
+                </Button>
+              ))}
             </Box>
 
             <Button
               variant="outlined"
-              sx={{ marginTop: '12px', marginBottom: '24px', width: '300px' }}
+              sx={{ marginTop: '16px', width: '300px' }}
               onClick={() => {
                 setShowSettings(!showSettings);
               }}
@@ -349,7 +389,8 @@ export const Rifflandia = () => {
                 },
                 color: 'black',
                 width: '300px',
-                marginBottom: '24px',
+                marginTop: '16px',
+                marginBottom: '16px',
                 justifyContent: 'center',
               }}
             >
@@ -357,17 +398,36 @@ export const Rifflandia = () => {
               <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
             </Button>
 
-            <Button
-              variant="outlined"
-              sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
-              href={WEBSITE_RIFFLANDIA}
-              target="_blank"
-            >
+            <Button variant="outlined" sx={{ width: '300px' }} href={WEBSITE_RIFFLANDIA} target="_blank">
               <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
                 <CHERRIES />
               </Box>
               Tickets
             </Button>
+
+            {/* <Box sx={{ display: 'flex' }}>
+              <Button
+                variant="outlined"
+                sx={{ marginRight: '18px', width: '140px' }}
+                href={WEBSITE_RIFFLANDIA}
+                target="_blank"
+              >
+                <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+                  <CHERRIES />
+                </Box>
+                Tickets
+              </Button>
+
+              <Button
+                variant="outlined"
+                sx={{ width: '140px' }}
+                onClick={() => {
+                  setShowSettings(!showSettings);
+                }}
+              >
+                Options
+              </Button>
+            </Box> */}
           </Box>
 
           {showSettings && (

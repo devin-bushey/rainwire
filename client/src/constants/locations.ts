@@ -8,7 +8,7 @@ export const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/
 export const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
 export const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
 export const WEBSITE_COACHELLA = 'https://coachella.com/';
-export const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/';
+export const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/tickets/';
 
 export const LOCATIONS: LocationType[] = [
   {
@@ -20,7 +20,7 @@ export const LOCATIONS: LocationType[] = [
   {
     name: 'Rifflandia',
     value: Festivals.Rifflandia,
-    website: 'https://rifflandia.com/',
+    website: 'https://rifflandia.com/tickets/',
     location: 'Victoria, BC',
   },
   {
