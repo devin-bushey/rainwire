@@ -8,45 +8,45 @@ export const WEBSITE_VANCOUVER = 'https://www.ticketmaster.ca/discover/concerts/
 export const WEBSITE_LAKETOWN = 'https://www.laketownshakedown.com/';
 export const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
 export const WEBSITE_COACHELLA = 'https://coachella.com/';
-export const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/';
+export const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/tickets/';
 
 export const LOCATIONS: LocationType[] = [
-  {
-    name: 'Phillips Backyard',
-    value: Festivals.PhilipsBackyard,
-    website: 'https://www.phillipsbackyard.com/',
-    location: 'Victoria, BC',
-  },
-  {
-    name: 'Rifflandia',
-    value: Festivals.Rifflandia,
-    website: 'https://rifflandia.com/',
-    location: 'Victoria, BC',
-  },
-  {
-    name: 'Whistlemania',
-    value: Festivals.Whistlemania,
-    website: 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/',
-    location: 'Victoria, BC',
-  },
-  {
-    name: 'Laketown Shakedown',
-    value: Festivals.LaketownShakedown,
-    website: 'https://www.laketownshakedown.com/',
-    location: 'Cowichan, BC',
-  },
-  {
-    name: 'Osheaga',
-    value: Festivals.Osheaga,
-    website: 'https://osheaga.com/en',
-    location: 'Montreal, QC',
-  },
-  {
-    name: 'Coachella',
-    value: Festivals.Coachella,
-    website: 'https://coachella.com/',
-    location: 'California, US',
-  },
+  // {
+  //   name: 'Phillips Backyard',
+  //   value: Festivals.PhilipsBackyard,
+  //   website: 'https://www.phillipsbackyard.com/',
+  //   location: 'Victoria, BC',
+  // },
+  // {
+  //   name: 'Rifflandia',
+  //   value: Festivals.Rifflandia,
+  //   website: 'https://rifflandia.com/tickets/',
+  //   location: 'Victoria, BC',
+  // },
+  // {
+  //   name: 'Whistlemania',
+  //   value: Festivals.Whistlemania,
+  //   website: 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/',
+  //   location: 'Victoria, BC',
+  // },
+  // {
+  //   name: 'Laketown Shakedown',
+  //   value: Festivals.LaketownShakedown,
+  //   website: 'https://www.laketownshakedown.com/',
+  //   location: 'Cowichan, BC',
+  // },
+  // {
+  //   name: 'Osheaga',
+  //   value: Festivals.Osheaga,
+  //   website: 'https://osheaga.com/en',
+  //   location: 'Montreal, QC',
+  // },
+  // {
+  //   name: 'Coachella',
+  //   value: Festivals.Coachella,
+  //   website: 'https://coachella.com/',
+  //   location: 'California, US',
+  // },
   {
     name: 'Victoria, BC',
     value: Cities.Victoria,

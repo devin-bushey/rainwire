@@ -47,11 +47,11 @@ export const StickyButton = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '75px',
+          height: '100px',
           width: '500px',
           borderRadius: '8px',
           backgroundColor: barColor,
-          marginBottom: '8px',
+          marginBottom: '24px',
         }}
       >
         <CreatePlaylistButton

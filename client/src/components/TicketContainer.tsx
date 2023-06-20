@@ -30,7 +30,7 @@ export const TicketContainer = ({
   return tickets.map((currentTicket: any, index: any) => {
     let imageURL: any;
     try {
-      imageURL = currentTicket.top_tracks[0].album.images[1].url;
+      imageURL = currentTicket.albumArtUrl || currentTicket.top_tracks[0].album.images[1].url;
     } catch {
       imageURL = blank;
     }

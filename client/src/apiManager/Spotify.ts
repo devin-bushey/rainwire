@@ -36,6 +36,7 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
           user_id: '',
           new_playlist_id: '',
           access: false,
+          error: false,
         };
       }
 
