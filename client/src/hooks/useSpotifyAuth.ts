@@ -9,6 +9,7 @@ type SpotifyUserDataType = {
   user_id: string;
   new_playlist_id: string;
   access: boolean;
+  error: boolean;
 };
 
 const useSpotifyAuth = () => {
@@ -19,6 +20,7 @@ const useSpotifyAuth = () => {
     user_id: '',
     new_playlist_id: '',
     access: false,
+    error: false,
   });
 
   useEffect(() => {

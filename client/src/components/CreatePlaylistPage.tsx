@@ -39,7 +39,7 @@ export const CreatePlaylistPage = () => {
           }}
         >
           <Typography sx={{ padding: '16px 0' }}>
-            1. Check out the upcoming festivals and concerts by clicking the button below.
+            1. Check out the upcoming concerts by clicking the button below.
           </Typography>
 
           <Button
@@ -59,7 +59,7 @@ export const CreatePlaylistPage = () => {
           }}
         >
           <Typography sx={{ padding: '16px 0' }}>
-            2. Filter the artists by genre and select the number of top tracks that you want to add to your playlist.
+            2. Select the number of top tracks that you want to add to your playlist.
           </Typography>
         </Card>
 

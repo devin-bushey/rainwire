@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import './styles/ClickMe.css';
 
 export const CreatePlaylistButton = ({
   handleCreatePlaylist,
@@ -14,7 +15,7 @@ export const CreatePlaylistButton = ({
     <Button
       onClick={handleCreatePlaylist}
       variant="contained"
-      className="create-playlist"
+      className="btn--click-me-riff create-playlist"
       sx={{
         backgroundColor: backgroundColor,
         ':hover': {

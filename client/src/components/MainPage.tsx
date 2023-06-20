@@ -56,8 +56,7 @@ const MainPage = memo(() => {
           }}
         >
           <Typography sx={{ paddingTop: '12px' }}>
-            Create personalized Spotify playlists with the top tracks from artists performing in your city or festival
-            of choice.
+            Create personalized Spotify playlists with the top tracks from artists performing in your city of choice.
           </Typography>
         </Box>
 

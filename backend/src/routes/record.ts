@@ -3,8 +3,103 @@ import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 export const recordRoutes = express.Router();
 import dbo from '../db/conn';
 import { extract } from '../extract_tickets';
+
 import { Cities, Festivals } from '../enums/common';
 import { CreateNewPlaylist } from '../createPlaylist';
+
+import { extractRifflandia } from '../rifflandia/extract';
+import { updateCollectionWithSpotify as updateCollectionWithSpotifyRifflandia } from '../rifflandia/addSpotifyDataToCollection';
+import { RIFFLANDIA_SIMPLE, RIFFLANDIA_SPOTIFY } from '../rifflandia/constants';
+import { CreateNewPlaylistRifflandia } from '../rifflandia/createPlaylist';
+
+recordRoutes.route('/rifflandia-extract').get(async (req, res) => {
+  console.log('Starting Web Scraping for Rifflandia');
+  let status;
+  try {
+    status = await extractRifflandia();
+  } catch (err) {
+    console.log('Error /rifflandia-extract: ', err);
+    status = 400;
+  }
+  res.status(status ? 200 : 400).send('Web Scraping Complete for Rifflandia');
+});
+
+recordRoutes.route('/rifflandia-spotify').get(async (req, res) => {
+  console.log('Starting to add spotify data to Rifflandia');
+  let db_connect = dbo.getDb();
+  await updateCollectionWithSpotifyRifflandia(RIFFLANDIA_SIMPLE, db_connect);
+  //res.status(status ? 200 : 400).send('Adding Spotify data for ' + collectionName + ' complete');
+});
+
+recordRoutes.route('/rifflandia').get(async (req, response) => {
+  let db_connect = dbo.getDb();
+
+  if (!db_connect) {
+    console.log('reconnecting to db');
+    await dbo.connectToServer(function (err: any) {
+      if (err) {
+        console.log('reconnecting error');
+        console.error(err);
+      }
+    });
+    db_connect = dbo.getDb();
+  }
+
+  db_connect
+    .collection(`rifflandia`)
+    .find({})
+    .toArray()
+    .then((data: any) => {
+      response.json(data);
+    });
+});
+
+recordRoutes.route('/rifflandia-create').post(async (req, response) => {
+  const { token, user_id, numTopTracks, days } = req.body;
+
+  let db_connect = dbo.getDb();
+
+  if (!db_connect) {
+    console.log('reconnecting to db');
+    await dbo.connectToServer(function (err: any) {
+      if (err) {
+        console.log('reconnecting error');
+        console.error(err);
+      }
+    });
+    db_connect = dbo.getDb();
+  }
+
+  let dayQuery;
+
+  if (!days || days.length === 0) {
+    dayQuery = {};
+  } else {
+    dayQuery = {
+      day: {
+        $in: days,
+      },
+    };
+  }
+
+  const artists = await db_connect.collection(RIFFLANDIA_SPOTIFY).find(dayQuery).toArray();
+
+  const url = await CreateNewPlaylistRifflandia({
+    token: token,
+    user_id: user_id,
+    numTopTracks: numTopTracks,
+    artists: artists,
+  }).catch((error) => {
+    console.log(error);
+    response.status(500).json({ error: error.message });
+  });
+
+  if (url) {
+    response.status(201).json(url);
+  } else {
+    response.status(500).json({ error: 'Something went wrong' });
+  }
+});
 
 /**
  * Route to get all tickets from a city, inlcuding spotify data

@@ -79,13 +79,13 @@ export const Settings = (props: any) => {
           </Box>
         </Box>
 
-        <Filter
+        {/* <Filter
           totalTickets={props.totalTickets}
           filteredGenres={props.filteredGenres}
           handleFilteredGenres={props.handleFilteredGenres}
           handleDeleteGenre={props.handleDeleteGenre}
           handleClearGenres={props.handleClearGenres}
-        />
+        /> */}
 
         <Box
           sx={{

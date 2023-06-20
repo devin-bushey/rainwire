@@ -48,6 +48,28 @@ const Refresh = () => {
       });
   };
 
+  const handleExtractRifflandia = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'rifflandia-extract/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleAddSpotifyRifflandia = () => {
+    axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'rifflandia-spotify/')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const getTodaysDate = () => {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -152,6 +174,13 @@ const Refresh = () => {
         <button onClick={() => handleAddSpotify(`db_${Festivals.Rifflandia}_` + getTodaysDate())}>
           Add Spotify to db_{Festivals.Rifflandia}_{getTodaysDate()}
         </button>
+      </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection(`rifflandia_simple`)}>Drop rifflandia_simple</button>
+        <button onClick={() => handleDropCollection(`rifflandia`)}>Drop rifflandia</button>
+        <button onClick={() => handleExtractRifflandia()}>Extract rifflandia_simple</button>
+        <button onClick={() => handleAddSpotifyRifflandia()}>Add Spotify to rifflandia_simple</button>
       </Box>
     </>
   );

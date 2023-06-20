@@ -58,6 +58,22 @@ export const Options = (props: any) => {
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
             Options
           </Typography>
+          <Button
+            variant="outlined"
+            sx={{
+              bottom: '20px',
+              left: '57px',
+              paddingLeft: '8px',
+              paddingRight: '8px',
+              paddingTop: '2px',
+              paddingBottom: '2px',
+              //marginLeft: '60px',
+              minWidth: '10px',
+            }}
+            onClick={props.handleCloseSettings}
+          >
+            x
+          </Button>
         </Box>
 
         <Box
@@ -102,9 +118,9 @@ export const Options = (props: any) => {
           <Button sx={{ width: '120px' }} variant="outlined" onClick={logOut}>
             Sign Out
           </Button>
-          <Button variant="outlined" sx={{ marginLeft: '8px', width: '120px' }} onClick={props.handleCloseSettings}>
+          {/* <Button variant="outlined" sx={{ marginLeft: '8px', width: '120px' }} onClick={props.handleCloseSettings}>
             Close
-          </Button>
+          </Button> */}
         </Box>
 
         <Box sx={{ marginTop: '24px' }}>
