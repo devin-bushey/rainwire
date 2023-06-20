@@ -16,8 +16,8 @@ export const CreateNewPlaylistRifflandia = async ({
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id });
 
-  //const playlist_id = playlist_data.new_playlist_id || '';
-  //AddCoverArt({ token, playlist_data.new_playlist_id || '' });
+  const playlist_id = playlist_data.new_playlist_id || '';
+  AddCoverArt({ token, playlist_id });
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
@@ -85,7 +85,7 @@ const CreateBlankPlaylist = async ({
   token: string;
   user_id: string;
 }): Promise<SpotifyPlaylistDataType> => {
-  let playlist_name = 'record shop ' + 'rifflandia';
+  let playlist_name = 'record shop rifflandia';
 
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
@@ -96,7 +96,7 @@ const CreateBlankPlaylist = async ({
     },
     data: {
       name: playlist_name,
-      description: 'a mixtape of upcoming concerts created by recordshop.cool',
+      description: 'a mixtape of the top tracks from artists playing at Rifflandia 2023 created by recordshop.cool',
       public: true,
     },
   })

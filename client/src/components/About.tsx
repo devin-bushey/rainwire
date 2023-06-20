@@ -93,7 +93,7 @@ export const About = memo(() => {
           }}
         >
           <Box sx={{ minHeight: '60px', marginBottom: '8px' }}>
-            {/* <Typography
+            <Typography
               sx={{
                 fontWeight: '700',
                 fontSize: '1.25rem',
@@ -113,7 +113,7 @@ export const About = memo(() => {
             >
               <img src={coffeeCup} alt="coffee" width="20px" height="20px" style={{ marginRight: '8px' }} />
               Buy me a coffee
-            </Button> */}
+            </Button>
             <Typography
               sx={{
                 fontWeight: '700',
