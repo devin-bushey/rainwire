@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { SpotifyPlaylistDataType } from '../SpotifyTypes';
-import path from 'path';
-import fs from 'fs';
+
+import { PLAYLIST_IMG } from './playlist_img';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -17,7 +17,7 @@ export const CreateNewPlaylistRifflandia = async ({
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id });
 
   const playlist_id = playlist_data.new_playlist_id || '';
-  AddCoverArt({ token, playlist_id });
+  await AddCoverArt({ token, playlist_id });
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
@@ -129,18 +129,18 @@ const CreateBlankPlaylist = async ({
     }); //end axios
 };
 
-const AddCoverArt = ({ token, playlist_id }: { token: string; playlist_id: string }) => {
-  const image = path.join(__dirname, './playlist_img.jpg');
-  const file = fs.readFileSync(image, { encoding: 'base64' });
+const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
+  // const image = path.join(__dirname, './playlist_img.jpg');
+  // const file = fs.readFileSync(image, { encoding: 'base64' });
 
-  axios({
+  return axios({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
     method: 'PUT',
     headers: {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
     },
-    data: file.toString(),
+    data: PLAYLIST_IMG,
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');
@@ -150,7 +150,7 @@ const AddCoverArt = ({ token, playlist_id }: { token: string; playlist_id: strin
       console.log('Error: unsuccessfully added cover art to playlist');
       //window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(error.message);
-      return null;
+      //return null;
     });
 };
 
