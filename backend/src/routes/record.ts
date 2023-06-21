@@ -192,37 +192,37 @@ recordRoutes.route('/tickets').post(async (req, response) => {
   }
 });
 
-recordRoutes.route('/drop').get(async (req, res) => {
-  const { collectionName } = req.query;
+// recordRoutes.route('/drop').get(async (req, res) => {
+//   const { collectionName } = req.query;
 
-  let db_connect = dbo.getDb();
+//   let db_connect = dbo.getDb();
 
-  await db_connect
-    .collection(collectionName)
-    .drop()
-    .then(() => {
-      console.log(collectionName + ' DROPPED');
-      res.status(200).send(collectionName + ' DROPPED');
-      // success
-    })
-    .catch(() => {
-      console.log('ERROR: ' + collectionName + ' NOT DROPPED');
-      res.status(400).send('ERROR: ' + collectionName + ' NOT DROPPED');
-      // error handling
-    });
-});
+//   await db_connect
+//     .collection(collectionName)
+//     .drop()
+//     .then(() => {
+//       console.log(collectionName + ' DROPPED');
+//       res.status(200).send(collectionName + ' DROPPED');
+//       // success
+//     })
+//     .catch(() => {
+//       console.log('ERROR: ' + collectionName + ' NOT DROPPED');
+//       res.status(400).send('ERROR: ' + collectionName + ' NOT DROPPED');
+//       // error handling
+//     });
+// });
 
-recordRoutes.route('/extract').get(async (req, res) => {
-  const { city } = req.query;
-  console.log('Starting Web Scraping for ' + city);
-  const status = await extract(city as Cities | Festivals);
-  res.status(status ? 200 : 400).send('Web Scraping Complete for ' + city);
-});
+// recordRoutes.route('/extract').get(async (req, res) => {
+//   const { city } = req.query;
+//   console.log('Starting Web Scraping for ' + city);
+//   const status = await extract(city as Cities | Festivals);
+//   res.status(status ? 200 : 400).send('Web Scraping Complete for ' + city);
+// });
 
-recordRoutes.route('/spotify').get(async (req, res) => {
-  const { collectionName } = req.query;
-  console.log('Starting to add spotify data to ' + collectionName);
-  let db_connect = dbo.getDb();
-  await updateCollectionWithSpotify(collectionName as string, db_connect);
-  //res.status(status ? 200 : 400).send('Adding Spotify data for ' + collectionName + ' complete');
-});
+// recordRoutes.route('/spotify').get(async (req, res) => {
+//   const { collectionName } = req.query;
+//   console.log('Starting to add spotify data to ' + collectionName);
+//   let db_connect = dbo.getDb();
+//   await updateCollectionWithSpotify(collectionName as string, db_connect);
+//   //res.status(status ? 200 : 400).send('Adding Spotify data for ' + collectionName + ' complete');
+// });

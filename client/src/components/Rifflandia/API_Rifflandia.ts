@@ -17,7 +17,7 @@ const sortDataByDateAndOrder = (data: any) => {
       return 1;
     } else {
       // If the dates are the same, compare the orders
-      return a.order - b.order;
+      return a.orderNum - b.orderNum;
     }
   });
 

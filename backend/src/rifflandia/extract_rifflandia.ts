@@ -16,18 +16,32 @@ export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park'
       const DAYS_ELECTRIC = ['Sept 7', 'Sept 8', 'Sept 9'];
       const DAYS_PARK = ['Sept 15', 'Sept 16', 'Sept 17'];
 
-      $('button').each(function (index, element) {
-        //console.log(element);
-        const dayIndex = index % DAYS_ELECTRIC.length;
-        var band_name = $(element).text().trim();
-        data.push({
-          ticket_band: band_name,
-          ticket_date: tbd + ' @ ' + venue,
-          weekend: venue,
-          date: tbd,
-          day: venue === 'Electric Avenue' ? DAYS_ELECTRIC[dayIndex] : DAYS_PARK[dayIndex],
-          orderNum: venue === 'Electric Avenue' ? 100 + index : 200 + index,
-        });
+      $('.font-extrabold').each(function (i, e) {
+        $(e)
+          .find('button')
+          .each(function (index, element) {
+            //console.log(element);
+            console.log('index', i);
+            console.log('font-extrabold', $(element).text().trim());
+            let dayI: number;
+            if (i === 18) {
+              dayI = 0;
+            } else if (i === 21) {
+              dayI = 1;
+            } else {
+              dayI = 2;
+            }
+            const dayIndex = dayI % DAYS_ELECTRIC.length;
+            var band_name = $(element).text().trim();
+            data.push({
+              ticket_band: band_name,
+              ticket_date: venue === 'Electric Avenue' ? DAYS_ELECTRIC[dayIndex] : DAYS_PARK[dayIndex] + ' @ ' + venue,
+              weekend: venue,
+              date: venue === 'Electric Avenue' ? DAYS_ELECTRIC[dayIndex] : DAYS_PARK[dayIndex],
+              day: venue === 'Electric Avenue' ? DAYS_ELECTRIC[dayIndex] : DAYS_PARK[dayIndex],
+              orderNum: venue === 'Electric Avenue' ? 100000 + i * 100 + index : 200000 + i * 100 + index,
+            });
+          });
       });
       return data;
     })
