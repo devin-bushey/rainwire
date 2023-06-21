@@ -1,4 +1,5 @@
-import { Box, Container } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Container } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
@@ -7,7 +8,7 @@ import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { WEBSITE_RIFFLANDIA } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { TicketContainer } from './TicketContainer';
+import { TicketContainer } from './Rifflandia/TicketContainer';
 import './styles/ClickMe.css';
 import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from './Rifflandia/colours';
 import './Rifflandia/styles.css';
@@ -22,10 +23,20 @@ import { Options } from './Rifflandia/Options';
 import { Login } from './Rifflandia/Login';
 import './Rifflandia/styles.css';
 import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from './Rifflandia/API_Rifflandia';
+import { SimpleAccordion } from './Rifflandia/SimpleAccordion';
+import { SelectDays } from './Rifflandia/SelectDays';
+import { useNavigate } from 'react-router-dom';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
+
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/rifflandia');
+    window.location.reload();
+  };
 
   const DAYS = ['Sept 7', 'Sept 8', 'Sept 9', 'Sept 15', 'Sept 16', 'Sept 17'];
 
@@ -53,6 +64,7 @@ export const Rifflandia = () => {
     ...queryOptions,
   });
 
+  const [showSelectDays, setShowSelectDays] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
@@ -110,6 +122,10 @@ export const Rifflandia = () => {
 
   const handleCloseSettings = () => {
     setShowSettings(false);
+  };
+
+  const handleCloseSelectDays = () => {
+    setShowSelectDays(false);
   };
 
   const isInAppBrowser = () => {
@@ -209,28 +225,66 @@ export const Rifflandia = () => {
 
       <Box
         className="riff-background"
-        sx={{ textAlign: 'center', paddingBottom: '24px', backgroundColor: RIFFLANDIA_COLOURS.background }}
+        sx={{
+          textAlign: 'center',
+          paddingBottom: '24px',
+          backgroundColor: RIFFLANDIA_COLOURS.background,
+        }}
       >
-        <Container
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
-            paddingBottom: !showLoadMoreBtn ? '120px' : '',
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: RIFFLANDIA_COLOURS.background,
-              borderRadius: '10px',
-              width: '300px',
-              margin: '8px',
-            }}
-          >
-            <img src={TITLE} alt="Rifflandia Title" />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ maxWidth: '900px' }}>
+            <Container
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
+                paddingBottom: !showLoadMoreBtn ? '120px' : '',
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: RIFFLANDIA_COLOURS.background,
+                  borderRadius: '10px',
+                  width: '300px',
+                  margin: '8px',
+                }}
+              >
+                <img src={TITLE} alt="Rifflandia Title" />
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                <Button
+                  onClick={handleCreatePlaylist}
+                  variant="contained"
+                  className="btn--click-me-riff create-playlist"
+                  sx={{
+                    backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                    ':hover': {
+                      backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                    },
+                    color: 'black',
+                    width: '300px',
+                    marginTop: '16px',
+                    marginBottom: '16px',
+                    justifyContent: 'center',
+                    height: '48px',
+                  }}
+                >
+                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+                  <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
+                </Button>
+              </Box>
+
+              {/* <Button
+              variant="outlined"
+              sx={{ marginTop: '16px', width: '300px' }}
+              onClick={() => {
+                setShowSelectDays(!showSelectDays);
+              }}
+            >
+              Filter by day
+            </Button> */}
+
+              {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
               {DAYS.map((day) => (
                 <Button
                   variant="outlined"
@@ -256,46 +310,45 @@ export const Rifflandia = () => {
                   {day}
                 </Button>
               ))}
-            </Box>
+            </Box> */}
 
-            <Button
-              variant="outlined"
-              sx={{ marginTop: '16px', width: '300px' }}
-              onClick={() => {
-                setShowSettings(!showSettings);
-              }}
-            >
-              Options
-            </Button>
+              <Box
+                sx={{
+                  backgroundColor: RIFFLANDIA_COLOURS.background,
+                  borderRadius: '10px',
+                  width: '300px',
+                  margin: '8px',
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  sx={{ marginBottom: '16px', width: '300px' }}
+                  onClick={() => {
+                    setShowSettings(!showSettings);
+                  }}
+                >
+                  Customize
+                </Button>
 
-            <Button
-              onClick={handleCreatePlaylist}
-              variant="contained"
-              className="btn--click-me-riff create-playlist"
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.light_blue,
-                ':hover': {
-                  backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
-                },
-                color: 'black',
-                width: '300px',
-                marginTop: '16px',
-                marginBottom: '16px',
-                justifyContent: 'center',
-              }}
-            >
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
-            </Button>
+                <Button
+                  variant="outlined"
+                  sx={{ marginBottom: '16px', width: '300px' }}
+                  onClick={() => {
+                    logOut();
+                  }}
+                >
+                  Sign out
+                </Button>
 
-            <Button variant="outlined" sx={{ width: '300px' }} href={WEBSITE_RIFFLANDIA} target="_blank">
-              <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-                <CHERRIES />
+                <Button variant="outlined" sx={{ width: '300px' }} href={WEBSITE_RIFFLANDIA} target="_blank">
+                  <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+                    <CHERRIES />
+                  </Box>
+                  Buy Tickets
+                </Button>
               </Box>
-              Tickets
-            </Button>
 
-            {/* <Box sx={{ display: 'flex' }}>
+              {/* <Box sx={{ display: 'flex' }}>
               <Button
                 variant="outlined"
                 sx={{ marginRight: '18px', width: '140px' }}
@@ -318,34 +371,45 @@ export const Rifflandia = () => {
                 Options
               </Button>
             </Box> */}
-          </Box>
 
-          {showSettings && (
-            <div>
-              <Options
-                totalTickets={totalTickets}
-                //filteredDates={filteredDates}
-                numTopTracks={numTopTracks}
-                //handleFilteredGenres={handleFilteredGenres}
-                handleNumTopTracks={handleNumTopTracks}
-                //handleDeleteGenre={handleDeleteGenre}
-                handleCloseSettings={handleCloseSettings}
-                //handleClearGenres={handleClearGenres}
-                colour={RIFFLANDIA_COLOURS.fill_pale_green}
-              />
-            </div>
-          )}
+              {showSelectDays && (
+                <div>
+                  <SelectDays
+                    selectedDays={selectedDays}
+                    handleDayClick={handleDayClick}
+                    handleCloseSelectDays={handleCloseSelectDays}
+                    colour={RIFFLANDIA_COLOURS.fill_pale_green}
+                  />
+                </div>
+              )}
 
-          {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
+              {showSettings && (
+                <div>
+                  <Options
+                    selectedDays={selectedDays}
+                    handleDayClick={handleDayClick}
+                    handleCloseSelectDays={handleCloseSelectDays}
+                    totalTickets={totalTickets}
+                    numTopTracks={numTopTracks}
+                    handleNumTopTracks={handleNumTopTracks}
+                    handleCloseSettings={handleCloseSettings}
+                    colour={RIFFLANDIA_COLOURS.fill_pale_green}
+                  />
+                </div>
+              )}
+
+              {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
           <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}> */}
-          <TicketContainer
-            tickets={tickets}
-            showGenres={false}
-            isLoadingTickets={false}
-            isErrorTickets={isErrorTickets}
-            cardColours={RIFF_CARD_COLOURS}
-          />
-        </Container>
+              <TicketContainer
+                tickets={tickets}
+                showGenres={false}
+                isLoadingTickets={false}
+                isErrorTickets={isErrorTickets}
+                cardColours={RIFF_CARD_COLOURS}
+              />
+            </Container>
+          </Box>
+        </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           {showLoadMoreBtn && (

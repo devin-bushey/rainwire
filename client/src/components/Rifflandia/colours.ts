@@ -22,3 +22,7 @@ export const RIFF_CARD_COLOURS = [
   RIFFLANDIA_COLOURS.fill_pale_pink,
   RIFFLANDIA_COLOURS.fill_pale_green,
 ];
+
+export const SPOTIFY_COLOURS = {
+  green: '#1DB954',
+};
