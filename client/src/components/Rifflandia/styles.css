@@ -26,6 +26,8 @@
   padding-right: 100px;
 }
 
+
+
 .fill-pale-pink{
   fill: rgba(239,180,210,1);
 }
@@ -72,5 +74,49 @@
 
     right: -70px;
   }
+}
+
+
+.option-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 8px;
+  align-items: flex-start;
+}
+
+.option-tracks-dates{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  max-width: 300px;
+  padding: 0 30px;
+}
+
+
+@media only screen and (max-width: 896px) {
+  .option-box {
+  display: block;
+  flex-wrap: nowrap;
+  width: 300px;
+  margin: 8px;
+}
+.options-container{
+  width: 300px;
+}
+
+.option-tracks-dates{
+  width: 228px;
+}
+
+}
+
+@media only screen and (max-width: 937px) {
+  .option-tracks-dates{
+    padding: 0px;
+  }
+
 }
 

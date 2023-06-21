@@ -36,7 +36,7 @@ export const StickyButton = ({
         //right: '16px',
         zIndex: 9999,
         opacity: showButton ? 1 : 0,
-        transition: 'opacity 0.5s ease',
+        transition: 'opacity 1.5s ease',
         display: 'flex',
         justifyContent: 'center',
         width: '100vw',

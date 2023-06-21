@@ -25,6 +25,7 @@ export const CreatePlaylistButton = ({
         width: '300px',
         //marginBottom: '24px',
         justifyContent: 'center',
+        height: '48px',
       }}
     >
       <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />

@@ -57,48 +57,54 @@ export const Login = () => {
           >
             <img src={TITLE} alt="Rifflandia Title" />
 
-            <Button
-              onClick={isInAppBrowser}
-              variant="contained"
-              className="create-playlist"
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.light_blue,
-                ':hover': {
-                  backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
-                },
-                color: 'black',
-                width: '300px',
-                marginTop: '24px',
-                marginBottom: '24px',
-                justifyContent: 'center',
-              }}
-            >
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              <Typography sx={{ paddingBottom: 0 }}>Sign in with Spotify</Typography>
-            </Button>
-
-            <Card
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.fill_light_orange,
-              }}
-            >
-              <Typography>
-                Effortlessly generate a playlist on your Spotify account featuring the top tracks from each artist
-                performing at Rifflandia.
-              </Typography>
-            </Card>
-
             <Card
               sx={{
                 backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
                 marginTop: '24px',
               }}
             >
-              <Typography>
-                Once signed in, the playlist can be generated and pre-filled for you directly on your account, with a
-                single click of a button.
+              <Typography
+                sx={{
+                  fontSize: '2.3rem',
+                  //fontFamily: 'Lobster, cursive',
+                  fontFamily: 'Caveat, cursive',
+                  fontWeight: '700',
+                }}
+              >
+                Record Shop
               </Typography>
+              <Typography sx={{ marginTop: '12px' }}>
+                Effortlessly generate a playlist featuring the top tracks from each artist performing at Rifflandia.
+              </Typography>
+
+              <Typography sx={{ marginTop: '12px' }}>Start by signing in with Spotify</Typography>
+
+              <Button
+                onClick={isInAppBrowser}
+                variant="contained"
+                className="create-playlist"
+                sx={{
+                  backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                  ':hover': {
+                    backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                  },
+                  color: 'black',
+                  width: '100%',
+                  marginTop: '24px',
+                  marginBottom: '24px',
+                  justifyContent: 'center',
+                  height: '48px',
+                }}
+              >
+                <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
+                <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Sign in</Typography>
+              </Button>
             </Card>
+
+            {/* <Typography sx={{ marginTop: '12px' }}>
+              Once signed in, the playlist can be generated and pre-filled for you directly on your account, with a
+              single click of a button.
+            </Typography> */}
           </Box>
         </Container>
       </Box>
