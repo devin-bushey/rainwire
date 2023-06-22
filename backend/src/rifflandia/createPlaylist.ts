@@ -50,13 +50,12 @@ export const CreateNewPlaylistRifflandia = async ({
     trackArrays.push(chunk);
   }
 
-  trackArrays.forEach(async (trackArray) => {
+  for (const trackArray of trackArrays) {
     const tracks = trackArray.join(',');
     if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
       await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
     }
-  });
-
+  }
   return playlist_data.external_urls?.spotify;
 };
 
