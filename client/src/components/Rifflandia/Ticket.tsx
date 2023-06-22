@@ -15,8 +15,9 @@ export const Ticket = (props: any) => {
         width: '300px',
         margin: '8px',
         '&:hover': {
-          background: RIFFLANDIA_COLOURS.dark_blue,
-          color: 'white',
+          outline: `thick double ${RIFFLANDIA_COLOURS.dark_blue}`,
+          // background: RIFFLANDIA_COLOURS.dark_blue,
+          // color: 'white',
         },
       }}
       onClick={() => {

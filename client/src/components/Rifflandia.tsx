@@ -26,6 +26,7 @@ import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from './Rifflandia/
 import { SimpleAccordion } from './Rifflandia/SimpleAccordion';
 import { SelectDays } from './Rifflandia/SelectDays';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from './Rifflandia/Spinner';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -70,6 +71,7 @@ export const Rifflandia = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
@@ -147,6 +149,7 @@ export const Rifflandia = () => {
 
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
+      setIsLoading(true);
       await CreateNewPlaylistRifflandia({
         token: token,
         user_id: spotifyInfo.user_id,
@@ -171,6 +174,8 @@ export const Rifflandia = () => {
           console.log(err);
           setIsError(true);
         });
+
+      setIsLoading(false);
     } else {
       isInAppBrowser();
     }
@@ -222,6 +227,8 @@ export const Rifflandia = () => {
     <>
       <div className="sidebar sidebar-svg-park"></div>
       <div className="sidebar sidebar-svg-electric"></div>
+
+      {isLoading && <Spinner />}
 
       <Box
         className="riff-background"
