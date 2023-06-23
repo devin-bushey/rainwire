@@ -8,11 +8,13 @@ export const CreateNewPlaylistRifflandia = async ({
   user_id,
   numTopTracks,
   artists,
+  sortBy,
 }: {
   token: string;
   user_id: string;
   numTopTracks?: number;
   artists: any;
+  sortBy: string;
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id });
 
@@ -21,7 +23,7 @@ export const CreateNewPlaylistRifflandia = async ({
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  const sortedArtists = sortDataByDateAndOrder(artists);
+  const sortedArtists = sortBy === 'orderNum' ? sortByOrderNum(artists) : sortDataByDateAndOrder(artists);
 
   let tracks = '';
 
@@ -81,6 +83,14 @@ const sortDataByDateAndOrder = (data: any) => {
   });
 
   return data;
+};
+
+const sortByOrderNum = (tickets: any) => {
+  tickets.sort((a: any, b: any) => {
+    return a.orderNum - b.orderNum;
+  });
+
+  return tickets;
 };
 
 const CreateBlankPlaylist = async ({
