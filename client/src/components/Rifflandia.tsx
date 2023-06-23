@@ -27,6 +27,7 @@ import { SimpleAccordion } from './Rifflandia/SimpleAccordion';
 import { SelectDays } from './Rifflandia/SelectDays';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from './Rifflandia/Spinner';
+import { sortByOrderNum, sortDataByDateAndOrder } from './Rifflandia/sorter';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -93,7 +94,7 @@ export const Rifflandia = () => {
   useEffect(() => {
     if (query.data) {
       setLoadMore(loadInterval);
-      setTotalTickets(query.data);
+      setTotalTickets(sortByOrderNum(query.data));
     }
   }, [query.data]);
 
@@ -183,6 +184,7 @@ export const Rifflandia = () => {
 
   const handleClearAllFilters = () => {
     setLoadMore(loadInterval);
+    setTotalTickets(sortByOrderNum(totalTickets));
     setTickets(totalTickets.slice(0, loadMore));
     setShowLoadMoreBtn(true);
   };
@@ -199,7 +201,9 @@ export const Rifflandia = () => {
     if (!selectedDays || selectedDays.length === 0) {
       handleClearAllFilters();
     } else {
-      const tickets = totalTickets.filter((ticket: any) => {
+      const sortedTickets = sortDataByDateAndOrder(totalTickets);
+      setTotalTickets(sortedTickets);
+      const tickets = sortedTickets.filter((ticket: any) => {
         return selectedDays.some((day: any) => ticket.day.includes(day));
       });
       setTickets(tickets);

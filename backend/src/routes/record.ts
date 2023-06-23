@@ -71,10 +71,13 @@ recordRoutes.route('/rifflandia-create').post(async (req, response) => {
   }
 
   let dayQuery;
+  let sortBy;
 
   if (!days || days.length === 0) {
+    sortBy = 'orderNum';
     dayQuery = {};
   } else {
+    sortBy = 'day';
     dayQuery = {
       day: {
         $in: days,
@@ -89,6 +92,7 @@ recordRoutes.route('/rifflandia-create').post(async (req, response) => {
     user_id: user_id,
     numTopTracks: numTopTracks,
     artists: artists,
+    sortBy: sortBy,
   }).catch((error) => {
     console.log(error);
     response.status(500).json({ error: error.message });

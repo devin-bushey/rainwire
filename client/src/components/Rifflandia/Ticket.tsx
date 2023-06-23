@@ -21,7 +21,7 @@ export const Ticket = (props: any) => {
         },
       }}
       onClick={() => {
-        window.open(props.ticket.link, '_blank');
+        window.open(props.ticket.link);
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'left' }}>
