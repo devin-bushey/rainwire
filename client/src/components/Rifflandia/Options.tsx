@@ -1,19 +1,11 @@
-import { Card, Typography, Slider, Button, Link } from '@mui/material';
+import { Typography, Slider, Button, Link } from '@mui/material';
 import { Box } from '@mui/system';
 import { COLOURS } from '../../theme/AppStyles';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { useNavigate } from 'react-router-dom';
 import { RIFFLANDIA_COLOURS } from './colours';
 import './styles.css';
 
 export const Options = (props: any) => {
-  const navigate = useNavigate();
-  const logOut = () => {
-    localStorage.clear();
-    navigate('/rifflandia');
-    window.location.reload();
-  };
-
   const DAYS = ['Sept 7', 'Sept 15', 'Sept 8', 'Sept 16', 'Sept 9', 'Sept 17'];
 
   const marks = [

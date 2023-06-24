@@ -1,11 +1,25 @@
-import { Card, Typography, CardMedia, Button } from '@mui/material';
+import { Card, Typography, CardMedia } from '@mui/material';
 import { Box } from '@mui/system';
 import spotifyLogoBlack from '../../spotifyLogos/Spotify_Logo_RGB_Black.png';
-import { useNavigate } from 'react-router-dom';
 import { RIFFLANDIA_COLOURS } from './colours';
+import { useEffect, useState } from 'react';
 
 export const Ticket = (props: any) => {
   const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
+
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
 
   return (
     <Card
@@ -21,7 +35,7 @@ export const Ticket = (props: any) => {
         },
       }}
       onClick={() => {
-        window.open(props.ticket.link);
+        isMobile ? window.location.assign(props.ticket.link) : window.open(props.ticket.link);
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'left' }}>
