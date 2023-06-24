@@ -28,6 +28,7 @@ import { SelectDays } from './Rifflandia/SelectDays';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from './Rifflandia/Spinner';
 import { sortByOrderNum, sortDataByDateAndOrder } from './Rifflandia/sorter';
+import { trackButtonClick } from '../hooks/ga4';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -197,6 +198,12 @@ export const Rifflandia = () => {
     }
   };
 
+  const handleBuyTickets = () => {
+    window.open(WEBSITE_RIFFLANDIA);
+    //window.location.assign(WEBSITE_RIFFLANDIA);
+    trackButtonClick();
+  };
+
   useEffect(() => {
     if (!selectedDays || selectedDays.length === 0) {
       handleClearAllFilters();
@@ -351,7 +358,7 @@ export const Rifflandia = () => {
                   Sign out
                 </Button>
 
-                <Button variant="outlined" sx={{ width: '300px' }} href={WEBSITE_RIFFLANDIA} target="_blank">
+                <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: '300px' }}>
                   <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
                     <CHERRIES />
                   </Box>
