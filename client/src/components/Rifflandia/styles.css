@@ -6,6 +6,14 @@
   bottom: 0;
 }
 
+.sidebar-login {
+  position: fixed;
+  width: 200px;
+  background-size: 114px 348px;
+  top: 0;
+  bottom: 0;
+}
+
 .sidebar-svg-park {
   background-image: url('./background-park.svg');
   left: 0;
@@ -59,6 +67,13 @@
   overflow: visible;
 } */
 
+@media only screen and (max-width: 1070px) {
+  .sidebar-login {
+    width: 100px;
+  }
+
+}
+
 @media only screen and (max-width: 600px) {
   .riff-background {
   padding-left: 20px;
@@ -66,7 +81,6 @@
 }
 
   .sidebar-svg-park {
-
     left: -70px;
   }
 

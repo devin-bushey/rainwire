@@ -93,6 +93,7 @@ recordRoutes.route('/rifflandia-create').post(async (req, response) => {
     numTopTracks: numTopTracks,
     artists: artists,
     sortBy: sortBy,
+    days: days,
   }).catch((error) => {
     console.log(error);
     response.status(500).json({ error: error.message });

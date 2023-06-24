@@ -9,14 +9,16 @@ export const CreateNewPlaylistRifflandia = async ({
   numTopTracks,
   artists,
   sortBy,
+  days,
 }: {
   token: string;
   user_id: string;
   numTopTracks?: number;
   artists: any;
   sortBy: string;
+  days: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id, days });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   await AddCoverArt({ token, playlist_id });
@@ -96,11 +98,28 @@ const sortByOrderNum = (tickets: any) => {
 const CreateBlankPlaylist = async ({
   token,
   user_id,
+  days,
 }: {
   token: string;
   user_id: string;
+  days: string[];
 }): Promise<SpotifyPlaylistDataType> => {
   let playlist_name = 'record shop rifflandia';
+  let description =
+    'a mixtape of the top tracks from artists playing at Rifflandia 2023 created by recordshop.cool/rifflandia';
+
+  days.sort();
+
+  const thePark = ['Sept 15', 'Sept 16', 'Sept 17'];
+  const electricAve = ['Sept 7', 'Sept 8', 'Sept 9'];
+
+  if (JSON.stringify(days) === JSON.stringify(electricAve)) {
+    playlist_name = playlist_name + ' - electric avenue';
+  }
+
+  if (JSON.stringify(days) === JSON.stringify(thePark)) {
+    playlist_name = playlist_name + ' - the park';
+  }
 
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
@@ -111,7 +130,7 @@ const CreateBlankPlaylist = async ({
     },
     data: {
       name: playlist_name,
-      description: 'a mixtape of the top tracks from artists playing at Rifflandia 2023 created by recordshop.cool',
+      description: description,
       public: true,
     },
   })

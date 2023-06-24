@@ -32,8 +32,8 @@ export const Login = () => {
 
   return (
     <>
-      <div className="sidebar sidebar-svg-park"></div>
-      <div className="sidebar sidebar-svg-electric"></div>
+      <div className="sidebar-login sidebar-svg-park"></div>
+      <div className="sidebar-login sidebar-svg-electric"></div>
 
       <Box
         className="riff-background"
@@ -51,11 +51,12 @@ export const Login = () => {
             sx={{
               backgroundColor: RIFFLANDIA_COLOURS.background,
               borderRadius: '10px',
-              width: '300px',
+              minWidth: '300px',
+              maxWidth: '550px',
               margin: '8px',
             }}
           >
-            <img src={TITLE} alt="Rifflandia Title" />
+            <img style={{ width: '300px' }} src={TITLE} alt="Rifflandia Title" />
 
             <Card
               sx={{
@@ -77,7 +78,11 @@ export const Login = () => {
                 Effortlessly generate a playlist featuring the top tracks from each artist performing at Rifflandia.
               </Typography>
 
-              <Typography sx={{ marginTop: '12px' }}>Start by signing in with Spotify</Typography>
+              <Typography sx={{ marginTop: '24px' }}>
+                The playist can be pre-populated and created right on your account!
+              </Typography>
+
+              <Typography sx={{ marginTop: '24px' }}>Start by signing in with Spotify</Typography>
 
               <Button
                 onClick={isInAppBrowser}
@@ -91,7 +96,7 @@ export const Login = () => {
                   color: 'black',
                   width: '100%',
                   marginTop: '24px',
-                  marginBottom: '24px',
+                  marginBottom: '12px',
                   justifyContent: 'center',
                   height: '48px',
                 }}
