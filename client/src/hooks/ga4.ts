@@ -15,3 +15,11 @@ export const sendPageview = (path: string) =>
     hitType: 'pageview',
     page: path,
   });
+
+export const trackButtonClick = () => {
+  ga4.event({
+    category: 'Button',
+    action: 'Click ',
+    label: 'BuyRiffTickets',
+  });
+};
