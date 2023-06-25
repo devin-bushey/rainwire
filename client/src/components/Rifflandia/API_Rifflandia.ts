@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { sortDataByDateAndOrder } from './sorter';
+import { sortDataByDateAndOrder } from '../../helpers/sorter';
 
 export const GetTicketsRifflandia = async (): Promise<any> => {
   return axios.get(import.meta.env.VITE_SITE_URL_DB + 'rifflandia/').then(async (response) => {

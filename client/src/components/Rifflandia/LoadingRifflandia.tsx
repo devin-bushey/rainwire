@@ -1,6 +1,5 @@
 import { Container, Typography } from '@mui/material';
 import '../styles/Loading.css';
-import { RIFFLANDIA_COLOURS } from './colours';
 
 export const LoadingRifflandia = () => {
   return (

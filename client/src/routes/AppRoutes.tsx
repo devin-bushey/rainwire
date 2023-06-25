@@ -9,7 +9,7 @@ import { DisplayTickets } from '../components/DisplayTickets';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { CreatePlaylistPage } from '../components/CreatePlaylistPage';
 import useAnalytics from '../hooks/useAnalytics';
-import { Rifflandia } from '../components/Rifflandia';
+import { Rifflandia } from '../components/Rifflandia/Rifflandia';
 
 export const AppRoutes = () => {
   useAnalytics();

@@ -9,6 +9,8 @@ import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constant
 import { InAppModal } from './InAppModal';
 import './styles/Background.css';
 
+import { ReactComponent as CHERRIES } from './Rifflandia/images/cherries.svg';
+
 const MainPage = memo(() => {
   const navigate = useNavigate();
 
@@ -89,6 +91,19 @@ const MainPage = memo(() => {
             sx={{ marginBottom: '24px', padding: '8px 16px', maxWidth: '222px' }}
           >
             About
+          </Button>
+
+          <Button
+            onClick={() => {
+              navigate('/rifflandia');
+            }}
+            variant="outlined"
+            sx={{ marginBottom: '24px', padding: '8px 16px', maxWidth: '222px' }}
+          >
+            <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+              <CHERRIES />
+            </Box>
+            Rifflandia
           </Button>
         </Box>
 
