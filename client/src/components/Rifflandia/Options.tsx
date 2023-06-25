@@ -36,22 +36,16 @@ export const Options = (props: any) => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        //marginLeft: 'auto',
-        //marginRight: 'auto',
-        //marginBottom: '24px',
       }}
     >
       <Box
         className="options-container"
         sx={{
           marginTop: '12px',
-          //display: 'flex',
           padding: '30px',
           borderRadius: '10px',
           backgroundColor: props.colour ? props.colour : 'hsl(141, 12%, 80%)',
           minHeight: '290px',
-          //width: '300px',
-          //margin: '8px',
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '4px' }}>
@@ -59,22 +53,6 @@ export const Options = (props: any) => {
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
             Customize
           </Typography>
-          {/* <Button
-            variant="outlined"
-            sx={{
-              bottom: '20px',
-              left: '57px',
-              paddingLeft: '8px',
-              paddingRight: '8px',
-              paddingTop: '2px',
-              paddingBottom: '2px',
-              //marginLeft: '60px',
-              minWidth: '10px',
-            }}
-            onClick={props.handleCloseSettings}
-          >
-            x
-          </Button> */}
         </Box>
 
         <Box className="option-box">
@@ -104,16 +82,9 @@ export const Options = (props: any) => {
                   onClick={() => props.handleDayClick(day)}
                   sx={{
                     width: '110px',
-                    //fontSize: '0.6rem',
                     margin: '8px 2px',
                     marginBottom: '2px',
                     background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
-                    // '&:active': {
-                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                    // },
-                    // '&:focus': {
-                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                    // },
                     '&:hover': {
                       background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
                     },
@@ -125,27 +96,6 @@ export const Options = (props: any) => {
             </Box>
           </Box>
         </Box>
-
-        {/* 
-        <Box sx={{ marginTop: '12px' }}>
-          <Button variant="outlined" onClick={logOut}>
-            Sign Out
-          </Button>
-        </Box> */}
-
-        {/* <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '8px',
-            //marginBottom: '8px',
-          }}
-        >
-          <Button sx={{ width: '120px' }} variant="outlined" onClick={logOut}>
-            Sign Out
-          </Button>
-        </Box> */}
 
         <Box sx={{ marginTop: '24px' }}>
           <Link href="https://www.spotify.com/account/apps">

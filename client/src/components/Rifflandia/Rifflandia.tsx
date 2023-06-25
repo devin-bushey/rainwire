@@ -1,34 +1,38 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Container } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useContext, useEffect, useState } from 'react';
+
+import '../styles/ClickMe.css';
+import './styles.css';
+
+// Images
+import TITLE from './images/title.svg';
+import { ReactComponent as CHERRIES } from './images/cherries.svg';
+import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
+
+import { Box, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
-import { useContext, useEffect, useState } from 'react';
-import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { SnackBarContext } from '../App';
-import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import { WEBSITE_RIFFLANDIA } from '../constants/locations';
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { TicketContainer } from './Rifflandia/TicketContainer';
-import './styles/ClickMe.css';
-import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from './Rifflandia/colours';
-import './Rifflandia/styles.css';
-import TITLE from './Rifflandia/title.svg';
-import { ReactComponent as CHERRIES } from './Rifflandia/cherries.svg';
-import { Festivals } from '../constants/enums';
-import { InAppModalRifflandia } from './Rifflandia/InAppModalRifflandia';
+
+import { SnackBarContext } from '../../App';
+import useSpotifyAuth from '../../hooks/useSpotifyAuth';
+import { WEBSITE_RIFFLANDIA } from '../../constants/locations';
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../../constants/auth';
+import { TicketContainer } from './TicketContainer';
+import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from './colours';
+
+import { Festivals } from '../../constants/enums';
+import { InAppModalRifflandia } from './InAppModalRifflandia';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { LoadingRifflandia } from './Rifflandia/LoadingRifflandia';
-import { StickyButton } from './StickyButton';
-import { Options } from './Rifflandia/Options';
-import { Login } from './Rifflandia/Login';
-import './Rifflandia/styles.css';
-import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from './Rifflandia/API_Rifflandia';
-import { SimpleAccordion } from './Rifflandia/SimpleAccordion';
-import { SelectDays } from './Rifflandia/SelectDays';
+import { LoadingRifflandia } from './LoadingRifflandia';
+import { StickyButton } from '../StickyButton';
+import { Options } from './Options';
+import { Login } from './Login';
+
+import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from './API_Rifflandia';
+import { SelectDays } from './SelectDays';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from './Rifflandia/Spinner';
-import { sortByOrderNum, sortDataByDateAndOrder } from './Rifflandia/sorter';
-import { trackButtonClick } from '../hooks/ga4';
+import { Spinner } from './Spinner';
+import { sortByOrderNum, sortDataByDateAndOrder } from '../../helpers/sorter';
+import { trackButtonClick } from '../../hooks/ga4';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -40,8 +44,6 @@ export const Rifflandia = () => {
     navigate('/rifflandia');
     window.location.reload();
   };
-
-  const DAYS = ['Sept 7', 'Sept 8', 'Sept 9', 'Sept 15', 'Sept 16', 'Sept 17'];
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -292,44 +294,6 @@ export const Rifflandia = () => {
                 </Button>
               </Box>
 
-              {/* <Button
-              variant="outlined"
-              sx={{ marginTop: '16px', width: '300px' }}
-              onClick={() => {
-                setShowSelectDays(!showSelectDays);
-              }}
-            >
-              Filter by day
-            </Button> */}
-
-              {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-              {DAYS.map((day) => (
-                <Button
-                  variant="outlined"
-                  key={day}
-                  onClick={() => handleDayClick(day)}
-                  sx={{
-                    width: '90px',
-                    fontSize: '0.6rem',
-                    margin: '8px 0px',
-                    marginBottom: '2px',
-                    background: selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
-                    // '&:active': {
-                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                    // },
-                    // '&:focus': {
-                    //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                    // },
-                    '&:hover': {
-                      background: selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
-                    },
-                  }}
-                >
-                  {day}
-                </Button>
-              ))}
-            </Box> */}
-
               <Box
                 sx={{
                   backgroundColor: RIFFLANDIA_COLOURS.background,
@@ -366,30 +330,6 @@ export const Rifflandia = () => {
                 </Button>
               </Box>
 
-              {/* <Box sx={{ display: 'flex' }}>
-              <Button
-                variant="outlined"
-                sx={{ marginRight: '18px', width: '140px' }}
-                href={WEBSITE_RIFFLANDIA}
-                target="_blank"
-              >
-                <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-                  <CHERRIES />
-                </Box>
-                Tickets
-              </Button>
-
-              <Button
-                variant="outlined"
-                sx={{ width: '140px' }}
-                onClick={() => {
-                  setShowSettings(!showSettings);
-                }}
-              >
-                Options
-              </Button>
-            </Box> */}
-
               {showSelectDays && (
                 <div>
                   <SelectDays
@@ -416,8 +356,6 @@ export const Rifflandia = () => {
                 </div>
               )}
 
-              {/* <Box sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-          <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}> */}
               <TicketContainer
                 tickets={tickets}
                 showGenres={false}

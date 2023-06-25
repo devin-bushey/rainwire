@@ -1,10 +1,14 @@
-import { Box, Button, Card, Container, Typography } from '@mui/material';
-import { RIFFLANDIA_COLOURS } from './colours';
-import { InAppModalRifflandia } from './InAppModalRifflandia';
-import TITLE from './title.svg';
-import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { useState } from 'react';
+
+import { Box, Button, Card, Container, Typography } from '@mui/material';
+import { InAppModalRifflandia } from './InAppModalRifflandia';
+
 import { BASE_REDIRECT_URI, AUTH_ENDPOINT, CLIENT_ID, SCOPES } from '../../constants/auth';
+import { RIFFLANDIA_COLOURS } from './colours';
+
+import TITLE from './images/title.svg';
+import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import './styles.css';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
@@ -42,9 +46,8 @@ export const Login = () => {
         <Container
           sx={{
             display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
+            flex: 1,
+            justifyContent: 'center',
           }}
         >
           <Box
@@ -105,13 +108,13 @@ export const Login = () => {
                 <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Sign in</Typography>
               </Button>
             </Card>
-
-            {/* <Typography sx={{ marginTop: '12px' }}>
-              Once signed in, the playlist can be generated and pre-filled for you directly on your account, with a
-              single click of a button.
-            </Typography> */}
           </Box>
         </Container>
+
+        <footer className="footer">
+          <span style={{ fontSize: '1.2rem', fontFamily: 'Caveat, cursive' }}>Record Shop </span> made by{' '}
+          <a href="https://www.linkedin.com/in/devin-bushey/">Devin Bushey</a>
+        </footer>
       </Box>
 
       <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />

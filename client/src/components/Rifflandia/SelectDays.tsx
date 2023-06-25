@@ -1,8 +1,5 @@
-import { Card, Typography, Slider, Button, Link } from '@mui/material';
+import { Card, Typography, Button } from '@mui/material';
 import { Box } from '@mui/system';
-import { COLOURS } from '../../theme/AppStyles';
-import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { useNavigate } from 'react-router-dom';
 import { RIFFLANDIA_COLOURS } from './colours';
 
 export const SelectDays = (props: any) => {
@@ -34,7 +31,6 @@ export const SelectDays = (props: any) => {
               paddingRight: '8px',
               paddingTop: '2px',
               paddingBottom: '2px',
-              //marginLeft: '60px',
               minWidth: '10px',
             }}
             onClick={props.handleCloseSettings}
@@ -60,16 +56,9 @@ export const SelectDays = (props: any) => {
                 onClick={() => props.handleDayClick(day)}
                 sx={{
                   width: '100px',
-                  //fontSize: '0.6rem',
                   margin: '8px 2px',
                   marginBottom: '2px',
                   background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
-                  // '&:active': {
-                  //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                  // },
-                  // '&:focus': {
-                  //   background: RIFFLANDIA_COLOURS.fill_light_orange,
-                  // },
                   '&:hover': {
                     background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : 'none',
                   },

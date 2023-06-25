@@ -30,8 +30,6 @@ export const Ticket = (props: any) => {
         margin: '8px',
         '&:hover': {
           outline: `thick double ${RIFFLANDIA_COLOURS.dark_blue}`,
-          // background: RIFFLANDIA_COLOURS.dark_blue,
-          // color: 'white',
         },
       }}
       onClick={() => {
@@ -52,9 +50,7 @@ export const Ticket = (props: any) => {
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center', // Vertically center the items
-          //margin: '8px',
-          //width: '100px',
+          alignItems: 'center',
         }}
       >
         <CardMedia
@@ -77,8 +73,6 @@ export const Ticket = (props: any) => {
           <Box
             sx={{
               display: 'inline-block',
-              //margin: '8px',
-              //width: '102px',
             }}
           >
             <Typography

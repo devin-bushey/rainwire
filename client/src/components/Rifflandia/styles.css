@@ -15,18 +15,20 @@
 }
 
 .sidebar-svg-park {
-  background-image: url('./background-park.svg');
+  background-image: url('./images/background-park.svg');
   left: 0;
   background-position-x: right;
 }
 
 .sidebar-svg-electric {
-  background-image: url('./background-electric.svg');
+  background-image: url('./images/background-electric.svg');
   right: 0;
   background-position-x: left;
 }
 
 .riff-background {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   padding-top: 48px;
   padding-left: 100px;
@@ -169,4 +171,13 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+.footer {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
 }
