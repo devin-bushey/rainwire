@@ -181,3 +181,16 @@
   font-size: 14px;
   color: #777;
 }
+
+.email-btn {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  /* font-family: arial, sans-serif; */
+  /*input has OS specific font-family*/
+  /* color: #069; */
+  color: #777;
+  text-decoration: underline;
+  cursor: pointer;
+}
