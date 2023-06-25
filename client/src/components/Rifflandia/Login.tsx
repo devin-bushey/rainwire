@@ -9,6 +9,7 @@ import { RIFFLANDIA_COLOURS } from './colours';
 import TITLE from './images/title.svg';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import './styles.css';
+import { Email } from './Email';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
@@ -16,6 +17,9 @@ export const Login = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openEmail, setOpenEmail] = useState(false);
+  const handleOpenEmail = () => setOpenEmail(true);
 
   const isInAppBrowser = () => {
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
@@ -112,10 +116,17 @@ export const Login = () => {
         </Container>
 
         <footer className="footer">
-          <span style={{ fontSize: '1.2rem', fontFamily: 'Caveat, cursive' }}>Record Shop </span> made by{' '}
-          <a href="https://www.linkedin.com/in/devin-bushey/">Devin Bushey</a>
+          <span style={{ fontSize: '1.2rem', fontFamily: 'Caveat, cursive', marginRight: '4px' }}>Record Shop </span>{' '}
+          made by{' '}
+          <button className="email-btn" onClick={handleOpenEmail}>
+            Devin B
+          </button>
+          {/* <span><Typography onClick={handleOpenEmail}>Devin B</Typography></span> */}
+          {/* <a href="https://www.linkedin.com/in/devin-bushey/">Devin Bushey</a> */}
         </footer>
       </Box>
+
+      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
       <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
