@@ -75,8 +75,9 @@ export const Login = () => {
                 sx={{
                   fontSize: '2.3rem',
                   //fontFamily: 'Lobster, cursive',
-                  fontFamily: 'Caveat, cursive',
-                  fontWeight: '700',
+                  fontFamily: 'Lobster, cursive',
+                  //fontWeight: '700',
+                  letterSpacing: '2px',
                 }}
               >
                 Record Shop
@@ -116,7 +117,7 @@ export const Login = () => {
         </Container>
 
         <footer className="footer">
-          <span style={{ fontSize: '1.2rem', fontFamily: 'Caveat, cursive', marginRight: '4px' }}>Record Shop </span>{' '}
+          <span style={{ fontSize: '1.1rem', fontFamily: 'Lobster, cursive', marginRight: '4px' }}>Record Shop </span>{' '}
           made by{' '}
           <button className="email-btn" onClick={handleOpenEmail}>
             Devin B
