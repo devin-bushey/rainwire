@@ -86,7 +86,7 @@ export const Login = () => {
               </Typography>
 
               <Typography sx={{ marginTop: '24px' }}>
-                The playist can be pre-populated and created right on your account!
+                The playlist can be pre-populated and created right on your account!
               </Typography>
 
               <Typography sx={{ marginTop: '24px' }}>Start by signing in with Spotify</Typography>
