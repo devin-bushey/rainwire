@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box, Button, Card, Container, Typography } from '@mui/material';
 import { InAppModalRifflandia } from './InAppModalRifflandia';
@@ -13,6 +13,10 @@ import { Email } from './Email';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -95,7 +99,6 @@ export const Login = () => {
               <Button
                 onClick={isInAppBrowser}
                 variant="contained"
-                className="create-playlist"
                 sx={{
                   backgroundColor: RIFFLANDIA_COLOURS.light_blue,
                   ':hover': {
