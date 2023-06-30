@@ -38,6 +38,34 @@ export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
 
+  const [isShaking, setIsShaking] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    setIsShaking(true);
+
+    // Reset the shaking animation after a delay
+    setTimeout(() => {
+      setIsShaking(false);
+    }, 2000);
+
+    const timer = setInterval(() => {
+      setIsShaking(true);
+
+      // Reset the shaking animation after a delay
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 2000);
+    }, 12000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
@@ -275,7 +303,8 @@ export const Rifflandia = () => {
                 <Button
                   onClick={handleCreatePlaylist}
                   variant="contained"
-                  className="btn--click-me-riff create-playlist"
+                  className={`${isShaking ? 'shaking' : ''}`}
+                  //className="btn--click-me-riff create-playlist"
                   sx={{
                     backgroundColor: RIFFLANDIA_COLOURS.light_blue,
                     ':hover': {

@@ -2,7 +2,9 @@ import { Card, Typography, CardMedia } from '@mui/material';
 import { Box } from '@mui/system';
 import spotifyLogoBlack from '../../spotifyLogos/Spotify_Logo_RGB_Black.png';
 import { RIFFLANDIA_COLOURS } from './colours';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import './ticket.css';
 
 export const Ticket = (props: any) => {
   const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
@@ -21,8 +23,39 @@ export const Ticket = (props: any) => {
 
   const isMobile = width <= 768;
 
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    initialInView: false,
+    triggerOnce: true,
+    threshold: 0.5,
+  });
+
+  const [isWiggling, setIsWiggling] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+  const startWiggleAnimation = () => {
+    setIsWiggling(true);
+  };
+
+  const stopWiggleAnimation = () => {
+    setIsWiggling(false);
+  };
+
+  useEffect(() => {
+    if (!isInitialLoad && inView) {
+      startWiggleAnimation();
+    } else {
+      stopWiggleAnimation();
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    setIsInitialLoad(false);
+  }, []);
+
   return (
     <Card
+      className={`ticket ${isWiggling ? 'wiggling' : ''}`}
       sx={{
         backgroundColor: props.bgcolor,
         height: '150px',
@@ -35,6 +68,7 @@ export const Ticket = (props: any) => {
       onClick={() => {
         isMobile ? window.location.assign(props.ticket.link) : window.open(props.ticket.link);
       }}
+      ref={ref}
     >
       <Box sx={{ display: 'flex', alignItems: 'left' }}>
         <img
