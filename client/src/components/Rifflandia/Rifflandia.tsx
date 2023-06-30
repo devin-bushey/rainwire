@@ -51,19 +51,6 @@ export const Rifflandia = () => {
     setTimeout(() => {
       setIsShaking(false);
     }, 2000);
-
-    const timer = setInterval(() => {
-      setIsShaking(true);
-
-      // Reset the shaking animation after a delay
-      setTimeout(() => {
-        setIsShaking(false);
-      }, 2000);
-    }, 12000);
-
-    return () => {
-      clearInterval(timer);
-    };
   }, []);
 
   const navigate = useNavigate();
