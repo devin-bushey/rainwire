@@ -1,5 +1,5 @@
 import { COLOURS } from '../theme/AppStyles';
-import { Loading } from './Loading';
+import { Loading } from '../pages/Loading';
 import { Ticket } from './Ticket';
 import { Error } from './Error';
 import blank from '../spotifyLogos/test.jpg';

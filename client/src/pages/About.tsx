@@ -13,6 +13,7 @@ export const About = memo(() => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    document.title = 'Record Shop | About';
     window.scrollTo(0, 0);
   }, []);
 

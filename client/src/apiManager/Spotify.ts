@@ -50,26 +50,3 @@ export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserData
       };
     });
 };
-
-export const CreateNewPlaylist = async ({
-  token,
-  city,
-  user_id,
-  numTopTracks,
-  days,
-}: {
-  token: string;
-  city: string;
-  user_id: string;
-  numTopTracks?: number;
-  days?: any;
-}) => {
-  const reqBody = {
-    token: token,
-    user_id: user_id,
-    city: city,
-    numTopTracks: numTopTracks,
-    days: days,
-  };
-  return await axios.post(import.meta.env.VITE_SITE_URL_DB + 'create/', reqBody);
-};

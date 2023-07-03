@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import './styles/ClickMe.css';
+import '../styles/ClickMe.css';
 
 export const CreatePlaylistButton = ({
   handleCreatePlaylist,

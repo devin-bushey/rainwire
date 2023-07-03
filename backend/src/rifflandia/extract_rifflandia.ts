@@ -10,7 +10,6 @@ export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park'
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
-      const tbd = weekend === 'electric-avenue' ? 'Sept 7-9' : 'Sept 15-17';
       const venue = weekend === 'electric-avenue' ? 'Electric Avenue' : 'The Park';
 
       const DAYS_ELECTRIC = ['Sept 7', 'Sept 8', 'Sept 9'];
@@ -20,9 +19,6 @@ export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park'
         $(e)
           .find('button')
           .each(function (index, element) {
-            //console.log(element);
-            console.log('index', i);
-            console.log('font-extrabold', $(element).text().trim());
             let dayI: number;
             if (i === 18) {
               dayI = 0;

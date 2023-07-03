@@ -1,9 +1,9 @@
-import { Modal, Input, Typography, TextField, Button } from '@mui/material';
+import { Modal, Input, TextField, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { send } from 'emailjs-com';
 import { useState, useContext } from 'react';
-import { SnackBarContext } from '../../App';
-import { RIFFLANDIA_COLOURS } from './colours';
+import { RIFFLANDIA_COLOURS } from './constants/colours';
+import { SnackBarContext } from '../App';
 
 export const Email = (props: any) => {
   const [message, setMessage] = useState('');

@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import MainPage from '../components/MainPage';
+import LoginPage from '../pages/LoginPage';
 import Navbarr from '../components/Navbar';
-import NotFound from '../components/NotFound';
-import Refresh from '../components/Refresh';
+import NotFound from '../pages/NotFound';
+import Refresh from '../pages/Refresh';
 import { Box } from '@mui/material';
-import { About } from '../components/About';
-import { DisplayTickets } from '../components/DisplayTickets';
+import { About } from '../pages/About';
+import { ArtistsPage } from '../pages/ArtistsPage';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import { CreatePlaylistPage } from '../components/CreatePlaylistPage';
+import { LandingPage } from '../pages/LandingPage';
 import useAnalytics from '../hooks/useAnalytics';
-import { Rifflandia } from '../components/Rifflandia/Rifflandia';
+import { Rifflandia } from '../Rifflandia/pages/Rifflandia';
 
 export const AppRoutes = () => {
   useAnalytics();
@@ -20,13 +20,10 @@ export const AppRoutes = () => {
       <Box sx={{ minHeight: 'calc(100vh - 46px)' }}>
         <Routes>
           <Route path="/" element={<Navbarr />}>
-            <Route
-              index
-              element={!token || !spotifyInfo || !spotifyInfo.access ? <MainPage /> : <CreatePlaylistPage />}
-            />
-            <Route path="/tickets" element={<DisplayTickets />} />
+            <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <LoginPage /> : <LandingPage />} />
+            <Route path="/artists" element={<ArtistsPage />} />
             <Route path="/about" element={<About />} />
-            <Route path="/refresh" element={<Refresh />} />
+            {/* <Route path="/refresh" element={<Refresh />} /> */}
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />

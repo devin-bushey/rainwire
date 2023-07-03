@@ -1,6 +1,6 @@
 import { Card, Typography, Button } from '@mui/material';
 import { Box } from '@mui/system';
-import { RIFFLANDIA_COLOURS } from './colours';
+import { RIFFLANDIA_COLOURS } from './constants/colours';
 
 export const SelectDays = (props: any) => {
   const DAYS = ['Sept 7', 'Sept 8', 'Sept 9', 'Sept 15', 'Sept 16', 'Sept 17'];

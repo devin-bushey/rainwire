@@ -1,8 +1,8 @@
-import { Typography, Slider, Button, Link } from '@mui/material';
+import { Typography, Slider, Link } from '@mui/material';
 import { Box } from '@mui/system';
 import { COLOURS } from '../theme/AppStyles';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import './styles/Settings.css';
+import '../styles/Settings.css';
 
 export const Settings = (props: any) => {
   const marks = [

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { SpotifyPlaylistDataType } from '../SpotifyTypes';
+import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 
 import { PLAYLIST_IMG } from './playlist_img';
 
@@ -21,7 +21,11 @@ export const CreateNewPlaylistRifflandia = async ({
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id, days });
 
   const playlist_id = playlist_data.new_playlist_id || '';
-  await AddCoverArt({ token, playlist_id });
+  try {
+    await AddCoverArt({ token, playlist_id });
+  } catch (err) {
+    console.log('Error adding cover art to Rifflandia');
+  }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 

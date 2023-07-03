@@ -4,27 +4,23 @@ import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
 import { useContext, useEffect, useState } from 'react';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { CreateNewPlaylist } from '../apiManager/Spotify';
 import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { LOCATIONS } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { Origin } from './Origin';
-import { Settings } from './Settings';
-import { TicketContainer } from './TicketContainer';
-import './styles/ClickMe.css';
-import { InAppModal } from './InAppModal';
-import { ScrollButton } from './ScrollButton';
+import { Origin } from '../components/Origin';
+import { Settings } from '../components/Settings';
+import { TicketContainer } from '../components/TicketContainer';
+import { InAppModal } from '../components/InAppModal';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { GetTickets } from '../apiManager/RecordShop';
+import { CreateNewPlaylist, GetTickets } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from './Rifflandia/Spinner';
-import { sortByOrderNum } from '../helpers/sorter';
-import { StickyButton } from './StickyButton';
-import { sendEvent } from '../hooks/ga4';
+import { Spinner } from '../Rifflandia/Spinner';
+import { sortByOrderNum } from '../utils/sorter';
+import { StickyButton } from '../components/StickyButton';
 
-export const DisplayTickets = () => {
+export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -34,7 +30,7 @@ export const DisplayTickets = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'tickets/';
+  const redirectUri = BASE_REDIRECT_URI + 'artists/';
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
@@ -73,7 +69,7 @@ export const DisplayTickets = () => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    sendEvent('artists');
+    document.title = 'Record Shop | Artists';
     window.scrollTo(0, 0);
   }, []);
 

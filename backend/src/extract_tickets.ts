@@ -2,162 +2,118 @@ require('dotenv').config({ path: './config.env' });
 import dbo from './db/conn';
 import _ from 'lodash';
 
-import { extract_vic_songkick_1 } from './extraction_scripts/extract_vic_songkick';
-import { extract_vic_songkick_2 } from './extraction_scripts/extract_vic_songkick2';
-import { extract_vic_songkick_3 } from './extraction_scripts/extract_vic_songkick3';
-
 import { addSimpleDataToCollection } from './db/addSimpleDataToCollection';
-import { extract_capital_ballroom } from './extraction_scripts/extract_capital_ballroom';
-import { extract_philips_backyarder } from './extraction_scripts/extract_philips_backyarder';
-import { extract_van_songkick_1 } from './extraction_scripts/extract_van_songkick';
-import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkick_page2';
 import { Cities, Festivals } from './enums/common';
-import { extract_victoria } from './extraction_scripts/extract_victoria';
-import { extract_laketown_shakedown } from './extraction_scripts/extract_laketown_shakedown';
+
 import { extract_osheaga } from './scripts/extract_osheaga';
-import { extract_coachella } from './extraction_scripts/extract_coachella';
-import { extract_rifflandia } from './extraction_scripts/extract_rifflandia';
 import { extract_songkick } from './scripts/extract_songkick';
 import { extract_phillips_backyarder } from './scripts/extract_philips_backyarder';
+import { Artist } from './types/Artists';
 
 export const extract = async (location: Cities | Festivals) => {
-  const date = getTodaysDate();
   const db_connect = dbo.getDb();
 
   const collectionName = location + '_simple';
-  let tickets: any[] = [];
+  let tickets: Artist[];
 
-  if (location === Cities.Victoria) {
-    // const tickets_vic_music_scene = await extract_victoria('http://victoriamusicscene.com/concerts/list/');
-    // const tickets_vic_music_scene_2 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/2/');
-    // const tickets_vic_music_scene_3 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/3/');
+  switch (location) {
+    case Cities.Victoria:
+      tickets = await extractVictoria();
+      break;
 
-    // const tickets_vic_spotify = await extract_capital_ballroom();
-    const tickets_vic_songkick_1 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27399-canada-victoria?page=1#metro-area-calendar',
-    ); //page one of songkick
-    const tickets_vic_songkick_2 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27399-canada-victoria?page=2#metro-area-calendar',
-    ); //page two of songkick
-    const tickets_vic_songkick_3 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27399-canada-victoria?page=3#metro-area-calendar',
-    ); //page three of songkick
+    case Cities.Vancouver:
+      tickets = await extractVancouver();
+      break;
 
-    // consolidate tickets
+    case Festivals.PhilipsBackyard:
+      tickets = await extractPhillipsBackyard();
+      break;
 
-    // tickets_vic_music_scene.forEach(function (obj: any) {
-    //   tickets.push(obj);
-    // });
-    // tickets_vic_music_scene_2.forEach(function (obj: any) {
-    //   tickets.push(obj);
-    // });
-    // tickets_vic_music_scene_3.forEach(function (obj: any) {
-    //   tickets.push(obj);
-    // });
+    case Festivals.Osheaga:
+      tickets = await extractOsheaga();
+      break;
 
-    // tickets_vic_spotify.forEach(function (obj: any) {
-    //   tickets.push(obj);
-    // });
-    tickets_vic_songkick_1.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_vic_songkick_2.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_vic_songkick_3.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Cities.Vancouver) {
-    const tickets_van_songkick_1 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=1#metro-area-calendar',
-    ); //page one of songkick
-    const tickets_van_songkick_2 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=2#metro-area-calendar',
-    ); //page two of songkick
-    const tickets_van_songkick_3 = await extract_songkick(
-      'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=3#metro-area-calendar',
-    ); //page three of songkick
-
-    // consolidate tickets
-    tickets_van_songkick_1.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_van_songkick_2.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_van_songkick_3.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Festivals.PhilipsBackyard) {
-    const tickets_phillips_backyarder = await extract_phillips_backyarder();
-
-    tickets_phillips_backyarder.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Festivals.LaketownShakedown) {
-    const tickets_laketown = await extract_laketown_shakedown();
-
-    tickets_laketown.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Festivals.Osheaga) {
-    const tickets_osheaga = await extract_osheaga();
-
-    tickets_osheaga.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Festivals.Coachella) {
-    const tickets_coachella = await extract_coachella();
-
-    tickets_coachella.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-  } else if (location === Festivals.Rifflandia) {
-    const tickets_rifflandia_park = await extract_rifflandia('the-park');
-    const tickets_rifflandia_electric = await extract_rifflandia('electric-avenue');
-
-    tickets_rifflandia_park.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_rifflandia_electric.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
+    default:
+      tickets = [];
+      break;
   }
 
-  // sort by date
-  // if (tickets) tickets.sort(sortByDate);
-
-  // // remove duplicates
-  // tickets = removeDuplicateBands(tickets);
-
-  // create simple data collection, does not included spotify data
   return await addSimpleDataToCollection(collectionName, tickets, db_connect);
 };
 
-function sortByDate(a: any, b: any) {
-  return new Date(a.date).getTime() - new Date(b.date).getTime();
-}
+const extractVictoria = async () => {
+  let tickets: Artist[] = [];
 
-function removeDuplicateBands(arr: any) {
-  var cleaned: any[] = [];
-  arr.forEach(function (itm: any) {
-    var unique = true;
-    cleaned.forEach(function (itm2) {
-      if (_.isEqual(itm.ticket_band, itm2.ticket_band)) {
-        //console.log('itm: ', itm, ' itm2: ', itm2, ' isEqual: ', _.isEqual(itm.ticket_band, itm2.ticket_band));
-        unique = false;
-      }
-    });
-    if (unique) cleaned.push(itm);
+  const tickets_vic_songkick_1 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27399-canada-victoria?page=1#metro-area-calendar',
+  ); //page one of songkick
+  const tickets_vic_songkick_2 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27399-canada-victoria?page=2#metro-area-calendar',
+  ); //page two of songkick
+  const tickets_vic_songkick_3 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27399-canada-victoria?page=3#metro-area-calendar',
+  ); //page three of songkick
+
+  tickets_vic_songkick_1.forEach(function (obj: Artist) {
+    tickets.push(obj);
   });
-  return cleaned;
-}
+  tickets_vic_songkick_2.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+  tickets_vic_songkick_3.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
 
-function getTodaysDate() {
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
+  return tickets;
+};
 
-  return mm + '-' + dd + '-' + yyyy;
-}
+const extractVancouver = async () => {
+  let tickets: Artist[] = [];
+
+  const tickets_van_songkick_1 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=1#metro-area-calendar',
+  ); //page one of songkick
+  const tickets_van_songkick_2 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=2#metro-area-calendar',
+  ); //page two of songkick
+  const tickets_van_songkick_3 = await extract_songkick(
+    'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=3#metro-area-calendar',
+  ); //page three of songkick
+
+  // consolidate tickets
+  tickets_van_songkick_1.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+  tickets_van_songkick_2.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+  tickets_van_songkick_3.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};
+
+const extractOsheaga = async () => {
+  let tickets: Artist[] = [];
+
+  const tickets_osheaga = await extract_osheaga();
+
+  tickets_osheaga.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};
+
+const extractPhillipsBackyard = async () => {
+  let tickets: Artist[] = [];
+
+  const tickets_phillips_backyarder = await extract_phillips_backyarder();
+
+  tickets_phillips_backyarder.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};

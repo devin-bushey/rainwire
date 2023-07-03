@@ -1,7 +1,7 @@
 import { Card, Typography, CardMedia } from '@mui/material';
 import { Box } from '@mui/system';
-import spotifyLogoBlack from '../../spotifyLogos/Spotify_Logo_RGB_Black.png';
-import { RIFFLANDIA_COLOURS } from './colours';
+import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
+import { RIFFLANDIA_COLOURS } from './constants/colours';
 import { useEffect, useState } from 'react';
 
 export const Ticket = (props: any) => {
