@@ -32,7 +32,7 @@ import { SelectDays } from './SelectDays';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from './Spinner';
 import { sortByOrderNum, sortDataByDateAndOrder } from '../../helpers/sorter';
-import { trackButtonClick } from '../../hooks/ga4';
+import { sendEvent, trackButtonClick } from '../../hooks/ga4';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -41,6 +41,8 @@ export const Rifflandia = () => {
   const [isShaking, setIsShaking] = useState(false);
 
   useEffect(() => {
+    document.title = 'Rifflandia';
+    sendEvent('riff_main');
     window.scrollTo(0, 0);
   }, []);
 

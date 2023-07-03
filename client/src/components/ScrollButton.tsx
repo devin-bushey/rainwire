@@ -35,7 +35,7 @@ export const ScrollButton = () => {
       onClick={scrollToTop}
       sx={{
         position: 'fixed',
-        bottom: 25,
+        bottom: 57,
         right: matches ? 20 : 60,
         minWidth: '20px',
       }}

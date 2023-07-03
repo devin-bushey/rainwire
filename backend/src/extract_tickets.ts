@@ -14,24 +14,25 @@ import { extract_van_songkick_2 } from './extraction_scripts/extract_van_songkic
 import { Cities, Festivals } from './enums/common';
 import { extract_victoria } from './extraction_scripts/extract_victoria';
 import { extract_laketown_shakedown } from './extraction_scripts/extract_laketown_shakedown';
-import { extract_osheaga } from './extraction_scripts/extract_oshaega';
+import { extract_osheaga } from './scripts/extract_osheaga';
 import { extract_coachella } from './extraction_scripts/extract_coachella';
 import { extract_rifflandia } from './extraction_scripts/extract_rifflandia';
-import { extract_songkick } from './extraction_scripts/extract_songkick';
+import { extract_songkick } from './scripts/extract_songkick';
+import { extract_phillips_backyarder } from './scripts/extract_philips_backyarder';
 
 export const extract = async (location: Cities | Festivals) => {
   const date = getTodaysDate();
   const db_connect = dbo.getDb();
 
-  const collectionName = 'db_' + location + '_' + date;
+  const collectionName = location + '_simple';
   let tickets: any[] = [];
 
   if (location === Cities.Victoria) {
-    const tickets_vic_music_scene = await extract_victoria('http://victoriamusicscene.com/concerts/list/');
-    const tickets_vic_music_scene_2 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/2/');
-    const tickets_vic_music_scene_3 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/3/');
+    // const tickets_vic_music_scene = await extract_victoria('http://victoriamusicscene.com/concerts/list/');
+    // const tickets_vic_music_scene_2 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/2/');
+    // const tickets_vic_music_scene_3 = await extract_victoria('http://victoriamusicscene.com/concerts/list/page/3/');
 
-    const tickets_vic_spotify = await extract_capital_ballroom();
+    // const tickets_vic_spotify = await extract_capital_ballroom();
     const tickets_vic_songkick_1 = await extract_songkick(
       'https://www.songkick.com/metro-areas/27399-canada-victoria?page=1#metro-area-calendar',
     ); //page one of songkick
@@ -44,19 +45,19 @@ export const extract = async (location: Cities | Festivals) => {
 
     // consolidate tickets
 
-    tickets_vic_music_scene.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_vic_music_scene_2.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
-    tickets_vic_music_scene_3.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
+    // tickets_vic_music_scene.forEach(function (obj: any) {
+    //   tickets.push(obj);
+    // });
+    // tickets_vic_music_scene_2.forEach(function (obj: any) {
+    //   tickets.push(obj);
+    // });
+    // tickets_vic_music_scene_3.forEach(function (obj: any) {
+    //   tickets.push(obj);
+    // });
 
-    tickets_vic_spotify.forEach(function (obj: any) {
-      tickets.push(obj);
-    });
+    // tickets_vic_spotify.forEach(function (obj: any) {
+    //   tickets.push(obj);
+    // });
     tickets_vic_songkick_1.forEach(function (obj: any) {
       tickets.push(obj);
     });
@@ -67,11 +68,15 @@ export const extract = async (location: Cities | Festivals) => {
       tickets.push(obj);
     });
   } else if (location === Cities.Vancouver) {
-    const tickets_van_songkick_1 = await extract_van_songkick_1(); //page one of songkick
-    const tickets_van_songkick_2 = await extract_van_songkick_2(); //page two of songkick
+    const tickets_van_songkick_1 = await extract_songkick(
+      'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=1#metro-area-calendar',
+    ); //page one of songkick
+    const tickets_van_songkick_2 = await extract_songkick(
+      'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=2#metro-area-calendar',
+    ); //page two of songkick
     const tickets_van_songkick_3 = await extract_songkick(
       'https://www.songkick.com/metro-areas/27398-canada-vancouver?page=3#metro-area-calendar',
-    ); //page two of songkick
+    ); //page three of songkick
 
     // consolidate tickets
     tickets_van_songkick_1.forEach(function (obj: any) {
@@ -84,9 +89,9 @@ export const extract = async (location: Cities | Festivals) => {
       tickets.push(obj);
     });
   } else if (location === Festivals.PhilipsBackyard) {
-    const tickets_philips_backyarder = await extract_philips_backyarder();
+    const tickets_phillips_backyarder = await extract_phillips_backyarder();
 
-    tickets_philips_backyarder.forEach(function (obj: any) {
+    tickets_phillips_backyarder.forEach(function (obj: any) {
       tickets.push(obj);
     });
   } else if (location === Festivals.LaketownShakedown) {
@@ -120,10 +125,10 @@ export const extract = async (location: Cities | Festivals) => {
   }
 
   // sort by date
-  if (tickets) tickets.sort(sortByDate);
+  // if (tickets) tickets.sort(sortByDate);
 
-  // remove duplicates
-  tickets = removeDuplicateBands(tickets);
+  // // remove duplicates
+  // tickets = removeDuplicateBands(tickets);
 
   // create simple data collection, does not included spotify data
   return await addSimpleDataToCollection(collectionName, tickets, db_connect);

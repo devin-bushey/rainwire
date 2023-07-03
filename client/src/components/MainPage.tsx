@@ -42,11 +42,16 @@ const MainPage = memo(() => {
   return (
     <>
       <div className="spacer layer"></div>
-      <Container maxWidth="lg" sx={{ marginBottom: '32px' }}>
-        <Typography variant="h3" sx={{ fontSize: '4rem', fontFamily: 'Lobster, cursive', letterSpacing: '2px' }}>
+      <Container maxWidth="lg" sx={{ marginBottom: '32px', marginTop: '-24px' }}>
+        <Typography
+          variant="h3"
+          sx={{ fontSize: '5rem', fontFamily: 'Lobster, Arial, sans-serif', letterSpacing: '2px' }}
+        >
           Record Shop
         </Typography>
-        <Typography sx={{ color: COLOURS.blue, fontWeight: '700', fontSize: '2rem' }}>Discover new music.</Typography>
+        <Typography sx={{ color: COLOURS.blue, fontWeight: '700', fontSize: '1.7rem', paddingTop: '8px' }}>
+          Discover new music.
+        </Typography>
 
         <Box
           sx={{

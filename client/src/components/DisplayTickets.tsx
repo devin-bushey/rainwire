@@ -19,6 +19,10 @@ import { UseQueryOptions, useQuery } from 'react-query';
 import { GetTickets } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from './Rifflandia/Spinner';
+import { sortByOrderNum } from '../helpers/sorter';
+import { StickyButton } from './StickyButton';
+import { sendEvent } from '../hooks/ga4';
 
 export const DisplayTickets = () => {
   const queryOptions: UseQueryOptions = {
@@ -57,12 +61,30 @@ export const DisplayTickets = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isShaking, setIsShaking] = useState(false);
+
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    sendEvent('artists');
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    setIsShaking(true);
+
+    // Reset the shaking animation after a delay
+    setTimeout(() => {
+      setIsShaking(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     if (query.data) {
@@ -78,7 +100,7 @@ export const DisplayTickets = () => {
   useEffect(() => {
     if (query.data) {
       setLoadMore(loadInterval);
-      setTotalTickets(query.data);
+      setTotalTickets(sortByOrderNum(query.data));
     }
   }, [query.data]);
 
@@ -175,12 +197,13 @@ export const DisplayTickets = () => {
 
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
+      setIsLoading(true);
       await CreateNewPlaylist({
         city: origin,
         token: token,
         user_id: spotifyInfo.user_id,
         numTopTracks: numTopTracks,
-        tickets: filteredGenres.length > 0 ? tickets : null,
+        //tickets: filteredGenres.length > 0 ? tickets : null,
       })
         .then((res) => {
           if (res.status === 201) {
@@ -199,6 +222,7 @@ export const DisplayTickets = () => {
           console.log(err);
           setIsError(true);
         });
+      setIsLoading(false);
     } else {
       isInAppBrowser();
     }
@@ -221,9 +245,15 @@ export const DisplayTickets = () => {
 
   return (
     <>
-      <Box className="" sx={{ marginTop: '-32px', textAlign: 'center', paddingBottom: '24px' }}>
+      {isLoading && <Spinner />}
+      <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
         <Typography
-          sx={{ fontSize: '4rem', fontFamily: 'Lobster, cursive', letterSpacing: '2px', marginBottom: '12px' }}
+          sx={{
+            fontSize: '4rem',
+            fontFamily: 'Lobster, Arial, sans-serif',
+            letterSpacing: '2px',
+            marginBottom: '12px',
+          }}
         >
           Record Shop
         </Typography>
@@ -242,6 +272,7 @@ export const DisplayTickets = () => {
                 <Button
                   onClick={handleCreatePlaylist}
                   variant="contained"
+                  className={`${isShaking ? 'shaking' : ''}`}
                   sx={{
                     backgroundColor: COLOURS.blue,
                     ':hover': {
@@ -326,7 +357,7 @@ export const DisplayTickets = () => {
         {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
           <Button
             variant="outlined"
-            sx={{ marginTop: '24px' }}
+            sx={{ marginTop: '24px', marginBottom: '32px' }}
             onClick={() => {
               setLoadMore(loadMore + loadInterval);
             }}
@@ -336,7 +367,12 @@ export const DisplayTickets = () => {
         )}
       </Box>
 
-      <ScrollButton />
+      <StickyButton
+        handleCreatePlaylist={handleCreatePlaylist}
+        backgroundColor={COLOURS.blue}
+        hoverColor={COLOURS.card_colours[1]}
+        barColor={COLOURS.card_colours[2]}
+      />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>

@@ -5,7 +5,10 @@ import { useEffect, useRef, useState } from 'react';
 import { COLOURS } from '../theme/AppStyles';
 
 export const Ticket = (props: any) => {
-  const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
+  console.log(props.ticket);
+  const description = props.ticket.day
+    ? `${props.ticket.day} at ${props.ticket.weekend || props.ticket.venue}`
+    : props.ticket.ticket_date;
 
   const [width, setWidth] = useState<number>(window.innerWidth);
 
@@ -32,7 +35,6 @@ export const Ticket = (props: any) => {
       if (textElement) {
         let fontSize = parseFloat(window.getComputedStyle(textElement).fontSize);
         while (textElement.offsetHeight > 16) {
-          console.log('new fontSize', fontSize);
           fontSize -= 1;
           textElement.style.fontSize = fontSize + 'px';
         }

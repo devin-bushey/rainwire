@@ -133,6 +133,19 @@ const Navbarr = () => {
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
+                    to="/"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Home
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
                     to="/tickets"
                     sx={{
                       color: 'black',

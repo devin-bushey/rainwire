@@ -1,110 +1,112 @@
-import axios from 'axios';
-import { SpotifyPlaylistDataType } from './SpotifyTypes';
 import { Festivals } from './enums/common';
+import axios, { AxiosError } from 'axios';
+import { SpotifyPlaylistDataType } from './SpotifyTypes';
+import { PLAYLIST_IMG_RS } from './assets/recordshop_img';
 
 export const CreateNewPlaylist = async ({
   token,
   city,
   user_id,
   numTopTracks,
-  tickets,
+  artists,
+  sortBy,
+  days,
 }: {
   token: string;
   city: string;
   user_id: string;
   numTopTracks?: number;
-  tickets?: any;
+  artists: any;
+  sortBy: string;
+  days: string[];
 }) => {
-  const reqBody = [];
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id, days });
 
-  if (tickets && tickets.length > 0) {
-    for (const ticket of tickets) {
-      reqBody.push(ticket.ticket_band);
+  const playlist_id = playlist_data.new_playlist_id || '';
+  await AddCoverArt({ token, playlist_id });
+
+  const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
+
+  const sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortDataByDateAndOrder(artists);
+
+  let tracks = '';
+
+  for (const artist of sortedArtists) {
+    try {
+      for (let i = 0; i < numTopTracksToAdd; i++) {
+        if (artist.topTrackURIs && artist.topTrackURIs[i]) {
+          //console.log(artist.sp_band_name, ' ', artist.day);
+          tracks += artist.topTrackURIs[i];
+          tracks += ',';
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  return axios
-    .post(process.env.VITE_SITE_URL_DB + 'tickets/', reqBody, {
-      params: {
-        city: city,
-      },
-    })
-    .then(async (response) => {
-      const data = response.data;
-      let tracks = '';
-      const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
-      for (const element of data) {
-        try {
-          for (let i = 0; i < numTopTracksToAdd; i++) {
-            if (element.top_tracks && element.top_tracks[i] && element.top_tracks[i].uri) {
-              tracks += element.top_tracks[i].uri;
-              tracks += ',';
-            }
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
+  tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-      tracks = tracks.substring(0, tracks.length - 1); // remove last comma
+  const array = tracks.split(',');
+  const MAX_CHUNK_LENGTH = 75;
+  const trackArrays = [];
 
-      const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
+  while (array.length > 0) {
+    const chunk = array.splice(0, MAX_CHUNK_LENGTH);
+    trackArrays.push(chunk);
+  }
 
-      const array = tracks.split(',');
-      // console.log('tracks: ' + array.length);
-      // console.log('array: ' + array);
+  for (const trackArray of trackArrays) {
+    const tracks = trackArray.join(',');
+    if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
+      await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
+    }
+  }
+  return playlist_data.external_urls?.spotify;
+};
 
-      let array1 = array;
-      let array2: string[] = [];
-      let array3: string[] = [];
-      let array4: string[] = [];
-
-      // Max playlist length = 400
-      if (array.length > 100 && array.length < 200) {
-        array1 = array.slice(0, 100);
-        array2 = array.slice(100, array.length);
-      } else if (array.length > 200 && array.length < 300) {
-        array1 = array.slice(0, 100);
-        array2 = array.slice(100, 200);
-        array3 = array.slice(200, array.length);
+const sortDataByDateAndOrder = (data: any) => {
+  data.sort((a: any, b: any) => {
+    // First, compare the dates
+    const dateA = new Date(a.day);
+    const dateB = new Date(b.day);
+    if (dateA < dateB) {
+      return -1;
+    } else if (dateA > dateB) {
+      return 1;
+    } else {
+      // If the dates are the same, compare the orders
+      if (a.popularity < b.popularity) {
+        return -1;
+      } else if (a.popularity > b.popularity) {
+        return 1;
       } else {
-        array1 = array.slice(0, 100);
-        array2 = array.slice(100, 200);
-        array3 = array.slice(200, 300);
-        array4 = array.slice(300, 400);
+        return 0;
       }
+    }
+  });
 
-      const arrays = [array1, array2, array3, array4];
+  return data;
+};
 
-      arrays.forEach((array) => {
-        if (array.length === 0) return;
-        let tracks = '';
-        array.forEach((track) => {
-          tracks += track;
-          tracks += ',';
-        });
-        tracks = tracks.substring(0, tracks.length - 1); // remove last comma
-        if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
-          AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
-        }
-      });
-      return playlist_data.external_urls?.spotify;
-    })
-    .catch(function (error) {
-      console.log('Error CreateNewPlaylist');
-      console.log(error);
-      return null;
-    });
+const sortByPopularity = (tickets: any) => {
+  tickets.sort((a: any, b: any) => {
+    return a.popularity - b.popularity;
+  });
+
+  return tickets;
 };
 
 const CreateBlankPlaylist = async ({
   token,
   city,
   user_id,
+  days,
 }: {
   token: string;
   city: string;
   user_id: string;
+  days: string[];
 }): Promise<SpotifyPlaylistDataType> => {
   let playlist_name = 'record shop ' + city;
 
@@ -116,6 +118,8 @@ const CreateBlankPlaylist = async ({
     playlist_name = 'record shop laketown shakedown';
   }
 
+  let description = `a mixtape created by recordshop.cool`;
+
   return axios({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
     method: 'POST',
@@ -125,7 +129,7 @@ const CreateBlankPlaylist = async ({
     },
     data: {
       name: playlist_name,
-      description: 'a mixtape of upcoming concerts created by recordshop.cool',
+      description: description,
       public: true,
     },
   })
@@ -158,8 +162,33 @@ const CreateBlankPlaylist = async ({
     }); //end axios
 };
 
-const AddTracksToPlaylist = (token: string, playlist_id: string, tracks: string) => {
-  axios({
+const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
+  // const image = path.join(__dirname, './playlist_img.jpg');
+  // const file = fs.readFileSync(image, { encoding: 'base64' });
+
+  return axios({
+    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
+    method: 'PUT',
+    headers: {
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'image/jpeg',
+    },
+    data: PLAYLIST_IMG_RS,
+  })
+    .then(() => {
+      //console.log('Successfully added tracks to playlist');
+      //window.location.assign(playlist_url);
+    })
+    .catch(function (error) {
+      console.log('Error: unsuccessfully added cover art to playlist');
+      //window.alert('Error: unsuccessfully added tracks to playlist');
+      console.log(error.message);
+      //return null;
+    });
+};
+
+const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
+  return axios({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
     method: 'POST',
     headers: {
@@ -172,9 +201,10 @@ const AddTracksToPlaylist = (token: string, playlist_id: string, tracks: string)
       //window.location.assign(playlist_url);
     })
     .catch(function (error) {
+      const err = error as AxiosError;
       console.log('Error: unsuccessfully added tracks to playlist');
       //window.alert('Error: unsuccessfully added tracks to playlist');
-      console.log(error);
+      console.log(err.message);
       return null;
     });
 };

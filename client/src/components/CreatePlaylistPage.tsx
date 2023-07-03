@@ -12,6 +12,7 @@ export const CreatePlaylistPage = () => {
   if (!spotifyInfo) return <Loading />;
 
   useEffect(() => {
+    document.title = 'Record Shop Landing Page';
     window.scrollTo(0, 0);
   }, []);
 

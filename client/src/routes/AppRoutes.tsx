@@ -13,14 +13,17 @@ import { Rifflandia } from '../components/Rifflandia/Rifflandia';
 
 export const AppRoutes = () => {
   useAnalytics();
-  const { token } = useSpotifyAuth();
+  const { token, spotifyInfo } = useSpotifyAuth();
 
   return (
     <>
       <Box sx={{ minHeight: 'calc(100vh - 46px)' }}>
         <Routes>
           <Route path="/" element={<Navbarr />}>
-            <Route index element={token != null && token != '' ? <CreatePlaylistPage /> : <MainPage />} />
+            <Route
+              index
+              element={!token || !spotifyInfo || !spotifyInfo.access ? <MainPage /> : <CreatePlaylistPage />}
+            />
             <Route path="/tickets" element={<DisplayTickets />} />
             <Route path="/about" element={<About />} />
             <Route path="/refresh" element={<Refresh />} />

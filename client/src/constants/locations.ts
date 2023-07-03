@@ -23,30 +23,30 @@ export const LOCATIONS: LocationType[] = [
     website: 'https://rifflandia.com/tickets/',
     location: 'Victoria, BC',
   },
-  {
-    name: 'Whistlemania',
-    value: Festivals.Whistlemania,
-    website: 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/',
-    location: 'Victoria, BC',
-  },
-  {
-    name: 'Laketown Shakedown',
-    value: Festivals.LaketownShakedown,
-    website: 'https://www.laketownshakedown.com/',
-    location: 'Cowichan, BC',
-  },
+  // {
+  //   name: 'Whistlemania',
+  //   value: Festivals.Whistlemania,
+  //   website: 'https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/',
+  //   location: 'Victoria, BC',
+  // },
+  // {
+  //   name: 'Laketown Shakedown',
+  //   value: Festivals.LaketownShakedown,
+  //   website: 'https://www.laketownshakedown.com/',
+  //   location: 'Cowichan, BC',
+  // },
   {
     name: 'Osheaga',
     value: Festivals.Osheaga,
     website: 'https://osheaga.com/en',
     location: 'Montreal, QC',
   },
-  {
-    name: 'Coachella',
-    value: Festivals.Coachella,
-    website: 'https://coachella.com/',
-    location: 'California, US',
-  },
+  // {
+  //   name: 'Coachella',
+  //   value: Festivals.Coachella,
+  //   website: 'https://coachella.com/',
+  //   location: 'California, US',
+  // },
   {
     name: 'Victoria, BC',
     value: Cities.Victoria,
