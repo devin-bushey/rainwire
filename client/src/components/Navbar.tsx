@@ -27,7 +27,7 @@ const Navbarr = () => {
       <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
         <Container>
           <Toolbar disableGutters>
-            <Link to="/" style={{ textDecoration: 'none' }}>
+            {/* <Link to="/" style={{ textDecoration: 'none' }}>
               <Typography
                 variant="h6"
                 sx={{
@@ -42,11 +42,25 @@ const Navbarr = () => {
                   color: COLOURS.black,
                 }}
               >
-                Record Shop
+                Home
               </Typography>
-            </Link>
+            </Link> */}
 
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, marginLeft: '24px' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1 }}>
+              <Button
+                component={Link}
+                to="/"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                  marginLeft: '16px',
+                }}
+              >
+                Home
+              </Button>
               <Button
                 component={Link}
                 to="/tickets"
@@ -56,67 +70,10 @@ const Navbarr = () => {
                   color: 'black',
                   display: 'block',
                   maxWidth: '175px',
-                  marginLeft: '16px',
                 }}
               >
                 Artists
               </Button>
-              {/* <Button
-                component={Link}
-                to="/philips"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '175px',
-                  marginLeft: '16px',
-                }}
-              >
-                Philips Backyard
-              </Button>
-
-              <Button
-                component={Link}
-                to="/whistle"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '175px',
-                }}
-              >
-                Whistlemania
-              </Button>
-
-              <Button
-                component={Link}
-                to="/vic"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '150px',
-                }}
-              >
-                Victoria
-              </Button>
-
-              <Button
-                component={Link}
-                to="/van"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '150px',
-                }}
-              >
-                Vancouver
-              </Button> */}
 
               <Button
                 component={Link}
@@ -172,6 +129,19 @@ const Navbarr = () => {
                 }}
               >
                 <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Home
+                  </Button>
                   <Button
                     variant="outlined"
                     onClick={handleCloseNavMenu}

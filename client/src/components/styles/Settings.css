@@ -1,0 +1,40 @@
+.main-option-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 8px;
+  /* align-items: flex-start; */
+
+  justify-content: center;
+
+  min-width: 620px;
+}
+
+.main-option-tracks-dates{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 16px; */
+  max-width: 300px;
+  padding: 0 30px;
+}
+
+
+@media only screen and (max-width: 728px) {
+
+.main-option-box {
+  display: block;
+  flex-wrap: nowrap;
+  min-width: 240px;
+  margin: 8px;
+}
+.options-container{
+  width: 300px;
+}
+
+.main-option-tracks-dates{
+  width: 228px;
+}
+
+}

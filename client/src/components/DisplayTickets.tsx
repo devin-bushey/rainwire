@@ -18,6 +18,11 @@ import { ScrollButton } from './ScrollButton';
 import { UseQueryOptions, useQuery } from 'react-query';
 import { GetTickets } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
+import { useNavigate } from 'react-router-dom';
+import { Spinner } from './Rifflandia/Spinner';
+import { sortByOrderNum } from '../helpers/sorter';
+import { StickyButton } from './StickyButton';
+import { sendEvent } from '../hooks/ga4';
 
 export const DisplayTickets = () => {
   const queryOptions: UseQueryOptions = {
@@ -56,12 +61,30 @@ export const DisplayTickets = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isShaking, setIsShaking] = useState(false);
+
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    sendEvent('artists');
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    setIsShaking(true);
+
+    // Reset the shaking animation after a delay
+    setTimeout(() => {
+      setIsShaking(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     if (query.data) {
@@ -77,7 +100,7 @@ export const DisplayTickets = () => {
   useEffect(() => {
     if (query.data) {
       setLoadMore(loadInterval);
-      setTotalTickets(query.data);
+      setTotalTickets(sortByOrderNum(query.data));
     }
   }, [query.data]);
 
@@ -174,12 +197,13 @@ export const DisplayTickets = () => {
 
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
+      setIsLoading(true);
       await CreateNewPlaylist({
         city: origin,
         token: token,
         user_id: spotifyInfo.user_id,
         numTopTracks: numTopTracks,
-        tickets: filteredGenres.length > 0 ? tickets : null,
+        //tickets: filteredGenres.length > 0 ? tickets : null,
       })
         .then((res) => {
           if (res.status === 201) {
@@ -198,6 +222,18 @@ export const DisplayTickets = () => {
           console.log(err);
           setIsError(true);
         });
+      setIsLoading(false);
+    } else {
+      isInAppBrowser();
+    }
+  };
+
+  const navigate = useNavigate();
+  const logOut = () => {
+    if (token && spotifyInfo.access) {
+      localStorage.clear();
+      navigate('/');
+      window.location.reload();
     } else {
       isInAppBrowser();
     }
@@ -209,86 +245,119 @@ export const DisplayTickets = () => {
 
   return (
     <>
-      <Box className="" sx={{ textAlign: 'center', paddingBottom: '24px' }}>
-        <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-          <Box
-            sx={{
-              //backgroundColor: COLOURS.accent_02,
-              borderRadius: '10px',
-              //padding: '30px',
-              //marginBottom: '20px',
-              width: '300px',
-              margin: '8px',
-            }}
-          >
-            <Typography
-              variant="h5"
-              sx={{ fontSize: '1.4rem', color: COLOURS.black, textAlign: 'center', marginBottom: '16px' }}
-            >
-              Create a new playlist
-            </Typography>
-
-            <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
-
-            <Button
-              onClick={handleCreatePlaylist}
-              variant="contained"
-              color="secondary"
-              className="btn--click-me create-playlist"
-              sx={{ width: '300px', marginTop: '24px', justifyContent: 'center' }}
-            >
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-            </Button>
-
-            <Button
-              variant="outlined"
-              sx={{ marginTop: '12px', marginBottom: '24px', width: '300px' }}
-              onClick={() => {
-                setShowSettings(!showSettings);
-              }}
-            >
-              Options
-            </Button>
-
-            {website && (
-              <Button
-                variant="outlined"
-                sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
-                href={website}
-                target="_blank"
+      {isLoading && <Spinner />}
+      <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
+        <Typography
+          sx={{
+            fontSize: '4rem',
+            fontFamily: 'Lobster, Arial, sans-serif',
+            letterSpacing: '2px',
+            marginBottom: '12px',
+          }}
+        >
+          Record Shop
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ maxWidth: '900px' }}>
+            <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+              <Box
+                sx={{
+                  borderRadius: '10px',
+                  width: '300px',
+                  margin: '8px',
+                }}
               >
-                Tickets
-              </Button>
-            )}
-          </Box>
+                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
-          {showSettings && (
-            <div>
-              <Settings
-                totalTickets={totalTickets}
-                filteredGenres={filteredGenres}
-                numTopTracks={numTopTracks}
-                handleFilteredGenres={handleFilteredGenres}
-                handleNumTopTracks={handleNumTopTracks}
-                handleDeleteGenre={handleDeleteGenre}
-                handleCloseSettings={handleCloseSettings}
-                handleClearGenres={handleClearGenres}
+                <Button
+                  onClick={handleCreatePlaylist}
+                  variant="contained"
+                  className={`${isShaking ? 'shaking' : ''}`}
+                  sx={{
+                    backgroundColor: COLOURS.blue,
+                    ':hover': {
+                      backgroundColor: COLOURS.card_colours[1],
+                    },
+                    color: 'black',
+                    width: '300px',
+                    marginTop: '24px',
+                    marginBottom: '16px',
+                    justifyContent: 'center',
+                    height: '48px',
+                  }}
+                >
+                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+                  <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+                </Button>
+              </Box>
+
+              <Box
+                sx={{
+                  borderRadius: '10px',
+                  width: '300px',
+                  margin: '8px',
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  sx={{ marginBottom: '12px', width: '300px' }}
+                  onClick={() => {
+                    setShowSettings(!showSettings);
+                  }}
+                >
+                  Customize
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  sx={{ marginBottom: '12px', width: '300px' }}
+                  onClick={() => {
+                    logOut();
+                  }}
+                >
+                  {token && spotifyInfo.access ? 'Sign out' : 'Sign in'}
+                </Button>
+
+                {website && (
+                  <Button
+                    variant="outlined"
+                    sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
+                    href={website}
+                    target="_blank"
+                  >
+                    Buy Tickets
+                  </Button>
+                )}
+              </Box>
+
+              {showSettings && (
+                <div>
+                  <Settings
+                    totalTickets={totalTickets}
+                    filteredGenres={filteredGenres}
+                    numTopTracks={numTopTracks}
+                    handleFilteredGenres={handleFilteredGenres}
+                    handleNumTopTracks={handleNumTopTracks}
+                    handleDeleteGenre={handleDeleteGenre}
+                    handleCloseSettings={handleCloseSettings}
+                    handleClearGenres={handleClearGenres}
+                  />
+                </div>
+              )}
+
+              <TicketContainer
+                tickets={tickets}
+                showGenres={showGenres}
+                isLoadingTickets={isLoadingTickets}
+                isErrorTickets={isErrorTickets}
               />
-            </div>
-          )}
-
-          <TicketContainer
-            tickets={tickets}
-            showGenres={showGenres}
-            isLoadingTickets={isLoadingTickets}
-            isErrorTickets={isErrorTickets}
-          />
-        </Container>
+            </Container>
+          </Box>
+        </Box>
         {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
           <Button
             variant="outlined"
-            sx={{ marginTop: '24px' }}
+            sx={{ marginTop: '24px', marginBottom: '32px' }}
             onClick={() => {
               setLoadMore(loadMore + loadInterval);
             }}
@@ -298,7 +367,12 @@ export const DisplayTickets = () => {
         )}
       </Box>
 
-      <ScrollButton />
+      <StickyButton
+        handleCreatePlaylist={handleCreatePlaylist}
+        backgroundColor={COLOURS.blue}
+        hoverColor={COLOURS.card_colours[1]}
+        barColor={COLOURS.card_colours[2]}
+      />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>

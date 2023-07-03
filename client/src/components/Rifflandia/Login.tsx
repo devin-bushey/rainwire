@@ -10,11 +10,14 @@ import TITLE from './images/title.svg';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import './styles.css';
 import { Email } from './Email';
+import { sendEvent } from '../../hooks/ga4';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
 
   useEffect(() => {
+    document.title = 'Rifflandia Login';
+    sendEvent('riff_login');
     window.scrollTo(0, 0);
   }, []);
 

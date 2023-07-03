@@ -42,11 +42,16 @@ const MainPage = memo(() => {
   return (
     <>
       <div className="spacer layer"></div>
-      <Container maxWidth="lg" sx={{ marginBottom: '32px' }}>
-        <Typography variant="h3" sx={{ fontSize: '4rem' }}>
+      <Container maxWidth="lg" sx={{ marginBottom: '32px', marginTop: '-24px' }}>
+        <Typography
+          variant="h3"
+          sx={{ fontSize: '5rem', fontFamily: 'Lobster, Arial, sans-serif', letterSpacing: '2px' }}
+        >
           Record Shop
         </Typography>
-        <Typography sx={{ color: COLOURS.blue, fontWeight: '700', fontSize: '2rem' }}>Discover new music.</Typography>
+        <Typography sx={{ color: COLOURS.blue, fontWeight: '700', fontSize: '1.7rem', paddingTop: '8px' }}>
+          Discover new music.
+        </Typography>
 
         <Box
           sx={{
@@ -61,6 +66,8 @@ const MainPage = memo(() => {
             Create personalized Spotify playlists with the top tracks from artists performing in your city or festival
             of choice.
           </Typography>
+
+          <Typography sx={{ paddingTop: '12px' }}>To get started, sign in with Spotify.</Typography>
         </Box>
 
         <Box display="flex" flexDirection="column">
@@ -70,8 +77,19 @@ const MainPage = memo(() => {
             //   '%20',
             // )}&response_type=token&show_dialog=true`}
             variant="contained"
-            color="secondary"
-            sx={{ marginTop: '24px', marginBottom: '24px', padding: '8px 16px', maxWidth: '222px' }}
+            //color="secondary"
+            sx={{
+              backgroundColor: COLOURS.blue,
+              ':hover': {
+                backgroundColor: COLOURS.card_colours[0],
+              },
+              color: 'black',
+              width: '300px',
+              marginTop: '24px',
+              marginBottom: '16px',
+              justifyContent: 'center',
+              height: '48px',
+            }}
           >
             <img
               src={spotifyLogo}
@@ -82,29 +100,6 @@ const MainPage = memo(() => {
             />
             Sign in with Spotify
           </Button>
-
-          <Button
-            onClick={() => {
-              navigate('/about');
-            }}
-            variant="outlined"
-            sx={{ marginBottom: '24px', padding: '8px 16px', maxWidth: '222px' }}
-          >
-            About
-          </Button>
-
-          <Button
-            onClick={() => {
-              navigate('/rifflandia');
-            }}
-            variant="outlined"
-            sx={{ marginBottom: '24px', padding: '8px 16px', maxWidth: '222px' }}
-          >
-            <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-              <CHERRIES />
-            </Box>
-            Rifflandia
-          </Button>
         </Box>
 
         <Box
@@ -114,10 +109,26 @@ const MainPage = memo(() => {
             '& .MuiTypography-body1': {
               fontSize: '1.25rem',
             },
+            marginTop: '32px',
           }}
         >
-          <Typography sx={{ paddingTop: '12px' }}>To get started, sign in with Spotify.</Typography>
+          <Typography sx={{ paddingTop: '12px' }}>
+            Or checkout the exclusive page that was created for Rifflandia.
+          </Typography>
         </Box>
+
+        <Button
+          onClick={() => {
+            navigate('/rifflandia');
+          }}
+          variant="outlined"
+          sx={{ marginTop: '12px', marginBottom: '24px', padding: '8px 16px', width: '300px' }}
+        >
+          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+            <CHERRIES />
+          </Box>
+          Rifflandia
+        </Button>
 
         <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>

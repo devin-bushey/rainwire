@@ -29,37 +29,36 @@ export const StickyButton = ({
   }, []);
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        bottom: '0px',
-        //right: '16px',
-        zIndex: 9999,
-        opacity: showButton ? 1 : 0,
-        visibility: showButton ? 1 : 'hidden',
-        transition: 'visibility 1.5s, opacity 1.5s ease',
-        display: 'flex',
-        justifyContent: 'center',
-        width: '100vw',
-      }}
-    >
+    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100px',
-          width: '500px',
-          borderRadius: '8px',
-          backgroundColor: barColor,
-          marginBottom: '24px',
+          position: 'fixed',
+          bottom: '0px',
+          //right: '16px',
+          zIndex: 9999,
+          opacity: showButton ? 1 : 0,
+          visibility: showButton ? 1 : 'hidden',
+          transition: 'visibility 1.5s, opacity 1.5s ease',
         }}
       >
-        <CreatePlaylistButton
-          handleCreatePlaylist={handleCreatePlaylist}
-          backgroundColor={backgroundColor}
-          hoverColor={hoverColor}
-        />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100px',
+            width: '500px',
+            borderRadius: '8px',
+            backgroundColor: barColor,
+            marginBottom: '24px',
+          }}
+        >
+          <CreatePlaylistButton
+            handleCreatePlaylist={handleCreatePlaylist}
+            backgroundColor={backgroundColor}
+            hoverColor={hoverColor}
+          />
+        </Box>
       </Box>
     </Box>
   );

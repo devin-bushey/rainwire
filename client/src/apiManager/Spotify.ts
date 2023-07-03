@@ -56,20 +56,20 @@ export const CreateNewPlaylist = async ({
   city,
   user_id,
   numTopTracks,
-  tickets,
+  days,
 }: {
   token: string;
   city: string;
   user_id: string;
   numTopTracks?: number;
-  tickets?: any;
+  days?: any;
 }) => {
   const reqBody = {
     token: token,
     user_id: user_id,
     city: city,
     numTopTracks: numTopTracks,
-    tickets: tickets,
+    days: days,
   };
   return await axios.post(import.meta.env.VITE_SITE_URL_DB + 'create/', reqBody);
 };

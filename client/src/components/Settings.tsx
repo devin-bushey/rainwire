@@ -1,8 +1,8 @@
-import { Card, Typography, Slider, Button } from '@mui/material';
-import { Container, Box } from '@mui/system';
+import { Typography, Slider, Button, Link } from '@mui/material';
+import { Box } from '@mui/system';
 import { COLOURS } from '../theme/AppStyles';
-import { Filter } from './Filter';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import './styles/Settings.css';
 
 export const Settings = (props: any) => {
   const marks = [
@@ -33,74 +33,70 @@ export const Settings = (props: any) => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        //marginLeft: 'auto',
-        //marginRight: 'auto',
-        //marginBottom: '24px',
       }}
     >
-      <Card
+      <Box
+        className="main-options-container"
         sx={{
+          marginTop: '12px',
+          marginBottom: '12px',
+          padding: '30px',
+          borderRadius: '10px',
           backgroundColor: props.colour ? props.colour : 'hsl(141, 12%, 80%)',
-          minHeight: '290px',
-          width: '300px',
-          margin: '8px',
+          //minHeight: '290px',
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '4px' }}>
-          <Typography variant="h5" sx={{ color: COLOURS.black }}>
-            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-            Options
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: '16px',
-          }}
-        >
           <Typography variant="h6" sx={{ color: COLOURS.black }}>
-            tracks per artist:
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+            Customize
           </Typography>
-          <Box sx={{ width: '90%' }}>
-            <Slider
-              aria-label="Number of tracks per artist"
-              valueLabelDisplay="auto"
-              step={1}
-              marks={marks}
-              min={1}
-              max={5}
-              value={props.numTopTracks}
-              onChange={props.handleNumTopTracks}
-            />
+        </Box>
+
+        <Box className="main-option-box">
+          <Box className="main-option-tracks-dates">
+            <Typography>Select number of top tracks:</Typography>
+            <Box sx={{ width: '90%' }}>
+              <Slider
+                aria-label="Number of tracks per artist"
+                valueLabelDisplay="auto"
+                step={1}
+                marks={marks}
+                min={1}
+                max={5}
+                value={props.numTopTracks}
+                onChange={props.handleNumTopTracks}
+              />
+            </Box>
           </Box>
+
+          {/* <Box className="option-tracks-dates">
+            <Typography>Select dates to add:</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+              {DAYS.map((day: any) => (
+                <Button
+                  variant="outlined"
+                  key={day}
+                  onClick={() => props.handleDayClick(day)}
+                  sx={{
+                    width: '110px',
+                    margin: '8px 2px',
+                    marginBottom: '2px',
+                  }}
+                >
+                  {day}
+                </Button>
+              ))}
+            </Box>
+          </Box>*/}
         </Box>
 
-        {/* <Filter
-          totalTickets={props.totalTickets}
-          filteredGenres={props.filteredGenres}
-          handleFilteredGenres={props.handleFilteredGenres}
-          handleDeleteGenre={props.handleDeleteGenre}
-          handleClearGenres={props.handleClearGenres}
-        /> */}
-
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '-8px',
-            marginBottom: '-8px',
-          }}
-        >
-          <Button variant="outlined" sx={{ color: COLOURS.black }} onClick={props.handleCloseSettings}>
-            Close
-          </Button>
+        <Box sx={{ marginTop: '24px' }}>
+          <Link href="https://www.spotify.com/account/apps">
+            <Typography sx={{ fontSize: '12px' }}>Unsubscribe</Typography>
+          </Link>
         </Box>
-      </Card>
+      </Box>
     </Box>
   );
 };
