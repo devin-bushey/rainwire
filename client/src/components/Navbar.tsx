@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Container, Box, IconButton, Typography, Menu } from '@mui/material';
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { COLOURS } from '../theme/AppStyles';
 
@@ -63,7 +63,7 @@ const Navbarr = () => {
               </Button>
               <Button
                 component={Link}
-                to="/tickets"
+                to="/artists"
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -146,7 +146,7 @@ const Navbarr = () => {
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
-                    to="/tickets"
+                    to="/artists"
                     sx={{
                       color: 'black',
                       textAlign: 'center',

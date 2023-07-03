@@ -1,5 +1,5 @@
 import { Container, Typography } from '@mui/material';
-import './styles/Loading.css';
+import '../styles/Loading.css';
 
 export const Loading = () => {
   return (

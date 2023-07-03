@@ -6,12 +6,12 @@ import { COLOURS } from '../theme/AppStyles';
 import spotifyLogo from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { useNavigate } from 'react-router-dom';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { InAppModal } from './InAppModal';
-import './styles/Background.css';
+import { InAppModal } from '../components/InAppModal';
+import '../styles/Background.css';
 
-import { ReactComponent as CHERRIES } from './Rifflandia/images/cherries.svg';
+import { ReactComponent as CHERRIES } from '../Rifflandia/images/cherries.svg';
 
-const MainPage = memo(() => {
+const LoginPage = memo(() => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -36,6 +36,7 @@ const MainPage = memo(() => {
   };
 
   useEffect(() => {
+    document.title = 'Record Shop | Login';
     window.scrollTo(0, 0);
   }, []);
 
@@ -136,6 +137,6 @@ const MainPage = memo(() => {
   );
 });
 
-MainPage.displayName = 'MainPage';
+LoginPage.displayName = 'LoginPage';
 
-export default MainPage;
+export default LoginPage;

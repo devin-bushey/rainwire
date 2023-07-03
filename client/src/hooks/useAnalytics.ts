@@ -12,7 +12,7 @@ export function useAnalytics() {
 
   React.useEffect(() => {
     const path = location.pathname + location.search;
-    analytics.sendPageview(path);
+    //analytics.sendPageview(path);
   }, [location]);
 }
 

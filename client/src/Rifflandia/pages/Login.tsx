@@ -1,23 +1,21 @@
 import { useEffect, useState } from 'react';
 
 import { Box, Button, Card, Container, Typography } from '@mui/material';
-import { InAppModalRifflandia } from './InAppModalRifflandia';
+import { InAppModalRifflandia } from '../InAppModalRifflandia';
 
-import { BASE_REDIRECT_URI, AUTH_ENDPOINT, CLIENT_ID, SCOPES } from '../../constants/auth';
-import { RIFFLANDIA_COLOURS } from './colours';
+import { RIFFLANDIA_COLOURS } from '../constants/colours';
 
-import TITLE from './images/title.svg';
+import TITLE from '../images/title.svg';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import './styles.css';
-import { Email } from './Email';
-import { sendEvent } from '../../hooks/ga4';
+import '../styles/styles.css';
+import { Email } from '../Email';
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../../constants/auth';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
 
   useEffect(() => {
-    document.title = 'Rifflandia Login';
-    sendEvent('riff_login');
+    document.title = 'Record Shop | Rifflandia Login';
     window.scrollTo(0, 0);
   }, []);
 

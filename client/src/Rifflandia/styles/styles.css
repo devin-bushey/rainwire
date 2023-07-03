@@ -15,13 +15,13 @@
 }
 
 .sidebar-svg-park {
-  background-image: url('./images/background-park.svg');
+  background-image: url('../images/background-park.svg');
   left: 0;
   background-position-x: right;
 }
 
 .sidebar-svg-electric {
-  background-image: url('./images/background-electric.svg');
+  background-image: url('../images/background-electric.svg');
   right: 0;
   background-position-x: left;
 }

@@ -1,8 +1,8 @@
-import { COLOURS } from '../../theme/AppStyles';
-import { Loading } from '../Loading';
+import blank from '../spotifyLogos/test.jpg';
+import { Loading } from '../pages/Loading';
+import { Error } from '../components/Error';
+import { COLOURS } from '../theme/AppStyles';
 import { Ticket } from './Ticket';
-import { Error } from '../Error';
-import blank from '../../spotifyLogos/test.jpg';
 
 export const TicketContainer = ({
   tickets,

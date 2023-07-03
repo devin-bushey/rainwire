@@ -1,7 +1,9 @@
-import { Festivals } from './enums/common';
+import { Festivals } from '../enums/common';
 import axios, { AxiosError } from 'axios';
-import { SpotifyPlaylistDataType } from './SpotifyTypes';
-import { PLAYLIST_IMG_RS } from './assets/recordshop_img';
+import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
+import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
+import { sortByPopularity } from './sortByPopularity';
+import { sortByDateAndOrder } from './sortByDateAndOrder';
 
 export const CreateNewPlaylist = async ({
   token,
@@ -23,11 +25,15 @@ export const CreateNewPlaylist = async ({
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id, days });
 
   const playlist_id = playlist_data.new_playlist_id || '';
-  await AddCoverArt({ token, playlist_id });
+  try {
+    await AddCoverArt({ token, playlist_id });
+  } catch (err) {
+    console.log('Error adding cover art');
+  }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  const sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortDataByDateAndOrder(artists);
+  const sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortByDateAndOrder(artists);
 
   let tracks = '';
 
@@ -35,7 +41,6 @@ export const CreateNewPlaylist = async ({
     try {
       for (let i = 0; i < numTopTracksToAdd; i++) {
         if (artist.topTrackURIs && artist.topTrackURIs[i]) {
-          //console.log(artist.sp_band_name, ' ', artist.day);
           tracks += artist.topTrackURIs[i];
           tracks += ',';
         }
@@ -63,38 +68,6 @@ export const CreateNewPlaylist = async ({
     }
   }
   return playlist_data.external_urls?.spotify;
-};
-
-const sortDataByDateAndOrder = (data: any) => {
-  data.sort((a: any, b: any) => {
-    // First, compare the dates
-    const dateA = new Date(a.day);
-    const dateB = new Date(b.day);
-    if (dateA < dateB) {
-      return -1;
-    } else if (dateA > dateB) {
-      return 1;
-    } else {
-      // If the dates are the same, compare the orders
-      if (a.popularity < b.popularity) {
-        return -1;
-      } else if (a.popularity > b.popularity) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  });
-
-  return data;
-};
-
-const sortByPopularity = (tickets: any) => {
-  tickets.sort((a: any, b: any) => {
-    return a.popularity - b.popularity;
-  });
-
-  return tickets;
 };
 
 const CreateBlankPlaylist = async ({
@@ -143,8 +116,6 @@ const CreateBlankPlaylist = async ({
         },
       };
 
-      //console.log('Successfully created a playist: ' + playlist_name);
-
       return returnVal;
     })
     .catch(function (error) {
@@ -163,9 +134,6 @@ const CreateBlankPlaylist = async ({
 };
 
 const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
-  // const image = path.join(__dirname, './playlist_img.jpg');
-  // const file = fs.readFileSync(image, { encoding: 'base64' });
-
   return axios({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
     method: 'PUT',
@@ -174,17 +142,11 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
       'Content-Type': 'image/jpeg',
     },
     data: PLAYLIST_IMG_RS,
-  })
-    .then(() => {
-      //console.log('Successfully added tracks to playlist');
-      //window.location.assign(playlist_url);
-    })
-    .catch(function (error) {
-      console.log('Error: unsuccessfully added cover art to playlist');
-      //window.alert('Error: unsuccessfully added tracks to playlist');
-      console.log(error.message);
-      //return null;
-    });
+  }).catch(function (error) {
+    const err = error as AxiosError;
+    console.log('Error: unsuccessfully added cover art to playlist');
+    console.log(err.message);
+  });
 };
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
@@ -195,16 +157,10 @@ const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: s
       Authorization: 'Bearer ' + token,
       'Content-Type': 'application/json',
     },
-  })
-    .then(() => {
-      //console.log('Successfully added tracks to playlist');
-      //window.location.assign(playlist_url);
-    })
-    .catch(function (error) {
-      const err = error as AxiosError;
-      console.log('Error: unsuccessfully added tracks to playlist');
-      //window.alert('Error: unsuccessfully added tracks to playlist');
-      console.log(err.message);
-      return null;
-    });
+  }).catch(function (error) {
+    const err = error as AxiosError;
+    console.log('Error: unsuccessfully added tracks to playlist');
+    console.log(err.message);
+    return null;
+  });
 };

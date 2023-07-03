@@ -1,9 +1,8 @@
 import { Typography, Slider, Button, Link } from '@mui/material';
 import { Box } from '@mui/system';
-import { COLOURS } from '../../theme/AppStyles';
-import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { RIFFLANDIA_COLOURS } from './colours';
-import './styles.css';
+import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import { RIFFLANDIA_COLOURS } from './constants/colours';
+import './styles/styles.css';
 
 export const Options = (props: any) => {
   const DAYS = ['Sept 7', 'Sept 15', 'Sept 8', 'Sept 16', 'Sept 9', 'Sept 17'];
@@ -49,7 +48,7 @@ export const Options = (props: any) => {
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '4px' }}>
-          <Typography variant="h6" sx={{ color: COLOURS.black }}>
+          <Typography variant="h6">
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
             Customize
           </Typography>

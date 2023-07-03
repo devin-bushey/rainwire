@@ -1,4 +1,6 @@
-export const addSimpleDataToCollection = async (collection_name: string, tickets: any, db_connect: any) => {
+import { Artist } from '../types/Artists';
+
+export const addSimpleDataToCollection = async (collection_name: string, tickets: Artist[], db_connect: any) => {
   await db_connect.createCollection(collection_name, function (err: any, res: any) {
     if (err) throw err;
     console.log(collection_name + ' created!');

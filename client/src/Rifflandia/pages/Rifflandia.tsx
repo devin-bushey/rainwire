@@ -1,38 +1,38 @@
 import { useContext, useEffect, useState } from 'react';
 
-import '../styles/ClickMe.css';
-import './styles.css';
+import '../../styles/ClickMe.css';
+import '../styles/styles.css';
 
 // Images
-import TITLE from './images/title.svg';
-import { ReactComponent as CHERRIES } from './images/cherries.svg';
+import TITLE from '../images/title.svg';
+import { ReactComponent as CHERRIES } from '../images/cherries.svg';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 import { Box, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 
-import { SnackBarContext } from '../../App';
-import useSpotifyAuth from '../../hooks/useSpotifyAuth';
-import { WEBSITE_RIFFLANDIA } from '../../constants/locations';
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../../constants/auth';
-import { TicketContainer } from './TicketContainer';
-import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from './colours';
+import { TicketContainer } from '../TicketContainer';
+import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from '../constants/colours';
 
-import { Festivals } from '../../constants/enums';
-import { InAppModalRifflandia } from './InAppModalRifflandia';
+import { InAppModalRifflandia } from '../InAppModalRifflandia';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { LoadingRifflandia } from './LoadingRifflandia';
-import { StickyButton } from '../StickyButton';
-import { Options } from './Options';
+import { LoadingRifflandia } from '../LoadingRifflandia';
+import { Options } from '../Options';
 import { Login } from './Login';
 
-import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from './API_Rifflandia';
-import { SelectDays } from './SelectDays';
+import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from '../apiManager/API_Rifflandia';
+import { SelectDays } from '../SelectDays';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from './Spinner';
-import { sortByOrderNum, sortDataByDateAndOrder } from '../../helpers/sorter';
-import { sendEvent, trackButtonClick } from '../../hooks/ga4';
+import { Spinner } from '../Spinner';
+
+import { SnackBarContext } from '../../App';
+import { StickyButton } from '../../components/StickyButton';
+import { BASE_REDIRECT_URI, AUTH_ENDPOINT, CLIENT_ID, SCOPES } from '../../constants/auth';
+import { Festivals } from '../../constants/enums';
+import { WEBSITE_RIFFLANDIA } from '../../constants/locations';
+import { sortByOrderNum, sortDataByDateAndOrder } from '../../utils/sorter';
+import useSpotifyAuth from '../../hooks/useSpotifyAuth';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -41,8 +41,7 @@ export const Rifflandia = () => {
   const [isShaking, setIsShaking] = useState(false);
 
   useEffect(() => {
-    document.title = 'Rifflandia';
-    sendEvent('riff_main');
+    document.title = 'Record Shop | Rifflandia';
     window.scrollTo(0, 0);
   }, []);
 
@@ -220,7 +219,6 @@ export const Rifflandia = () => {
   const handleBuyTickets = () => {
     window.open(WEBSITE_RIFFLANDIA);
     //window.location.assign(WEBSITE_RIFFLANDIA);
-    trackButtonClick();
   };
 
   useEffect(() => {

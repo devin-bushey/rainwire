@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { Button, Container, Box, Link, Card } from '@mui/material';
+import { Button, Container, Box, Card } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Loading } from './Loading';
 import { COLOURS } from '../theme/AppStyles';
 import { useNavigate } from 'react-router-dom';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 
-export const CreatePlaylistPage = () => {
+export const LandingPage = () => {
   const { spotifyInfo } = useSpotifyAuth();
 
   if (!spotifyInfo) return <Loading />;
 
   useEffect(() => {
-    document.title = 'Record Shop Landing Page';
+    document.title = 'Record Shop | Welcome';
     window.scrollTo(0, 0);
   }, []);
 
@@ -44,7 +44,7 @@ export const CreatePlaylistPage = () => {
           </Typography>
 
           <Button
-            onClick={() => navigate('/tickets')}
+            onClick={() => navigate('/artists')}
             variant="contained"
             color="secondary"
             sx={{ marginTop: '8px', marginBottom: '8px', width: '225px' }}
@@ -74,10 +74,6 @@ export const CreatePlaylistPage = () => {
             3. Finally, create a personalized playlist directly on your Spotify account!
           </Typography>
         </Card>
-      </Box>
-
-      <Box sx={{ marginTop: '32px' }}>
-        <Link href="https://www.spotify.com/account/apps">Unsubscribe</Link>
       </Box>
     </Container>
   );

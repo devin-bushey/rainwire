@@ -1,6 +1,8 @@
 require('dotenv').config({ path: '../config.env' });
 import axios from 'axios';
 import _ from 'lodash';
+import { getSpotifyAuth } from '../helpers/getSpotifyAuth';
+import { removeDuplicateArtists } from '../helpers/removeDuplicateArtists';
 
 export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
@@ -83,55 +85,15 @@ async function addSpotifyTopTracks(element: any, token: any) {
   }
 }
 
-function removeDuplicateBands(arr: any) {
-  var cleaned: any[] = [];
-  arr.forEach(function (itm: any) {
-    var unique = true;
-    cleaned.forEach(function (itm2) {
-      if (_.isEqual(itm.sp_band_name, itm2.sp_band_name)) {
-        //console.log('itm: ', itm, ' itm2: ', itm2, ' isEqual: ', _.isEqual(itm.ticket_band, itm2.ticket_band));
-        unique = false;
-      }
-    });
-    if (unique) cleaned.push(itm);
-  });
-  return cleaned;
-}
-
 const createNewCollection = async (linked_data: any, collection_name: string, db_connect: any) => {
   let name = collection_name;
   await db_connect.createCollection(name, (err: any, result: any) => {
     console.log(name + ' created!');
   });
 
-  const duplicatesRemoved = removeDuplicateBands(linked_data);
+  const duplicatesRemoved = removeDuplicateArtists(linked_data);
 
   await db_connect.collection(name).insertMany(duplicatesRemoved, (err: any, res: any) => {
     console.log('Successfully added ' + res.insertedCount + ' records to ' + name);
   });
 };
-
-async function getSpotifyAuth() {
-  var client_id = process.env.SP_CLIENT_ID;
-  var client_secret = process.env.SP_CLIENT_S;
-
-  return await new Promise(function (resolve, reject) {
-    axios({
-      url: 'https://accounts.spotify.com/api/token',
-      method: 'POST',
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
-      },
-      params: {
-        grant_type: 'client_credentials',
-      },
-    })
-      .then(function (response) {
-        resolve(response.data.access_token);
-      })
-      .catch(function (error) {
-        console.log('Error: POST getAccessToken');
-        console.log(error);
-      });
-  });
-}

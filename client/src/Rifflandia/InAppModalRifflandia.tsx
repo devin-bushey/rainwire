@@ -1,5 +1,5 @@
 import { Modal, Box, Typography, Button } from '@mui/material';
-import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
 export const InAppModalRifflandia = ({
   open,
