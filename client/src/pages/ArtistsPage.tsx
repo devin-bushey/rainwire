@@ -30,7 +30,7 @@ export const ArtistsPage = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'artists/';
+  const redirectUri = BASE_REDIRECT_URI + 'artists';
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
