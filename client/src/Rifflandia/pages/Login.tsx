@@ -88,7 +88,8 @@ export const Login = () => {
                 Record Shop
               </Typography>
               <Typography sx={{ marginTop: '12px' }}>
-                Effortlessly generate a playlist featuring the top tracks from each artist performing at Rifflandia.
+                Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+                Rifflandia.
               </Typography>
 
               <Typography sx={{ marginTop: '24px' }}>
@@ -121,11 +122,16 @@ export const Login = () => {
         </Container>
 
         <footer className="footer">
-          <span style={{ fontSize: '1.1rem', fontFamily: 'Lobster, cursive', marginRight: '4px' }}>Record Shop </span>{' '}
-          made by{' '}
-          <button className="email-btn" onClick={handleOpenEmail}>
-            Devin B
-          </button>
+          <div>
+            <a href="/" style={{ fontSize: '1.1rem', fontFamily: 'Lobster, cursive', marginRight: '4px' }}>
+              Record Shop{' '}
+            </a>{' '}
+            by{' '}
+            <button className="email-btn" onClick={handleOpenEmail}>
+              Devin B
+            </button>
+          </div>
+          <div style={{ marginTop: '8px' }}>Made in Victoria, BC</div>
           {/* <span><Typography onClick={handleOpenEmail}>Devin B</Typography></span> */}
           {/* <a href="https://www.linkedin.com/in/devin-bushey/">Devin Bushey</a> */}
         </footer>

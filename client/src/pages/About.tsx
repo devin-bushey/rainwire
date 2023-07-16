@@ -125,18 +125,18 @@ export const About = memo(() => {
                 marginTop: '8px',
               }}
             >
-              Please keep in touch through the links below:
+              Please keep in touch through the link below:
             </Typography>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', width: '125px' }}>
-              <Button
+              {/* <Button
                 href="https://www.linkedin.com/in/devin-bushey/"
                 target="_blank"
                 variant="outlined"
                 sx={{ margin: '8px 0' }}
               >
                 LinkedIn
-              </Button>
+              </Button> */}
               <Button onClick={handleOpen} variant="outlined" sx={{ margin: '8px 0' }}>
                 Email
               </Button>
@@ -182,7 +182,7 @@ export const About = memo(() => {
               sx={{ backgroundColor: 'white', width: '300px', marginTop: '8px', marginBottom: '24px' }}
             />
             <br />
-            <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography>
+            {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
             <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
             <br />
             <br />
