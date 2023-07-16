@@ -9,8 +9,8 @@ export const sortByOrderNum = (tickets: any) => {
 export const sortDataByDateAndOrder = (data: any) => {
   data.sort((a: any, b: any) => {
     // First, compare the dates
-    const dateA = new Date(a.day);
-    const dateB = new Date(b.day);
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
     if (dateA < dateB) {
       return -1;
     } else if (dateA > dateB) {
