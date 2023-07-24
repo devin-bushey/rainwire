@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { COLOURS } from '../theme/AppStyles';
 
 export const Ticket = (props: any) => {
-  console.log(props.ticket);
   const description = props.ticket.day
     ? `${props.ticket.day} at ${props.ticket.weekend || props.ticket.venue}`
     : props.ticket.ticket_date;

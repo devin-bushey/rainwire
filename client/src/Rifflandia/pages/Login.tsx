@@ -10,9 +10,12 @@ import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import '../styles/styles.css';
 import { Email } from '../Email';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../../constants/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Record Shop | Rifflandia Login';
@@ -118,6 +121,85 @@ export const Login = () => {
                 <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Sign in</Typography>
               </Button>
             </Card>
+
+            <div style={{ marginTop: '48px' }}>Or preview an already created playlist:</div>
+            <Button
+              onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+              variant="outlined"
+              sx={{
+                //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                ':hover': {
+                  backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                },
+                color: 'rgba(3, 49, 46, 0.8)',
+                width: '290px',
+                marginTop: '12px',
+                marginBottom: '24px',
+                justifyContent: 'center',
+                height: '48px',
+              }}
+            >
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
+              <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Preview a Playlist</Typography>
+            </Button>
+
+            {/* <Button
+              onClick={() => navigate('/about')}
+              variant="outlined"
+              sx={{
+                //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                ':hover': {
+                  backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                },
+                color: 'rgba(3, 49, 46, 0.8)',
+                width: '290px',
+                marginTop: '8px',
+                marginBottom: '12px',
+                justifyContent: 'center',
+                height: '48px',
+              }}
+            >
+              <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>About</Typography>
+            </Button> */}
+
+            {/* <Box sx={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+              <Button
+                onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                variant="outlined"
+                sx={{
+                  //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                  ':hover': {
+                    backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                  },
+                  color: 'rgba(3, 49, 46, 0.8)',
+                  width: '140px',
+                  marginTop: '24px',
+                  marginBottom: '12px',
+                  justifyContent: 'center',
+                  height: '48px',
+                }}
+              >
+                <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Preview</Typography>
+              </Button>
+              <Button
+                onClick={() => navigate('/about')}
+                variant="outlined"
+                sx={{
+                  //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                  ':hover': {
+                    backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                  },
+                  color: 'rgba(3, 49, 46, 0.8)',
+                  width: '140px',
+                  marginTop: '24px',
+                  marginBottom: '12px',
+                  justifyContent: 'center',
+                  height: '48px',
+                }}
+              >
+                <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>About</Typography>
+              </Button>
+            </Box> */}
           </Box>
         </Container>
 
