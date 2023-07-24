@@ -99,7 +99,9 @@ export const Login = () => {
                 The playlist can be pre-populated and created right on your account!
               </Typography>
 
-              <Typography sx={{ marginTop: '24px' }}>Start by signing in with Spotify</Typography>
+              <Typography sx={{ marginTop: '24px', fontWeight: '900' }}>
+                Start by signing into your Spotify account:
+              </Typography>
 
               <Button
                 onClick={isInAppBrowser}
@@ -122,7 +124,7 @@ export const Login = () => {
               </Button>
             </Card>
 
-            <div style={{ marginTop: '48px' }}>Or preview an already created playlist:</div>
+            <div style={{ marginTop: '64px' }}>Or preview an already created playlist:</div>
             <Button
               onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
               variant="outlined"
@@ -134,7 +136,7 @@ export const Login = () => {
                 color: 'rgba(3, 49, 46, 0.8)',
                 width: '290px',
                 marginTop: '12px',
-                marginBottom: '24px',
+                //marginBottom: '24px',
                 justifyContent: 'center',
                 height: '48px',
               }}
@@ -142,6 +144,9 @@ export const Login = () => {
               <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
               <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Preview a Playlist</Typography>
             </Button>
+            <div style={{ fontSize: '0.75rem', marginBottom: '24px', marginTop: '4px' }}>
+              (but its more fun to customize your own)
+            </div>
 
             {/* <Button
               onClick={() => navigate('/about')}
