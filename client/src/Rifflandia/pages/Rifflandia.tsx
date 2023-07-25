@@ -8,7 +8,7 @@ import TITLE from '../images/title.svg';
 import { ReactComponent as CHERRIES } from '../images/cherries.svg';
 import spotifyIcon from '../../spotifyLogos/Spotify_Icon_RGB_Black.png';
 
-import { Box, Container } from '@mui/material';
+import { Box, Card, Container } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 
@@ -33,6 +33,8 @@ import { Festivals } from '../../constants/enums';
 import { WEBSITE_RIFFLANDIA } from '../../constants/locations';
 import { sortByOrderNum, sortDataByDateAndOrder } from '../../utils/sorter';
 import useSpotifyAuth from '../../hooks/useSpotifyAuth';
+import { Email } from '../Email';
+import { SignInModalRifflandia } from '../SignInModalRifflandia';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -46,12 +48,24 @@ export const Rifflandia = () => {
   }, []);
 
   useEffect(() => {
-    setIsShaking(true);
+    // Function to handle the shaking logic
+    function handleShaking() {
+      setIsShaking(true);
 
-    // Reset the shaking animation after a delay
-    setTimeout(() => {
-      setIsShaking(false);
-    }, 2000);
+      // Reset the shaking animation after a delay (in this case, 2 seconds)
+      setTimeout(() => {
+        setIsShaking(false);
+      }, 2000);
+    }
+
+    // Call the handleShaking function initially
+    handleShaking();
+
+    // Set the interval to call the handleShaking function every 20 seconds (20000 milliseconds)
+    const intervalId = setInterval(handleShaking, 7000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
   }, []);
 
   const navigate = useNavigate();
@@ -98,6 +112,13 @@ export const Rifflandia = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openSignIn, setOpenSignIn] = useState(false);
+  const handleOpenSignIn = () => setOpenSignIn(true);
+  const handleCloseSignIn = () => setOpenSignIn(false);
+
+  const [openEmail, setOpenEmail] = useState(false);
+  const handleOpenEmail = () => setOpenEmail(true);
 
   useEffect(() => {
     if (query.data) {
@@ -197,7 +218,7 @@ export const Rifflandia = () => {
 
       setIsLoading(false);
     } else {
-      isInAppBrowser();
+      handleOpenSignIn();
     }
   };
 
@@ -247,9 +268,9 @@ export const Rifflandia = () => {
     return <LoadingRifflandia />;
   }
 
-  if (!token || !spotifyInfo || !spotifyInfo.access) {
-    return <Login />;
-  }
+  // if (!token || !spotifyInfo || !spotifyInfo.access) {
+  //   return <Login />;
+  // }
 
   return (
     <>
@@ -266,6 +287,98 @@ export const Rifflandia = () => {
           backgroundColor: RIFFLANDIA_COLOURS.background,
         }}
       >
+        <Container
+          sx={{
+            display: 'flex',
+            flex: 1,
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: RIFFLANDIA_COLOURS.background,
+              borderRadius: '10px',
+              minWidth: '300px',
+              maxWidth: '550px',
+              margin: '8px',
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: '4rem',
+                fontFamily: 'Lobster, cursive',
+                //fontWeight: '700',
+                letterSpacing: '2px',
+                color: 'black',
+              }}
+            >
+              Record Shop
+            </Typography>
+
+            <Card
+              sx={{
+                backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
+                marginTop: '24px',
+                marginBottom: '64px',
+              }}
+            >
+              <Typography sx={{ marginTop: '12px' }}>
+                Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+                Rifflandia.
+              </Typography>
+
+              <Typography sx={{ marginTop: '24px' }}>
+                The playlist can be pre-populated and created right on your account!
+              </Typography>
+
+              {(!token || !spotifyInfo || !spotifyInfo.access) && (
+                <>
+                  <Typography sx={{ marginTop: '24px', fontWeight: '900' }}>
+                    Start by signing into your Spotify account:
+                  </Typography>
+
+                  <Button
+                    onClick={isInAppBrowser}
+                    variant="contained"
+                    sx={{
+                      backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                      ':hover': {
+                        backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                      },
+                      color: 'black',
+                      width: '100%',
+                      marginTop: '24px',
+
+                      justifyContent: 'center',
+                      height: '48px',
+                    }}
+                  >
+                    <img
+                      src={spotifyIcon}
+                      alt="spotify_logo"
+                      width="20px"
+                      height="20px"
+                      style={{ marginRight: '16px' }}
+                    />
+                    <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Sign in</Typography>
+                  </Button>
+                </>
+              )}
+
+              <div style={{ marginTop: '32px' }}>
+                <a href="/" style={{ fontSize: '1.1rem', fontFamily: 'Lobster, cursive', marginRight: '4px' }}>
+                  Record Shop{' '}
+                </a>{' '}
+                by{' '}
+                <button className="email-btn" onClick={handleOpenEmail}>
+                  Devin B
+                </button>
+              </div>
+              <div style={{ marginTop: '8px' }}>Made in Victoria, BC</div>
+            </Card>
+          </Box>
+        </Container>
+
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{ maxWidth: '900px' }}>
             <Container
@@ -325,17 +438,22 @@ export const Rifflandia = () => {
                     setShowSettings(!showSettings);
                   }}
                 >
-                  Customize
+                  Options
                 </Button>
 
                 <Button
                   variant="outlined"
                   sx={{ marginBottom: '16px', width: '300px' }}
-                  onClick={() => {
-                    logOut();
-                  }}
+                  onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                 >
-                  Sign out
+                  <img
+                    src={spotifyIcon}
+                    alt="spotify_logo"
+                    width="20px"
+                    height="20px"
+                    style={{ marginRight: '16px' }}
+                  />
+                  Preview a Playlist
                 </Button>
 
                 <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: '300px' }}>
@@ -368,6 +486,8 @@ export const Rifflandia = () => {
                     handleNumTopTracks={handleNumTopTracks}
                     handleCloseSettings={handleCloseSettings}
                     colour={RIFFLANDIA_COLOURS.fill_pale_green}
+                    token={token}
+                    spotifyInfo={spotifyInfo}
                   />
                 </div>
               )}
@@ -404,6 +524,10 @@ export const Rifflandia = () => {
         hoverColor={RIFFLANDIA_COLOURS.dark_blue}
         barColor={RIFFLANDIA_COLOURS.fill_light_orange}
       />
+
+      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
+
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
       <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>

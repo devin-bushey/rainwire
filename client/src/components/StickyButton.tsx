@@ -18,7 +18,7 @@ export const StickyButton = ({
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setShowButton(scrollPosition >= 300);
+      setShowButton(scrollPosition >= 800);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -35,7 +35,7 @@ export const StickyButton = ({
           position: 'fixed',
           bottom: '0px',
           //right: '16px',
-          zIndex: 9999,
+          zIndex: 9,
           opacity: showButton ? 1 : 0,
           visibility: showButton ? 1 : 'hidden',
           transition: 'visibility 1.5s, opacity 1.5s ease',
