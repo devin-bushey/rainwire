@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { RIFFLANDIA_COLOURS } from './constants/colours';
 import './styles/styles.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Options = (props: any) => {
   const DAYS = ['Sept 7', 'Sept 15', 'Sept 8', 'Sept 16', 'Sept 9', 'Sept 17'];
@@ -29,6 +30,13 @@ export const Options = (props: any) => {
       label: '5',
     },
   ];
+
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/rifflandia');
+    window.location.reload();
+  };
 
   return (
     <Box
@@ -96,11 +104,19 @@ export const Options = (props: any) => {
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: '24px' }}>
-          <Link href="https://www.spotify.com/account/apps">
-            <Typography sx={{ fontSize: '12px' }}>Unsubscribe</Typography>
-          </Link>
-        </Box>
+        {!(!props.token || !props.spotifyInfo || !props.spotifyInfo.access) && (
+          <>
+            <Button variant="outlined" sx={{ marginTop: '24px', width: '200px' }} onClick={logOut}>
+              Sign Out
+            </Button>
+
+            <Box sx={{ marginTop: '12px' }}>
+              <Link href="https://www.spotify.com/account/apps">
+                <Typography sx={{ fontSize: '12px' }}>Unsubscribe</Typography>
+              </Link>
+            </Box>
+          </>
+        )}
       </Box>
     </Box>
   );
