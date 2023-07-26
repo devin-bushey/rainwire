@@ -41,6 +41,7 @@ export const Rifflandia = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
 
   const [isShaking, setIsShaking] = useState(false);
+  const [isSignInShaking, setIsSignInShaking] = useState(false);
 
   useEffect(() => {
     document.title = 'Record Shop | Rifflandia';
@@ -58,26 +59,31 @@ export const Rifflandia = () => {
       }, 2000);
     }
 
-    // Call the handleShaking function initially
-    handleShaking();
+    function handleSignInShaking() {
+      setIsSignInShaking(true);
 
-    // Set the interval to call the handleShaking function every 20 seconds (20000 milliseconds)
-    const intervalId = setInterval(handleShaking, 7000);
+      // Reset the shaking animation after a delay (in this case, 2 seconds)
+      setTimeout(() => {
+        setIsSignInShaking(false);
+      }, 2000);
+    }
+
+    // Call the handleShaking function initially
+    //handleShaking();
+    handleSignInShaking();
+
+    // Set the interval to call the handleShaking function every x milliseconds
+    const intervalId = setInterval(handleShaking, 8000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
   const navigate = useNavigate();
-  const logOut = () => {
-    localStorage.clear();
-    navigate('/rifflandia');
-    window.location.reload();
-  };
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnReconnect: false,
     cacheTime: Infinity,
     keepPreviousData: true,
@@ -242,6 +248,10 @@ export const Rifflandia = () => {
     //window.location.assign(WEBSITE_RIFFLANDIA);
   };
 
+  const handleAboutClick = () => {
+    navigate('/about');
+  };
+
   useEffect(() => {
     if (!selectedDays || selectedDays.length === 0) {
       handleClearAllFilters();
@@ -339,6 +349,7 @@ export const Rifflandia = () => {
 
                   <Button
                     onClick={isInAppBrowser}
+                    className={`${isSignInShaking ? 'shaking' : ''}`}
                     variant="contained"
                     sx={{
                       backgroundColor: RIFFLANDIA_COLOURS.light_blue,
@@ -362,6 +373,38 @@ export const Rifflandia = () => {
                     />
                     <Typography sx={{ fontWeight: '700', paddingBottom: 0 }}>Sign in</Typography>
                   </Button>
+
+                  <div style={{ marginTop: '48px' }}>Or preview an already created playlist:</div>
+                  <Button
+                    onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                    variant="outlined"
+                    sx={{
+                      //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                      ':hover': {
+                        backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                      },
+                      color: 'rgba(3, 49, 46, 0.8)',
+                      width: '230px',
+                      marginTop: '12px',
+                      //marginBottom: '24px',
+                      justifyContent: 'center',
+                      height: '36px',
+                    }}
+                  >
+                    <img
+                      src={spotifyIcon}
+                      alt="spotify_logo"
+                      width="20px"
+                      height="20px"
+                      style={{ marginRight: '16px' }}
+                    />
+                    <Typography sx={{ fontSize: '0.8rem', fontWeight: '700', paddingBottom: 0 }}>
+                      Preview a Playlist
+                    </Typography>
+                  </Button>
+                  <div style={{ fontSize: '0.7rem', marginBottom: '24px', marginTop: '4px' }}>
+                    (but its more fun to customize your own)
+                  </div>
                 </>
               )}
 
@@ -444,16 +487,10 @@ export const Rifflandia = () => {
                 <Button
                   variant="outlined"
                   sx={{ marginBottom: '16px', width: '300px' }}
-                  onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                  //onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                  onClick={handleAboutClick}
                 >
-                  <img
-                    src={spotifyIcon}
-                    alt="spotify_logo"
-                    width="20px"
-                    height="20px"
-                    style={{ marginRight: '16px' }}
-                  />
-                  Preview a Playlist
+                  About
                 </Button>
 
                 <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: '300px' }}>

@@ -6,11 +6,16 @@ import { COLOURS } from '../theme/AppStyles';
 import coffeeCup from '../assets/images/coffee-cup.png';
 import { SnackBarContext } from '../App';
 
+import { ReactComponent as CHERRIES } from '../Rifflandia/images/cherries.svg';
+import { useNavigate } from 'react-router-dom';
+
 export const About = memo(() => {
   const [openEmail, setOpenEmail] = useState(false);
   const handleOpen = () => setOpenEmail(true);
   const handleClose = () => setOpenEmail(false);
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = 'Record Shop | About';
@@ -86,6 +91,23 @@ export const About = memo(() => {
         <Typography sx={{ padding: '16px 0' }}>
           I wanted to automate part of this process - so I created Record Shop.
         </Typography>
+
+        <Typography sx={{ fontWeight: '700', paddingTop: '12px' }}>
+          Checkout the exclusive page that was created for Rifflandia:
+        </Typography>
+
+        <Button
+          onClick={() => {
+            navigate('/rifflandia');
+          }}
+          variant="outlined"
+          sx={{ marginTop: '12px', marginBottom: '24px', padding: '8px 16px', width: '300px' }}
+        >
+          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+            <CHERRIES />
+          </Box>
+          Rifflandia
+        </Button>
 
         <Card
           sx={{
