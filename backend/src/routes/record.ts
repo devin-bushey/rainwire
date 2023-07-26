@@ -7,6 +7,8 @@ import { CreateNewPlaylist } from '../helpers/createPlaylist';
 import { RIFFLANDIA_SPOTIFY } from '../rifflandia/constants';
 import { CreateNewPlaylistRifflandia } from '../rifflandia/createPlaylist';
 
+const cachedData: { rifflandia_data?: any } = {}; // The in-memory cache object
+
 recordRoutes.route('/artists').get(async (req, response) => {
   const { city } = req.query;
   let db_connect = dbo.getDb();
@@ -86,26 +88,36 @@ recordRoutes.route('/create').post(async (req, response) => {
 });
 
 recordRoutes.route('/rifflandia').get(async (req, response) => {
-  let db_connect = dbo.getDb();
+  // Check if data is cached in memory
+  if (cachedData.rifflandia_data) {
+    // If data is found in cache, return the cached data
+    response.json(cachedData.rifflandia_data);
+  } else {
+    console.log('cache not found for /rifflandia: ', cachedData);
 
-  if (!db_connect) {
-    console.log('reconnecting to db');
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log('reconnecting error');
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
+    let db_connect = dbo.getDb();
+
+    if (!db_connect) {
+      console.log('reconnecting to db');
+      await dbo.connectToServer(function (err: any) {
+        if (err) {
+          console.log('reconnecting error');
+          console.error(err);
+        }
+      });
+      db_connect = dbo.getDb();
+    }
+
+    db_connect
+      .collection(`rifflandia`)
+      .find({})
+      .toArray()
+      .then((data: any) => {
+        // Save the fetched data to cache
+        cachedData.rifflandia_data = data;
+        response.json(data);
+      });
   }
-
-  db_connect
-    .collection(`rifflandia`)
-    .find({})
-    .toArray()
-    .then((data: any) => {
-      response.json(data);
-    });
 });
 
 recordRoutes.route('/rifflandia-create').post(async (req, response) => {
