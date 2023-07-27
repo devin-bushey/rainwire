@@ -80,6 +80,11 @@ export const Rifflandia = () => {
   }, []);
 
   const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/rifflandia');
+    window.location.reload();
+  };
 
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
@@ -431,6 +436,7 @@ export const Rifflandia = () => {
                 flexWrap: 'wrap',
                 justifyContent: 'space-evenly',
                 paddingBottom: !showLoadMoreBtn ? '120px' : '',
+                alignItems: 'center',
               }}
             >
               <Box
@@ -481,17 +487,17 @@ export const Rifflandia = () => {
                     setShowSettings(!showSettings);
                   }}
                 >
-                  Options
+                  Customize
                 </Button>
 
-                <Button
+                {/* <Button
                   variant="outlined"
                   sx={{ marginBottom: '16px', width: '300px' }}
                   //onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                   onClick={handleAboutClick}
                 >
                   About
-                </Button>
+                </Button> */}
 
                 <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: '300px' }}>
                   <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
@@ -499,6 +505,18 @@ export const Rifflandia = () => {
                   </Box>
                   Buy Tickets
                 </Button>
+
+                {!(!token || !spotifyInfo || !spotifyInfo.access) && (
+                  <Button
+                    variant="outlined"
+                    sx={{ marginTop: '16px', marginBottom: '16px', width: '300px' }}
+                    onClick={logOut}
+                    //onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                    //onClick={handleAboutClick}
+                  >
+                    Sign Out
+                  </Button>
+                )}
               </Box>
 
               {showSelectDays && (
