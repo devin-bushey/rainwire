@@ -106,9 +106,9 @@ export const Options = (props: any) => {
 
         {!(!props.token || !props.spotifyInfo || !props.spotifyInfo.access) && (
           <>
-            <Button variant="outlined" sx={{ marginTop: '24px', width: '200px' }} onClick={logOut}>
+            {/* <Button variant="outlined" sx={{ marginTop: '24px', width: '200px' }} onClick={logOut}>
               Sign Out
-            </Button>
+            </Button> */}
 
             <Box sx={{ marginTop: '12px' }}>
               <Link href="https://www.spotify.com/account/apps">
