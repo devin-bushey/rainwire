@@ -384,7 +384,7 @@ export const Rifflandia = () => {
                     onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                     variant="outlined"
                     sx={{
-                      //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                      backgroundColor: RIFFLANDIA_COLOURS.fill_pale_pink,
                       ':hover': {
                         backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
                       },
@@ -413,7 +413,7 @@ export const Rifflandia = () => {
                 </>
               )}
 
-              {/* <div style={{ marginTop: '32px' }}>
+              <div style={{ marginTop: '32px' }}>
                 <a href="/" style={{ fontSize: '1.1rem', fontFamily: 'Lobster, cursive', marginRight: '4px' }}>
                   Record Shop{' '}
                 </a>{' '}
@@ -422,7 +422,7 @@ export const Rifflandia = () => {
                   Devin B
                 </button>
               </div>
-              <div style={{ marginTop: '8px' }}>Made in Victoria, BC</div> */}
+              <div style={{ marginTop: '8px', fontSize: '0.7rem' }}>Made in Victoria, BC</div>
             </Card>
           </Box>
         </Container>
