@@ -381,7 +381,7 @@ export const Rifflandia = () => {
 
                   <div style={{ marginTop: '48px' }}>Or preview an already created playlist:</div>
                   <Button
-                    onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                    onClick={() => window.location.assign('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                     variant="outlined"
                     sx={{
                       backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
