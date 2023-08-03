@@ -384,7 +384,7 @@ export const Rifflandia = () => {
                     onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                     variant="outlined"
                     sx={{
-                      backgroundColor: RIFFLANDIA_COLOURS.fill_pale_pink,
+                      backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
                       ':hover': {
                         backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
                       },

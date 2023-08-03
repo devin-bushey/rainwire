@@ -5,6 +5,7 @@ export const RIFFLANDIA_COLOURS = {
   blue: '#00adef',
   green: '#70be44',
   light_blue: 'rgba(0,174,239, 1)',
+  light_blue_opaque: 'rgba(0,174,239, 0.2)',
   dark_blue: 'rgba(5,89,114,1)',
   fill_pale_green: 'rgba(206,228,169,1)',
   fill_pale_pink: 'rgba(239,180,210,1)',
