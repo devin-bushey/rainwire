@@ -96,17 +96,11 @@ const Refresh = () => {
       </Box>
 
       <Box sx={{ marginBottom: '20px' }}>
-        <button onClick={() => handleDropCollection(`db_${Festivals.LaketownShakedown}`)}>
-          Drop db_{Festivals.LaketownShakedown}
-        </button>
-        <button onClick={() => handleDropCollection(`db_${Festivals.LaketownShakedown}_sp`)}>
-          Drop db_{Festivals.LaketownShakedown}_sp
-        </button>
-        <button onClick={() => handleExtract(Festivals.LaketownShakedown)}>
-          Extract {Festivals.LaketownShakedown}
-        </button>
-        <button onClick={() => handleAddSpotify(`db_${Festivals.LaketownShakedown}`)}>
-          Add Spotify to db_{Festivals.LaketownShakedown}
+        <button onClick={() => handleDropCollection('laketownShakedown_simple')}>Drop laketownShakedown_simple</button>
+        <button onClick={() => handleDropCollection('laketownShakedown')}>Drop laketownShakedown</button>
+        <button onClick={() => handleExtract(Festivals.LaketownShakedown)}>Extract laketownShakedown</button>
+        <button onClick={() => handleAddSpotify(`${Festivals.LaketownShakedown}`)}>
+          Add Spotify to {Festivals.LaketownShakedown}_simple
         </button>
       </Box>
 

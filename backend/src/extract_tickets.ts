@@ -9,6 +9,7 @@ import { extract_osheaga } from './scripts/extract_osheaga';
 import { extract_songkick } from './scripts/extract_songkick';
 import { extract_phillips_backyarder } from './scripts/extract_philips_backyarder';
 import { Artist } from './types/Artists';
+import { extract_laketown_shakedown } from './scripts/extract_laketown_shakedown';
 
 export const extract = async (location: Cities | Festivals) => {
   const db_connect = dbo.getDb();
@@ -31,6 +32,10 @@ export const extract = async (location: Cities | Festivals) => {
 
     case Festivals.Osheaga:
       tickets = await extractOsheaga();
+      break;
+
+    case Festivals.LaketownShakedown:
+      tickets = await extractLaketownShakedown();
       break;
 
     default:
@@ -112,6 +117,18 @@ const extractPhillipsBackyard = async () => {
   const tickets_phillips_backyarder = await extract_phillips_backyarder();
 
   tickets_phillips_backyarder.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};
+
+const extractLaketownShakedown = async () => {
+  let tickets: Artist[] = [];
+
+  const tickets_laketownShakedown = await extract_laketown_shakedown();
+
+  tickets_laketownShakedown.forEach(function (obj: Artist) {
     tickets.push(obj);
   });
 
