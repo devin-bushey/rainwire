@@ -6,6 +6,9 @@ import { CreateNewPlaylist } from '../helpers/createPlaylist';
 
 import { RIFFLANDIA_SPOTIFY } from '../rifflandia/constants';
 import { CreateNewPlaylistRifflandia } from '../rifflandia/createPlaylist';
+// import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
+// import { Cities, Festivals } from '../enums/common';
+// import { extract } from '../extract_tickets';
 
 const cachedData: { rifflandia_data?: any } = {}; // The in-memory cache object
 

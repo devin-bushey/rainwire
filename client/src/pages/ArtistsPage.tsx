@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Rifflandia/Spinner';
 import { sortByOrderNum } from '../utils/sorter';
 import { StickyButton } from '../components/StickyButton';
+import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -31,6 +32,10 @@ export const ArtistsPage = () => {
 
   const { token, spotifyInfo } = useSpotifyAuth();
   const redirectUri = BASE_REDIRECT_URI + 'artists';
+
+  const [openSignIn, setOpenSignIn] = useState(false);
+  const handleOpenSignIn = () => setOpenSignIn(true);
+  const handleCloseSignIn = () => setOpenSignIn(false);
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
@@ -220,7 +225,8 @@ export const ArtistsPage = () => {
         });
       setIsLoading(false);
     } else {
-      isInAppBrowser();
+      handleOpenSignIn();
+      //isInAppBrowser();
     }
   };
 
@@ -369,6 +375,8 @@ export const ArtistsPage = () => {
         hoverColor={COLOURS.card_colours[1]}
         barColor={COLOURS.card_colours[2]}
       />
+
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
