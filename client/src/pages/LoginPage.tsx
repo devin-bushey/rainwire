@@ -43,7 +43,7 @@ const LoginPage = memo(() => {
   return (
     <>
       <div className="spacer layer"></div>
-      <Container maxWidth="lg" sx={{ marginBottom: '32px', marginTop: '-24px' }}>
+      <Container maxWidth="lg" sx={{ marginTop: '-24px' }}>
         <Typography
           variant="h3"
           sx={{ fontSize: '5rem', fontFamily: 'Lobster, Arial, sans-serif', letterSpacing: '2px' }}
@@ -108,9 +108,9 @@ const LoginPage = memo(() => {
             width: '75%',
             maxWidth: '700px',
             '& .MuiTypography-body1': {
-              fontSize: '1.25rem',
+              fontSize: '1rem',
             },
-            marginTop: '32px',
+            marginTop: '48px',
           }}
         >
           <Typography sx={{ paddingTop: '12px' }}>
@@ -123,13 +123,38 @@ const LoginPage = memo(() => {
             navigate('/rifflandia');
           }}
           variant="outlined"
-          sx={{ marginTop: '12px', marginBottom: '24px', padding: '8px 16px', width: '300px' }}
+          sx={{ marginTop: '12px', marginBottom: '16px', padding: '8px 16px', width: '300px' }}
         >
           <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
             <CHERRIES />
           </Box>
           Rifflandia
         </Button>
+
+        <Box
+          sx={{
+            width: '75%',
+            maxWidth: '700px',
+            '& .MuiTypography-body1': {
+              fontSize: '1rem',
+            },
+            //marginTop: '16px',
+          }}
+        >
+          <Typography sx={{ paddingTop: '12px' }}>Too tired to find you Spotify password?</Typography>
+        </Box>
+
+        <Button
+          onClick={() => window.location.assign('https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q')}
+          variant="outlined"
+          sx={{ marginTop: '12px', marginBottom: '8px', padding: '8px 16px', width: '300px' }}
+        >
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
+          Preview a Playlist
+        </Button>
+        <div style={{ fontSize: '0.7rem', paddingBottom: '48px', marginTop: '4px' }}>
+          (but its more fun to customize your own)
+        </div>
 
         <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>
