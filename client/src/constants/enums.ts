@@ -10,4 +10,5 @@ export enum Festivals {
   LaketownShakedown = 'laketownShakedown',
   Osheaga = 'osheaga',
   Coachella = 'coachella',
+  TheFunction = 'theFunction',
 }

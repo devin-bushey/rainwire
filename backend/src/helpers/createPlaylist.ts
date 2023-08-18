@@ -91,6 +91,10 @@ const CreateBlankPlaylist = async ({
     playlist_name = 'record shop laketown shakedown';
   }
 
+  if (city === Festivals.TheFunction) {
+    playlist_name = 'record shop - the function';
+  }
+
   let description = `a mixtape created by recordshop.cool`;
 
   return axios({

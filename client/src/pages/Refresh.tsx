@@ -105,6 +105,15 @@ const Refresh = () => {
       </Box>
 
       <Box sx={{ marginBottom: '20px' }}>
+        <button onClick={() => handleDropCollection('theFunction_simple')}>Drop theFunction_simple</button>
+        <button onClick={() => handleDropCollection('theFunction')}>Drop theFunction</button>
+        <button onClick={() => handleExtract(Festivals.TheFunction)}>Extract theFunction</button>
+        <button onClick={() => handleAddSpotify(`${Festivals.TheFunction}`)}>
+          Add Spotify to {Festivals.TheFunction}_simple
+        </button>
+      </Box>
+
+      <Box sx={{ marginBottom: '20px' }}>
         <button onClick={() => handleDropCollection(`${Festivals.Osheaga}_simple`)}>
           Drop {Festivals.Osheaga}_simple
         </button>
