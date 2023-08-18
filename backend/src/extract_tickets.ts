@@ -10,6 +10,8 @@ import { extract_songkick } from './scripts/extract_songkick';
 import { extract_phillips_backyarder } from './scripts/extract_philips_backyarder';
 import { Artist } from './types/Artists';
 import { extract_laketown_shakedown } from './scripts/extract_laketown_shakedown';
+import { extract_capital_ballroom } from './scripts/extract_capital_ballroom';
+import { extract_function_festival } from './scripts/extract_function_festival';
 
 export const extract = async (location: Cities | Festivals) => {
   const db_connect = dbo.getDb();
@@ -36,6 +38,10 @@ export const extract = async (location: Cities | Festivals) => {
 
     case Festivals.LaketownShakedown:
       tickets = await extractLaketownShakedown();
+      break;
+
+    case Festivals.TheFunction:
+      tickets = await extractFunctionFestival();
       break;
 
     default:
@@ -66,6 +72,12 @@ const extractVictoria = async () => {
     tickets.push(obj);
   });
   tickets_vic_songkick_3.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  const tickets_capital = await extract_capital_ballroom();
+
+  tickets_capital.forEach(function (obj: Artist) {
     tickets.push(obj);
   });
 
@@ -129,6 +141,18 @@ const extractLaketownShakedown = async () => {
   const tickets_laketownShakedown = await extract_laketown_shakedown();
 
   tickets_laketownShakedown.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};
+
+const extractFunctionFestival = async () => {
+  let tickets: Artist[] = [];
+
+  const extracted = await extract_function_festival();
+
+  extracted.forEach(function (obj: Artist) {
     tickets.push(obj);
   });
 

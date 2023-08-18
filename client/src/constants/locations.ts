@@ -18,6 +18,12 @@ export const LOCATIONS: LocationType[] = [
     location: 'Victoria, BC',
   },
   {
+    name: 'The Function',
+    value: Festivals.TheFunction,
+    website: 'https://www.functionfestival.com/',
+    location: 'Ship Point',
+  },
+  {
     name: 'Rifflandia',
     value: Festivals.Rifflandia,
     website: 'https://rifflandia.com/tickets/',
@@ -47,16 +53,17 @@ export const LOCATIONS: LocationType[] = [
   //   website: 'https://coachella.com/',
   //   location: 'California, US',
   // },
+
   {
     name: 'Victoria, BC',
     value: Cities.Victoria,
     website: 'https://victoriamusicscene.com/concerts/',
     location: 'Victoria, BC',
   },
-  {
-    name: 'Vancouver, BC',
-    value: Cities.Vancouver,
-    website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
-    location: 'Vancouver, BC',
-  },
+  // {
+  //   name: 'Vancouver, BC',
+  //   value: Cities.Vancouver,
+  //   website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
+  //   location: 'Vancouver, BC',
+  // },
 ];
