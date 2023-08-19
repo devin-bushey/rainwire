@@ -30,6 +30,7 @@
     "lodash": "^4.17.21",
     "mongodb": "^4.13.0",
     "request": "^2.88.2",
+    "string-similarity": "^4.0.4",
     "swagger-ui-express": "^4.6.0"
   }
 }
