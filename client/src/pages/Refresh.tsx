@@ -123,12 +123,12 @@ const Refresh = () => {
       </Box>
 
       <Box sx={{ marginBottom: '20px' }}>
-        <button onClick={() => handleDropCollection(`db_${Festivals.Coachella}`)}>Drop db_{Festivals.Coachella}</button>
-        <button onClick={() => handleDropCollection(`db_${Festivals.Coachella}_sp`)}>
-          Drop db_{Festivals.Coachella}_sp
+        <button onClick={() => handleDropCollection(`${Festivals.Coachella}_simple`)}>
+          Drop {Festivals.Coachella}_simple
         </button>
+        <button onClick={() => handleDropCollection(`${Festivals.Coachella}`)}>Drop {Festivals.Coachella}</button>
         <button onClick={() => handleExtract(Festivals.Coachella)}>Extract {Festivals.Coachella}</button>
-        <button onClick={() => handleAddSpotify(`db_${Festivals.Coachella}`)}>
+        <button onClick={() => handleAddSpotify(`${Festivals.Coachella}`)}>
           Add Spotify to db_{Festivals.Coachella}
         </button>
       </Box>

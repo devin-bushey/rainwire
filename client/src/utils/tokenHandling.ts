@@ -12,6 +12,6 @@ export const getSpotifyTokenLocalStorage = () => {
     return null;
   }
   const decrypted = CryptoJS.AES.decrypt(encrypted, import.meta.env.VITE_CRYPTO_KEY).toString(CryptoJS.enc.Utf8);
-  //console.log(decrypted);
+  // console.log(decrypted);
   return decrypted;
 };

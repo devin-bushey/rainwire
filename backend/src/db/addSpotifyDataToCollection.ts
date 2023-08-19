@@ -3,6 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import { getSpotifyAuth } from '../helpers/getSpotifyAuth';
 import { removeDuplicateArtists } from '../helpers/removeDuplicateArtists';
+const stringSimilarity = require('string-similarity');
 
 export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
@@ -40,13 +41,29 @@ async function addSpotifyMainData(element: any, token: any) {
       },
     })
       .then(async function (res) {
+        //console.log('res', res);
+        const bestMatch = findBestMatch(
+          res.data.artists.items,
+          element.artist,
+          res.data.artists.items.map((artist: any) => artist.name),
+        );
+
+        //console.log('bestMatch', bestMatch);
         try {
-          element.band_id = res.data.artists.items[0].id;
-          element.sp_band_name = res.data.artists.items[0].name;
-          element.link = res.data.artists.items[0].external_urls.spotify;
-          element.uri = res.data.artists.items[0].uri;
+          element.band_id = bestMatch.id;
+          element.sp_band_name = bestMatch.name;
+          element.link = bestMatch.external_urls.spotify;
+          element.uri = bestMatch.uri;
           //element.genres = res.data.artists.items[0].genres;
         } catch {}
+
+        // try {
+        //   element.band_id = res.data.artists.items[0].id;
+        //   element.sp_band_name = res.data.artists.items[0].name;
+        //   element.link = res.data.artists.items[0].external_urls.spotify;
+        //   element.uri = res.data.artists.items[0].uri;
+        //   //element.genres = res.data.artists.items[0].genres;
+        // } catch {}
 
         resolve();
       })
@@ -55,6 +72,19 @@ async function addSpotifyMainData(element: any, token: any) {
         console.log(error.response);
       });
   });
+}
+
+function findBestMatch(artists: any, query: any, options: any) {
+  const matches = stringSimilarity.findBestMatch(
+    query.toLowerCase(),
+    options.map((option: any) => option.toLowerCase()),
+  );
+
+  if (matches.bestMatch.rating >= 0.95) {
+    //return options[matches.bestMatchIndex];
+    return artists[matches.bestMatchIndex];
+  }
+  return null;
 }
 
 async function addSpotifyTopTracks(element: any, token: any) {

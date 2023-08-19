@@ -12,6 +12,7 @@ import { Artist } from './types/Artists';
 import { extract_laketown_shakedown } from './scripts/extract_laketown_shakedown';
 import { extract_capital_ballroom } from './scripts/extract_capital_ballroom';
 import { extract_function_festival } from './scripts/extract_function_festival';
+import { extract_coachella } from './scripts/extract_coachella';
 
 export const extract = async (location: Cities | Festivals) => {
   const db_connect = dbo.getDb();
@@ -42,6 +43,10 @@ export const extract = async (location: Cities | Festivals) => {
 
     case Festivals.TheFunction:
       tickets = await extractFunctionFestival();
+      break;
+
+    case Festivals.Coachella:
+      tickets = await extractCoachella();
       break;
 
     default:
@@ -151,6 +156,18 @@ const extractFunctionFestival = async () => {
   let tickets: Artist[] = [];
 
   const extracted = await extract_function_festival();
+
+  extracted.forEach(function (obj: Artist) {
+    tickets.push(obj);
+  });
+
+  return tickets;
+};
+
+const extractCoachella = async () => {
+  let tickets: Artist[] = [];
+
+  const extracted = await extract_coachella();
 
   extracted.forEach(function (obj: Artist) {
     tickets.push(obj);

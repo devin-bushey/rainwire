@@ -47,12 +47,12 @@ export const LOCATIONS: LocationType[] = [
     website: 'https://osheaga.com/en',
     location: 'Montreal, QC',
   },
-  // {
-  //   name: 'Coachella',
-  //   value: Festivals.Coachella,
-  //   website: 'https://coachella.com/',
-  //   location: 'California, US',
-  // },
+  {
+    name: 'Coachella',
+    value: Festivals.Coachella,
+    website: 'https://coachella.com/',
+    location: 'California, US',
+  },
 
   {
     name: 'Victoria, BC',
@@ -60,10 +60,10 @@ export const LOCATIONS: LocationType[] = [
     website: 'https://victoriamusicscene.com/concerts/',
     location: 'Victoria, BC',
   },
-  // {
-  //   name: 'Vancouver, BC',
-  //   value: Cities.Vancouver,
-  //   website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
-  //   location: 'Vancouver, BC',
-  // },
+  {
+    name: 'Vancouver, BC',
+    value: Cities.Vancouver,
+    website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
+    location: 'Vancouver, BC',
+  },
 ];
