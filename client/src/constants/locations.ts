@@ -10,7 +10,21 @@ export const WEBSITE_OSHEAGA = 'https://osheaga.com/en';
 export const WEBSITE_COACHELLA = 'https://coachella.com/';
 export const WEBSITE_RIFFLANDIA = 'https://rifflandia.com/tickets/';
 
+// This order of locations in this list corresponds to the order in the dropdown in the UI
 export const LOCATIONS: LocationType[] = [
+  {
+    name: 'Victoria, BC',
+    value: Cities.Victoria,
+    //website: 'https://victoriamusicscene.com/concerts/',
+    website: 'https://www.songkick.com/metro-areas/27399-canada-victoria',
+    location: 'Victoria, BC',
+  },
+  {
+    name: 'Vancouver, BC',
+    value: Cities.Vancouver,
+    website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
+    location: 'Vancouver, BC',
+  },
   {
     name: 'Phillips Backyard',
     value: Festivals.PhilipsBackyard,
@@ -52,18 +66,5 @@ export const LOCATIONS: LocationType[] = [
     value: Festivals.Coachella,
     website: 'https://coachella.com/',
     location: 'California, US',
-  },
-
-  {
-    name: 'Victoria, BC',
-    value: Cities.Victoria,
-    website: 'https://victoriamusicscene.com/concerts/',
-    location: 'Victoria, BC',
-  },
-  {
-    name: 'Vancouver, BC',
-    value: Cities.Vancouver,
-    website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
-    location: 'Vancouver, BC',
   },
 ];
