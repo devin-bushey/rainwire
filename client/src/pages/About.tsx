@@ -92,23 +92,6 @@ export const About = memo(() => {
           I wanted to automate part of this process - so I created Record Shop.
         </Typography>
 
-        <Typography sx={{ fontWeight: '700', paddingTop: '12px' }}>
-          Checkout the exclusive page that was created for Rifflandia:
-        </Typography>
-
-        <Button
-          onClick={() => {
-            navigate('/rifflandia');
-          }}
-          variant="outlined"
-          sx={{ marginTop: '12px', marginBottom: '24px', padding: '8px 16px', width: '300px' }}
-        >
-          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-            <CHERRIES />
-          </Box>
-          Rifflandia
-        </Button>
-
         <Card
           sx={{
             marginTop: '16px',
@@ -132,7 +115,7 @@ export const About = memo(() => {
               target="_blank"
               variant="contained"
               color="secondary"
-              sx={{ margin: '16px 0' }}
+              sx={{ width: '200px', margin: '16px 0' }}
             >
               <img src={coffeeCup} alt="coffee" width="20px" height="20px" style={{ marginRight: '8px' }} />
               Buy me a coffee
@@ -147,10 +130,24 @@ export const About = memo(() => {
                 marginTop: '8px',
               }}
             >
-              Please keep in touch through the link below:
+              Please keep in touch and let me know what you think of the app!
             </Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: '125px' }}>
+            <Typography
+              sx={{
+                fontWeight: '700',
+                fontSize: '1.25rem',
+                textAlign: 'left',
+                paddingBottom: '0px',
+                marginBottom: '16px',
+                marginTop: '8px',
+              }}
+            >
+              Or if you&apos;re an artist and you want to add your show to the list then send me an email through the
+              button below:
+            </Typography>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               {/* <Button
                 href="https://www.linkedin.com/in/devin-bushey/"
                 target="_blank"
@@ -159,10 +156,94 @@ export const About = memo(() => {
               >
                 LinkedIn
               </Button> */}
-              <Button onClick={handleOpen} variant="outlined" sx={{ margin: '8px 0' }}>
+              <Button
+                onClick={handleOpen}
+                variant="contained"
+                color="secondary"
+                sx={{ width: '200px', margin: '8px 0' }}
+              >
                 Email
               </Button>
             </Box>
+          </Box>
+        </Card>
+
+        <Card
+          sx={{
+            marginTop: '16px',
+            backgroundColor: COLOURS.card_colours[0],
+          }}
+        >
+          <Box sx={{ minHeight: '60px', marginBottom: '8px' }}>
+            <Typography
+              sx={{
+                fontWeight: '700',
+                fontSize: '1.25rem',
+                textAlign: 'left',
+                paddingBottom: '0px',
+                marginBottom: '8px',
+              }}
+            >
+              Record Shop is in the news and on social media!
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              <Button
+                href="https://www.victoriabuzz.com/2023/08/victoria-developer-creates-website-to-connect-music-lovers-to-bands-that-are-playing-in-town/"
+                target="_blank"
+                variant="contained"
+                color="secondary"
+                sx={{ width: '175px', margin: '16px 0', marginRight: '12px' }}
+              >
+                Victoria Buzz
+              </Button>
+
+              <Button
+                href="https://www.instagram.com/p/CvdPr81MlCB/"
+                target="_blank"
+                variant="contained"
+                color="secondary"
+                sx={{ width: '175px', margin: '16px 0', marginRight: '12px' }}
+              >
+                Riff&apos;s Instagram
+              </Button>
+
+              <Button
+                href="https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q"
+                target="_blank"
+                variant="contained"
+                color="secondary"
+                sx={{ width: '175px', margin: '16px 0' }}
+              >
+                Spotify
+              </Button>
+            </Box>
+          </Box>
+        </Card>
+
+        <Card
+          sx={{
+            marginTop: '16px',
+            backgroundColor: COLOURS.card_colours[2],
+          }}
+        >
+          <Box sx={{ minHeight: '60px', marginBottom: '8px' }}>
+            <Typography sx={{ fontWeight: '700', paddingTop: '12px' }}>
+              Checkout the exclusive page that was created for Rifflandia:
+            </Typography>
+
+            <Button
+              onClick={() => {
+                navigate('/rifflandia');
+              }}
+              variant="contained"
+              color="secondary"
+              sx={{ marginTop: '12px', marginBottom: '24px', padding: '8px 16px', width: '200px' }}
+            >
+              <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+                <CHERRIES />
+              </Box>
+              Rifflandia
+            </Button>
           </Box>
         </Card>
       </Box>

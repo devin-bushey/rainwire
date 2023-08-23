@@ -110,35 +110,7 @@ const LoginPage = memo(() => {
             '& .MuiTypography-body1': {
               fontSize: '1rem',
             },
-            marginTop: '12px',
-          }}
-        >
-          <Typography sx={{ paddingTop: '12px' }}>
-            Or checkout the exclusive page that was created for Rifflandia:
-          </Typography>
-        </Box>
-
-        <Button
-          onClick={() => {
-            navigate('/rifflandia');
-          }}
-          variant="outlined"
-          sx={{ marginTop: '4px', marginBottom: '16px', padding: '8px 16px', width: '300px' }}
-        >
-          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-            <CHERRIES />
-          </Box>
-          Rifflandia
-        </Button>
-
-        <Box
-          sx={{
-            width: '75%',
-            maxWidth: '700px',
-            '& .MuiTypography-body1': {
-              fontSize: '1rem',
-            },
-            //marginTop: '16px',
+            marginTop: '16px',
           }}
         >
           <Typography sx={{ paddingTop: '12px' }}>Too tired to find you Spotify password?</Typography>
