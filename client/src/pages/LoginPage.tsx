@@ -124,9 +124,35 @@ const LoginPage = memo(() => {
           <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
           Preview a Playlist
         </Button>
-        <Box style={{ maxWidth: '700px', fontSize: '0.7rem', paddingBottom: '48px', marginTop: '4px' }}>
+        <Box style={{ maxWidth: '700px', fontSize: '0.7rem', marginTop: '4px' }}>
           (but its more fun to customize your own)
         </Box>
+
+        <Box
+          sx={{
+            width: '75%',
+            maxWidth: '700px',
+            '& .MuiTypography-body1': {
+              fontSize: '1rem',
+            },
+            marginTop: '16px',
+          }}
+        >
+          <Typography sx={{ paddingTop: '12px' }}>Create a Rifflandia playlist here:</Typography>
+        </Box>
+
+        <Button
+          onClick={() => {
+            navigate('/rifflandia');
+          }}
+          variant="outlined"
+          sx={{ marginTop: '4px', marginBottom: '48px', padding: '8px 16px', width: '300px' }}
+        >
+          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
+            <CHERRIES />
+          </Box>
+          Rifflandia
+        </Button>
 
         <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>
