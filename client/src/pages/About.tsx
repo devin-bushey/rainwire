@@ -130,7 +130,7 @@ export const About = memo(() => {
                 marginTop: '8px',
               }}
             >
-              Please keep in touch and let me know what you think of the app!
+              Please keep in touch and let me know what you think of the website!
             </Typography>
 
             <Typography

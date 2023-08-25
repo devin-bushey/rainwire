@@ -10,30 +10,41 @@ import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 import { Cities, Festivals } from '../enums/common';
 import { extract } from '../extract_tickets';
 
-const cachedData: { rifflandia_data?: any } = {}; // The in-memory cache object
+const cachedData: { victoria_data?: any; rifflandia_data?: any } = {}; // The in-memory cache object
 
 recordRoutes.route('/artists').get(async (req, response) => {
   const { city } = req.query;
-  let db_connect = dbo.getDb();
 
-  if (!db_connect) {
-    console.log('reconnecting to db');
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log('reconnecting error');
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
+  if (city === Cities.Victoria && cachedData.victoria_data) {
+    response.json(cachedData.victoria_data);
+  } else {
+    if (city === Cities.Victoria) console.log('cache not found for /victoria: ', cachedData.victoria_data);
+
+    let db_connect = dbo.getDb();
+
+    if (!db_connect) {
+      console.log('reconnecting to db');
+      await dbo.connectToServer(function (err: any) {
+        if (err) {
+          console.log('reconnecting error');
+          console.error(err);
+        }
+      });
+      db_connect = dbo.getDb();
+    }
+
+    db_connect
+      .collection(`${city}`)
+      .find({})
+      .toArray()
+      .then((data: any) => {
+        // Save the fetched data to cache
+        if (city === Cities.Victoria) {
+          cachedData.victoria_data = data;
+        }
+        response.json(data);
+      });
   }
-
-  db_connect
-    .collection(`${city}`)
-    .find({})
-    .toArray()
-    .then((data: any) => {
-      response.json(data);
-    });
 });
 
 recordRoutes.route('/create').post(async (req, response) => {
@@ -96,7 +107,7 @@ recordRoutes.route('/rifflandia').get(async (req, response) => {
     // If data is found in cache, return the cached data
     response.json(cachedData.rifflandia_data);
   } else {
-    console.log('cache not found for /rifflandia: ', cachedData);
+    console.log('cache not found for /rifflandia: ', cachedData.rifflandia_data);
 
     let db_connect = dbo.getDb();
 
