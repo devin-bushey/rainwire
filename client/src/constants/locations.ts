@@ -19,12 +19,12 @@ export const LOCATIONS: LocationType[] = [
     website: 'https://www.songkick.com/metro-areas/27399-canada-victoria',
     location: 'Victoria, BC',
   },
-  {
-    name: 'Vancouver, BC',
-    value: Cities.Vancouver,
-    website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
-    location: 'Vancouver, BC',
-  },
+  // {
+  //   name: 'Vancouver, BC',
+  //   value: Cities.Vancouver,
+  //   website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
+  //   location: 'Vancouver, BC',
+  // },
   {
     name: 'Phillips Backyard',
     value: Festivals.PhilipsBackyard,
