@@ -113,7 +113,7 @@ const LoginPage = memo(() => {
             marginTop: '16px',
           }}
         >
-          <Typography sx={{ paddingTop: '12px' }}>Too tired to find you Spotify password?</Typography>
+          <Typography sx={{ paddingTop: '12px' }}>Don&apos;t want to sign in?</Typography>
         </Box>
 
         <Button
@@ -138,7 +138,7 @@ const LoginPage = memo(() => {
             marginTop: '16px',
           }}
         >
-          <Typography sx={{ paddingTop: '12px' }}>Create a Rifflandia playlist here:</Typography>
+          <Typography sx={{ paddingTop: '12px' }}>Create a Rifflandia playlist:</Typography>
         </Box>
 
         <Button
