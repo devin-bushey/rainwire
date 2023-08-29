@@ -135,7 +135,7 @@ export const About = memo(() => {
 
             <Typography
               sx={{
-                fontWeight: '700',
+                fontWeight: '500',
                 fontSize: '1.25rem',
                 textAlign: 'left',
                 paddingBottom: '0px',
@@ -188,11 +188,21 @@ export const About = memo(() => {
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <Button
+                href="https://www.vicnews.com/local-news/victoria-software-developer-creates-tool-to-get-music-fans-out-to-concerts-3089731"
+                target="_blank"
+                variant="contained"
+                color="secondary"
+                sx={{ width: '200px', margin: '16px 0', marginRight: '16px' }}
+              >
+                Victoria News
+              </Button>
+
+              <Button
                 href="https://www.victoriabuzz.com/2023/08/victoria-developer-creates-website-to-connect-music-lovers-to-bands-that-are-playing-in-town/"
                 target="_blank"
                 variant="contained"
                 color="secondary"
-                sx={{ width: '175px', margin: '16px 0', marginRight: '12px' }}
+                sx={{ width: '200px', margin: '16px 0', marginRight: '16px' }}
               >
                 Victoria Buzz
               </Button>
@@ -202,7 +212,7 @@ export const About = memo(() => {
                 target="_blank"
                 variant="contained"
                 color="secondary"
-                sx={{ width: '175px', margin: '16px 0', marginRight: '12px' }}
+                sx={{ width: '200px', margin: '16px 0', marginRight: '16px' }}
               >
                 Riff&apos;s Instagram
               </Button>
@@ -212,7 +222,7 @@ export const About = memo(() => {
                 target="_blank"
                 variant="contained"
                 color="secondary"
-                sx={{ width: '175px', margin: '16px 0' }}
+                sx={{ width: '200px', margin: '16px 0' }}
               >
                 Spotify
               </Button>
