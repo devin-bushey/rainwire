@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GetSpotifyUserInfo } from '../apiManager/Spotify';
-import { encrypt, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
+import { setSpotifyTokenLocalStorage, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
 import hash from '../utils/hash';
 
 type SpotifyUserDataType = {
@@ -34,7 +34,7 @@ const useSpotifyAuth = () => {
       } else {
         _token = hash.access_token || '';
         if (_token) {
-          encrypt(_token);
+          setSpotifyTokenLocalStorage(_token);
           setToken(_token);
         }
       }
