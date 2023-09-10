@@ -90,7 +90,7 @@ const Navbarr = () => {
               </Button>
             </Box>
 
-            {localStorage.getItem('encryptedSpotifyToken') && (
+            {localStorage.getItem('spotifyToken') && (
               <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 0, marginRight: '24px' }}>
                 <Button variant="outlined" onClick={logOut}>
                   Sign Out
@@ -225,7 +225,7 @@ const Navbarr = () => {
                     About
                   </Button>
 
-                  {localStorage.getItem('encryptedSpotifyToken') && (
+                  {localStorage.getItem('spotifyToken') && (
                     <Button
                       variant="contained"
                       onClick={logOut}
