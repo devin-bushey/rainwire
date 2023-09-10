@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 export const recordRoutes = express.Router();
 import dbo from '../db/conn';
 
@@ -9,8 +9,139 @@ import { CreateNewPlaylistRifflandia } from '../rifflandia/createPlaylist';
 import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 import { Cities, Festivals } from '../enums/common';
 import { extract } from '../extract_tickets';
+import { Artist } from '../types/Artists';
 
+const axios = require('axios');
+const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || '';
 const cachedData: { victoria_data?: any; rifflandia_data?: any } = {}; // The in-memory cache object
+
+recordRoutes.route('/jamBase').get(async (req, response) => {
+  const { city } = req.query;
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=jambase:382342&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
+  };
+
+  try {
+    const axiosResponse = await axios.request(config);
+    const data = formatJamBase(axiosResponse.data);
+    console.log('****data ', data);
+    response.json(data);
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+const formatJamBase = (data: any) => {
+  const responseObject: any = [];
+
+  if (!data.events) {
+    return responseObject; // Return an empty array if there are no events
+  }
+
+  data.events.forEach((event: any, index: number) => {
+    event.performer.forEach((performer: any) => {
+      let spotifyId = null;
+
+      for (const externalIdentifier of performer['x-externalIdentifiers']) {
+        if (externalIdentifier.source === 'spotify') {
+          spotifyId = externalIdentifier.identifier[0];
+        }
+      }
+
+      responseObject.push({
+        id: spotifyId + index,
+        artistName: performer.name,
+        spotifyId: spotifyId,
+        venue: event.location.name,
+        date: formatDate(event.startDate),
+        link: `https://open.spotify.com/artist/${spotifyId}`,
+      });
+    });
+  });
+
+  return responseObject; // Return the responseObject
+};
+
+const formatDate = (utc: string) => {
+  const inputDate = new Date(utc);
+  const pacificTimeFormatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
+  const formattedDate = pacificTimeFormatter.format(inputDate);
+  return formattedDate;
+};
+
+recordRoutes.route('/create').post(async (req, response) => {
+  const { token, city, user_id, numTopTracks, days } = req.body;
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=jambase:382342&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
+  };
+
+  try {
+    const axiosResponse = await axios.request(config);
+    const data = formatJamBase(axiosResponse.data);
+    console.log('****data ', data);
+    response.json(data);
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+
+  const artists: any[] = [];
+
+  const url = await CreateNewPlaylist({
+    token: token,
+    city: city,
+    user_id: user_id,
+    numTopTracks: numTopTracks,
+    artists: artists,
+    sortBy: '',
+    days: days,
+  }).catch((error) => {
+    console.log(error);
+    response.status(500).json({ error: error.message });
+  });
+
+  if (url) {
+    response.status(201).json(url);
+  } else {
+    response.status(500).json({ error: 'Something went wrong' });
+  }
+});
+
+const getJamBaseSpotifyIds = (data: any) => {
+  if (!data.events) {
+    return []; // Return an empty array if there are no events
+  }
+
+  let spotifyIdList: any = [];
+
+  data.events.forEach((event: any, index: number) => {
+    event.performer.forEach((performer: any) => {
+      let spotifyId = null;
+
+      for (const externalIdentifier of performer['x-externalIdentifiers']) {
+        if (externalIdentifier.source === 'spotify') {
+          spotifyId = externalIdentifier.identifier[0];
+          spotifyIdList.push(spotifyId);
+        }
+      }
+    });
+  });
+
+  return spotifyIdList;
+};
 
 recordRoutes.route('/artists').get(async (req, response) => {
   const { city } = req.query;
