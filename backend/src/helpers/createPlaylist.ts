@@ -149,7 +149,9 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
   }).catch(function (error) {
     const err = error as AxiosError;
     console.log('Error: unsuccessfully added cover art to playlist');
-    console.log(err.message);
+    console.log('***Axios err: ', err);
+    console.log('***JS error: ', error);
+    console.log('***');
   });
 };
 
