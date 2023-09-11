@@ -208,23 +208,23 @@ export const About = memo(() => {
               </Button>
 
               <Button
-                href="https://www.instagram.com/p/CvdPr81MlCB/"
+                href="https://www.instagram.com/recordshop.cool/"
                 target="_blank"
                 variant="contained"
                 color="secondary"
                 sx={{ width: '200px', margin: '16px 0', marginRight: '16px' }}
               >
-                Riff&apos;s Instagram
+                Instagram
               </Button>
 
               <Button
-                href="https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q"
+                href="https://www.reddit.com/r/VictoriaBC/comments/13ubjcp/love_live_music_in_vic_check_out_my_free_website/"
                 target="_blank"
                 variant="contained"
                 color="secondary"
                 sx={{ width: '200px', margin: '16px 0' }}
               >
-                Spotify
+                Reddit
               </Button>
             </Box>
           </Box>

@@ -16,7 +16,9 @@ export const LOCATIONS: LocationType[] = [
     name: 'Victoria, BC',
     value: Cities.Victoria,
     //website: 'https://victoriamusicscene.com/concerts/',
-    website: 'https://www.songkick.com/metro-areas/27399-canada-victoria',
+    //website: 'https://www.songkick.com/metro-areas/27399-canada-victoria',
+    website:
+      'https://www.jambase.com/concerts/finder?location=Victoria%2C%20British%20Columbia%2C%20CA&lat=48.4235&lng=-123.3625&radius=10',
     location: 'Victoria, BC',
   },
   // {
