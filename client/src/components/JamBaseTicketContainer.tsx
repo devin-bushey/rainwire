@@ -29,7 +29,6 @@ export const JamBaseTicketContainer = ({
   }
 
   return tickets.map((currentTicket: any, index: any) => {
-    console.log(currentTicket);
     let imageURL: any;
     try {
       imageURL = currentTicket.albumArtUrl || currentTicket.top_tracks[0].album.images[1].url;

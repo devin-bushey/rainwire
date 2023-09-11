@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Container, TextField } from '@mui/material';
 import Button from '@mui/material/Button/Button';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
@@ -13,7 +13,7 @@ import { Settings } from '../components/Settings';
 import { TicketContainer } from '../components/TicketContainer';
 import { InAppModal } from '../components/InAppModal';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { CreateNewPlaylist, GetJamBase, GetTickets } from '../apiManager/RecordShop';
+import { CreateNewPlaylist, CreateNewPlaylistJamBase, GetJamBase, GetTickets } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Rifflandia/Spinner';
@@ -41,7 +41,7 @@ export const JamBase = () => {
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
   const query = useQuery({
-    queryKey: [origin, { origin }],
+    queryKey: [`${origin}_jb`, { origin }],
     queryFn: GetJamBase,
     ...queryOptions,
   });
@@ -200,7 +200,8 @@ export const JamBase = () => {
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
       setIsLoading(true);
-      await CreateNewPlaylist({
+      await CreateNewPlaylistJamBase({
+        //city: origin,
         city: origin,
         token: token,
         user_id: spotifyInfo.user_id,
@@ -242,6 +243,14 @@ export const JamBase = () => {
     }
   };
 
+  const onKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      console.log('Input value', e.target.value);
+      setOrigin(e.target.value);
+      e.preventDefault();
+    }
+  };
+
   if (isLoadingTickets) {
     return <Loading />;
   }
@@ -270,8 +279,13 @@ export const JamBase = () => {
                   margin: '8px',
                 }}
               >
-                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
+                {/* <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} /> */}
 
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Box sx={{ minWidth: '300px' }}>
+                    <TextField fullWidth id="outlined-basic" label={origin} variant="outlined" onKeyDown={onKeyPress} />
+                  </Box>
+                </Box>
                 <Button
                   onClick={handleCreatePlaylist}
                   variant="contained"
