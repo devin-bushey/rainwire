@@ -20,6 +20,11 @@ recordRoutes.route('/jamBase').get(async (req, response) => {
 
   const cityId = await getCityId(city as string);
 
+  if (!cityId || cityId == null) {
+    response.status(404).json('City not found');
+    return;
+  }
+
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -85,20 +90,24 @@ const getCityId = async (requestedCity: string) => {
   //const city = requestedCity.replace(/\s/g, '');
   const city = requestedCity;
 
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: `https://www.jambase.com/jb-api/v1/geographies/cities?apikey=${API_KEY_JAMBASE}&geoCityName=${city}`,
+  const options = {
+    method: 'GET',
+    url: 'https://www.jambase.com/jb-api/v1/geographies/cities',
+    params: { geoCityName: city, apikey: API_KEY_JAMBASE },
+    headers: { Accept: 'application/json' },
   };
 
   return await axios
-    .request(config)
+    .request(options)
     .then((response: any) => {
-      //console.log(JSON.stringify(response.data));
-      return response.data.cities[0].identifier;
+      if (response.data.cities[0].identifier) {
+        return response.data.cities[0].identifier;
+      }
+
+      return null;
     })
     .catch((error: any) => {
-      console.log(error);
+      console.log(`Error getting jam base getCityId for ${city}`);
     });
 };
 
@@ -120,7 +129,7 @@ recordRoutes.route('/createJamBase').post(async (req, response) => {
     const axiosResponse = await axios.request(config);
     artists = formatJamBase(axiosResponse.data);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     response.status(500).json({ error: 'Internal Server Error' });
   }
 

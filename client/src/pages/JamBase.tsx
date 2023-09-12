@@ -21,6 +21,7 @@ import { sortByOrderNum } from '../utils/sorter';
 import { StickyButton } from '../components/StickyButton';
 import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
 import { JamBaseTicketContainer } from '../components/JamBaseTicketContainer';
+import { ErrorJamBase } from '../components/ErrorJamBase';
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -29,10 +30,11 @@ export const JamBase = () => {
     refetchOnReconnect: false,
     cacheTime: Infinity,
     keepPreviousData: true,
+    retry: false,
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'artists';
+  const redirectUri = BASE_REDIRECT_URI + 'jamBase';
 
   const [openSignIn, setOpenSignIn] = useState(false);
   const handleOpenSignIn = () => setOpenSignIn(true);
@@ -89,12 +91,15 @@ export const JamBase = () => {
   }, []);
 
   useEffect(() => {
-    if (query.data) {
+    console.log(query);
+    if (query.data && !query.isFetching && !query.isLoading && !query.isError) {
       setIsLoadingTickets(false);
       setIsErrorTickets(false);
     } else if (query.isFetching || query.isLoading) {
       setIsLoadingTickets(true);
-    } else if (query.error) {
+    } else if (query.error || query.isError) {
+      console.log('error test');
+      setIsLoadingTickets(false);
       setIsErrorTickets(true);
     }
   }, [query]);
@@ -107,6 +112,10 @@ export const JamBase = () => {
   }, [query.data]);
 
   useEffect(() => {
+    console.log('TEST', origin);
+
+    setIsLoadingTickets(true);
+
     setFilteredGenres([]);
 
     LOCATIONS.map((location) => {
@@ -251,9 +260,9 @@ export const JamBase = () => {
     }
   };
 
-  if (isLoadingTickets) {
-    return <Loading />;
-  }
+  // if (isLoadingTickets) {
+  //   return <Loading />;
+  // }
 
   return (
     <>
@@ -362,26 +371,34 @@ export const JamBase = () => {
                 </div>
               )}
 
-              <JamBaseTicketContainer
-                tickets={tickets}
-                showGenres={showGenres}
-                isLoadingTickets={isLoadingTickets}
-                isErrorTickets={isErrorTickets}
-              />
+              {isLoadingTickets && !isErrorTickets && <Loading />}
+              {!isLoadingTickets && isErrorTickets && <ErrorJamBase />}
+              {!isLoadingTickets && !isErrorTickets && (
+                <JamBaseTicketContainer
+                  tickets={tickets}
+                  showGenres={showGenres}
+                  isLoadingTickets={isLoadingTickets}
+                  isErrorTickets={isErrorTickets}
+                />
+              )}
             </Container>
           </Box>
         </Box>
-        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
-          <Button
-            variant="outlined"
-            sx={{ marginTop: '24px', marginBottom: '32px' }}
-            onClick={() => {
-              setLoadMore(loadMore + loadInterval);
-            }}
-          >
-            Load more
-          </Button>
-        )}
+        {!isErrorTickets &&
+          !isLoadingTickets &&
+          totalTickets &&
+          filteredGenres.length === 0 &&
+          loadMore < totalTickets.length && (
+            <Button
+              variant="outlined"
+              sx={{ marginTop: '24px', marginBottom: '32px' }}
+              onClick={() => {
+                setLoadMore(loadMore + loadInterval);
+              }}
+            >
+              Load more
+            </Button>
+          )}
       </Box>
 
       <StickyButton

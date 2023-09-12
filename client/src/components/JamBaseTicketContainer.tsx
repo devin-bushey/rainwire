@@ -20,14 +20,6 @@ export const JamBaseTicketContainer = ({
 }) => {
   const colors = cardColours ? cardColours : COLOURS.card_colours;
 
-  if (isLoadingTickets) {
-    return <Loading />;
-  }
-
-  if (isErrorTickets || !tickets || tickets.length === 0) {
-    return <Error />;
-  }
-
   return tickets.map((currentTicket: any, index: any) => {
     let imageURL: any;
     try {
