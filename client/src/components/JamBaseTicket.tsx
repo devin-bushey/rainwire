@@ -69,12 +69,12 @@ export const JamBaseTicket = (props: any) => {
           alignItems: 'center',
         }}
       >
-        {/* <CardMedia
+        <CardMedia
           component="img"
           sx={{ display: 'inline-block', width: 60, height: 60, marginRight: '12px' }}
-          image={props.image}
+          image={props.ticket.image}
           alt="Album"
-        /> */}
+        />
         <Box sx={{ alignItems: 'center', textAlign: 'left' }}>
           <div ref={containerRef}>
             <span style={{ fontWeight: '700' }}>{props.ticket.artistName}</span>

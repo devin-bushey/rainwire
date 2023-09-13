@@ -72,7 +72,20 @@ const Navbarr = () => {
                   maxWidth: '175px',
                 }}
               >
-                Artists
+                Victoria
+              </Button>
+              <Button
+                component={Link}
+                to="/explore"
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
+                  maxWidth: '175px',
+                }}
+              >
+                Explore
               </Button>
 
               <Button
@@ -153,7 +166,20 @@ const Navbarr = () => {
                       margin: { xs: '4px 4px', md: '0px 4px' },
                     }}
                   >
-                    Artists
+                    Victoria
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to="/explore"
+                    sx={{
+                      color: 'black',
+                      textAlign: 'center',
+                      margin: { xs: '4px 4px', md: '0px 4px' },
+                    }}
+                  >
+                    Explore
                   </Button>
                   {/* <Button
                     variant="outlined"

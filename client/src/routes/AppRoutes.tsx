@@ -25,7 +25,7 @@ export const AppRoutes = () => {
             <Route path="/artists" element={<ArtistsPage />} />
             <Route path="/about" element={<About />} />
             {/* <Route path="/refresh" element={<Refresh />} /> */}
-            <Route path="/jamBase" element={<JamBase />} />
+            <Route path="/explore" element={<JamBase />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />

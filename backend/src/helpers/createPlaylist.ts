@@ -22,17 +22,16 @@ export const CreateNewPlaylistJamBase = async ({
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
-    await AddCoverArt({ token, playlist_id });
+    AddCoverArt({ token, playlist_id });
   } catch (err) {
     console.log('Error adding cover art');
   }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  let tracks = '';
-
-  for (const spotifyId of spotifyIds) {
+  const promises = spotifyIds.map(async (spotifyId) => {
     const topTracks: any = await getTopTracks(spotifyId, token);
+    let tracks = '';
     try {
       for (let i = 0; i < numTopTracksToAdd; i++) {
         if (topTracks && topTracks[i]) {
@@ -40,11 +39,14 @@ export const CreateNewPlaylistJamBase = async ({
           tracks += ',';
         }
       }
-      console.log('tracks: ', tracks);
     } catch (error) {
       console.log(error);
     }
-  }
+    return tracks;
+  });
+  const trackResults = await Promise.all(promises);
+
+  let tracks = trackResults.join('');
 
   tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 

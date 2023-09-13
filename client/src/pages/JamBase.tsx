@@ -8,82 +8,78 @@ import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { LOCATIONS } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { Origin } from '../components/Origin';
-import { Settings } from '../components/Settings';
-import { TicketContainer } from '../components/TicketContainer';
 import { InAppModal } from '../components/InAppModal';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { CreateNewPlaylist, CreateNewPlaylistJamBase, GetJamBase, GetTickets } from '../apiManager/RecordShop';
+import { CreateNewPlaylistJamBase, GetJamBase } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
-import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Rifflandia/Spinner';
-import { sortByOrderNum } from '../utils/sorter';
 import { StickyButton } from '../components/StickyButton';
-import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
 import { JamBaseTicketContainer } from '../components/JamBaseTicketContainer';
 import { ErrorJamBase } from '../components/ErrorJamBase';
+import { JamBaseEmpty } from '../components/JamBaseEmpty';
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    cacheTime: Infinity,
-    keepPreviousData: true,
     retry: false,
+    cacheTime: 50000,
+    staleTime: 100,
   };
 
+  // Spotify Authentication / Authorization
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'jamBase';
+  const redirectUri = BASE_REDIRECT_URI + 'explore';
 
-  const [openSignIn, setOpenSignIn] = useState(false);
-  const handleOpenSignIn = () => setOpenSignIn(true);
-  const handleCloseSignIn = () => setOpenSignIn(false);
+  // City of choice
+  const [city, setCity] = useState('');
 
-  const [origin, setOrigin] = useState(LOCATIONS[0].value);
-
-  const query = useQuery({
-    queryKey: [`${origin}_jb`, { origin }],
+  // React Query to fetch the data (concerts)
+  const { isLoading, isError, data } = useQuery({
+    queryKey: [`${city}_jb`, { origin: city }],
     queryFn: GetJamBase,
     ...queryOptions,
   });
 
-  const loadInterval = 10;
+  const [jamLocation, setJamLocation] = useState('');
+  const [cantFindSongs, setCantFindSongs] = useState(false);
 
-  const [loadMore, setLoadMore] = useState(loadInterval);
-  const [totalTickets, setTotalTickets] = useState<any>([]);
-  const [tickets, setTickets] = useState<any>([]);
+  useEffect(() => {
+    if (data) {
+      const x = data as any;
+      if (x && x.length > 0) {
+        setJamLocation(x[0].location);
+        setCantFindSongs(false);
+      } else {
+        setCantFindSongs(true);
+      }
+    }
+  }, [data]);
 
-  const [filteredGenres, setFilteredGenres] = useState<any>([]);
-  const [numTopTracks, setNumTopTracks] = useState(1);
-
-  const [showSettings, setShowSettings] = useState(false);
-  const [showGenres, setShowGenres] = useState(false);
-
-  const [website, setWebsite] = useState(LOCATIONS[0].website);
-
-  const [isLoadingTickets, setIsLoadingTickets] = useState(false);
-  const [isErrorTickets, setIsErrorTickets] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
-
+  // State variable to shake the blue Create Playlist / Sign In button
   const [isShaking, setIsShaking] = useState(false);
 
-  const [isError, setIsError] = useState(false);
+  // State variables for creating a Spotify playlist
+  const [isCreatePlaylistError, setIsError] = useState(false);
+  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
+
+  // Snackbar / Toast message to show status of creating a Spotify playlist
   const snackBar = useContext(SnackBarContext);
 
+  // State variables to show modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    document.title = 'Record Shop | Artists';
+    document.title = 'Record Shop | Explore';
     window.scrollTo(0, 0);
+    setCity('');
   }, []);
 
   useEffect(() => {
     setIsShaking(true);
-
     // Reset the shaking animation after a delay
     setTimeout(() => {
       setIsShaking(false);
@@ -91,60 +87,7 @@ export const JamBase = () => {
   }, []);
 
   useEffect(() => {
-    console.log(query);
-    if (query.data && !query.isFetching && !query.isLoading && !query.isError) {
-      setIsLoadingTickets(false);
-      setIsErrorTickets(false);
-    } else if (query.isFetching || query.isLoading) {
-      setIsLoadingTickets(true);
-    } else if (query.error || query.isError) {
-      console.log('error test');
-      setIsLoadingTickets(false);
-      setIsErrorTickets(true);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    if (query.data) {
-      setLoadMore(loadInterval);
-      setTotalTickets(query.data);
-    }
-  }, [query.data]);
-
-  useEffect(() => {
-    console.log('TEST', origin);
-
-    setIsLoadingTickets(true);
-
-    setFilteredGenres([]);
-
-    LOCATIONS.map((location) => {
-      if (location.value === origin) {
-        setWebsite(location.website);
-        return;
-      }
-    });
-  }, [origin]);
-
-  useEffect(() => {
-    if (filteredGenres === undefined || filteredGenres.length === 0) {
-      setShowGenres(false);
-      setLoadMore(loadInterval);
-      setTickets(totalTickets.slice(0, loadMore));
-      return;
-    }
-
-    const filteredTickets = totalTickets.filter((ticket: any) => {
-      if (!ticket?.genres) return false;
-      return ticket.genres.some((genre: any) => filteredGenres.includes(genre));
-    });
-
-    setShowGenres(filteredTickets.length > 0);
-    setTickets(filteredTickets);
-  }, [filteredGenres]);
-
-  useEffect(() => {
-    if (isError) {
+    if (isCreatePlaylistError) {
       snackBar.setSnackBar({
         showSnackbar: true,
         setShowSnackbar: () => true,
@@ -153,41 +96,7 @@ export const JamBase = () => {
       });
       setIsError(false);
     }
-  }, [isError]);
-
-  useEffect(() => {
-    setTickets(totalTickets.slice(0, loadInterval));
-    setLoadMore(loadInterval);
-  }, [totalTickets]);
-
-  useEffect(() => {
-    setTickets(totalTickets.slice(0, loadMore));
-  }, [loadMore]);
-
-  const handleDeleteGenre = (genre: string) => () => {
-    setFilteredGenres((value: any) => value?.filter((v: any) => v !== genre));
-  };
-
-  const handleClearGenres = () => {
-    setFilteredGenres([]);
-  };
-
-  const handleFilteredGenres = (event: any) => {
-    const genres = event.target.value;
-    setFilteredGenres(genres);
-  };
-
-  const handleChangeOrigin = (event: any) => {
-    setOrigin(event.target.value);
-  };
-
-  const handleNumTopTracks = (event: any) => {
-    setNumTopTracks(event.target.value);
-  };
-
-  const handleCloseSettings = () => {
-    setShowSettings(false);
-  };
+  }, [isCreatePlaylistError]);
 
   const isInAppBrowser = () => {
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
@@ -208,14 +117,11 @@ export const JamBase = () => {
 
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
-      setIsLoading(true);
+      setIsCreatingPlaylist(true);
       await CreateNewPlaylistJamBase({
-        //city: origin,
-        city: origin,
+        city: city,
         token: token,
         user_id: spotifyInfo.user_id,
-        numTopTracks: numTopTracks,
-        //tickets: filteredGenres.length > 0 ? tickets : null,
       })
         .then((res) => {
           if (res.status === 201) {
@@ -234,19 +140,7 @@ export const JamBase = () => {
           console.log(err);
           setIsError(true);
         });
-      setIsLoading(false);
-    } else {
-      handleOpenSignIn();
-      //isInAppBrowser();
-    }
-  };
-
-  const navigate = useNavigate();
-  const logOut = () => {
-    if (token && spotifyInfo.access) {
-      localStorage.clear();
-      navigate('/');
-      window.location.reload();
+      setIsCreatingPlaylist(false);
     } else {
       isInAppBrowser();
     }
@@ -255,18 +149,15 @@ export const JamBase = () => {
   const onKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       console.log('Input value', e.target.value);
-      setOrigin(e.target.value);
+      setCantFindSongs(false);
+      setCity(e.target.value);
       e.preventDefault();
     }
   };
 
-  // if (isLoadingTickets) {
-  //   return <Loading />;
-  // }
-
   return (
     <>
-      {isLoading && <Spinner />}
+      {isCreatingPlaylist && <Spinner />}
       <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
         <Typography
           sx={{
@@ -278,127 +169,68 @@ export const JamBase = () => {
         >
           Record Shop
         </Typography>
+
+        <Box
+          sx={{
+            borderRadius: '10px',
+            minWidth: '300px',
+            margin: '8px',
+            marginBottom: '24px',
+          }}
+        >
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ minWidth: '300px' }}>
+              <TextField fullWidth id="outlined-basic" label={city} variant="outlined" onKeyDown={onKeyPress} />
+            </Box>
+          </Box>
+
+          <Button
+            onClick={handleCreatePlaylist}
+            variant="contained"
+            className={`${isShaking ? 'shaking' : ''}`}
+            sx={{
+              backgroundColor: COLOURS.blue,
+              ':hover': {
+                backgroundColor: COLOURS.card_colours[1],
+              },
+              color: 'black',
+              width: '300px',
+              marginTop: '24px',
+              marginBottom: '16px',
+              justifyContent: 'center',
+              height: '48px',
+            }}
+          >
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+            <Typography sx={{ paddingBottom: 0 }}>
+              {token && spotifyInfo.access ? 'Create playlist' : 'Sign in'}
+            </Typography>
+          </Button>
+
+          {!cantFindSongs &&
+            !isLoading &&
+            !isError &&
+            city != null &&
+            city != '' &&
+            jamLocation != null &&
+            jamLocation != '' && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ minWidth: '300px' }}>
+                  <Typography>{`Showing artists in ${jamLocation}`}</Typography>
+                </Box>
+              </Box>
+            )}
+        </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{ maxWidth: '900px' }}>
             <Container sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
-              <Box
-                sx={{
-                  borderRadius: '10px',
-                  width: '300px',
-                  margin: '8px',
-                }}
-              >
-                {/* <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} /> */}
-
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Box sx={{ minWidth: '300px' }}>
-                    <TextField fullWidth id="outlined-basic" label={origin} variant="outlined" onKeyDown={onKeyPress} />
-                  </Box>
-                </Box>
-                <Button
-                  onClick={handleCreatePlaylist}
-                  variant="contained"
-                  className={`${isShaking ? 'shaking' : ''}`}
-                  sx={{
-                    backgroundColor: COLOURS.blue,
-                    ':hover': {
-                      backgroundColor: COLOURS.card_colours[1],
-                    },
-                    color: 'black',
-                    width: '300px',
-                    marginTop: '24px',
-                    marginBottom: '16px',
-                    justifyContent: 'center',
-                    height: '48px',
-                  }}
-                >
-                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-                  <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-                </Button>
-              </Box>
-
-              <Box
-                sx={{
-                  borderRadius: '10px',
-                  width: '300px',
-                  margin: '8px',
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{ marginBottom: '12px', width: '300px' }}
-                  onClick={() => {
-                    setShowSettings(!showSettings);
-                  }}
-                >
-                  Customize
-                </Button>
-
-                <Button
-                  variant="outlined"
-                  sx={{ marginBottom: '12px', width: '300px' }}
-                  onClick={() => {
-                    logOut();
-                  }}
-                >
-                  {token && spotifyInfo.access ? 'Sign out' : 'Sign in'}
-                </Button>
-
-                {website && (
-                  <Button
-                    variant="outlined"
-                    sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
-                    href={website}
-                    target="_blank"
-                  >
-                    Buy Tickets
-                  </Button>
-                )}
-              </Box>
-
-              {showSettings && (
-                <div>
-                  <Settings
-                    totalTickets={totalTickets}
-                    filteredGenres={filteredGenres}
-                    numTopTracks={numTopTracks}
-                    handleFilteredGenres={handleFilteredGenres}
-                    handleNumTopTracks={handleNumTopTracks}
-                    handleDeleteGenre={handleDeleteGenre}
-                    handleCloseSettings={handleCloseSettings}
-                    handleClearGenres={handleClearGenres}
-                  />
-                </div>
-              )}
-
-              {isLoadingTickets && !isErrorTickets && <Loading />}
-              {!isLoadingTickets && isErrorTickets && <ErrorJamBase />}
-              {!isLoadingTickets && !isErrorTickets && (
-                <JamBaseTicketContainer
-                  tickets={tickets}
-                  showGenres={showGenres}
-                  isLoadingTickets={isLoadingTickets}
-                  isErrorTickets={isErrorTickets}
-                />
-              )}
+              {(city === '' || !city) && <JamBaseEmpty />}
+              {(city != '' || city) && isLoading && !isError && <Loading />}
+              {(((city != '' || city) && !isLoading && isError) || cantFindSongs) && <ErrorJamBase />}
+              {(city != '' || city) && !isLoading && !isError && <JamBaseTicketContainer tickets={data} />}
             </Container>
           </Box>
         </Box>
-        {!isErrorTickets &&
-          !isLoadingTickets &&
-          totalTickets &&
-          filteredGenres.length === 0 &&
-          loadMore < totalTickets.length && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: '24px', marginBottom: '32px' }}
-              onClick={() => {
-                setLoadMore(loadMore + loadInterval);
-              }}
-            >
-              Load more
-            </Button>
-          )}
       </Box>
 
       <StickyButton
@@ -407,8 +239,6 @@ export const JamBase = () => {
         hoverColor={COLOURS.card_colours[1]}
         barColor={COLOURS.card_colours[2]}
       />
-
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>

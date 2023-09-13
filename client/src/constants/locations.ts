@@ -55,16 +55,16 @@ export const LOCATIONS: LocationType[] = [
     website: 'https://www.laketownshakedown.com/',
     location: 'Cowichan, BC',
   },
-  {
-    name: 'Osheaga',
-    value: Festivals.Osheaga,
-    website: 'https://osheaga.com/en',
-    location: 'Montreal, QC',
-  },
-  {
-    name: 'Coachella',
-    value: Festivals.Coachella,
-    website: 'https://coachella.com/',
-    location: 'California, US',
-  },
+  // {
+  //   name: 'Osheaga',
+  //   value: Festivals.Osheaga,
+  //   website: 'https://osheaga.com/en',
+  //   location: 'Montreal, QC',
+  // },
+  // {
+  //   name: 'Coachella',
+  //   value: Festivals.Coachella,
+  //   website: 'https://coachella.com/',
+  //   location: 'California, US',
+  // },
 ];

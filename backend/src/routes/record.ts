@@ -18,6 +18,11 @@ const cachedData: { victoria_data?: any; rifflandia_data?: any } = {}; // The in
 recordRoutes.route('/jamBase').get(async (req, response) => {
   const { city } = req.query;
 
+  if (!city || city == null || city == '') {
+    response.status(404).json('City not provided');
+    return;
+  }
+
   const cityId = await getCityId(city as string);
 
   if (!cityId || cityId == null) {
@@ -66,6 +71,8 @@ const formatJamBase = (data: any) => {
         venue: event.location.name,
         date: formatDate(event.startDate),
         link: `https://open.spotify.com/artist/${spotifyId}`,
+        image: performer.image,
+        location: `${event.location.address.addressLocality}, ${event.location.address.addressRegion.alternateName}`,
       });
     });
   });
@@ -114,8 +121,18 @@ const getCityId = async (requestedCity: string) => {
 recordRoutes.route('/createJamBase').post(async (req, response) => {
   const { token, city, user_id, numTopTracks, days } = req.body;
 
+  if (!city || city == null || city == '') {
+    response.status(404).json('City not provided');
+    return;
+  }
+
   const cityId = await getCityId(city);
   //console.log('******', cityId);
+
+  if (!cityId || cityId == null) {
+    response.status(404).json('City not found');
+    return;
+  }
 
   let artists: any[] = [];
 
