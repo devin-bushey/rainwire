@@ -1,14 +1,15 @@
 .btn--click-me:after {
-  content: 'click me';
+  content: 'New!';
   display: inline-block;
-  font-size: 6px;
+  font-size: 12px;
+  font-family: 'Comfortaa';
   color: #130f40;
   background-color: #38ccff;
   border-radius: 25px;
-  padding: 4px;
+  padding: 6px;
   position: absolute;
-  margin-top: -23px; 
-  margin-left: 260px; 
+  margin-top: -16px;
+  margin-left: -23px;
 }
 
 /* .btn--click-me-riff:after {

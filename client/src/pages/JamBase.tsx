@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from 'react';
 import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
 import { SnackBarContext } from '../App';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import { LOCATIONS } from '../constants/locations';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
 import { InAppModal } from '../components/InAppModal';
 import { UseQueryOptions, useQuery } from 'react-query';
@@ -17,6 +16,7 @@ import { StickyButton } from '../components/StickyButton';
 import { JamBaseTicketContainer } from '../components/JamBaseTicketContainer';
 import { ErrorJamBase } from '../components/ErrorJamBase';
 import { JamBaseEmpty } from '../components/JamBaseEmpty';
+import '../styles/ClickMe.css';
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -148,7 +148,6 @@ export const JamBase = () => {
 
   const onKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      console.log('Input value', e.target.value);
       setCantFindSongs(false);
       setCity(e.target.value);
       e.preventDefault();
@@ -179,7 +178,7 @@ export const JamBase = () => {
           }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ minWidth: '300px' }}>
+            <Box className="btn--click-me" sx={{ minWidth: '300px' }}>
               <TextField fullWidth id="outlined-basic" label={city} variant="outlined" onKeyDown={onKeyPress} />
             </Box>
           </Box>

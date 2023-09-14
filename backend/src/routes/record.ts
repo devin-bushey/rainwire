@@ -23,7 +23,14 @@ recordRoutes.route('/jamBase').get(async (req, response) => {
     return;
   }
 
-  const cityId = await getCityId(city as string);
+  let cityId = null;
+
+  try {
+    cityId = await getCityId(city as string);
+  } catch (err) {
+    response.status(404).json('City not found');
+    return;
+  }
 
   if (!cityId || cityId == null) {
     response.status(404).json('City not found');
@@ -104,18 +111,16 @@ const getCityId = async (requestedCity: string) => {
     headers: { Accept: 'application/json' },
   };
 
-  return await axios
-    .request(options)
-    .then((response: any) => {
-      if (response.data.cities[0].identifier) {
-        return response.data.cities[0].identifier;
-      }
+  return await axios.request(options).then((response: any) => {
+    if (response.data.cities[0].identifier) {
+      return response.data.cities[0].identifier;
+    }
 
-      return null;
-    })
-    .catch((error: any) => {
-      console.log(`Error getting jam base getCityId for ${city}`);
-    });
+    return null;
+  });
+  // .catch((error: any) => {
+  //   //console.log(`Error getting jam base getCityId for ${city}`);
+  // });
 };
 
 recordRoutes.route('/createJamBase').post(async (req, response) => {
