@@ -146,12 +146,20 @@ export const JamBase = () => {
     }
   };
 
+  const [textFieldValue, setTextFieldValue] = useState('');
+
   const onKeyPress = (e: any) => {
     if (e.key === 'Enter') {
-      setCantFindSongs(false);
-      setCity(e.target.value);
       e.preventDefault();
+      handleSubmit();
     }
+  };
+
+  const handleSubmit = () => {
+    // You can now access the value of the TextField in the textFieldValue state.
+    console.log('Submitted value:', textFieldValue);
+    setCantFindSongs(false);
+    setCity(textFieldValue);
   };
 
   return (
@@ -178,9 +186,25 @@ export const JamBase = () => {
           }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box className="btn--click-me" sx={{ minWidth: '300px' }}>
-              <TextField fullWidth id="outlined-basic" label={city} variant="outlined" onKeyDown={onKeyPress} />
-            </Box>
+            <form onSubmit={handleSubmit}>
+              {' '}
+              {/* Use a form element */}
+              <Box className="btn--click-me" sx={{ minWidth: '300px', display: 'flex' }}>
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label={city}
+                  variant="outlined"
+                  value={textFieldValue}
+                  onChange={(e) => setTextFieldValue(e.target.value)}
+                  onKeyDown={onKeyPress}
+                />
+                <Button onClick={handleSubmit} variant="outlined" color="primary" sx={{ marginLeft: '6px' }}>
+                  GO
+                </Button>{' '}
+                {/* Submit button */}
+              </Box>
+            </form>
           </Box>
 
           <Button

@@ -40,7 +40,7 @@ export const CreateNewPlaylistJamBase = async ({
         }
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
     return tracks;
   });
@@ -81,10 +81,10 @@ async function getTopTracks(spotifyId: string, token: string) {
     if (response.status === 200) {
       return response.data.tracks.map((track: any) => track.uri);
     } else {
-      console.log('Unexpected response status:', response.status);
+      //console.log('Unexpected response status:', response.status);
     }
   } catch (error) {
-    console.log('Error at fetching top tracks:', error);
+    //console.log('Error at fetching top tracks:', error);
   }
   return null; // Return null in case of errors
 }
