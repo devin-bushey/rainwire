@@ -96,22 +96,3 @@
   bottom: 5px;
   transform: rotate(35deg);
 }
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: scaleY(1);
-  }
-  
-  33% {
-    opacity: 1;
-    transform: scaleY(1.4);
-  }
-  64% {
-     opacity: .1;
-     transform: scaleY(1);
-  }
-  100% { 
-    opacity: 0;
-    transform: scaleY(.3);
-  }
-}

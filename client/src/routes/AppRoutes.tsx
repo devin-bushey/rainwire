@@ -10,6 +10,7 @@ import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { LandingPage } from '../pages/LandingPage';
 import useAnalytics from '../hooks/useAnalytics';
 import { Rifflandia } from '../Rifflandia/pages/Rifflandia';
+import { JamBase } from '../pages/JamBase';
 
 export const AppRoutes = () => {
   useAnalytics();
@@ -24,6 +25,7 @@ export const AppRoutes = () => {
             <Route path="/artists" element={<ArtistsPage />} />
             <Route path="/about" element={<About />} />
             {/* <Route path="/refresh" element={<Refresh />} /> */}
+            <Route path="/explore" element={<JamBase />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />
