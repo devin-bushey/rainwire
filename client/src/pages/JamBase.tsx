@@ -156,7 +156,6 @@ export const JamBase = () => {
   };
 
   const handleSubmit = () => {
-    // You can now access the value of the TextField in the textFieldValue state.
     console.log('Submitted value:', textFieldValue);
     setCantFindSongs(false);
     setCity(textFieldValue);

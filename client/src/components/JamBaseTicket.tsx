@@ -41,7 +41,7 @@ export const JamBaseTicket = (props: any) => {
     <Card
       sx={{
         backgroundColor: props.bgcolor,
-        height: '150px',
+        height: '160px',
         width: '300px',
         margin: '8px',
         '&:hover': {
