@@ -1,5 +1,4 @@
 import { COLOURS } from '../theme/AppStyles';
-import blank from '../spotifyLogos/test.jpg';
 import { JamBaseTicket } from './JamBaseTicket';
 
 export const JamBaseTicketContainer = ({ tickets, cardColours }: { tickets: any; cardColours?: string[] }) => {

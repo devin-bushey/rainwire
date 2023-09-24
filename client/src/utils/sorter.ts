@@ -7,7 +7,7 @@ export const sortByOrderNum = (tickets: any) => {
 };
 
 export const sortDataByDateAndOrder = (data: any) => {
-  data.sort((a: any, b: any) => {
+  return data.sort((a: any, b: any) => {
     // First, compare the dates
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
@@ -20,6 +20,12 @@ export const sortDataByDateAndOrder = (data: any) => {
       return a.orderNum - b.orderNum;
     }
   });
+};
 
-  return data;
+export const filterRecent = (data: any) => {
+  return data.filter((ticket: any) => {
+    const sevenDaysAgo: Date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const ticketDate = new Date(ticket.date);
+    return ticketDate > sevenDaysAgo;
+  });
 };
