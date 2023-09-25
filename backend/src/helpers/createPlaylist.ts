@@ -1,9 +1,10 @@
-import { Festivals } from '../enums/common';
+import { Cities, Festivals } from '../enums/common';
 import axios, { AxiosError } from 'axios';
 import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
 import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
+import { filterRecent } from './filterRecent';
 
 export const CreateNewPlaylistJamBase = async ({
   token,
@@ -117,7 +118,11 @@ export const CreateNewPlaylist = async ({
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  const sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+  let sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+
+  if (city === Cities.Victoria) {
+    sortedArtists = filterRecent(sortedArtists);
+  }
 
   let tracks = '';
 
