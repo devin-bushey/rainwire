@@ -225,8 +225,8 @@ export const ArtistsPage = () => {
         });
       setIsLoading(false);
     } else {
-      handleOpenSignIn();
-      //isInAppBrowser();
+      // handleOpenSignIn();
+      isInAppBrowser();
     }
   };
 
@@ -289,7 +289,9 @@ export const ArtistsPage = () => {
                   }}
                 >
                   <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
-                  <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+                  <Typography sx={{ paddingBottom: 0 }}>
+                    {token && spotifyInfo.access ? 'Create playlist' : 'Sign in'}
+                  </Typography>
                 </Button>
               </Box>
 
@@ -310,15 +312,17 @@ export const ArtistsPage = () => {
                   Customize
                 </Button>
 
-                <Button
-                  variant="outlined"
-                  sx={{ marginBottom: '12px', width: '300px' }}
-                  onClick={() => {
-                    logOut();
-                  }}
-                >
-                  {token && spotifyInfo.access ? 'Sign out' : 'Sign in'}
-                </Button>
+                {token && spotifyInfo.access && (
+                  <Button
+                    variant="outlined"
+                    sx={{ marginBottom: '12px', width: '300px' }}
+                    onClick={() => {
+                      logOut();
+                    }}
+                  >
+                    Sign out
+                  </Button>
+                )}
 
                 {website && (
                   <Button

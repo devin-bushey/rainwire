@@ -30,7 +30,7 @@ const LoginPage = memo(() => {
   };
 
   const handleRedirectToAuth = () => {
-    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${BASE_REDIRECT_URI}&scope=${SCOPES.join(
+    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${BASE_REDIRECT_URI}artists&scope=${SCOPES.join(
       '%20',
     )}&response_type=token&show_dialog=true`;
   };
@@ -128,7 +128,7 @@ const LoginPage = memo(() => {
           (but its more fun to customize your own)
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             width: '75%',
             maxWidth: '700px',
@@ -152,7 +152,7 @@ const LoginPage = memo(() => {
             <CHERRIES />
           </Box>
           Rifflandia
-        </Button>
+        </Button> */}
 
         <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>
