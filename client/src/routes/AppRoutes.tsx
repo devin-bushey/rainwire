@@ -21,7 +21,7 @@ export const AppRoutes = () => {
       <Box sx={{ minHeight: 'calc(100vh - 46px)' }}>
         <Routes>
           <Route path="/" element={<Navbarr />}>
-            <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <LoginPage /> : <LandingPage />} />
+            <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <LoginPage /> : <ArtistsPage />} />
             <Route path="/artists" element={<ArtistsPage />} />
             <Route path="/about" element={<About />} />
             {/* <Route path="/refresh" element={<Refresh />} /> */}
