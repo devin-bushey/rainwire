@@ -10,92 +10,91 @@ import { updateCollectionWithSpotify } from '../db/addSpotifyDataToCollection';
 import { Cities, Festivals } from '../enums/common';
 import { extract } from '../extract_tickets';
 import { Artist } from '../types/Artists';
+import { Countries, Metros, States } from '../types/Geographies';
 
 const axios = require('axios');
 const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || '';
-const cachedData: { victoria_data?: any; rifflandia_data?: any } = {}; // The in-memory cache object
+const cachedData: {
+  victoria_data?: any;
+  rifflandia_data?: any;
+  geo_countries?: Countries;
+  geo_states?: States;
+  geo_metros?: Metros;
+} = {}; // The in-memory cache object
 
 recordRoutes.route('/geographies/countries').get(async (req, res) => {
-  console.log('Request body: ', req);
-  const sampleResponse = {
-    countries: [
-      {
-        '@type': 'Country',
-        identifier: 'US',
-        name: 'United States',
-        alternateName: 'USA',
-        'x-numUpcomingEvents': 12,
+  if (cachedData.geo_countries) {
+    res.json(cachedData.geo_countries);
+  } else {
+    const options = {
+      method: 'GET',
+      url: 'https://www.jambase.com/jb-api/v1/geographies/countries',
+      params: {
+        countryHasUpcomingEvents: 'true',
+        apikey: API_KEY_JAMBASE,
       },
-    ],
-  };
-  res.status(200).json(sampleResponse);
+      headers: { Accept: 'application/json' },
+    };
+
+    try {
+      const { data } = await axios.request(options);
+      cachedData.geo_countries = {
+        countries: data.countries,
+      };
+      res.json(cachedData.geo_countries);
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ error: 'Something went wrong' });
+    }
+  }
 });
 
 recordRoutes.route('/geographies/states').get(async (req, res) => {
-  console.log('Request body: ', req);
-  const sampleResponse = {
-    states: [
-      {
-        '@type': 'State',
-        identifier: 'US-AZ',
-        name: 'Arizona',
-        alternateName: 'AZ',
-        country: {
-          '@type': 'Country',
-          identifier: 'US',
-          name: 'United States',
-          alternateName: 'USA',
-          'x-numUpcomingEvents': 12,
-        },
-        'x-numUpcomingEvents': 12,
-      },
-    ],
-  };
-  res.status(200).json(sampleResponse);
+  if (cachedData.geo_states) {
+    res.json(cachedData.geo_states);
+  } else {
+    const options = {
+      method: 'GET',
+      url: 'https://www.jambase.com/jb-api/v1/geographies/states',
+      params: { stateHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+      headers: { Accept: 'application/json' },
+    };
+
+    try {
+      const { data } = await axios.request(options);
+      cachedData.geo_states = {
+        states: data.states,
+      };
+      res.json(cachedData.geo_states);
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ error: 'Something went wrong' });
+    }
+  }
 });
 
 recordRoutes.route('/geographies/metros').get(async (req, res) => {
-  console.log('Request body: ', req);
-  const sampleResponse = {
-    metros: [
-      {
-        '@type': 'AdministrativeArea',
-        identifier: 'jambase:13412',
-        name: 'New York Area',
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 40.7505,
-          longitude: -73.9934,
-        },
-        address: {
-          addressRegion: 'US-AZ',
-          addressCountry: 'US',
-        },
-        containsPlace: [
-          {
-            '@type': 'City',
-            identifier: 'jambase:13412',
-            name: 'New York',
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: 40.7505,
-              longitude: -73.9934,
-            },
-            address: {
-              addressRegion: 'US-AZ',
-              addressCountry: 'US',
-            },
-            'x-timezone': 'America/New_York',
-            containedInPlace: {},
-            'x-numUpcomingEvents': 12,
-          },
-        ],
-        'x-primaryCityId': 12,
-        'x-numUpcomingEvents': 12,
-      },
-    ],
-  };
-  res.status(200).json(sampleResponse);
+  if (cachedData.geo_metros) {
+    res.json(cachedData.geo_metros);
+  } else {
+    const options = {
+      method: 'GET',
+      url: 'https://www.jambase.com/jb-api/v1/geographies/metros',
+      params: { metroHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+      headers: { Accept: 'application/json' },
+    };
+
+    try {
+      const { data } = await axios.request(options);
+      cachedData.geo_metros = {
+        metros: data.metros,
+      };
+      res.json(cachedData.geo_metros);
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ error: 'Something went wrong' });
+    }
+  }
 });
 
 recordRoutes.route('/jamBase').get(async (req, response) => {
