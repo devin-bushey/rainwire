@@ -155,6 +155,14 @@ export const JamBase = () => {
     }
   };
 
+  const handleConcertSelected = () => {
+    console.log('concert clicked!');
+  };
+
+  const handleFestivalSelected = () => {
+    console.log('festival clicked!');
+  };
+
   const handleSubmit = () => {
     console.log('Submitted value:', textFieldValue);
     setCantFindSongs(false);
@@ -175,6 +183,39 @@ export const JamBase = () => {
         >
           Record Shop
         </Typography>
+
+        <Box
+          sx={{
+            borderRadius: '10px',
+            minWidth: '300px',
+            margin: '8px',
+            marginBottom: '24px',
+          }}
+        >
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            {' '}
+            {/* Use a form element */}
+            <Box className="btn--click-me" sx={{ minWidth: '300px', display: 'flex' }}>
+              <Button
+                onClick={handleConcertSelected}
+                variant="outlined"
+                color="primary"
+                sx={{ marginLeft: '6px', width: '50%' }}
+              >
+                Concerts
+              </Button>{' '}
+              <Button
+                onClick={handleFestivalSelected}
+                variant="outlined"
+                color="primary"
+                sx={{ marginLeft: '6px', width: '50%' }}
+              >
+                Festivals
+              </Button>{' '}
+              {/* Submit button */}
+            </Box>
+          </Box>
+        </Box>
 
         <Box
           sx={{
