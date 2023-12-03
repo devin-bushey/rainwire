@@ -15,6 +15,89 @@ const axios = require('axios');
 const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || '';
 const cachedData: { victoria_data?: any; rifflandia_data?: any } = {}; // The in-memory cache object
 
+recordRoutes.route('/geographies/countries').get(async (req, res) => {
+  console.log('Request body: ', req);
+  const sampleResponse = {
+    countries: [
+      {
+        '@type': 'Country',
+        identifier: 'US',
+        name: 'United States',
+        alternateName: 'USA',
+        'x-numUpcomingEvents': 12,
+      },
+    ],
+  };
+  res.status(200).json(sampleResponse);
+});
+
+recordRoutes.route('/geographies/states').get(async (req, res) => {
+  console.log('Request body: ', req);
+  const sampleResponse = {
+    states: [
+      {
+        '@type': 'State',
+        identifier: 'US-AZ',
+        name: 'Arizona',
+        alternateName: 'AZ',
+        country: {
+          '@type': 'Country',
+          identifier: 'US',
+          name: 'United States',
+          alternateName: 'USA',
+          'x-numUpcomingEvents': 12,
+        },
+        'x-numUpcomingEvents': 12,
+      },
+    ],
+  };
+  res.status(200).json(sampleResponse);
+});
+
+recordRoutes.route('/geographies/metros').get(async (req, res) => {
+  console.log('Request body: ', req);
+  const sampleResponse = {
+    metros: [
+      {
+        '@type': 'AdministrativeArea',
+        identifier: 'jambase:13412',
+        name: 'New York Area',
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 40.7505,
+          longitude: -73.9934,
+        },
+        address: {
+          addressRegion: 'US-AZ',
+          addressCountry: 'US',
+        },
+        containsPlace: [
+          {
+            '@type': 'City',
+            identifier: 'jambase:13412',
+            name: 'New York',
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 40.7505,
+              longitude: -73.9934,
+            },
+            address: {
+              addressRegion: 'US-AZ',
+              addressCountry: 'US',
+            },
+            'x-timezone': 'America/New_York',
+            containedInPlace: {},
+            'x-numUpcomingEvents': 12,
+          },
+        ],
+        'x-primaryCityId': 12,
+        'x-numUpcomingEvents': 12,
+      },
+    ],
+  };
+  res.status(200).json(sampleResponse);
+});
+
 recordRoutes.route('/jamBase').get(async (req, response) => {
   const { city } = req.query;
 
