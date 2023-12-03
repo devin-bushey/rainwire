@@ -124,7 +124,7 @@ const LoginPage = memo(() => {
           <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '16px' }} />
           Preview a Playlist
         </Button>
-        <Box style={{ maxWidth: '700px', fontSize: '0.7rem', marginTop: '4px' }}>
+        <Box style={{ maxWidth: '700px', fontSize: '0.7rem', marginTop: '4px', marginBottom: '48px' }}>
           (but its more fun to customize your own)
         </Box>
 
