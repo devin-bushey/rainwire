@@ -95,3 +95,14 @@ export const CreateNewPlaylist = async ({
   };
   return await axios.post(import.meta.env.VITE_SITE_URL_DB + 'create/', reqBody);
 };
+
+export const GetCountries = async (): Promise<any> => {
+    return axios
+      .get(import.meta.env.VITE_SITE_URL_DB + 'geographies/countries', {})
+      .then(async (response) => {
+        const countryNames = response.data.countries.map((country : any) => {
+            return country.name;
+        });
+        return countryNames;
+      });
+  };

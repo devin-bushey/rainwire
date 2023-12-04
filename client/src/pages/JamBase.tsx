@@ -1,5 +1,6 @@
-import { Box, Container, TextField } from '@mui/material';
+import { Box, Container, MenuItem, TextField } from '@mui/material';
 import Button from '@mui/material/Button/Button';
+import Select from '@mui/material/Select/Select';
 import Typography from '@mui/material/Typography';
 import { COLOURS } from '../theme/AppStyles';
 import { useContext, useEffect, useState } from 'react';
@@ -9,7 +10,7 @@ import useSpotifyAuth from '../hooks/useSpotifyAuth';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
 import { InAppModal } from '../components/InAppModal';
 import { UseQueryOptions, useQuery } from 'react-query';
-import { CreateNewPlaylistJamBase, GetJamBase } from '../apiManager/RecordShop';
+import { CreateNewPlaylistJamBase, GetCountries, GetJamBase } from '../apiManager/RecordShop';
 import { Loading } from './Loading';
 import { Spinner } from '../Rifflandia/Spinner';
 import { StickyButton } from '../components/StickyButton';
@@ -64,6 +65,9 @@ export const JamBase = () => {
   const [isCreatePlaylistError, setIsError] = useState(false);
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
 
+  const [countrySelected, setCountrySelected] = useState();
+  const [countries, setCountries] = useState([]);
+
   // Snackbar / Toast message to show status of creating a Spotify playlist
   const snackBar = useContext(SnackBarContext);
 
@@ -115,6 +119,20 @@ export const JamBase = () => {
     )}&response_type=token&show_dialog=true`;
   };
 
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        await GetCountries().then((response) => {
+          setCountries(response);
+        });
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
   const handleCreatePlaylist = async () => {
     if (token && spotifyInfo.access) {
       setIsCreatingPlaylist(true);
@@ -161,6 +179,14 @@ export const JamBase = () => {
 
   const handleFestivalSelected = () => {
     console.log('festival clicked!');
+  };
+
+  const handleCountrySelect = (e: any) => {
+    setCountrySelected(e.value);
+  };
+
+  const handleProvinceSelect = () => {
+    console.log('Province Selected!');
   };
 
   const handleSubmit = () => {
@@ -212,6 +238,22 @@ export const JamBase = () => {
               >
                 Festivals
               </Button>{' '}
+              {/* Submit button */}
+            </Box>
+          </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            {' '}
+            {/* Use a form element */}
+            <Box className="btn--click-me" sx={{ minWidth: '300px', display: 'flex', margin: '10px' }}>
+              <Select value={countrySelected} onChange={handleCountrySelect} sx={{ marginLeft: '6px', width: '50%' }}>
+                {countries.map((country: any, index: number) => (
+                  <MenuItem key={index} value={country}>
+                    {country}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Select value={null} onChange={handleProvinceSelect} sx={{ marginLeft: '6px', width: '50%' }}></Select>
               {/* Submit button */}
             </Box>
           </Box>
