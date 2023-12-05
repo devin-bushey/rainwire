@@ -23,7 +23,7 @@ export const AppRoutes = () => {
           <Route path="/" element={<Navbarr />}>
             <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <LoginPage /> : <ArtistsPage />} />
             <Route path="/artists" element={<ArtistsPage />} />
-            <Route path="/about" element={<About />} />
+            {/* <Route path="/about" element={<About />} /> */}
             {/* <Route path="/refresh" element={<Refresh />} /> */}
             <Route path="/explore" element={<JamBase />} />
             <Route path="*" element={<NotFound />} />

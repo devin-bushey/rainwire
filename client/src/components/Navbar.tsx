@@ -88,7 +88,7 @@ const Navbarr = () => {
                 Explore
               </Button>
 
-              <Button
+              {/* <Button
                 component={Link}
                 to="/about"
                 onClick={handleCloseNavMenu}
@@ -100,7 +100,7 @@ const Navbarr = () => {
                 }}
               >
                 About
-              </Button>
+              </Button> */}
             </Box>
 
             {localStorage.getItem('spotifyToken') && (
@@ -237,7 +237,7 @@ const Navbarr = () => {
                     Vancouver
                   </Button> */}
 
-                  <Button
+                  {/* <Button
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
@@ -249,7 +249,7 @@ const Navbarr = () => {
                     }}
                   >
                     About
-                  </Button>
+                  </Button> */}
 
                   {localStorage.getItem('spotifyToken') && (
                     <Button
