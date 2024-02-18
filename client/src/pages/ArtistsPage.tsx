@@ -20,6 +20,7 @@ import { Spinner } from '../Rifflandia/Spinner';
 import { sortByOrderNum } from '../utils/sorter';
 import { StickyButton } from '../components/StickyButton';
 import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
+import { Email } from '../Rifflandia/Email';
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -72,6 +73,9 @@ export const ArtistsPage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openEmail, setOpenEmail] = useState(false);
+  const handleOpenEmail = () => setOpenEmail(true);
 
   useEffect(() => {
     document.title = 'Record Shop | Artists';
@@ -328,10 +332,9 @@ export const ArtistsPage = () => {
                   <Button
                     variant="outlined"
                     sx={{ marginBottom: '12px', marginRight: '18px', width: '300px' }}
-                    href={website}
-                    target="_blank"
+                    onClick={handleOpenEmail}
                   >
-                    Buy Tickets
+                    Contact me!
                   </Button>
                 )}
               </Box>
@@ -379,6 +382,8 @@ export const ArtistsPage = () => {
         hoverColor={COLOURS.card_colours[1]}
         barColor={COLOURS.card_colours[2]}
       />
+
+      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
       <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
