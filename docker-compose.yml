@@ -1,12 +1,32 @@
 version: '3.8'
 
 services:
-  database:
-    container_name: database
-    hostname: database
-    image: mongo:latest
+  mongo:
+    container_name: mongo
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    restart: always
     ports:
-      - 27017:27017
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: RecordShop
+    volumes:
+      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo-volume:/data/db
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express:1.0.0-20
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
   backend:
     container_name: backend
@@ -15,10 +35,11 @@ services:
       dockerfile: Dockerfile
     environment:
       NODE_ENV: production
-      ATLAS_URI: mongodb://database:27017/
+      ATLAS_URI: mongodb://root:example@mongo:27017/
       SP_CLIENT_ID: ${SP_CLIENT_ID}
       SP_MY_USER_ID: ${SP_MY_USER_ID}
       SP_CLIENT_S: ${SP_CLIENT_S}
+      API_KEY_JAMBASE: ${API_KEY_JAMBASE}
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:5000/']
       interval: 1m30s
@@ -27,9 +48,9 @@ services:
       start_period: 40s
     hostname: backend
     links:
-      - database
+      - mongo
     depends_on:
-      - database
+      - mongo
     ports:
       - '5000:5000'
 
@@ -62,3 +83,6 @@ services:
       - backend
     ports:
       - '${VITE_PORT}:${VITE_PORT}'
+
+volumes:
+  mongo-volume:
