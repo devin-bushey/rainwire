@@ -5,6 +5,7 @@ import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
 import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
 import { filterRecent } from './filterRecent';
+import {get} from "../http/request";
 
 export const CreateNewPlaylistJamBase = async ({
   token,
@@ -71,9 +72,8 @@ export const CreateNewPlaylistJamBase = async ({
 
 async function getTopTracks(spotifyId: string, token: string) {
   try {
-    const response = await axios({
+    const response = await get({
       url: `https://api.spotify.com/v1/artists/${spotifyId}/top-tracks?market=CA`,
-      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
