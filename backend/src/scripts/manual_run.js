@@ -1,16 +1,18 @@
-const fs = require('fs');
 const https = require('https');
+const { MongoClient } = require('mongodb');
 
 // Check if all required arguments are provided
-if (process.argv.length !== 6) {
-  console.error('Usage: node createConcertObject.js <Spotify Artist ID> <Date> <Venue> <Bearer Token>');
+if (process.argv.length !== 8) {
+  console.error('Usage: node manual_run.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>');
   process.exit(1);
 }
 
 const artistId = process.argv[2];
 const date = process.argv[3];
 const venue = process.argv[4];
-const bearerToken = process.argv[5];
+const databaseUrl = process.argv[5];
+const collectionName = process.argv[6];
+const bearerToken = process.argv[7];
 
 const concertObject = {
   artist: '',
@@ -35,6 +37,33 @@ const options = {
   },
 };
 
+const addToMongoDb = async (_concertObject) => {
+  // Connect to MongoDB and save the concertObject to the specified collection
+  const client = new MongoClient(databaseUrl);
+  try {
+    await client.connect();
+    console.log("Succesfully connected to ", databaseUrl)
+  } catch (e) {
+    console.error(e);
+  }
+  const db = client.db('RecordShop');
+
+  try {
+    const collection = db.collection(collectionName);
+    const result = await collection.insertOne(_concertObject);
+    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+  } catch (e) {
+    console.error(e);
+  }
+  finally {
+    // Close the MongoDB client connection
+    await client.close();
+    process.exit(2);
+  }
+
+
+}
+
 const req = https.request(options, (res) => {
   let data = '';
 
@@ -43,10 +72,6 @@ const req = https.request(options, (res) => {
   });
 
   res.on('end', () => {
-
-    console.log("*****");
-    console.log(data);
-    console.log("*****");
     const topTracks = JSON.parse(data).tracks;
     topTracks.forEach((track) => {
       concertObject.topTrackURIs.push(track.uri);
@@ -61,6 +86,8 @@ const req = https.request(options, (res) => {
 
     // Print the concert object as JSON
     console.log(JSON.stringify(concertObject, null, 2));
+
+    addToMongoDb(concertObject)
 
     // You can also save it to a file if needed
     // fs.writeFileSync('concertObject.json', JSON.stringify(concertObject, null, 2));
