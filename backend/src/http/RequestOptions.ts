@@ -5,6 +5,7 @@ export interface RequestOptions {
     params?: RequestParams,
     headers?: RequestHeaders,
     data?: RequestData
+    maxBodyLength?: number;
 }
 
 export enum RequestMethod {
@@ -15,6 +16,6 @@ export enum RequestMethod {
 
 type RequestParams = Record<string, string | number | boolean>;
 type RequestHeaders = Record<string, string>;
-type RequestData = Record<string, string | number | boolean>;
+type RequestData = string | Record<string, string | number | boolean>;
 
 

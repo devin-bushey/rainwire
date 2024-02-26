@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '../config.env' });
-import axios from 'axios';
 import { RIFFLANDIA_SPOTIFY } from './constants';
+import { get, post } from '../http/request';
 
 export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
@@ -26,9 +26,8 @@ async function addSpotifyData(data: any) {
 
 async function addSpotifyMainData(element: any, token: any) {
   await new Promise<void>(function (resolve, reject) {
-    axios({
+    get({
       url: 'https://api.spotify.com/v1/search',
-      method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -57,9 +56,8 @@ async function addSpotifyMainData(element: any, token: any) {
 async function addSpotifyTopTracks(element: any, token: any) {
   if (element.band_id) {
     await new Promise<void>(function (resolve, reject) {
-      axios({
+      get({
         url: 'https://api.spotify.com/v1/artists/' + element.band_id + '/top-tracks?market=CA',
-        method: 'GET',
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -97,9 +95,8 @@ async function getSpotifyAuth() {
   var client_secret = process.env.SP_CLIENT_S;
 
   return await new Promise(function (resolve, reject) {
-    axios({
+    post({
       url: 'https://accounts.spotify.com/api/token',
-      method: 'POST',
       headers: {
         Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
       },

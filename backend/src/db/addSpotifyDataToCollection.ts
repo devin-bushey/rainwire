@@ -1,8 +1,8 @@
 require('dotenv').config({ path: '../config.env' });
-import axios from 'axios';
 import _ from 'lodash';
 import { getSpotifyAuth } from '../helpers/getSpotifyAuth';
 import { removeDuplicateArtists } from '../helpers/removeDuplicateArtists';
+import { get } from '../http/request';
 const stringSimilarity = require('string-similarity');
 
 export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
@@ -29,9 +29,8 @@ async function addSpotifyData(data: any) {
 
 async function addSpotifyMainData(element: any, token: any) {
   await new Promise<void>(function (resolve, reject) {
-    axios({
+    get({
       url: 'https://api.spotify.com/v1/search',
-      method: 'GET',
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -90,9 +89,8 @@ function findBestMatch(artists: any, query: any, options: any) {
 async function addSpotifyTopTracks(element: any, token: any) {
   if (element.band_id) {
     await new Promise<void>(function (resolve, reject) {
-      axios({
+      get({
         url: 'https://api.spotify.com/v1/artists/' + element.band_id + '/top-tracks?market=CA',
-        method: 'GET',
         headers: {
           Authorization: 'Bearer ' + token,
         },

@@ -27,6 +27,7 @@ const request = async (options: RequestOptions) => {
         ...options, // stephg why does this allow for the spread of non-axios options?
         headers: {
             Accept: 'application/json',
+            'Content-Type': 'application/json',
             ...options.headers
         }
     });

@@ -1,11 +1,11 @@
 import { Cities, Festivals } from '../enums/common';
-import axios, { AxiosError } from 'axios';
 import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
 import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
 import { filterRecent } from './filterRecent';
-import {get} from "../http/request";
+import {get, post, put} from "../http/request";
+import { HttpRequestError } from '../http/RequestError';
 
 export const CreateNewPlaylistJamBase = async ({
   token,
@@ -186,12 +186,10 @@ const CreateBlankPlaylist = async ({
 
   let description = `a mixtape created by recordshop.cool`;
 
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
     data: {
       name: playlist_name,
@@ -223,37 +221,34 @@ const CreateBlankPlaylist = async ({
       };
 
       return returnVal;
-    }); //end axios
+    });
 };
 
 const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
-  return axios({
+  return put({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
-    method: 'PUT',
     headers: {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
     },
     data: PLAYLIST_IMG_RS,
   }).catch(function (error) {
-    const err = error as AxiosError;
+    const err = error as HttpRequestError;
     console.log('Error: unsuccessfully added cover art to playlist');
-    console.log('***Axios err: ', err);
+    console.log('***Http Request err: ', err);
     console.log('***JS error: ', error);
     console.log('***');
   });
 };
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
   }).catch(function (error) {
-    const err = error as AxiosError;
+    const err = error as HttpRequestError;
     console.log('Error: unsuccessfully added tracks to playlist');
     console.log(err.message);
     return null;
