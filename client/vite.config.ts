@@ -1,9 +1,9 @@
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
-import svgrPlugin from 'vite-plugin-svgr';
-import eslint from 'vite-plugin-eslint';
-import { VitePluginRadar } from 'vite-plugin-radar';
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
+import viteTsconfigPaths from "vite-tsconfig-paths";
+import svgrPlugin from "vite-plugin-svgr";
+import eslint from "vite-plugin-eslint";
+import { VitePluginRadar } from "vite-plugin-radar";
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -18,21 +18,21 @@ export default ({ mode }) => {
       VitePluginRadar({
         // Google Analytics tag injection
         analytics: {
-          id: 'G-WK0NXL9P3R',
+          id: "G-WK0NXL9P3R",
         },
         gtm: [
           {
-            id: 'GTM-NCVHZ37',
+            id: "GTM-NCVHZ37",
           },
         ],
       }),
     ],
     server: {
       host: true,
-      port: parseInt(process.env.VITE_PORT || '3000'),
+      port: parseInt(process.env.VITE_PORT || "3000"),
     },
     build: {
-      outDir: 'build',
+      outDir: "build",
     },
   });
 };

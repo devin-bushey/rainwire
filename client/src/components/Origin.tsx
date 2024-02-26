@@ -1,7 +1,7 @@
-import { Box, ListSubheader, MenuItem, Select } from '@mui/material';
-import { LOCATIONS } from '../constants/locations';
-import { LocationType } from '../types/RecordShopTypes';
-import { COLOURS } from '../theme/AppStyles';
+import { Box, ListSubheader, MenuItem, Select } from "@mui/material";
+import { LOCATIONS } from "../constants/locations";
+import { LocationType } from "../types/RecordShopTypes";
+import { COLOURS } from "../theme/AppStyles";
 
 function MyListSubheader(props: any) {
   return <ListSubheader {...props} />;
@@ -17,14 +17,14 @@ export const Origin = ({
   handleChangeOrigin: (event: any) => void;
 }) => {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: '300px' }}>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ minWidth: "300px" }}>
         <Select
           value={origin}
           onChange={handleChangeOrigin}
           fullWidth
           sx={{
-            height: '40px',
+            height: "40px",
             border: `1px solid ${COLOURS.accent_04}}`,
           }}
         >

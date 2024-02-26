@@ -1,14 +1,14 @@
 export enum Cities {
-  Victoria = 'victoria',
-  Vancouver = 'vancouver',
+  Victoria = "victoria",
+  Vancouver = "vancouver",
 }
 
 export enum Festivals {
-  PhilipsBackyard = 'phillipsBackyard',
-  Rifflandia = 'rifflandia',
-  Whistlemania = 'whistlemania',
-  LaketownShakedown = 'laketownShakedown',
-  Osheaga = 'osheaga',
-  Coachella = 'coachella',
-  TheFunction = 'theFunction',
+  PhilipsBackyard = "phillipsBackyard",
+  Rifflandia = "rifflandia",
+  Whistlemania = "whistlemania",
+  LaketownShakedown = "laketownShakedown",
+  Osheaga = "osheaga",
+  Coachella = "coachella",
+  TheFunction = "theFunction",
 }

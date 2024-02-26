@@ -1,7 +1,7 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import { useLocation } from "react-router-dom";
 
-import * as analytics from './ga4';
+import * as analytics from "./ga4";
 
 export function useAnalytics() {
   const location = useLocation();

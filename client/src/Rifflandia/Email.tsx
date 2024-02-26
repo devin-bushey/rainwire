@@ -1,18 +1,18 @@
-import { Modal, Input, TextField, Button } from '@mui/material';
-import { Box } from '@mui/system';
-import { send } from 'emailjs-com';
-import { useState, useContext } from 'react';
-import { RIFFLANDIA_COLOURS } from './constants/colours';
-import { SnackBarContext } from '../App';
+import { Modal, Input, TextField, Button } from "@mui/material";
+import { Box } from "@mui/system";
+import { send } from "emailjs-com";
+import { useState, useContext } from "react";
+import { RIFFLANDIA_COLOURS } from "./constants/colours";
+import { SnackBarContext } from "../App";
 
 export const Email = (props: any) => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const handleCloseEmail = () => props.setOpenEmail(false);
 
   const [toSend, setToSend] = useState({
-    from_name: '',
-    reply_to: '',
-    message: '',
+    from_name: "",
+    reply_to: "",
+    message: "",
   });
 
   const serviceID = import.meta.env.VITE_EMAIL_SERVICEID;
@@ -26,10 +26,10 @@ export const Email = (props: any) => {
     toSend.message = message;
     send(serviceID, templateID, toSend, pubkey)
       .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
+        console.log("SUCCESS!", response.status, response.text);
       })
       .catch((err) => {
-        console.log('FAILED...', err);
+        console.log("FAILED...", err);
       })
       .finally(() => {
         snackBar.setSnackBar({
@@ -55,14 +55,14 @@ export const Email = (props: any) => {
     >
       <Box
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          minWidth: '300px',
-          maxWidth: '550px',
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          minWidth: "300px",
+          maxWidth: "550px",
           backgroundColor: RIFFLANDIA_COLOURS.fill_pale_green,
-          border: '2px solid #000',
+          border: "2px solid #000",
           boxShadow: 24,
           p: 4,
         }}
@@ -73,7 +73,7 @@ export const Email = (props: any) => {
             placeholder="Your Name"
             value={toSend.from_name}
             onChange={handleChange}
-            sx={{ width: '300px' }}
+            sx={{ width: "300px" }}
           />
           <br />
           <Input
@@ -82,14 +82,23 @@ export const Email = (props: any) => {
             placeholder="Your Email"
             value={toSend.reply_to}
             onChange={handleChange}
-            sx={{ width: '300px', marginTop: '8px', marginBottom: '24px' }}
+            sx={{ width: "300px", marginTop: "8px", marginBottom: "24px" }}
           />
           <br />
           {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
-          <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
+          <TextField
+            placeholder="Message"
+            onChange={(e) => setMessage(e.target.value)}
+            multiline
+            fullWidth
+          />
           <br />
           <br />
-          <Button type="submit" variant="contained" sx={{ backgroundColor: RIFFLANDIA_COLOURS.blue, marginTop: '8px' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ backgroundColor: RIFFLANDIA_COLOURS.blue, marginTop: "8px" }}
+          >
             Send
           </Button>
           <br />

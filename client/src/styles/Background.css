@@ -11,5 +11,5 @@
 }
 
 .layer {
-  background-image: url('../assets/images/wave-haikei.svg');
+  background-image: url("../assets/images/wave-haikei.svg");
 }

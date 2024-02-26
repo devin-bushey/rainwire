@@ -19,7 +19,11 @@ export const CreateNewPlaylistJamBase = async ({
   numTopTracks?: number;
   spotifyIds: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    city,
+    user_id,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
@@ -107,7 +111,12 @@ export const CreateNewPlaylist = async ({
   sortBy: string;
   days: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id, days });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    city,
+    user_id,
+    days,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {

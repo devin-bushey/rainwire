@@ -1,6 +1,6 @@
-import { Button, Typography } from '@mui/material';
-import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import '../styles/ClickMe.css';
+import { Button, Typography } from "@mui/material";
+import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import "../styles/ClickMe.css";
 
 export const CreatePlaylistButton = ({
   handleCreatePlaylist,
@@ -18,17 +18,23 @@ export const CreatePlaylistButton = ({
       className="btn--click-me-riff create-playlist"
       sx={{
         backgroundColor: backgroundColor,
-        ':hover': {
+        ":hover": {
           backgroundColor: hoverColor,
         },
-        color: 'black',
-        width: '300px',
+        color: "black",
+        width: "300px",
         //marginBottom: '24px',
-        justifyContent: 'center',
-        height: '48px',
+        justifyContent: "center",
+        height: "48px",
       }}
     >
-      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+      <img
+        src={spotifyIcon}
+        alt="spotify_logo"
+        width="20px"
+        height="20px"
+        style={{ marginRight: "8px" }}
+      />
       <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
     </Button>
   );
