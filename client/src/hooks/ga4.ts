@@ -1,4 +1,4 @@
-import ga4 from 'react-ga4';
+import ga4 from "react-ga4";
 
 const TRACKING_ID = import.meta.env.VITE_GOOGLE_ANALYTICS;
 

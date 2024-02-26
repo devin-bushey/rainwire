@@ -1,8 +1,8 @@
-import blank from '../spotifyLogos/test.jpg';
-import { Loading } from '../pages/Loading';
-import { Error } from '../components/Error';
-import { COLOURS } from '../theme/AppStyles';
-import { Ticket } from './Ticket';
+import blank from "../spotifyLogos/test.jpg";
+import { Loading } from "../pages/Loading";
+import { Error } from "../components/Error";
+import { COLOURS } from "../theme/AppStyles";
+import { Ticket } from "./Ticket";
 
 export const TicketContainer = ({
   tickets,
@@ -30,7 +30,9 @@ export const TicketContainer = ({
   return tickets.map((currentTicket: any, index: any) => {
     let imageURL: any;
     try {
-      imageURL = currentTicket.albumArtUrl || currentTicket.top_tracks[0].album.images[1].url;
+      imageURL =
+        currentTicket.albumArtUrl ||
+        currentTicket.top_tracks[0].album.images[1].url;
     } catch {
       imageURL = blank;
     }
