@@ -1,7 +1,14 @@
 export const extract_function_festival = async () => {
   console.log('Extracting function festival');
 
-  const artists = ['KYLE', 'Zach Zoya', 'Khanvict', 'Desiree Dawson', 'Dacey', 'Dilly Cooner'];
+  const artists = [
+    'KYLE',
+    'Zach Zoya',
+    'Khanvict',
+    'Desiree Dawson',
+    'Dacey',
+    'Dilly Cooner',
+  ];
   let data: any[] = [];
 
   artists.forEach((name, index) => {

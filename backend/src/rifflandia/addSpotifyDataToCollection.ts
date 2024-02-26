@@ -2,7 +2,10 @@ require('dotenv').config({ path: '../config.env' });
 import { RIFFLANDIA_SPOTIFY } from './constants';
 import { get, post } from '../http/request';
 
-export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
+export const updateCollectionWithSpotify = async (
+  collection_name: string,
+  db_connect: any,
+) => {
   db_connect
     .collection(collection_name)
     .find({})
@@ -57,7 +60,10 @@ async function addSpotifyTopTracks(element: any, token: any) {
   if (element.band_id) {
     await new Promise<void>(function (resolve, reject) {
       get({
-        url: 'https://api.spotify.com/v1/artists/' + element.band_id + '/top-tracks?market=CA',
+        url:
+          'https://api.spotify.com/v1/artists/' +
+          element.band_id +
+          '/top-tracks?market=CA',
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -65,7 +71,9 @@ async function addSpotifyTopTracks(element: any, token: any) {
         .then(async function (res) {
           try {
             element.albumArtUrl = res.data.tracks[0].album.images[1].url;
-            element.topTrackURIs = res.data.tracks.map((track: any) => track.uri);
+            element.topTrackURIs = res.data.tracks.map(
+              (track: any) => track.uri,
+            );
           } catch (err) {
             console.log('Error at adding top tracks');
             console.log(err);
@@ -80,14 +88,28 @@ async function addSpotifyTopTracks(element: any, token: any) {
   }
 }
 
-const createNewCollection = async (linked_data: any, collection_name: string, db_connect: any) => {
-  await db_connect.createCollection(RIFFLANDIA_SPOTIFY, (err: any, result: any) => {
-    console.log(RIFFLANDIA_SPOTIFY + ' created!');
-  });
+const createNewCollection = async (
+  linked_data: any,
+  collection_name: string,
+  db_connect: any,
+) => {
+  await db_connect.createCollection(
+    RIFFLANDIA_SPOTIFY,
+    (err: any, result: any) => {
+      console.log(RIFFLANDIA_SPOTIFY + ' created!');
+    },
+  );
 
-  await db_connect.collection(RIFFLANDIA_SPOTIFY).insertMany(linked_data, (err: any, res: any) => {
-    console.log('Successfully added ' + res.insertedCount + ' records to ' + RIFFLANDIA_SPOTIFY);
-  });
+  await db_connect
+    .collection(RIFFLANDIA_SPOTIFY)
+    .insertMany(linked_data, (err: any, res: any) => {
+      console.log(
+        'Successfully added ' +
+          res.insertedCount +
+          ' records to ' +
+          RIFFLANDIA_SPOTIFY,
+      );
+    });
 };
 
 async function getSpotifyAuth() {
@@ -98,7 +120,9 @@ async function getSpotifyAuth() {
     post({
       url: 'https://accounts.spotify.com/api/token',
       headers: {
-        Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
+        Authorization:
+          'Basic ' +
+          Buffer.from(client_id + ':' + client_secret).toString('base64'),
       },
       params: {
         grant_type: 'client_credentials',

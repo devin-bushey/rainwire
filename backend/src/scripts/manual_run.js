@@ -3,7 +3,9 @@ const https = require('https');
 
 // Check if all required arguments are provided
 if (process.argv.length !== 6) {
-  console.error('Usage: node createConcertObject.js <Spotify Artist ID> <Date> <Venue> <Bearer Token>');
+  console.error(
+    'Usage: node createConcertObject.js <Spotify Artist ID> <Date> <Venue> <Bearer Token>',
+  );
   process.exit(1);
 }
 
@@ -31,7 +33,7 @@ const options = {
   path: `/v1/artists/${artistId}/top-tracks?market=ca`,
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${bearerToken}`,
+    Authorization: `Bearer ${bearerToken}`,
   },
 };
 
@@ -43,10 +45,9 @@ const req = https.request(options, (res) => {
   });
 
   res.on('end', () => {
-
-    console.log("*****");
+    console.log('*****');
     console.log(data);
-    console.log("*****");
+    console.log('*****');
     const topTracks = JSON.parse(data).tracks;
     topTracks.forEach((track) => {
       concertObject.topTrackURIs.push(track.uri);

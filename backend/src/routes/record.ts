@@ -2,7 +2,10 @@ import express, { response } from 'express';
 export const recordRoutes = express.Router();
 import dbo from '../db/conn';
 
-import { CreateNewPlaylist, CreateNewPlaylistJamBase } from '../helpers/createPlaylist';
+import {
+  CreateNewPlaylist,
+  CreateNewPlaylistJamBase,
+} from '../helpers/createPlaylist';
 
 import { RIFFLANDIA_SPOTIFY } from '../rifflandia/constants';
 import { CreateNewPlaylistRifflandia } from '../rifflandia/createPlaylist';
@@ -25,7 +28,6 @@ const cachedData: {
 recordRoutes.route('/geographies/countries').get(async (req, res) => {
   if (cachedData.geo_countries) {
     res.json(cachedData.geo_countries);
-
   } else {
     try {
       const { data } = await get({
@@ -50,7 +52,6 @@ recordRoutes.route('/geographies/countries').get(async (req, res) => {
 recordRoutes.route('/geographies/states').get(async (req, res) => {
   if (cachedData.geo_states) {
     res.json(cachedData.geo_states);
-
   } else {
     try {
       const { data } = await get({
@@ -72,7 +73,6 @@ recordRoutes.route('/geographies/states').get(async (req, res) => {
 recordRoutes.route('/geographies/metros').get(async (req, res) => {
   if (cachedData.geo_metros) {
     res.json(cachedData.geo_metros);
-
   } else {
     try {
       const { data } = await get({
@@ -181,8 +181,7 @@ const getCityId = async (requestedCity: string) => {
   return await get({
     url: 'https://www.jambase.com/jb-api/v1/geographies/cities',
     params: { geoCityName: city, apikey: API_KEY_JAMBASE },
-  })
-  .then((response: any) => {
+  }).then((response: any) => {
     if (response.data.cities[0].identifier) {
       return response.data.cities[0].identifier;
     }
@@ -264,7 +263,8 @@ recordRoutes.route('/artists').get(async (req, response) => {
   if (city === Cities.Victoria && cachedData.victoria_data) {
     response.json(cachedData.victoria_data);
   } else {
-    if (city === Cities.Victoria) console.log('cache not found for /victoria: ', cachedData.victoria_data);
+    if (city === Cities.Victoria)
+      console.log('cache not found for /victoria: ', cachedData.victoria_data);
 
     let db_connect = dbo.getDb();
 
@@ -353,7 +353,10 @@ recordRoutes.route('/rifflandia').get(async (req, response) => {
     // If data is found in cache, return the cached data
     response.json(cachedData.rifflandia_data);
   } else {
-    console.log('cache not found for /rifflandia: ', cachedData.rifflandia_data);
+    console.log(
+      'cache not found for /rifflandia: ',
+      cachedData.rifflandia_data,
+    );
 
     let db_connect = dbo.getDb();
 
@@ -411,7 +414,10 @@ recordRoutes.route('/rifflandia-create').post(async (req, response) => {
     };
   }
 
-  const artists = await db_connect.collection(RIFFLANDIA_SPOTIFY).find(dayQuery).toArray();
+  const artists = await db_connect
+    .collection(RIFFLANDIA_SPOTIFY)
+    .find(dayQuery)
+    .toArray();
 
   const url = await CreateNewPlaylistRifflandia({
     token: token,

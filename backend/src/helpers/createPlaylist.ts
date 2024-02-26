@@ -4,7 +4,7 @@ import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
 import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
 import { filterRecent } from './filterRecent';
-import {get, post, put} from "../http/request";
+import { get, post, put } from '../http/request';
 import { HttpRequestError } from '../http/RequestError';
 
 export const CreateNewPlaylistJamBase = async ({
@@ -20,7 +20,11 @@ export const CreateNewPlaylistJamBase = async ({
   numTopTracks?: number;
   spotifyIds: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    city,
+    user_id,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
@@ -107,7 +111,12 @@ export const CreateNewPlaylist = async ({
   sortBy: string;
   days: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, city, user_id, days });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    city,
+    user_id,
+    days,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
@@ -118,7 +127,10 @@ export const CreateNewPlaylist = async ({
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  let sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+  let sortedArtists =
+    sortBy === 'popularity'
+      ? sortByPopularity(artists)
+      : sortByDateAndOrder(artists);
 
   if (city === Cities.Victoria) {
     sortedArtists = filterRecent(sortedArtists);
@@ -224,7 +236,13 @@ const CreateBlankPlaylist = async ({
     });
 };
 
-const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
+const AddCoverArt = async ({
+  token,
+  playlist_id,
+}: {
+  token: string;
+  playlist_id: string;
+}) => {
   return put({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
     headers: {
@@ -241,9 +259,17 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
   });
 };
 
-const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
+const AddTracksToPlaylist = async (
+  token: string,
+  playlist_id: string,
+  tracks: string,
+) => {
   return post({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
+    url:
+      'https://api.spotify.com/v1/playlists/' +
+      playlist_id +
+      '/tracks?uris=' +
+      tracks,
     headers: {
       Authorization: 'Bearer ' + token,
     },

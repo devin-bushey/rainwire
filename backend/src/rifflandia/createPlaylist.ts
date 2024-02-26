@@ -19,7 +19,11 @@ export const CreateNewPlaylistRifflandia = async ({
   sortBy: string;
   days: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id, days });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    user_id,
+    days,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
@@ -30,7 +34,10 @@ export const CreateNewPlaylistRifflandia = async ({
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  const sortedArtists = sortBy === 'orderNum' ? sortByOrderNum(artists) : sortDataByDateAndOrder(artists);
+  const sortedArtists =
+    sortBy === 'orderNum'
+      ? sortByOrderNum(artists)
+      : sortDataByDateAndOrder(artists);
 
   let tracks = '';
 
@@ -166,7 +173,13 @@ const CreateBlankPlaylist = async ({
     });
 };
 
-const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
+const AddCoverArt = async ({
+  token,
+  playlist_id,
+}: {
+  token: string;
+  playlist_id: string;
+}) => {
   // const image = path.join(__dirname, './playlist_img.jpg');
   // const file = fs.readFileSync(image, { encoding: 'base64' });
 
@@ -190,9 +203,17 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
     });
 };
 
-const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
+const AddTracksToPlaylist = async (
+  token: string,
+  playlist_id: string,
+  tracks: string,
+) => {
   return post({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
+    url:
+      'https://api.spotify.com/v1/playlists/' +
+      playlist_id +
+      '/tracks?uris=' +
+      tracks,
     headers: {
       Authorization: 'Bearer ' + token,
     },

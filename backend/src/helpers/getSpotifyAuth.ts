@@ -8,7 +8,9 @@ export const getSpotifyAuth = async () => {
     post({
       url: 'https://accounts.spotify.com/api/token',
       headers: {
-        Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
+        Authorization:
+          'Basic ' +
+          Buffer.from(client_id + ':' + client_secret).toString('base64'),
       },
       params: {
         grant_type: 'client_credentials',
