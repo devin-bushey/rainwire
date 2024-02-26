@@ -1,12 +1,10 @@
 import { Button, useMediaQuery, useTheme } from '@mui/material';
 import { useState, useEffect } from 'react';
 import chevronUp from '../assets/images/chevron-up-solid.svg';
+import { scrollToTop } from '../utils/browserUtils';
 
 export const ScrollButton = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
   const listenToScroll = () => {
     const heightToHideFrom = 400;
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;

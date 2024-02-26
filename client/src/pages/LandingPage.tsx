@@ -5,6 +5,7 @@ import { Loading } from './Loading';
 import { COLOURS } from '../theme/AppStyles';
 import { useNavigate } from 'react-router-dom';
 import useSpotifyAuth from '../hooks/useSpotifyAuth';
+import { scrollToTop } from '../utils/browserUtils';
 
 export const LandingPage = () => {
   const { spotifyInfo } = useSpotifyAuth();
@@ -13,7 +14,7 @@ export const LandingPage = () => {
 
   useEffect(() => {
     document.title = 'Record Shop | Welcome';
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   const navigate = useNavigate();

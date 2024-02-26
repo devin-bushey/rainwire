@@ -182,7 +182,7 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');
-      //window.location.assign(playlist_url);
+      //goTo(playlist_url);
     })
     .catch(function (error) {
       console.log('Error: unsuccessfully added cover art to playlist');
@@ -203,7 +203,7 @@ const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: s
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');
-      //window.location.assign(playlist_url);
+      //goTo(playlist_url);
     })
     .catch(function (error) {
       const err = error as AxiosError;

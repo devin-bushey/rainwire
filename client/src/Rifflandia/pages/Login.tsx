@@ -11,6 +11,7 @@ import '../styles/styles.css';
 import { Email } from '../Email';
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../../constants/auth';
 import { useNavigate } from 'react-router-dom';
+import { openTab, scrollToTop } from '../../utils/browserUtils';
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + 'rifflandia';
@@ -19,7 +20,7 @@ export const Login = () => {
 
   useEffect(() => {
     document.title = 'Record Shop | Rifflandia Login';
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   const [open, setOpen] = useState(false);
@@ -126,7 +127,7 @@ export const Login = () => {
 
             <div style={{ marginTop: '64px' }}>Or preview an already created playlist:</div>
             <Button
-              onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+              onClick={() => openTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
               variant="outlined"
               sx={{
                 //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
@@ -169,7 +170,7 @@ export const Login = () => {
 
             {/* <Box sx={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
               <Button
-                onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                onClick={() => openTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                 variant="outlined"
                 sx={{
                   //backgroundColor: RIFFLANDIA_COLOURS.light_blue,

@@ -3,13 +3,14 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { COLOURS } from '../theme/AppStyles';
+import { refreshPage } from '../utils/browserUtils';
 
 const Navbarr = () => {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
     navigate('/');
-    window.location.reload();
+    refreshPage();
   };
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

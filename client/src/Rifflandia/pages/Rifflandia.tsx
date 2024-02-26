@@ -35,6 +35,7 @@ import { sortByOrderNum, sortDataByDateAndOrder } from '../../utils/sorter';
 import useSpotifyAuth from '../../hooks/useSpotifyAuth';
 import { Email } from '../Email';
 import { SignInModalRifflandia } from '../SignInModalRifflandia';
+import { openTab, refreshPage, scrollToTop } from '../../utils/browserUtils';
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -45,7 +46,7 @@ export const Rifflandia = () => {
 
   useEffect(() => {
     document.title = 'Record Shop | Rifflandia';
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   useEffect(() => {
@@ -83,7 +84,7 @@ export const Rifflandia = () => {
   const logOut = () => {
     localStorage.clear();
     navigate('/rifflandia');
-    window.location.reload();
+    refreshPage();
   };
 
   const queryOptions: UseQueryOptions = {
@@ -217,7 +218,7 @@ export const Rifflandia = () => {
               message: 'Successfully created a playlist!',
               isError: false,
             });
-            window.location.assign(res.data);
+            openTab(res.data);
           } else {
             setIsError(true);
           }
@@ -249,8 +250,8 @@ export const Rifflandia = () => {
   };
 
   const handleBuyTickets = () => {
-    window.open(WEBSITE_RIFFLANDIA);
-    //window.location.assign(WEBSITE_RIFFLANDIA);
+    openTab(WEBSITE_RIFFLANDIA);
+    //goTo(WEBSITE_RIFFLANDIA);
   };
 
   const handleAboutClick = () => {
@@ -381,7 +382,7 @@ export const Rifflandia = () => {
 
                   <div style={{ marginTop: '48px' }}>Or preview an already created playlist:</div>
                   <Button
-                    onClick={() => window.location.assign('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                    onClick={() => openTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                     variant="outlined"
                     sx={{
                       backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
@@ -493,7 +494,7 @@ export const Rifflandia = () => {
                 {/* <Button
                   variant="outlined"
                   sx={{ marginBottom: '16px', width: '300px' }}
-                  //onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                  //onClick={() => openTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                   onClick={handleAboutClick}
                 >
                   About
@@ -511,7 +512,7 @@ export const Rifflandia = () => {
                     variant="outlined"
                     sx={{ marginTop: '16px', marginBottom: '16px', width: '300px' }}
                     onClick={logOut}
-                    //onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                    //onClick={() => openTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                     //onClick={handleAboutClick}
                   >
                     Sign Out

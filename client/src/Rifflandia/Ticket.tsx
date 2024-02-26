@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import spotifyLogoBlack from '../spotifyLogos/Spotify_Logo_RGB_Black.png';
 import { RIFFLANDIA_COLOURS } from './constants/colours';
 import { useEffect, useState } from 'react';
+import { goTo, openTab } from '../utils/browserUtils';
 
 export const Ticket = (props: any) => {
   const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
@@ -33,7 +34,7 @@ export const Ticket = (props: any) => {
         },
       }}
       onClick={() => {
-        isMobile ? window.location.assign(props.ticket.link) : window.open(props.ticket.link);
+        isMobile ? goTo(props.ticket.link) : openTab(props.ticket.link);
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'left' }}>
