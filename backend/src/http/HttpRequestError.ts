@@ -6,14 +6,16 @@ export class HttpRequestError extends Error {
 
   constructor(err: any) {
     if (err instanceof Error) {
-      super(err.message);
+      super('Caught error when executing HTTP request');
+      this.stack = `${this.stack}\n${err.stack}\n`;
 
       if (err instanceof AxiosError) {
         this.statusCode = err.response?.status;
         this.responseBody = err.response?.data;
       }
     } else {
-      super(`Unknown error when making Http request: ${err}`);
+      super(`Unknown error when executing Http request`);
+      this.stack = `${this.stack}\n${err}\n`;
     }
   }
 }

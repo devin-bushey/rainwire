@@ -22,7 +22,6 @@ export const put = async (options: Omit<HttpRequestOptions, 'method'>) =>
   });
 
 const request = async (options: HttpRequestOptions) => {
-  // stephg does this throw an error when it rejects?
   const axiosResponse = await axios({
     ...options,
     headers: {
