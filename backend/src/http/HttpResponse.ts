@@ -5,10 +5,7 @@ export interface HttpResponse {
   data: any;
 }
 
-export const buildHttpResponseFromAxios = ({
-  status,
-  data,
-}: AxiosResponse): HttpResponse => ({
+export const buildHttpResponseFromAxios = ({ status, data }: AxiosResponse): HttpResponse => ({
   status,
   data,
 });

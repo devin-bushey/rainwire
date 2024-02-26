@@ -1,5 +1,5 @@
-import { createTheme } from '@mui/material/styles';
-import { COLOURS } from './AppStyles';
+import { createTheme } from "@mui/material/styles";
+import { COLOURS } from "./AppStyles";
 
 export const AppTheme = createTheme({
   palette: {
@@ -14,29 +14,29 @@ export const AppTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['Comfortaa', 'sans-serif'].join(','),
+    fontFamily: ["Comfortaa", "sans-serif"].join(","),
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background: '#ece7e1',
+          background: "#ece7e1",
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: '30px',
-          borderRadius: '10px',
-          marginBottom: '20px',
+          padding: "30px",
+          borderRadius: "10px",
+          marginBottom: "20px",
         },
       },
     },
     MuiTypography: {
       styleOverrides: {
         root: {
-          paddingBottom: '8px',
+          paddingBottom: "8px",
         },
       },
     },

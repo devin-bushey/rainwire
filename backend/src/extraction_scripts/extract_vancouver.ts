@@ -23,9 +23,7 @@ export const extract_vancouver = async () => {
 
         for (let i = 0; i < escape_chars.length; i++) {
           if (band_name.includes(escape_chars[i])) {
-            band_name_reduced = band_name
-              .substring(0, band_name.indexOf(escape_chars[i]))
-              .trim();
+            band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
             break;
           } else {
             band_name_reduced = band_name;

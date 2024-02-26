@@ -23,14 +23,11 @@ export const extract_coachella = async () => {
               .each(function (i2, e2) {
                 var band_name = $(e2).text().trim();
 
-                var band_name_reduced = band_name
-                  .substring(0, band_name.indexOf('('))
-                  .trim();
+                var band_name_reduced = band_name.substring(0, band_name.indexOf('(')).trim();
 
                 data.push({
                   artist: band_name_reduced,
-                  ticket_date:
-                    day[i] + ', ' + date[i] + ' @ Coachella Valley, CA',
+                  ticket_date: day[i] + ', ' + date[i] + ' @ Coachella Valley, CA',
                   venue: 'Coachella',
                   date: date[i],
                   popularity: index,

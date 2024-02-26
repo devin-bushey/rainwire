@@ -19,9 +19,7 @@ export const extract_van_songkick_2 = async () => {
         const escape_chars = ['\n'];
         for (let i = 0; i < escape_chars.length; i++) {
           if (band_name.includes(escape_chars[i])) {
-            band_name_reduced = band_name
-              .substring(0, band_name.indexOf(escape_chars[i]))
-              .trim();
+            band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
             break;
           } else {
             band_name_reduced = band_name;

@@ -20,26 +20,17 @@ export const extract_capital_ballroom = async () => {
         const escape_chars = ['–'];
         for (let i = 0; i < escape_chars.length; i++) {
           if (band_name.includes(escape_chars[i])) {
-            band_name_reduced = band_name
-              .substring(0, band_name.indexOf(escape_chars[i]))
-              .trim();
+            band_name_reduced = band_name.substring(0, band_name.indexOf(escape_chars[i])).trim();
             break;
           } else {
             band_name_reduced = band_name;
           }
         }
-        if (
-          band_name.includes('Presents:') ||
-          band_name.includes('PRESENTS:')
-        ) {
-          band_name_reduced = band_name
-            .substring(band_name.indexOf(':') + 1)
-            .trim();
+        if (band_name.includes('Presents:') || band_name.includes('PRESENTS:')) {
+          band_name_reduced = band_name.substring(band_name.indexOf(':') + 1).trim();
         }
         if (band_name.includes('*CANCELLED*')) {
-          band_name_reduced = band_name
-            .substring(band_name.indexOf('D') + 2)
-            .trim();
+          band_name_reduced = band_name.substring(band_name.indexOf('D') + 2).trim();
         }
         //console.log(band_name_reduced);
 
@@ -65,9 +56,7 @@ export const extract_capital_ballroom = async () => {
     })
     .catch((err: any) => {
       console.log(err);
-      console.log(
-        'Error: Extracted https://victoriamusicscene.com/concerts/ Failure',
-      );
+      console.log('Error: Extracted https://victoriamusicscene.com/concerts/ Failure');
     });
 
   return data;

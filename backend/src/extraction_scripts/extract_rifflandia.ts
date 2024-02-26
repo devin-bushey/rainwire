@@ -1,9 +1,7 @@
 import * as cheerio from 'cheerio';
 import { get } from '../http/request';
 
-export const extract_rifflandia = async (
-  weekend: 'electric-avenue' | 'the-park',
-) => {
+export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park') => {
   console.log('Extracting rifflandia');
   let data: any[] = [];
 
@@ -17,8 +15,7 @@ export const extract_rifflandia = async (
       const day = ['Friday', 'Saturday', 'Sunday'];
       const tbd = weekend === 'electric-avenue' ? 'Sept 7-9' : 'Sept 15-17';
       const days = weekend === 'electric-avenue' ? '2023-09-07' : '2023-09-15';
-      const venue =
-        weekend === 'electric-avenue' ? 'Electric Avenue' : 'The Park';
+      const venue = weekend === 'electric-avenue' ? 'Electric Avenue' : 'The Park';
 
       $('button').each(function (index, element) {
         //console.log(element);

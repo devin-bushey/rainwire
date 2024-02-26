@@ -5,10 +5,7 @@ import { removeDuplicateArtists } from '../helpers/removeDuplicateArtists';
 import { get } from '../http/request';
 const stringSimilarity = require('string-similarity');
 
-export const updateCollectionWithSpotify = async (
-  collection_name: string,
-  db_connect: any,
-) => {
+export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
     .collection(collection_name + '_simple')
     .find({})
@@ -93,10 +90,7 @@ async function addSpotifyTopTracks(element: any, token: any) {
   if (element.band_id) {
     await new Promise<void>(function (resolve, reject) {
       get({
-        url:
-          'https://api.spotify.com/v1/artists/' +
-          element.band_id +
-          '/top-tracks?market=CA',
+        url: 'https://api.spotify.com/v1/artists/' + element.band_id + '/top-tracks?market=CA',
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -104,9 +98,7 @@ async function addSpotifyTopTracks(element: any, token: any) {
         .then(async function (res) {
           try {
             element.albumArtUrl = res.data.tracks[0].album.images[1].url;
-            element.topTrackURIs = res.data.tracks.map(
-              (track: any) => track.uri,
-            );
+            element.topTrackURIs = res.data.tracks.map((track: any) => track.uri);
           } catch (err) {
             console.log('Error at adding top tracks');
             console.log(err);
@@ -121,11 +113,7 @@ async function addSpotifyTopTracks(element: any, token: any) {
   }
 }
 
-const createNewCollection = async (
-  linked_data: any,
-  collection_name: string,
-  db_connect: any,
-) => {
+const createNewCollection = async (linked_data: any, collection_name: string, db_connect: any) => {
   let name = collection_name;
   await db_connect.createCollection(name, (err: any, result: any) => {
     console.log(name + ' created!');
@@ -133,11 +121,7 @@ const createNewCollection = async (
 
   const duplicatesRemoved = removeDuplicateArtists(linked_data);
 
-  await db_connect
-    .collection(name)
-    .insertMany(duplicatesRemoved, (err: any, res: any) => {
-      console.log(
-        'Successfully added ' + res.insertedCount + ' records to ' + name,
-      );
-    });
+  await db_connect.collection(name).insertMany(duplicatesRemoved, (err: any, res: any) => {
+    console.log('Successfully added ' + res.insertedCount + ' records to ' + name);
+  });
 };

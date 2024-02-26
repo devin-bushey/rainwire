@@ -1,13 +1,13 @@
-import { ThemeProvider } from '@emotion/react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { AppRoutes } from './routes/AppRoutes';
-import { AppTheme } from './theme/AppTheme';
-import { CssBaseline } from '@mui/material/';
-import { createContext, Dispatch, useState, useEffect } from 'react';
-import { SnackBar, SnackBarOptions } from './components/SnackBar';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from './components/ErrorFallback';
+import { ThemeProvider } from "@emotion/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { AppRoutes } from "./routes/AppRoutes";
+import { AppTheme } from "./theme/AppTheme";
+import { CssBaseline } from "@mui/material/";
+import { createContext, Dispatch, useState, useEffect } from "react";
+import { SnackBar, SnackBarOptions } from "./components/SnackBar";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./components/ErrorFallback";
 
 export const SnackBarContext = createContext({
   setSnackBar: (() => undefined) as Dispatch<SnackBarOptions>,
@@ -21,7 +21,7 @@ const App = () => {
   const [snackBar, setSnackBar] = useState<SnackBarOptions>({
     showSnackbar: false,
     setShowSnackbar: () => undefined,
-    message: '',
+    message: "",
     isError: false,
   });
   // Needed the following usestate and useffect code so that the snackbar would disapear/close
