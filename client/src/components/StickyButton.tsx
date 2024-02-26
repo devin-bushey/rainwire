@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { CreatePlaylistButton } from './CreatePlaylistButton';
-import { Box } from '@mui/material';
+import { useState, useEffect } from "react";
+import { CreatePlaylistButton } from "./CreatePlaylistButton";
+import { Box } from "@mui/material";
 
 export const StickyButton = ({
   handleCreatePlaylist,
@@ -21,36 +21,36 @@ export const StickyButton = ({
       setShowButton(scrollPosition >= 800);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+    <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
       <Box
         sx={{
-          position: 'fixed',
-          bottom: '0px',
+          position: "fixed",
+          bottom: "0px",
           //right: '16px',
           zIndex: 9,
           opacity: showButton ? 1 : 0,
-          visibility: showButton ? 1 : 'hidden',
-          transition: 'visibility 1.5s, opacity 1.5s ease',
+          visibility: showButton ? 1 : "hidden",
+          transition: "visibility 1.5s, opacity 1.5s ease",
         }}
       >
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100px',
-            width: '500px',
-            borderRadius: '8px',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100px",
+            width: "500px",
+            borderRadius: "8px",
             backgroundColor: barColor,
-            marginBottom: '24px',
+            marginBottom: "24px",
           }}
         >
           <CreatePlaylistButton

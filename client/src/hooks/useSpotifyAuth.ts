@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
-import { GetSpotifyUserInfo } from '../apiManager/Spotify';
-import { setSpotifyTokenLocalStorage, getSpotifyTokenLocalStorage } from '../utils/tokenHandling';
-import hash from '../utils/hash';
+import { useState, useEffect } from "react";
+import { GetSpotifyUserInfo } from "../apiManager/Spotify";
+import {
+  setSpotifyTokenLocalStorage,
+  getSpotifyTokenLocalStorage,
+} from "../utils/tokenHandling";
+import hash from "../utils/hash";
 
 type SpotifyUserDataType = {
   firstName: string;
@@ -13,12 +16,12 @@ type SpotifyUserDataType = {
 };
 
 const useSpotifyAuth = () => {
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<string>("");
   const [spotifyInfo, setSpotifyInfo] = useState<SpotifyUserDataType>({
-    firstName: '',
-    user_name: '',
-    user_id: '',
-    new_playlist_id: '',
+    firstName: "",
+    user_name: "",
+    user_id: "",
+    new_playlist_id: "",
     access: false,
     error: false,
   });
@@ -32,7 +35,7 @@ const useSpotifyAuth = () => {
         _token = localToken;
         setToken(localToken);
       } else {
-        _token = hash.access_token || '';
+        _token = hash.access_token || "";
         if (_token) {
           setSpotifyTokenLocalStorage(_token);
           setToken(_token);

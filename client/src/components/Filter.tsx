@@ -1,5 +1,5 @@
-import { Select, MenuItem, Button, Chip } from '@mui/material';
-import { Box } from '@mui/system';
+import { Select, MenuItem, Button, Chip } from "@mui/material";
+import { Box } from "@mui/system";
 
 export const Filter = ({
   totalTickets,
@@ -25,22 +25,30 @@ export const Filter = ({
   });
 
   return (
-    <Box sx={{ marginBottom: '24px' }}>
-      <Box sx={{ width: '90%', marginLeft: 'auto', marginRight: 'auto', display: 'flex', justifyContent: 'center' }}>
+    <Box sx={{ marginBottom: "24px" }}>
+      <Box
+        sx={{
+          width: "90%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
           fullWidth
           displayEmpty
-          renderValue={() => 'Genres'}
+          renderValue={() => "Genres"}
           value={filteredGenres}
           onChange={handleFilteredGenres}
-          sx={{ height: '40px' }}
+          sx={{ height: "40px" }}
           MenuProps={{
             style: {
-              maxHeight: '300px',
-              marginLeft: '45px',
+              maxHeight: "300px",
+              marginLeft: "45px",
             },
           }}
         >
@@ -53,7 +61,7 @@ export const Filter = ({
 
         <Button
           variant="outlined"
-          sx={{ marginLeft: '4px' }}
+          sx={{ marginLeft: "4px" }}
           onClick={() => {
             handleClearGenres();
           }}
@@ -65,12 +73,17 @@ export const Filter = ({
       <Box
         mt={3}
         sx={{
-          '& > :not(:last-child)': { mr: 1 },
-          '& > *': { mr: 1 },
+          "& > :not(:last-child)": { mr: 1 },
+          "& > *": { mr: 1 },
         }}
       >
         {filteredGenres?.map((genre) => (
-          <Chip sx={{ margin: '2px' }} key={genre} label={genre} onDelete={handleDeleteGenre(genre)} />
+          <Chip
+            sx={{ margin: "2px" }}
+            key={genre}
+            label={genre}
+            onDelete={handleDeleteGenre(genre)}
+          />
         ))}
       </Box>
     </Box>

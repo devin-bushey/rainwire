@@ -1,8 +1,11 @@
-import axios from 'axios';
-import { filterRecent, sortDataByDateAndOrder } from '../utils/sorter';
-import { Cities } from '../constants/enums';
+import axios from "axios";
+import { filterRecent, sortDataByDateAndOrder } from "../utils/sorter";
+import { Cities } from "../constants/enums";
 
-function removeDuplicatesByPropertyName<T>(dataArray: T[], propertyName: keyof T): T[] {
+function removeDuplicatesByPropertyName<T>(
+  dataArray: T[],
+  propertyName: keyof T,
+): T[] {
   const seenNames = new Set<T[keyof T]>();
   const uniqueData = dataArray.filter((item) => {
     if (!seenNames.has(item[propertyName])) {
@@ -14,17 +17,24 @@ function removeDuplicatesByPropertyName<T>(dataArray: T[], propertyName: keyof T
   return uniqueData;
 }
 
-export const GetJamBase = async ({ queryKey }: { queryKey: any }): Promise<any> => {
+export const GetJamBase = async ({
+  queryKey,
+}: {
+  queryKey: any;
+}): Promise<any> => {
   const [_key, { origin }] = queryKey;
 
   return axios
-    .get(import.meta.env.VITE_SITE_URL_DB + 'jamBase/', {
+    .get(import.meta.env.VITE_SITE_URL_DB + "jamBase/", {
       params: {
         city: origin,
       },
     })
     .then(async (response) => {
-      const duplicatesRemoved = removeDuplicatesByPropertyName(response.data, 'artistName');
+      const duplicatesRemoved = removeDuplicatesByPropertyName(
+        response.data,
+        "artistName",
+      );
       const removeNonSpotify = duplicatesRemoved.filter((ticket: any) => {
         return ticket.spotifyId;
       });
@@ -52,14 +62,21 @@ export const CreateNewPlaylistJamBase = async ({
     numTopTracks: numTopTracks,
     days: days,
   };
-  return await axios.post(import.meta.env.VITE_SITE_URL_DB + 'createJamBase/', reqBody);
+  return await axios.post(
+    import.meta.env.VITE_SITE_URL_DB + "createJamBase/",
+    reqBody,
+  );
 };
 
-export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> => {
+export const GetTickets = async ({
+  queryKey,
+}: {
+  queryKey: any;
+}): Promise<any> => {
   const [_key, { origin }] = queryKey;
 
   return axios
-    .get(import.meta.env.VITE_SITE_URL_DB + 'artists/', {
+    .get(import.meta.env.VITE_SITE_URL_DB + "artists/", {
       params: {
         city: origin,
       },
@@ -93,5 +110,8 @@ export const CreateNewPlaylist = async ({
     numTopTracks: numTopTracks,
     days: days,
   };
-  return await axios.post(import.meta.env.VITE_SITE_URL_DB + 'create/', reqBody);
+  return await axios.post(
+    import.meta.env.VITE_SITE_URL_DB + "create/",
+    reqBody,
+  );
 };

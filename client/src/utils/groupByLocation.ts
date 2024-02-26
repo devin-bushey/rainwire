@@ -5,7 +5,9 @@ export const groupByLocation = (locations: any) => {
     const { location: group } = location;
 
     // Find the group in the existing groups array
-    const groupIndex = groups.findIndex((groupObj: any) => groupObj.location === group);
+    const groupIndex = groups.findIndex(
+      (groupObj: any) => groupObj.location === group,
+    );
 
     if (groupIndex === -1) {
       // If the group doesn't exist, create a new group object

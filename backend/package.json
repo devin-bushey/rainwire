@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start:dev": "npx nodemon",
+    "start:dev": "npm run format && npx nodemon",
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier . --write"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "express": "^4.18.2",
     "lodash": "^4.17.21",
     "mongodb": "^4.13.0",
+    "prettier": "3.2.5",
     "request": "^2.88.2",
     "string-similarity": "^4.0.4",
     "swagger-ui-express": "^4.6.0"

@@ -1,14 +1,22 @@
-import { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { COLOURS } from '../theme/AppStyles';
+import { useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Container,
+  Box,
+  IconButton,
+  Menu,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { COLOURS } from "../theme/AppStyles";
 
 const Navbarr = () => {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
-    navigate('/');
+    navigate("/");
     window.location.reload();
   };
 
@@ -24,7 +32,10 @@ const Navbarr = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+      >
         <Container>
           <Toolbar disableGutters>
             {/* <Link to="/" style={{ textDecoration: 'none' }}>
@@ -46,17 +57,17 @@ const Navbarr = () => {
               </Typography>
             </Link> */}
 
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1 }}>
+            <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1 }}>
               <Button
                 component={Link}
                 to="/"
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '175px',
-                  marginLeft: '16px',
+                  color: "black",
+                  display: "block",
+                  maxWidth: "175px",
+                  marginLeft: "16px",
                 }}
               >
                 Home
@@ -67,9 +78,9 @@ const Navbarr = () => {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '175px',
+                  color: "black",
+                  display: "block",
+                  maxWidth: "175px",
                 }}
               >
                 Victoria
@@ -80,9 +91,9 @@ const Navbarr = () => {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '175px',
+                  color: "black",
+                  display: "block",
+                  maxWidth: "175px",
                 }}
               >
                 Explore
@@ -103,15 +114,27 @@ const Navbarr = () => {
               </Button> */}
             </Box>
 
-            {localStorage.getItem('spotifyToken') && (
-              <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 0, marginRight: '24px' }}>
+            {localStorage.getItem("spotifyToken") && (
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  flexGrow: 0,
+                  marginRight: "24px",
+                }}
+              >
                 <Button variant="outlined" onClick={logOut}>
                   Sign Out
                 </Button>
               </Box>
             )}
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'right' }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                justifyContent: "right",
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -126,31 +149,36 @@ const Navbarr = () => {
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
+                  vertical: "bottom",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'flex', md: 'none' },
-                  justifyContent: 'center',
+                  display: { xs: "flex", md: "none" },
+                  justifyContent: "center",
                 }}
               >
-                <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    flexDirection: "column",
+                  }}
+                >
                   <Button
                     variant="outlined"
                     onClick={handleCloseNavMenu}
                     component={Link}
                     to="/"
                     sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
+                      color: "black",
+                      textAlign: "center",
+                      margin: { xs: "4px 4px", md: "0px 4px" },
                     }}
                   >
                     Home
@@ -161,9 +189,9 @@ const Navbarr = () => {
                     component={Link}
                     to="/artists"
                     sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
+                      color: "black",
+                      textAlign: "center",
+                      margin: { xs: "4px 4px", md: "0px 4px" },
                     }}
                   >
                     Victoria
@@ -174,9 +202,9 @@ const Navbarr = () => {
                     component={Link}
                     to="/explore"
                     sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
+                      color: "black",
+                      textAlign: "center",
+                      margin: { xs: "4px 4px", md: "0px 4px" },
                     }}
                   >
                     Explore
@@ -251,11 +279,15 @@ const Navbarr = () => {
                     About
                   </Button> */}
 
-                  {localStorage.getItem('spotifyToken') && (
+                  {localStorage.getItem("spotifyToken") && (
                     <Button
                       variant="contained"
                       onClick={logOut}
-                      sx={{ backgroundColor: COLOURS.accent_01, color: COLOURS.black, margin: '4px 4px' }}
+                      sx={{
+                        backgroundColor: COLOURS.accent_01,
+                        color: COLOURS.black,
+                        margin: "4px 4px",
+                      }}
                     >
                       Sign Out
                     </Button>
@@ -266,7 +298,7 @@ const Navbarr = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container sx={{ marginTop: '24px' }}>
+      <Container sx={{ marginTop: "24px" }}>
         <Outlet />
       </Container>
     </>

@@ -18,7 +18,11 @@ export const CreateNewPlaylistRifflandia = async ({
   sortBy: string;
   days: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({ token, user_id, days });
+  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+    token,
+    user_id,
+    days,
+  });
 
   const playlist_id = playlist_data.new_playlist_id || '';
   try {
