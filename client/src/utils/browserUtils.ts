@@ -1,7 +1,7 @@
 /**
  * Refreshes the current tab
  */
-export const refreshPage = () => window.location.reload();
+export const reloadPage = () => window.location.reload();
 
 /**
  * Goes to the provided url on the *current tab*
@@ -13,7 +13,7 @@ export const goTo = (url: string) => window.location.assign(url);
  * Goes to the provided url in a *new tab*
  * @param url the string url to go to
  */
-export const openTab = (url: string) => window.open(url);
+export const goToNewTab = (url: string) => window.open(url);
 
 /**
  * Scrolls to the top of the current tab

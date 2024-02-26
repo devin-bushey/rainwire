@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { useEffect, useRef, useState } from "react";
 import { COLOURS } from "../theme/AppStyles";
-import { goTo, openTab } from "../utils/browserUtils";
+import { goTo, goToNewTab } from "../utils/browserUtils";
 
 export const JamBaseTicket = (props: any) => {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -52,7 +52,7 @@ export const JamBaseTicket = (props: any) => {
         },
       }}
       onClick={() => {
-        isMobile ? goTo(props.ticket.link) : openTab(props.ticket.link);
+        isMobile ? goTo(props.ticket.link) : goToNewTab(props.ticket.link);
       }}
     >
       <Box sx={{ display: "flex", alignItems: "left" }}>

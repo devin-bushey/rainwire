@@ -26,7 +26,7 @@ import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
 import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
 import { Email } from "../Rifflandia/Email";
-import { openTab, refreshPage, scrollToTop } from "../utils/browserUtils";
+import { goToNewTab, reloadPage, scrollToTop } from "../utils/browserUtils";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -224,7 +224,7 @@ export const ArtistsPage = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            openTab(res.data);
+            goToNewTab(res.data);
           } else {
             setIsError(true);
           }
@@ -245,7 +245,7 @@ export const ArtistsPage = () => {
     if (token && spotifyInfo.access) {
       localStorage.clear();
       navigate("/");
-      refreshPage();
+      reloadPage();
     } else {
       isInAppBrowser();
     }

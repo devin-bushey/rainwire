@@ -16,7 +16,7 @@ import {
   SCOPES,
 } from "../../constants/auth";
 import { useNavigate } from "react-router-dom";
-import { openTab, scrollToTop } from "../../utils/browserUtils";
+import { goToNewTab, scrollToTop } from "../../utils/browserUtils";
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + "rifflandia";
@@ -152,7 +152,7 @@ export const Login = () => {
             </div>
             <Button
               onClick={() =>
-                openTab(
+                goToNewTab(
                   "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh",
                 )
               }

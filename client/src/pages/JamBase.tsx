@@ -22,7 +22,7 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
-import { openTab, scrollToTop } from "../utils/browserUtils";
+import { goToNewTab, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -137,7 +137,7 @@ export const JamBase = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            openTab(res.data);
+            goToNewTab(res.data);
           } else {
             setIsError(true);
           }

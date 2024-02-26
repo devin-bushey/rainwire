@@ -11,14 +11,14 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { COLOURS } from "../theme/AppStyles";
-import { refreshPage } from "../utils/browserUtils";
+import { reloadPage } from "../utils/browserUtils";
 
 const Navbarr = () => {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
     navigate("/");
-    refreshPage();
+    reloadPage();
   };
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

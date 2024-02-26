@@ -43,7 +43,7 @@ import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
 import useSpotifyAuth from "../../hooks/useSpotifyAuth";
 import { Email } from "../Email";
 import { SignInModalRifflandia } from "../SignInModalRifflandia";
-import { openTab, refreshPage, scrollToTop } from "../../utils/browserUtils";
+import { goToNewTab, reloadPage, scrollToTop } from "../../utils/browserUtils";
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -92,7 +92,7 @@ export const Rifflandia = () => {
   const logOut = () => {
     localStorage.clear();
     navigate("/rifflandia");
-    refreshPage();
+    reloadPage();
   };
 
   const queryOptions: UseQueryOptions = {
@@ -226,7 +226,7 @@ export const Rifflandia = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            openTab(res.data);
+            goToNewTab(res.data);
           } else {
             setIsError(true);
           }
@@ -260,7 +260,7 @@ export const Rifflandia = () => {
   };
 
   const handleBuyTickets = () => {
-    openTab(WEBSITE_RIFFLANDIA);
+    goToNewTab(WEBSITE_RIFFLANDIA);
     //goTo(WEBSITE_RIFFLANDIA);
   };
 
@@ -403,7 +403,7 @@ export const Rifflandia = () => {
                   </div>
                   <Button
                     onClick={() =>
-                      openTab(
+                      goToNewTab(
                         "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh",
                       )
                     }
