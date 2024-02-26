@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
+import { SpotifyPlaylistDataType } from '../../types/SpotifyTypes';
 
-import { PLAYLIST_IMG } from './playlist_img';
+import { RIFFLANDIA_CHERRIES } from './rifflandia_cherries';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -178,7 +178,7 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
     },
-    data: PLAYLIST_IMG,
+    data: RIFFLANDIA_CHERRIES,
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');

@@ -1,18 +1,16 @@
 require('dotenv').config({ path: './config.env' });
-import dbo from './db/conn';
+import dbo from '../../database/conn';
 import _ from 'lodash';
 
-import { addSimpleDataToCollection } from './db/addSimpleDataToCollection';
-import { Cities, Festivals } from './enums/common';
+import { addSimpleDataToCollection } from '../../database/addSimpleDataToCollection';
 
-import { extract_osheaga } from './scripts/extract_osheaga';
-import { extract_songkick } from './scripts/extract_songkick';
-import { extract_phillips_backyarder } from './scripts/extract_philips_backyarder';
-import { Artist } from './types/Artists';
-import { extract_laketown_shakedown } from './scripts/extract_laketown_shakedown';
-import { extract_capital_ballroom } from './scripts/extract_capital_ballroom';
-import { extract_function_festival } from './scripts/extract_function_festival';
-import { extract_coachella } from './scripts/extract_coachella';
+import { extract_songkick } from './sources/extract_songkick';
+import { extract_capital_ballroom } from './sources/extract_capital_ballroom';
+
+import { Artist } from '../../types/Artists';
+import { Cities } from '../../enums/Cities';
+import { Festivals } from '../../enums/Festivals';
+import { extract_phillips_backyarder } from './sources/extract_philips_backyarder';
 
 export const extract = async (location: Cities | Festivals) => {
   const db_connect = dbo.getDb();
@@ -31,22 +29,6 @@ export const extract = async (location: Cities | Festivals) => {
 
     case Festivals.PhilipsBackyard:
       tickets = await extractPhillipsBackyard();
-      break;
-
-    case Festivals.Osheaga:
-      tickets = await extractOsheaga();
-      break;
-
-    case Festivals.LaketownShakedown:
-      tickets = await extractLaketownShakedown();
-      break;
-
-    case Festivals.TheFunction:
-      tickets = await extractFunctionFestival();
-      break;
-
-    case Festivals.Coachella:
-      tickets = await extractCoachella();
       break;
 
     default:
@@ -116,60 +98,12 @@ const extractVancouver = async () => {
   return tickets;
 };
 
-const extractOsheaga = async () => {
-  let tickets: Artist[] = [];
-
-  const tickets_osheaga = await extract_osheaga();
-
-  tickets_osheaga.forEach(function (obj: Artist) {
-    tickets.push(obj);
-  });
-
-  return tickets;
-};
-
 const extractPhillipsBackyard = async () => {
   let tickets: Artist[] = [];
 
   const tickets_phillips_backyarder = await extract_phillips_backyarder();
 
   tickets_phillips_backyarder.forEach(function (obj: Artist) {
-    tickets.push(obj);
-  });
-
-  return tickets;
-};
-
-const extractLaketownShakedown = async () => {
-  let tickets: Artist[] = [];
-
-  const tickets_laketownShakedown = await extract_laketown_shakedown();
-
-  tickets_laketownShakedown.forEach(function (obj: Artist) {
-    tickets.push(obj);
-  });
-
-  return tickets;
-};
-
-const extractFunctionFestival = async () => {
-  let tickets: Artist[] = [];
-
-  const extracted = await extract_function_festival();
-
-  extracted.forEach(function (obj: Artist) {
-    tickets.push(obj);
-  });
-
-  return tickets;
-};
-
-const extractCoachella = async () => {
-  let tickets: Artist[] = [];
-
-  const extracted = await extract_coachella();
-
-  extracted.forEach(function (obj: Artist) {
     tickets.push(obj);
   });
 

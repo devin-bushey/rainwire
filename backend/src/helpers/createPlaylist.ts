@@ -1,10 +1,11 @@
-import { Cities, Festivals } from '../enums/common';
 import axios, { AxiosError } from 'axios';
 import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
 import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
 import { filterRecent } from './filterRecent';
+import { Cities } from '../enums/Cities';
+import { Festivals } from '../enums/Festivals';
 
 export const CreateNewPlaylistJamBase = async ({
   token,
