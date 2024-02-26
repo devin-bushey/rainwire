@@ -3,9 +3,7 @@ const { MongoClient } = require('mongodb');
 
 // Check if all required arguments are provided
 if (process.argv.length !== 8) {
-  console.error(
-    'Usage: node manual_run.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>',
-  );
+  console.error('Usage: node manual_run.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>');
   process.exit(1);
 }
 
@@ -35,7 +33,7 @@ const options = {
   path: `/v1/artists/${artistId}/top-tracks?market=ca`,
   method: 'GET',
   headers: {
-    Authorization: `Bearer ${bearerToken}`,
+    'Authorization': `Bearer ${bearerToken}`,
   },
 };
 
@@ -44,7 +42,7 @@ const addToMongoDb = async (_concertObject) => {
   const client = new MongoClient(databaseUrl);
   try {
     await client.connect();
-    console.log('Succesfully connected to ', databaseUrl);
+    console.log("Succesfully connected to ", databaseUrl)
   } catch (e) {
     console.error(e);
   }
@@ -56,12 +54,15 @@ const addToMongoDb = async (_concertObject) => {
     console.log(`A document was inserted with the _id: ${result.insertedId}`);
   } catch (e) {
     console.error(e);
-  } finally {
+  }
+  finally {
     // Close the MongoDB client connection
     await client.close();
     process.exit(2);
   }
-};
+
+
+}
 
 const req = https.request(options, (res) => {
   let data = '';
@@ -86,7 +87,7 @@ const req = https.request(options, (res) => {
     // Print the concert object as JSON
     console.log(JSON.stringify(concertObject, null, 2));
 
-    addToMongoDb(concertObject);
+    addToMongoDb(concertObject)
 
     // You can also save it to a file if needed
     // fs.writeFileSync('concertObject.json', JSON.stringify(concertObject, null, 2));
