@@ -15,13 +15,13 @@
 }
 
 .sidebar-svg-park {
-  background-image: url("../images/background-park.svg");
+  background-image: url('../images/background-park.svg');
   left: 0;
   background-position-x: right;
 }
 
 .sidebar-svg-electric {
-  background-image: url("../images/background-electric.svg");
+  background-image: url('../images/background-electric.svg');
   right: 0;
   background-position-x: left;
 }
@@ -36,32 +36,34 @@
   padding-right: 100px;
 }
 
-.fill-pale-pink {
-  fill: rgba(239, 180, 210, 1);
+
+
+.fill-pale-pink{
+  fill: rgba(239,180,210,1);
 }
 
-.fill-pale-green {
-  fill: rgba(206, 228, 169, 1);
+.fill-pale-green{
+  fill: rgba(206,228,169,1);
 }
 
-.fill-bright-green {
-  fill: rgba(112, 191, 68, 1);
+.fill-bright-green{
+  fill: rgba(112,191,68,1);
 }
 
-.fill-light-orange {
-  fill: rgba(247, 216, 173, 1);
+.fill-light-orange{
+  fill: rgba(247,216,173,1);
 }
 
-.fill-dark-brown {
-  fill: rgba(53, 45, 42, 1);
+.fill-dark-brown{
+  fill: rgba(53,45,42,1);
 }
 
-.fill-orange {
-  fill: rgba(250, 164, 26, 1);
+.fill-orange{
+  fill: rgba(250,164,26,1);
 }
 
-.fill-bright-pink {
-  fill: rgba(236, 0, 140, 1);
+.fill-bright-pink{
+  fill: rgba(236,0,140,1);
 }
 /* svg {
   overflow: visible;
@@ -71,22 +73,25 @@
   .sidebar-login {
     width: 100px;
   }
+
 }
 
 @media only screen and (max-width: 600px) {
   .riff-background {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
   .sidebar-svg-park {
     left: -70px;
   }
 
   .sidebar-svg-electric {
+
     right: -70px;
   }
 }
+
 
 .option-box {
   display: flex;
@@ -96,7 +101,7 @@
   align-items: flex-start;
 }
 
-.option-tracks-dates {
+.option-tracks-dates{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,26 +111,29 @@
   padding: 0 30px;
 }
 
+
 @media only screen and (max-width: 896px) {
   .option-box {
-    display: block;
-    flex-wrap: nowrap;
-    width: 300px;
-    margin: 8px;
-  }
-  .options-container {
-    width: 300px;
-  }
+  display: block;
+  flex-wrap: nowrap;
+  width: 300px;
+  margin: 8px;
+}
+.options-container{
+  width: 300px;
+}
 
-  .option-tracks-dates {
-    width: 228px;
-  }
+.option-tracks-dates{
+  width: 228px;
+}
+
 }
 
 @media only screen and (max-width: 937px) {
-  .option-tracks-dates {
+  .option-tracks-dates{
     padding: 0px;
   }
+
 }
 
 .spinner-overlay {
@@ -165,6 +173,7 @@
   }
 }
 
+
 .footer {
   width: 100%;
   padding: 20px;
@@ -175,9 +184,9 @@
 
 .email-btn {
   font-size: 14px;
-  background: none !important;
+  background: none!important;
   border: none;
-  padding: 0 !important;
+  padding: 0!important;
   /*optional*/
   /* font-family: arial, sans-serif; */
   /*input has OS specific font-family*/
