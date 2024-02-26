@@ -5,7 +5,7 @@ import { sortByPopularity } from './sortByPopularity';
 import { sortByDateAndOrder } from './sortByDateAndOrder';
 import { filterRecent } from './filterRecent';
 import { get, post, put } from '../http/request';
-import { HttpRequestError } from '../http/RequestError';
+import { HttpRequestError } from '../http/HttpRequestError';
 
 export const CreateNewPlaylistJamBase = async ({
   token,

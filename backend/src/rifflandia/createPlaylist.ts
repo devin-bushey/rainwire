@@ -2,7 +2,7 @@ import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 
 import { PLAYLIST_IMG } from './playlist_img';
 import { post, put } from '../http/request';
-import { HttpRequestError } from '../http/RequestError';
+import { HttpRequestError } from '../http/HttpRequestError';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,

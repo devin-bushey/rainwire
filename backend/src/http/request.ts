@@ -1,27 +1,27 @@
 import axios from 'axios';
-import { RequestMethod, RequestOptions } from './RequestOptions';
-import { buildResponseFromAxios } from './Response';
-import { HttpRequestError } from './RequestError';
+import { HttpRequestMethod, HttpRequestOptions } from './HttpRequestOptions';
+import { buildHttpResponseFromAxios } from './HttpResponse';
+import { HttpRequestError } from './HttpRequestError';
 
-export const get = async (options: Omit<RequestOptions, 'method'>) =>
+export const get = async (options: Omit<HttpRequestOptions, 'method'>) =>
   await request({
-    method: RequestMethod.GET,
+    method: HttpRequestMethod.GET,
     ...options,
   });
 
-export const post = async (options: Omit<RequestOptions, 'method'>) =>
+export const post = async (options: Omit<HttpRequestOptions, 'method'>) =>
   await request({
-    method: RequestMethod.POST,
+    method: HttpRequestMethod.POST,
     ...options,
   });
 
-export const put = async (options: Omit<RequestOptions, 'method'>) =>
+export const put = async (options: Omit<HttpRequestOptions, 'method'>) =>
   await request({
-    method: RequestMethod.PUT,
+    method: HttpRequestMethod.PUT,
     ...options,
   });
 
-const request = async (options: RequestOptions) => {
+const request = async (options: HttpRequestOptions) => {
   // stephg does this throw an error when it rejects?
   const axiosResponse = await axios({
     ...options,
@@ -34,5 +34,5 @@ const request = async (options: RequestOptions) => {
     throw new HttpRequestError(err);
   });
 
-  return buildResponseFromAxios(axiosResponse);
+  return buildHttpResponseFromAxios(axiosResponse);
 };
