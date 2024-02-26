@@ -1,6 +1,7 @@
 import axios from "axios";
 import {RequestMethod, RequestOptions} from "./RequestOptions";
 import {buildResponseFromAxios} from "./Response";
+import { HttpRequestError } from "./RequestError";
 
 
 export const get = async (options: Omit<RequestOptions, "method">) =>
@@ -24,12 +25,15 @@ export const put = async (options: Omit<RequestOptions, "method">) =>
 const request = async (options: RequestOptions) => {
     // stephg does this throw an error when it rejects?
     const axiosResponse = await axios({
-        ...options, // stephg why does this allow for the spread of non-axios options?
+        ...options,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             ...options.headers
         }
+    })
+    .catch((err) => {
+        throw new HttpRequestError(err);
     });
 
     return buildResponseFromAxios(axiosResponse);
