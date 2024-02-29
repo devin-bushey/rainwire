@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { get } from '../http/request';
+import { get } from '../../../http/request';
 
 export const extract_songkick = async (url: string) => {
   console.log('Extracting song kick ' + url);
@@ -13,7 +13,6 @@ export const extract_songkick = async (url: string) => {
 
       $('.event-listings-element').each(function (index, element) {
         var band_name = $(element).find('p.artists').text().trim();
-
         var band_name_reduced = '';
         const escape_chars = ['\n'];
         for (let i = 0; i < escape_chars.length; i++) {
@@ -31,9 +30,11 @@ export const extract_songkick = async (url: string) => {
         var venue = $(element).find('.venue-link').text().trim();
 
         data.push({
-          ticket_band: band_name_reduced,
-          ticket_date: date_reduced + ' @ ' + venue,
-          date: dateString,
+          artist: band_name_reduced,
+          ticket_date: `${date_reduced} at ${venue}`,
+          venue: venue,
+          date: date_reduced,
+          popularity: index,
         });
       });
       return data;

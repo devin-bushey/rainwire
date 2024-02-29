@@ -1,8 +1,7 @@
-import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
-
-import { PLAYLIST_IMG } from './playlist_img';
-import { post, put } from '../http/request';
-import { HttpRequestError } from '../http/HttpRequestError';
+import { HttpRequestError } from '../../http/HttpRequestError';
+import { post, put } from '../../http/request';
+import { SpotifyPlaylistDataType } from '../../types/SpotifyTypes';
+import { RIFFLANDIA_CHERRIES } from './rifflandia_cherries';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -141,7 +140,7 @@ const CreateBlankPlaylist = async ({
       public: true,
     },
   })
-    .then((response) => {
+    .then((response: any) => {
       const data = response.data;
 
       const returnVal: SpotifyPlaylistDataType = {
@@ -155,7 +154,7 @@ const CreateBlankPlaylist = async ({
 
       return returnVal;
     })
-    .catch(function (error) {
+    .catch(function (error: any) {
       console.log('Error: CreateBlankPlaylist');
       console.log(error);
 
@@ -180,13 +179,13 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
     },
-    data: PLAYLIST_IMG,
+    data: RIFFLANDIA_CHERRIES,
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');
       //window.location.assign(playlist_url);
     })
-    .catch(function (error) {
+    .catch(function (error: any) {
       console.log('Error: unsuccessfully added cover art to playlist');
       //window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(error.message);
@@ -200,16 +199,11 @@ const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: s
     headers: {
       Authorization: 'Bearer ' + token,
     },
-  })
-    .then(() => {
-      //console.log('Successfully added tracks to playlist');
-      //window.location.assign(playlist_url);
-    })
-    .catch(function (error) {
-      const err = error as HttpRequestError;
-      console.log('Error: unsuccessfully added tracks to playlist');
-      //window.alert('Error: unsuccessfully added tracks to playlist');
-      console.log(err.message);
-      return null;
-    });
+  }).catch(function (error: any) {
+    const err = error as HttpRequestError;
+    console.log('Error: unsuccessfully added tracks to playlist');
+    //window.alert('Error: unsuccessfully added tracks to playlist');
+    console.log(err.message);
+    return null;
+  });
 };

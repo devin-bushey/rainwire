@@ -14,10 +14,10 @@ export const getSpotifyAuth = async () => {
         grant_type: 'client_credentials',
       },
     })
-      .then(function (response) {
+      .then(function (response: any) {
         resolve(response.data.access_token);
       })
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.log('Error: POST getAccessToken');
         console.log(error);
       });

@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { get } from '../http/request';
+import { get } from '../../../http/request';
 
 export const extract_phillips_backyarder = async () => {
   console.log('Extracting phillips backyarder');
