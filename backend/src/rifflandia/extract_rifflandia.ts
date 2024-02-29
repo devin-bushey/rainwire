@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park') => {
   console.log('Extracting rifflandia ' + weekend);
   let data: any[] = [];
 
-  await axios
-    .get(`https://rifflandia.com/${weekend}`)
+  await get({
+    url: `https://rifflandia.com/${weekend}`,
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
@@ -39,10 +40,6 @@ export const extract_rifflandia = async (weekend: 'electric-avenue' | 'the-park'
             });
           });
       });
-      return data;
-    })
-    .then((data) => {
-      //console.log('data', data);
       return data;
     })
     .catch((error: any) => {

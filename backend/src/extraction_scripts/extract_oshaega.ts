@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_osheaga = async () => {
   console.log('Extracting osheaga');
   let data: any[] = [];
 
-  await axios
-    .get('https://consequence.net/festival/osheaga-music-and-arts-festival-2023-tickets-lineup/')
+  await get({
+    url: 'https://consequence.net/festival/osheaga-music-and-arts-festival-2023-tickets-lineup/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 

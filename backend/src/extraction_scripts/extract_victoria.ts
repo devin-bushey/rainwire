@@ -1,13 +1,14 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_victoria = async (url: string) => {
   console.log('Extracting ' + url);
 
   let data: any[] = [];
 
-  await axios
-    .get(url)
+  await get({
+    url,
+  })
     .then((res: any) => {
       const $ = cheerio.load(res.data);
 
@@ -53,9 +54,6 @@ export const extract_victoria = async (url: string) => {
       console.log('Successfully extracted ' + url);
       //console.log(data);
 
-      return data;
-    })
-    .then((data) => {
       return data;
     })
     .catch((err: any) => {

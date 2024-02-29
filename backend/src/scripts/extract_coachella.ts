@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_coachella = async () => {
   console.log('Extracting coachella');
   let data: any[] = [];
 
-  await axios
-    .get('https://pitchfork.com/news/coachella-2023-lineup-and-schedule-all-the-set-times-you-need-to-know/')
+  await get({
+    url: 'https://pitchfork.com/news/coachella-2023-lineup-and-schedule-all-the-set-times-you-need-to-know/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
@@ -34,10 +35,6 @@ export const extract_coachella = async () => {
               });
           });
       });
-      return data;
-    })
-    .then((data) => {
-      //console.log('data', data);
       return data;
     })
     .catch((error: any) => {

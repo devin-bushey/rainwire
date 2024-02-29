@@ -11,8 +11,8 @@ import { Cities, Festivals } from '../enums/common';
 import { extract } from '../extract_tickets';
 import { Artist } from '../types/Artists';
 import { Countries, Metros, States } from '../types/Geographies';
+import { get } from '../http/request';
 
-const axios = require('axios');
 const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || '';
 const cachedData: {
   victoria_data?: any;
@@ -26,18 +26,15 @@ recordRoutes.route('/geographies/countries').get(async (req, res) => {
   if (cachedData.geo_countries) {
     res.json(cachedData.geo_countries);
   } else {
-    const options = {
-      method: 'GET',
-      url: 'https://www.jambase.com/jb-api/v1/geographies/countries',
-      params: {
-        countryHasUpcomingEvents: 'true',
-        apikey: API_KEY_JAMBASE,
-      },
-      headers: { Accept: 'application/json' },
-    };
-
     try {
-      const { data } = await axios.request(options);
+      const { data } = await get({
+        url: 'https://www.jambase.com/jb-api/v1/geographies/countries',
+        params: {
+          countryHasUpcomingEvents: 'true',
+          apikey: API_KEY_JAMBASE,
+        },
+      });
+
       cachedData.geo_countries = {
         countries: data.countries,
       };
@@ -53,15 +50,12 @@ recordRoutes.route('/geographies/states').get(async (req, res) => {
   if (cachedData.geo_states) {
     res.json(cachedData.geo_states);
   } else {
-    const options = {
-      method: 'GET',
-      url: 'https://www.jambase.com/jb-api/v1/geographies/states',
-      params: { stateHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
-      headers: { Accept: 'application/json' },
-    };
-
     try {
-      const { data } = await axios.request(options);
+      const { data } = await get({
+        url: 'https://www.jambase.com/jb-api/v1/geographies/states',
+        params: { stateHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+      });
+
       cachedData.geo_states = {
         states: data.states,
       };
@@ -77,15 +71,12 @@ recordRoutes.route('/geographies/metros').get(async (req, res) => {
   if (cachedData.geo_metros) {
     res.json(cachedData.geo_metros);
   } else {
-    const options = {
-      method: 'GET',
-      url: 'https://www.jambase.com/jb-api/v1/geographies/metros',
-      params: { metroHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
-      headers: { Accept: 'application/json' },
-    };
-
     try {
-      const { data } = await axios.request(options);
+      const { data } = await get({
+        url: 'https://www.jambase.com/jb-api/v1/geographies/metros',
+        params: { metroHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+      });
+
       cachedData.geo_metros = {
         metros: data.metros,
       };
@@ -119,15 +110,13 @@ recordRoutes.route('/jamBase').get(async (req, response) => {
     return;
   }
 
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=${cityId}&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
-  };
-
   try {
-    const axiosResponse = await axios.request(config);
-    const data = formatJamBase(axiosResponse.data);
+    const httpResponse = await get({
+      maxBodyLength: Infinity,
+      url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=${cityId}&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
+    });
+
+    const data = formatJamBase(httpResponse.data);
     //console.log('****data ', data);
     response.json(data);
   } catch (error) {
@@ -186,14 +175,10 @@ const getCityId = async (requestedCity: string) => {
   //const city = requestedCity.replace(/\s/g, '');
   const city = requestedCity;
 
-  const options = {
-    method: 'GET',
+  return await get({
     url: 'https://www.jambase.com/jb-api/v1/geographies/cities',
     params: { geoCityName: city, apikey: API_KEY_JAMBASE },
-    headers: { Accept: 'application/json' },
-  };
-
-  return await axios.request(options).then((response: any) => {
+  }).then((response: any) => {
     if (response.data.cities[0].identifier) {
       return response.data.cities[0].identifier;
     }
@@ -223,15 +208,13 @@ recordRoutes.route('/createJamBase').post(async (req, response) => {
 
   let artists: any[] = [];
 
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=${cityId}&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
-  };
-
   try {
-    const axiosResponse = await axios.request(config);
-    artists = formatJamBase(axiosResponse.data);
+    const httpResponse = await get({
+      maxBodyLength: Infinity,
+      url: `https://www.jambase.com/jb-api/v1/events?apikey=${API_KEY_JAMBASE}&eventType=concert&geoCityId=${cityId}&geoRadiusAmount=30&geoRadiusUnits=km&expandExternalIdentifiers=true`,
+    });
+
+    artists = formatJamBase(httpResponse.data);
   } catch (error) {
     //console.log(error);
     response.status(500).json({ error: 'Internal Server Error' });

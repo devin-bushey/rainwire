@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_songkick = async (url: string) => {
   console.log('Extracting song kick ' + url);
   let data: any[] = [];
 
-  await axios
-    .get(url)
+  await get({
+    url,
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
@@ -36,9 +37,6 @@ export const extract_songkick = async (url: string) => {
           popularity: index,
         });
       });
-      return data;
-    })
-    .then((data) => {
       return data;
     })
     .catch((error: any) => {

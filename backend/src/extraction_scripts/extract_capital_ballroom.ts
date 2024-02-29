@@ -1,13 +1,14 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_capital_ballroom = async () => {
   console.log('Extracting https://thecapitalballroom.com/all-events/');
 
   let data: any[] = [];
 
-  await axios
-    .get('https://thecapitalballroom.com/all-events/')
+  await get({
+    url: 'https://thecapitalballroom.com/all-events/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
@@ -51,9 +52,6 @@ export const extract_capital_ballroom = async () => {
           date: date_sort,
         });
       });
-      return data;
-    })
-    .then((data: any) => {
       return data;
     })
     .catch((err: any) => {

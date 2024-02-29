@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_vancouver = async () => {
   console.log('Extracting https://www.redcat.ca/');
@@ -7,8 +7,9 @@ export const extract_vancouver = async () => {
   let $: any;
   let data: any[] = [];
 
-  await axios
-    .get('https://www.redcat.ca/')
+  await get({
+    url: 'https://www.redcat.ca/',
+  })
     .then(async (res: any) => {
       $ = cheerio.load(res.data);
     })
@@ -36,9 +37,6 @@ export const extract_vancouver = async () => {
         });
       });
       console.log('Successfully extracted Red Cat Records');
-      return data;
-    })
-    .then((data: any) => {
       return data;
     })
     .catch((err: any) => {

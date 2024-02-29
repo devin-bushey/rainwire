@@ -1,7 +1,8 @@
-import axios, { AxiosError } from 'axios';
 import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
 
 import { PLAYLIST_IMG } from './playlist_img';
+import { post, put } from '../http/request';
+import { HttpRequestError } from '../http/HttpRequestError';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -129,12 +130,10 @@ const CreateBlankPlaylist = async ({
     playlist_name = playlist_name + ' - the park';
   }
 
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
     data: {
       name: playlist_name,
@@ -168,16 +167,15 @@ const CreateBlankPlaylist = async ({
       };
 
       return returnVal;
-    }); //end axios
+    });
 };
 
 const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
   // const image = path.join(__dirname, './playlist_img.jpg');
   // const file = fs.readFileSync(image, { encoding: 'base64' });
 
-  return axios({
+  return put({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
-    method: 'PUT',
     headers: {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
@@ -197,12 +195,10 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
 };
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
   })
     .then(() => {
@@ -210,7 +206,7 @@ const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: s
       //window.location.assign(playlist_url);
     })
     .catch(function (error) {
-      const err = error as AxiosError;
+      const err = error as HttpRequestError;
       console.log('Error: unsuccessfully added tracks to playlist');
       //window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(err.message);

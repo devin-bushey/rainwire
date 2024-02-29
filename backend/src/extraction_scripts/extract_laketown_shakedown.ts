@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../http/request';
 
 export const extract_laketown_shakedown = async () => {
   console.log('Extracting laketown shakedown');
   let data: any[] = [];
 
-  await axios
-    .get('https://www.laketownshakedown.com/lineup/')
+  await get({
+    url: 'https://www.laketownshakedown.com/lineup/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
