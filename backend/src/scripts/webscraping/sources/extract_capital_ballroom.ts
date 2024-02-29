@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { get } from '../http/request';
+import { get } from '../../../http/request';
 
 export const extract_capital_ballroom = async () => {
   console.log('Extracting https://thecapitalballroom.com/all-events/');
@@ -40,17 +40,10 @@ export const extract_capital_ballroom = async () => {
         var date = $(element).find('p.date').text().trim();
         var day = $(element).find('p.day').text().trim();
         var date_reduced = month + ' ' + date;
-        //console.log(date_reduced);
 
         const d = new Date();
         let year = d.getFullYear();
         var date_sort = date_reduced + ' ' + year;
-
-        // data.push({
-        //   ticket_band: band_name_reduced,
-        //   ticket_date: date_reduced + ' @ ' + venue,
-        //   date: date_sort,
-        // });
 
         data.push({
           artist: band_name_reduced,
