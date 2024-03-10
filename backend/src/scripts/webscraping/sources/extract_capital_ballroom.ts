@@ -1,13 +1,14 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../../../http/request';
 
 export const extract_capital_ballroom = async () => {
   console.log('Extracting https://thecapitalballroom.com/all-events/');
 
   let data: any[] = [];
 
-  await axios
-    .get('https://thecapitalballroom.com/all-events/')
+  await get({
+    url: 'https://thecapitalballroom.com/all-events/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
@@ -39,21 +40,19 @@ export const extract_capital_ballroom = async () => {
         var date = $(element).find('p.date').text().trim();
         var day = $(element).find('p.day').text().trim();
         var date_reduced = month + ' ' + date;
-        //console.log(date_reduced);
 
         const d = new Date();
         let year = d.getFullYear();
         var date_sort = date_reduced + ' ' + year;
 
         data.push({
-          ticket_band: band_name_reduced,
-          ticket_date: date_reduced + ' @ ' + venue,
-          date: date_sort,
+          artist: band_name_reduced,
+          ticket_date: `${date_reduced} @ ${venue}`,
+          venue: venue,
+          date: date_reduced,
+          popularity: index,
         });
       });
-      return data;
-    })
-    .then((data: any) => {
       return data;
     })
     .catch((err: any) => {

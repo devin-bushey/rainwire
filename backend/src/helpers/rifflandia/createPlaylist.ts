@@ -1,7 +1,7 @@
-import axios, { AxiosError } from 'axios';
-import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
-
-import { PLAYLIST_IMG } from './playlist_img';
+import { HttpRequestError } from '../../http/HttpRequestError';
+import { post, put } from '../../http/request';
+import { SpotifyPlaylistDataType } from '../../types/SpotifyTypes';
+import { RIFFLANDIA_CHERRIES } from './rifflandia_cherries';
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -129,12 +129,10 @@ const CreateBlankPlaylist = async ({
     playlist_name = playlist_name + ' - the park';
   }
 
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
     data: {
       name: playlist_name,
@@ -142,7 +140,7 @@ const CreateBlankPlaylist = async ({
       public: true,
     },
   })
-    .then((response) => {
+    .then((response: any) => {
       const data = response.data;
 
       const returnVal: SpotifyPlaylistDataType = {
@@ -156,7 +154,7 @@ const CreateBlankPlaylist = async ({
 
       return returnVal;
     })
-    .catch(function (error) {
+    .catch(function (error: any) {
       console.log('Error: CreateBlankPlaylist');
       console.log(error);
 
@@ -168,27 +166,26 @@ const CreateBlankPlaylist = async ({
       };
 
       return returnVal;
-    }); //end axios
+    });
 };
 
 const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
   // const image = path.join(__dirname, './playlist_img.jpg');
   // const file = fs.readFileSync(image, { encoding: 'base64' });
 
-  return axios({
+  return put({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
-    method: 'PUT',
     headers: {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'image/jpeg',
     },
-    data: PLAYLIST_IMG,
+    data: RIFFLANDIA_CHERRIES,
   })
     .then(() => {
       //console.log('Successfully added tracks to playlist');
       //goTo(playlist_url);
     })
-    .catch(function (error) {
+    .catch(function (error: any) {
       console.log('Error: unsuccessfully added cover art to playlist');
       //window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(error.message);
@@ -197,23 +194,16 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
 };
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
-  return axios({
+  return post({
     url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
-    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + token,
-      'Content-Type': 'application/json',
     },
-  })
-    .then(() => {
-      //console.log('Successfully added tracks to playlist');
-      //goTo(playlist_url);
-    })
-    .catch(function (error) {
-      const err = error as AxiosError;
-      console.log('Error: unsuccessfully added tracks to playlist');
-      //window.alert('Error: unsuccessfully added tracks to playlist');
-      console.log(err.message);
-      return null;
-    });
+  }).catch(function (error: any) {
+    const err = error as HttpRequestError;
+    console.log('Error: unsuccessfully added tracks to playlist');
+    //window.alert('Error: unsuccessfully added tracks to playlist');
+    console.log(err.message);
+    return null;
+  });
 };

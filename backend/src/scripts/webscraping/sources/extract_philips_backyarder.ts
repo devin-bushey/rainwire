@@ -1,12 +1,13 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../../../http/request';
 
 export const extract_phillips_backyarder = async () => {
   console.log('Extracting phillips backyarder');
   let data: any[] = [];
 
-  await axios
-    .get('https://www.phillipsbackyard.com/')
+  await get({
+    url: 'https://www.phillipsbackyard.com/',
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
       $('.sqs-col-6').each(function (index, element) {
@@ -57,9 +58,6 @@ export const extract_phillips_backyarder = async () => {
           });
         }
       });
-      return data;
-    })
-    .then((data) => {
       return data;
     })
     .catch((error: any) => {

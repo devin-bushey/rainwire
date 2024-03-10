@@ -1,9 +1,23 @@
 const https = require('https');
 const { MongoClient } = require('mongodb');
 
+// USAGE:
+
+// node ./backend/src/scripts/addSingleArtistToDatabase.js {Spotify Id} {Date} {Venue} <DB Url> <DB Collection> {Bearer Token}
+// EXAMPLE: node ./backend/src/scripts/addSingleArtistToDatabase.js 1qPcb4gGRO6ZsefrOWsh8f 2024-04-06 "Club Kwench" 'mongodb://root:example@localhost:27017/' 'victoria' BQDult-eBIkxxZQoNGFPyFWINlGDpKMlGpp5kRKLG4NDIG0E1XoJatW0ICdH6o4StPa7i4mWququ8QMV816vL3ONfqh3mGWV-ZOORTFK__1jiTBO3MlqTK5TC9MP8h3uXMfopG1P9bqdTZC99Dx4P_e1-t1qQ0uuQseY6F0M2HR-APOJ2Uzfx7hkEjnLy1UThPLl40fuANA0kXEQ-xtsADBm5jacNGeMc6Dnnw
+
+// # Get the Bearer token by logging into your spotify account through record shop, 
+// # then get the token from Dev tools -> Application tab -> local storage
+
+// # Get the spotify Id from opening up spotify in your browser (easiest to click an artist from record shop)
+// # then search for an artist, then the Id is last in the url (Example: https://open.spotify.com/artist/79JJCxCCfJ8HufX6w8q2k4)
+
+// # This script gets the spotify info then updates the provided database
+
+
 // Check if all required arguments are provided
 if (process.argv.length !== 8) {
-  console.error('Usage: node manual_run.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>');
+  console.error('Usage: node addSingleArtistToDatabase.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>');
   process.exit(1);
 }
 

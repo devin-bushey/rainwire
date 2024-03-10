@@ -1,20 +1,19 @@
 import * as cheerio from 'cheerio';
-import axios from 'axios';
+import { get } from '../../../http/request';
 
-export const extract_vic_songkick_3 = async () => {
-  console.log('Extracting song kick 3');
+export const extract_songkick = async (url: string) => {
+  console.log('Extracting song kick ' + url);
   let data: any[] = [];
 
-  await axios
-    .get('https://www.songkick.com/metro-areas/27399-canada-victoria?page=3#metro-area-calendar')
+  await get({
+    url,
+  })
     .then((response: any) => {
       const $ = cheerio.load(response.data);
 
       $('.event-listings-element').each(function (index, element) {
         var band_name = $(element).find('p.artists').text().trim();
-
         var band_name_reduced = '';
-        //const escape_chars = ['w/', '&', '-', "vs", " at ", "*CANCELLED*",];
         const escape_chars = ['\n'];
         for (let i = 0; i < escape_chars.length; i++) {
           if (band_name.includes(escape_chars[i])) {
@@ -31,19 +30,18 @@ export const extract_vic_songkick_3 = async () => {
         var venue = $(element).find('.venue-link').text().trim();
 
         data.push({
-          ticket_band: band_name_reduced,
-          ticket_date: date_reduced + ' @ ' + venue,
-          date: dateString,
+          artist: band_name_reduced,
+          ticket_date: `${date_reduced} at ${venue}`,
+          venue: venue,
+          date: date_reduced,
+          popularity: index,
         });
       });
       return data;
     })
-    .then((data) => {
-      return data;
-    })
     .catch((error: any) => {
       console.log(error);
-      console.log('Error extracting songkick3');
+      console.log('Error extracting songkick');
     });
 
   return data;

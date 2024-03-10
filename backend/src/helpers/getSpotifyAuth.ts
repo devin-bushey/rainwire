@@ -1,13 +1,12 @@
-import axios from 'axios';
+import { post } from '../http/request';
 
 export const getSpotifyAuth = async () => {
   var client_id = process.env.SP_CLIENT_ID;
   var client_secret = process.env.SP_CLIENT_S;
 
   return await new Promise(function (resolve, reject) {
-    axios({
+    post({
       url: 'https://accounts.spotify.com/api/token',
-      method: 'POST',
       headers: {
         Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
       },
@@ -15,10 +14,10 @@ export const getSpotifyAuth = async () => {
         grant_type: 'client_credentials',
       },
     })
-      .then(function (response) {
+      .then(function (response: any) {
         resolve(response.data.access_token);
       })
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.log('Error: POST getAccessToken');
         console.log(error);
       });
