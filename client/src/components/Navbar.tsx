@@ -1,308 +1,245 @@
-import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Container,
-  Box,
-  IconButton,
-  Menu,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { COLOURS } from "../theme/AppStyles";
-import { reloadPage } from "../utils/browserUtils";
+import { useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { COLOURS } from '../theme/AppStyles';
+import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import { handleRedirectToAuth, logOut } from '../utils/authUtils';
+import useSpotifyAuth from '../hooks/useSpotifyAuth';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const Navbarr = () => {
-  const navigate = useNavigate();
-  const logOut = () => {
-    localStorage.clear();
-    navigate("/");
-    reloadPage();
-  };
+const Navbarr = () => (
+  <>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: '15px 0' }}>
+      <Container>
+        <Toolbar>
+          <HeaderMenu />
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+          <DropdownMenu />
+        </Toolbar>
+      </Container>
+    </AppBar>
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    <Container sx={{ marginTop: '24px' }}>
+      <Outlet />
+    </Container>
+  </>
+);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+const HeaderMenu = () => {
+  const NavBarMenuOption = (label: string, toPage: string) => (
+    <Button
+      component={Link}
+      to={toPage}
+      sx={{
+        my: 2,
+        color: 'black',
+        display: 'block',
+        maxWidth: '175px',
+        alignSelf: 'center',
+      }}
+    >
+      {label}
+    </Button>
+  );
 
   return (
     <>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
-      >
-        <Container>
-          <Toolbar disableGutters>
-            {/* <Link to="/" style={{ textDecoration: 'none' }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  textAlign: 'center',
-                  borderRadius: '10px',
-                  background: COLOURS.accent_01,
-                  padding: '3px 10px 3px 10px',
-                  marginLeft: '16px',
-                  mr: 2,
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: COLOURS.black,
-                }}
-              >
-                Home
-              </Typography>
-            </Link> */}
+      <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, margin: '0 16px' }}>
+        {NavBarMenuOption('Home', '/')}
+        {NavBarMenuOption('Victoria', '/artists')}
+        {NavBarMenuOption('Explore', '/explore')}
+      </Box>
 
-            <Box sx={{ display: { xs: "none", md: "flex" }, flexGrow: 1 }}>
-              <Button
-                component={Link}
-                to="/"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  maxWidth: "175px",
-                  marginLeft: "16px",
-                }}
-              >
-                Home
-              </Button>
-              <Button
-                component={Link}
-                to="/artists"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  maxWidth: "175px",
-                }}
-              >
-                Victoria
-              </Button>
-              <Button
-                component={Link}
-                to="/explore"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "black",
-                  display: "block",
-                  maxWidth: "175px",
-                }}
-              >
-                Explore
-              </Button>
-
-              {/* <Button
-                component={Link}
-                to="/about"
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'black',
-                  display: 'block',
-                  maxWidth: '75px',
-                }}
-              >
-                About
-              </Button> */}
-            </Box>
-
-            {localStorage.getItem("spotifyToken") && (
-              <Box
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  flexGrow: 0,
-                  marginRight: "24px",
-                }}
-              >
-                <Button variant="outlined" onClick={logOut}>
-                  Sign Out
-                </Button>
-              </Box>
-            )}
-
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: { xs: "flex", md: "none" },
-                justifyContent: "right",
-              }}
-            >
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="primary"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  justifyContent: "center",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: { xs: "flex", md: "none" },
-                    flexDirection: "column",
-                  }}
-                >
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/"
-                    sx={{
-                      color: "black",
-                      textAlign: "center",
-                      margin: { xs: "4px 4px", md: "0px 4px" },
-                    }}
-                  >
-                    Home
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/artists"
-                    sx={{
-                      color: "black",
-                      textAlign: "center",
-                      margin: { xs: "4px 4px", md: "0px 4px" },
-                    }}
-                  >
-                    Victoria
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/explore"
-                    sx={{
-                      color: "black",
-                      textAlign: "center",
-                      margin: { xs: "4px 4px", md: "0px 4px" },
-                    }}
-                  >
-                    Explore
-                  </Button>
-                  {/* <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/philips"
-                    sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
-                    }}
-                  >
-                    Philips Backyard
-                  </Button>
-
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/whistle"
-                    sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
-                    }}
-                  >
-                    Whistlemania
-                  </Button>
-
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/vic"
-                    sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
-                    }}
-                  >
-                    Victoria
-                  </Button>
-
-                  <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/van"
-                    sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
-                    }}
-                  >
-                    Vancouver
-                  </Button> */}
-
-                  {/* <Button
-                    variant="outlined"
-                    onClick={handleCloseNavMenu}
-                    component={Link}
-                    to="/about"
-                    sx={{
-                      color: 'black',
-                      textAlign: 'center',
-                      margin: { xs: '4px 4px', md: '0px 4px' },
-                    }}
-                  >
-                    About
-                  </Button> */}
-
-                  {localStorage.getItem("spotifyToken") && (
-                    <Button
-                      variant="contained"
-                      onClick={logOut}
-                      sx={{
-                        backgroundColor: COLOURS.accent_01,
-                        color: COLOURS.black,
-                        margin: "4px 4px",
-                      }}
-                    >
-                      Sign Out
-                    </Button>
-                  )}
-                </Box>
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Container sx={{ marginTop: "24px" }}>
-        <Outlet />
-      </Container>
+      <ProfileMenu />
     </>
+  );
+};
+
+const ProfileMenu = () => {
+  const { spotifyInfo } = useSpotifyAuth();
+
+  const [profileMenuAnchor, setProfileMenuAnchor] = useState<null | HTMLElement>(null);
+
+  const isProfileMenuOpen = Boolean(profileMenuAnchor);
+
+  const openProfileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setProfileMenuAnchor(event.currentTarget);
+  };
+
+  const closeProfileMenu = () => {
+    setProfileMenuAnchor(null);
+  };
+
+  const SignInButton = (
+    <Button
+      onClick={handleRedirectToAuth()}
+      variant="contained"
+      sx={{
+        backgroundColor: COLOURS.blue,
+        ':hover': {
+          backgroundColor: COLOURS.card_colours[1],
+        },
+        width: '150px',
+        height: '48px',
+        alignSelf: 'center',
+        color: 'black',
+      }}
+    >
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+      <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
+    </Button>
+  );
+
+  const ProfileMenu = (
+    <Box>
+      <Button id="profile-button" onClick={openProfileMenu} endIcon={<KeyboardArrowDownIcon />}>
+        Welcome {spotifyInfo.firstName || spotifyInfo.user_name}
+      </Button>
+      <Menu
+        id="profile-menu"
+        anchorEl={profileMenuAnchor}
+        open={isProfileMenuOpen}
+        onClose={closeProfileMenu}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <MenuItem onClick={logOut}>Logout</MenuItem>
+      </Menu>
+    </Box>
+  );
+
+  return (
+    <div>
+      <Box
+        sx={{
+          display: { xs: 'none', md: 'flex' },
+          flexGrow: 0,
+          color: 'black',
+        }}
+      >
+        {localStorage.getItem('spotifyToken') ? ProfileMenu : SignInButton}
+      </Box>
+    </div>
+  );
+};
+
+const DropdownMenu = () => {
+  const [navMenuAnchor, setNavMenuAnchor] = useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setNavMenuAnchor(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setNavMenuAnchor(null);
+  };
+
+  const NavBarDropdownMenuOption = (label: string, toPage: string) => (
+    <Button
+      onClick={handleCloseNavMenu}
+      component={Link}
+      to={toPage}
+      sx={{
+        color: 'black',
+        margin: { xs: '4px 4px', md: '0px 4px' },
+      }}
+    >
+      {label}
+    </Button>
+  );
+
+  const SignInButton = (
+    <Button
+      onClick={handleRedirectToAuth()}
+      variant="contained"
+      sx={{
+        backgroundColor: COLOURS.blue,
+        ':hover': {
+          backgroundColor: COLOURS.card_colours[1],
+        },
+        width: '140px',
+        height: '45px',
+        alignSelf: 'center',
+        color: 'black',
+        margin: '15px 30px 10px 30px',
+      }}
+    >
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+      <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
+    </Button>
+  );
+
+  const SignOutButton = (
+    <Button
+      variant="contained"
+      onClick={logOut}
+      sx={{
+        backgroundColor: COLOURS.accent_01,
+        color: COLOURS.black,
+        width: '140px',
+        height: '45px',
+        alignSelf: 'center',
+        // color: 'black',
+        margin: '15px 30px 10px 30px',
+      }}
+    >
+      Sign Out
+    </Button>
+  );
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: { xs: 'flex', md: 'none' },
+        justifyContent: 'right',
+      }}
+    >
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+        color="primary"
+      >
+        <MenuIcon />
+      </IconButton>
+
+      <Menu
+        id="menu-appbar"
+        anchorEl={navMenuAnchor}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(navMenuAnchor)}
+        onClose={handleCloseNavMenu}
+        sx={{
+          display: { xs: 'flex', md: 'none' },
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            flexDirection: 'column',
+          }}
+        >
+          {NavBarDropdownMenuOption('Home', '/')}
+          {NavBarDropdownMenuOption('Victoria', '/artists')}
+          {NavBarDropdownMenuOption('Explore', '/explore')}
+
+          {localStorage.getItem('spotifyToken') ? SignOutButton : SignInButton}
+        </Box>
+      </Menu>
+    </Box>
   );
 };
 

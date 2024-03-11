@@ -1,4 +1,9 @@
 /**
+ * Gets the URL of the current page
+ */
+export const getCurrentUrl = () => window.location.href;
+
+/**
  * Refreshes the current tab
  */
 export const reloadPage = () => window.location.reload();
