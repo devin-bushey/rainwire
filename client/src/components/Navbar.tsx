@@ -111,7 +111,9 @@ const ProfileMenu = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem onClick={logOut}>Sign out</MenuItem>
+        <Button onClick={logOut} sx={{ width: '120px', height: '30px', margin: '0 10px' }}>
+          Sign out
+        </Button>
       </Menu>
     </Box>
   );
