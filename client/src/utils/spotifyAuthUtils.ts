@@ -13,3 +13,5 @@ export const logOut = () => {
   localStorage.clear();
   reloadPage();
 };
+
+export const isLoggedIntoSpotify = () => Boolean(localStorage.getItem('spotifyToken'));
