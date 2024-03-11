@@ -1,8 +1,8 @@
 import { AUTH_ENDPOINT, CLIENT_ID, SCOPES } from '../constants/auth';
-import { getCurrentUrl, reloadPage } from './browserUtils';
+import { getCurrentUrlWithoutParams, goTo, reloadPage } from './browserUtils';
 
 export const handleRedirectToAuth =
-  (redirectUri: string = getCurrentUrl()) =>
+  (redirectUri: string = getCurrentUrlWithoutParams()) =>
   () => {
     location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
       '%20',
@@ -11,6 +11,7 @@ export const handleRedirectToAuth =
 
 export const logOut = () => {
   localStorage.clear();
+  goTo(getCurrentUrlWithoutParams());
   reloadPage();
 };
 
