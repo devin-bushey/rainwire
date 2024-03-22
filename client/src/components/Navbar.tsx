@@ -1,13 +1,31 @@
-import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { COLOURS, primaryButtonColours, secondaryButtonColours } from '../theme/AppStyles';
-import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { handleRedirectToAuth, isLoggedIntoSpotify, logOut } from '../utils/spotifyAuthUtils';
-import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Email } from '../Rifflandia/Email';
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Container,
+  Box,
+  IconButton,
+  Menu,
+  Typography,
+  MenuItem,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  COLOURS,
+  primaryButtonColours,
+  secondaryButtonColours,
+} from "../theme/AppStyles";
+import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import {
+  handleRedirectToAuth,
+  isLoggedIntoSpotify,
+  logOut,
+} from "../utils/spotifyAuthUtils";
+import useSpotifyAuth from "../hooks/useSpotifyAuth";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Email } from "../Rifflandia/Email";
 
 type MenuProps = {
   handleOpenEmail: () => void;
@@ -19,7 +37,14 @@ const Navbarr = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: '15px 0' }}>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          padding: "15px 0",
+        }}
+      >
         <Container>
           <Toolbar>
             <HeaderMenu handleOpenEmail={handleOpenEmail} />
@@ -31,7 +56,7 @@ const Navbarr = () => {
 
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
-      <Container sx={{ marginTop: '24px' }}>
+      <Container sx={{ marginTop: "24px" }}>
         <Outlet />
       </Container>
     </>
@@ -41,10 +66,10 @@ const Navbarr = () => {
 const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
   const optionButtonAppearance = {
     my: 2,
-    color: 'black',
-    display: 'block',
-    maxWidth: '175px',
-    alignSelf: 'center',
+    color: "black",
+    display: "block",
+    maxWidth: "175px",
+    alignSelf: "center",
   };
 
   const NavBarMenuOption = (label: string, toPage: string) => (
@@ -55,10 +80,16 @@ const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
 
   return (
     <>
-      <Box sx={{ display: { xs: 'none', md: 'flex' }, flexGrow: 1, margin: '0 16px' }}>
-        {NavBarMenuOption('Home', '/')}
-        {NavBarMenuOption('Victoria', '/artists')}
-        {NavBarMenuOption('Explore', '/explore')}
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          flexGrow: 1,
+          margin: "0 16px",
+        }}
+      >
+        {NavBarMenuOption("Home", "/")}
+        {NavBarMenuOption("Victoria", "/artists")}
+        {NavBarMenuOption("Explore", "/explore")}
         <Button sx={optionButtonAppearance} onClick={handleOpenEmail}>
           Contact me
         </Button>
@@ -72,7 +103,8 @@ const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
 const ProfileMenu = () => {
   const { spotifyInfo } = useSpotifyAuth();
 
-  const [profileMenuAnchor, setProfileMenuAnchor] = useState<null | HTMLElement>(null);
+  const [profileMenuAnchor, setProfileMenuAnchor] =
+    useState<null | HTMLElement>(null);
   const isProfileMenuOpen = Boolean(profileMenuAnchor);
 
   const openProfileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -88,19 +120,29 @@ const ProfileMenu = () => {
       variant="contained"
       sx={{
         ...primaryButtonColours,
-        width: '150px',
-        height: '48px',
-        alignSelf: 'center',
+        width: "150px",
+        height: "48px",
+        alignSelf: "center",
       }}
     >
-      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+      <img
+        src={spotifyIcon}
+        alt="spotify_logo"
+        width="20px"
+        height="20px"
+        style={{ marginRight: "8px" }}
+      />
       <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
     </Button>
   );
 
   const ProfileMenu = (
     <Box>
-      <Button id="profile-button" onClick={openProfileMenu} endIcon={<KeyboardArrowDownIcon />}>
+      <Button
+        id="profile-button"
+        onClick={openProfileMenu}
+        endIcon={<KeyboardArrowDownIcon />}
+      >
         Welcome {spotifyInfo.firstName || spotifyInfo.user_name}
       </Button>
       <Menu
@@ -108,10 +150,13 @@ const ProfileMenu = () => {
         anchorEl={profileMenuAnchor}
         open={isProfileMenuOpen}
         onClose={closeProfileMenu}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Button onClick={logOut} sx={{ width: '120px', height: '30px', margin: '0 10px' }}>
+        <Button
+          onClick={logOut}
+          sx={{ width: "120px", height: "30px", margin: "0 10px" }}
+        >
           Sign out
         </Button>
       </Menu>
@@ -121,7 +166,7 @@ const ProfileMenu = () => {
   return (
     <Box
       sx={{
-        display: { xs: 'none', md: 'flex' },
+        display: { xs: "none", md: "flex" },
         flexGrow: 0,
         color: COLOURS.black,
       }}
@@ -143,18 +188,23 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
 
   const optionButtonAppearance = {
     color: COLOURS.black,
-    margin: { xs: '4px 4px', md: '0px 4px' },
+    margin: { xs: "4px 4px", md: "0px 4px" },
   };
 
   const accountButtonAppearance = {
-    width: '140px',
-    height: '45px',
-    alignSelf: 'center',
-    margin: '15px 30px 10px 30px',
+    width: "140px",
+    height: "45px",
+    alignSelf: "center",
+    margin: "15px 30px 10px 30px",
   };
 
   const NavBarDropdownMenuOption = (label: string, toPage: string) => (
-    <Button onClick={handleCloseNavMenu} component={Link} to={toPage} sx={optionButtonAppearance}>
+    <Button
+      onClick={handleCloseNavMenu}
+      component={Link}
+      to={toPage}
+      sx={optionButtonAppearance}
+    >
       {label}
     </Button>
   );
@@ -168,7 +218,13 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
         ...primaryButtonColours,
       }}
     >
-      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+      <img
+        src={spotifyIcon}
+        alt="spotify_logo"
+        width="20px"
+        height="20px"
+        style={{ marginRight: "8px" }}
+      />
       <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
     </Button>
   );
@@ -190,8 +246,8 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
     <Box
       sx={{
         flexGrow: 1,
-        display: { xs: 'flex', md: 'none' },
-        justifyContent: 'right',
+        display: { xs: "flex", md: "none" },
+        justifyContent: "right",
       }}
     >
       <IconButton
@@ -209,30 +265,30 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
         id="menu-appbar"
         anchorEl={navMenuAnchor}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
+          vertical: "bottom",
+          horizontal: "right",
         }}
         keepMounted
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         open={Boolean(navMenuAnchor)}
         onClose={handleCloseNavMenu}
         sx={{
-          display: { xs: 'flex', md: 'none' },
-          justifyContent: 'center',
+          display: { xs: "flex", md: "none" },
+          justifyContent: "center",
         }}
       >
         <Box
           sx={{
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'column',
+            display: { xs: "flex", md: "none" },
+            flexDirection: "column",
           }}
         >
-          {NavBarDropdownMenuOption('Home', '/')}
-          {NavBarDropdownMenuOption('Victoria', '/artists')}
-          {NavBarDropdownMenuOption('Explore', '/explore')}
+          {NavBarDropdownMenuOption("Home", "/")}
+          {NavBarDropdownMenuOption("Victoria", "/artists")}
+          {NavBarDropdownMenuOption("Explore", "/explore")}
 
           <Button
             sx={optionButtonAppearance}

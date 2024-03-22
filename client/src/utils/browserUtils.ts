@@ -6,7 +6,8 @@ export const getCurrentUrl = () => window.location.href;
 /**
  * Gets the URL of the current page
  */
-export const getCurrentUrlWithoutParams = () => getCurrentUrl().split('?')[0].split('#')[0];
+export const getCurrentUrlWithoutParams = () =>
+  getCurrentUrl().split("?")[0].split("#")[0];
 
 /**
  * Refreshes the current tab

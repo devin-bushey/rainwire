@@ -1,27 +1,30 @@
-import { Box, Collapse, Container, Fade } from '@mui/material';
-import Button from '@mui/material/Button/Button';
-import Typography from '@mui/material/Typography';
-import { COLOURS } from '../theme/AppStyles';
-import { useContext, useEffect, useState } from 'react';
-import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { SnackBarContext } from '../App';
-import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import { LOCATIONS } from '../constants/locations';
-import { BASE_REDIRECT_URI } from '../constants/auth';
-import { Origin } from '../components/Origin';
-import { Settings } from '../components/Settings';
-import { TicketContainer } from '../components/TicketContainer';
-import { InAppModal } from '../components/InAppModal';
-import { UseQueryOptions, useQuery } from 'react-query';
-import { CreateNewPlaylist, GetTickets } from '../apiManager/RecordShop';
-import { Loading } from './Loading';
-import { Spinner } from '../Rifflandia/Spinner';
-import { sortByOrderNum } from '../utils/sorter';
-import { StickyButton } from '../components/StickyButton';
-import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
-import { goToNewTab, reloadPage, scrollToTop } from '../utils/browserUtils';
-import { handleRedirectToAuth, isLoggedIntoSpotify } from '../utils/spotifyAuthUtils';
-import { primaryButtonColours } from '../theme/AppStyles';
+import { Box, Collapse, Container, Fade } from "@mui/material";
+import Button from "@mui/material/Button/Button";
+import Typography from "@mui/material/Typography";
+import { COLOURS } from "../theme/AppStyles";
+import { useContext, useEffect, useState } from "react";
+import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import { SnackBarContext } from "../App";
+import useSpotifyAuth from "../hooks/useSpotifyAuth";
+import { LOCATIONS } from "../constants/locations";
+import { BASE_REDIRECT_URI } from "../constants/auth";
+import { Origin } from "../components/Origin";
+import { Settings } from "../components/Settings";
+import { TicketContainer } from "../components/TicketContainer";
+import { InAppModal } from "../components/InAppModal";
+import { UseQueryOptions, useQuery } from "react-query";
+import { CreateNewPlaylist, GetTickets } from "../apiManager/RecordShop";
+import { Loading } from "./Loading";
+import { Spinner } from "../Rifflandia/Spinner";
+import { sortByOrderNum } from "../utils/sorter";
+import { StickyButton } from "../components/StickyButton";
+import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
+import { goToNewTab, reloadPage, scrollToTop } from "../utils/browserUtils";
+import {
+  handleRedirectToAuth,
+  isLoggedIntoSpotify,
+} from "../utils/spotifyAuthUtils";
+import { primaryButtonColours } from "../theme/AppStyles";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -33,7 +36,7 @@ export const ArtistsPage = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'artists';
+  const redirectUri = BASE_REDIRECT_URI + "artists";
 
   const [openSignIn, setOpenSignIn] = useState(false);
   const handleOpenSignIn = () => setOpenSignIn(true);
@@ -76,7 +79,7 @@ export const ArtistsPage = () => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    document.title = 'Record Shop | Artists';
+    document.title = "Record Shop | Artists";
     scrollToTop();
   }, []);
 
@@ -140,7 +143,7 @@ export const ArtistsPage = () => {
       snackBar.setSnackBar({
         showSnackbar: true,
         setShowSnackbar: () => true,
-        message: 'Error creating playlist. Please try again.',
+        message: "Error creating playlist. Please try again.",
         isError: true,
       });
       setIsError(false);
@@ -207,7 +210,7 @@ export const ArtistsPage = () => {
             snackBar.setSnackBar({
               showSnackbar: true,
               setShowSnackbar: () => true,
-              message: 'Successfully created a playlist!',
+              message: "Successfully created a playlist!",
               isError: false,
             });
             goToNewTab(res.data);
@@ -234,9 +237,9 @@ export const ArtistsPage = () => {
     <>
       <Box
         sx={{
-          borderRadius: '10px',
-          width: '300px',
-          margin: '8px',
+          borderRadius: "10px",
+          width: "300px",
+          margin: "8px",
         }}
       >
         {isLoggedIntoSpotify() && (
@@ -244,23 +247,29 @@ export const ArtistsPage = () => {
             <Button
               onClick={handleCreatePlaylist}
               variant="contained"
-              className={`${isShaking ? 'shaking' : ''}`}
+              className={`${isShaking ? "shaking" : ""}`}
               sx={{
                 ...primaryButtonColours,
-                color: 'black',
-                width: '300px',
-                marginBottom: '16px',
-                justifyContent: 'center',
-                height: '48px',
+                color: "black",
+                width: "300px",
+                marginBottom: "16px",
+                justifyContent: "center",
+                height: "48px",
               }}
             >
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+              <img
+                src={spotifyIcon}
+                alt="spotify_logo"
+                width="20px"
+                height="20px"
+                style={{ marginRight: "8px" }}
+              />
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
             <Button
               variant="outlined"
-              sx={{ marginBottom: '12px', width: '300px' }}
+              sx={{ marginBottom: "12px", width: "300px" }}
               onClick={() => {
                 setShowSettings(!showSettings);
               }}
@@ -289,35 +298,40 @@ export const ArtistsPage = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
+      <Box
+        sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}
+      >
         <Typography
           sx={{
-            fontSize: '4rem',
-            fontFamily: 'Lobster, Arial, sans-serif',
-            letterSpacing: '2px',
-            marginBottom: '12px',
+            fontSize: "4rem",
+            fontFamily: "Lobster, Arial, sans-serif",
+            letterSpacing: "2px",
+            marginBottom: "12px",
           }}
         >
           Record Shop
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Box sx={{ maxWidth: '900px' }}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ maxWidth: "900px" }}>
             <Container
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'space-evenly',
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
               }}
             >
               <Box
                 sx={{
-                  borderRadius: '10px',
-                  width: '300px',
-                  margin: '8px',
+                  borderRadius: "10px",
+                  width: "300px",
+                  margin: "8px",
                 }}
               >
-                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
+                <Origin
+                  origin={origin}
+                  handleChangeOrigin={handleChangeOrigin}
+                />
               </Box>
 
               {PlaylistCreation}
@@ -325,11 +339,11 @@ export const ArtistsPage = () => {
 
             <Container
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'space-evenly',
-                paddingTop: '24px',
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+                paddingTop: "24px",
               }}
             >
               <TicketContainer
@@ -342,17 +356,19 @@ export const ArtistsPage = () => {
           </Box>
         </Box>
 
-        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
-          <Button
-            variant="outlined"
-            sx={{ marginTop: '24px', marginBottom: '32px' }}
-            onClick={() => {
-              setLoadMore(loadMore + loadInterval);
-            }}
-          >
-            Load more
-          </Button>
-        )}
+        {totalTickets &&
+          filteredGenres.length === 0 &&
+          loadMore < totalTickets.length && (
+            <Button
+              variant="outlined"
+              sx={{ marginTop: "24px", marginBottom: "32px" }}
+              onClick={() => {
+                setLoadMore(loadMore + loadInterval);
+              }}
+            >
+              Load more
+            </Button>
+          )}
       </Box>
 
       <StickyButton
@@ -362,9 +378,17 @@ export const ArtistsPage = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
+      <SignInModalRifflandia
+        open={openSignIn}
+        handleClose={handleCloseSignIn}
+        handleRedirectToAuth={isInAppBrowser}
+      />
 
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal
+        open={open}
+        handleClose={handleClose}
+        handleRedirectToAuth={handleRedirectToAuth}
+      />
     </>
   );
 };
