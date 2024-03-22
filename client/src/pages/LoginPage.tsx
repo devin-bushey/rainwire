@@ -15,6 +15,7 @@ import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 
 import { ReactComponent as CHERRIES } from "../Rifflandia/images/cherries.svg";
+import { goToNewTab, scrollToTop } from "../utils/browserUtils";
 
 const LoginPage = memo(() => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const LoginPage = memo(() => {
 
   useEffect(() => {
     document.title = "Record Shop | Login";
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   return (
@@ -138,7 +139,7 @@ const LoginPage = memo(() => {
 
         <Button
           onClick={() =>
-            window.location.assign(
+            goToNewTab(
               "https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q",
             )
           }

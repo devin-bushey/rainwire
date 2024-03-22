@@ -4,6 +4,7 @@ import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { RIFFLANDIA_COLOURS } from "./constants/colours";
 import "./styles/styles.css";
 import { useNavigate } from "react-router-dom";
+import { reloadPage } from "../utils/browserUtils";
 
 export const Options = (props: any) => {
   const DAYS = ["Sept 7", "Sept 15", "Sept 8", "Sept 16", "Sept 9", "Sept 17"];
@@ -35,7 +36,7 @@ export const Options = (props: any) => {
   const logOut = () => {
     localStorage.clear();
     navigate("/rifflandia");
-    window.location.reload();
+    reloadPage();
   };
 
   return (

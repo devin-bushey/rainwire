@@ -22,6 +22,7 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
+import { goToNewTab, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -79,7 +80,7 @@ export const JamBase = () => {
 
   useEffect(() => {
     document.title = "Record Shop | Explore";
-    window.scrollTo(0, 0);
+    scrollToTop();
     setCity("");
   }, []);
 
@@ -136,7 +137,7 @@ export const JamBase = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            window.location.assign(res.data);
+            goToNewTab(res.data);
           } else {
             setIsError(true);
           }

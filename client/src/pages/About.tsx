@@ -16,6 +16,7 @@ import { SnackBarContext } from "../App";
 
 import { ReactComponent as CHERRIES } from "../Rifflandia/images/cherries.svg";
 import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../utils/browserUtils";
 
 export const About = memo(() => {
   const [openEmail, setOpenEmail] = useState(false);
@@ -27,7 +28,7 @@ export const About = memo(() => {
 
   useEffect(() => {
     document.title = "Record Shop | About";
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   const [toSend, setToSend] = useState({

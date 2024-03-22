@@ -16,6 +16,7 @@ import {
   SCOPES,
 } from "../../constants/auth";
 import { useNavigate } from "react-router-dom";
+import { goToNewTab, scrollToTop } from "../../utils/browserUtils";
 
 export const Login = () => {
   const redirectUri = BASE_REDIRECT_URI + "rifflandia";
@@ -24,7 +25,7 @@ export const Login = () => {
 
   useEffect(() => {
     document.title = "Record Shop | Rifflandia Login";
-    window.scrollTo(0, 0);
+    scrollToTop();
   }, []);
 
   const [open, setOpen] = useState(false);
@@ -151,7 +152,7 @@ export const Login = () => {
             </div>
             <Button
               onClick={() =>
-                window.open(
+                goToNewTab(
                   "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh",
                 )
               }
@@ -211,7 +212,7 @@ export const Login = () => {
 
             {/* <Box sx={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
               <Button
-                onClick={() => window.open('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                onClick={() => goToNewTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
                 variant="outlined"
                 sx={{
                   //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
