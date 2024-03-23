@@ -1,27 +1,27 @@
-import { Box, Container } from '@mui/material';
-import Button from '@mui/material/Button/Button';
-import Typography from '@mui/material/Typography';
-import { COLOURS } from '../theme/AppStyles';
-import { useContext, useEffect, useState } from 'react';
-import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
-import { SnackBarContext } from '../App';
-import useSpotifyAuth from '../hooks/useSpotifyAuth';
-import { LOCATIONS } from '../constants/locations';
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
-import { Origin } from '../components/Origin';
-import { Settings } from '../components/Settings';
-import { TicketContainer } from '../components/TicketContainer';
-import { InAppModal } from '../components/InAppModal';
-import { UseQueryOptions, useQuery } from 'react-query';
-import { CreateNewPlaylist, GetTickets } from '../apiManager/RecordShop';
-import { Loading } from './Loading';
-import { useNavigate } from 'react-router-dom';
-import { Spinner } from '../Rifflandia/Spinner';
-import { sortByOrderNum } from '../utils/sorter';
-import { StickyButton } from '../components/StickyButton';
-import { SignInModalRifflandia } from '../Rifflandia/SignInModalRifflandia';
-import { Email } from '../Rifflandia/Email';
-import { goToNewTabOnDesktop, reloadPage, scrollToTop } from '../utils/browserUtils';
+import { Box, Container } from "@mui/material";
+import Button from "@mui/material/Button/Button";
+import Typography from "@mui/material/Typography";
+import { COLOURS } from "../theme/AppStyles";
+import { useContext, useEffect, useState } from "react";
+import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import { SnackBarContext } from "../App";
+import useSpotifyAuth from "../hooks/useSpotifyAuth";
+import { LOCATIONS } from "../constants/locations";
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
+import { Origin } from "../components/Origin";
+import { Settings } from "../components/Settings";
+import { TicketContainer } from "../components/TicketContainer";
+import { InAppModal } from "../components/InAppModal";
+import { UseQueryOptions, useQuery } from "react-query";
+import { CreateNewPlaylist, GetTickets } from "../apiManager/RecordShop";
+import { Loading } from "./Loading";
+import { useNavigate } from "react-router-dom";
+import { Spinner } from "../Rifflandia/Spinner";
+import { sortByOrderNum } from "../utils/sorter";
+import { StickyButton } from "../components/StickyButton";
+import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
+import { Email } from "../Rifflandia/Email";
+import { goToNewTabOnDesktop, reloadPage, scrollToTop } from "../utils/browserUtils";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -33,7 +33,7 @@ export const ArtistsPage = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + 'artists';
+  const redirectUri = BASE_REDIRECT_URI + "artists";
 
   const [openSignIn, setOpenSignIn] = useState(false);
   const handleOpenSignIn = () => setOpenSignIn(true);
@@ -79,7 +79,7 @@ export const ArtistsPage = () => {
   const handleOpenEmail = () => setOpenEmail(true);
 
   useEffect(() => {
-    document.title = 'Record Shop | Artists';
+    document.title = "Record Shop | Artists";
     scrollToTop();
   }, []);
 
@@ -143,7 +143,7 @@ export const ArtistsPage = () => {
       snackBar.setSnackBar({
         showSnackbar: true,
         setShowSnackbar: () => true,
-        message: 'Error creating playlist. Please try again.',
+        message: "Error creating playlist. Please try again.",
         isError: true,
       });
       setIsError(false);
@@ -197,7 +197,7 @@ export const ArtistsPage = () => {
 
   const handleRedirectToAuth = () => {
     location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      '%20',
+      "%20",
     )}&response_type=token&show_dialog=true`;
   };
 
@@ -216,7 +216,7 @@ export const ArtistsPage = () => {
             snackBar.setSnackBar({
               showSnackbar: true,
               setShowSnackbar: () => true,
-              message: 'Successfully created a playlist!',
+              message: "Successfully created a playlist!",
               isError: false,
             });
             goToNewTabOnDesktop(res.data);
@@ -239,7 +239,7 @@ export const ArtistsPage = () => {
   const logOut = () => {
     if (token && spotifyInfo.access) {
       localStorage.clear();
-      navigate('/');
+      navigate("/");
       reloadPage();
     } else {
       isInAppBrowser();
@@ -253,32 +253,32 @@ export const ArtistsPage = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
-            fontSize: '4rem',
-            fontFamily: 'Lobster, Arial, sans-serif',
-            letterSpacing: '2px',
-            marginBottom: '12px',
+            fontSize: "4rem",
+            fontFamily: "Lobster, Arial, sans-serif",
+            letterSpacing: "2px",
+            marginBottom: "12px",
           }}
         >
           Record Shop
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Box sx={{ maxWidth: '900px' }}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ maxWidth: "900px" }}>
             <Container
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'space-evenly',
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
               }}
             >
               <Box
                 sx={{
-                  borderRadius: '10px',
-                  width: '300px',
-                  margin: '8px',
+                  borderRadius: "10px",
+                  width: "300px",
+                  margin: "8px",
                 }}
               >
                 <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
@@ -287,37 +287,37 @@ export const ArtistsPage = () => {
                 <Button
                   onClick={handleCreatePlaylist}
                   variant="contained"
-                  className={`${isShaking ? 'shaking' : ''}`}
+                  className={`${isShaking ? "shaking" : ""}`}
                   sx={{
                     backgroundColor: COLOURS.blue,
-                    ':hover': {
+                    ":hover": {
                       backgroundColor: COLOURS.card_colours[1],
                     },
-                    color: 'black',
-                    width: '300px',
-                    marginTop: '24px',
-                    marginBottom: '16px',
-                    justifyContent: 'center',
-                    height: '48px',
+                    color: "black",
+                    width: "300px",
+                    marginTop: "24px",
+                    marginBottom: "16px",
+                    justifyContent: "center",
+                    height: "48px",
                   }}
                 >
-                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
+                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
                   <Typography sx={{ paddingBottom: 0 }}>
-                    {token && spotifyInfo.access ? 'Create playlist' : 'Sign in'}
+                    {token && spotifyInfo.access ? "Create playlist" : "Sign in"}
                   </Typography>
                 </Button>
               </Box>
 
               <Box
                 sx={{
-                  borderRadius: '10px',
-                  width: '300px',
-                  margin: '8px',
+                  borderRadius: "10px",
+                  width: "300px",
+                  margin: "8px",
                 }}
               >
                 <Button
                   variant="outlined"
-                  sx={{ marginBottom: '12px', width: '300px' }}
+                  sx={{ marginBottom: "12px", width: "300px" }}
                   onClick={() => {
                     setShowSettings(!showSettings);
                   }}
@@ -328,7 +328,7 @@ export const ArtistsPage = () => {
                 {token && spotifyInfo.access && (
                   <Button
                     variant="outlined"
-                    sx={{ marginBottom: '12px', width: '300px' }}
+                    sx={{ marginBottom: "12px", width: "300px" }}
                     onClick={() => {
                       logOut();
                     }}
@@ -341,9 +341,9 @@ export const ArtistsPage = () => {
                   <Button
                     variant="outlined"
                     sx={{
-                      marginBottom: '12px',
-                      marginRight: '18px',
-                      width: '300px',
+                      marginBottom: "12px",
+                      marginRight: "18px",
+                      width: "300px",
                     }}
                     onClick={handleOpenEmail}
                   >
@@ -379,7 +379,7 @@ export const ArtistsPage = () => {
         {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
           <Button
             variant="outlined"
-            sx={{ marginTop: '24px', marginBottom: '32px' }}
+            sx={{ marginTop: "24px", marginBottom: "32px" }}
             onClick={() => {
               setLoadMore(loadMore + loadInterval);
             }}

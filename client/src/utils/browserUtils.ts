@@ -22,8 +22,7 @@ export const goToNewTab = (url: string) => window.open(url);
  * On mobile, goes to the provided url on the *current tab*
  * @param url  the string url to go to
  */
-export const goToNewTabOnDesktop = (url: string) => isMobile() ? goTo(url) : goToNewTab(url);
-
+export const goToNewTabOnDesktop = (url: string) => (isMobile() ? goTo(url) : goToNewTab(url));
 
 /**
  * Scrolls to the top of the current tab
