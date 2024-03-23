@@ -244,6 +244,7 @@ export const Rifflandia = () => {
   const handleDayClick = (day: string) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
+      setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
     } else {
       setSelectedDays([...selectedDays, day]);
     }
@@ -280,6 +281,7 @@ export const Rifflandia = () => {
     }
   }, [totalTickets, loadMore]);
 
+  if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
   if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
     return <LoadingRifflandia />;
   }
@@ -607,7 +609,9 @@ export const Rifflandia = () => {
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
       <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
+      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );

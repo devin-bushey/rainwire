@@ -4,10 +4,7 @@ import "../styles/Loading.css";
 export const Loading = () => {
   return (
     <Container sx={{ textAlign: "center" }}>
-      <Typography
-        variant="h5"
-        sx={{ color: "black", textAlign: "center", marginBottom: "8px" }}
-      >
+      <Typography variant="h5" sx={{ color: "black", textAlign: "center", marginBottom: "8px" }}>
         L O A D I N G
       </Typography>
       <div className="loader">

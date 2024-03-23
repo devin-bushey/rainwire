@@ -1,9 +1,9 @@
 export type Country = {
-  '@type': 'Country';
+  "@type": "Country";
   identifier: String;
   name: String;
   alternateName: String;
-  'x-numUpcomingEvents': Number;
+  "x-numUpcomingEvents": Number;
 };
 
 export type Countries = {
@@ -11,12 +11,12 @@ export type Countries = {
 };
 
 export type State = {
-  '@type': 'State';
+  "@type": "State";
   identifier: String;
   name: String;
   alternateName: String;
   country: Country;
-  'x-numUpcomingEvents': Number;
+  "x-numUpcomingEvents": Number;
 };
 
 export type States = {
@@ -24,11 +24,11 @@ export type States = {
 };
 
 export type Metro = {
-  '@type': 'AdministrativeArea';
+  "@type": "AdministrativeArea";
   identifier: String;
   name: String;
   geo: {
-    '@type': 'GeoCoordinates';
+    "@type": "GeoCoordinates";
     latitude: Number;
     longitude: Number;
   };
@@ -38,11 +38,11 @@ export type Metro = {
   };
   containsPlace: [
     {
-      '@type': 'City';
+      "@type": "City";
       identifier: String;
       name: String;
       geo: {
-        '@type': 'GeoCoordinates';
+        "@type": "GeoCoordinates";
         latitude: Number;
         longitude: Number;
       };
@@ -50,13 +50,13 @@ export type Metro = {
         addressRegion: String;
         addressCountry: String;
       };
-      'x-timezone': String;
+      "x-timezone": String;
       containedInPlace: {};
-      'x-numUpcomingEvents': Number;
+      "x-numUpcomingEvents": Number;
     },
   ];
-  'x-primaryCityId': String;
-  'x-numUpcomingEvents': String;
+  "x-primaryCityId": String;
+  "x-numUpcomingEvents": String;
 };
 
 export type Metros = {

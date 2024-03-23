@@ -78,12 +78,7 @@ export const Filter = ({
         }}
       >
         {filteredGenres?.map((genre) => (
-          <Chip
-            sx={{ margin: "2px" }}
-            key={genre}
-            label={genre}
-            onDelete={handleDeleteGenre(genre)}
-          />
+          <Chip sx={{ margin: "2px" }} key={genre} label={genre} onDelete={handleDeleteGenre(genre)} />
         ))}
       </Box>
     </Box>

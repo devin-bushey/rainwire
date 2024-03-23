@@ -55,13 +55,7 @@ export const Settings = (props: any) => {
           }}
         >
           <Typography variant="h6" sx={{ color: COLOURS.black }}>
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
             Customize
           </Typography>
         </Box>

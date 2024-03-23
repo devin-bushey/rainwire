@@ -282,6 +282,7 @@ export const ArtistsPage = () => {
                 }}
               >
                 <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
+                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
                 <Button
                   onClick={handleCreatePlaylist}
@@ -398,7 +399,9 @@ export const ArtistsPage = () => {
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
       <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );

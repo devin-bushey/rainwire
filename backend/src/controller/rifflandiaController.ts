@@ -1,6 +1,6 @@
-import express from 'express';
-import dbo from '../database/conn';
-import { CreateNewPlaylistRifflandia } from '../helpers/rifflandia/createPlaylist';
+import express from "express";
+import dbo from "../database/conn";
+import { CreateNewPlaylistRifflandia } from "../helpers/rifflandia/createPlaylist";
 
 export const rifflandiaRouter = express.Router();
 
@@ -9,21 +9,21 @@ const cachedData: {
   rifflandia_data?: any;
 } = {}; // The in-memory cache object
 
-rifflandiaRouter.route('/rifflandia').get(async (req, response) => {
+rifflandiaRouter.route("/rifflandia").get(async (req, response) => {
   // Check if data is cached in memory
   if (cachedData.rifflandia_data) {
     // If data is found in cache, return the cached data
     response.json(cachedData.rifflandia_data);
   } else {
-    console.log('cache not found for /rifflandia: ', cachedData.rifflandia_data);
+    console.log("cache not found for /rifflandia: ", cachedData.rifflandia_data);
 
     let db_connect = dbo.getDb();
 
     if (!db_connect) {
-      console.log('reconnecting to db');
+      console.log("reconnecting to db");
       await dbo.connectToServer(function (err: any) {
         if (err) {
-          console.log('reconnecting error');
+          console.log("reconnecting error");
           console.error(err);
         }
       });
@@ -42,16 +42,16 @@ rifflandiaRouter.route('/rifflandia').get(async (req, response) => {
   }
 });
 
-rifflandiaRouter.route('/rifflandia-create').post(async (req, response) => {
+rifflandiaRouter.route("/rifflandia-create").post(async (req, response) => {
   const { token, user_id, numTopTracks, days } = req.body;
 
   let db_connect = dbo.getDb();
 
   if (!db_connect) {
-    console.log('reconnecting to db');
+    console.log("reconnecting to db");
     await dbo.connectToServer(function (err: any) {
       if (err) {
-        console.log('reconnecting error');
+        console.log("reconnecting error");
         console.error(err);
       }
     });
@@ -62,10 +62,10 @@ rifflandiaRouter.route('/rifflandia-create').post(async (req, response) => {
   let sortBy;
 
   if (!days || days.length === 0) {
-    sortBy = 'orderNum';
+    sortBy = "orderNum";
     dayQuery = {};
   } else {
-    sortBy = 'day';
+    sortBy = "day";
     dayQuery = {
       day: {
         $in: days,
@@ -73,7 +73,7 @@ rifflandiaRouter.route('/rifflandia-create').post(async (req, response) => {
     };
   }
 
-  const artists = await db_connect.collection('rifflandia').find(dayQuery).toArray();
+  const artists = await db_connect.collection("rifflandia").find(dayQuery).toArray();
 
   const url = await CreateNewPlaylistRifflandia({
     token: token,
@@ -90,6 +90,6 @@ rifflandiaRouter.route('/rifflandia-create').post(async (req, response) => {
   if (url) {
     response.status(201).json(url);
   } else {
-    response.status(500).json({ error: 'Something went wrong' });
+    response.status(500).json({ error: "Something went wrong" });
   }
 });

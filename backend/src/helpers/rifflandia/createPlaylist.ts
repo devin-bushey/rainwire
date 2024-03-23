@@ -1,7 +1,7 @@
-import { HttpRequestError } from '../../http/HttpRequestError';
-import { post, put } from '../../http/request';
-import { SpotifyPlaylistDataType } from '../../types/SpotifyTypes';
-import { RIFFLANDIA_CHERRIES } from './rifflandia_cherries';
+import { HttpRequestError } from "../../http/HttpRequestError";
+import { post, put } from "../../http/request";
+import { SpotifyPlaylistDataType } from "../../types/SpotifyTypes";
+import { RIFFLANDIA_CHERRIES } from "./rifflandia_cherries";
 
 export const CreateNewPlaylistRifflandia = async ({
   token,
@@ -24,18 +24,18 @@ export const CreateNewPlaylistRifflandia = async ({
     days,
   });
 
-  const playlist_id = playlist_data.new_playlist_id || '';
+  const playlist_id = playlist_data.new_playlist_id || "";
   try {
     await AddCoverArt({ token, playlist_id });
   } catch (err) {
-    console.log('Error adding cover art to Rifflandia');
+    console.log("Error adding cover art to Rifflandia");
   }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  const sortedArtists = sortBy === 'orderNum' ? sortByOrderNum(artists) : sortDataByDateAndOrder(artists);
+  const sortedArtists = sortBy === "orderNum" ? sortByOrderNum(artists) : sortDataByDateAndOrder(artists);
 
-  let tracks = '';
+  let tracks = "";
 
   for (const artist of sortedArtists) {
     try {
@@ -43,7 +43,7 @@ export const CreateNewPlaylistRifflandia = async ({
         if (artist.topTrackURIs && artist.topTrackURIs[i]) {
           //console.log(artist.sp_band_name, ' ', artist.day);
           tracks += artist.topTrackURIs[i];
-          tracks += ',';
+          tracks += ",";
         }
       }
     } catch (error) {
@@ -53,7 +53,7 @@ export const CreateNewPlaylistRifflandia = async ({
 
   tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-  const array = tracks.split(',');
+  const array = tracks.split(",");
   const MAX_CHUNK_LENGTH = 75;
   const trackArrays = [];
 
@@ -63,7 +63,7 @@ export const CreateNewPlaylistRifflandia = async ({
   }
 
   for (const trackArray of trackArrays) {
-    const tracks = trackArray.join(',');
+    const tracks = trackArray.join(",");
     if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
       await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
     }
@@ -112,27 +112,27 @@ const CreateBlankPlaylist = async ({
   user_id: string;
   days: string[];
 }): Promise<SpotifyPlaylistDataType> => {
-  let playlist_name = 'record shop rifflandia';
+  let playlist_name = "record shop rifflandia";
   let description =
-    'a mixtape of the top tracks from artists playing at Rifflandia 2023 created by recordshop.cool/rifflandia';
+    "a mixtape of the top tracks from artists playing at Rifflandia 2023 created by recordshop.cool/rifflandia";
 
   days.sort();
 
-  const thePark = ['Sept 15', 'Sept 16', 'Sept 17'];
-  const electricAve = ['Sept 7', 'Sept 8', 'Sept 9'];
+  const thePark = ["Sept 15", "Sept 16", "Sept 17"];
+  const electricAve = ["Sept 7", "Sept 8", "Sept 9"];
 
   if (JSON.stringify(days) === JSON.stringify(electricAve)) {
-    playlist_name = playlist_name + ' - electric avenue';
+    playlist_name = playlist_name + " - electric avenue";
   }
 
   if (JSON.stringify(days) === JSON.stringify(thePark)) {
-    playlist_name = playlist_name + ' - the park';
+    playlist_name = playlist_name + " - the park";
   }
 
   return post({
-    url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+    url: "https://api.spotify.com/v1/users/" + user_id + "/playlists",
     headers: {
-      Authorization: 'Bearer ' + token,
+      Authorization: "Bearer " + token,
     },
     data: {
       name: playlist_name,
@@ -155,13 +155,13 @@ const CreateBlankPlaylist = async ({
       return returnVal;
     })
     .catch(function (error: any) {
-      console.log('Error: CreateBlankPlaylist');
+      console.log("Error: CreateBlankPlaylist");
       console.log(error);
 
       const returnVal: SpotifyPlaylistDataType = {
-        new_playlist_id: '',
+        new_playlist_id: "",
         external_urls: {
-          spotify: '',
+          spotify: "",
         },
       };
 
@@ -174,10 +174,10 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
   // const file = fs.readFileSync(image, { encoding: 'base64' });
 
   return put({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
+    url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/images",
     headers: {
-      Authorization: 'Bearer ' + token,
-      'Content-Type': 'image/jpeg',
+      Authorization: "Bearer " + token,
+      "Content-Type": "image/jpeg",
     },
     data: RIFFLANDIA_CHERRIES,
   })
@@ -186,7 +186,7 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
       //goTo(playlist_url);
     })
     .catch(function (error: any) {
-      console.log('Error: unsuccessfully added cover art to playlist');
+      console.log("Error: unsuccessfully added cover art to playlist");
       //window.alert('Error: unsuccessfully added tracks to playlist');
       console.log(error.message);
       //return null;
@@ -195,13 +195,13 @@ const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id:
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
   return post({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
+    url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
     headers: {
-      Authorization: 'Bearer ' + token,
+      Authorization: "Bearer " + token,
     },
   }).catch(function (error: any) {
     const err = error as HttpRequestError;
-    console.log('Error: unsuccessfully added tracks to playlist');
+    console.log("Error: unsuccessfully added tracks to playlist");
     //window.alert('Error: unsuccessfully added tracks to playlist');
     console.log(err.message);
     return null;

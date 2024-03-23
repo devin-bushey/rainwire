@@ -86,19 +86,10 @@ export const Email = (props: any) => {
           />
           <br />
           {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
-          <TextField
-            placeholder="Message"
-            onChange={(e) => setMessage(e.target.value)}
-            multiline
-            fullWidth
-          />
+          <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
           <br />
           <br />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ backgroundColor: RIFFLANDIA_COLOURS.blue, marginTop: "8px" }}
-          >
+          <Button type="submit" variant="contained" sx={{ backgroundColor: RIFFLANDIA_COLOURS.blue, marginTop: "8px" }}>
             Send
           </Button>
           <br />

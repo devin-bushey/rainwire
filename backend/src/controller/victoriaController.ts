@@ -1,30 +1,30 @@
-import express from 'express';
+import express from "express";
 export const victoriaRouter = express.Router();
-import dbo from '../database/conn';
+import dbo from "../database/conn";
 
-import { CreateNewPlaylist } from '../helpers/createPlaylist';
+import { CreateNewPlaylist } from "../helpers/createPlaylist";
 
-import { Cities } from '../enums/Cities';
+import { Cities } from "../enums/Cities";
 
 const cachedData: {
   victoria_data?: any;
 } = {}; // The in-memory cache object
 
-victoriaRouter.route('/artists').get(async (req, response) => {
+victoriaRouter.route("/artists").get(async (req, response) => {
   const { city } = req.query;
 
   if (city === Cities.Victoria && cachedData.victoria_data) {
     response.json(cachedData.victoria_data);
   } else {
-    if (city === Cities.Victoria) console.log('cache not found for /victoria: ', cachedData.victoria_data);
+    if (city === Cities.Victoria) console.log("cache not found for /victoria: ", cachedData.victoria_data);
 
     let db_connect = dbo.getDb();
 
     if (!db_connect) {
-      console.log('reconnecting to db');
+      console.log("reconnecting to db");
       await dbo.connectToServer(function (err: any) {
         if (err) {
-          console.log('reconnecting error');
+          console.log("reconnecting error");
           console.error(err);
         }
       });
@@ -45,16 +45,16 @@ victoriaRouter.route('/artists').get(async (req, response) => {
   }
 });
 
-victoriaRouter.route('/create').post(async (req, response) => {
+victoriaRouter.route("/create").post(async (req, response) => {
   const { token, city, user_id, numTopTracks, days } = req.body;
 
   let db_connect = dbo.getDb();
 
   if (!db_connect) {
-    console.log('reconnecting to db');
+    console.log("reconnecting to db");
     await dbo.connectToServer(function (err: any) {
       if (err) {
-        console.log('reconnecting error');
+        console.log("reconnecting error");
         console.error(err);
       }
     });
@@ -66,10 +66,10 @@ victoriaRouter.route('/create').post(async (req, response) => {
 
   if (!days || days.length === 0) {
     // TODO: can change to 'popularity'
-    sortBy = 'date';
+    sortBy = "date";
     dayQuery = {};
   } else {
-    sortBy = 'day';
+    sortBy = "day";
     dayQuery = {
       day: {
         $in: days,
@@ -95,7 +95,7 @@ victoriaRouter.route('/create').post(async (req, response) => {
   if (url) {
     response.status(201).json(url);
   } else {
-    response.status(500).json({ error: 'Something went wrong' });
+    response.status(500).json({ error: "Something went wrong" });
   }
 });
 

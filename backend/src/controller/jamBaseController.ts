@@ -1,26 +1,26 @@
-import express, { response } from 'express';
-import { CreateNewPlaylistJamBase } from '../helpers/createPlaylist';
-import { Countries, States, Metros } from '../types/Geographies';
-import { get } from '../http/request';
+import express, { response } from "express";
+import { CreateNewPlaylistJamBase } from "../helpers/createPlaylist";
+import { Countries, States, Metros } from "../types/Geographies";
+import { get } from "../http/request";
 
 export const jamBaseRouter = express.Router();
 
-const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || '';
+const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE || "";
 const cachedData: {
   geo_countries?: Countries;
   geo_states?: States;
   geo_metros?: Metros;
 } = {}; // The in-memory cache object
 
-jamBaseRouter.route('/geographies/countries').get(async (req, res) => {
+jamBaseRouter.route("/geographies/countries").get(async (req, res) => {
   if (cachedData.geo_countries) {
     res.json(cachedData.geo_countries);
   } else {
     try {
       const { data } = await get({
-        url: 'https://www.jambase.com/jb-api/v1/geographies/countries',
+        url: "https://www.jambase.com/jb-api/v1/geographies/countries",
         params: {
-          countryHasUpcomingEvents: 'true',
+          countryHasUpcomingEvents: "true",
           apikey: API_KEY_JAMBASE,
         },
       });
@@ -30,19 +30,19 @@ jamBaseRouter.route('/geographies/countries').get(async (req, res) => {
       res.json(cachedData.geo_countries);
     } catch (error) {
       console.error(error);
-      response.status(500).json({ error: 'Something went wrong' });
+      response.status(500).json({ error: "Something went wrong" });
     }
   }
 });
 
-jamBaseRouter.route('/geographies/states').get(async (req, res) => {
+jamBaseRouter.route("/geographies/states").get(async (req, res) => {
   if (cachedData.geo_states) {
     res.json(cachedData.geo_states);
   } else {
     try {
       const { data } = await get({
-        url: 'https://www.jambase.com/jb-api/v1/geographies/states',
-        params: { stateHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+        url: "https://www.jambase.com/jb-api/v1/geographies/states",
+        params: { stateHasUpcomingEvents: "true", apikey: API_KEY_JAMBASE },
       });
       cachedData.geo_states = {
         states: data.states,
@@ -50,19 +50,19 @@ jamBaseRouter.route('/geographies/states').get(async (req, res) => {
       res.json(cachedData.geo_states);
     } catch (error) {
       console.error(error);
-      response.status(500).json({ error: 'Something went wrong' });
+      response.status(500).json({ error: "Something went wrong" });
     }
   }
 });
 
-jamBaseRouter.route('/geographies/metros').get(async (req, res) => {
+jamBaseRouter.route("/geographies/metros").get(async (req, res) => {
   if (cachedData.geo_metros) {
     res.json(cachedData.geo_metros);
   } else {
     try {
       const { data } = await get({
-        url: 'https://www.jambase.com/jb-api/v1/geographies/metros',
-        params: { metroHasUpcomingEvents: 'true', apikey: API_KEY_JAMBASE },
+        url: "https://www.jambase.com/jb-api/v1/geographies/metros",
+        params: { metroHasUpcomingEvents: "true", apikey: API_KEY_JAMBASE },
       });
       cachedData.geo_metros = {
         metros: data.metros,
@@ -70,16 +70,16 @@ jamBaseRouter.route('/geographies/metros').get(async (req, res) => {
       res.json(cachedData.geo_metros);
     } catch (error) {
       console.error(error);
-      response.status(500).json({ error: 'Something went wrong' });
+      response.status(500).json({ error: "Something went wrong" });
     }
   }
 });
 
-jamBaseRouter.route('/jamBase').get(async (req, response) => {
+jamBaseRouter.route("/jamBase").get(async (req, response) => {
   const { city } = req.query;
 
-  if (!city || city == null || city == '') {
-    response.status(404).json('City not provided');
+  if (!city || city == null || city == "") {
+    response.status(404).json("City not provided");
     return;
   }
 
@@ -88,12 +88,12 @@ jamBaseRouter.route('/jamBase').get(async (req, response) => {
   try {
     cityId = await getCityId(city as string);
   } catch (err) {
-    response.status(404).json('City not found');
+    response.status(404).json("City not found");
     return;
   }
 
   if (!cityId || cityId == null) {
-    response.status(404).json('City not found');
+    response.status(404).json("City not found");
     return;
   }
 
@@ -108,7 +108,7 @@ jamBaseRouter.route('/jamBase').get(async (req, response) => {
     response.json(data);
   } catch (error) {
     console.log(error);
-    response.status(500).json({ error: 'Internal Server Error' });
+    response.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -123,8 +123,8 @@ const formatJamBase = (data: any) => {
     event.performer.forEach((performer: any) => {
       let spotifyId = null;
 
-      for (const externalIdentifier of performer['x-externalIdentifiers']) {
-        if (externalIdentifier.source === 'spotify') {
+      for (const externalIdentifier of performer["x-externalIdentifiers"]) {
+        if (externalIdentifier.source === "spotify") {
           spotifyId = externalIdentifier.identifier[0];
         }
       }
@@ -147,11 +147,11 @@ const formatJamBase = (data: any) => {
 
 const formatDate = (utc: string) => {
   const inputDate = new Date(utc);
-  const pacificTimeFormatter = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/Los_Angeles',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
+  const pacificTimeFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   });
 
   const formattedDate = pacificTimeFormatter.format(inputDate);
@@ -163,7 +163,7 @@ const getCityId = async (requestedCity: string) => {
   const city = requestedCity;
 
   return await get({
-    url: 'https://www.jambase.com/jb-api/v1/geographies/cities',
+    url: "https://www.jambase.com/jb-api/v1/geographies/cities",
     params: { geoCityName: city, apikey: API_KEY_JAMBASE },
   }).then((response: any) => {
     if (response.data.cities[0].identifier) {
@@ -177,11 +177,11 @@ const getCityId = async (requestedCity: string) => {
   // });
 };
 
-jamBaseRouter.route('/createJamBase').post(async (req, response) => {
+jamBaseRouter.route("/createJamBase").post(async (req, response) => {
   const { token, city, user_id, numTopTracks, days } = req.body;
 
-  if (!city || city == null || city == '') {
-    response.status(404).json('City not provided');
+  if (!city || city == null || city == "") {
+    response.status(404).json("City not provided");
     return;
   }
 
@@ -189,7 +189,7 @@ jamBaseRouter.route('/createJamBase').post(async (req, response) => {
   //console.log('******', cityId);
 
   if (!cityId || cityId == null) {
-    response.status(404).json('City not found');
+    response.status(404).json("City not found");
     return;
   }
 
@@ -204,7 +204,7 @@ jamBaseRouter.route('/createJamBase').post(async (req, response) => {
     artists = formatJamBase(httpResponse.data);
   } catch (error) {
     //console.log(error);
-    response.status(500).json({ error: 'Internal Server Error' });
+    response.status(500).json({ error: "Internal Server Error" });
   }
 
   const spotifyIds: any = getJamBaseSpotifyIds(artists);
@@ -223,7 +223,7 @@ jamBaseRouter.route('/createJamBase').post(async (req, response) => {
   if (url) {
     response.status(201).json(url);
   } else {
-    response.status(500).json({ error: 'Something went wrong' });
+    response.status(500).json({ error: "Something went wrong" });
   }
 });
 

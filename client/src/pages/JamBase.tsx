@@ -271,6 +271,7 @@ export const JamBase = () => {
       />
 
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

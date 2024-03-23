@@ -46,12 +46,7 @@ export const SignInModalRifflandia = ({
           p: 4,
         }}
       >
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h2"
-          sx={{ maxWidth: "70%", fontWeight: "700" }}
-        >
+        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ maxWidth: "70%", fontWeight: "700" }}>
           Please sign into your Spotify account then try again!
         </Typography>
         <Box
@@ -75,16 +70,8 @@ export const SignInModalRifflandia = ({
               },
             }}
           >
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
-            <Typography sx={{ paddingBottom: 0, color: "black" }}>
-              Continue
-            </Typography>
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+            <Typography sx={{ paddingBottom: 0, color: "black" }}>Continue</Typography>
           </Button>
         </Box>
       </Box>

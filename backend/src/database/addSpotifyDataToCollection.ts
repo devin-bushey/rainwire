@@ -1,13 +1,13 @@
-require('dotenv').config({ path: '../config.env' });
-import { get } from '../http/request';
-import _ from 'lodash';
-import { getSpotifyAuth } from '../helpers/getSpotifyAuth';
-import { removeDuplicateArtists } from '../helpers/removeDuplicateArtists';
-const stringSimilarity = require('string-similarity');
+require("dotenv").config({ path: "../config.env" });
+import { get } from "../http/request";
+import _ from "lodash";
+import { getSpotifyAuth } from "../helpers/getSpotifyAuth";
+import { removeDuplicateArtists } from "../helpers/removeDuplicateArtists";
+const stringSimilarity = require("string-similarity");
 
 export const updateCollectionWithSpotify = async (collection_name: string, db_connect: any) => {
   db_connect
-    .collection(collection_name + '_simple')
+    .collection(collection_name + "_simple")
     .find({})
     .toArray(async function (err: any, result: any) {
       if (err) throw err;
@@ -30,13 +30,13 @@ async function addSpotifyData(data: any) {
 async function addSpotifyMainData(element: any, token: any) {
   await new Promise<void>(function (resolve, reject) {
     get({
-      url: 'https://api.spotify.com/v1/search',
+      url: "https://api.spotify.com/v1/search",
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: "Bearer " + token,
       },
       params: {
         q: element.artist,
-        type: 'artist',
+        type: "artist",
       },
     })
       .then(async function (res: any) {
@@ -56,7 +56,7 @@ async function addSpotifyMainData(element: any, token: any) {
         resolve();
       })
       .catch(function (error: any) {
-        console.log('Error: addSpotifyMainData');
+        console.log("Error: addSpotifyMainData");
         console.log(error.response);
       });
   });
@@ -78,9 +78,9 @@ async function addSpotifyTopTracks(element: any, token: any) {
   if (element.band_id) {
     await new Promise<void>(function (resolve, reject) {
       get({
-        url: 'https://api.spotify.com/v1/artists/' + element.band_id + '/top-tracks?market=CA',
+        url: "https://api.spotify.com/v1/artists/" + element.band_id + "/top-tracks?market=CA",
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: "Bearer " + token,
         },
       })
         .then(async function (res: any) {
@@ -88,7 +88,7 @@ async function addSpotifyTopTracks(element: any, token: any) {
             element.albumArtUrl = res.data.tracks[0].album.images[1].url;
             element.topTrackURIs = res.data.tracks.map((track: any) => track.uri);
           } catch (err) {
-            console.log('Error at adding top tracks');
+            console.log("Error at adding top tracks");
             console.log(err);
           }
 
@@ -104,12 +104,12 @@ async function addSpotifyTopTracks(element: any, token: any) {
 const createNewCollection = async (linked_data: any, collection_name: string, db_connect: any) => {
   let name = collection_name;
   await db_connect.createCollection(name, (err: any, result: any) => {
-    console.log(name + ' created!');
+    console.log(name + " created!");
   });
 
   const duplicatesRemoved = removeDuplicateArtists(linked_data);
 
   await db_connect.collection(name).insertMany(duplicatesRemoved, (err: any, res: any) => {
-    console.log('Successfully added ' + res.insertedCount + ' records to ' + name);
+    console.log("Successfully added " + res.insertedCount + " records to " + name);
   });
 };

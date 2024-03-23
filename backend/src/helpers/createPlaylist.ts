@@ -1,12 +1,12 @@
-import { SpotifyPlaylistDataType } from '../types/SpotifyTypes';
-import { PLAYLIST_IMG_RS } from '../assets/recordshop_img';
-import { sortByPopularity } from './sortByPopularity';
-import { sortByDateAndOrder } from './sortByDateAndOrder';
-import { filterRecent } from './filterRecent';
-import { get, post, put } from '../http/request';
-import { HttpRequestError } from '../http/HttpRequestError';
-import { Cities } from '../enums/Cities';
-import { Festivals } from '../enums/Festivals';
+import { SpotifyPlaylistDataType } from "../types/SpotifyTypes";
+import { PLAYLIST_IMG_RS } from "../assets/recordshop_img";
+import { sortByPopularity } from "./sortByPopularity";
+import { sortByDateAndOrder } from "./sortByDateAndOrder";
+import { filterRecent } from "./filterRecent";
+import { get, post, put } from "../http/request";
+import { HttpRequestError } from "../http/HttpRequestError";
+import { Cities } from "../enums/Cities";
+import { Festivals } from "../enums/Festivals";
 
 export const CreateNewPlaylistJamBase = async ({
   token,
@@ -27,23 +27,23 @@ export const CreateNewPlaylistJamBase = async ({
     user_id,
   });
 
-  const playlist_id = playlist_data.new_playlist_id || '';
+  const playlist_id = playlist_data.new_playlist_id || "";
   try {
     AddCoverArt({ token, playlist_id });
   } catch (err) {
-    console.log('Error adding cover art');
+    console.log("Error adding cover art");
   }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
   const promises = spotifyIds.map(async (spotifyId) => {
     const topTracks: any = await getTopTracks(spotifyId, token);
-    let tracks = '';
+    let tracks = "";
     try {
       for (let i = 0; i < numTopTracksToAdd; i++) {
         if (topTracks && topTracks[i]) {
           tracks += topTracks[i];
-          tracks += ',';
+          tracks += ",";
         }
       }
     } catch (error) {
@@ -53,11 +53,11 @@ export const CreateNewPlaylistJamBase = async ({
   });
   const trackResults = await Promise.all(promises);
 
-  let tracks = trackResults.join('');
+  let tracks = trackResults.join("");
 
   tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-  const array = tracks.split(',');
+  const array = tracks.split(",");
   const MAX_CHUNK_LENGTH = 75;
   const trackArrays = [];
 
@@ -67,7 +67,7 @@ export const CreateNewPlaylistJamBase = async ({
   }
 
   for (const trackArray of trackArrays) {
-    const tracks = trackArray.join(',');
+    const tracks = trackArray.join(",");
     if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
       await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
     }
@@ -119,29 +119,29 @@ export const CreateNewPlaylist = async ({
     days,
   });
 
-  const playlist_id = playlist_data.new_playlist_id || '';
+  const playlist_id = playlist_data.new_playlist_id || "";
   try {
     await AddCoverArt({ token, playlist_id });
   } catch (err) {
-    console.log('Error adding cover art');
+    console.log("Error adding cover art");
   }
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  let sortedArtists = sortBy === 'popularity' ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+  let sortedArtists = sortBy === "popularity" ? sortByPopularity(artists) : sortByDateAndOrder(artists);
 
   if (city === Cities.Victoria) {
     sortedArtists = filterRecent(sortedArtists);
   }
 
-  let tracks = '';
+  let tracks = "";
 
   for (const artist of sortedArtists) {
     try {
       for (let i = 0; i < numTopTracksToAdd; i++) {
         if (artist.topTrackURIs && artist.topTrackURIs[i]) {
           tracks += artist.topTrackURIs[i];
-          tracks += ',';
+          tracks += ",";
         }
       }
     } catch (error) {
@@ -151,7 +151,7 @@ export const CreateNewPlaylist = async ({
 
   tracks = tracks.substring(0, tracks.length - 1); // remove last comma
 
-  const array = tracks.split(',');
+  const array = tracks.split(",");
   const MAX_CHUNK_LENGTH = 75;
   const trackArrays = [];
 
@@ -161,7 +161,7 @@ export const CreateNewPlaylist = async ({
   }
 
   for (const trackArray of trackArrays) {
-    const tracks = trackArray.join(',');
+    const tracks = trackArray.join(",");
     if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
       await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
     }
@@ -180,26 +180,26 @@ const CreateBlankPlaylist = async ({
   user_id: string;
   days?: string[];
 }): Promise<SpotifyPlaylistDataType> => {
-  let playlist_name = 'record shop ' + city;
+  let playlist_name = "record shop " + city;
 
   if (city === Festivals.PhilipsBackyard) {
-    playlist_name = 'record shop phillips backyard';
+    playlist_name = "record shop phillips backyard";
   }
 
   if (city === Festivals.LaketownShakedown) {
-    playlist_name = 'record shop laketown shakedown';
+    playlist_name = "record shop laketown shakedown";
   }
 
   if (city === Festivals.TheFunction) {
-    playlist_name = 'record shop - the function';
+    playlist_name = "record shop - the function";
   }
 
   let description = `a mixtape created by recordshop.cool`;
 
   return post({
-    url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+    url: "https://api.spotify.com/v1/users/" + user_id + "/playlists",
     headers: {
-      Authorization: 'Bearer ' + token,
+      Authorization: "Bearer " + token,
     },
     data: {
       name: playlist_name,
@@ -220,13 +220,13 @@ const CreateBlankPlaylist = async ({
       return returnVal;
     })
     .catch(function (error) {
-      console.log('Error: CreateBlankPlaylist');
+      console.log("Error: CreateBlankPlaylist");
       console.log(error);
 
       const returnVal: SpotifyPlaylistDataType = {
-        new_playlist_id: '',
+        new_playlist_id: "",
         external_urls: {
-          spotify: '',
+          spotify: "",
         },
       };
 
@@ -236,30 +236,30 @@ const CreateBlankPlaylist = async ({
 
 const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
   return put({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/images',
+    url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/images",
     headers: {
-      Authorization: 'Bearer ' + token,
-      'Content-Type': 'image/jpeg',
+      Authorization: "Bearer " + token,
+      "Content-Type": "image/jpeg",
     },
     data: PLAYLIST_IMG_RS,
   }).catch(function (error) {
     const err = error as HttpRequestError;
-    console.log('Error: unsuccessfully added cover art to playlist');
-    console.log('***Http Request err: ', err);
-    console.log('***JS error: ', error);
-    console.log('***');
+    console.log("Error: unsuccessfully added cover art to playlist");
+    console.log("***Http Request err: ", err);
+    console.log("***JS error: ", error);
+    console.log("***");
   });
 };
 
 const AddTracksToPlaylist = async (token: string, playlist_id: string, tracks: string) => {
   return post({
-    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + tracks,
+    url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/tracks?uris=" + tracks,
     headers: {
-      Authorization: 'Bearer ' + token,
+      Authorization: "Bearer " + token,
     },
   }).catch(function (error) {
     const err = error as HttpRequestError;
-    console.log('Error: unsuccessfully added tracks to playlist');
+    console.log("Error: unsuccessfully added tracks to playlist");
     console.log(err.message);
     return null;
   });

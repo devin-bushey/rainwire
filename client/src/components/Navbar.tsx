@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Container,
-  Box,
-  IconButton,
-  Menu,
-} from "@mui/material";
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { COLOURS } from "../theme/AppStyles";
 import { reloadPage } from "../utils/browserUtils";
@@ -33,10 +25,7 @@ const Navbarr = () => {
 
   return (
     <>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
-      >
+      <AppBar position="static" sx={{ backgroundColor: "transparent", boxShadow: "none" }}>
         <Container>
           <Toolbar disableGutters>
             {/* <Link to="/" style={{ textDecoration: 'none' }}>

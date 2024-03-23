@@ -31,17 +31,12 @@ export const InAppModal = ({
           p: 4,
         }}
       >
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h2"
-          sx={{ maxWidth: "70%" }}
-        >
+        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ maxWidth: "70%" }}>
           Looks like you&apos;re using an in-app browser.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          If you have trouble signing in with Spotify then please try again by
-          opening Record Shop with Chrome, Safari, Firefox, etc.
+          If you have trouble signing in with Spotify then please try again by opening Record Shop with Chrome, Safari,
+          Firefox, etc.
         </Typography>
         <Box
           sx={{
@@ -58,13 +53,7 @@ export const InAppModal = ({
             //className="btn--click-me"
             sx={{ width: "100%", marginTop: "12px", justifyContent: "center" }}
           >
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
             <Typography sx={{ paddingBottom: 0 }}>Continue</Typography>
           </Button>
         </Box>
@@ -78,13 +67,8 @@ export const InAppModal = ({
             marginTop: "20px",
           }}
         >
-          <Typography sx={{ paddingBottom: "0px" }}>
-            https://recordshop.cool
-          </Typography>
-          <Button
-            variant="outlined"
-            onClick={() => navigator.clipboard.writeText("recordshop.cool")}
-          >
+          <Typography sx={{ paddingBottom: "0px" }}>https://recordshop.cool</Typography>
+          <Button variant="outlined" onClick={() => navigator.clipboard.writeText("recordshop.cool")}>
             Copy
           </Button>
         </Box>
