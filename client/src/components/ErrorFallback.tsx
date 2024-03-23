@@ -12,10 +12,7 @@ export const ErrorFallback = ({ error }: any) => {
       }}
     >
       <Box>
-        <Typography
-          variant="h5"
-          sx={{ textAlign: "center", marginBottom: "8px" }}
-        >
+        <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
           Whoops! Something went wrong ...
         </Typography>
         <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>

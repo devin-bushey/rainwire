@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Router } from "express";
 const router = Router({});
-router.get('/', async (_req, res, _next) => {
+router.get("/", async (_req, res, _next) => {
   const healthcheck = {
     uptime: process.uptime(),
-    message: 'OK',
+    message: "OK",
     timestamp: Date.now(),
   };
   try {

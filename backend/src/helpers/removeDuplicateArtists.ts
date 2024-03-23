@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 export const removeDuplicateArtists = (arr: any) => {
   var cleaned: any[] = [];

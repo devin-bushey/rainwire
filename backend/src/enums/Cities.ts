@@ -1,4 +1,4 @@
 export enum Cities {
-  Victoria = 'victoria',
-  Vancouver = 'vancouver',
+  Victoria = "victoria",
+  Vancouver = "vancouver",
 }

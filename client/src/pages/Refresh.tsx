@@ -73,115 +73,61 @@ const Refresh = () => {
   return (
     <>
       <Box sx={{ marginBottom: "20px" }}>
-        <button onClick={() => handleDropCollection("victoria_simple")}>
-          Drop victoria_simple
-        </button>
-        <button onClick={() => handleDropCollection("victoria")}>
-          Drop victoria
-        </button>
-        <button onClick={() => handleExtract("victoria")}>
-          Extract Victoria
-        </button>
-        <button onClick={() => handleAddSpotify("victoria")}>
-          Add Spotify to victoria_simple
-        </button>
+        <button onClick={() => handleDropCollection("victoria_simple")}>Drop victoria_simple</button>
+        <button onClick={() => handleDropCollection("victoria")}>Drop victoria</button>
+        <button onClick={() => handleExtract("victoria")}>Extract Victoria</button>
+        <button onClick={() => handleAddSpotify("victoria")}>Add Spotify to victoria_simple</button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button onClick={() => handleDropCollection("vancouver_simple")}>
-          Drop vancouver_simple
-        </button>
-        <button onClick={() => handleDropCollection("vancouver")}>
-          Drop vancouver
-        </button>
-        <button onClick={() => handleExtract("vancouver")}>
-          Extract Vancouver
-        </button>
-        <button onClick={() => handleAddSpotify("vancouver")}>
-          Add Spotify to vancouver_simple
-        </button>
+        <button onClick={() => handleDropCollection("vancouver_simple")}>Drop vancouver_simple</button>
+        <button onClick={() => handleDropCollection("vancouver")}>Drop vancouver</button>
+        <button onClick={() => handleExtract("vancouver")}>Extract Vancouver</button>
+        <button onClick={() => handleAddSpotify("vancouver")}>Add Spotify to vancouver_simple</button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button onClick={() => handleDropCollection("phillipsBackyard_simple")}>
-          Drop philipsBackyard_simple
-        </button>
-        <button onClick={() => handleDropCollection("phillipsBackyard")}>
-          Drop philipsBackyard
-        </button>
-        <button onClick={() => handleExtract(Festivals.PhilipsBackyard)}>
-          Extract Philips
-        </button>
-        <button
-          onClick={() => handleAddSpotify(`${Festivals.PhilipsBackyard}`)}
-        >
+        <button onClick={() => handleDropCollection("phillipsBackyard_simple")}>Drop philipsBackyard_simple</button>
+        <button onClick={() => handleDropCollection("phillipsBackyard")}>Drop philipsBackyard</button>
+        <button onClick={() => handleExtract(Festivals.PhilipsBackyard)}>Extract Philips</button>
+        <button onClick={() => handleAddSpotify(`${Festivals.PhilipsBackyard}`)}>
           Add Spotify to {Festivals.PhilipsBackyard}_simple
         </button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button
-          onClick={() => handleDropCollection("laketownShakedown_simple")}
-        >
-          Drop laketownShakedown_simple
-        </button>
-        <button onClick={() => handleDropCollection("laketownShakedown")}>
-          Drop laketownShakedown
-        </button>
-        <button onClick={() => handleExtract(Festivals.LaketownShakedown)}>
-          Extract laketownShakedown
-        </button>
-        <button
-          onClick={() => handleAddSpotify(`${Festivals.LaketownShakedown}`)}
-        >
+        <button onClick={() => handleDropCollection("laketownShakedown_simple")}>Drop laketownShakedown_simple</button>
+        <button onClick={() => handleDropCollection("laketownShakedown")}>Drop laketownShakedown</button>
+        <button onClick={() => handleExtract(Festivals.LaketownShakedown)}>Extract laketownShakedown</button>
+        <button onClick={() => handleAddSpotify(`${Festivals.LaketownShakedown}`)}>
           Add Spotify to {Festivals.LaketownShakedown}_simple
         </button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button onClick={() => handleDropCollection("theFunction_simple")}>
-          Drop theFunction_simple
-        </button>
-        <button onClick={() => handleDropCollection("theFunction")}>
-          Drop theFunction
-        </button>
-        <button onClick={() => handleExtract(Festivals.TheFunction)}>
-          Extract theFunction
-        </button>
+        <button onClick={() => handleDropCollection("theFunction_simple")}>Drop theFunction_simple</button>
+        <button onClick={() => handleDropCollection("theFunction")}>Drop theFunction</button>
+        <button onClick={() => handleExtract(Festivals.TheFunction)}>Extract theFunction</button>
         <button onClick={() => handleAddSpotify(`${Festivals.TheFunction}`)}>
           Add Spotify to {Festivals.TheFunction}_simple
         </button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button
-          onClick={() => handleDropCollection(`${Festivals.Osheaga}_simple`)}
-        >
+        <button onClick={() => handleDropCollection(`${Festivals.Osheaga}_simple`)}>
           Drop {Festivals.Osheaga}_simple
         </button>
-        <button onClick={() => handleDropCollection(`${Festivals.Osheaga}`)}>
-          Drop {Festivals.Osheaga}
-        </button>
-        <button onClick={() => handleExtract(Festivals.Osheaga)}>
-          Extract {Festivals.Osheaga}
-        </button>
-        <button onClick={() => handleAddSpotify(Festivals.Osheaga)}>
-          Add Spotify to {Festivals.Osheaga}
-        </button>
+        <button onClick={() => handleDropCollection(`${Festivals.Osheaga}`)}>Drop {Festivals.Osheaga}</button>
+        <button onClick={() => handleExtract(Festivals.Osheaga)}>Extract {Festivals.Osheaga}</button>
+        <button onClick={() => handleAddSpotify(Festivals.Osheaga)}>Add Spotify to {Festivals.Osheaga}</button>
       </Box>
 
       <Box sx={{ marginBottom: "20px" }}>
-        <button
-          onClick={() => handleDropCollection(`${Festivals.Coachella}_simple`)}
-        >
+        <button onClick={() => handleDropCollection(`${Festivals.Coachella}_simple`)}>
           Drop {Festivals.Coachella}_simple
         </button>
-        <button onClick={() => handleDropCollection(`${Festivals.Coachella}`)}>
-          Drop {Festivals.Coachella}
-        </button>
-        <button onClick={() => handleExtract(Festivals.Coachella)}>
-          Extract {Festivals.Coachella}
-        </button>
+        <button onClick={() => handleDropCollection(`${Festivals.Coachella}`)}>Drop {Festivals.Coachella}</button>
+        <button onClick={() => handleExtract(Festivals.Coachella)}>Extract {Festivals.Coachella}</button>
         <button onClick={() => handleAddSpotify(`${Festivals.Coachella}`)}>
           Add Spotify to db_{Festivals.Coachella}
         </button>

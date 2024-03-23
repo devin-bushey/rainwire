@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { GetSpotifyUserInfo } from "../apiManager/Spotify";
-import {
-  setSpotifyTokenLocalStorage,
-  getSpotifyTokenLocalStorage,
-} from "../utils/tokenHandling";
+import { setSpotifyTokenLocalStorage, getSpotifyTokenLocalStorage } from "../utils/tokenHandling";
 import hash from "../utils/hash";
 
 type SpotifyUserDataType = {

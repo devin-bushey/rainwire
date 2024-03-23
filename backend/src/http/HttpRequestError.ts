@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError } from "axios";
 
 export class HttpRequestError extends Error {
   statusCode?: number;
@@ -6,7 +6,7 @@ export class HttpRequestError extends Error {
 
   constructor(err: any) {
     if (err instanceof Error) {
-      super('Error occurred when executing HTTP request');
+      super("Error occurred when executing HTTP request");
       this.stack = `${this.stack}\n${err.stack}\n`;
 
       if (err instanceof AxiosError) {

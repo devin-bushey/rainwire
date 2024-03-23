@@ -1,9 +1,7 @@
 import axios from "axios";
 import { SpotifyUserDataType } from "../types/SpotifyTypes";
 
-export const GetSpotifyUserInfo = async (
-  token: string,
-): Promise<SpotifyUserDataType> => {
+export const GetSpotifyUserInfo = async (token: string): Promise<SpotifyUserDataType> => {
   return axios({
     url: "https://api.spotify.com/v1/me/",
     method: "GET",
@@ -15,9 +13,7 @@ export const GetSpotifyUserInfo = async (
       const data = response.data;
       const user_name = data.display_name;
       const user_id = data.id;
-      const firstName = data.display_name
-        .substring(0, data.display_name.indexOf(" "))
-        .trim();
+      const firstName = data.display_name.substring(0, data.display_name.indexOf(" ")).trim();
 
       return {
         firstName: firstName,

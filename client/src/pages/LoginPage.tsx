@@ -5,12 +5,7 @@ import { memo, useEffect, useState } from "react";
 import { COLOURS } from "../theme/AppStyles";
 import spotifyLogo from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { useNavigate } from "react-router-dom";
-import {
-  AUTH_ENDPOINT,
-  BASE_REDIRECT_URI,
-  CLIENT_ID,
-  SCOPES,
-} from "../constants/auth";
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 
@@ -81,13 +76,11 @@ const LoginPage = memo(() => {
           }}
         >
           <Typography sx={{ paddingTop: "12px" }}>
-            Create personalized Spotify playlists with the top tracks from
-            artists performing in your city or festival of choice.
+            Create personalized Spotify playlists with the top tracks from artists performing in your city or festival
+            of choice.
           </Typography>
 
-          <Typography sx={{ paddingTop: "12px" }}>
-            To get started, sign in with Spotify.
-          </Typography>
+          <Typography sx={{ paddingTop: "12px" }}>To get started, sign in with Spotify.</Typography>
         </Box>
 
         <Box display="flex" flexDirection="column">
@@ -132,17 +125,11 @@ const LoginPage = memo(() => {
             marginTop: "16px",
           }}
         >
-          <Typography sx={{ paddingTop: "12px" }}>
-            Don&apos;t want to sign in?
-          </Typography>
+          <Typography sx={{ paddingTop: "12px" }}>Don&apos;t want to sign in?</Typography>
         </Box>
 
         <Button
-          onClick={() =>
-            goToNewTab(
-              "https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q",
-            )
-          }
+          onClick={() => goToNewTab("https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q")}
           variant="outlined"
           sx={{
             marginTop: "4px",
@@ -151,13 +138,7 @@ const LoginPage = memo(() => {
             width: "300px",
           }}
         >
-          <img
-            src={spotifyLogo}
-            alt="spotify_logo"
-            width="20px"
-            height="20px"
-            style={{ marginRight: "16px" }}
-          />
+          <img src={spotifyLogo} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
           Preview a Playlist
         </Button>
         <Box
@@ -197,11 +178,7 @@ const LoginPage = memo(() => {
           Rifflandia
         </Button> */}
 
-        <InAppModal
-          open={open}
-          handleClose={handleClose}
-          handleRedirectToAuth={handleRedirectToAuth}
-        />
+        <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>
     </>
   );
