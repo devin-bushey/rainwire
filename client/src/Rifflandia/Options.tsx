@@ -65,13 +65,7 @@ export const Options = (props: any) => {
           }}
         >
           <Typography variant="h6">
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
             Customize
           </Typography>
         </Box>
@@ -111,13 +105,9 @@ export const Options = (props: any) => {
                     width: "110px",
                     margin: "8px 2px",
                     marginBottom: "2px",
-                    background: props.selectedDays.includes(day)
-                      ? RIFFLANDIA_COLOURS.fill_light_orange
-                      : "none",
+                    background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : "none",
                     "&:hover": {
-                      background: props.selectedDays.includes(day)
-                        ? RIFFLANDIA_COLOURS.fill_light_orange
-                        : "none",
+                      background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : "none",
                     },
                   }}
                 >

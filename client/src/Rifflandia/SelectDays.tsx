@@ -71,13 +71,9 @@ export const SelectDays = (props: any) => {
                   width: "100px",
                   margin: "8px 2px",
                   marginBottom: "2px",
-                  background: props.selectedDays.includes(day)
-                    ? RIFFLANDIA_COLOURS.fill_light_orange
-                    : "none",
+                  background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : "none",
                   "&:hover": {
-                    background: props.selectedDays.includes(day)
-                      ? RIFFLANDIA_COLOURS.fill_light_orange
-                      : "none",
+                    background: props.selectedDays.includes(day) ? RIFFLANDIA_COLOURS.fill_light_orange : "none",
                   },
                 }}
               >

@@ -1,28 +1,10 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  Container,
-  Box,
-  IconButton,
-  Menu,
-  Typography,
-  MenuItem,
-} from "@mui/material";
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import {
-  COLOURS,
-  primaryButtonColours,
-  secondaryButtonColours,
-} from "../theme/AppStyles";
+import { COLOURS, primaryButtonColours, secondaryButtonColours } from "../theme/AppStyles";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import {
-  handleRedirectToAuth,
-  isLoggedIntoSpotify,
-  logOut,
-} from "../utils/spotifyAuthUtils";
+import { handleRedirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Email } from "../Rifflandia/Email";
@@ -103,8 +85,7 @@ const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
 const ProfileMenu = () => {
   const { spotifyInfo } = useSpotifyAuth();
 
-  const [profileMenuAnchor, setProfileMenuAnchor] =
-    useState<null | HTMLElement>(null);
+  const [profileMenuAnchor, setProfileMenuAnchor] = useState<null | HTMLElement>(null);
   const isProfileMenuOpen = Boolean(profileMenuAnchor);
 
   const openProfileMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -125,24 +106,14 @@ const ProfileMenu = () => {
         alignSelf: "center",
       }}
     >
-      <img
-        src={spotifyIcon}
-        alt="spotify_logo"
-        width="20px"
-        height="20px"
-        style={{ marginRight: "8px" }}
-      />
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
       <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
     </Button>
   );
 
   const ProfileMenu = (
     <Box>
-      <Button
-        id="profile-button"
-        onClick={openProfileMenu}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
+      <Button id="profile-button" onClick={openProfileMenu} endIcon={<KeyboardArrowDownIcon />}>
         Welcome {spotifyInfo.firstName || spotifyInfo.user_name}
       </Button>
       <Menu
@@ -153,10 +124,7 @@ const ProfileMenu = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Button
-          onClick={logOut}
-          sx={{ width: "120px", height: "30px", margin: "0 10px" }}
-        >
+        <Button onClick={logOut} sx={{ width: "120px", height: "30px", margin: "0 10px" }}>
           Sign out
         </Button>
       </Menu>
@@ -199,12 +167,7 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
   };
 
   const NavBarDropdownMenuOption = (label: string, toPage: string) => (
-    <Button
-      onClick={handleCloseNavMenu}
-      component={Link}
-      to={toPage}
-      sx={optionButtonAppearance}
-    >
+    <Button onClick={handleCloseNavMenu} component={Link} to={toPage} sx={optionButtonAppearance}>
       {label}
     </Button>
   );
@@ -218,13 +181,7 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
         ...primaryButtonColours,
       }}
     >
-      <img
-        src={spotifyIcon}
-        alt="spotify_logo"
-        width="20px"
-        height="20px"
-        style={{ marginRight: "8px" }}
-      />
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
       <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
     </Button>
   );

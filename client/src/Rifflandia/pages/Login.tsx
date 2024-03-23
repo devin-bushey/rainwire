@@ -9,12 +9,7 @@ import TITLE from "../images/title.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import "../styles/styles.css";
 import { Email } from "../Email";
-import {
-  AUTH_ENDPOINT,
-  BASE_REDIRECT_URI,
-  CLIENT_ID,
-  SCOPES,
-} from "../../constants/auth";
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../../constants/auth";
 import { useNavigate } from "react-router-dom";
 import { goToNewTab, scrollToTop } from "../../utils/browserUtils";
 
@@ -81,11 +76,7 @@ export const Login = () => {
               margin: "8px",
             }}
           >
-            <img
-              style={{ width: "300px" }}
-              src={TITLE}
-              alt="Rifflandia Title"
-            />
+            <img style={{ width: "300px" }} src={TITLE} alt="Rifflandia Title" />
 
             <Card
               sx={{
@@ -105,13 +96,12 @@ export const Login = () => {
                 Record Shop
               </Typography>
               <Typography sx={{ marginTop: "12px" }}>
-                Effortlessly generate a playlist within seconds featuring the
-                top tracks from each artist performing at Rifflandia.
+                Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+                Rifflandia.
               </Typography>
 
               <Typography sx={{ marginTop: "24px" }}>
-                The playlist can be pre-populated and created right on your
-                account!
+                The playlist can be pre-populated and created right on your account!
               </Typography>
 
               <Typography sx={{ marginTop: "24px", fontWeight: "900" }}>
@@ -134,28 +124,14 @@ export const Login = () => {
                   height: "48px",
                 }}
               >
-                <img
-                  src={spotifyIcon}
-                  alt="spotify_logo"
-                  width="20px"
-                  height="20px"
-                  style={{ marginRight: "16px" }}
-                />
-                <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>
-                  Sign in
-                </Typography>
+                <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
+                <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
               </Button>
             </Card>
 
-            <div style={{ marginTop: "64px" }}>
-              Or preview an already created playlist:
-            </div>
+            <div style={{ marginTop: "64px" }}>Or preview an already created playlist:</div>
             <Button
-              onClick={() =>
-                goToNewTab(
-                  "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh",
-                )
-              }
+              onClick={() => goToNewTab("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
               variant="outlined"
               sx={{
                 //backgroundColor: RIFFLANDIA_COLOURS.light_blue,
@@ -170,16 +146,8 @@ export const Login = () => {
                 height: "48px",
               }}
             >
-              <img
-                src={spotifyIcon}
-                alt="spotify_logo"
-                width="20px"
-                height="20px"
-                style={{ marginRight: "16px" }}
-              />
-              <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>
-                Preview a Playlist
-              </Typography>
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
+              <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Preview a Playlist</Typography>
             </Button>
             <div
               style={{
@@ -276,11 +244,7 @@ export const Login = () => {
 
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
-      <InAppModalRifflandia
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

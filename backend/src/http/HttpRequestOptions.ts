@@ -8,9 +8,9 @@ export interface HttpRequestOptions {
 }
 
 export enum HttpRequestMethod {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
 }
 
 type HttpRequestParams = Record<string, string | number | boolean>;

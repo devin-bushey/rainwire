@@ -1,6 +1,6 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
-const Db = process.env.ATLAS_URI || '';
+const Db = process.env.ATLAS_URI || "";
 const client = new MongoClient(Db);
 
 let _db: any;
@@ -13,7 +13,7 @@ export default {
       console.error(e);
     }
 
-    _db = client.db('RecordShop');
+    _db = client.db("RecordShop");
 
     return _db !== undefined;
   },

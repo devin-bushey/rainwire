@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Input,
-  Modal,
-  TextField,
-} from "@mui/material";
+import { Box, Button, Card, Container, Input, Modal, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { send } from "emailjs-com";
 import { memo, useContext, useEffect, useState } from "react";
@@ -84,20 +76,18 @@ export const About = memo(() => {
         }}
       >
         <Typography sx={{ padding: "16px 0" }}>
-          Record Shop&apos;s name is inspired by the times when I would visit
-          record stores to browse through concert listings, look up each
-          unfamiliar band on Spotify, and then create a playlist with the top
-          track from each artist.
+          Record Shop&apos;s name is inspired by the times when I would visit record stores to browse through concert
+          listings, look up each unfamiliar band on Spotify, and then create a playlist with the top track from each
+          artist.
         </Typography>
         <Typography sx={{ padding: "16px 0" }}>
-          I would then listen to the playlist throughout the week and if an
-          artist played with a song that I liked, I could go back to the record
-          store and buy a ticket to their upcoming show. I could also remove
-          songs from the playlist that didn&apos;t suit my taste.
+          I would then listen to the playlist throughout the week and if an artist played with a song that I liked, I
+          could go back to the record store and buy a ticket to their upcoming show. I could also remove songs from the
+          playlist that didn&apos;t suit my taste.
         </Typography>
         <Typography sx={{ padding: "16px 0" }}>
-          In the end, I was going to more live shows and I would end up with a
-          playlist that I could put on repeat and share with friends!
+          In the end, I was going to more live shows and I would end up with a playlist that I could put on repeat and
+          share with friends!
         </Typography>
         <Typography sx={{ padding: "16px 0" }}>
           I wanted to automate part of this process - so I created Record Shop.
@@ -128,13 +118,7 @@ export const About = memo(() => {
               color="secondary"
               sx={{ width: "200px", margin: "16px 0" }}
             >
-              <img
-                src={coffeeCup}
-                alt="coffee"
-                width="20px"
-                height="20px"
-                style={{ marginRight: "8px" }}
-              />
+              <img src={coffeeCup} alt="coffee" width="20px" height="20px" style={{ marginRight: "8px" }} />
               Buy me a coffee
             </Button>
             <Typography
@@ -147,8 +131,7 @@ export const About = memo(() => {
                 marginTop: "8px",
               }}
             >
-              Please keep in touch and let me know what you think of the
-              website!
+              Please keep in touch and let me know what you think of the website!
             </Typography>
 
             <Typography
@@ -161,8 +144,8 @@ export const About = memo(() => {
                 marginTop: "8px",
               }}
             >
-              Or if you&apos;re an artist and you want to add your show to the
-              list then send me an email through the button below:
+              Or if you&apos;re an artist and you want to add your show to the list then send me an email through the
+              button below:
             </Typography>
 
             <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -324,20 +307,10 @@ export const About = memo(() => {
             />
             <br />
             {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
-            <TextField
-              placeholder="Message"
-              onChange={(e) => setMessage(e.target.value)}
-              multiline
-              fullWidth
-            />
+            <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
             <br />
             <br />
-            <Button
-              type="submit"
-              variant="contained"
-              color="secondary"
-              sx={{ marginTop: "8px" }}
-            >
+            <Button type="submit" variant="contained" color="secondary" sx={{ marginTop: "8px" }}>
               Send
             </Button>
             <br />

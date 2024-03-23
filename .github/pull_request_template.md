@@ -1,25 +1,10 @@
-## Describe your changes
+#### What does this PR do? (please include some screenshots if you got em!)
 
-## Type of change
+#### Where should the reviewer start reading?
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+#### How should these changes be tested / verified?
 
-# How Has This Been Tested?
+#### How does this PR make you feel?
 
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
-
-- [ ] Test A
-- [ ] Test B
-
-## Checklist before requesting a review
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
-- [ ] Any dependent changes have been merged and published in downstream modules
+<!-- https://giphy.com/ is a good source for GIFs -->
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDQ4MXk2ZzdkMGRsOWt0ZzYwdWVnd3dhNjJlbml4M29vMHV2bW84cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NABFbkFmpIOqY/giphy.gif" width="340"/>

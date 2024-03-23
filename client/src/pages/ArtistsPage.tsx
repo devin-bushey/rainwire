@@ -19,12 +19,10 @@ import { Spinner } from "../Rifflandia/Spinner";
 import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
 import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
-import { goToNewTab, reloadPage, scrollToTop } from "../utils/browserUtils";
-import {
-  handleRedirectToAuth,
-  isLoggedIntoSpotify,
-} from "../utils/spotifyAuthUtils";
+import { handleRedirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { primaryButtonColours } from "../theme/AppStyles";
+import { Email } from "../Rifflandia/Email";
+import { goToNewTabOnDesktop, reloadPage, scrollToTop } from "../utils/browserUtils";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -213,7 +211,7 @@ export const ArtistsPage = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -257,13 +255,7 @@ export const ArtistsPage = () => {
                 height: "48px",
               }}
             >
-              <img
-                src={spotifyIcon}
-                alt="spotify_logo"
-                width="20px"
-                height="20px"
-                style={{ marginRight: "8px" }}
-              />
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
@@ -298,9 +290,7 @@ export const ArtistsPage = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      <Box
-        sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}
-      >
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
             fontSize: "4rem",
@@ -328,10 +318,7 @@ export const ArtistsPage = () => {
                   margin: "8px",
                 }}
               >
-                <Origin
-                  origin={origin}
-                  handleChangeOrigin={handleChangeOrigin}
-                />
+                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
               </Box>
 
               {PlaylistCreation}
@@ -356,19 +343,17 @@ export const ArtistsPage = () => {
           </Box>
         </Box>
 
-        {totalTickets &&
-          filteredGenres.length === 0 &&
-          loadMore < totalTickets.length && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: "24px", marginBottom: "32px" }}
-              onClick={() => {
-                setLoadMore(loadMore + loadInterval);
-              }}
-            >
-              Load more
-            </Button>
-          )}
+        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
+          <Button
+            variant="outlined"
+            sx={{ marginTop: "24px", marginBottom: "32px" }}
+            onClick={() => {
+              setLoadMore(loadMore + loadInterval);
+            }}
+          >
+            Load more
+          </Button>
+        )}
       </Box>
 
       <StickyButton
@@ -378,17 +363,9 @@ export const ArtistsPage = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <SignInModalRifflandia
-        open={openSignIn}
-        handleClose={handleCloseSignIn}
-        handleRedirectToAuth={isInAppBrowser}
-      />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
-      <InAppModal
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

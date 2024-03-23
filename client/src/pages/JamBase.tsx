@@ -6,12 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
-import {
-  AUTH_ENDPOINT,
-  BASE_REDIRECT_URI,
-  CLIENT_ID,
-  SCOPES,
-} from "../constants/auth";
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import { UseQueryOptions, useQuery } from "react-query";
 import { CreateNewPlaylistJamBase, GetJamBase } from "../apiManager/RecordShop";
@@ -22,11 +17,8 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
-import { goToNewTab, scrollToTop } from "../utils/browserUtils";
-import {
-  handleRedirectToAuth,
-  isLoggedIntoSpotify,
-} from "../utils/spotifyAuthUtils";
+import { handleRedirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
+import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -135,7 +127,7 @@ export const JamBase = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -168,9 +160,7 @@ export const JamBase = () => {
   return (
     <>
       {isCreatingPlaylist && <Spinner />}
-      <Box
-        sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}
-      >
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
             fontSize: "4rem",
@@ -194,10 +184,7 @@ export const JamBase = () => {
             <form onSubmit={handleSubmit}>
               {" "}
               {/* Use a form element */}
-              <Box
-                className="btn--click-me"
-                sx={{ minWidth: "300px", display: "flex" }}
-              >
+              <Box className="btn--click-me" sx={{ minWidth: "300px", display: "flex" }}>
                 <TextField
                   fullWidth
                   id="outlined-basic"
@@ -207,12 +194,7 @@ export const JamBase = () => {
                   onChange={(e) => setTextFieldValue(e.target.value)}
                   onKeyDown={onKeyPress}
                 />
-                <Button
-                  onClick={handleSubmit}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ marginLeft: "6px" }}
-                >
+                <Button onClick={handleSubmit} variant="outlined" color="primary" sx={{ marginLeft: "6px" }}>
                   GO
                 </Button>{" "}
                 {/* Submit button */}
@@ -238,13 +220,7 @@ export const JamBase = () => {
                 height: "48px",
               }}
             >
-              <img
-                src={spotifyIcon}
-                alt="spotify_logo"
-                width="20px"
-                height="20px"
-                style={{ marginRight: "8px" }}
-              />
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
           )}
@@ -274,11 +250,8 @@ export const JamBase = () => {
             >
               {(city === "" || !city) && <JamBaseEmpty />}
               {(city != "" || city) && isLoading && !isError && <Loading />}
-              {(((city != "" || city) && !isLoading && isError) ||
-                cantFindSongs) && <ErrorJamBase />}
-              {(city != "" || city) && !isLoading && !isError && (
-                <JamBaseTicketContainer tickets={data} />
-              )}
+              {(((city != "" || city) && !isLoading && isError) || cantFindSongs) && <ErrorJamBase />}
+              {(city != "" || city) && !isLoading && !isError && <JamBaseTicketContainer tickets={data} />}
             </Container>
           </Box>
         </Box>
@@ -291,11 +264,8 @@ export const JamBase = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <InAppModal
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };
