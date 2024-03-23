@@ -33,9 +33,7 @@ export const Ticket = (props: any) => {
       const textElement = container.querySelector("span");
 
       if (textElement) {
-        let fontSize = parseFloat(
-          window.getComputedStyle(textElement).fontSize,
-        );
+        let fontSize = parseFloat(window.getComputedStyle(textElement).fontSize);
         while (textElement.offsetHeight > 16) {
           fontSize -= 1;
           textElement.style.fontSize = fontSize + "px";
@@ -89,9 +87,7 @@ export const Ticket = (props: any) => {
         />
         <Box sx={{ alignItems: "center", textAlign: "left" }}>
           <div ref={containerRef}>
-            <span style={{ fontWeight: "700" }}>
-              {props.ticket.sp_band_name}
-            </span>
+            <span style={{ fontWeight: "700" }}>{props.ticket.sp_band_name}</span>
           </div>
 
           <Box>

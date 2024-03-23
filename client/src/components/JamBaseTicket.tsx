@@ -29,9 +29,7 @@ export const JamBaseTicket = (props: any) => {
       const textElement = container.querySelector("span");
 
       if (textElement) {
-        let fontSize = parseFloat(
-          window.getComputedStyle(textElement).fontSize,
-        );
+        let fontSize = parseFloat(window.getComputedStyle(textElement).fontSize);
         while (textElement.offsetHeight > 16) {
           fontSize -= 1;
           textElement.style.fontSize = fontSize + "px";

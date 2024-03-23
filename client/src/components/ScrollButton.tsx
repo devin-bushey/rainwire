@@ -7,8 +7,7 @@ export const ScrollButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const listenToScroll = () => {
     const heightToHideFrom = 400;
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 
     if (winScroll > heightToHideFrom) {
       !isVisible && // to limit setting state only the first time

@@ -61,8 +61,7 @@ export const LandingPage = () => {
           }}
         >
           <Typography sx={{ padding: "16px 0" }}>
-            2. Select the number of top tracks that you want to add to your
-            playlist.
+            2. Select the number of top tracks that you want to add to your playlist.
           </Typography>
         </Card>
 
@@ -73,8 +72,7 @@ export const LandingPage = () => {
           }}
         >
           <Typography sx={{ padding: "16px 0" }}>
-            3. Finally, create a personalized playlist directly on your Spotify
-            account!
+            3. Finally, create a personalized playlist directly on your Spotify account!
           </Typography>
         </Card>
       </Box>

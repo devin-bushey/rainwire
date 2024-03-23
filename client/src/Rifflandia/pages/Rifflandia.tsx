@@ -21,22 +21,14 @@ import { LoadingRifflandia } from "../LoadingRifflandia";
 import { Options } from "../Options";
 import { Login } from "./Login";
 
-import {
-  CreateNewPlaylistRifflandia,
-  GetTicketsRifflandia,
-} from "../apiManager/API_Rifflandia";
+import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from "../apiManager/API_Rifflandia";
 import { SelectDays } from "../SelectDays";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../Spinner";
 
 import { SnackBarContext } from "../../App";
 import { StickyButton } from "../../components/StickyButton";
-import {
-  BASE_REDIRECT_URI,
-  AUTH_ENDPOINT,
-  CLIENT_ID,
-  SCOPES,
-} from "../../constants/auth";
+import { BASE_REDIRECT_URI, AUTH_ENDPOINT, CLIENT_ID, SCOPES } from "../../constants/auth";
 import { Festivals } from "../../constants/enums";
 import { WEBSITE_RIFFLANDIA } from "../../constants/locations";
 import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
@@ -251,9 +243,7 @@ export const Rifflandia = () => {
 
   const handleDayClick = (day: string) => {
     if (selectedDays.includes(day)) {
-      setSelectedDays(
-        selectedDays.filter((selectedDay) => selectedDay !== day),
-      );
+      setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
     } else {
       setSelectedDays([...selectedDays, day]);
     }
@@ -290,12 +280,7 @@ export const Rifflandia = () => {
     }
   }, [totalTickets, loadMore]);
 
-  if (
-    isLoadingTickets ||
-    query.isLoading ||
-    query.isFetching ||
-    query.isRefetching
-  ) {
+  if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
     return <LoadingRifflandia />;
   }
 
@@ -354,13 +339,12 @@ export const Rifflandia = () => {
               }}
             >
               <Typography sx={{ marginTop: "12px" }}>
-                Effortlessly generate a playlist within seconds featuring the
-                top tracks from each artist performing at Rifflandia.
+                Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+                Rifflandia.
               </Typography>
 
               <Typography sx={{ marginTop: "24px" }}>
-                The playlist can be pre-populated and created right on your
-                account!
+                The playlist can be pre-populated and created right on your account!
               </Typography>
 
               {(!token || !spotifyInfo || !spotifyInfo.access) && (
@@ -393,20 +377,12 @@ export const Rifflandia = () => {
                       height="20px"
                       style={{ marginRight: "16px" }}
                     />
-                    <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>
-                      Sign in
-                    </Typography>
+                    <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
                   </Button>
 
-                  <div style={{ marginTop: "48px" }}>
-                    Or preview an already created playlist:
-                  </div>
+                  <div style={{ marginTop: "48px" }}>Or preview an already created playlist:</div>
                   <Button
-                    onClick={() =>
-                      goToNewTab(
-                        "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh",
-                      )
-                    }
+                    onClick={() => goToNewTab("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
                     variant="outlined"
                     sx={{
                       backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
@@ -466,9 +442,7 @@ export const Rifflandia = () => {
                   Devin B
                 </button>
               </div>
-              <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>
-                Made in Victoria, BC
-              </div>
+              <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
             </Card>
           </Box>
         </Container>
@@ -513,16 +487,8 @@ export const Rifflandia = () => {
                     height: "48px",
                   }}
                 >
-                  <img
-                    src={spotifyIcon}
-                    alt="spotify_logo"
-                    width="20px"
-                    height="20px"
-                    style={{ marginRight: "8px" }}
-                  />
-                  <Typography sx={{ paddingBottom: 0 }}>
-                    Generate playlist
-                  </Typography>
+                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+                  <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
                 </Button>
               </Box>
 
@@ -553,15 +519,8 @@ export const Rifflandia = () => {
                   About
                 </Button> */}
 
-                <Button
-                  className="buy_tickets"
-                  onClick={handleBuyTickets}
-                  variant="outlined"
-                  sx={{ width: "300px" }}
-                >
-                  <Box
-                    sx={{ marginRight: "12px", height: "20px", width: "20px" }}
-                  >
+                <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: "300px" }}>
+                  <Box sx={{ marginRight: "12px", height: "20px", width: "20px" }}>
                     <CHERRIES />
                   </Box>
                   Buy Tickets
@@ -647,17 +606,9 @@ export const Rifflandia = () => {
 
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
-      <SignInModalRifflandia
-        open={openSignIn}
-        handleClose={handleCloseSignIn}
-        handleRedirectToAuth={isInAppBrowser}
-      />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
-      <InAppModalRifflandia
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

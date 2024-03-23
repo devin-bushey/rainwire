@@ -2,11 +2,9 @@ import axios from "axios";
 import { sortDataByDateAndOrder } from "../../utils/sorter";
 
 export const GetTicketsRifflandia = async (): Promise<any> => {
-  return axios
-    .get(import.meta.env.VITE_SITE_URL_DB + "rifflandia/")
-    .then(async (response) => {
-      return sortDataByDateAndOrder(response.data);
-    });
+  return axios.get(import.meta.env.VITE_SITE_URL_DB + "rifflandia/").then(async (response) => {
+    return sortDataByDateAndOrder(response.data);
+  });
 };
 
 export const CreateNewPlaylistRifflandia = async ({
@@ -26,8 +24,5 @@ export const CreateNewPlaylistRifflandia = async ({
     numTopTracks: numTopTracks,
     days: days,
   };
-  return await axios.post(
-    import.meta.env.VITE_SITE_URL_DB + "rifflandia-create/",
-    reqBody,
-  );
+  return await axios.post(import.meta.env.VITE_SITE_URL_DB + "rifflandia-create/", reqBody);
 };

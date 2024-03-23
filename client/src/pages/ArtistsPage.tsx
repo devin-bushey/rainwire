@@ -7,12 +7,7 @@ import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import { LOCATIONS } from "../constants/locations";
-import {
-  AUTH_ENDPOINT,
-  BASE_REDIRECT_URI,
-  CLIENT_ID,
-  SCOPES,
-} from "../constants/auth";
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { TicketContainer } from "../components/TicketContainer";
@@ -258,9 +253,7 @@ export const ArtistsPage = () => {
   return (
     <>
       {isLoading && <Spinner />}
-      <Box
-        sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}
-      >
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
             fontSize: "4rem",
@@ -288,10 +281,7 @@ export const ArtistsPage = () => {
                   margin: "8px",
                 }}
               >
-                <Origin
-                  origin={origin}
-                  handleChangeOrigin={handleChangeOrigin}
-                />
+                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
                 <Button
                   onClick={handleCreatePlaylist}
@@ -310,17 +300,9 @@ export const ArtistsPage = () => {
                     height: "48px",
                   }}
                 >
-                  <img
-                    src={spotifyIcon}
-                    alt="spotify_logo"
-                    width="20px"
-                    height="20px"
-                    style={{ marginRight: "8px" }}
-                  />
+                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
                   <Typography sx={{ paddingBottom: 0 }}>
-                    {token && spotifyInfo.access
-                      ? "Create playlist"
-                      : "Sign in"}
+                    {token && spotifyInfo.access ? "Create playlist" : "Sign in"}
                   </Typography>
                 </Button>
               </Box>
@@ -393,19 +375,17 @@ export const ArtistsPage = () => {
             </Container>
           </Box>
         </Box>
-        {totalTickets &&
-          filteredGenres.length === 0 &&
-          loadMore < totalTickets.length && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: "24px", marginBottom: "32px" }}
-              onClick={() => {
-                setLoadMore(loadMore + loadInterval);
-              }}
-            >
-              Load more
-            </Button>
-          )}
+        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
+          <Button
+            variant="outlined"
+            sx={{ marginTop: "24px", marginBottom: "32px" }}
+            onClick={() => {
+              setLoadMore(loadMore + loadInterval);
+            }}
+          >
+            Load more
+          </Button>
+        )}
       </Box>
 
       <StickyButton
@@ -417,17 +397,9 @@ export const ArtistsPage = () => {
 
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
-      <SignInModalRifflandia
-        open={openSignIn}
-        handleClose={handleCloseSignIn}
-        handleRedirectToAuth={isInAppBrowser}
-      />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
-      <InAppModal
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

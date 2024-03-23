@@ -46,17 +46,12 @@ export const InAppModalRifflandia = ({
           p: 4,
         }}
       >
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h2"
-          sx={{ maxWidth: "70%", fontWeight: "700" }}
-        >
+        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ maxWidth: "70%", fontWeight: "700" }}>
           Looks like you&apos;re using an in-app browser.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          If you have trouble signing in with Spotify then please try again by
-          opening Record Shop using Chrome, Safari, Firefox, etc.
+          If you have trouble signing in with Spotify then please try again by opening Record Shop using Chrome, Safari,
+          Firefox, etc.
         </Typography>
         <Box
           sx={{
@@ -79,16 +74,8 @@ export const InAppModalRifflandia = ({
               },
             }}
           >
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
-            <Typography sx={{ paddingBottom: 0, color: "black" }}>
-              Continue
-            </Typography>
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+            <Typography sx={{ paddingBottom: 0, color: "black" }}>Continue</Typography>
           </Button>
         </Box>
 
@@ -101,9 +88,7 @@ export const InAppModalRifflandia = ({
             marginTop: "20px",
           }}
         >
-          <Typography sx={{ paddingBottom: "0px", fontSize: "14px" }}>
-            https://recordshop.cool/rifflandia
-          </Typography>
+          <Typography sx={{ paddingBottom: "0px", fontSize: "14px" }}>https://recordshop.cool/rifflandia</Typography>
           <Button onClick={handleCopy} sx={{ minWidth: "20px" }}>
             <img src={copy} alt="copy" height="20px" />
           </Button>

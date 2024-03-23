@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import { goTo, goToNewTab } from "../utils/browserUtils";
 
 export const Ticket = (props: any) => {
-  const description = props.ticket.day
-    ? `${props.ticket.day} at ${props.ticket.weekend}`
-    : props.ticket.ticket_date;
+  const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
 
   const [width, setWidth] = useState<number>(window.innerWidth);
 
