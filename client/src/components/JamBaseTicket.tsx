@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { useEffect, useRef, useState } from "react";
 import { COLOURS } from "../theme/AppStyles";
-import { goTo, goToNewTab } from "../utils/browserUtils";
+import { goToNewTabOnDesktop } from "../utils/browserUtils";
 
 export const JamBaseTicket = (props: any) => {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -18,8 +18,6 @@ export const JamBaseTicket = (props: any) => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-
-  const isMobile = width <= 768;
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -49,9 +47,7 @@ export const JamBaseTicket = (props: any) => {
           outline: `thick double ${COLOURS.primary_blue}`,
         },
       }}
-      onClick={() => {
-        isMobile ? goTo(props.ticket.link) : goToNewTab(props.ticket.link);
-      }}
+      onClick={() => goToNewTabOnDesktop(props.ticket.link)}
     >
       <Box sx={{ display: "flex", alignItems: "left" }}>
         <img

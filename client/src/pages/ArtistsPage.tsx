@@ -21,7 +21,7 @@ import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
 import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
 import { Email } from "../Rifflandia/Email";
-import { goToNewTab, reloadPage, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop, reloadPage, scrollToTop } from "../utils/browserUtils";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -219,7 +219,7 @@ export const ArtistsPage = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -398,7 +398,9 @@ export const ArtistsPage = () => {
       <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
       <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
+      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
 
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );

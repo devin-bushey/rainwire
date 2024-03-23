@@ -35,7 +35,7 @@ import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
 import useSpotifyAuth from "../../hooks/useSpotifyAuth";
 import { Email } from "../Email";
 import { SignInModalRifflandia } from "../SignInModalRifflandia";
-import { goToNewTab, reloadPage, scrollToTop } from "../../utils/browserUtils";
+import { goToNewTab, goToNewTabOnDesktop, reloadPage, scrollToTop } from "../../utils/browserUtils";
 
 export const Rifflandia = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
@@ -218,7 +218,7 @@ export const Rifflandia = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -243,6 +243,7 @@ export const Rifflandia = () => {
 
   const handleDayClick = (day: string) => {
     if (selectedDays.includes(day)) {
+      setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
       setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
     } else {
       setSelectedDays([...selectedDays, day]);
@@ -281,91 +282,209 @@ export const Rifflandia = () => {
   }, [totalTickets, loadMore]);
 
   if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
-    return <LoadingRifflandia />;
-  }
+    if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
+      return <LoadingRifflandia />;
+    }
 
-  // if (!token || !spotifyInfo || !spotifyInfo.access) {
-  //   return <Login />;
-  // }
+    // if (!token || !spotifyInfo || !spotifyInfo.access) {
+    //   return <Login />;
+    // }
 
-  return (
-    <>
-      <div className="sidebar sidebar-svg-park"></div>
-      <div className="sidebar sidebar-svg-electric"></div>
+    return (
+      <>
+        <div className="sidebar sidebar-svg-park"></div>
+        <div className="sidebar sidebar-svg-electric"></div>
 
-      {isLoading && <Spinner />}
+        {isLoading && <Spinner />}
 
-      <Box
-        className="riff-background"
-        sx={{
-          textAlign: "center",
-          paddingBottom: "24px",
-          backgroundColor: RIFFLANDIA_COLOURS.background,
-        }}
-      >
-        <Container
+        <Box
+          className="riff-background"
           sx={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "center",
+            textAlign: "center",
+            paddingBottom: "24px",
+            backgroundColor: RIFFLANDIA_COLOURS.background,
           }}
         >
-          <Box
+          <Container
             sx={{
-              backgroundColor: RIFFLANDIA_COLOURS.background,
-              borderRadius: "10px",
-              minWidth: "300px",
-              maxWidth: "550px",
-              margin: "8px",
+              display: "flex",
+              flex: 1,
+              justifyContent: "center",
             }}
           >
-            <Typography
+            <Box
               sx={{
-                fontSize: "4rem",
-                fontFamily: "Lobster, cursive",
-                //fontWeight: '700',
-                letterSpacing: "2px",
-                color: "black",
+                backgroundColor: RIFFLANDIA_COLOURS.background,
+                borderRadius: "10px",
+                minWidth: "300px",
+                maxWidth: "550px",
+                margin: "8px",
               }}
             >
-              Record Shop
-            </Typography>
-
-            <Card
-              sx={{
-                backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
-                marginTop: "24px",
-                marginBottom: "64px",
-              }}
-            >
-              <Typography sx={{ marginTop: "12px" }}>
-                Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                Rifflandia.
+              <Typography
+                sx={{
+                  fontSize: "4rem",
+                  fontFamily: "Lobster, cursive",
+                  //fontWeight: '700',
+                  letterSpacing: "2px",
+                  color: "black",
+                }}
+              >
+                Record Shop
               </Typography>
 
-              <Typography sx={{ marginTop: "24px" }}>
-                The playlist can be pre-populated and created right on your account!
-              </Typography>
+              <Card
+                sx={{
+                  backgroundColor: RIFFLANDIA_COLOURS.fill_pale_purple,
+                  marginTop: "24px",
+                  marginBottom: "64px",
+                }}
+              >
+                <Typography sx={{ marginTop: "12px" }}>
+                  Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing
+                  at Rifflandia.
+                </Typography>
 
-              {(!token || !spotifyInfo || !spotifyInfo.access) && (
-                <>
-                  <Typography sx={{ marginTop: "24px", fontWeight: "900" }}>
-                    Start by signing into your Spotify account:
-                  </Typography>
+                <Typography sx={{ marginTop: "24px" }}>
+                  The playlist can be pre-populated and created right on your account!
+                </Typography>
+
+                {(!token || !spotifyInfo || !spotifyInfo.access) && (
+                  <>
+                    <Typography sx={{ marginTop: "24px", fontWeight: "900" }}>
+                      Start by signing into your Spotify account:
+                    </Typography>
+
+                    <Button
+                      onClick={isInAppBrowser}
+                      className={`${isSignInShaking ? "shaking" : ""}`}
+                      variant="contained"
+                      sx={{
+                        backgroundColor: RIFFLANDIA_COLOURS.light_blue,
+                        ":hover": {
+                          backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                        },
+                        color: "black",
+                        width: "100%",
+                        marginTop: "24px",
+
+                        justifyContent: "center",
+                        height: "48px",
+                      }}
+                    >
+                      <img
+                        src={spotifyIcon}
+                        alt="spotify_logo"
+                        width="20px"
+                        height="20px"
+                        style={{ marginRight: "16px" }}
+                      />
+                      <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
+                    </Button>
+
+                    <div style={{ marginTop: "48px" }}>Or preview an already created playlist:</div>
+                    <Button
+                      onClick={() => goToNewTabOnDesktop("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
+                      variant="outlined"
+                      sx={{
+                        backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
+                        ":hover": {
+                          backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
+                        },
+                        color: "rgba(3, 49, 46, 0.8)",
+                        width: "230px",
+                        marginTop: "12px",
+                        //marginBottom: '24px',
+                        justifyContent: "center",
+                        height: "36px",
+                      }}
+                    >
+                      <img
+                        src={spotifyIcon}
+                        alt="spotify_logo"
+                        width="20px"
+                        height="20px"
+                        style={{ marginRight: "16px" }}
+                      />
+                      <Typography
+                        sx={{
+                          fontSize: "0.8rem",
+                          fontWeight: "700",
+                          paddingBottom: 0,
+                        }}
+                      >
+                        Preview a Playlist
+                      </Typography>
+                    </Button>
+                    <div
+                      style={{
+                        fontSize: "0.7rem",
+                        marginBottom: "24px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      (but its more fun to customize your own)
+                    </div>
+                  </>
+                )}
+
+                <div style={{ marginTop: "32px" }}>
+                  <a
+                    href="/"
+                    style={{
+                      fontSize: "1.1rem",
+                      fontFamily: "Lobster, cursive",
+                      marginRight: "4px",
+                    }}
+                  >
+                    Record Shop{" "}
+                  </a>{" "}
+                  by{" "}
+                  <button className="email-btn" onClick={handleOpenEmail}>
+                    Devin B
+                  </button>
+                </div>
+                <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
+              </Card>
+            </Box>
+          </Container>
+
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ maxWidth: "900px" }}>
+              <Container
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-evenly",
+                  paddingBottom: !showLoadMoreBtn ? "120px" : "",
+                  alignItems: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    backgroundColor: RIFFLANDIA_COLOURS.background,
+                    borderRadius: "10px",
+                    width: "300px",
+                    margin: "8px",
+                  }}
+                >
+                  <img src={TITLE} alt="Rifflandia Title" />
 
                   <Button
-                    onClick={isInAppBrowser}
-                    className={`${isSignInShaking ? "shaking" : ""}`}
+                    onClick={handleCreatePlaylist}
                     variant="contained"
+                    className={`${isShaking ? "shaking" : ""}`}
+                    //className="btn--click-me-riff create-playlist"
                     sx={{
                       backgroundColor: RIFFLANDIA_COLOURS.light_blue,
                       ":hover": {
                         backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
                       },
                       color: "black",
-                      width: "100%",
-                      marginTop: "24px",
-
+                      width: "300px",
+                      marginTop: "16px",
+                      marginBottom: "16px",
                       justifyContent: "center",
                       height: "48px",
                     }}
@@ -375,142 +494,31 @@ export const Rifflandia = () => {
                       alt="spotify_logo"
                       width="20px"
                       height="20px"
-                      style={{ marginRight: "16px" }}
+                      style={{ marginRight: "8px" }}
                     />
-                    <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
+                    <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
                   </Button>
+                </Box>
 
-                  <div style={{ marginTop: "48px" }}>Or preview an already created playlist:</div>
-                  <Button
-                    onClick={() => goToNewTab("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
-                    variant="outlined"
-                    sx={{
-                      backgroundColor: RIFFLANDIA_COLOURS.light_blue_opaque,
-                      ":hover": {
-                        backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
-                      },
-                      color: "rgba(3, 49, 46, 0.8)",
-                      width: "230px",
-                      marginTop: "12px",
-                      //marginBottom: '24px',
-                      justifyContent: "center",
-                      height: "36px",
-                    }}
-                  >
-                    <img
-                      src={spotifyIcon}
-                      alt="spotify_logo"
-                      width="20px"
-                      height="20px"
-                      style={{ marginRight: "16px" }}
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: "0.8rem",
-                        fontWeight: "700",
-                        paddingBottom: 0,
-                      }}
-                    >
-                      Preview a Playlist
-                    </Typography>
-                  </Button>
-                  <div
-                    style={{
-                      fontSize: "0.7rem",
-                      marginBottom: "24px",
-                      marginTop: "4px",
-                    }}
-                  >
-                    (but its more fun to customize your own)
-                  </div>
-                </>
-              )}
-
-              <div style={{ marginTop: "32px" }}>
-                <a
-                  href="/"
-                  style={{
-                    fontSize: "1.1rem",
-                    fontFamily: "Lobster, cursive",
-                    marginRight: "4px",
-                  }}
-                >
-                  Record Shop{" "}
-                </a>{" "}
-                by{" "}
-                <button className="email-btn" onClick={handleOpenEmail}>
-                  Devin B
-                </button>
-              </div>
-              <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
-            </Card>
-          </Box>
-        </Container>
-
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box sx={{ maxWidth: "900px" }}>
-            <Container
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
-                paddingBottom: !showLoadMoreBtn ? "120px" : "",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  backgroundColor: RIFFLANDIA_COLOURS.background,
-                  borderRadius: "10px",
-                  width: "300px",
-                  margin: "8px",
-                }}
-              >
-                <img src={TITLE} alt="Rifflandia Title" />
-
-                <Button
-                  onClick={handleCreatePlaylist}
-                  variant="contained"
-                  className={`${isShaking ? "shaking" : ""}`}
-                  //className="btn--click-me-riff create-playlist"
+                <Box
                   sx={{
-                    backgroundColor: RIFFLANDIA_COLOURS.light_blue,
-                    ":hover": {
-                      backgroundColor: RIFFLANDIA_COLOURS.dark_blue,
-                    },
-                    color: "black",
+                    backgroundColor: RIFFLANDIA_COLOURS.background,
+                    borderRadius: "10px",
                     width: "300px",
-                    marginTop: "16px",
-                    marginBottom: "16px",
-                    justifyContent: "center",
-                    height: "48px",
+                    margin: "8px",
                   }}
                 >
-                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
-                  <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
-                </Button>
-              </Box>
+                  <Button
+                    variant="outlined"
+                    sx={{ marginBottom: "16px", width: "300px" }}
+                    onClick={() => {
+                      setShowSettings(!showSettings);
+                    }}
+                  >
+                    Customize
+                  </Button>
 
-              <Box
-                sx={{
-                  backgroundColor: RIFFLANDIA_COLOURS.background,
-                  borderRadius: "10px",
-                  width: "300px",
-                  margin: "8px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{ marginBottom: "16px", width: "300px" }}
-                  onClick={() => {
-                    setShowSettings(!showSettings);
-                  }}
-                >
-                  Customize
-                </Button>
-
-                {/* <Button
+                  {/* <Button
                   variant="outlined"
                   sx={{ marginBottom: '16px', width: '300px' }}
                   //onClick={() => goToNewTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
@@ -519,96 +527,107 @@ export const Rifflandia = () => {
                   About
                 </Button> */}
 
-                <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: "300px" }}>
-                  <Box sx={{ marginRight: "12px", height: "20px", width: "20px" }}>
-                    <CHERRIES />
-                  </Box>
-                  Buy Tickets
-                </Button>
-
-                {!(!token || !spotifyInfo || !spotifyInfo.access) && (
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      marginTop: "16px",
-                      marginBottom: "16px",
-                      width: "300px",
-                    }}
-                    onClick={logOut}
-                    //onClick={() => goToNewTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
-                    //onClick={handleAboutClick}
-                  >
-                    Sign Out
+                  <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: "300px" }}>
+                    <Box sx={{ marginRight: "12px", height: "20px", width: "20px" }}>
+                      <CHERRIES />
+                    </Box>
+                    Buy Tickets
                   </Button>
+
+                  {!(!token || !spotifyInfo || !spotifyInfo.access) && (
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        marginTop: "16px",
+                        marginBottom: "16px",
+                        width: "300px",
+                      }}
+                      onClick={logOut}
+                      //onClick={() => goToNewTab('https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh')}
+                      //onClick={handleAboutClick}
+                    >
+                      Sign Out
+                    </Button>
+                  )}
+                </Box>
+
+                {showSelectDays && (
+                  <div>
+                    <SelectDays
+                      selectedDays={selectedDays}
+                      handleDayClick={handleDayClick}
+                      handleCloseSelectDays={handleCloseSelectDays}
+                      colour={RIFFLANDIA_COLOURS.fill_pale_green}
+                    />
+                  </div>
                 )}
-              </Box>
 
-              {showSelectDays && (
-                <div>
-                  <SelectDays
-                    selectedDays={selectedDays}
-                    handleDayClick={handleDayClick}
-                    handleCloseSelectDays={handleCloseSelectDays}
-                    colour={RIFFLANDIA_COLOURS.fill_pale_green}
-                  />
-                </div>
-              )}
+                {showSettings && (
+                  <div>
+                    <Options
+                      selectedDays={selectedDays}
+                      handleDayClick={handleDayClick}
+                      handleCloseSelectDays={handleCloseSelectDays}
+                      totalTickets={totalTickets}
+                      numTopTracks={numTopTracks}
+                      handleNumTopTracks={handleNumTopTracks}
+                      handleCloseSettings={handleCloseSettings}
+                      colour={RIFFLANDIA_COLOURS.fill_pale_green}
+                      token={token}
+                      spotifyInfo={spotifyInfo}
+                    />
+                  </div>
+                )}
 
-              {showSettings && (
-                <div>
-                  <Options
-                    selectedDays={selectedDays}
-                    handleDayClick={handleDayClick}
-                    handleCloseSelectDays={handleCloseSelectDays}
-                    totalTickets={totalTickets}
-                    numTopTracks={numTopTracks}
-                    handleNumTopTracks={handleNumTopTracks}
-                    handleCloseSettings={handleCloseSettings}
-                    colour={RIFFLANDIA_COLOURS.fill_pale_green}
-                    token={token}
-                    spotifyInfo={spotifyInfo}
-                  />
-                </div>
-              )}
+                <TicketContainer
+                  tickets={tickets}
+                  showGenres={false}
+                  isLoadingTickets={false}
+                  isErrorTickets={isErrorTickets}
+                  cardColours={RIFF_CARD_COLOURS}
+                />
+              </Container>
+            </Box>
+          </Box>
 
-              <TicketContainer
-                tickets={tickets}
-                showGenres={false}
-                isLoadingTickets={false}
-                isErrorTickets={isErrorTickets}
-                cardColours={RIFF_CARD_COLOURS}
-              />
-            </Container>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {showLoadMoreBtn && (
+              <Button
+                variant="outlined"
+                sx={{ marginTop: "24px", marginBottom: "120px" }}
+                onClick={() => {
+                  setLoadMore(loadMore + loadInterval);
+                }}
+              >
+                Load more
+              </Button>
+            )}
           </Box>
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          {showLoadMoreBtn && (
-            <Button
-              variant="outlined"
-              sx={{ marginTop: "24px", marginBottom: "120px" }}
-              onClick={() => {
-                setLoadMore(loadMore + loadInterval);
-              }}
-            >
-              Load more
-            </Button>
-          )}
-        </Box>
-      </Box>
+        <StickyButton
+          handleCreatePlaylist={handleCreatePlaylist}
+          backgroundColor={RIFFLANDIA_COLOURS.light_blue}
+          hoverColor={RIFFLANDIA_COLOURS.dark_blue}
+          barColor={RIFFLANDIA_COLOURS.fill_light_orange}
+        />
 
-      <StickyButton
-        handleCreatePlaylist={handleCreatePlaylist}
-        backgroundColor={RIFFLANDIA_COLOURS.light_blue}
-        hoverColor={RIFFLANDIA_COLOURS.dark_blue}
-        barColor={RIFFLANDIA_COLOURS.fill_light_orange}
-      />
+        <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
 
-      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
+        <SignInModalRifflandia
+          open={openSignIn}
+          handleClose={handleCloseSignIn}
+          handleRedirectToAuth={isInAppBrowser}
+        />
+        <SignInModalRifflandia
+          open={openSignIn}
+          handleClose={handleCloseSignIn}
+          handleRedirectToAuth={isInAppBrowser}
+        />
 
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
-
-      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
-    </>
-  );
+        <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+        <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      </>
+    );
+  }
 };

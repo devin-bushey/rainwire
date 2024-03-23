@@ -10,7 +10,7 @@ import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 
 import { ReactComponent as CHERRIES } from "../Rifflandia/images/cherries.svg";
-import { goToNewTab, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
 const LoginPage = memo(() => {
   const navigate = useNavigate();
@@ -129,7 +129,7 @@ const LoginPage = memo(() => {
         </Box>
 
         <Button
-          onClick={() => goToNewTab("https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q")}
+          onClick={() => goToNewTabOnDesktop("https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q")}
           variant="outlined"
           sx={{
             marginTop: "4px",

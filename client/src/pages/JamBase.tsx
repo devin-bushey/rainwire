@@ -17,7 +17,7 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
-import { goToNewTab, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -132,7 +132,7 @@ export const JamBase = () => {
               message: "Successfully created a playlist!",
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -270,6 +270,7 @@ export const JamBase = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );

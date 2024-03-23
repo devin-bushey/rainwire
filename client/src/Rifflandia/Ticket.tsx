@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { RIFFLANDIA_COLOURS } from "./constants/colours";
 import { useEffect, useState } from "react";
-import { goTo, goToNewTab } from "../utils/browserUtils";
+import { goToNewTabOnDesktop } from "../utils/browserUtils";
 
 export const Ticket = (props: any) => {
   const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
@@ -20,8 +20,6 @@ export const Ticket = (props: any) => {
     };
   }, []);
 
-  const isMobile = width <= 768;
-
   return (
     <Card
       sx={{
@@ -33,9 +31,7 @@ export const Ticket = (props: any) => {
           outline: `thick double ${RIFFLANDIA_COLOURS.dark_blue}`,
         },
       }}
-      onClick={() => {
-        isMobile ? goTo(props.ticket.link) : goToNewTab(props.ticket.link);
-      }}
+      onClick={() => goToNewTabOnDesktop(props.ticket.link)}
     >
       <Box sx={{ display: "flex", alignItems: "left" }}>
         <img
