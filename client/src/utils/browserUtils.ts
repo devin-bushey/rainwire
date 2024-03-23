@@ -1,3 +1,5 @@
+import { isMobile } from "./responsiveUtils";
+
 /**
  * Refreshes the current tab
  */
@@ -14,6 +16,14 @@ export const goTo = (url: string) => window.location.assign(url);
  * @param url the string url to go to
  */
 export const goToNewTab = (url: string) => window.open(url);
+
+/**
+ * On desktop, goes to the provided url in a *new tab*
+ * On mobile, goes to the provided url on the *current tab*
+ * @param url  the string url to go to
+ */
+export const goToNewTabOnDesktop = (url: string) => isMobile() ? goTo(url) : goToNewTab(url);
+
 
 /**
  * Scrolls to the top of the current tab

@@ -1,28 +1,23 @@
-import { Box, Container, TextField } from "@mui/material";
-import Button from "@mui/material/Button/Button";
-import Typography from "@mui/material/Typography";
-import { COLOURS } from "../theme/AppStyles";
-import { useContext, useEffect, useState } from "react";
-import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { SnackBarContext } from "../App";
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
-import {
-  AUTH_ENDPOINT,
-  BASE_REDIRECT_URI,
-  CLIENT_ID,
-  SCOPES,
-} from "../constants/auth";
-import { InAppModal } from "../components/InAppModal";
-import { UseQueryOptions, useQuery } from "react-query";
-import { CreateNewPlaylistJamBase, GetJamBase } from "../apiManager/RecordShop";
-import { Loading } from "./Loading";
-import { Spinner } from "../Rifflandia/Spinner";
-import { StickyButton } from "../components/StickyButton";
-import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
-import { ErrorJamBase } from "../components/ErrorJamBase";
-import { JamBaseEmpty } from "../components/JamBaseEmpty";
-import "../styles/ClickMe.css";
-import { goToNewTab, scrollToTop } from "../utils/browserUtils";
+import { Box, Container, TextField } from '@mui/material';
+import Button from '@mui/material/Button/Button';
+import Typography from '@mui/material/Typography';
+import { COLOURS } from '../theme/AppStyles';
+import { useContext, useEffect, useState } from 'react';
+import spotifyIcon from '../spotifyLogos/Spotify_Icon_RGB_Black.png';
+import { SnackBarContext } from '../App';
+import useSpotifyAuth from '../hooks/useSpotifyAuth';
+import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from '../constants/auth';
+import { InAppModal } from '../components/InAppModal';
+import { UseQueryOptions, useQuery } from 'react-query';
+import { CreateNewPlaylistJamBase, GetJamBase } from '../apiManager/RecordShop';
+import { Loading } from './Loading';
+import { Spinner } from '../Rifflandia/Spinner';
+import { StickyButton } from '../components/StickyButton';
+import { JamBaseTicketContainer } from '../components/JamBaseTicketContainer';
+import { ErrorJamBase } from '../components/ErrorJamBase';
+import { JamBaseEmpty } from '../components/JamBaseEmpty';
+import '../styles/ClickMe.css';
+import { goToNewTabOnDesktop, scrollToTop } from '../utils/browserUtils';
 
 export const JamBase = () => {
   const queryOptions: UseQueryOptions = {
@@ -36,10 +31,10 @@ export const JamBase = () => {
 
   // Spotify Authentication / Authorization
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + "explore";
+  const redirectUri = BASE_REDIRECT_URI + 'explore';
 
   // City of choice
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState('');
 
   // React Query to fetch the data (concerts)
   const { isLoading, isError, data } = useQuery({
@@ -48,7 +43,7 @@ export const JamBase = () => {
     ...queryOptions,
   });
 
-  const [jamLocation, setJamLocation] = useState("");
+  const [jamLocation, setJamLocation] = useState('');
   const [cantFindSongs, setCantFindSongs] = useState(false);
 
   useEffect(() => {
@@ -79,9 +74,9 @@ export const JamBase = () => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    document.title = "Record Shop | Explore";
+    document.title = 'Record Shop | Explore';
     scrollToTop();
-    setCity("");
+    setCity('');
   }, []);
 
   useEffect(() => {
@@ -97,7 +92,7 @@ export const JamBase = () => {
       snackBar.setSnackBar({
         showSnackbar: true,
         setShowSnackbar: () => true,
-        message: "Error creating playlist. Please try again.",
+        message: 'Error creating playlist. Please try again.',
         isError: true,
       });
       setIsError(false);
@@ -117,7 +112,7 @@ export const JamBase = () => {
 
   const handleRedirectToAuth = () => {
     location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      "%20",
+      '%20',
     )}&response_type=token&show_dialog=true`;
   };
 
@@ -134,10 +129,10 @@ export const JamBase = () => {
             snackBar.setSnackBar({
               showSnackbar: true,
               setShowSnackbar: () => true,
-              message: "Successfully created a playlist!",
+              message: 'Successfully created a playlist!',
               isError: false,
             });
-            goToNewTab(res.data);
+            goToNewTabOnDesktop(res.data);
           } else {
             setIsError(true);
           }
@@ -152,17 +147,17 @@ export const JamBase = () => {
     }
   };
 
-  const [textFieldValue, setTextFieldValue] = useState("");
+  const [textFieldValue, setTextFieldValue] = useState('');
 
   const onKeyPress = (e: any) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       e.preventDefault();
       handleSubmit();
     }
   };
 
   const handleSubmit = () => {
-    console.log("Submitted value:", textFieldValue);
+    console.log('Submitted value:', textFieldValue);
     setCantFindSongs(false);
     setCity(textFieldValue);
   };
@@ -170,15 +165,13 @@ export const JamBase = () => {
   return (
     <>
       {isCreatingPlaylist && <Spinner />}
-      <Box
-        sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}
-      >
+      <Box sx={{ marginTop: '-24px', textAlign: 'center', paddingBottom: '125px' }}>
         <Typography
           sx={{
-            fontSize: "4rem",
-            fontFamily: "Lobster, Arial, sans-serif",
-            letterSpacing: "2px",
-            marginBottom: "12px",
+            fontSize: '4rem',
+            fontFamily: 'Lobster, Arial, sans-serif',
+            letterSpacing: '2px',
+            marginBottom: '12px',
           }}
         >
           Record Shop
@@ -186,20 +179,17 @@ export const JamBase = () => {
 
         <Box
           sx={{
-            borderRadius: "10px",
-            minWidth: "300px",
-            margin: "8px",
-            marginBottom: "24px",
+            borderRadius: '10px',
+            minWidth: '300px',
+            margin: '8px',
+            marginBottom: '24px',
           }}
         >
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <form onSubmit={handleSubmit}>
-              {" "}
+              {' '}
               {/* Use a form element */}
-              <Box
-                className="btn--click-me"
-                sx={{ minWidth: "300px", display: "flex" }}
-              >
+              <Box className="btn--click-me" sx={{ minWidth: '300px', display: 'flex' }}>
                 <TextField
                   fullWidth
                   id="outlined-basic"
@@ -209,14 +199,9 @@ export const JamBase = () => {
                   onChange={(e) => setTextFieldValue(e.target.value)}
                   onKeyDown={onKeyPress}
                 />
-                <Button
-                  onClick={handleSubmit}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ marginLeft: "6px" }}
-                >
+                <Button onClick={handleSubmit} variant="outlined" color="primary" sx={{ marginLeft: '6px' }}>
                   GO
-                </Button>{" "}
+                </Button>{' '}
                 {/* Submit button */}
               </Box>
             </form>
@@ -225,29 +210,23 @@ export const JamBase = () => {
           <Button
             onClick={handleCreatePlaylist}
             variant="contained"
-            className={`${isShaking ? "shaking" : ""}`}
+            className={`${isShaking ? 'shaking' : ''}`}
             sx={{
               backgroundColor: COLOURS.blue,
-              ":hover": {
+              ':hover': {
                 backgroundColor: COLOURS.card_colours[1],
               },
-              color: "black",
-              width: "300px",
-              marginTop: "24px",
-              marginBottom: "16px",
-              justifyContent: "center",
-              height: "48px",
+              color: 'black',
+              width: '300px',
+              marginTop: '24px',
+              marginBottom: '16px',
+              justifyContent: 'center',
+              height: '48px',
             }}
           >
-            <img
-              src={spotifyIcon}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px" }}
-            />
+            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: '8px' }} />
             <Typography sx={{ paddingBottom: 0 }}>
-              {token && spotifyInfo.access ? "Create playlist" : "Sign in"}
+              {token && spotifyInfo.access ? 'Create playlist' : 'Sign in'}
             </Typography>
           </Button>
 
@@ -255,33 +234,30 @@ export const JamBase = () => {
             !isLoading &&
             !isError &&
             city != null &&
-            city != "" &&
+            city != '' &&
             jamLocation != null &&
-            jamLocation != "" && (
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Box sx={{ minWidth: "300px" }}>
+            jamLocation != '' && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ minWidth: '300px' }}>
                   <Typography>{`Showing artists in ${jamLocation}`}</Typography>
                 </Box>
               </Box>
             )}
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box sx={{ maxWidth: "900px" }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ maxWidth: '900px' }}>
             <Container
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
               }}
             >
-              {(city === "" || !city) && <JamBaseEmpty />}
-              {(city != "" || city) && isLoading && !isError && <Loading />}
-              {(((city != "" || city) && !isLoading && isError) ||
-                cantFindSongs) && <ErrorJamBase />}
-              {(city != "" || city) && !isLoading && !isError && (
-                <JamBaseTicketContainer tickets={data} />
-              )}
+              {(city === '' || !city) && <JamBaseEmpty />}
+              {(city != '' || city) && isLoading && !isError && <Loading />}
+              {(((city != '' || city) && !isLoading && isError) || cantFindSongs) && <ErrorJamBase />}
+              {(city != '' || city) && !isLoading && !isError && <JamBaseTicketContainer tickets={data} />}
             </Container>
           </Box>
         </Box>
@@ -294,11 +270,7 @@ export const JamBase = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <InAppModal
-        open={open}
-        handleClose={handleClose}
-        handleRedirectToAuth={handleRedirectToAuth}
-      />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };
