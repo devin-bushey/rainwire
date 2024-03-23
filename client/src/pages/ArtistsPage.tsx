@@ -282,7 +282,6 @@ export const ArtistsPage = () => {
                 }}
               >
                 <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
-                <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
 
                 <Button
                   onClick={handleCreatePlaylist}
