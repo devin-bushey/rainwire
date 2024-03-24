@@ -11,6 +11,7 @@ import healthchecker from "./controller/healthchecker";
 import { victoriaRouter } from "./controller/victoriaController";
 import { rifflandiaRouter } from "./controller/rifflandiaController";
 import { jamBaseRouter } from "./controller/jamBaseController";
+import { playlistRouter } from "./controller/playlistController";
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use("/", healthchecker);
 app.use(victoriaRouter);
 app.use(rifflandiaRouter);
 app.use(jamBaseRouter);
+app.use(playlistRouter);
 
 app.listen(port, async () => {
   // perform a database connection when server starts

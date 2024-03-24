@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "compile": "tsc --noemit",
-    "start:dev": "npm run format && npx nodemon",
+    "start:dev": "npx nodemon",
     "start": "node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier . --write"
