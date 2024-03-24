@@ -2,7 +2,7 @@ import express from "express";
 import dbo from "../database/conn";
 import {
   addPlaylistItems,
-  getPlaylistId,
+  getPlaylist,
   getPlaylistItems,
   removePlaylistItems,
 } from "../helpers/spotifyPlaylistHelpers";
@@ -40,11 +40,16 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
   const { token, userId, playlistName, collectionName } = req.body;
 
   try {
-    const playlistId = await getPlaylistId({
+    const playlist = await getPlaylist({
       token: token,
       user_id: userId,
       playlistName: playlistName,
     });
+
+    if (!playlist) {
+      response.status(404).json(`Whoops! Playlist not found :(`);
+      return;
+    }
 
     const artistsFromDatabase = await getArtistsFromDatabase(collectionName);
     const sortedArtists = filterRecent(artistsFromDatabase);
@@ -56,13 +61,54 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
       }
     }
 
-    const tracksFromUsersPlaylist = await getPlaylistItems({ token: token, playlistId: playlistId });
-    await removePlaylistItems({ token: token, playlistId: playlistId, tracks: tracksFromUsersPlaylist });
-    await addPlaylistItems({ token: token, playlistId: playlistId, tracks: tracksFromDatabase });
+    const tracksFromUsersPlaylist = await getPlaylistItems({ token: token, playlistId: playlist.id });
+    await removePlaylistItems({ token: token, playlistId: playlist.id, tracks: tracksFromUsersPlaylist });
+    await addPlaylistItems({ token: token, playlistId: playlist.id, tracks: tracksFromDatabase });
 
     response
       .status(200)
       .json(`Yassss! Successfully updated the playlist: ${playlistName} with ${tracksFromDatabase.length} tracks.`);
+  } catch (err) {
+    response.status(400).json(`Whoops! Something went wrong :(`);
+  }
+});
+
+playlistRouter.route("/playlist").get(async (req, response) => {
+  const { token, userId, playlistName } = req.query;
+
+  try {
+    const playlist = await getPlaylist({
+      token: token,
+      user_id: userId,
+      playlistName: playlistName,
+    });
+
+    if (!playlist?.id) {
+      response.status(404).json(`Whoops! Playlist not found :(`);
+      return;
+    }
+
+    const tracksFromUsersPlaylist = await getPlaylistItems({ token: token, playlistId: playlist.id });
+
+    const playlistObj = {
+      id: playlist.id,
+      name: playlist.name,
+      image: playlist.image,
+      uri: playlist.uri,
+      tracks: tracksFromUsersPlaylist,
+    };
+
+    response.status(200).json(playlistObj);
+  } catch (err) {
+    response.status(400).json(`Whoops! Something went wrong :(`);
+  }
+});
+
+playlistRouter.route("/playlist/track").post(async (req, response) => {
+  const { token, playlistId, trackId } = req.body;
+  try {
+    await addPlaylistItems({ token: token, playlistId: playlistId, tracks: [trackId] });
+    response.status(200).json(`Yay, added ${trackId} to ${playlistId}`);
   } catch (err) {
     response.status(400).json(`Whoops! Something went wrong :(`);
   }
