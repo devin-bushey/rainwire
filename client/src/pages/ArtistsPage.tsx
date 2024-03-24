@@ -1,13 +1,11 @@
-import { Box, Collapse, Container, Fade } from "@mui/material";
+import { Box, Collapse, Container, Fade, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import Typography from "@mui/material/Typography";
 import { COLOURS } from "../theme/AppStyles";
 import { useContext, useEffect, useState } from "react";
-import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import { LOCATIONS } from "../constants/locations";
-import { BASE_REDIRECT_URI } from "../constants/auth";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { TicketContainer } from "../components/TicketContainer";
@@ -18,11 +16,18 @@ import { Loading } from "./Loading";
 import { Spinner } from "../Rifflandia/Spinner";
 import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
-import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
-import { handleRedirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
+import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { primaryButtonColours } from "../theme/AppStyles";
-import { Email } from "../Rifflandia/Email";
-import { goToNewTabOnDesktop, reloadPage, scrollToTop } from "../utils/browserUtils";
+import {
+  getCurrentUrlWithoutParams,
+  goToNewTabOnDesktop,
+  isInAppBrowser,
+  reloadPage,
+  scrollToTop,
+} from "../utils/browserUtils";
+import { SpotifyIcon } from "../components/Icons";
+import { isMobile } from "../utils/responsiveUtils";
+import { AUTH_ENDPOINT, CLIENT_ID, SCOPES } from "../constants/auth";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -34,11 +39,6 @@ export const ArtistsPage = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + "artists";
-
-  const [openSignIn, setOpenSignIn] = useState(false);
-  const handleOpenSignIn = () => setOpenSignIn(true);
-  const handleCloseSignIn = () => setOpenSignIn(false);
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
@@ -65,16 +65,16 @@ export const ArtistsPage = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
 
   const [isShaking, setIsShaking] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [isInAppModalOpen, setIsInAppModalOpen] = useState(false);
+  const openInAppModal = () => setIsInAppModalOpen(true);
+  const closeInAppModal = () => setIsInAppModalOpen(false);
 
   useEffect(() => {
     document.title = "Record Shop | Artists";
@@ -182,50 +182,36 @@ export const ArtistsPage = () => {
     setShowSettings(false);
   };
 
-  const isInAppBrowser = () => {
-    // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
-    if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
-      // in-app browser detected
-      handleOpen();
-      return true;
-    }
-    handleRedirectToAuth();
-    return false;
+  const handleCreatePlaylist = async () => {
+    setIsCreatingPlaylist(true);
+    await CreateNewPlaylist({
+      city: origin,
+      token: token,
+      user_id: spotifyInfo.user_id,
+      numTopTracks: numTopTracks,
+      //tickets: filteredGenres.length > 0 ? tickets : null,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          snackBar.setSnackBar({
+            showSnackbar: true,
+            setShowSnackbar: () => true,
+            message: "Successfully created a playlist!",
+            isError: false,
+          });
+          goToNewTabOnDesktop(res.data);
+        } else {
+          setIsError(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsError(true);
+      });
+    setIsCreatingPlaylist(false);
   };
 
-  const handleCreatePlaylist = async () => {
-    if (isLoggedIntoSpotify()) {
-      setIsLoading(true);
-      await CreateNewPlaylist({
-        city: origin,
-        token: token,
-        user_id: spotifyInfo.user_id,
-        numTopTracks: numTopTracks,
-        //tickets: filteredGenres.length > 0 ? tickets : null,
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            snackBar.setSnackBar({
-              showSnackbar: true,
-              setShowSnackbar: () => true,
-              message: "Successfully created a playlist!",
-              isError: false,
-            });
-            goToNewTabOnDesktop(res.data);
-          } else {
-            setIsError(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsError(true);
-        });
-      setIsLoading(false);
-    } else {
-      // handleOpenSignIn();
-      isInAppBrowser();
-    }
-  };
+  const handleSignIn = () => (isInAppBrowser() ? openInAppModal() : redirectToAuth());
 
   if (isLoadingTickets) {
     return <Loading />;
@@ -240,7 +226,7 @@ export const ArtistsPage = () => {
           margin: "8px",
         }}
       >
-        {isLoggedIntoSpotify() && (
+        {isLoggedIntoSpotify() ? (
           <>
             <Button
               onClick={handleCreatePlaylist}
@@ -255,7 +241,7 @@ export const ArtistsPage = () => {
                 height: "48px",
               }}
             >
-              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+              {SpotifyIcon}
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
@@ -269,6 +255,41 @@ export const ArtistsPage = () => {
               Customize
             </Button>
           </>
+        ) : isMobile() ? (
+          <Button
+            onClick={handleSignIn}
+            variant="contained"
+            className={`${isShaking ? "shaking" : ""}`}
+            sx={{
+              ...primaryButtonColours,
+              color: "black",
+              width: "300px",
+              marginBottom: "16px",
+              justifyContent: "center",
+              height: "48px",
+            }}
+          >
+            {SpotifyIcon}
+            <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
+          </Button>
+        ) : (
+          <Tooltip title="Sign in to unlock this feature!">
+            <span>
+              <Button
+                variant="contained"
+                sx={{
+                  width: "300px",
+                  marginBottom: "16px",
+                  justifyContent: "center",
+                  height: "48px",
+                }}
+                disabled
+              >
+                {SpotifyIcon}
+                <Typography sx={{ paddingBottom: 0, color: "grey" }}>Create playlist</Typography>
+              </Button>
+            </span>
+          </Tooltip>
         )}
       </Box>
 
@@ -289,7 +310,7 @@ export const ArtistsPage = () => {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isCreatingPlaylist && <Spinner />}
       <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
@@ -363,9 +384,7 @@ export const ArtistsPage = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
-
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={isInAppModalOpen} handleClose={closeInAppModal} handleRedirectToAuth={redirectToAuth} />
     </>
   );
 };

@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
+import { BASE_REDIRECT_URI } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import { UseQueryOptions, useQuery } from "react-query";
 import { CreateNewPlaylistJamBase, GetJamBase } from "../apiManager/RecordShop";
@@ -17,7 +17,7 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
-import { handleRedirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
+import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
@@ -107,7 +107,7 @@ export const JamBase = () => {
       handleOpen();
       return true;
     }
-    handleRedirectToAuth();
+    redirectToAuth();
     return false;
   };
 
@@ -264,8 +264,7 @@ export const JamBase = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={redirectToAuth} />
     </>
   );
 };

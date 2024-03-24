@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography, 
 import MenuIcon from "@mui/icons-material/Menu";
 import { COLOURS, primaryButtonColours, secondaryButtonColours } from "../theme/AppStyles";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { handleRedirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
+import { redirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Email } from "../Rifflandia/Email";
@@ -97,7 +97,7 @@ const ProfileMenu = () => {
 
   const SignInButton = (
     <Button
-      onClick={handleRedirectToAuth()}
+      onClick={() => redirectToAuth()}
       variant="contained"
       sx={{
         ...primaryButtonColours,
@@ -174,7 +174,7 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
 
   const SignInButton = (
     <Button
-      onClick={handleRedirectToAuth()}
+      onClick={() => redirectToAuth()}
       variant="contained"
       sx={{
         ...accountButtonAppearance,
