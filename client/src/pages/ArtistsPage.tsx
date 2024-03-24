@@ -1,4 +1,4 @@
-import { Box, Collapse, Container, Fade, Tooltip } from "@mui/material";
+import { Box, Collapse, Container, Fade, IconButton, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import Typography from "@mui/material/Typography";
 import { COLOURS } from "../theme/AppStyles";
@@ -18,16 +18,10 @@ import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
 import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { primaryButtonColours } from "../theme/AppStyles";
-import {
-  getCurrentUrlWithoutParams,
-  goToNewTabOnDesktop,
-  isInAppBrowser,
-  reloadPage,
-  scrollToTop,
-} from "../utils/browserUtils";
+import { goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../utils/browserUtils";
 import { SpotifyIcon } from "../components/Icons";
 import { isMobile } from "../utils/responsiveUtils";
-import { AUTH_ENDPOINT, CLIENT_ID, SCOPES } from "../constants/auth";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -227,7 +221,7 @@ export const ArtistsPage = () => {
         }}
       >
         {isLoggedIntoSpotify() ? (
-          <>
+          <Box sx={{ display: "flex" }}>
             <Button
               onClick={handleCreatePlaylist}
               variant="contained"
@@ -235,8 +229,7 @@ export const ArtistsPage = () => {
               sx={{
                 ...primaryButtonColours,
                 color: "black",
-                width: "300px",
-                marginBottom: "16px",
+                width: "100%",
                 justifyContent: "center",
                 height: "48px",
               }}
@@ -245,16 +238,16 @@ export const ArtistsPage = () => {
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
-            <Button
-              variant="outlined"
-              sx={{ marginBottom: "12px", width: "300px" }}
+            <IconButton
+              sx={{ marginLeft: "8px" }}
               onClick={() => {
                 setShowSettings(!showSettings);
               }}
+              disableRipple={true}
             >
-              Customize
-            </Button>
-          </>
+              <SettingsIcon />
+            </IconButton>
+          </Box>
         ) : isMobile() ? (
           <Button
             onClick={handleSignIn}
