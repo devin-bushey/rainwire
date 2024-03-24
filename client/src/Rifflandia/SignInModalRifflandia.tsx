@@ -5,15 +5,13 @@ import { useContext } from "react";
 import { SnackBarContext } from "../App";
 import copy from "../assets/images/copy-solid.svg";
 
-export const SignInModalRifflandia = ({
-  open,
-  handleClose,
-  handleRedirectToAuth,
-}: {
-  open: any;
-  handleClose: any;
-  handleRedirectToAuth: any;
-}) => {
+type SignInModalRifflandiaProps = {
+  isOpen: boolean;
+  closeModal: () => void;
+  handleRedirectToAuth: () => void;
+};
+
+export const SignInModalRifflandia = ({ isOpen, closeModal, handleRedirectToAuth }: SignInModalRifflandiaProps) => {
   const snackBar = useContext(SnackBarContext);
 
   const handleCopy = () => {
@@ -27,8 +25,8 @@ export const SignInModalRifflandia = ({
   };
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={isOpen}
+      onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

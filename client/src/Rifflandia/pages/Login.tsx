@@ -8,7 +8,7 @@ import { RIFFLANDIA_COLOURS } from "../constants/colours";
 import TITLE from "../images/title.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import "../styles/styles.css";
-import { Email } from "../Email";
+import { ContactUsModal } from "../ContactUsModal";
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../../constants/auth";
 import { useNavigate } from "react-router-dom";
 import { goToNewTab, scrollToTop } from "../../utils/browserUtils";
@@ -242,9 +242,9 @@ export const Login = () => {
         </footer>
       </Box>
 
-      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
+      <ContactUsModal isOpen={openEmail} setOpenEmail={setOpenEmail} />
 
-      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModalRifflandia open={open} closeModal={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
     </>
   );
 };

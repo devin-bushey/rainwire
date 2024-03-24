@@ -7,7 +7,7 @@ import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { redirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Email } from "../Rifflandia/Email";
+import { ContactUsModal } from "../Rifflandia/ContactUsModal";
 
 type MenuProps = {
   handleOpenEmail: () => void;
@@ -36,7 +36,7 @@ const Navbarr = () => {
         </Container>
       </AppBar>
 
-      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
+      <ContactUsModal isOpen={openEmail} setOpenEmail={setOpenEmail} />
 
       <Container sx={{ marginTop: "24px" }}>
         <Outlet />
