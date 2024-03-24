@@ -101,11 +101,28 @@ export const Rifflandia = () => {
           backgroundColor: COLOURS.pageBackground,
         }}
       >
-        <Description
-          token={token}
-          spotifyInfo={spotifyInfo}
-          handleRedirectToAuthForBrowser={handleRedirectToAuthForBrowser}
-        />
+        <Container
+          sx={{
+            display: "flex",
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              minWidth: "300px",
+              maxWidth: "550px",
+            }}
+          >
+            <RecordShopTitle />
+
+            <Description
+              token={token}
+              spotifyInfo={spotifyInfo}
+              handleRedirectToAuthForBrowser={handleRedirectToAuthForBrowser}
+            />
+          </Box>
+        </Container>
 
         <Artists
           token={token}
@@ -125,134 +142,138 @@ type DescriptionProps = {
   handleRedirectToAuthForBrowser: () => void;
 };
 
-const Description = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: DescriptionProps) => {
+const Description = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: DescriptionProps) => (
+  <Card
+    sx={{
+      backgroundColor: COLOURS.descriptionBackground,
+      marginTop: "24px",
+      marginBottom: "64px",
+    }}
+  >
+    <Typography sx={{ marginTop: "12px" }}>
+      Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+      Rifflandia.
+    </Typography>
+
+    <Typography sx={{ marginTop: "24px" }}>
+      The playlist can be pre-populated and created right on your account!
+    </Typography>
+
+    {(!token || !spotifyInfo || !spotifyInfo.access) && (
+      <>
+        <SignInButton handleRedirectToAuthForBrowser={handleRedirectToAuthForBrowser} />
+
+        <PreviewPlaylistButton />
+      </>
+    )}
+
+    <BuiltByRecordShop />
+  </Card>
+);
+
+const RecordShopTitle = () => (
+  <>
+    <Typography
+      sx={{
+        fontSize: "4rem",
+        fontFamily: "Lobster, cursive",
+        letterSpacing: "2px",
+        color: "black",
+      }}
+    >
+      Record Shop
+    </Typography>
+  </>
+);
+
+const SignInButton = ({ handleRedirectToAuthForBrowser }: { handleRedirectToAuthForBrowser: () => void }) => (
+  <>
+    <Typography sx={{ marginTop: "24px", fontWeight: "900" }}>Start by signing into your Spotify account:</Typography>
+
+    <Button
+      onClick={handleRedirectToAuthForBrowser}
+      variant="contained"
+      sx={{
+        ...PRIMARY_BUTTON_SX,
+        width: "100%",
+        marginTop: "24px",
+
+        justifyContent: "center",
+        height: "48px",
+      }}
+    >
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
+      <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
+    </Button>
+  </>
+);
+
+const PreviewPlaylistButton = () => (
+  <>
+    <div style={{ marginTop: "48px" }}>Or preview an already created playlist:</div>
+
+    <Button
+      onClick={() => goToNewTabOnDesktop("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
+      variant="outlined"
+      sx={{
+        ...SECONDARY_BUTTON_SX,
+        width: "230px",
+        marginTop: "12px",
+        justifyContent: "center",
+        height: "36px",
+      }}
+    >
+      <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
+      <Typography
+        sx={{
+          fontSize: "0.8rem",
+          fontWeight: "700",
+          paddingBottom: 0,
+        }}
+      >
+        Preview a Playlist
+      </Typography>
+    </Button>
+
+    <div
+      style={{
+        fontSize: "0.7rem",
+        marginBottom: "24px",
+        marginTop: "4px",
+      }}
+    >
+      (but its more fun to customize your own)
+    </div>
+  </>
+);
+
+const BuiltByRecordShop = () => {
   const [isContactUsModalOpen, setIsContactUsModalOpen] = useState(false);
   const openContactUsModal = () => setIsContactUsModalOpen(true);
   const closeContactUsModal = () => setIsContactUsModalOpen(false);
 
   return (
-    <Container
-      sx={{
-        display: "flex",
-        flex: 1,
-        justifyContent: "center",
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: COLOURS.pageBackground,
-          borderRadius: "10px",
-          minWidth: "300px",
-          maxWidth: "550px",
-          margin: "8px",
-        }}
-      >
-        <Typography
-          sx={{
-            fontSize: "4rem",
+    <>
+      <div style={{ marginTop: "32px" }}>
+        <a
+          href="/"
+          style={{
+            fontSize: "1.1rem",
             fontFamily: "Lobster, cursive",
-            letterSpacing: "2px",
-            color: "black",
+            marginRight: "4px",
           }}
         >
-          Record Shop
-        </Typography>
-
-        <Card
-          sx={{
-            backgroundColor: COLOURS.descriptionBackground,
-            marginTop: "24px",
-            marginBottom: "64px",
-          }}
-        >
-          <Typography sx={{ marginTop: "12px" }}>
-            Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-            Rifflandia.
-          </Typography>
-
-          <Typography sx={{ marginTop: "24px" }}>
-            The playlist can be pre-populated and created right on your account!
-          </Typography>
-
-          {(!token || !spotifyInfo || !spotifyInfo.access) && (
-            <>
-              <Typography sx={{ marginTop: "24px", fontWeight: "900" }}>
-                Start by signing into your Spotify account:
-              </Typography>
-
-              <Button
-                onClick={handleRedirectToAuthForBrowser}
-                variant="contained"
-                sx={{
-                  ...PRIMARY_BUTTON_SX,
-                  width: "100%",
-                  marginTop: "24px",
-
-                  justifyContent: "center",
-                  height: "48px",
-                }}
-              >
-                <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
-                <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
-              </Button>
-
-              <div style={{ marginTop: "48px" }}>Or preview an already created playlist:</div>
-              <Button
-                onClick={() => goToNewTabOnDesktop("https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh")}
-                variant="outlined"
-                sx={{
-                  ...SECONDARY_BUTTON_SX,
-                  width: "230px",
-                  marginTop: "12px",
-                  justifyContent: "center",
-                  height: "36px",
-                }}
-              >
-                <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
-                <Typography
-                  sx={{
-                    fontSize: "0.8rem",
-                    fontWeight: "700",
-                    paddingBottom: 0,
-                  }}
-                >
-                  Preview a Playlist
-                </Typography>
-              </Button>
-              <div
-                style={{
-                  fontSize: "0.7rem",
-                  marginBottom: "24px",
-                  marginTop: "4px",
-                }}
-              >
-                (but its more fun to customize your own)
-              </div>
-            </>
-          )}
-
-          <div style={{ marginTop: "32px" }}>
-            <a
-              href="/"
-              style={{
-                fontSize: "1.1rem",
-                fontFamily: "Lobster, cursive",
-                marginRight: "4px",
-              }}
-            >
-              Record Shop{" "}
-            </a>{" "}
-            by{" "}
-            <button className="email-btn" onClick={openContactUsModal}>
-              Devin B
-            </button>
-          </div>
-          <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
-        </Card>
-      </Box>
+          Record Shop{" "}
+        </a>{" "}
+        by{" "}
+        <button className="email-btn" onClick={openContactUsModal}>
+          Devin B
+        </button>
+      </div>
+      <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
 
       <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} />
-    </Container>
+    </>
   );
 };
 
@@ -284,8 +305,6 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const openSignInModal = () => setIsSignInModalOpen(true);
   const closeSignInModal = () => setIsSignInModalOpen(false);
-
-  const [isPlaylistButtonShaking, setPlaylistButtonShaking] = useState(false);
 
   const query = useQuery({
     queryKey: [Festivals.Rifflandia],
@@ -358,27 +377,6 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
     }
   }, [totalTickets, loadMore]);
 
-  useEffect(() => {
-    // Function to handle the shaking logic
-    function shakePlaylistButton() {
-      setPlaylistButtonShaking(true);
-
-      // Reset the shaking animation after a delay (in this case, 2 seconds)
-      setTimeout(() => {
-        setPlaylistButtonShaking(false);
-      }, 2000);
-    }
-
-    // Call the shakePlaylistButton function initially
-    shakePlaylistButton();
-
-    // Set the interval to call the shakePlaylistButton function every x milliseconds
-    const intervalId = setInterval(shakePlaylistButton, 8000);
-
-    // Clean up the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, []);
-
   const handleNumTopTracks = (event: any) => {
     setNumTopTracks(event.target.value);
   };
@@ -439,14 +437,12 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
     }
   };
 
-  const handleBuyTickets = () => goToNewTab(TICKET_LINK);
-
   if (isLoadingTickets || query.isLoading || query.isFetching || query.isRefetching) {
     return <LoadingRifflandia />;
   } else {
     return (
       <Box>
-        <Box sx={{ display: "flex", justifyContent: "center", backgroundColor: COLOURS.pageBackground }}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
           {isLoadingPlaylist && <Spinner />}
 
           <Box sx={{ maxWidth: "900px" }}>
@@ -469,22 +465,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
               >
                 <img src={TITLE} alt="Rifflandia Title" />
 
-                <Button
-                  onClick={handleCreatePlaylist}
-                  variant="contained"
-                  className={`${isPlaylistButtonShaking ? "shaking" : ""}`}
-                  sx={{
-                    ...PRIMARY_BUTTON_SX,
-                    width: "300px",
-                    marginTop: "16px",
-                    marginBottom: "16px",
-                    justifyContent: "center",
-                    height: "48px",
-                  }}
-                >
-                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
-                  <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
-                </Button>
+                <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
               </Box>
 
               <Box
@@ -494,12 +475,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
                   margin: "8px",
                 }}
               >
-                <Button className="buy_tickets" onClick={handleBuyTickets} variant="outlined" sx={{ width: "300px" }}>
-                  <Box sx={{ marginRight: "12px", height: "20px", width: "20px" }}>
-                    <CHERRIES />
-                  </Box>
-                  Buy Tickets
-                </Button>
+                <BuyTicketsButton />
 
                 <Button
                   variant="outlined"
@@ -511,19 +487,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
                   Customize
                 </Button>
 
-                {!(!token || !spotifyInfo || !spotifyInfo.access) && (
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      marginTop: "16px",
-                      marginBottom: "16px",
-                      width: "300px",
-                    }}
-                    onClick={logOut}
-                  >
-                    Sign Out
-                  </Button>
-                )}
+                {!(!token || !spotifyInfo || !spotifyInfo.access) && <SignOutButton />}
               </Box>
 
               {showSelectDays && (
@@ -595,3 +559,72 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
     );
   }
 };
+
+const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePlaylist: () => Promise<void> }) => {
+  const [isPlaylistButtonShaking, setPlaylistButtonShaking] = useState(false);
+
+  useEffect(() => {
+    // Function to handle the shaking logic
+    function shakePlaylistButton() {
+      setPlaylistButtonShaking(true);
+
+      // Reset the shaking animation after a delay (in this case, 2 seconds)
+      setTimeout(() => {
+        setPlaylistButtonShaking(false);
+      }, 2000);
+    }
+
+    // Call the shakePlaylistButton function initially
+    shakePlaylistButton();
+
+    // Set the interval to call the shakePlaylistButton function every x milliseconds
+    const intervalId = setInterval(shakePlaylistButton, 8000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <>
+      <Button
+        onClick={handleCreatePlaylist}
+        variant="contained"
+        className={`${isPlaylistButtonShaking ? "shaking" : ""}`}
+        sx={{
+          ...PRIMARY_BUTTON_SX,
+          width: "300px",
+          marginTop: "16px",
+          marginBottom: "16px",
+          justifyContent: "center",
+          height: "48px",
+        }}
+      >
+        <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+        <Typography sx={{ paddingBottom: 0 }}>Generate playlist</Typography>
+      </Button>
+    </>
+  );
+};
+
+const BuyTicketsButton = () => (
+  <Button className="buy_tickets" onClick={() => goToNewTab(TICKET_LINK)} variant="outlined" sx={{ width: "300px" }}>
+    <Box sx={{ marginRight: "12px", height: "20px", width: "20px" }}>
+      <CHERRIES />
+    </Box>
+    Buy Tickets
+  </Button>
+);
+
+const SignOutButton = () => (
+  <Button
+    variant="outlined"
+    sx={{
+      marginTop: "16px",
+      marginBottom: "16px",
+      width: "300px",
+    }}
+    onClick={logOut}
+  >
+    Sign Out
+  </Button>
+);
