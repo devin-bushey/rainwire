@@ -24,7 +24,7 @@ const Navbarr = () => {
         sx={{
           backgroundColor: "transparent",
           boxShadow: "none",
-          padding: "15px 0",
+          padding: "15px 0 0 0",
         }}
       >
         <Container>
