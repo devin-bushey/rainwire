@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
+import { BASE_REDIRECT_URI } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import { UseQueryOptions, useQuery } from "react-query";
 import { CreateNewPlaylistJamBase, GetJamBase } from "../apiManager/RecordShop";
@@ -17,6 +17,7 @@ import { JamBaseTicketContainer } from "../components/JamBaseTicketContainer";
 import { ErrorJamBase } from "../components/ErrorJamBase";
 import { JamBaseEmpty } from "../components/JamBaseEmpty";
 import "../styles/ClickMe.css";
+import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
 export const JamBase = () => {
@@ -106,14 +107,8 @@ export const JamBase = () => {
       handleOpen();
       return true;
     }
-    handleRedirectToAuth();
+    redirectToAuth();
     return false;
-  };
-
-  const handleRedirectToAuth = () => {
-    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      "%20",
-    )}&response_type=token&show_dialog=true`;
   };
 
   const handleCreatePlaylist = async () => {
@@ -207,29 +202,28 @@ export const JamBase = () => {
             </form>
           </Box>
 
-          <Button
-            onClick={handleCreatePlaylist}
-            variant="contained"
-            className={`${isShaking ? "shaking" : ""}`}
-            sx={{
-              backgroundColor: COLOURS.blue,
-              ":hover": {
-                backgroundColor: COLOURS.card_colours[1],
-              },
-              color: "black",
-              width: "300px",
-              marginTop: "24px",
-              marginBottom: "16px",
-              justifyContent: "center",
-              height: "48px",
-            }}
-          >
-            <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
-            <Typography sx={{ paddingBottom: 0 }}>
-              {token && spotifyInfo.access ? "Create playlist" : "Sign in"}
-            </Typography>
-          </Button>
-
+          {isLoggedIntoSpotify() && (
+            <Button
+              onClick={handleCreatePlaylist}
+              variant="contained"
+              className={`${isShaking ? "shaking" : ""}`}
+              sx={{
+                backgroundColor: COLOURS.blue,
+                ":hover": {
+                  backgroundColor: COLOURS.card_colours[1],
+                },
+                color: "black",
+                width: "300px",
+                marginTop: "24px",
+                marginBottom: "16px",
+                justifyContent: "center",
+                height: "48px",
+              }}
+            >
+              <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+            </Button>
+          )}
           {!cantFindSongs &&
             !isLoading &&
             !isError &&
@@ -270,8 +264,7 @@ export const JamBase = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={redirectToAuth} />
     </>
   );
 };

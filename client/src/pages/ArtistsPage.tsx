@@ -1,13 +1,11 @@
-import { Box, Container } from "@mui/material";
+import { Box, Collapse, Container, Fade, IconButton, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import Typography from "@mui/material/Typography";
 import { COLOURS } from "../theme/AppStyles";
 import { useContext, useEffect, useState } from "react";
-import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SnackBarContext } from "../App";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import { LOCATIONS } from "../constants/locations";
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { TicketContainer } from "../components/TicketContainer";
@@ -15,13 +13,15 @@ import { InAppModal } from "../components/InAppModal";
 import { UseQueryOptions, useQuery } from "react-query";
 import { CreateNewPlaylist, GetTickets } from "../apiManager/RecordShop";
 import { Loading } from "./Loading";
-import { useNavigate } from "react-router-dom";
 import { Spinner } from "../Rifflandia/Spinner";
 import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
-import { SignInModalRifflandia } from "../Rifflandia/SignInModalRifflandia";
-import { Email } from "../Rifflandia/Email";
-import { goToNewTabOnDesktop, reloadPage, scrollToTop } from "../utils/browserUtils";
+import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
+import { primaryButtonColours } from "../theme/AppStyles";
+import { goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../utils/browserUtils";
+import { SpotifyIcon } from "../components/Icons";
+import { isMobile } from "../utils/responsiveUtils";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export const ArtistsPage = () => {
   const queryOptions: UseQueryOptions = {
@@ -33,11 +33,6 @@ export const ArtistsPage = () => {
   };
 
   const { token, spotifyInfo } = useSpotifyAuth();
-  const redirectUri = BASE_REDIRECT_URI + "artists";
-
-  const [openSignIn, setOpenSignIn] = useState(false);
-  const handleOpenSignIn = () => setOpenSignIn(true);
-  const handleCloseSignIn = () => setOpenSignIn(false);
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
@@ -64,19 +59,16 @@ export const ArtistsPage = () => {
   const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [isErrorTickets, setIsErrorTickets] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
 
   const [isShaking, setIsShaking] = useState(false);
 
   const [isError, setIsError] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [openEmail, setOpenEmail] = useState(false);
-  const handleOpenEmail = () => setOpenEmail(true);
+  const [isInAppModalOpen, setIsInAppModalOpen] = useState(false);
+  const openInAppModal = () => setIsInAppModalOpen(true);
+  const closeInAppModal = () => setIsInAppModalOpen(false);
 
   useEffect(() => {
     document.title = "Record Shop | Artists";
@@ -184,75 +176,134 @@ export const ArtistsPage = () => {
     setShowSettings(false);
   };
 
-  const isInAppBrowser = () => {
-    // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
-    if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
-      // in-app browser detected
-      handleOpen();
-      return true;
-    }
-    handleRedirectToAuth();
-    return false;
-  };
-
-  const handleRedirectToAuth = () => {
-    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      "%20",
-    )}&response_type=token&show_dialog=true`;
-  };
-
   const handleCreatePlaylist = async () => {
-    if (token && spotifyInfo.access) {
-      setIsLoading(true);
-      await CreateNewPlaylist({
-        city: origin,
-        token: token,
-        user_id: spotifyInfo.user_id,
-        numTopTracks: numTopTracks,
-        //tickets: filteredGenres.length > 0 ? tickets : null,
-      })
-        .then((res) => {
-          if (res.status === 201) {
-            snackBar.setSnackBar({
-              showSnackbar: true,
-              setShowSnackbar: () => true,
-              message: "Successfully created a playlist!",
-              isError: false,
-            });
-            goToNewTabOnDesktop(res.data);
-          } else {
-            setIsError(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
+    setIsCreatingPlaylist(true);
+    await CreateNewPlaylist({
+      city: origin,
+      token: token,
+      user_id: spotifyInfo.user_id,
+      numTopTracks: numTopTracks,
+      //tickets: filteredGenres.length > 0 ? tickets : null,
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          snackBar.setSnackBar({
+            showSnackbar: true,
+            setShowSnackbar: () => true,
+            message: "Successfully created a playlist!",
+            isError: false,
+          });
+          goToNewTabOnDesktop(res.data);
+        } else {
           setIsError(true);
-        });
-      setIsLoading(false);
-    } else {
-      // handleOpenSignIn();
-      isInAppBrowser();
-    }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsError(true);
+      });
+    setIsCreatingPlaylist(false);
   };
 
-  const navigate = useNavigate();
-  const logOut = () => {
-    if (token && spotifyInfo.access) {
-      localStorage.clear();
-      navigate("/");
-      reloadPage();
-    } else {
-      isInAppBrowser();
-    }
-  };
+  const handleSignIn = () => (isInAppBrowser() ? openInAppModal() : redirectToAuth());
 
   if (isLoadingTickets) {
     return <Loading />;
   }
 
+  const PlaylistCreation = (
+    <>
+      <Box
+        sx={{
+          borderRadius: "10px",
+          width: "300px",
+          margin: "8px",
+        }}
+      >
+        {isLoggedIntoSpotify() ? (
+          <Box sx={{ display: "flex" }}>
+            <Button
+              onClick={handleCreatePlaylist}
+              variant="contained"
+              className={`${isShaking ? "shaking" : ""}`}
+              sx={{
+                ...primaryButtonColours,
+                color: "black",
+                width: "100%",
+                justifyContent: "center",
+                height: "48px",
+              }}
+            >
+              {SpotifyIcon}
+              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
+            </Button>
+
+            <IconButton
+              sx={{ marginLeft: "8px" }}
+              onClick={() => {
+                setShowSettings(!showSettings);
+              }}
+              disableRipple={true}
+            >
+              <SettingsIcon />
+            </IconButton>
+          </Box>
+        ) : isMobile() ? (
+          <Button
+            onClick={handleSignIn}
+            variant="contained"
+            className={`${isShaking ? "shaking" : ""}`}
+            sx={{
+              ...primaryButtonColours,
+              color: "black",
+              width: "300px",
+              marginBottom: "16px",
+              justifyContent: "center",
+              height: "48px",
+            }}
+          >
+            {SpotifyIcon}
+            <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
+          </Button>
+        ) : (
+          <Tooltip title="Sign in to unlock this feature!">
+            <span>
+              <Button
+                variant="contained"
+                sx={{
+                  width: "300px",
+                  marginBottom: "16px",
+                  justifyContent: "center",
+                  height: "48px",
+                }}
+                disabled
+              >
+                {SpotifyIcon}
+                <Typography sx={{ paddingBottom: 0, color: "grey" }}>Create playlist</Typography>
+              </Button>
+            </span>
+          </Tooltip>
+        )}
+      </Box>
+
+      <Collapse in={showSettings} collapsedSize={0}>
+        <Settings
+          totalTickets={totalTickets}
+          filteredGenres={filteredGenres}
+          numTopTracks={numTopTracks}
+          handleFilteredGenres={handleFilteredGenres}
+          handleNumTopTracks={handleNumTopTracks}
+          handleDeleteGenre={handleDeleteGenre}
+          handleCloseSettings={handleCloseSettings}
+          handleClearGenres={handleClearGenres}
+        />
+      </Collapse>
+    </>
+  );
+
   return (
     <>
-      {isLoading && <Spinner />}
+      {isCreatingPlaylist && <Spinner />}
       <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
         <Typography
           sx={{
@@ -282,90 +333,20 @@ export const ArtistsPage = () => {
                 }}
               >
                 <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
-
-                <Button
-                  onClick={handleCreatePlaylist}
-                  variant="contained"
-                  className={`${isShaking ? "shaking" : ""}`}
-                  sx={{
-                    backgroundColor: COLOURS.blue,
-                    ":hover": {
-                      backgroundColor: COLOURS.card_colours[1],
-                    },
-                    color: "black",
-                    width: "300px",
-                    marginTop: "24px",
-                    marginBottom: "16px",
-                    justifyContent: "center",
-                    height: "48px",
-                  }}
-                >
-                  <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
-                  <Typography sx={{ paddingBottom: 0 }}>
-                    {token && spotifyInfo.access ? "Create playlist" : "Sign in"}
-                  </Typography>
-                </Button>
               </Box>
 
-              <Box
-                sx={{
-                  borderRadius: "10px",
-                  width: "300px",
-                  margin: "8px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{ marginBottom: "12px", width: "300px" }}
-                  onClick={() => {
-                    setShowSettings(!showSettings);
-                  }}
-                >
-                  Customize
-                </Button>
+              {PlaylistCreation}
+            </Container>
 
-                {token && spotifyInfo.access && (
-                  <Button
-                    variant="outlined"
-                    sx={{ marginBottom: "12px", width: "300px" }}
-                    onClick={() => {
-                      logOut();
-                    }}
-                  >
-                    Sign out
-                  </Button>
-                )}
-
-                {website && (
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      marginBottom: "12px",
-                      marginRight: "18px",
-                      width: "300px",
-                    }}
-                    onClick={handleOpenEmail}
-                  >
-                    Contact me!
-                  </Button>
-                )}
-              </Box>
-
-              {showSettings && (
-                <div>
-                  <Settings
-                    totalTickets={totalTickets}
-                    filteredGenres={filteredGenres}
-                    numTopTracks={numTopTracks}
-                    handleFilteredGenres={handleFilteredGenres}
-                    handleNumTopTracks={handleNumTopTracks}
-                    handleDeleteGenre={handleDeleteGenre}
-                    handleCloseSettings={handleCloseSettings}
-                    handleClearGenres={handleClearGenres}
-                  />
-                </div>
-              )}
-
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+                paddingTop: "24px",
+              }}
+            >
               <TicketContainer
                 tickets={tickets}
                 showGenres={showGenres}
@@ -375,6 +356,7 @@ export const ArtistsPage = () => {
             </Container>
           </Box>
         </Box>
+
         {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
           <Button
             variant="outlined"
@@ -395,13 +377,7 @@ export const ArtistsPage = () => {
         barColor={COLOURS.card_colours[2]}
       />
 
-      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
-
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
-      <SignInModalRifflandia open={openSignIn} handleClose={handleCloseSignIn} handleRedirectToAuth={isInAppBrowser} />
-
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
-      <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModal open={isInAppModalOpen} handleClose={closeInAppModal} handleRedirectToAuth={redirectToAuth} />
     </>
   );
 };

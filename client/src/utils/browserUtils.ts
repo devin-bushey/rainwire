@@ -1,6 +1,16 @@
 import { isMobile } from "./responsiveUtils";
 
 /**
+ * Gets the URL of the current page
+ */
+export const getCurrentUrl = () => window.location.href;
+
+/**
+ * Gets the URL of the current page
+ */
+export const getCurrentUrlWithoutParams = () => getCurrentUrl().split("?")[0].split("#")[0];
+
+/**
  * Refreshes the current tab
  */
 export const reloadPage = () => window.location.reload();
@@ -28,3 +38,7 @@ export const goToNewTabOnDesktop = (url: string) => (isMobile() ? goTo(url) : go
  * Scrolls to the top of the current tab
  */
 export const scrollToTop = () => window.scrollTo(0, 0);
+
+export const isInAppBrowser = () => {
+  return !!navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i);
+};

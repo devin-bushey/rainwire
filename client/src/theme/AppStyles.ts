@@ -25,3 +25,19 @@ export const COLOURS = {
 
   spotify_green: "#1DB954",
 };
+
+export const primaryButtonColours = {
+  color: COLOURS.black,
+  backgroundColor: COLOURS.blue,
+  ":hover": {
+    backgroundColor: COLOURS.card_colours[1],
+  },
+};
+
+export const secondaryButtonColours = {
+  color: COLOURS.black,
+  backgroundColor: COLOURS.accent_01,
+  ":hover": {
+    backgroundColor: COLOURS.card_colours[1],
+  },
+};
