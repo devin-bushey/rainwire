@@ -5,12 +5,12 @@
   "description": "A web application to help you connect with music in your city",
   "author": "Devin Bushey & friends",
   "scripts": {
-    "backend-install": "cd backend && npm i",
-    "client-install": "cd client && npm i",
-    "install": "concurrently --kill-others \"npm i\" \"npm run backend-install\" \"npm run client-install\"",
-    "backend-dev": "cd backend && npm run start:dev",
-    "client-dev": "cd client && npm run start",
-    "dev": "concurrently --kill-others \"npm run backend-dev\" \"npm run client-dev\""
+    "setup-backend": "cd backend && npm i",
+    "setup-client": "cd client && npm i",
+    "setup": "concurrently --kill-others \"npm i\" \"npm run setup-backend\" \"npm run setup-client\"",
+    "dev-backend": "cd backend && npm run start:dev",
+    "dev-client": "cd client && npm run start",
+    "dev": "concurrently --kill-others \"npm run dev-backend\" \"npm run dev-client\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
