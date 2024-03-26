@@ -1,5 +1,4 @@
-import { Modal, Box, Typography, Button } from "@mui/material";
-import { RIFFLANDIA_COLOURS } from "./constants/colours";
+import { Modal, Box } from "@mui/material";
 
 type SpotifyPreviewModalProps = {
   artistId?: string;

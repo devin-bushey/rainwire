@@ -7,10 +7,10 @@ type TicketProps = {
   ticket: any;
   image: string;
   bgcolor: string;
-  setSpotifyPreviewArtist: (artistUrl: string) => void;
+  setSpotifyPreviewArtistId: (artistId: string) => void;
 };
 
-export const Ticket = ({ ticket, image, bgcolor, setSpotifyPreviewArtist }: TicketProps) => {
+export const Ticket = ({ ticket, image, bgcolor, setSpotifyPreviewArtistId }: TicketProps) => {
   const description = ticket.day ? `${ticket.day} at ${ticket.weekend}` : ticket.ticket_date;
 
   return (
@@ -25,7 +25,7 @@ export const Ticket = ({ ticket, image, bgcolor, setSpotifyPreviewArtist }: Tick
         },
       }}
     >
-      <Box onClick={() => setSpotifyPreviewArtist(ticket.band_id)}>
+      <Box onClick={() => setSpotifyPreviewArtistId(ticket.band_id)}>
         <Box sx={{ display: "flex", alignItems: "left" }}>
           <img
             src={spotifyLogoBlack}

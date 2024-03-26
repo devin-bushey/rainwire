@@ -9,13 +9,13 @@ export const TicketContainer = ({
   isLoadingTickets,
   isErrorTickets,
   cardColours,
-  setSpotifyPreviewArtist,
+  spotifyPreviewArtistId,
 }: {
   tickets: any;
   isLoadingTickets: boolean;
   isErrorTickets: boolean;
   cardColours?: string[];
-  setSpotifyPreviewArtist: (artistUrl: string) => void;
+  spotifyPreviewArtistId: (artistId: string) => void;
 }) => {
   const colors = cardColours ? cardColours : COLOURS.card_colours;
 
@@ -41,7 +41,7 @@ export const TicketContainer = ({
         ticket={currentTicket}
         image={imageURL}
         bgcolor={colors[index % colors.length]}
-        setSpotifyPreviewArtist={setSpotifyPreviewArtist}
+        setSpotifyPreviewArtistId={setSpotifyPreviewArtistId}
       />
     );
   });

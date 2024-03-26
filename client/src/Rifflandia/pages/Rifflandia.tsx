@@ -307,7 +307,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
   const openSignInModal = () => setIsSignInModalOpen(true);
   const closeSignInModal = () => setIsSignInModalOpen(false);
 
-  const [spotifyPreviewArtist, setSpotifyPreviewArtist] = useState<string | undefined>();
+  const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
 
   const query = useQuery({
     queryKey: [Festivals.Rifflandia],
@@ -526,7 +526,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
                 isLoadingTickets={false}
                 isErrorTickets={isErrorTickets}
                 cardColours={COLOURS.cardColours}
-                setSpotifyPreviewArtist={setSpotifyPreviewArtist}
+                spotifyPreviewArtistId={setSpotifyPreviewArtistId}
               />
             </Container>
           </Box>
@@ -559,7 +559,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
           handleRedirectToAuth={handleRedirectToAuthForBrowser}
         />
 
-        <SpotifyPreviewModal artistId={spotifyPreviewArtist} setArtistId={setSpotifyPreviewArtist} />
+        <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
       </Box>
     );
   }
