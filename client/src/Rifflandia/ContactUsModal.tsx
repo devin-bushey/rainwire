@@ -5,9 +5,13 @@ import { useState, useContext } from "react";
 import { RIFFLANDIA_COLOURS } from "./constants/colours";
 import { SnackBarContext } from "../App";
 
-export const Email = (props: any) => {
+type ContactUsModalProps = {
+  isOpen: boolean;
+  closeModal: () => void;
+};
+
+export const ContactUsModal = ({ isOpen, closeModal }: ContactUsModalProps) => {
   const [message, setMessage] = useState("");
-  const handleCloseEmail = () => props.setOpenEmail(false);
 
   const [toSend, setToSend] = useState({
     from_name: "",
@@ -38,7 +42,7 @@ export const Email = (props: any) => {
           message: "Request sent! We'll be in touch soon!",
           isError: false,
         });
-        handleCloseEmail();
+        closeModal();
       });
   };
 
@@ -48,8 +52,8 @@ export const Email = (props: any) => {
 
   return (
     <Modal
-      open={props.openEmail}
-      onClose={handleCloseEmail}
+      open={isOpen}
+      onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

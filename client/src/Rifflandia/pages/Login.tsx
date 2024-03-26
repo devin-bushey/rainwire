@@ -8,43 +8,34 @@ import { RIFFLANDIA_COLOURS } from "../constants/colours";
 import TITLE from "../images/title.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import "../styles/styles.css";
-import { Email } from "../Email";
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../../constants/auth";
-import { useNavigate } from "react-router-dom";
+import { ContactUsModal } from "../ContactUsModal";
+import { BASE_REDIRECT_URI } from "../../constants/auth";
 import { goToNewTab, scrollToTop } from "../../utils/browserUtils";
+import { redirectToAuth } from "../../utils/spotifyAuthUtils";
 
 export const Login = () => {
-  const redirectUri = BASE_REDIRECT_URI + "rifflandia";
-
-  const navigate = useNavigate();
-
   useEffect(() => {
     document.title = "Record Shop | Rifflandia Login";
     scrollToTop();
   }, []);
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [isInAppModalOpen, setIsInAppModalOpen] = useState(false);
+  const openInAppModal = () => setIsInAppModalOpen(true);
+  const closeInAppModal = () => setIsInAppModalOpen(false);
 
-  const [openEmail, setOpenEmail] = useState(false);
-  const handleOpenEmail = () => setOpenEmail(true);
+  const [isContactUsModalOpen, setIsContactUsModalOpen] = useState(false);
+  const openContactUsModal = () => setIsContactUsModalOpen(true);
+  const closeContactUsModal = () => setIsContactUsModalOpen(false);
 
   const isInAppBrowser = () => {
     // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
     if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
       // in-app browser detected
-      handleOpen();
+      openInAppModal();
       return true;
     }
-    handleRedirectToAuth();
+    redirectToAuth(BASE_REDIRECT_URI + "rifflandia");
     return false;
-  };
-
-  const handleRedirectToAuth = () => {
-    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
-      "%20",
-    )}&response_type=token&show_dialog=true`;
   };
 
   return (
@@ -232,7 +223,7 @@ export const Login = () => {
               Record Shop{" "}
             </a>{" "}
             by{" "}
-            <button className="email-btn" onClick={handleOpenEmail}>
+            <button className="email-btn" onClick={openContactUsModal}>
               Devin B
             </button>
           </div>
@@ -242,9 +233,9 @@ export const Login = () => {
         </footer>
       </Box>
 
-      <Email openEmail={openEmail} setOpenEmail={setOpenEmail} />
+      <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} />
 
-      <InAppModalRifflandia open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+      <InAppModalRifflandia isOpen={isInAppModalOpen} closeModal={closeInAppModal} />
     </>
   );
 };
