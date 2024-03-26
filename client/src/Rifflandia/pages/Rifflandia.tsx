@@ -527,20 +527,20 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
               />
             </Container>
           </Box>
+        </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            {showLoadMoreBtn && (
-              <Button
-                variant="outlined"
-                sx={{ marginTop: "24px", marginBottom: "120px" }}
-                onClick={() => {
-                  setLoadMore(loadMore + LOAD_INTERVAL);
-                }}
-              >
-                Load more
-              </Button>
-            )}
-          </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {showLoadMoreBtn && (
+            <Button
+              variant="outlined"
+              sx={{ marginTop: "24px", marginBottom: "120px" }}
+              onClick={() => {
+                setLoadMore(loadMore + LOAD_INTERVAL);
+              }}
+            >
+              Load more
+            </Button>
+          )}
         </Box>
 
         <StickyButton
