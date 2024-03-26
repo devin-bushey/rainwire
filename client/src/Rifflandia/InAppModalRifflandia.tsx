@@ -61,7 +61,7 @@ export const InAppModalRifflandia = ({ isOpen, closeModal }: InAppModalRifflandi
           }}
         >
           <Button
-            onClick={() => redirectToAuth(BASE_REDIRECT_URI + "rifflandia")}
+            onClick={() => redirectToAuth()}
             variant="contained"
             sx={{
               width: "100%",
