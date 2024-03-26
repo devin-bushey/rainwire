@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { SnackBarContext } from "../App";
 import copy from "../assets/images/copy-solid.svg";
 import { redirectToAuth } from "../utils/spotifyAuthUtils";
+import { BASE_REDIRECT_URI } from "../constants/auth";
 
 type InAppModalRifflandiaProps = {
   isOpen: boolean;
@@ -60,7 +61,7 @@ export const InAppModalRifflandia = ({ isOpen, closeModal }: InAppModalRifflandi
           }}
         >
           <Button
-            onClick={() => redirectToAuth}
+            onClick={() => redirectToAuth(BASE_REDIRECT_URI + "rifflandia")}
             variant="contained"
             sx={{
               width: "100%",

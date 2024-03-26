@@ -10,12 +10,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ContactUsModal } from "../Rifflandia/ContactUsModal";
 
 type MenuProps = {
-  handleOpenEmail: () => void;
+  openContactUsModal: () => void;
 };
 
 const Navbarr = () => {
-  const [openEmail, setOpenEmail] = useState(false);
-  const handleOpenEmail = () => setOpenEmail(true);
+  const [isContactUsModalOpen, setIsContactUsModalOpen] = useState(false);
+  const openContactUsModal = () => setIsContactUsModalOpen(true);
+  const closeContactUsModal = () => setIsContactUsModalOpen(false);
 
   return (
     <>
@@ -29,14 +30,14 @@ const Navbarr = () => {
       >
         <Container>
           <Toolbar>
-            <HeaderMenu handleOpenEmail={handleOpenEmail} />
+            <HeaderMenu openContactUsModal={openContactUsModal} />
 
-            <DropdownMenu handleOpenEmail={handleOpenEmail} />
+            <DropdownMenu openContactUsModal={openContactUsModal} />
           </Toolbar>
         </Container>
       </AppBar>
 
-      <ContactUsModal isOpen={openEmail} setOpenEmail={setOpenEmail} />
+      <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} />
 
       <Container sx={{ marginTop: "24px" }}>
         <Outlet />
@@ -45,7 +46,7 @@ const Navbarr = () => {
   );
 };
 
-const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
+const HeaderMenu = ({ openContactUsModal }: MenuProps) => {
   const optionButtonAppearance = {
     my: 2,
     color: "black",
@@ -72,7 +73,7 @@ const HeaderMenu = ({ handleOpenEmail }: MenuProps) => {
         {NavBarMenuOption("Home", "/")}
         {NavBarMenuOption("Victoria", "/artists")}
         {NavBarMenuOption("Explore", "/explore")}
-        <Button sx={optionButtonAppearance} onClick={handleOpenEmail}>
+        <Button sx={optionButtonAppearance} onClick={openContactUsModal}>
           Contact me
         </Button>
       </Box>
@@ -144,7 +145,7 @@ const ProfileMenu = () => {
   );
 };
 
-const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
+const DropdownMenu = ({ openContactUsModal }: MenuProps) => {
   const [navMenuAnchor, setNavMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -250,7 +251,7 @@ const DropdownMenu = ({ handleOpenEmail }: MenuProps) => {
           <Button
             sx={optionButtonAppearance}
             onClick={() => {
-              handleOpenEmail();
+              openContactUsModal();
               handleCloseNavMenu();
             }}
           >
