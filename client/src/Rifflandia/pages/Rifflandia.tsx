@@ -35,6 +35,7 @@ import "../styles/styles.css";
 import TITLE from "../images/title.svg";
 import { ReactComponent as CHERRIES } from "../images/cherries.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import { SpotifyPreviewModal } from "../SpotifyPreviewModal";
 
 const TICKET_LINK = WEBSITE_RIFFLANDIA;
 
@@ -306,6 +307,8 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
   const openSignInModal = () => setIsSignInModalOpen(true);
   const closeSignInModal = () => setIsSignInModalOpen(false);
 
+  const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
+
   const query = useQuery({
     queryKey: [Festivals.Rifflandia],
     queryFn: GetTicketsRifflandia,
@@ -520,10 +523,10 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
 
               <TicketContainer
                 tickets={tickets}
-                showGenres={false}
                 isLoadingTickets={false}
                 isErrorTickets={isErrorTickets}
                 cardColours={COLOURS.cardColours}
+                setSpotifyPreviewArtistId={setSpotifyPreviewArtistId}
               />
             </Container>
           </Box>
@@ -555,6 +558,8 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
           closeModal={closeSignInModal}
           handleRedirectToAuth={handleRedirectToAuthForBrowser}
         />
+
+        <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
       </Box>
     );
   }
