@@ -475,17 +475,17 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
                   margin: "8px",
                 }}
               >
-                <BuyTicketsButton />
-
                 <Button
                   variant="outlined"
-                  sx={{ marginTop: "16px", width: "300px" }}
+                  sx={{ marginBottom: "16px", width: "300px" }}
                   onClick={() => {
                     setShowSettings(!showSettings);
                   }}
                 >
                   Customize
                 </Button>
+
+                <BuyTicketsButton />
 
                 {!(!token || !spotifyInfo || !spotifyInfo.access) && <SignOutButton />}
               </Box>
