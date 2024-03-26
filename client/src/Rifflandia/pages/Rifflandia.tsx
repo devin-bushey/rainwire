@@ -526,7 +526,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
                 isLoadingTickets={false}
                 isErrorTickets={isErrorTickets}
                 cardColours={COLOURS.cardColours}
-                spotifyPreviewArtistId={setSpotifyPreviewArtistId}
+                setSpotifyPreviewArtistId={setSpotifyPreviewArtistId}
               />
             </Container>
           </Box>

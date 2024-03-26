@@ -9,13 +9,13 @@ export const TicketContainer = ({
   isLoadingTickets,
   isErrorTickets,
   cardColours,
-  spotifyPreviewArtistId,
+  setSpotifyPreviewArtistId,
 }: {
   tickets: any;
   isLoadingTickets: boolean;
   isErrorTickets: boolean;
   cardColours?: string[];
-  spotifyPreviewArtistId: (artistId: string) => void;
+  setSpotifyPreviewArtistId: (artistId: string) => void;
 }) => {
   const colors = cardColours ? cardColours : COLOURS.card_colours;
 
