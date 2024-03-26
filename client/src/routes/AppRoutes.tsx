@@ -30,7 +30,7 @@ export const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />
-          <Route path="/laketownShakedown" element={<SampleFestival />} />
+          <Route path="/test" element={<SampleFestival />} />
         </Routes>
       </Box>
     </>

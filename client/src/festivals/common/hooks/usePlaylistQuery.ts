@@ -1,10 +1,8 @@
 import { QueryFunction, useQuery } from "react-query";
 import axios from "axios";
-import useSpotifyAuth from "../../../hooks/useSpotifyAuth";
 import { useState, useEffect } from "react";
 
-// Custom hook for handling data fetching
-export const usePlaylistQuery = (token: string, user_id: string, playlistName: string) => {
+export const usePlaylistQuery = (token: string, userId: string, playlistName: string) => {
   const queryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: true,
@@ -13,18 +11,18 @@ export const usePlaylistQuery = (token: string, user_id: string, playlistName: s
     keepPreviousData: true,
   };
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingUserInfo, setIsLoadingUserInfo] = useState<boolean>(true);
 
   const getPlaylistsQueryFn: QueryFunction<any> = async () => {
     try {
-      if (!token || !user_id) {
+      if (!token || !userId) {
         throw new Error("Token or user id is missing");
       }
 
       const response = await axios.get(import.meta.env.VITE_SITE_URL_DB + "playlist", {
         params: {
           token: token,
-          userId: user_id,
+          userId: userId,
           playlistName: playlistName,
         },
       });
@@ -35,26 +33,15 @@ export const usePlaylistQuery = (token: string, user_id: string, playlistName: s
   };
 
   useEffect(() => {
-    if (token && user_id) {
-      setIsLoading(false);
+    if (token && userId) {
+      setIsLoadingUserInfo(false);
     }
-  }, [token, user_id]);
+  }, [token, userId]);
 
-  const {
-    data,
-    isLoading: queryIsLoading,
-    isError,
-    error,
-  } = useQuery({
+  return useQuery({
     queryKey: [playlistName],
     queryFn: getPlaylistsQueryFn,
     ...queryOptions,
-    enabled: !isLoading, // Don't make the query until loading is false
+    enabled: !isLoadingUserInfo,
   });
-
-  if (isLoading) {
-    return { isLoading: true }; // Return loading state
-  }
-
-  return { data, isLoading: queryIsLoading, isError, error };
 };
