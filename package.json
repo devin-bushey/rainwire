@@ -7,7 +7,7 @@
   "scripts": {
     "setup-backend": "cd backend && npm i",
     "setup-client": "cd client && npm i",
-    "setup": "concurrently --kill-others \"npm i\" \"npm run setup-backend\" \"npm run setup-client\"",
+    "setup": "npm i & concurrently --kill-others \"npm run setup-backend\" \"npm run setup-client\"",
     "dev-backend": "cd backend && npm run start:dev",
     "dev-client": "cd client && npm run start",
     "dev": "concurrently --kill-others \"npm run dev-backend\" \"npm run dev-client\""
