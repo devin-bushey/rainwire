@@ -11,7 +11,7 @@ import { LandingPage } from "../pages/LandingPage";
 import useAnalytics from "../hooks/useAnalytics";
 import { Rifflandia } from "../Rifflandia/pages/Rifflandia";
 import { JamBase } from "../pages/JamBase";
-import { LaketownShakedown } from "../festivals/LakeTownShakedown/LaketownShakedown";
+import { SampleFestival } from "../festivals/SampleFestival/SampleFestival";
 
 export const AppRoutes = () => {
   useAnalytics();
@@ -30,7 +30,7 @@ export const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />
-          <Route path="/laketownShakedown" element={<LaketownShakedown />} />
+          <Route path="/laketownShakedown" element={<SampleFestival />} />
         </Routes>
       </Box>
     </>

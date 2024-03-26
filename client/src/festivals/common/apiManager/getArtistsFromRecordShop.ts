@@ -2,7 +2,7 @@ import axios from "axios";
 import { filterRecent, sortDataByDateAndOrder } from "../../../utils/sorter";
 import { Cities } from "../../../constants/enums";
 
-export const getTicketsCities = async (collectionName: string): Promise<any> => {
+export const getArtistsFromRecordShop = async (collectionName: string): Promise<any> => {
   return axios
     .get(import.meta.env.VITE_SITE_URL_DB + "artists/", {
       params: {

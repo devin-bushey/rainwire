@@ -4,7 +4,7 @@ import useSpotifyAuth from "../../../hooks/useSpotifyAuth";
 import { useState, useEffect } from "react";
 
 // Custom hook for handling data fetching
-export const usePlaylistQuery = (playlistName: string) => {
+export const usePlaylistQuery = (token: string, user_id: string, playlistName: string) => {
   const queryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: true,
@@ -13,19 +13,18 @@ export const usePlaylistQuery = (playlistName: string) => {
     keepPreviousData: true,
   };
 
-  const { token, spotifyInfo } = useSpotifyAuth();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getPlaylistsQueryFn: QueryFunction<any> = async () => {
     try {
-      if (!token || !spotifyInfo || !spotifyInfo.user_id) {
+      if (!token || !user_id) {
         throw new Error("Token or user id is missing");
       }
 
       const response = await axios.get(import.meta.env.VITE_SITE_URL_DB + "playlist", {
         params: {
           token: token,
-          userId: spotifyInfo.user_id,
+          userId: user_id,
           playlistName: playlistName,
         },
       });
@@ -36,10 +35,10 @@ export const usePlaylistQuery = (playlistName: string) => {
   };
 
   useEffect(() => {
-    if (token && spotifyInfo && spotifyInfo.user_id) {
+    if (token && user_id) {
       setIsLoading(false);
     }
-  }, [token, spotifyInfo]);
+  }, [token, user_id]);
 
   const {
     data,

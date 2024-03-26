@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getPlaylists = async (token: string, user_id: string, playlistName: string): Promise<any> => {
+export const getUsersPlaylists = async (token: string, user_id: string, playlistName: string): Promise<any> => {
   return axios
     .get(import.meta.env.VITE_SITE_URL_DB + "playlists/", {
       params: {
