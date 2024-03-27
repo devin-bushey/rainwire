@@ -10,8 +10,8 @@ import { useAuth } from "../../context/AuthContext";
 
 export const SampleFestival = () => {
   const { isLoggedIntoSpotify, redirectToAuth, logOut } = useAuth();
-  const { data: gigs } = useGigsQuery(Cities.Victoria);
-  const { data: playlist } = usePlaylistQuery("test");
+  const { data: gigs } = useGigsQuery(Cities.Victoria); // TODO: change Cities.Victoria to the actual festival enum
+  const { data: playlist } = usePlaylistQuery("test"); // TODO: change 'test' to 'record shop {festival name}'
   const missingTracks = useMissingTracks(playlist, gigs);
 
   return (
@@ -26,7 +26,7 @@ export const SampleFestival = () => {
       }}
     >
       {!isLoggedIntoSpotify() ? (
-        // Temp redirect - have to add to allow list in spotify dev dashboard
+        // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
         <Button variant="contained" onClick={() => redirectToAuth()}>
           Sign In
         </Button>
