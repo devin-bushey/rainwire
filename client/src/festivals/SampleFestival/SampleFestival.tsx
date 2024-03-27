@@ -35,7 +35,7 @@ export const SampleFestival = () => {
             />
             <Box>
               <p>Missing Tracks:</p>
-              {missingTracks && (
+              {missingTracks.length > 0 && (
                 <TicketContainer
                   tickets={missingTracks}
                   cardColours={MISSING_COLOURS}

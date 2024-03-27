@@ -3,21 +3,20 @@ import { Playlist } from "../types/Playlist";
 import { Gig } from "../types/Gig";
 
 export const useMissingTracks = (playlist?: Playlist, gigs?: Gig[]) => {
-  if (!playlist || !gigs) return;
-
   const [missingTracks, setMissingTracks] = useState<Gig[]>([]);
 
   useEffect(() => {
     const findMissingTracks = () => {
-      if (!playlist) return;
-
       const missingTracks: Gig[] = [];
+
+      if (!playlist || !gigs) return missingTracks;
 
       const trackIds = playlist.tracks;
       const playlistTracks = new Set(trackIds);
 
       gigs.forEach((gig: Gig) => {
-        if (!playlistTracks.has(gig.artist.topTracks[0])) {
+        // TODO: Use this -> if (!playlistTracks.has(gig.artist.topTracks[0])) {
+        if (!playlistTracks.has(gig.topTrackURIs[0])) {
           gig.isMissing = true;
           missingTracks.push(gig);
         }
