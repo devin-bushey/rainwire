@@ -5,6 +5,7 @@ export interface Gig {
 
   // TODO: Remove these old types
   topTrackURIs: string[];
+  sp_band_name: string;
 }
 
 interface Artist {

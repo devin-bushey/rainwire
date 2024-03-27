@@ -2,8 +2,9 @@ import { QueryFunction, useQuery } from "react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Playlist } from "../types/Playlist";
+import { useAuth } from "../../../context/AuthContext";
 
-export const usePlaylistQuery = (token: string, userId: string, playlistName: string) => {
+export const usePlaylistQuery = (playlistName: string) => {
   const queryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: true,
@@ -13,17 +14,18 @@ export const usePlaylistQuery = (token: string, userId: string, playlistName: st
   };
 
   const [isLoadingUserInfo, setIsLoadingUserInfo] = useState<boolean>(true);
+  const { token, spotifyInfo } = useAuth();
 
   const getPlaylistsQueryFn: QueryFunction<Playlist> = async () => {
     try {
-      if (!token || !userId) {
+      if (!token || !spotifyInfo.user_id) {
         throw new Error("Token or user id is missing");
       }
 
       const response = await axios.get(import.meta.env.VITE_SITE_URL_DB + "playlist", {
         params: {
           token: token,
-          userId: userId,
+          userId: spotifyInfo.user_id,
           playlistName: playlistName,
         },
       });
@@ -34,10 +36,10 @@ export const usePlaylistQuery = (token: string, userId: string, playlistName: st
   };
 
   useEffect(() => {
-    if (token && userId) {
+    if (token && spotifyInfo.user_id) {
       setIsLoadingUserInfo(false);
     }
-  }, [token, userId]);
+  }, [token, spotifyInfo.user_id]);
 
   return useQuery({
     queryKey: [playlistName],
