@@ -2,28 +2,21 @@ import { Card, Typography, CardMedia } from "@mui/material";
 import { Box } from "@mui/system";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { RIFFLANDIA_COLOURS } from "./constants/colours";
-import { useEffect, useState } from "react";
-import { goToNewTabOnDesktop } from "../utils/browserUtils";
 
-export const Ticket = (props: any) => {
-  const description = props.ticket.day ? `${props.ticket.day} at ${props.ticket.weekend}` : props.ticket.ticket_date;
+type TicketProps = {
+  ticket: any;
+  image: string;
+  bgcolor: string;
+  setSpotifyPreviewArtistId: (artistId: string) => void;
+};
 
-  const [width, setWidth] = useState<number>(window.innerWidth);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+export const Ticket = ({ ticket, image, bgcolor, setSpotifyPreviewArtistId }: TicketProps) => {
+  const description = ticket.day ? `${ticket.day} at ${ticket.weekend}` : ticket.ticket_date;
 
   return (
     <Card
       sx={{
-        backgroundColor: props.bgcolor,
+        backgroundColor: bgcolor,
         height: "150px",
         width: "300px",
         margin: "8px",
@@ -31,67 +24,67 @@ export const Ticket = (props: any) => {
           outline: `thick double ${RIFFLANDIA_COLOURS.dark_blue}`,
         },
       }}
-      onClick={() => goToNewTabOnDesktop(props.ticket.link)}
     >
-      <Box sx={{ display: "flex", alignItems: "left" }}>
-        <img
-          src={spotifyLogoBlack}
-          alt="spotify_logo"
-          width="75px"
-          height="22.48px"
-          style={{ marginBottom: "12px" }}
-          loading="lazy"
-        />
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <CardMedia
-          component="img"
+      <Box onClick={() => setSpotifyPreviewArtistId(ticket.band_id)}>
+        <Box sx={{ display: "flex", alignItems: "left" }}>
+          <img
+            src={spotifyLogoBlack}
+            alt="spotify_logo"
+            width="75px"
+            height="22.48px"
+            style={{ marginBottom: "12px" }}
+            loading="lazy"
+          />
+        </Box>
+        <Box
           sx={{
-            display: "inline-block",
-            width: 60,
-            height: 60,
-            marginRight: "12px",
+            display: "flex",
+            alignItems: "center",
           }}
-          image={props.image}
-          alt="Album"
-        />
-        <Box sx={{ alignItems: "center", textAlign: "left" }}>
-          <Typography
-            sx={{
-              fontWeight: "700",
-              fontSize: "1rem",
-              paddingBottom: 0,
-            }}
-          >
-            {props.ticket.sp_band_name}
-          </Typography>
-
-          <Box
+        >
+          <CardMedia
+            component="img"
             sx={{
               display: "inline-block",
+              width: 60,
+              height: 60,
+              marginRight: "12px",
             }}
-          >
+            image={image}
+            alt="Album"
+          />
+          <Box sx={{ alignItems: "center", textAlign: "left" }}>
             <Typography
               sx={{
                 fontWeight: "700",
-                fontSize: "0.77rem",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: "4",
-                WebkitBoxOrient: "vertical",
-                paddingBottom: "0px",
-                marginBottom: "8px",
+                fontSize: "1rem",
+                paddingBottom: 0,
               }}
             >
-              {description}
+              {ticket.sp_band_name}
             </Typography>
+
+            <Box
+              sx={{
+                display: "inline-block",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontWeight: "700",
+                  fontSize: "0.77rem",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: "4",
+                  WebkitBoxOrient: "vertical",
+                  paddingBottom: "0px",
+                  marginBottom: "8px",
+                }}
+              >
+                {description}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Box>

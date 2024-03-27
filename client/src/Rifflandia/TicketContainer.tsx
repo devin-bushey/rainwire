@@ -6,16 +6,16 @@ import { Ticket } from "./Ticket";
 
 export const TicketContainer = ({
   tickets,
-  showGenres,
   isLoadingTickets,
   isErrorTickets,
   cardColours,
+  setSpotifyPreviewArtistId,
 }: {
   tickets: any;
-  showGenres: boolean;
   isLoadingTickets: boolean;
   isErrorTickets: boolean;
   cardColours?: string[];
+  setSpotifyPreviewArtistId: (artistId: string) => void;
 }) => {
   const colors = cardColours ? cardColours : COLOURS.card_colours;
 
@@ -37,11 +37,11 @@ export const TicketContainer = ({
 
     return (
       <Ticket
+        key={currentTicket._id}
         ticket={currentTicket}
-        showGenres={showGenres}
         image={imageURL}
         bgcolor={colors[index % colors.length]}
-        key={currentTicket._id}
+        setSpotifyPreviewArtistId={setSpotifyPreviewArtistId}
       />
     );
   });

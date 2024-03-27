@@ -4,16 +4,15 @@ import { RIFFLANDIA_COLOURS } from "./constants/colours";
 import { useContext } from "react";
 import { SnackBarContext } from "../App";
 import copy from "../assets/images/copy-solid.svg";
+import { redirectToAuth } from "../utils/spotifyAuthUtils";
+import { BASE_REDIRECT_URI } from "../constants/auth";
 
-export const InAppModalRifflandia = ({
-  open,
-  handleClose,
-  handleRedirectToAuth,
-}: {
-  open: any;
-  handleClose: any;
-  handleRedirectToAuth: any;
-}) => {
+type InAppModalRifflandiaProps = {
+  isOpen: boolean;
+  closeModal: () => void;
+};
+
+export const InAppModalRifflandia = ({ isOpen, closeModal }: InAppModalRifflandiaProps) => {
   const snackBar = useContext(SnackBarContext);
 
   const handleCopy = () => {
@@ -27,8 +26,8 @@ export const InAppModalRifflandia = ({
   };
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={isOpen}
+      onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -62,7 +61,7 @@ export const InAppModalRifflandia = ({
           }}
         >
           <Button
-            onClick={handleRedirectToAuth}
+            onClick={() => redirectToAuth()}
             variant="contained"
             sx={{
               width: "100%",
