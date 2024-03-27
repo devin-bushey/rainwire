@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
+import { Playlist } from "../types/Playlist";
+import { Gig } from "../types/Gig";
 
-export const useMissingTracks = (playlistData: any, tickets: any) => {
-  const [missingTracks, setMissingTracks] = useState([]);
+export const useMissingTracks = (playlist?: Playlist, gigs?: Gig[]) => {
+  if (!playlist || !gigs) return;
+
+  const [missingTracks, setMissingTracks] = useState<Gig[]>([]);
 
   useEffect(() => {
     const findMissingTracks = () => {
-      if (!playlistData) return;
+      if (!playlist) return;
 
-      const missingTracks: any = [];
+      const missingTracks: Gig[] = [];
 
-      const trackIds = playlistData.tracks;
+      const trackIds = playlist.tracks;
       const playlistTracks = new Set(trackIds);
 
-      tickets.forEach((ticket: any) => {
-        if (!playlistTracks.has(ticket.topTrackURIs[0])) {
-          ticket.isMissing = true;
-          ticket.topTrack = ticket.topTrackURIs[0];
-          missingTracks.push(ticket);
+      gigs.forEach((gig: Gig) => {
+        if (!playlistTracks.has(gig.artist.topTracks[0])) {
+          gig.isMissing = true;
+          missingTracks.push(gig);
         }
       });
 
@@ -24,7 +27,7 @@ export const useMissingTracks = (playlistData: any, tickets: any) => {
     };
 
     findMissingTracks();
-  }, [playlistData, tickets]);
+  }, [playlist, gigs]);
 
   return missingTracks;
 };

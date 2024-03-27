@@ -1,6 +1,7 @@
 import { QueryFunction, useQuery } from "react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Playlist } from "../types/Playlist";
 
 export const usePlaylistQuery = (token: string, userId: string, playlistName: string) => {
   const queryOptions = {
@@ -13,7 +14,7 @@ export const usePlaylistQuery = (token: string, userId: string, playlistName: st
 
   const [isLoadingUserInfo, setIsLoadingUserInfo] = useState<boolean>(true);
 
-  const getPlaylistsQueryFn: QueryFunction<any> = async () => {
+  const getPlaylistsQueryFn: QueryFunction<Playlist> = async () => {
     try {
       if (!token || !userId) {
         throw new Error("Token or user id is missing");

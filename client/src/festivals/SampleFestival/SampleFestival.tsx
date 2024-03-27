@@ -10,19 +10,18 @@ import { useMissingTracks } from "../common/hooks/useMissingTracks";
 
 export const SampleFestival = () => {
   const { token, spotifyInfo } = useSpotifyAuth();
-
-  const tickets = useTicketsQuery(Cities.Victoria);
-  const playlist = usePlaylistQuery(token, spotifyInfo.user_id, "test");
-  const missingTracks = useMissingTracks(playlist.data, tickets.data);
+  const { data: gigs } = useTicketsQuery(Cities.Victoria);
+  const { data: playlist } = usePlaylistQuery(token, spotifyInfo.user_id, "record shop victoria");
+  const missingTracks = useMissingTracks(playlist, gigs);
 
   const PlaylistInfo = () => {
-    if (playlist.data) {
+    if (playlist) {
       return (
         <>
           <Box>
             <p>PLAYLIST FOUND!!!!</p>
-            <p>ID: {playlist.data.id}</p>
-            <p>Name: {playlist.data.name}</p>
+            <p>ID: {playlist.id}</p>
+            <p>Name: {playlist.name}</p>
             <CardMedia
               component="img"
               sx={{
@@ -31,17 +30,17 @@ export const SampleFestival = () => {
                 height: 60,
                 marginRight: "12px",
               }}
-              image={playlist.data.image.url}
+              image={playlist.image.url}
               alt="Playlist"
             />
             <Box>
               <p>Missing Tracks:</p>
-              {missingTracks.length > 0 && (
+              {missingTracks && (
                 <TicketContainer
                   tickets={missingTracks}
                   cardColours={MISSING_COLOURS}
                   token={token}
-                  playlistId={playlist.data.id}
+                  playlistId={playlist.id}
                 />
               )}
               <p>End of missing tracks</p>
@@ -67,7 +66,7 @@ export const SampleFestival = () => {
       >
         <Box sx={{ maxWidth: "900px" }}>
           <PlaylistInfo />
-          <TicketContainer tickets={tickets.data} cardColours={RIFF_CARD_COLOURS} />
+          <TicketContainer tickets={gigs} cardColours={RIFF_CARD_COLOURS} />
         </Box>
       </Box>
     </>

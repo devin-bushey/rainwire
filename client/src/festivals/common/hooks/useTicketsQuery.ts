@@ -1,6 +1,7 @@
 import { QueryFunction, useQuery } from "react-query";
 import { Cities, Festivals } from "../../../constants/enums";
 import { getArtistsFromRecordShop } from "../apiManager/getArtistsFromRecordShop";
+import { Gig } from "../types/Gig";
 
 // Custom hook for handling data fetching
 export const useTicketsQuery = (queryKey: Festivals | Cities) => {
@@ -12,7 +13,7 @@ export const useTicketsQuery = (queryKey: Festivals | Cities) => {
     keepPreviousData: true,
   };
 
-  const getTicketQueryFn: QueryFunction<any> = async () => {
+  const getTicketQueryFn: QueryFunction<Gig[]> = async () => {
     try {
       const data = await getArtistsFromRecordShop(queryKey);
       return data;
