@@ -13,8 +13,8 @@ export const usePlaylistQuery = (playlistName: string) => {
     keepPreviousData: true,
   };
 
-  const [isLoadingUserInfo, setIsLoadingUserInfo] = useState<boolean>(true);
   const { token, spotifyInfo } = useAuth();
+  const [isLoadingUserInfo, setIsLoadingUserInfo] = useState<boolean>(true);
 
   const getPlaylistsQueryFn: QueryFunction<Playlist> = async () => {
     try {

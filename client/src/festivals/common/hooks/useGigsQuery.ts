@@ -3,8 +3,7 @@ import { Cities, Festivals } from "../../../constants/enums";
 import { getArtistsFromRecordShop } from "../apiManager/getArtistsFromRecordShop";
 import { Gig } from "../types/Gig";
 
-// Custom hook for handling data fetching
-export const useTicketsQuery = (queryKey: Festivals | Cities) => {
+export const useGigsQuery = (queryKey: Festivals | Cities) => {
   const queryOptions = {
     refetchOnWindowFocus: false,
     refetchOnMount: true,
@@ -13,18 +12,17 @@ export const useTicketsQuery = (queryKey: Festivals | Cities) => {
     keepPreviousData: true,
   };
 
-  const getTicketQueryFn: QueryFunction<Gig[]> = async () => {
+  const getGigQueryFn: QueryFunction<Gig[]> = async () => {
     try {
-      const data = await getArtistsFromRecordShop(queryKey);
-      return data;
+      return await getArtistsFromRecordShop(queryKey);
     } catch (error) {
-      throw new Error("Error fetching tickets");
+      throw new Error("Error fetching gigs");
     }
   };
 
   return useQuery({
     queryKey: [queryKey],
-    queryFn: getTicketQueryFn,
+    queryFn: getGigQueryFn,
     ...queryOptions,
   });
 };

@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { Cities } from "../../constants/enums";
-import { useTicketsQuery } from "../common/hooks/useTicketsQuery";
+import { useGigsQuery } from "../common/hooks/useGigsQuery";
 import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from "../../Rifflandia/constants/colours";
 import { GigList } from "../common/components/GigList";
 import { usePlaylistQuery } from "../common/hooks/usePlaylistQuery";
@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 
 export const SampleFestival = () => {
   const { isLoggedIntoSpotify, redirectToAuth, logOut } = useAuth();
-  const { data: gigs } = useTicketsQuery(Cities.Victoria);
+  const { data: gigs } = useGigsQuery(Cities.Victoria);
   const { data: playlist } = usePlaylistQuery("test");
   const missingTracks = useMissingTracks(playlist, gigs);
 
