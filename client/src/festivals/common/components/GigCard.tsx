@@ -6,7 +6,6 @@ import { useAuth } from "../../../context/AuthContext";
 
 export const GigCard = ({ gig, playlistId, bgcolor }: { gig: Gig; playlistId?: string; bgcolor: string }) => {
   const { token } = useAuth();
-
   return (
     <Card
       sx={{

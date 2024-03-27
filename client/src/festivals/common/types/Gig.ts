@@ -1,7 +1,7 @@
 export interface Gig {
   artist: Artist;
   date: string;
-  isMissing?: boolean; // TODO: can be undefined?
+  isMissing?: boolean; // TODO: should this be optional?
 
   // TODO: Remove these old types
   topTrackURIs: string[];
