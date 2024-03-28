@@ -1,3 +1,53 @@
+db.createCollection("test");
+db.test.insertMany([
+  {
+    artist: {
+      id: "74gcBzlQza1bSfob90yRhR",
+      name: "City and Colour",
+      topTracks: [
+        "spotify:track:39dnj8G8DK6I1JmNOZKeZO",
+        "spotify:track:5y2H3YMH4BcIVMYaqr7NPB",
+        "spotify:track:6bpoSwD4xu2WWIVQH07LMa",
+        "spotify:track:7G9yE2L2bXxqaQKVL2rKAr",
+        "spotify:track:0SwUDplbBp66rM5sMC0eD7",
+        "spotify:track:65HOlqJpNqaUbateZw2GrA",
+        "spotify:track:29BYcl5IptV6B5jfJRNq4o",
+        "spotify:track:58CHujf89H5cuuZqm4RaLn",
+        "spotify:track:3cNyJCm0nf1DPr6hvSLu8Q",
+        "spotify:track:5Cn9nBZh530Vei9dOeKUGs",
+      ],
+      uri: "spotify:artist:74gcBzlQza1bSfob90yRhR",
+      albumArtUrl: "https://i.scdn.co/image/ab67616d00001e02fcd095743d626051079163f3",
+      link: "https://open.spotify.com/artist/74gcBzlQza1bSfob90yRhR",
+    },
+    date: "2025-02-18",
+    venue: "Save On Foods Arena",
+  },
+  {
+    artist: {
+      id: "02seUFsFQP7TH4hLrTj77o",
+      name: "Nathaniel Rateliff & The Night Sweats",
+      topTracks: [
+        "spotify:track:1VPUpUwtbpoRVXt0txVU0w",
+        "spotify:track:7ADBL3WZ9Oyj7zgkg7ODT8",
+        "spotify:track:1q5wF1wZQD41ura41yVqXb",
+        "spotify:track:6YfEvtwpQwGAWZBWzNmoIw",
+        "spotify:track:2YhAqgvjzU2Rw44rAqzGl6",
+        "spotify:track:71DxoKxpHcW8iaYNczwGi3",
+        "spotify:track:5yTpyXVKcB20zOGXU1ffgf",
+        "spotify:track:4nXmBb2s8Mmkq2hGskHxiq",
+        "spotify:track:5rHUY5EUCtdE7a9qUJblQC",
+        "spotify:track:5q15dlrrKO1ubSZAciVQgl",
+      ],
+      uri: "spotify:artist:02seUFsFQP7TH4hLrTj77o",
+      albumArtUrl: "https://i.scdn.co/image/ab67616d00001e02e564c5e6be9e9cace137b989",
+      link: "https://open.spotify.com/artist/74gcBzlQza1bSfob90yRhR",
+    },
+    date: "2025-03-02",
+    venue: "Save On Foods Arena",
+  }
+]);
+
 db.createCollection("victoria");
 db.victoria.insertMany([
   {

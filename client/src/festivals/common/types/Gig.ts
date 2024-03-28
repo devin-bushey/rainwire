@@ -1,6 +1,7 @@
 export interface Gig {
   artist: Artist;
   date: string;
+  venue: string;
   isMissing?: boolean; // TODO: should this be optional?
 
   // TODO: Remove these old types
