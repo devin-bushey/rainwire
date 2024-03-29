@@ -1,12 +1,13 @@
 import { GigCard } from "./GigCard";
 import { COLOURS } from "../../../theme/AppStyles";
+import { Gig } from "../types/Gig";
 
 export const GigList = ({
   gigs,
   cardColours,
   playlistId,
 }: {
-  gigs: any;
+  gigs: Gig[];
   cardColours?: string[];
   playlistId?: string;
 }) => {
@@ -14,7 +15,9 @@ export const GigList = ({
 
   if (!gigs) return null;
 
-  return gigs.map((gig: any, index: any) => {
+  const wrappedJsx = gigs.map((gig: Gig, index: number) => {
     return <GigCard gig={gig} bgcolor={colors[index % colors.length]} key={gig._id} playlistId={playlistId} />;
   });
+
+  return <>{wrappedJsx}</>;
 };

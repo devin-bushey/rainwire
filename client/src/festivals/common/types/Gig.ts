@@ -1,4 +1,5 @@
 export interface Gig {
+  _id: string;
   artist: Artist;
   date: string;
   venue: string;
