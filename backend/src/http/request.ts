@@ -21,6 +21,12 @@ export const put = (options: Omit<HttpRequestOptions, "method">) =>
     ...options,
   });
 
+export const delete_ = (options: Omit<HttpRequestOptions, "method">) =>
+  request({
+    method: HttpRequestMethod.DELETE,
+    ...options,
+  });
+
 const request = (options: HttpRequestOptions) =>
   axios({
     ...options,

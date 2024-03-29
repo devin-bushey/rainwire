@@ -14,3 +14,15 @@ export interface SpotifyPlaylistDataType {
     spotify?: string;
   };
 }
+
+export interface SpotifyAddTracksReqBody {
+  uris: string[];
+  position?: 0;
+}
+
+export interface SpotifyRemoveTracksReqBody {
+  tracks: {
+    uri: string;
+  }[];
+  snapshot_id?: string;
+}
