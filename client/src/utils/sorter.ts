@@ -6,6 +6,14 @@ export const sortByOrderNum = (tickets: any) => {
   return tickets;
 };
 
+export const sortByPopularity = (tickets: any) => {
+  tickets.sort((a: any, b: any) => {
+    return a.popularity - b.popularity;
+  });
+
+  return tickets;
+};
+
 export const sortDataByDateAndOrder = (data: any) => {
   return data.sort((a: any, b: any) => {
     // First, compare the dates

@@ -190,6 +190,10 @@ const CreateBlankPlaylist = async ({
     playlist_name = "record shop laketown shakedown";
   }
 
+  if (city === Festivals.LaketownShakedown_2024) {
+    playlist_name = "record shop laketown shakedown";
+  }
+
   if (city === Festivals.TheFunction) {
     playlist_name = "record shop - the function";
   }

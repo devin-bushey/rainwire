@@ -15,23 +15,34 @@ const { MongoClient } = require('mongodb');
 
 
 // Check if all required arguments are provided
-if (process.argv.length !== 8) {
-  console.error('Usage: node addSingleArtistToDatabase.js <Spotify Artist ID> <Date> <Venue> <DB Url> <DB Collection> <Bearer Token>');
+if (process.argv.length !== 9) {
+  console.error('Usage: node addSingleArtistToDatabase.js <Spotify Artist ID> <Date> <Popularity> <Venue> <DB Url> <DB Collection> <Bearer Token>');
   process.exit(1);
 }
 
 const artistId = process.argv[2];
 const date = process.argv[3];
-const venue = process.argv[4];
-const databaseUrl = process.argv[5];
-const collectionName = process.argv[6];
-const bearerToken = process.argv[7];
+const popularity = process.argv[4];
+const venue = process.argv[5];
+const databaseUrl = process.argv[6];
+const collectionName = process.argv[7];
+const bearerToken = process.argv[8];
 
 const concertObject = {
-  artist: '',
-  ticket_date: `${date} at ${venue}`,
-  venue,
+  artist: {
+    id: artistId,
+    name: "",
+    topTracks: [],
+    uri: `spotify:artist:${artistId}`,
+    albumArtUrl: "",
+    link: `https://open.spotify.com/artist/${artistId}`,
+  },
   date,
+  venue,
+  popularity,
+
+
+  ticket_date: `${date} at ${venue}`,
   band_id: artistId,
   sp_band_name: '',
   link: `https://open.spotify.com/artist/${artistId}`,
@@ -85,16 +96,20 @@ const req = https.request(options, (res) => {
   });
 
   res.on('end', () => {
+
+
     const topTracks = JSON.parse(data).tracks;
     topTracks.forEach((track) => {
       concertObject.topTrackURIs.push(track.uri);
+      concertObject.artist.topTracks.push(track.uri); // NEW
     });
 
     const name = JSON.parse(data).tracks[0].album.artists[0].name;
-    concertObject.artist = name;
+    concertObject.artist.name = name; // NEW
     concertObject.sp_band_name = name;
 
     const albumArt = JSON.parse(data).tracks[0].album.images[1].url;
+    concertObject.artist.albumArtUrl = albumArt; // NEW
     concertObject.albumArtUrl = albumArt;
 
     // Print the concert object as JSON
