@@ -7,7 +7,7 @@ export const GigList = ({
   cardColours,
   playlistId,
 }: {
-  gigs: Gig[];
+  gigs: Gig[] | undefined;
   cardColours?: string[];
   playlistId?: string;
 }) => {
