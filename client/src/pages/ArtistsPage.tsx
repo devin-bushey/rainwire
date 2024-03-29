@@ -370,12 +370,14 @@ export const ArtistsPage = () => {
         )}
       </Box>
 
-      <StickyButton
-        handleCreatePlaylist={handleCreatePlaylist}
-        backgroundColor={COLOURS.blue}
-        hoverColor={COLOURS.card_colours[1]}
-        barColor={COLOURS.card_colours[2]}
-      />
+      {isLoggedIntoSpotify() && (
+        <StickyButton
+          handleCreatePlaylist={handleCreatePlaylist}
+          backgroundColor={COLOURS.blue}
+          hoverColor={COLOURS.card_colours[1]}
+          barColor={COLOURS.card_colours[2]}
+        />
+      )}
 
       <InAppModal open={isInAppModalOpen} handleClose={closeInAppModal} handleRedirectToAuth={redirectToAuth} />
     </>

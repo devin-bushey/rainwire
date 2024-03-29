@@ -51,11 +51,17 @@ export const LOCATIONS: LocationType[] = [
     website: "https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/",
     location: "Victoria, BC",
   },
+  // {
+  //   name: "Laketown Shakedown",
+  //   value: Festivals.LaketownShakedown,
+  //   website: "https://www.laketownshakedown.com/",
+  //   location: "Cowichan, BC",
+  // },
   {
-    name: "Laketown Shakedown",
-    value: Festivals.LaketownShakedown,
+    name: "Laketown Shakedown 2024",
+    value: Festivals.LaketownShakedown_2024,
     website: "https://www.laketownshakedown.com/",
-    location: "Cowichan, BC",
+    location: "Laketown Ranch",
   },
   // {
   //   name: 'Osheaga',

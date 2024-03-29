@@ -1,6 +1,7 @@
 import axios from "axios";
-import { filterRecent, sortDataByDateAndOrder } from "../utils/sorter";
-import { Cities } from "../constants/enums";
+import { filterRecent, sortByOrderNum, sortByPopularity, sortDataByDateAndOrder } from "../utils/sorter";
+import { Cities, Festivals } from "../constants/enums";
+import { Festival } from "@mui/icons-material";
 
 function removeDuplicatesByPropertyName<T>(dataArray: T[], propertyName: keyof T): T[] {
   const seenNames = new Set<T[keyof T]>();
@@ -68,6 +69,10 @@ export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> 
       if (origin === Cities.Victoria) {
         const sorted = sortDataByDateAndOrder(response.data);
         return filterRecent(sorted);
+      }
+      if (origin === Festivals.LaketownShakedown_2024) {
+        const ordered = sortByPopularity(response.data);
+        return ordered;
       }
       return sortDataByDateAndOrder(response.data);
     });

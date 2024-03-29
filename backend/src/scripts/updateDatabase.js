@@ -52,34 +52,34 @@ async function getConcertData() {
           const topTracks = spotifyResponse.data.tracks;
 
           // TODO: OLD
-          // const concertObject = {
-          //   artist: spotifyResponse.data.tracks[0].album.artists[0].name,
-          //   ticket_date: `${event.endDate} at ${event.location.name}`,
-          //   venue: event.location.name,
-          //   date: event.endDate,
-          //   band_id: spotifyId,
-          //   sp_band_name: '',
-          //   link: `https://open.spotify.com/artist/${spotifyId}`,
-          //   uri: `spotify:artist:${spotifyId}`,
-          //   albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
-          //   topTrackURIs: topTracks.map(track => track.uri)
-          // };
-          // concertObject.sp_band_name = concertObject.artist;
+          const concertObject = {
+            artist: spotifyResponse.data.tracks[0].album.artists[0].name,
+            ticket_date: `${event.endDate} at ${event.location.name}`,
+            venue: event.location.name,
+            date: event.endDate,
+            band_id: spotifyId,
+            sp_band_name: '',
+            link: `https://open.spotify.com/artist/${spotifyId}`,
+            uri: `spotify:artist:${spotifyId}`,
+            albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
+            topTrackURIs: topTracks.map(track => track.uri)
+          };
+          concertObject.sp_band_name = concertObject.artist;
 
           // NEW DATAMODEL
 
-          const concertObject = {
-            artist: {
-              id: spotifyId,
-              name: spotifyResponse.data.tracks[0].album.artists[0].name,
-              topTracks: topTracks.map(track => track.uri),
-              uri: `spotify:artist:${spotifyId}`,
-              albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
-              link: `https://open.spotify.com/artist/${spotifyId}`
-            },
-            date: event.endDate,
-            venue: event.location.name,
-          };
+          // const concertObject = {
+          //   artist: {
+          //     id: spotifyId,
+          //     name: spotifyResponse.data.tracks[0].album.artists[0].name,
+          //     topTracks: topTracks.map(track => track.uri),
+          //     uri: `spotify:artist:${spotifyId}`,
+          //     albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
+          //     link: `https://open.spotify.com/artist/${spotifyId}`
+          //   },
+          //   date: event.endDate,
+          //   venue: event.location.name,
+          // };
 
           concertData.push(concertObject);
         }
