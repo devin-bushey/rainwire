@@ -11,12 +11,11 @@ export const useMissingTracks = (playlist?: Playlist, gigs?: Gig[]) => {
 
       if (!playlist || !gigs) return missingTracks;
 
-      const trackIds = playlist.tracks;
-      const playlistTracks = new Set(trackIds);
+      const playlistTracks = playlist.tracks.map((track: any) => track.uri);
 
       gigs.forEach((gig: Gig) => {
         // TODO: Use this -> if (!playlistTracks.has(gig.artist.topTracks[0])) {
-        if (!playlistTracks.has(gig.topTrackURIs[0])) {
+        if (!playlistTracks.includes(gig.topTrackURIs[0])) {
           gig.isMissing = true;
           missingTracks.push(gig);
         }

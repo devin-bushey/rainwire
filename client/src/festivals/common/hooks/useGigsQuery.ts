@@ -1,6 +1,6 @@
 import { QueryFunction, useQuery } from "react-query";
 import { Cities, Festivals } from "../../../constants/enums";
-import { getArtistsFromRecordShop } from "../apiManager/getArtistsFromRecordShop";
+import { getGigsFromRecordShop } from "../apiManager/getGigsFromRecordShop";
 import { Gig } from "../types/Gig";
 
 export const useGigsQuery = (queryKey: Festivals | Cities) => {
@@ -14,7 +14,7 @@ export const useGigsQuery = (queryKey: Festivals | Cities) => {
 
   const getGigQueryFn: QueryFunction<Gig[]> = async () => {
     try {
-      return await getArtistsFromRecordShop(queryKey);
+      return await getGigsFromRecordShop(queryKey);
     } catch (error) {
       throw new Error("Error fetching gigs");
     }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const addTrackToPlaylist = async (token: string, playlistId: string, trackId: string): Promise<any> => {
+export const addTrackToPlaylist = async (token: string, playlistId: string, trackId: string): Promise<string> => {
   return axios
     .post(import.meta.env.VITE_SITE_URL_DB + "playlist/track", {
       token: token,
