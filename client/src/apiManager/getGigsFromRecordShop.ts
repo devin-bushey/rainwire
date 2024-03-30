@@ -1,6 +1,6 @@
 import axios from "axios";
-import { filterRecent, sortDataByDateAndOrder } from "../../../utils/sorter";
-import { Cities } from "../../../constants/enums";
+import { filterRecent, sortDataByDateAndOrder } from "../utils/sorter";
+import { Cities } from "../constants/enums";
 import { Gig } from "../types/Gig";
 
 export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig[]> => {
@@ -11,7 +11,7 @@ export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig
       },
     })
     .then(async (response) => {
-      if (origin === Cities.Victoria) {
+      if (origin === Cities.Victoria_2024) {
         const sorted = sortDataByDateAndOrder(response.data);
         return filterRecent(sorted);
       }

@@ -1,74 +1,41 @@
-import { Box, Collapse, Container, Fade, IconButton, Tooltip } from "@mui/material";
+import { Box, Collapse, Container, IconButton, Tooltip } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import Typography from "@mui/material/Typography";
 import { COLOURS } from "../theme/AppStyles";
 import { useContext, useEffect, useState } from "react";
 import { SnackBarContext } from "../App";
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import { LOCATIONS } from "../constants/locations";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
-import { TicketContainer } from "../components/TicketContainer";
-import { InAppModal } from "../components/InAppModal";
-import { UseQueryOptions, useQuery } from "react-query";
-import { CreateNewPlaylist, GetTickets } from "../apiManager/RecordShop";
+import { CreateNewPlaylist } from "../apiManager/RecordShop";
 import { Loading } from "./Loading";
 import { Spinner } from "../Rifflandia/Spinner";
-import { sortByOrderNum } from "../utils/sorter";
 import { StickyButton } from "../components/StickyButton";
-import { redirectToAuth, isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { primaryButtonColours } from "../theme/AppStyles";
-import { goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 import { SpotifyIcon } from "../components/Icons";
 import { isMobile } from "../utils/responsiveUtils";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useGigsQuery } from "../hooks/useGigsQuery";
+import { useAuth } from "../context/AuthContext";
+import { useShakingEffect } from "../hooks/useShakingEffect";
+import { GigList } from "../components/GigList";
 
 export const ArtistsPage = () => {
-  const queryOptions: UseQueryOptions = {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    cacheTime: Infinity,
-    keepPreviousData: true,
-  };
-
-  const { token, spotifyInfo } = useSpotifyAuth();
+  const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
-  const query = useQuery({
-    queryKey: [origin, { origin }],
-    queryFn: GetTickets,
-    ...queryOptions,
-  });
+  const gigsQuery = useGigsQuery(origin);
 
-  const loadInterval = 10;
-
-  const [loadMore, setLoadMore] = useState(loadInterval);
-  const [totalTickets, setTotalTickets] = useState<any>([]);
-  const [tickets, setTickets] = useState<any>([]);
-
-  const [filteredGenres, setFilteredGenres] = useState<any>([]);
   const [numTopTracks, setNumTopTracks] = useState(1);
-
   const [showSettings, setShowSettings] = useState(false);
-  const [showGenres, setShowGenres] = useState(false);
-
-  const [website, setWebsite] = useState(LOCATIONS[0].website);
-
-  const [isLoadingTickets, setIsLoadingTickets] = useState(false);
-  const [isErrorTickets, setIsErrorTickets] = useState(false);
 
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
+  const { isShaking } = useShakingEffect();
 
-  const [isShaking, setIsShaking] = useState(false);
-
-  const [isError, setIsError] = useState(false);
+  const [isErrorCreatingPlaylist, setIsErrorCreatingPlaylist] = useState(false);
   const snackBar = useContext(SnackBarContext);
-
-  const [isInAppModalOpen, setIsInAppModalOpen] = useState(false);
-  const openInAppModal = () => setIsInAppModalOpen(true);
-  const closeInAppModal = () => setIsInAppModalOpen(false);
 
   useEffect(() => {
     document.title = "Record Shop | Artists";
@@ -76,93 +43,17 @@ export const ArtistsPage = () => {
   }, []);
 
   useEffect(() => {
-    setIsShaking(true);
-
-    // Reset the shaking animation after a delay
-    setTimeout(() => {
-      setIsShaking(false);
-    }, 2000);
-  }, []);
-
-  useEffect(() => {
-    if (query.data) {
-      setIsLoadingTickets(false);
-      setIsErrorTickets(false);
-    } else if (query.isFetching || query.isLoading) {
-      setIsLoadingTickets(true);
-    } else if (query.error) {
-      setIsErrorTickets(true);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    if (query.data) {
-      setLoadMore(loadInterval);
-      setTotalTickets(sortByOrderNum(query.data));
-    }
-  }, [query.data]);
-
-  useEffect(() => {
-    setFilteredGenres([]);
-
-    LOCATIONS.map((location) => {
-      if (location.value === origin) {
-        setWebsite(location.website);
-        return;
-      }
-    });
-  }, [origin]);
-
-  useEffect(() => {
-    if (filteredGenres === undefined || filteredGenres.length === 0) {
-      setShowGenres(false);
-      setLoadMore(loadInterval);
-      setTickets(totalTickets.slice(0, loadMore));
-      return;
-    }
-
-    const filteredTickets = totalTickets.filter((ticket: any) => {
-      if (!ticket?.genres) return false;
-      return ticket.genres.some((genre: any) => filteredGenres.includes(genre));
-    });
-
-    setShowGenres(filteredTickets.length > 0);
-    setTickets(filteredTickets);
-  }, [filteredGenres]);
-
-  useEffect(() => {
-    if (isError) {
+    if (isErrorCreatingPlaylist) {
       snackBar.setSnackBar({
         showSnackbar: true,
         setShowSnackbar: () => true,
         message: "Error creating playlist. Please try again.",
         isError: true,
       });
-      setIsError(false);
     }
-  }, [isError]);
+  }, [isErrorCreatingPlaylist]);
 
-  useEffect(() => {
-    setTickets(totalTickets.slice(0, loadInterval));
-    setLoadMore(loadInterval);
-  }, [totalTickets]);
-
-  useEffect(() => {
-    setTickets(totalTickets.slice(0, loadMore));
-  }, [loadMore]);
-
-  const handleDeleteGenre = (genre: string) => () => {
-    setFilteredGenres((value: any) => value?.filter((v: any) => v !== genre));
-  };
-
-  const handleClearGenres = () => {
-    setFilteredGenres([]);
-  };
-
-  const handleFilteredGenres = (event: any) => {
-    const genres = event.target.value;
-    setFilteredGenres(genres);
-  };
+  const handleSignIn = () => redirectToAuth();
 
   const handleChangeOrigin = (event: any) => {
     setOrigin(event.target.value);
@@ -183,7 +74,6 @@ export const ArtistsPage = () => {
       token: token,
       user_id: spotifyInfo.user_id,
       numTopTracks: numTopTracks,
-      //tickets: filteredGenres.length > 0 ? tickets : null,
     })
       .then((res) => {
         if (res.status === 201) {
@@ -195,19 +85,17 @@ export const ArtistsPage = () => {
           });
           goToNewTabOnDesktop(res.data);
         } else {
-          setIsError(true);
+          setIsErrorCreatingPlaylist(true);
         }
       })
       .catch((err) => {
         console.log(err);
-        setIsError(true);
+        setIsErrorCreatingPlaylist(true);
       });
     setIsCreatingPlaylist(false);
   };
 
-  const handleSignIn = () => (isInAppBrowser() ? openInAppModal() : redirectToAuth());
-
-  if (isLoadingTickets) {
+  if (gigsQuery.isLoading) {
     return <Loading />;
   }
 
@@ -288,14 +176,10 @@ export const ArtistsPage = () => {
 
       <Collapse in={showSettings} collapsedSize={0}>
         <Settings
-          totalTickets={totalTickets}
-          filteredGenres={filteredGenres}
+          totalTickets={gigsQuery.data}
           numTopTracks={numTopTracks}
-          handleFilteredGenres={handleFilteredGenres}
           handleNumTopTracks={handleNumTopTracks}
-          handleDeleteGenre={handleDeleteGenre}
           handleCloseSettings={handleCloseSettings}
-          handleClearGenres={handleClearGenres}
         />
       </Collapse>
     </>
@@ -347,27 +231,10 @@ export const ArtistsPage = () => {
                 paddingTop: "24px",
               }}
             >
-              <TicketContainer
-                tickets={tickets}
-                showGenres={showGenres}
-                isLoadingTickets={isLoadingTickets}
-                isErrorTickets={isErrorTickets}
-              />
+              <GigList gigs={gigsQuery.data} />
             </Container>
           </Box>
         </Box>
-
-        {totalTickets && filteredGenres.length === 0 && loadMore < totalTickets.length && (
-          <Button
-            variant="outlined"
-            sx={{ marginTop: "24px", marginBottom: "32px" }}
-            onClick={() => {
-              setLoadMore(loadMore + loadInterval);
-            }}
-          >
-            Load more
-          </Button>
-        )}
       </Box>
 
       {isLoggedIntoSpotify() && (
@@ -378,8 +245,6 @@ export const ArtistsPage = () => {
           barColor={COLOURS.card_colours[2]}
         />
       )}
-
-      <InAppModal open={isInAppModalOpen} handleClose={closeInAppModal} handleRedirectToAuth={redirectToAuth} />
     </>
   );
 };

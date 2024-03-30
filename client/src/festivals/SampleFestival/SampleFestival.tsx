@@ -1,11 +1,11 @@
 import { Box, Button } from "@mui/material";
 import { Cities } from "../../constants/enums";
-import { useGigsQuery } from "../common/hooks/useGigsQuery";
+import { useGigsQuery } from "../../hooks/useGigsQuery";
 import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from "../../Rifflandia/constants/colours";
-import { GigList } from "../common/components/GigList";
-import { usePlaylistQuery } from "../common/hooks/usePlaylistQuery";
-import { useMissingTracks } from "../common/hooks/useMissingTracks";
-import { MissingGigsList } from "../common/components/MissingGigsList";
+import { GigList } from "../../components/GigList";
+import { usePlaylistQuery } from "../../hooks/usePlaylistQuery";
+import { useMissingTracks } from "../../hooks/useMissingTracks";
+import { MissingGigsList } from "../../components/MissingGigsList";
 import { useAuth } from "../../context/AuthContext";
 
 export const SampleFestival = () => {
@@ -35,8 +35,8 @@ export const SampleFestival = () => {
           Sign Out
         </Button>
       )}
-      {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
-      <GigList gigs={gigs} cardColours={RIFF_CARD_COLOURS} />
+      {/* {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
+      <GigList gigs={gigs} cardColours={RIFF_CARD_COLOURS} /> */}
     </Box>
   );
 };
