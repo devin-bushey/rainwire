@@ -72,7 +72,7 @@ const HeaderMenu = ({ openContactUsModal }: MenuProps) => {
       >
         {NavBarMenuOption("Home", "/")}
         {NavBarMenuOption("Victoria", "/artists")}
-        {NavBarMenuOption("Explore", "/explore")}
+        {/* {NavBarMenuOption("Explore", "/explore")} */}
         <Button sx={optionButtonAppearance} onClick={openContactUsModal}>
           Contact me
         </Button>
@@ -246,7 +246,7 @@ const DropdownMenu = ({ openContactUsModal }: MenuProps) => {
         >
           {NavBarDropdownMenuOption("Home", "/")}
           {NavBarDropdownMenuOption("Victoria", "/artists")}
-          {NavBarDropdownMenuOption("Explore", "/explore")}
+          {/* {NavBarDropdownMenuOption("Explore", "/explore")} */}
 
           <Button
             sx={optionButtonAppearance}
