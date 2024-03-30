@@ -43,7 +43,7 @@ export const CreateNewPlaylist = async ({
 
   let sortedArtists = sortBy === "popularity" ? sortByPopularity(artists) : sortByDateAndOrder(artists);
 
-  if (city === Cities.Victoria) {
+  if (city === Cities.Victoria_2024) {
     sortedArtists = filterRecent(sortedArtists);
   }
 

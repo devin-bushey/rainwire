@@ -4,17 +4,13 @@ import Typography from "@mui/material/Typography";
 import { memo, useEffect, useState } from "react";
 import { COLOURS } from "../theme/AppStyles";
 import spotifyLogo from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { useNavigate } from "react-router-dom";
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 
-import { ReactComponent as CHERRIES } from "../Rifflandia/images/cherries.svg";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 
-const LoginPage = memo(() => {
-  const navigate = useNavigate();
-
+const WelcomePage = memo(() => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -86,11 +82,7 @@ const LoginPage = memo(() => {
         <Box display="flex" flexDirection="column">
           <Button
             onClick={isInAppBrowser}
-            // href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${BASE_REDIRECT_URI}&scope=${SCOPES.join(
-            //   '%20',
-            // )}&response_type=token&show_dialog=true`}
             variant="contained"
-            //color="secondary"
             sx={{
               backgroundColor: COLOURS.blue,
               ":hover": {
@@ -152,38 +144,12 @@ const LoginPage = memo(() => {
           (but its more fun to customize your own)
         </Box>
 
-        {/* <Box
-          sx={{
-            width: '75%',
-            maxWidth: '700px',
-            '& .MuiTypography-body1': {
-              fontSize: '1rem',
-            },
-            marginTop: '16px',
-          }}
-        >
-          <Typography sx={{ paddingTop: '12px' }}>Create a Rifflandia playlist:</Typography>
-        </Box>
-
-        <Button
-          onClick={() => {
-            navigate('/rifflandia');
-          }}
-          variant="outlined"
-          sx={{ marginTop: '4px', marginBottom: '48px', padding: '8px 16px', width: '300px' }}
-        >
-          <Box sx={{ marginRight: '12px', height: '20px', width: '20px' }}>
-            <CHERRIES />
-          </Box>
-          Rifflandia
-        </Button> */}
-
         <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
       </Container>
     </>
   );
 });
 
-LoginPage.displayName = "LoginPage";
+WelcomePage.displayName = "WelcomePage";
 
-export default LoginPage;
+export default WelcomePage;

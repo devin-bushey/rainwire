@@ -1,5 +1,5 @@
 import { QueryFunction, useQuery } from "react-query";
-import { Cities, Festivals } from "../../../constants/enums";
+import { Cities, Festivals } from "../constants/enums";
 import { getGigsFromRecordShop } from "../apiManager/getGigsFromRecordShop";
 import { Gig } from "../types/Gig";
 

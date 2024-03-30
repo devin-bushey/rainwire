@@ -4,10 +4,7 @@ export interface Gig {
   date: string;
   venue: string;
   isMissing?: boolean; // TODO: should this be optional?
-
-  // TODO: Remove these old types
-  topTrackURIs: string[];
-  sp_band_name: string;
+  popularity?: number;
 }
 
 interface Artist {

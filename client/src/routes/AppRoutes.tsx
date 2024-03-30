@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
+import WelcomePage from "../pages/WelomePage";
 import Navbarr from "../components/Navbar";
 import NotFound from "../pages/NotFound";
 import { Box } from "@mui/material";
@@ -18,7 +18,7 @@ export const AppRoutes = () => {
       <Box sx={{ minHeight: "calc(100vh - 46px)" }}>
         <Routes>
           <Route path="/" element={<Navbarr />}>
-            <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <LoginPage /> : <ArtistsPage />} />
+            <Route index element={!token || !spotifyInfo || !spotifyInfo.access ? <WelcomePage /> : <ArtistsPage />} />
             <Route path="/artists" element={<ArtistsPage />} />
             {/* <Route path="/about" element={<About />} /> */}
             <Route path="*" element={<NotFound />} />
