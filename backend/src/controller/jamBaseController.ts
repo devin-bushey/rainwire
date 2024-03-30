@@ -1,7 +1,7 @@
 import express, { response } from "express";
-import { CreateNewPlaylistJamBase } from "../helpers/createPlaylist";
-import { Countries, States, Metros } from "../types/Geographies";
+import { Countries, States, Metros } from "../types/jamBase/Geographies";
 import { get } from "../http/request";
+import { CreateNewPlaylistJamBase } from "../helpers/jamBase/createPlaylist";
 
 export const jamBaseRouter = express.Router();
 
@@ -104,7 +104,6 @@ jamBaseRouter.route("/jamBase").get(async (req, response) => {
     });
 
     const data = formatJamBase(httpResponse.data);
-    //console.log('****data ', data);
     response.json(data);
   } catch (error) {
     console.log(error);
@@ -172,9 +171,6 @@ const getCityId = async (requestedCity: string) => {
 
     return null;
   });
-  // .catch((error: any) => {
-  //   //console.log(`Error getting jam base getCityId for ${city}`);
-  // });
 };
 
 jamBaseRouter.route("/createJamBase").post(async (req, response) => {
@@ -186,7 +182,6 @@ jamBaseRouter.route("/createJamBase").post(async (req, response) => {
   }
 
   const cityId = await getCityId(city);
-  //console.log('******', cityId);
 
   if (!cityId || cityId == null) {
     response.status(404).json("City not found");
