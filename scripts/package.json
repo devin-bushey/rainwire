@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "scrape": "npx ts-node",
+    "format": "prettier . --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.16",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.18",
+    "@types/swagger-ui-express": "^4.1.3",
+    "nodemon": "^2.0.20",
+    "prettier": "^3.2.5",
+    "rimraf": "^4.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "mongodb": "^4.13.0",
+    "request": "^2.88.2",
+    "string-similarity": "^4.0.4",
+    "swagger-ui-express": "^4.6.0"
+  }
+}
