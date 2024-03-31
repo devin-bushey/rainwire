@@ -14,7 +14,7 @@ export const WEBSITE_RIFFLANDIA = "https://rifflandia.com/tickets/";
 export const LOCATIONS: LocationType[] = [
   {
     name: "Victoria, BC",
-    value: Cities.Victoria,
+    value: Cities.Victoria_2024,
     //website: 'https://victoriamusicscene.com/concerts/',
     //website: 'https://www.songkick.com/metro-areas/27399-canada-victoria',
     website:
@@ -27,30 +27,30 @@ export const LOCATIONS: LocationType[] = [
   //   website: 'https://www.ticketmaster.ca/discover/concerts/vancouver',
   //   location: 'Vancouver, BC',
   // },
-  {
-    name: "Phillips Backyard",
-    value: Festivals.PhilipsBackyard,
-    website: "https://www.phillipsbackyard.com/",
-    location: "Victoria, BC",
-  },
-  {
-    name: "The Function",
-    value: Festivals.TheFunction,
-    website: "https://www.functionfestival.com/",
-    location: "Ship Point",
-  },
-  {
-    name: "Rifflandia",
-    value: Festivals.Rifflandia,
-    website: "https://rifflandia.com/tickets/",
-    location: "Victoria, BC",
-  },
-  {
-    name: "Whistlemania",
-    value: Festivals.Whistlemania,
-    website: "https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/",
-    location: "Victoria, BC",
-  },
+  // {
+  //   name: "Phillips Backyard",
+  //   value: Festivals.PhilipsBackyard,
+  //   website: "https://www.phillipsbackyard.com/",
+  //   location: "Victoria, BC",
+  // },
+  // {
+  //   name: "The Function",
+  //   value: Festivals.TheFunction,
+  //   website: "https://www.functionfestival.com/",
+  //   location: "Ship Point",
+  // },
+  // {
+  //   name: "Rifflandia",
+  //   value: Festivals.Rifflandia,
+  //   website: "https://rifflandia.com/tickets/",
+  //   location: "Victoria, BC",
+  // },
+  // {
+  //   name: "Whistlemania",
+  //   value: Festivals.Whistlemania,
+  //   website: "https://www.eventbrite.ca/e/whistlemania-2023-tickets-623971705167/",
+  //   location: "Victoria, BC",
+  // },
   // {
   //   name: "Laketown Shakedown",
   //   value: Festivals.LaketownShakedown,

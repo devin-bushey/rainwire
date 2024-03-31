@@ -41,19 +41,19 @@ export const CreateNewPlaylist = async ({
 
   const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
 
-  let sortedArtists = sortBy === "popularity" ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+  let sortedGigs = sortBy === "popularity" ? sortByPopularity(artists) : sortByDateAndOrder(artists);
 
-  if (city === Cities.Victoria) {
-    sortedArtists = filterRecent(sortedArtists);
+  if (city === Cities.Victoria_2024) {
+    sortedGigs = filterRecent(sortedGigs);
   }
 
   let tracks = "";
 
-  for (const artist of sortedArtists) {
+  for (const gig of sortedGigs) {
     try {
       for (let i = 0; i < numTopTracksToAdd; i++) {
-        if (artist.topTrackURIs && artist.topTrackURIs[i]) {
-          tracks += artist.topTrackURIs[i];
+        if (gig.artist.topTracks && gig.artist.topTracks[i]) {
+          tracks += gig.artist.topTracks[i];
           tracks += ",";
         }
       }
@@ -97,6 +97,10 @@ export const CreateBlankPlaylist = async ({
 
   if (city === Festivals.PhilipsBackyard) {
     playlist_name = "record shop phillips backyard";
+  }
+
+  if (city === Cities.Victoria_2024) {
+    playlist_name = "record shop victoria";
   }
 
   if (city === Festivals.LaketownShakedown) {

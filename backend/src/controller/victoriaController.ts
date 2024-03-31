@@ -13,10 +13,10 @@ const cachedData: {
 victoriaRouter.route("/artists").get(async (req, response) => {
   const { city } = req.query;
 
-  if (city === Cities.Victoria && cachedData.victoria_data) {
+  if (city === Cities.Victoria_2024 && cachedData.victoria_data) {
     response.json(cachedData.victoria_data);
   } else {
-    if (city === Cities.Victoria) console.log("cache not found for /victoria: ", cachedData.victoria_data);
+    if (city === Cities.Victoria_2024) console.log("cache not found for /victoria: ", cachedData.victoria_data);
 
     let db_connect = dbo.getDb();
 
@@ -37,7 +37,7 @@ victoriaRouter.route("/artists").get(async (req, response) => {
       .toArray()
       .then((data: any) => {
         // Save the fetched data to cache
-        if (city === Cities.Victoria) {
+        if (city === Cities.Victoria_2024) {
           cachedData.victoria_data = data;
         }
         response.json(data);

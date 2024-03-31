@@ -1,5 +1,5 @@
 import { Box, CardMedia } from "@mui/material";
-import { MISSING_COLOURS } from "../../../Rifflandia/constants/colours";
+import { MISSING_COLOURS } from "../Rifflandia/constants/colours";
 import { Playlist } from "../types/Playlist";
 import { GigList } from "./GigList";
 import { Gig } from "../types/Gig";
@@ -22,9 +22,7 @@ export const MissingGigsList = ({ playlist, missingTracks }: { playlist: Playlis
     />
     <Box>
       <p>Missing Tracks:</p>
-      {missingTracks.length > 0 && (
-        <GigList gigs={missingTracks} cardColours={MISSING_COLOURS} playlistId={playlist.id} />
-      )}
+      {missingTracks.length > 0 && <GigList gigs={missingTracks} cardColours={MISSING_COLOURS} />}
       <p>End of missing tracks</p>
     </Box>
   </Box>

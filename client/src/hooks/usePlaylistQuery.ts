@@ -2,7 +2,7 @@ import { QueryFunction, useQuery } from "react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Playlist } from "../types/Playlist";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export const usePlaylistQuery = (playlistName: string) => {
   const queryOptions = {

@@ -7,8 +7,7 @@
 // # Get the Bearer token by logging into your spotify account through record shop, 
 // # then get the token from Dev tools -> Application tab -> local storage
 
-// node ./backend/src/scripts/updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' d64eed8d-4612-4ee4-9529-46dc35e8083d BQBmvVscfEDlR_M-vokiUyu3k2VGyQzKp49hi3Uo-IkqqheATjHbGPHUb5rASOyBf2grQqm67hb3akKe4K4zlmgk3jytcU7zu43JUozrAxez7rB07A6qZS6xra_kZte527lDOTctkktjTj_4rHWYDOacnpIp8KTlB37BOcvWwBhjex9YrBKsm8PbP18RWdhDtTo1l4TaH8l6GU4R6el8-53V7QVVCKoZEQCeUA
-
+// node ./backend/src/scripts/updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' d64eed8d-4612-4ee4-9529-46dc35e8083d BQCMNUZcgv2-CSZFaAkdUb5y6cqJnEbFIxPfSsR-cKDiKPZzdGt4I3dTPaGFTJMCHpXQ53UiczHtY3WtYKObh4ANsLITMeq-6x769HSko5LO3sAQLvXdU2NgL0YyPofalNvWp2RO4DewPv7UueXcxF_5q65h1CQ6bGpQcuxItk4Ufgy9InG_sqgcFJv0V_MtZbR764rrRQuuTVBzX8Ij5DzLaq629WQfx-q3mQ
 
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
@@ -55,18 +54,17 @@ async function getConcertData() {
           const spotifyResponse = await axios(optionsSpotify);
           const topTracks = spotifyResponse.data.tracks;
           const concertObject = {
-            artist: spotifyResponse.data.tracks[0].album.artists[0].name,
-            ticket_date: `${event.endDate} at ${event.location.name}`,
-            venue: event.location.name,
+            artist: {
+              id: spotifyId,
+              name: spotifyResponse.data.tracks[0].album.artists[0].name,
+              topTracks: topTracks.map(track => track.uri),
+              uri: `spotify:artist:${spotifyId}`,
+              albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
+              link: `https://open.spotify.com/artist/${spotifyId}`
+            },
             date: event.endDate,
-            band_id: spotifyId,
-            sp_band_name: '',
-            link: `https://open.spotify.com/artist/${spotifyId}`,
-            uri: `spotify:artist:${spotifyId}`,
-            albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
-            topTrackURIs: topTracks.map(track => track.uri)
+            venue: event.location.name,
           };
-          concertObject.sp_band_name = concertObject.artist;
           concertData.push(concertObject);
         }
       }
@@ -96,14 +94,29 @@ const updateMongoDb = async () => {
 
   try {
     const collection = db.collection('victoria');
+
     for (const concert of concertData) {
-      // Upsert operation based on the artist's Spotify ID
-      await collection.updateOne(
-        { band_id: concert.band_id },
-        { $setOnInsert: concert },
-        { upsert: true }
-      );
+      // Check if the concert already exists in the database
+      const existingConcert = await collection.findOne({ 'artist.id': concert.artist.id });
+      if (!existingConcert) {
+        // Insert the concert if it doesn't exist
+        await collection.insertOne(concert);
+        console.log(`Concert for ${concert.artist.name} on ${concert.date} added to the database`);
+      } else {
+        console.log(`Concert for ${concert.artist.name} on ${concert.date} already exists in the database`);
+      }
     }
+
+    // await collection.insertMany(concertData, { ordered: false });
+
+    // for (const concert of concertData) {
+    //   // Upsert operation based on the artist's Spotify ID
+    //   await collection.updateMany(
+    //     { $setOnInsert: concert },
+    //     { upsert: true }
+    //   );
+    // }
+
     console.log(`Documents were updated/inserted`);
   } catch (e) {
     console.error(e);
