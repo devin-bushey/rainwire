@@ -32,8 +32,7 @@ victoriaRouter.route("/artists").get(async (req, response) => {
     }
 
     db_connect
-      .collection(`victoria_2024`)
-
+      .collection(`${city}`)
       .find({})
       .toArray()
       .then((data: any) => {
