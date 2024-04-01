@@ -1,26 +1,12 @@
 import { Button, Typography } from "@mui/material";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 
-type ButtonColours = {
-  background: string;
-  text: string;
-  hover: {
-    background: string;
-    text: string;
-  };
-};
-
-export const SignInButton = ({ redirectToAuth, colours }: { redirectToAuth: () => void; colours: ButtonColours }) => (
+export const SignInButton = ({ redirectToAuth, className }: { redirectToAuth: () => void; className?: string }) => (
   <Button
     onClick={redirectToAuth}
     variant="contained"
+    className={className}
     sx={{
-      backgroundColor: colours.background,
-      color: colours.text,
-      ":hover": {
-        backgroundColor: colours.hover.background,
-        color: colours.hover.text,
-      },
       justifyContent: "center",
       width: "200px",
       height: "48px",

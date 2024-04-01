@@ -1,6 +1,24 @@
+:root {
+  --main-bg-color: #3B6AB3;
+
+  --card-bg-color: #3B6AB3;
+  --card-text-color: #FCFCFC;
+
+  --primary-button-bg-color: #EE97A6;
+  --primary-button-text-color: #FCFCFC;
+  --primary-button-hover-bg-color: #FCFCFC;
+  --primary-button-hover-text-color: #312F2E;
+
+  --secondary-button-bg-color: #5C9188;
+  --secondary-button-text-color: #FCFCFC;
+  --secondary-button-hover-bg-color: #FCFCFC;
+  --secondary-button-hover-text-color: #312F2E;
+
+}
+
 .pachena-page { 
   position: relative;
-  background-color: #3B6AB3;
+  background-color: var(--main-bg-color);
   z-index: 0;
   height: 100%;
 }
@@ -11,6 +29,8 @@
   background-size: cover;
   z-index: 1;
 }
+
+/***** BG IMAGES ******/
 
 .sidebar {
   position: fixed;
@@ -49,4 +69,46 @@
   right: 30px;
   width: 149px;
   background-position: bottom;
+}
+
+
+
+/******* BUTTONS *******/
+.primary-button {
+  background-color: var(--primary-button-bg-color) !important;
+  color: var(--primary-button-text-color) !important;
+}
+.primary-button:hover {
+  background-color: var(--primary-button-hover-bg-color) !important;
+  color: var(--primary-button-hover-text-color) !important;
+}
+
+.secondary-button {
+  background-color: var(--primary-button-bg-color) !important;
+  color: var(--primary-button-text-color) !important;
+
+  &:hover {
+    background-color: var(--primary-button-hover-bg-color) !important;
+    color: var(--primary-button-hover-text-color) !important;  
+  }
+}
+
+
+
+/****** PREVIEW_PLAYLIST ******/
+.preview-playlist {
+  .MuiCard-root {
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+  }
+
+  button {
+    background-color: var(--secondary-button-bg-color) !important;
+    color: var(--secondary-button-text-color) !important;
+
+    &:hover {
+      background-color: var(--secondary-button-hover-bg-color) !important;
+      color: var(--secondary-button-hover-text-color) !important;
+    }
+  }
 }
