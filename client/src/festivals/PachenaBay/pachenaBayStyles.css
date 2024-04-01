@@ -1,18 +1,25 @@
+.pachena-page { 
+  background-color: #3B6AB3;
+  position: relative;
+  z-index: -2;
+}
+
 .sidebar {
   position: fixed;
   width: 300px;
   background-size: contain;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .sidebar-coral-left {
   background-image: url('./assets/coralLeft.png');
-  left: 0;
+  left: -50px;
   background-position: right;
 }
 
 .sidebar-coral-right {
   background-image: url('./assets/coralRight.png');
-  right: 0;
+  right: -50px;
   background-position: left;
 }

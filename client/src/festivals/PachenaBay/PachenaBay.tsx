@@ -25,7 +25,7 @@ const PLAYLIST_NAME = "Record Shop Pachena Bay 2024";
 const TICKET_LINK = WEBSITE_PACHENA_BAY;
 
 const COLOURS = Object.freeze({
-  pageBackground: "rgb(59, 106, 179)",
+  pageBackground: "#3B6AB3",
   text: "#FCFCFC",
   description: {
     background: "#00223C",
@@ -67,10 +67,11 @@ export const PachenaBay = () => {
 
   return (
     <Box
+      className="pachena-page"
       sx={{
         minHeight: "100vh",
         textAlign: "center",
-        backgroundColor: COLOURS.pageBackground,
+        // backgroundColor: COLOURS.pageBackground,
       }}
     >
       <Grid
