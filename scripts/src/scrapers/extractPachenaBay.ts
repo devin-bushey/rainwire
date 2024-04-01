@@ -8,7 +8,7 @@ const { MongoClient } = require("mongodb");
 /**
  * USAGE:
  *
- * npx ts-node extract_pachena_bay.ts
+ * npx ts-node extractPachenaBay.ts
  */
 
 const DATABASE_URL = "mongodb://root:example@localhost:27017/";
