@@ -1,25 +1,52 @@
 .pachena-page { 
-  background-color: #3B6AB3;
   position: relative;
-  z-index: -2;
+  background-color: #3B6AB3;
+  z-index: 0;
+  height: 100%;
+}
+
+.pachena-background-swirls {
+  position: relative;
+  background-image: url('./assets/backgroundSwirls.png');
+  background-size: cover;
+  z-index: 1;
 }
 
 .sidebar {
   position: fixed;
-  width: 300px;
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: 2;
 }
 
-.sidebar-coral-left {
-  background-image: url('./assets/coralLeft.png');
+.sidebar-coral-blue {
+  background-image: url('./assets/coralBlue.png');
   left: -50px;
-  background-position: right;
+  width: 300px;
+  background-position: bottom;
 }
 
-.sidebar-coral-right {
-  background-image: url('./assets/coralRight.png');
-  right: -50px;
-  background-position: left;
+.sidebar-coral-pink {
+  background-image: url('./assets/coralPink.png');
+  left: -400px;
+  width: 600px;
+  top: -50px;
+  background-position: top;
+  transform: rotate(40deg);
+}
+
+.sidebar-coral-red {
+  background-image: url('./assets/coralRed.png');
+  right: -80px;
+  top: 200px;
+  width: 300px;
+  height: 300px;
+  transform: rotate(-40deg);
+}
+
+.sidebar-pink-googly-eye {
+  background-image: url('./assets/pinkGooglyEye.png');
+  right: 30px;
+  width: 149px;
+  background-position: bottom;
 }

@@ -28,8 +28,10 @@ const COLOURS = Object.freeze({
   pageBackground: "#3B6AB3",
   text: "#FCFCFC",
   description: {
-    background: "#00223C",
+    // background: "#00223C",
+    background: "#3B6AB3",
     text: "#FCFCFC",
+    // text: "#FFEAC2",
   },
   primaryButton: {
     background: "#EE97A6",
@@ -71,24 +73,21 @@ export const PachenaBay = () => {
       sx={{
         minHeight: "100vh",
         textAlign: "center",
-        // backgroundColor: COLOURS.pageBackground,
       }}
     >
-      <Grid
-        container
-        justifyContent="center"
-        // sx={{
-        //   backgroundImage: `url(${backgroundSwirls})`,
-        //   backgroundSize: "cover",
-        // }}
-      >
-        <div className="sidebar sidebar-coral-left" />
-        <div className="sidebar sidebar-coral-right" />
+      <Grid container justifyContent="center" className="pachena-background-swirls">
+        <div className="sidebar sidebar-coral-red" />
+        <div className="sidebar sidebar-coral-pink" />
+        <div className="sidebar sidebar-coral-blue" />
+        <div className="sidebar sidebar-pink-googly-eye" />
 
-        <Grid item xs={11} sm={10} md={7}>
+        <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 10 }}>
           <RecordShopTitle textColour={COLOURS.text} />
 
-          <Description />
+          <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
+            Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
+            Pachena Bay.
+          </Typography>
 
           {!isLoggedIntoSpotify() ? (
             // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
@@ -106,12 +105,8 @@ export const PachenaBay = () => {
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        justifyContent="center"
-        sx={{ backgroundImage: `url(${backgroundSwirls})`, backgroundSize: "cover" }}
-      >
-        <Grid item xs={11} sm={10} md={7}>
+      <Grid container justifyContent="center">
+        <Grid item xs={11} sm={10} md={7} sx={{ zIndex: 3 }}>
           <Grid container sx={{ marginTop: "48px" }}>
             <Grid item xs={12} md={6}>
               <img src={pachenaBayTextLogo} alt="Pachena Bay Music Festival" width="100%" />
@@ -122,25 +117,6 @@ export const PachenaBay = () => {
     </Box>
   );
 };
-
-const Description = () => (
-  <Card
-    sx={{
-      backgroundColor: COLOURS.description.background,
-      color: COLOURS.description.text,
-      margin: "24px 0",
-    }}
-  >
-    <Typography sx={{ marginTop: "12px" }}>
-      Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at Pachena
-      Bay.
-    </Typography>
-
-    <Typography sx={{ marginTop: "24px" }}>
-      The playlist can be pre-populated and created right on your account!
-    </Typography>
-  </Card>
-);
 
 const PreviewPlaylist = () => (
   <Box
