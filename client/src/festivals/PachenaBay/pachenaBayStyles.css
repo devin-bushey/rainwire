@@ -1,0 +1,18 @@
+.sidebar {
+  position: fixed;
+  width: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.sidebar-coral-left {
+  background-image: url('./assets/coralLeft.png');
+  left: 0;
+  background-position: right;
+}
+
+.sidebar-coral-right {
+  background-image: url('./assets/coralRight.png');
+  right: 0;
+  background-position: left;
+}

@@ -3,7 +3,7 @@ import { getCurrentUrlWithoutParams, goTo, reloadPage } from "./browserUtils";
 
 export const redirectToAuth = (redirectUri?: unknown) => {
   // this fn gets passed a button event in certain cases, hence the type check here
-  redirectUri = redirectUri instanceof String ? redirectUri : getCurrentUrlWithoutParams();
+  redirectUri = typeof redirectUri === "string" ? redirectUri : getCurrentUrlWithoutParams();
 
   location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&scope=${SCOPES.join(
     "%20",

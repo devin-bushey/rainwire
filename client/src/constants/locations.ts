@@ -9,6 +9,7 @@ export const WEBSITE_LAKETOWN = "https://www.laketownshakedown.com/";
 export const WEBSITE_OSHEAGA = "https://osheaga.com/en";
 export const WEBSITE_COACHELLA = "https://coachella.com/";
 export const WEBSITE_RIFFLANDIA = "https://rifflandia.com/tickets/";
+export const WEBSITE_PACHENA_BAY = "https://www.pachenabaymusicfestival.com/tickets";
 
 // This order of locations in this list corresponds to the order in the dropdown in the UI
 export const LOCATIONS: LocationType[] = [

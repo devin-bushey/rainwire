@@ -8,10 +8,14 @@ import { useMissingTracks } from "../../hooks/useMissingTracks";
 import { MissingGigsList } from "../../components/MissingGigsList";
 import { useAuth } from "../../context/AuthContext";
 
+/** UPDATE THESE CONSTANTS */
+const FESTIVAL_ENUM = Cities.Victoria;
+const PLAYLIST_NAME = "Record Shop test";
+
 export const SampleFestival = () => {
   const { isLoggedIntoSpotify, redirectToAuth, logOut } = useAuth();
-  const { data: gigs } = useGigsQuery(Cities.Victoria); // TODO: change Cities.Victoria to the actual festival enum
-  const { data: playlist } = usePlaylistQuery("test"); // TODO: change 'test' to 'record shop {festival name}'
+  const { data: gigs } = useGigsQuery(FESTIVAL_ENUM);
+  const { data: playlist } = usePlaylistQuery(PLAYLIST_NAME);
   const missingTracks = useMissingTracks(playlist, gigs);
 
   return (
