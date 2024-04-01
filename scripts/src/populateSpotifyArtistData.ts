@@ -1,6 +1,3 @@
-// require("dotenv").config({ path: "../config.env" });
-// import { get } from "../http/request";
-// import _ from "lodash";
 import { findBestMatch } from "string-similarity";
 import { MongoClient } from "mongodb";
 import { buildArtist } from "./model/Artist";
@@ -19,7 +16,7 @@ const SPOTIFY_TOKEN = process.argv[3];
 /**
  * USAGE
  *
- * npmx ts-node populateSpotifyArtistData.ts COLLECTION_NAME SPOTIFY_TOKEN
+ * npx ts-node populateSpotifyArtistData.ts COLLECTION_NAME SPOTIFY_TOKEN
  */
 
 export const updateCollectionWithSpotify = async () => {
