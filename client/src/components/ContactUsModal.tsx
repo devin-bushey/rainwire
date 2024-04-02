@@ -2,15 +2,15 @@ import { Modal, Input, TextField, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { send } from "emailjs-com";
 import { useState, useContext } from "react";
-import { RIFFLANDIA_COLOURS } from "./constants/colours";
 import { SnackBarContext } from "../App";
 
 type ContactUsModalProps = {
   isOpen: boolean;
   closeModal: () => void;
+  globalClassName: string;
 };
 
-export const ContactUsModal = ({ isOpen, closeModal }: ContactUsModalProps) => {
+export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactUsModalProps) => {
   const [message, setMessage] = useState("");
 
   const [toSend, setToSend] = useState({
@@ -56,8 +56,10 @@ export const ContactUsModal = ({ isOpen, closeModal }: ContactUsModalProps) => {
       onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      className={`${globalClassName}`}
     >
       <Box
+        className="contact-us-modal-contents"
         sx={{
           position: "absolute",
           top: "50%",
@@ -65,7 +67,6 @@ export const ContactUsModal = ({ isOpen, closeModal }: ContactUsModalProps) => {
           transform: "translate(-50%, -50%)",
           minWidth: "300px",
           maxWidth: "550px",
-          backgroundColor: RIFFLANDIA_COLOURS.fill_pale_green,
           border: "2px solid #000",
           boxShadow: 24,
           p: 4,
@@ -93,7 +94,7 @@ export const ContactUsModal = ({ isOpen, closeModal }: ContactUsModalProps) => {
           <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
           <br />
           <br />
-          <Button type="submit" variant="contained" sx={{ backgroundColor: RIFFLANDIA_COLOURS.blue, marginTop: "8px" }}>
+          <Button type="submit" variant="contained" className="primary-button" sx={{ marginTop: "8px" }}>
             Send
           </Button>
           <br />

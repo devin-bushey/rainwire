@@ -9,7 +9,7 @@ import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from "../constants/colours";
 import { WEBSITE_RIFFLANDIA } from "../../constants/locations";
 
 import { TicketContainer } from "../TicketContainer";
-import { ContactUsModal } from "../ContactUsModal";
+import { ContactUsModal } from "../../components/ContactUsModal";
 import { SignInModalRifflandia } from "../SignInModalRifflandia";
 import { InAppModalRifflandia } from "../InAppModalRifflandia";
 import { LoadingRifflandia } from "../LoadingRifflandia";
@@ -38,6 +38,8 @@ import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SpotifyPreviewModal } from "../SpotifyPreviewModal";
 
 const TICKET_LINK = WEBSITE_RIFFLANDIA;
+
+const GLOBAL_CSS_CLASSNAME = "rifflandia";
 
 const COLOURS = Object.freeze({
   pageBackground: RIFFLANDIA_COLOURS.background,
@@ -90,7 +92,7 @@ export const Rifflandia = () => {
   const handleRedirectToAuthForBrowser = isInAppBrowser() ? openInAppModal : redirectToAuth;
 
   return (
-    <>
+    <div className={GLOBAL_CSS_CLASSNAME}>
       <div className="sidebar sidebar-svg-park"></div>
       <div className="sidebar sidebar-svg-electric"></div>
 
@@ -133,7 +135,7 @@ export const Rifflandia = () => {
       </Box>
 
       <InAppModalRifflandia isOpen={isInAppModalOpen} closeModal={closeInAppModal} />
-    </>
+    </div>
   );
 };
 
@@ -273,7 +275,11 @@ const BuiltByRecordShop = () => {
       </div>
       <div style={{ marginTop: "8px", fontSize: "0.7rem" }}>Made in Victoria, BC</div>
 
-      <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} />
+      <ContactUsModal
+        isOpen={isContactUsModalOpen}
+        closeModal={closeContactUsModal}
+        globalClassName={GLOBAL_CSS_CLASSNAME}
+      />
     </>
   );
 };

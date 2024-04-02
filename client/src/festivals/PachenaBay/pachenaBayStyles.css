@@ -1,4 +1,4 @@
-:root {
+.pachena {
   --main-bg-color: #3B6AB3;
 
   --card-bg-color: #3B6AB3;
@@ -14,101 +14,127 @@
   --secondary-button-hover-bg-color: #FCFCFC;
   --secondary-button-hover-text-color: #312F2E;
 
-}
-
-.pachena-page { 
-  position: relative;
-  background-color: var(--main-bg-color);
-  z-index: 0;
-  height: 100%;
-}
-
-.pachena-background-swirls {
-  position: relative;
-  background-image: url('./assets/backgroundSwirls.png');
-  background-size: cover;
-  z-index: 1;
-}
-
-/***** BG IMAGES ******/
-
-.sidebar {
-  position: fixed;
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 2;
-}
-
-.sidebar-coral-blue {
-  background-image: url('./assets/coralBlue.png');
-  left: -50px;
-  width: 300px;
-  background-position: bottom;
-}
-
-.sidebar-coral-pink {
-  background-image: url('./assets/coralPink.png');
-  left: -400px;
-  width: 600px;
-  top: -50px;
-  background-position: top;
-  transform: rotate(40deg);
-}
-
-.sidebar-coral-red {
-  background-image: url('./assets/coralRed.png');
-  right: -80px;
-  top: 200px;
-  width: 300px;
-  height: 300px;
-  transform: rotate(-40deg);
-}
-
-.sidebar-pink-googly-eye {
-  background-image: url('./assets/pinkGooglyEye.png');
-  right: 30px;
-  width: 149px;
-  background-position: bottom;
-}
-
-
-
-/******* BUTTONS *******/
-.primary-button {
-  background-color: var(--primary-button-bg-color) !important;
-  color: var(--primary-button-text-color) !important;
-}
-.primary-button:hover {
-  background-color: var(--primary-button-hover-bg-color) !important;
-  color: var(--primary-button-hover-text-color) !important;
-}
-
-.secondary-button {
-  background-color: var(--primary-button-bg-color) !important;
-  color: var(--primary-button-text-color) !important;
-
-  &:hover {
-    background-color: var(--primary-button-hover-bg-color) !important;
-    color: var(--primary-button-hover-text-color) !important;  
+  .pachena-page { 
+    position: relative;
+    background-color: var(--main-bg-color);
+    z-index: 0;
+    height: 100%;
   }
-}
-
-
-
-/****** PREVIEW_PLAYLIST ******/
-.preview-playlist {
-  .MuiCard-root {
-    background-color: var(--card-bg-color);
-    color: var(--card-text-color);
+  
+  .pachena-background-swirls {
+    position: relative;
+    background-image: url('./assets/backgroundSwirls.png');
+    background-size: cover;
+    z-index: 1;
   }
-
-  button {
-    background-color: var(--secondary-button-bg-color) !important;
-    color: var(--secondary-button-text-color) !important;
-
+  
+  /***** BG IMAGES ******/
+  
+  .sidebar {
+    position: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+  }
+  
+  .sidebar-coral-blue {
+    background-image: url('./assets/coralBlue.png');
+    width: 350px;
+    height: 400px;
+    left: -100px;
+    bottom: 0px;
+    background-position: bottom;
+  }
+  
+  .sidebar-coral-pink {
+    background-image: url('./assets/coralPink.png');
+    width: 600px;
+    height: 400px;
+    left: -200px;
+    top: -50px;
+    background-position: top;
+    transform: rotate(40deg);
+  }
+  
+  .sidebar-coral-red {
+    background-image: url('./assets/coralRed.png');
+    right: -80px;
+    top: 200px;
+    width: 300px;
+    height: 300px;
+    transform: rotate(-40deg);
+  }
+  
+  .sidebar-pink-googly-eye {
+    background-image: url('./assets/pinkGooglyEye.png');
+    width: 150px;
+    height: 300px;
+    right: 30px;
+    background-position: bottom;
+    bottom: -10px;
+  }
+  
+  
+  
+  /******* BUTTONS *******/
+  .primary-button {
+    background-color: var(--primary-button-bg-color) !important;
+    color: var(--primary-button-text-color) !important;
+  
     &:hover {
-      background-color: var(--secondary-button-hover-bg-color) !important;
-      color: var(--secondary-button-hover-text-color) !important;
+      background-color: var(--primary-button-hover-bg-color) !important;
+      color: var(--primary-button-hover-text-color) !important;  
     }
   }
+  
+  .secondary-button {
+    background-color: var(--secondary-button-bg-color) !important;
+    color: var(--secondary-button-text-color) !important;
+  
+    &:hover {
+      background-color: var(--secondary-button-hover-bg-color) !important;
+      color: var(--secondary-button-hover-text-color) !important;  
+    }
+  }
+  
+  
+  
+  /****** COMPONENT CLASSES ******/
+  .preview-playlist {
+    .MuiCard-root {
+      background-color: var(--card-bg-color);
+      color: var(--card-text-color);
+    }
+  
+    button {
+      background-color: var(--secondary-button-bg-color) !important;
+      color: var(--secondary-button-text-color) !important;
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color) !important;
+        color: var(--secondary-button-hover-text-color) !important;
+      }
+    }
+  }
+  
+  .about-us-popover {
+    button {
+      background-color: var(--secondary-button-bg-color) !important;
+      color: var(--secondary-button-text-color) !important;
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color) !important;
+        color: var(--secondary-button-hover-text-color) !important;
+      }
+    }
+  }
+  
+  .about-us-contents {
+    background-color: #FFEAC2;
+  }
+  
+  .contact-us-modal-contents {
+    background-color: #FFEAC2;
+  }
+    
 }

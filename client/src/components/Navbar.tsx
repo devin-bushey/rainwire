@@ -7,7 +7,7 @@ import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { redirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { ContactUsModal } from "../Rifflandia/ContactUsModal";
+import { ContactUsModal } from "./ContactUsModal";
 
 type MenuProps = {
   openContactUsModal: () => void;

@@ -18,7 +18,7 @@ export const PreviewPlaylist = ({ playlistUrl, className }: { playlistUrl: strin
         onClick={() => goToNewTabOnDesktop(playlistUrl)}
         variant="outlined"
         sx={{
-          width: "230px",
+          width: "210px",
           marginTop: "12px",
           justifyContent: "center",
           height: "36px",
@@ -27,7 +27,7 @@ export const PreviewPlaylist = ({ playlistUrl, className }: { playlistUrl: strin
         <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
         <Typography
           sx={{
-            fontSize: "0.8rem",
+            fontSize: "12px",
             fontWeight: "700",
             paddingBottom: 0,
           }}
