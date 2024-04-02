@@ -1,8 +1,11 @@
 .pachena {
   --main-bg-color: #3B6AB3;
+  --main-text-color: #FCFCFC;
 
   --card-bg-color: #3B6AB3;
   --card-text-color: #FCFCFC;
+
+  --popover-bg-color: #FFEAC2;
 
   --primary-button-bg-color: #EE97A6;
   --primary-button-text-color: #FCFCFC;
@@ -13,6 +16,8 @@
   --secondary-button-text-color: #FCFCFC;
   --secondary-button-hover-bg-color: #FCFCFC;
   --secondary-button-hover-text-color: #312F2E;
+
+  overflow: hidden;
 
   .pachena-page { 
     position: relative;
@@ -130,11 +135,17 @@
   }
   
   .about-us-contents {
-    background-color: #FFEAC2;
+    background-color: var(--popover-bg-color);
   }
   
   .contact-us-modal-contents {
-    background-color: #FFEAC2;
+    background-color: var(--popover-bg-color);
+  }
+
+  .profile-menu-button {
+    button {
+      color: var(--main-text-color);
+    }
   }
     
 }

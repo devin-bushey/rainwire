@@ -4,10 +4,17 @@ import { send } from "emailjs-com";
 import { useState, useContext } from "react";
 import { SnackBarContext } from "../App";
 
+const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
+const DEFAULT_PRIMARY_BUTTON_COLOUR = {
+  backgroundColor: "#00AEEF",
+  color: "black",
+  ":hover": { backgroundColor: "#055972" },
+};
+
 type ContactUsModalProps = {
   isOpen: boolean;
   closeModal: () => void;
-  globalClassName: string;
+  globalClassName?: string;
 };
 
 export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactUsModalProps) => {
@@ -70,6 +77,7 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
           border: "2px solid #000",
           boxShadow: 24,
           p: 4,
+          backgroundColor: DEFAULT_BACKGROUND_COLOUR,
         }}
       >
         <form onSubmit={onSubmit}>
@@ -94,7 +102,15 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
           <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
           <br />
           <br />
-          <Button type="submit" variant="contained" className="primary-button" sx={{ marginTop: "8px" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            className="primary-button"
+            sx={{
+              marginTop: "8px",
+              ...DEFAULT_PRIMARY_BUTTON_COLOUR,
+            }}
+          >
             Send
           </Button>
           <br />

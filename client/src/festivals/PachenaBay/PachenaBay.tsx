@@ -13,6 +13,8 @@ import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
 import { PreviewPlaylist } from "../../components/PreviewPlaylist";
 import { AboutUsPopover } from "../../components/AboutUsPopover";
 import "./pachenaBayStyles.css";
+import { ProfileMenu } from "../../components/ProfileMenu";
+import { goToNewTab } from "../../utils/browserUtils";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
@@ -74,7 +76,7 @@ export const PachenaBay = () => {
           <div className="sidebar sidebar-coral-blue" />
           <div className="sidebar sidebar-pink-googly-eye" />
 
-          <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 10 }}>
+          <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3 }}>
             <Grid
               container
               direction="row"
@@ -93,7 +95,7 @@ export const PachenaBay = () => {
               Pachena Bay.
             </Typography>
 
-            {!isLoggedIntoSpotify() ? (
+            {/* {!isLoggedIntoSpotify() ? (
               // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
               // TODO: make this button work for in-app
               <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
@@ -101,7 +103,7 @@ export const PachenaBay = () => {
               <Button variant="contained" onClick={logOut}>
                 Sign Out
               </Button>
-            )}
+            )} */}
             {/* {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
       <GigList gigs={gigs} cardColours={RIFF_CARD_COLOURS} /> */}
 
@@ -110,11 +112,34 @@ export const PachenaBay = () => {
         </Grid>
 
         <Grid container justifyContent="center">
-          <Grid item xs={11} sm={10} md={7} sx={{ zIndex: 3 }}>
-            <Grid container sx={{ marginTop: "48px" }}>
-              <Grid item xs={12} md={6}>
-                <img src={pachenaBayTextLogo} alt="Pachena Bay Music Festival" width="100%" />
-              </Grid>
+          <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3 }}>
+            <Grid
+              container
+              direction="row"
+              justifyContent={{ xs: "center", sm: "space-between" }}
+              alignItems="flex-start"
+              sx={{ marginTop: "48px" }}
+              columnGap={2}
+            >
+              <div style={{ maxWidth: "350px" }}>
+                <img src={pachenaBayTextLogo} alt="Pachena Bay Music Festival" style={{ width: "100%" }} />
+                <Button
+                  className="secondary-button"
+                  onClick={() => goToNewTab(TICKET_LINK)}
+                  variant="outlined"
+                  sx={{ width: "200px", margin: "12px 0" }}
+                >
+                  Buy Tickets
+                </Button>
+              </div>
+
+              {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
+              // TODO: make this button work for in-app */}
+              {isLoggedIntoSpotify() ? (
+                <ProfileMenu />
+              ) : (
+                <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
+              )}
             </Grid>
           </Grid>
         </Grid>
