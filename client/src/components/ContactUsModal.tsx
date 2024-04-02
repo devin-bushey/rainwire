@@ -3,14 +3,22 @@ import { Box } from "@mui/system";
 import { send } from "emailjs-com";
 import { useState, useContext } from "react";
 import { SnackBarContext } from "../App";
+import { PageClassName } from "../theme/AppStyles";
+
+const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
+const DEFAULT_PRIMARY_BUTTON_COLOUR = {
+  backgroundColor: "#00AEEF",
+  color: "black",
+  ":hover": { backgroundColor: "#055972" },
+};
 
 type ContactUsModalProps = {
   isOpen: boolean;
   closeModal: () => void;
-  globalClassName: string;
+  pageClassName?: PageClassName;
 };
 
-export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactUsModalProps) => {
+export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsModalProps) => {
   const [message, setMessage] = useState("");
 
   const [toSend, setToSend] = useState({
@@ -56,7 +64,7 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
       onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      className={`${globalClassName}`}
+      className={`${pageClassName}`}
     >
       <Box
         className="contact-us-modal-contents"
@@ -70,6 +78,7 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
           border: "2px solid #000",
           boxShadow: 24,
           p: 4,
+          backgroundColor: DEFAULT_BACKGROUND_COLOUR,
         }}
       >
         <form onSubmit={onSubmit}>
@@ -94,7 +103,15 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
           <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
           <br />
           <br />
-          <Button type="submit" variant="contained" className="primary-button" sx={{ marginTop: "8px" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            className="primary-button"
+            sx={{
+              marginTop: "8px",
+              ...DEFAULT_PRIMARY_BUTTON_COLOUR,
+            }}
+          >
             Send
           </Button>
           <br />

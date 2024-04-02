@@ -2,8 +2,16 @@ import { useState } from "react";
 import { Box, Button, Popover, Typography } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { ContactUsModal } from "./ContactUsModal";
+import { PageClassName } from "../theme/AppStyles";
 
-export const AboutUsPopover = ({ globalClassName }: { globalClassName: string }) => {
+const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
+const DEFAULT_PRIMARY_BUTTON_COLOUR = {
+  backgroundColor: "#00AEEF",
+  color: "black",
+  ":hover": { backgroundColor: "#3772ff33" },
+};
+
+export const AboutUsPopover = ({ pageClassName }: { pageClassName?: PageClassName }) => {
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -15,8 +23,8 @@ export const AboutUsPopover = ({ globalClassName }: { globalClassName: string })
   const open = Boolean(popoverAnchor);
 
   return (
-    <div className="about-us-popover">
-      <Button variant="contained" onClick={handleClick}>
+    <Box className="about-us-popover">
+      <Button variant="contained" onClick={handleClick} sx={DEFAULT_PRIMARY_BUTTON_COLOUR}>
         CREDITS
       </Button>
       <Popover
@@ -31,21 +39,24 @@ export const AboutUsPopover = ({ globalClassName }: { globalClassName: string })
           vertical: "top",
           horizontal: "right",
         }}
-        className={globalClassName}
+        className={pageClassName}
       >
-        <AboutUsContents globalClassName={globalClassName} />
+        <AboutUsContents pageClassName={pageClassName} />
       </Popover>
-    </div>
+    </Box>
   );
 };
 
-const AboutUsContents = ({ globalClassName }: { globalClassName: string }) => {
+const AboutUsContents = ({ pageClassName }: { pageClassName?: PageClassName }) => {
   const [isContactUsModalOpen, setIsContactUsModalOpen] = useState(false);
   const openContactUsModal = () => setIsContactUsModalOpen(true);
   const closeContactUsModal = () => setIsContactUsModalOpen(false);
 
   return (
-    <Box sx={{ padding: "24px", textAlign: "right" }} className="about-us-contents">
+    <Box
+      sx={{ padding: "24px", textAlign: "right", backgroundColor: DEFAULT_BACKGROUND_COLOUR }}
+      className="about-us-contents"
+    >
       <Box>
         <a
           href="/"
@@ -63,22 +74,22 @@ const AboutUsContents = ({ globalClassName }: { globalClassName: string }) => {
 
       {/* TODO what's the url for this? */}
       <Box sx={{ marginTop: "12px" }}>
-        <Button className="secondary-button" sx={{ width: "100%" }}>
+        <Button className="secondary-button" sx={{ width: "100%", ...DEFAULT_PRIMARY_BUTTON_COLOUR }}>
           Buy me a Coffee {<ArrowOutwardIcon />}
         </Button>
       </Box>
 
       <Box sx={{ marginTop: "12px" }}>
-        <Button className="primary-button" onClick={openContactUsModal} sx={{ width: "100%" }}>
+        <Button
+          className="primary-button"
+          onClick={openContactUsModal}
+          sx={{ width: "100%", ...DEFAULT_PRIMARY_BUTTON_COLOUR }}
+        >
           Contact Us
         </Button>
       </Box>
 
-      <ContactUsModal
-        isOpen={isContactUsModalOpen}
-        closeModal={closeContactUsModal}
-        globalClassName={globalClassName}
-      />
+      <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} pageClassName={pageClassName} />
     </Box>
   );
 };

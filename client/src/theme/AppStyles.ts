@@ -26,6 +26,11 @@ export const COLOURS = {
   spotify_green: "#1DB954",
 };
 
+export enum PageClassName {
+  Rifflandia = "rifflandia",
+  PachenaBay = "pachena",
+}
+
 export const primaryButtonColours = {
   color: COLOURS.black,
   backgroundColor: COLOURS.blue,

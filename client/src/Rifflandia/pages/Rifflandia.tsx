@@ -36,10 +36,11 @@ import TITLE from "../images/title.svg";
 import { ReactComponent as CHERRIES } from "../images/cherries.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { SpotifyPreviewModal } from "../SpotifyPreviewModal";
+import { PageClassName } from "../../theme/AppStyles";
 
 const TICKET_LINK = WEBSITE_RIFFLANDIA;
 
-const GLOBAL_CSS_CLASSNAME = "rifflandia";
+const RIFFLANDIA_PAGE_CLASS = PageClassName.Rifflandia;
 
 const COLOURS = Object.freeze({
   pageBackground: RIFFLANDIA_COLOURS.background,
@@ -92,7 +93,7 @@ export const Rifflandia = () => {
   const handleRedirectToAuthForBrowser = isInAppBrowser() ? openInAppModal : redirectToAuth;
 
   return (
-    <div className={GLOBAL_CSS_CLASSNAME}>
+    <div className={RIFFLANDIA_PAGE_CLASS}>
       <div className="sidebar sidebar-svg-park"></div>
       <div className="sidebar sidebar-svg-electric"></div>
 
@@ -278,7 +279,7 @@ const BuiltByRecordShop = () => {
       <ContactUsModal
         isOpen={isContactUsModalOpen}
         closeModal={closeContactUsModal}
-        globalClassName={GLOBAL_CSS_CLASSNAME}
+        pageClassName={RIFFLANDIA_PAGE_CLASS}
       />
     </>
   );

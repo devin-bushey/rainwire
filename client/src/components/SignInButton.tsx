@@ -10,7 +10,6 @@ export const SignInButton = ({ redirectToAuth, className }: { redirectToAuth: ()
       justifyContent: "center",
       width: "200px",
       height: "48px",
-      marginTop: "24px",
     }}
   >
     <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
