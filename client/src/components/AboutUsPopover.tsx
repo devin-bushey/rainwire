@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Button, Popover, Typography } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { ContactUsModal } from "./ContactUsModal";
+import { PageClassName } from "../theme/AppStyles";
 
 const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
 const DEFAULT_PRIMARY_BUTTON_COLOUR = {
@@ -10,7 +11,7 @@ const DEFAULT_PRIMARY_BUTTON_COLOUR = {
   ":hover": { backgroundColor: "#3772ff33" },
 };
 
-export const AboutUsPopover = ({ globalClassName }: { globalClassName?: string }) => {
+export const AboutUsPopover = ({ pageClassName }: { pageClassName?: PageClassName }) => {
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,15 +39,15 @@ export const AboutUsPopover = ({ globalClassName }: { globalClassName?: string }
           vertical: "top",
           horizontal: "right",
         }}
-        className={globalClassName}
+        className={pageClassName}
       >
-        <AboutUsContents globalClassName={globalClassName} />
+        <AboutUsContents pageClassName={pageClassName} />
       </Popover>
     </Box>
   );
 };
 
-const AboutUsContents = ({ globalClassName }: { globalClassName?: string }) => {
+const AboutUsContents = ({ pageClassName }: { pageClassName?: PageClassName }) => {
   const [isContactUsModalOpen, setIsContactUsModalOpen] = useState(false);
   const openContactUsModal = () => setIsContactUsModalOpen(true);
   const closeContactUsModal = () => setIsContactUsModalOpen(false);
@@ -88,11 +89,7 @@ const AboutUsContents = ({ globalClassName }: { globalClassName?: string }) => {
         </Button>
       </Box>
 
-      <ContactUsModal
-        isOpen={isContactUsModalOpen}
-        closeModal={closeContactUsModal}
-        globalClassName={globalClassName}
-      />
+      <ContactUsModal isOpen={isContactUsModalOpen} closeModal={closeContactUsModal} pageClassName={pageClassName} />
     </Box>
   );
 };

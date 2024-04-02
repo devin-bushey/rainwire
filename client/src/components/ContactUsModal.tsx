@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { send } from "emailjs-com";
 import { useState, useContext } from "react";
 import { SnackBarContext } from "../App";
+import { PageClassName } from "../theme/AppStyles";
 
 const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
 const DEFAULT_PRIMARY_BUTTON_COLOUR = {
@@ -14,10 +15,10 @@ const DEFAULT_PRIMARY_BUTTON_COLOUR = {
 type ContactUsModalProps = {
   isOpen: boolean;
   closeModal: () => void;
-  globalClassName?: string;
+  pageClassName?: PageClassName;
 };
 
-export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactUsModalProps) => {
+export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsModalProps) => {
   const [message, setMessage] = useState("");
 
   const [toSend, setToSend] = useState({
@@ -63,7 +64,7 @@ export const ContactUsModal = ({ isOpen, closeModal, globalClassName }: ContactU
       onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      className={`${globalClassName}`}
+      className={`${pageClassName}`}
     >
       <Box
         className="contact-us-modal-contents"
