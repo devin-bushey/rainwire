@@ -11,12 +11,11 @@ export const PreviewPlaylist = ({ playlistUrl, className }: { playlistUrl: strin
       justifyContent: "center",
     }}
   >
-    <Card sx={{ maxWidth: "70%" }}>
+    <Card sx={{ maxWidth: "70%", padding: "24px" }}>
       <Typography>Not sure where to start? We&#39;ve created a sample playlist for you to check out!</Typography>
 
       <Button
         onClick={() => goToNewTabOnDesktop(playlistUrl)}
-        variant="outlined"
         sx={{
           width: "210px",
           marginTop: "12px",
