@@ -8,11 +8,11 @@ const { MongoClient } = require("mongodb");
 /**
  * USAGE:
  *
- * npx ts-node extractPachenaBay.ts
+ * npx ts-node extractPachenaBay.ts <DATABASE>
  */
 
-const DATABASE_URL = "mongodb://root:example@localhost:27017/";
-const DATABASE_COLLECTION_NAME = "pachena_bay_simple";
+const DATABASE_URL = process.argv[2];
+const DATABASE_COLLECTION_NAME = "pachenaBay_simple";
 
 const PACHENA_BAY_ARTISTS_URL = "https://www.pachenabaymusicfestival.com/artists";
 

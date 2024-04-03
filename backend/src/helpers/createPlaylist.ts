@@ -95,24 +95,16 @@ export const CreateBlankPlaylist = async ({
 }): Promise<SpotifyPlaylistDataType> => {
   let playlist_name = "record shop " + city;
 
-  if (city === Festivals.PhilipsBackyard) {
-    playlist_name = "record shop phillips backyard";
-  }
-
   if (city === Cities.Victoria_2024) {
     playlist_name = "record shop victoria";
-  }
-
-  if (city === Festivals.LaketownShakedown) {
-    playlist_name = "record shop laketown shakedown";
   }
 
   if (city === Festivals.LaketownShakedown_2024) {
     playlist_name = "record shop laketown shakedown";
   }
 
-  if (city === Festivals.TheFunction) {
-    playlist_name = "record shop - the function";
+  if (city === Festivals.PachenaBay) {
+    playlist_name = "record shop pachena bay";
   }
 
   let description = `a mixtape created by recordshop.cool`;
