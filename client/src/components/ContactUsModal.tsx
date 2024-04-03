@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import { SnackBarContext } from "../App";
 import { PageClassName } from "../theme/AppStyles";
 
-const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
+const DEFAULT_BACKGROUND_COLOUR = "#2596be";
 const DEFAULT_PRIMARY_BUTTON_COLOUR = {
   backgroundColor: "#00AEEF",
   color: "black",
