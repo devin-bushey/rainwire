@@ -74,7 +74,9 @@ const SpotifyGigName = ({ name }: { name: string }) => {
 };
 
 const Description = ({ gig }: { gig: Gig }) => {
-  const description = `${gig.date} at ${gig.venue}`;
+  const dateUnformatted = new Date(gig.date);
+  const date = dateUnformatted.toISOString().split("T")[0];
+  const description = `${date} at ${gig.venue}`;
   return (
     <Box>
       <Typography
