@@ -21,7 +21,8 @@ export const SpotifyPreviewModal = ({ artistId, setArtistId: setArtistUrl }: Spo
         transform: "translate(-50%, -50%)",
         width: "100%",
         maxWidth: 600,
-        padding: "16px",
+        padding: "32px",
+        marginTop: "32px",
         border: 0,
       }}
     >
