@@ -40,15 +40,6 @@ const concertObject = {
   date,
   venue,
   popularity,
-
-
-  ticket_date: `${date} at ${venue}`,
-  band_id: artistId,
-  sp_band_name: '',
-  link: `https://open.spotify.com/artist/${artistId}`,
-  uri: `spotify:artist:${artistId}`,
-  albumArtUrl: '',
-  topTrackURIs: [],
 };
 
 // Make a GET request to Spotify API to get top tracks
@@ -100,17 +91,14 @@ const req = https.request(options, (res) => {
 
     const topTracks = JSON.parse(data).tracks;
     topTracks.forEach((track) => {
-      concertObject.topTrackURIs.push(track.uri);
       concertObject.artist.topTracks.push(track.uri); // NEW
     });
 
     const name = JSON.parse(data).tracks[0].album.artists[0].name;
     concertObject.artist.name = name; // NEW
-    concertObject.sp_band_name = name;
 
     const albumArt = JSON.parse(data).tracks[0].album.images[1].url;
     concertObject.artist.albumArtUrl = albumArt; // NEW
-    concertObject.albumArtUrl = albumArt;
 
     // Print the concert object as JSON
     console.log(JSON.stringify(concertObject, null, 2));
