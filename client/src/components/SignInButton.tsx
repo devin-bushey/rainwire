@@ -8,7 +8,7 @@ export const SignInButton = ({ redirectToAuth, className }: { redirectToAuth: ()
     className={className}
     sx={{
       justifyContent: "center",
-      width: "200px",
+      width: "180px",
       height: "48px",
     }}
   >

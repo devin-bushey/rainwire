@@ -26,7 +26,7 @@ export const ArtistsPage = () => {
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
 
-  const gigsQuery = useGigsQuery(origin);
+  const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(origin);
 
   const [numTopTracks, setNumTopTracks] = useState(1);
   const [showSettings, setShowSettings] = useState(false);
@@ -94,10 +94,6 @@ export const ArtistsPage = () => {
       });
     setIsCreatingPlaylist(false);
   };
-
-  if (gigsQuery.isLoading) {
-    return <Loading />;
-  }
 
   const PlaylistCreation = (
     <>
@@ -175,12 +171,7 @@ export const ArtistsPage = () => {
       </Box>
 
       <Collapse in={showSettings} collapsedSize={0}>
-        <Settings
-          totalTickets={gigsQuery.data}
-          numTopTracks={numTopTracks}
-          handleNumTopTracks={handleNumTopTracks}
-          handleCloseSettings={handleCloseSettings}
-        />
+        <Settings numTopTracks={numTopTracks} setNumTopTracks={handleNumTopTracks} />
       </Collapse>
     </>
   );
@@ -231,7 +222,7 @@ export const ArtistsPage = () => {
                 paddingTop: "24px",
               }}
             >
-              <GigList gigs={gigsQuery.data} />
+              <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} />
             </Container>
           </Box>
         </Box>

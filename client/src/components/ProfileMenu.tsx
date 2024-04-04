@@ -20,7 +20,7 @@ export const ProfileMenu = () => {
   return (
     <Box className="profile-menu-button">
       <Button id="profile-button" onClick={openProfileMenu} endIcon={<KeyboardArrowDownIcon />}>
-        Welcome {spotifyInfo.firstName || spotifyInfo.user_name}
+        <b>Welcome {spotifyInfo.firstName || spotifyInfo.user_name}</b>
       </Button>
       <Menu
         id="profile-menu"
@@ -30,7 +30,15 @@ export const ProfileMenu = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Button onClick={logOut} sx={{ width: "120px", height: "30px", margin: "0 10px" }}>
+        <Button
+          onClick={logOut}
+          sx={{
+            width: "120px",
+            height: "30px",
+            margin: "0 10px",
+            ":hover": { backgroundColor: "rgba(3, 49, 46, 0.08)" },
+          }}
+        >
           Sign out
         </Button>
       </Menu>

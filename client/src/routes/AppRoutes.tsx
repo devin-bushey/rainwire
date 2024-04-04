@@ -7,7 +7,6 @@ import { ArtistsPage } from "../pages/ArtistsPage";
 import useSpotifyAuth from "../hooks/useSpotifyAuth";
 import useAnalytics from "../hooks/useAnalytics";
 import { Rifflandia } from "../Rifflandia/pages/Rifflandia";
-import { SampleFestival } from "../festivals/SampleFestival/SampleFestival";
 import { PachenaBay } from "../festivals/PachenaBay/PachenaBay";
 
 export const AppRoutes = () => {
@@ -25,7 +24,6 @@ export const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />
-          <Route path="/test" element={<SampleFestival />} />
           <Route path="/pachenabay" element={<PachenaBay />} />
         </Routes>
       </Box>

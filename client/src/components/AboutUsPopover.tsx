@@ -3,6 +3,7 @@ import { Box, Button, Popover, Typography } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { ContactUsModal } from "./ContactUsModal";
 import { PageClassName } from "../theme/AppStyles";
+import coffeeCup from "../assets/images/coffee-cup.png";
 
 const DEFAULT_BACKGROUND_COLOUR = "#CEE4A9";
 const DEFAULT_PRIMARY_BUTTON_COLOUR = {
@@ -24,7 +25,7 @@ export const AboutUsPopover = ({ pageClassName }: { pageClassName?: PageClassNam
 
   return (
     <Box className="about-us-popover">
-      <Button variant="contained" onClick={handleClick} sx={DEFAULT_PRIMARY_BUTTON_COLOUR}>
+      <Button onClick={handleClick} sx={DEFAULT_PRIMARY_BUTTON_COLOUR}>
         CREDITS
       </Button>
       <Popover
@@ -72,10 +73,15 @@ const AboutUsContents = ({ pageClassName }: { pageClassName?: PageClassName }) =
         <Typography style={{ fontSize: "12px" }}>Made in Victoria, BC</Typography>
       </Box>
 
-      {/* TODO what's the url for this? */}
       <Box sx={{ marginTop: "12px" }}>
-        <Button className="secondary-button" sx={{ width: "100%", ...DEFAULT_PRIMARY_BUTTON_COLOUR }}>
-          Buy me a Coffee {<ArrowOutwardIcon />}
+        <Button
+          href="https://bmc.link/buushh"
+          target="_blank"
+          className="secondary-button"
+          sx={{ width: "100%", ...DEFAULT_PRIMARY_BUTTON_COLOUR }}
+        >
+          <img src={coffeeCup} alt="coffee" width="20px" height="20px" style={{ marginRight: "8px" }} />
+          Buy me a coffee
         </Button>
       </Box>
 
