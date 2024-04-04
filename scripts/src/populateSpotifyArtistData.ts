@@ -5,13 +5,13 @@ import { Gig } from "./model/Gig";
 const axios = require("axios");
 
 if (process.argv.length !== 4) {
-  console.error("Usage: npx ts-node populateSpotifyArtistData.ts <COLLECTION_NAME> <SPOTIFY_TOKEN>");
+  console.error("Usage: npx ts-node populateSpotifyArtistData.ts <COLLECTION_NAME> <DATABASE> <SPOTIFY_TOKEN>");
   process.exit(-1);
 }
 
-const DATABASE_URL = "mongodb://root:example@localhost:27017/";
 const COLLECTION_NAME = process.argv[2];
-const SPOTIFY_TOKEN = process.argv[3];
+const DATABASE_URL = process.argv[3];
+const SPOTIFY_TOKEN = process.argv[4];
 
 /**
  * USAGE
@@ -90,6 +90,7 @@ const addSpotifyMainData = async (gig: Gig): Promise<Gig | undefined> => {
           link: bestMatch.external_urls.spotify,
           uri: bestMatch.uri,
         });
+        console.log(`Found ${bestMatch.name} !`);
         return gig;
       } else {
         console.log(`No good Spotify artist matches for artist "${artistName}"; skipping.`);
@@ -153,7 +154,8 @@ const createNewCollection = async (dbConnection: any, gigs: Gig[]) => {
 
 try {
   updateCollectionWithSpotify();
+  process.exit(1);
 } catch (err) {
   console.log(err);
-  process.exit(1);
+  process.exit(-1);
 }
