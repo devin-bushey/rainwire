@@ -1,42 +1,30 @@
 import express from "express";
 import dbo from "../database/conn";
 import { CreateNewPlaylistRifflandia } from "../helpers/rifflandia/createPlaylist";
+import { cachedData } from "../cache/cachedGigs";
+import { Gig } from "../types/Gig";
+import { connectToDatabase } from "../database/connectToDatabase";
+import { Collection } from "mongodb";
 
 export const rifflandiaRouter = express.Router();
 
-// TODO move to separate shared folder
-const cachedData: {
-  rifflandia_data?: any;
-} = {}; // The in-memory cache object
-
 rifflandiaRouter.route("/rifflandia").get(async (req, response) => {
   // Check if data is cached in memory
-  if (cachedData.rifflandia_data) {
+  if (cachedData.cachedRifflandia) {
     // If data is found in cache, return the cached data
-    response.json(cachedData.rifflandia_data);
+    response.json(cachedData.cachedRifflandia);
   } else {
-    console.log("cache not found for /rifflandia: ", cachedData.rifflandia_data);
+    console.log("cache not found for /rifflandia: ", cachedData.cachedRifflandia);
 
-    let db_connect = dbo.getDb();
+    const db_connect = await connectToDatabase();
+    const collection: Collection<Gig> = db_connect.collection(`rifflandia`);
 
-    if (!db_connect) {
-      console.log("reconnecting to db");
-      await dbo.connectToServer(function (err: any) {
-        if (err) {
-          console.log("reconnecting error");
-          console.error(err);
-        }
-      });
-      db_connect = dbo.getDb();
-    }
-
-    db_connect
-      .collection(`rifflandia`)
+    collection
       .find({})
       .toArray()
-      .then((data: any) => {
+      .then((data: Gig[]) => {
         // Save the fetched data to cache
-        cachedData.rifflandia_data = data;
+        cachedData.cachedRifflandia = data;
         response.json(data);
       });
   }

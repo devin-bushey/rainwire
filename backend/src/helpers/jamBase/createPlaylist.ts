@@ -1,6 +1,6 @@
 import { get } from "../../http/request";
 import { SpotifyPlaylistDataType } from "../../types/SpotifyTypes";
-import { AddCoverArt, AddTracksToPlaylist, CreateBlankPlaylist } from "../createPlaylist";
+import { addCoverArt, addTracksToPlaylist, createBlankPlaylist } from "../createPlaylist";
 
 export const CreateNewPlaylistJamBase = async ({
   token,
@@ -15,7 +15,7 @@ export const CreateNewPlaylistJamBase = async ({
   numTopTracks?: number;
   spotifyIds: string[];
 }) => {
-  const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
+  const playlist_data: SpotifyPlaylistDataType = await createBlankPlaylist({
     token,
     city,
     user_id,
@@ -23,7 +23,7 @@ export const CreateNewPlaylistJamBase = async ({
 
   const playlist_id = playlist_data.new_playlist_id || "";
   try {
-    AddCoverArt({ token, playlist_id });
+    addCoverArt({ token, playlist_id });
   } catch (err) {
     console.log("Error adding cover art");
   }
@@ -63,7 +63,7 @@ export const CreateNewPlaylistJamBase = async ({
   for (const trackArray of trackArrays) {
     const tracks = trackArray.join(",");
     if (playlist_data.new_playlist_id && playlist_data.external_urls?.spotify) {
-      await AddTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
+      await addTracksToPlaylist(token, playlist_data.new_playlist_id, tracks);
     }
   }
   return playlist_data.external_urls?.spotify;

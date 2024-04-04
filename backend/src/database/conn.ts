@@ -1,9 +1,9 @@
-import { MongoClient } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 
-const Db = process.env.ATLAS_URI || "";
-const client = new MongoClient(Db);
+const databaseUri = process.env.ATLAS_URI || "";
+const client = new MongoClient(databaseUri);
 
-let _db: any;
+let _db: Db;
 
 export default {
   connectToServer: async (callback: any) => {
