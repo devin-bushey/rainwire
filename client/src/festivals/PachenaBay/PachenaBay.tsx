@@ -1,7 +1,8 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Collapse, Grid, IconButton, Typography } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Festivals } from "../../constants/enums";
 import { useGigsQuery } from "../../hooks/useGigsQuery";
-import { RIFFLANDIA_COLOURS, RIFF_CARD_COLOURS } from "../../Rifflandia/constants/colours";
+import { RIFFLANDIA_COLOURS } from "../../Rifflandia/constants/colours";
 import { usePlaylistQuery } from "../../hooks/usePlaylistQuery";
 import { useMissingTracks } from "../../hooks/useMissingTracks";
 import { useAuth } from "../../context/AuthContext";
@@ -12,11 +13,15 @@ import { RecordShopTitle } from "../../components/RecordShopTitle";
 import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
 import { PreviewPlaylist } from "../../components/PreviewPlaylist";
 import { AboutUsPopover } from "../../components/AboutUsPopover";
-import "./pachenaBayStyles.css";
 import { ProfileMenu } from "../../components/ProfileMenu";
 import { goToNewTab } from "../../utils/browserUtils";
 import { PageClassName } from "../../theme/AppStyles";
 import { GigList } from "../../components/GigList";
+import { redirectToAuth } from "../../utils/spotifyAuthUtils";
+import { useSettingsState } from "../../hooks/useSettingsCollapse";
+import { Settings } from "../../components/Settings";
+
+import "./pachenaBayStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
@@ -56,10 +61,11 @@ const COLOURS = Object.freeze({
 });
 
 export const PachenaBay = () => {
-  const { isLoggedIntoSpotify, redirectToAuth, logOut } = useAuth();
+  const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { data: playlist } = usePlaylistQuery(CREATE_PLAYLIST_NAME);
   const missingTracks = useMissingTracks(playlist, gigs);
+  const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
 
   setDocumentTitle("Record Shop | Pachena Bay");
 
@@ -105,13 +111,12 @@ export const PachenaBay = () => {
           <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3 }}>
             <Grid
               container
-              direction="row"
               justifyContent={{ xs: "center", sm: "space-between" }}
               alignItems="flex-start"
               sx={{ marginTop: "48px" }}
               columnGap={2}
             >
-              <div style={{ maxWidth: "350px" }}>
+              <Grid item style={{ maxWidth: "350px" }}>
                 <img src={pachenaBayTextLogo} alt="Pachena Bay Music Festival" style={{ width: "100%" }} />
                 <Button
                   className="secondary-button"
@@ -121,16 +126,31 @@ export const PachenaBay = () => {
                 >
                   Buy Tickets
                 </Button>
-              </div>
+              </Grid>
 
               {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
               // TODO: make this button work for in-app */}
-              {isLoggedIntoSpotify() ? (
-                <ProfileMenu />
-              ) : (
-                <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
-              )}
+              <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
+                {isLoggedIntoSpotify() ? (
+                  <ProfileMenu />
+                ) : (
+                  <div style={{ justifySelf: "center" }}>
+                    <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
+                  </div>
+                )}
+                <IconButton
+                  sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white" }}
+                  onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
+                  disableRipple={true}
+                >
+                  <SettingsIcon fontSize="large" />
+                </IconButton>
+              </Grid>
             </Grid>
+
+            <Collapse in={isSettingsOpen} collapsedSize={0}>
+              <Settings numTopTracks={numTopTracks} setNumTopTracks={setNumTopTracks} />
+            </Collapse>
 
             <Box margin="24px 0">
               <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} cardColours={COLOURS.cardColours} />

@@ -153,5 +153,9 @@
       color: var(--main-text-color);
     }
   }
+
+  .settings-container {
+    background-color: var(--popover-bg-color);
+  }
     
 }
