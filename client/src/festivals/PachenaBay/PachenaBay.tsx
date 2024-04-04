@@ -2,7 +2,6 @@ import { Box, Button, Collapse, Grid, IconButton, Typography } from "@mui/materi
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Festivals } from "../../constants/enums";
 import { useGigsQuery } from "../../hooks/useGigsQuery";
-import { RIFFLANDIA_COLOURS } from "../../Rifflandia/constants/colours";
 import { usePlaylistQuery } from "../../hooks/usePlaylistQuery";
 import { useMissingTracks } from "../../hooks/useMissingTracks";
 import { useAuth } from "../../context/AuthContext";
@@ -31,32 +30,8 @@ const CREATE_PLAYLIST_NAME = "Record Shop Pachena Bay 2024";
 
 const PACHENA_PAGE_CLASS = PageClassName.PachenaBay;
 
-// TODO clean these colours up
 const COLOURS = Object.freeze({
-  pageBackground: "#3B6AB3",
   text: "#FCFCFC",
-  description: {
-    background: "#3B6AB3",
-    text: "#FCFCFC",
-  },
-  primaryButton: {
-    background: "#EE97A6",
-    text: "#FCFCFC",
-    hover: {
-      background: "#FCFCFC",
-      text: "#312F2E",
-    },
-  },
-  secondaryButton: {
-    background: "#5C9188",
-    text: "#FCFCFC",
-    hover: {
-      background: "#FCFCFC",
-      text: "#312F2E",
-    },
-  },
-  settingsBackground: RIFFLANDIA_COLOURS.fill_pale_green,
-  stickyButtonBackground: RIFFLANDIA_COLOURS.fill_light_orange,
   cardColours: ["#F1B3B5", "#FFEAC2", "#5C9188", "#F06A48"],
 });
 
@@ -157,7 +132,7 @@ export const PachenaBay = () => {
             </Box>
 
             {/* {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
-              <GigList gigs={gigs} cardColours={RIFF_CARD_COLOURS} /> */}
+              <GigList gigs={gigs} cardColours={COLOURS.cardColours} /> */}
           </Grid>
         </Grid>
       </Box>
