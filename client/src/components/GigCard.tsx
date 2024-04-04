@@ -14,7 +14,9 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
       <Card
         sx={{
           backgroundColor: bgcolor,
-          width: "300px",
+          maxWidth: "400px",
+          alignItems: "center",
+          cursor: "pointer",
         }}
         onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
       >

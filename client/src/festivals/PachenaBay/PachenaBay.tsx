@@ -16,6 +16,7 @@ import "./pachenaBayStyles.css";
 import { ProfileMenu } from "../../components/ProfileMenu";
 import { goToNewTab } from "../../utils/browserUtils";
 import { PageClassName } from "../../theme/AppStyles";
+import { GigList } from "../../components/GigList";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
@@ -51,12 +52,12 @@ const COLOURS = Object.freeze({
   },
   settingsBackground: RIFFLANDIA_COLOURS.fill_pale_green,
   stickyButtonBackground: RIFFLANDIA_COLOURS.fill_light_orange,
-  cardColours: RIFF_CARD_COLOURS,
+  cardColours: ["#F1B3B5", "#FFEAC2", "#5C9188", "#F06A48"],
 });
 
 export const PachenaBay = () => {
   const { isLoggedIntoSpotify, redirectToAuth, logOut } = useAuth();
-  const { data: gigs } = useGigsQuery(DB_COLLECTION_NAME);
+  const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { data: playlist } = usePlaylistQuery(CREATE_PLAYLIST_NAME);
   const missingTracks = useMissingTracks(playlist, gigs);
 
@@ -116,7 +117,7 @@ export const PachenaBay = () => {
                   className="secondary-button"
                   onClick={() => goToNewTab(TICKET_LINK)}
                   variant="outlined"
-                  sx={{ width: "200px", margin: "12px 0" }}
+                  sx={{ width: "180px", margin: "12px 0" }}
                 >
                   Buy Tickets
                 </Button>
@@ -130,6 +131,10 @@ export const PachenaBay = () => {
                 <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
               )}
             </Grid>
+
+            <Box margin="24px 0">
+              <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} cardColours={COLOURS.cardColours} />
+            </Box>
 
             {/* {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
               <GigList gigs={gigs} cardColours={RIFF_CARD_COLOURS} /> */}
