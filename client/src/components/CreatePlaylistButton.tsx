@@ -7,15 +7,15 @@ export const CreatePlaylistButton = ({
   backgroundColor,
   hoverColor,
 }: {
-  handleCreatePlaylist: any;
-  backgroundColor: string;
-  hoverColor: string;
+  handleCreatePlaylist: () => void;
+  backgroundColor?: string;
+  hoverColor?: string;
 }) => {
   return (
     <Button
       onClick={handleCreatePlaylist}
       variant="contained"
-      className="btn--click-me-riff create-playlist"
+      className="primary-button"
       sx={{
         backgroundColor: backgroundColor,
         ":hover": {
@@ -23,7 +23,6 @@ export const CreatePlaylistButton = ({
         },
         color: "black",
         width: "300px",
-        //marginBottom: '24px',
         justifyContent: "center",
         height: "48px",
       }}

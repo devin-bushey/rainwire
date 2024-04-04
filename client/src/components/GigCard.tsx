@@ -15,8 +15,10 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
         sx={{
           backgroundColor: bgcolor,
           maxWidth: "400px",
+          width: "100%",
           alignItems: "center",
           cursor: "pointer",
+          marginBottom: "0",
         }}
         onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
       >
@@ -70,7 +72,7 @@ const SpotifyGigName = ({ name }: { name: string }) => {
   const containerRef = useAdjustFontSize();
   return (
     <div ref={containerRef}>
-      <span style={{ fontWeight: "700" }}>{name}</span>
+      <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>{name}</Typography>
     </div>
   );
 };

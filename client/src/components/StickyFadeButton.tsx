@@ -2,23 +2,19 @@ import { useState, useEffect } from "react";
 import { CreatePlaylistButton } from "./CreatePlaylistButton";
 import { Box } from "@mui/material";
 
-export const StickyButton = ({
+export const StickyFadeButton = ({
   handleCreatePlaylist,
-  backgroundColor,
-  hoverColor,
-  barColor,
+  bgFadeColourHex,
 }: {
-  handleCreatePlaylist: any;
-  backgroundColor: string;
-  hoverColor: string;
-  barColor: string;
+  handleCreatePlaylist: () => void;
+  bgFadeColourHex: string;
 }) => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setShowButton(scrollPosition >= 800);
+      setShowButton(scrollPosition >= 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -34,27 +30,18 @@ export const StickyButton = ({
         sx={{
           position: "fixed",
           bottom: "0px",
-          //right: '16px',
           zIndex: 9,
           opacity: showButton ? 1 : 0,
           visibility: showButton ? 1 : "hidden",
           transition: "visibility 1.5s, opacity 1.5s ease",
+          padding: "24px",
+          width: "100%",
+          height: "20%",
+          alignContent: "center",
+          backgroundImage: `linear-gradient(${bgFadeColourHex}00, ${bgFadeColourHex})`,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100px",
-            width: "500px",
-            borderRadius: "8px",
-            backgroundColor: barColor,
-            marginBottom: "24px",
-          }}
-        >
-          <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
-        </Box>
+        <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
       </Box>
     </Box>
   );

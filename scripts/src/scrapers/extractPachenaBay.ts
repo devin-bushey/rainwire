@@ -8,7 +8,9 @@ const { MongoClient } = require("mongodb");
 /**
  * USAGE:
  *
- * npx ts-node extractPachenaBay.ts <DATABASE>
+ * npx ts-node extractPachenaBay.ts <DATABASE_URL>
+ *
+ * For local DBs, use the DB URL is 'mongodb://root:example@localhost:27017/'
  */
 
 const DATABASE_URL = process.argv[2];

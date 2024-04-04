@@ -25,8 +25,8 @@ export const GigList = ({
       <Grid
         container
         justifyContent={{ xs: "center", sm: "space-between" }}
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        rowSpacing={{ xs: 2, md: 3 }}
+        columnSpacing={{ sm: 2, md: 3 }}
       >
         {gigs.map((gig: Gig, index: number) => (
           <Grid item xs={12} sm={6} key={gig._id} display="flex" justifyContent="center">
