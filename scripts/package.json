@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Some scripts to run one-off tasks",
   "scripts": {
-    "scrape": "npx ts-node"
+    "exec": "npx ts-node",
+    "scrape": "cd src/scrapers && npm run exec"
   },
   "author": "Devin Bushey | Steph Goodale",
   "type": "commonjs",
