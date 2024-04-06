@@ -22,8 +22,6 @@ export const SpotifyPreviewModal = ({ artistId, setArtistId: setArtistUrl }: Spo
         width: "100%",
         maxWidth: 600,
         padding: "0px 32px",
-        marginTop: "48px",
-        marginBottom: "32px",
         border: 0,
       }}
     >
@@ -31,7 +29,7 @@ export const SpotifyPreviewModal = ({ artistId, setArtistId: setArtistUrl }: Spo
         title="spotifyPreviewModal"
         src={`https://open.spotify.com/embed/artist/${artistId}?utm_source=generator`}
         width="100%"
-        height="600"
+        height="450"
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"

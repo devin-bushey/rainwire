@@ -17,7 +17,6 @@ import { useGigsQuery } from "../hooks/useGigsQuery";
 import { useAuth } from "../context/AuthContext";
 import { useShakingEffect } from "../hooks/useShakingEffect";
 import { GigList } from "../components/GigList";
-import { StickyFadeButton } from "../components/StickyFadeButton";
 
 export const ArtistsPage = () => {
   const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
