@@ -1,17 +1,14 @@
-import { Box, Collapse, Container, IconButton, Tooltip } from "@mui/material";
+import { Box, Collapse, Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button/Button";
-import Typography from "@mui/material/Typography";
-import { COLOURS } from "../theme/AppStyles";
 import { useContext, useEffect, useState } from "react";
 import { SnackBarContext } from "../App";
 import { LOCATIONS } from "../constants/locations";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { CreateNewPlaylist } from "../apiManager/RecordShop";
-import { Loading } from "./Loading";
-import { Spinner } from "../Rifflandia/Spinner";
+import { Spinner } from "../components/Spinner";
 import { StickyButton } from "../components/StickyButton";
-import { primaryButtonColours } from "../theme/AppStyles";
+import { COLOURS, primaryButtonColours } from "../theme/AppStyles";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 import { SpotifyIcon } from "../components/Icons";
 import { isMobile } from "../utils/responsiveUtils";
@@ -61,10 +58,6 @@ export const ArtistsPage = () => {
 
   const handleNumTopTracks = (event: any) => {
     setNumTopTracks(event.target.value);
-  };
-
-  const handleCloseSettings = () => {
-    setShowSettings(false);
   };
 
   const handleCreatePlaylist = async () => {
@@ -179,7 +172,7 @@ export const ArtistsPage = () => {
   return (
     <>
       {isCreatingPlaylist && <Spinner />}
-      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "150px" }}>
         <Typography
           sx={{
             fontSize: "4rem",

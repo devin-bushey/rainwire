@@ -3,6 +3,7 @@ import { filterRecent, sortByPopularity, sortDataByDateAndOrder } from "../utils
 import { Cities, Festivals } from "../constants/enums";
 
 export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> => {
+  // eslint-disable-next-line
   const [_key, { origin }] = queryKey;
 
   return axios
@@ -29,20 +30,20 @@ export const CreateNewPlaylist = async ({
   city,
   user_id,
   numTopTracks,
-  days,
+  sortBy = "date",
 }: {
   token: string;
   city: string;
   user_id: string;
   numTopTracks?: number;
-  days?: any;
+  sortBy?: "popularity" | "date";
 }) => {
   const reqBody = {
     token: token,
     user_id: user_id,
     city: city,
     numTopTracks: numTopTracks,
-    days: days,
+    sortBy: sortBy,
   };
   return await axios.post(import.meta.env.VITE_SITE_URL_DB + "create/", reqBody);
 };

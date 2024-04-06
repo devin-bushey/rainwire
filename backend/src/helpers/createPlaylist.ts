@@ -3,33 +3,31 @@ import { PLAYLIST_IMG_RS } from "../assets/recordshop_img";
 import { sortByPopularity } from "./sortByPopularity";
 import { sortByDateAndOrder } from "./sortByDateAndOrder";
 import { filterRecent } from "./filterRecent";
-import { get, post, put } from "../http/request";
+import { post, put } from "../http/request";
 import { HttpRequestError } from "../http/HttpRequestError";
 import { Cities } from "../enums/Cities";
 import { Festivals } from "../enums/Festivals";
+import { Gig } from "../types/Gig";
 
 export const CreateNewPlaylist = async ({
   token,
   city,
   user_id,
-  numTopTracks,
-  artists,
-  sortBy,
-  days,
+  numTopTracks = 1,
+  gigs,
+  sortBy = "date",
 }: {
   token: string;
   city: string;
   user_id: string;
   numTopTracks?: number;
-  artists: any;
-  sortBy: string;
-  days: string[];
+  gigs: Gig[];
+  sortBy?: "popularity" | "date";
 }) => {
   const playlist_data: SpotifyPlaylistDataType = await CreateBlankPlaylist({
     token,
     city,
     user_id,
-    days,
   });
 
   const playlist_id = playlist_data.new_playlist_id || "";
@@ -39,9 +37,7 @@ export const CreateNewPlaylist = async ({
     console.log("Error adding cover art");
   }
 
-  const numTopTracksToAdd = numTopTracks ? numTopTracks : 1;
-
-  let sortedGigs = sortBy === "popularity" ? sortByPopularity(artists) : sortByDateAndOrder(artists);
+  let sortedGigs = sortBy === "popularity" ? sortByPopularity(gigs) : sortByDateAndOrder(gigs);
 
   if (city === Cities.Victoria_2024) {
     sortedGigs = filterRecent(sortedGigs);
@@ -51,7 +47,7 @@ export const CreateNewPlaylist = async ({
 
   for (const gig of sortedGigs) {
     try {
-      for (let i = 0; i < numTopTracksToAdd; i++) {
+      for (let i = 0; i < numTopTracks; i++) {
         if (gig.artist.topTracks && gig.artist.topTracks[i]) {
           tracks += gig.artist.topTracks[i];
           tracks += ",";
@@ -86,12 +82,10 @@ export const CreateBlankPlaylist = async ({
   token,
   city,
   user_id,
-  days,
 }: {
   token: string;
   city: string;
   user_id: string;
-  days?: string[];
 }): Promise<SpotifyPlaylistDataType> => {
   let playlist_name = "record shop " + city;
 
@@ -157,10 +151,7 @@ export const AddCoverArt = async ({ token, playlist_id }: { token: string; playl
     data: PLAYLIST_IMG_RS,
   }).catch(function (error) {
     const err = error as HttpRequestError;
-    console.log("Error: unsuccessfully added cover art to playlist");
-    console.log("***Http Request err: ", err);
-    console.log("***JS error: ", error);
-    console.log("***");
+    console.log("Error: unsuccessfully added cover art to playlist", err);
   });
 };
 

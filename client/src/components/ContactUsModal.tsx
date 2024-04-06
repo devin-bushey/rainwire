@@ -1,9 +1,9 @@
 import { Modal, Input, TextField, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { send } from "emailjs-com";
 import { useState, useContext } from "react";
 import { SnackBarContext } from "../App";
 import { PageClassName } from "../theme/AppStyles";
+import { send } from "@emailjs/browser";
 
 const DEFAULT_BACKGROUND_COLOUR = "#2596be";
 const DEFAULT_PRIMARY_BUTTON_COLOUR = {

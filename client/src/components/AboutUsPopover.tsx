@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Box, Button, Popover, Typography } from "@mui/material";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { ContactUsModal } from "./ContactUsModal";
 import { PageClassName } from "../theme/AppStyles";
 import coffeeCup from "../assets/images/coffee-cup.png";

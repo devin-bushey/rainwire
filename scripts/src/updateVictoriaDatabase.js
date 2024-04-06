@@ -1,13 +1,13 @@
 
 // USAGE:
 
-// node ./backend/src/scripts/updateVictoriaDatabase.js {DB Url} {JamBase API} {Spotify Bearer Token}
-// EXAMPLE: node ./backend/src/scripts/updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' d64eed8d-4612-4ee4-9529-46dc35e8083d BQBmvVscfEDlR_M-vokiUyu3k2VGyQzKp49hi3Uo-IkqqheATjHbGPHUb5rASOyBf2grQqm67hb3akKe4K4zlmgk3jytcU7zu43JUozrAxez7rB07A6qZS6xra_kZte527lDOTctkktjTj_4rHWYDOacnpIp8KTlB37BOcvWwBhjex9YrBKsm8PbP18RWdhDtTo1l4TaH8l6GU4R6el8-53V7QVVCKoZEQCeUA
+// node ./updateVictoriaDatabase.js {DB Url} {JamBase API} {Spotify Bearer Token}
+// EXAMPLE: node ./updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' {JamBase API} BQBmvVscfEDlR_M-vokiUyu3k2VGyQzKp49hi3Uo-IkqqheATjHbGPHUb5rASOyBf2grQqm67hb3akKe4K4zlmgk3jytcU7zu43JUozrAxez7rB07A6qZS6xra_kZte527lDOTctkktjTj_4rHWYDOacnpIp8KTlB37BOcvWwBhjex9YrBKsm8PbP18RWdhDtTo1l4TaH8l6GU4R6el8-53V7QVVCKoZEQCeUA
 
 // # Get the Bearer token by logging into your spotify account through record shop, 
 // # then get the token from Dev tools -> Application tab -> local storage
 
-// node ./backend/src/scripts/updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' d64eed8d-4612-4ee4-9529-46dc35e8083d BQCMNUZcgv2-CSZFaAkdUb5y6cqJnEbFIxPfSsR-cKDiKPZzdGt4I3dTPaGFTJMCHpXQ53UiczHtY3WtYKObh4ANsLITMeq-6x769HSko5LO3sAQLvXdU2NgL0YyPofalNvWp2RO4DewPv7UueXcxF_5q65h1CQ6bGpQcuxItk4Ufgy9InG_sqgcFJv0V_MtZbR764rrRQuuTVBzX8Ij5DzLaq629WQfx-q3mQ
+// node ./backend/src/scripts/updateVictoriaDatabase.js 'mongodb://root:example@localhost:27017/' {JamBase API} BQCMNUZcgv2-CSZFaAkdUb5y6cqJnEbFIxPfSsR-cKDiKPZzdGt4I3dTPaGFTJMCHpXQ53UiczHtY3WtYKObh4ANsLITMeq-6x769HSko5LO3sAQLvXdU2NgL0YyPofalNvWp2RO4DewPv7UueXcxF_5q65h1CQ6bGpQcuxItk4Ufgy9InG_sqgcFJv0V_MtZbR764rrRQuuTVBzX8Ij5DzLaq629WQfx-q3mQ
 
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
@@ -107,21 +107,10 @@ const updateMongoDb = async () => {
       }
     }
 
-    // await collection.insertMany(concertData, { ordered: false });
-
-    // for (const concert of concertData) {
-    //   // Upsert operation based on the artist's Spotify ID
-    //   await collection.updateMany(
-    //     { $setOnInsert: concert },
-    //     { upsert: true }
-    //   );
-    // }
-
     console.log(`Documents were updated/inserted`);
   } catch (e) {
     console.error(e);
   } finally {
-    // Close the MongoDB client connection
     await client.close();
   }
 }
