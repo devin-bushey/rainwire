@@ -179,7 +179,7 @@ export const ArtistsPage = () => {
   return (
     <>
       {isCreatingPlaylist && <Spinner />}
-      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "125px" }}>
+      <Box sx={{ marginTop: "-24px", textAlign: "center", paddingBottom: "150px" }}>
         <Typography
           sx={{
             fontSize: "4rem",
