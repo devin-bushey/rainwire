@@ -9,7 +9,7 @@ import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { CreateNewPlaylist } from "../apiManager/RecordShop";
 import { Loading } from "./Loading";
-import { Spinner } from "../Rifflandia/Spinner";
+import { Spinner } from "../components/Spinner";
 import { StickyButton } from "../components/StickyButton";
 import { primaryButtonColours } from "../theme/AppStyles";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
