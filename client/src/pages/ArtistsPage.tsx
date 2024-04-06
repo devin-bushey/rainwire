@@ -17,6 +17,7 @@ import { useGigsQuery } from "../hooks/useGigsQuery";
 import { useAuth } from "../context/AuthContext";
 import { useShakingEffect } from "../hooks/useShakingEffect";
 import { GigList } from "../components/GigList";
+import { StickyFadeButton } from "../components/StickyFadeButton";
 
 export const ArtistsPage = () => {
   const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
@@ -220,9 +221,7 @@ export const ArtistsPage = () => {
         </Box>
       </Box>
 
-      {isLoggedIntoSpotify() && (
-        <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.card_colours[2]} />
-      )}
+      <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.card_colours[2]} />
     </>
   );
 };
