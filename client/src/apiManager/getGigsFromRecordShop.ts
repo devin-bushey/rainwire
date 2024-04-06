@@ -1,6 +1,6 @@
 import axios from "axios";
-import { filterRecent, sortDataByDateAndOrder } from "../utils/sorter";
-import { Cities } from "../constants/enums";
+import { filterRecent, sortByPopularity, sortDataByDateAndOrder } from "../utils/sorter";
+import { Cities, Festivals } from "../constants/enums";
 import { Gig } from "../types/Gig";
 
 export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig[]> => {
@@ -11,9 +11,15 @@ export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig
       },
     })
     .then(async (response) => {
-      if (origin === Cities.Victoria_2024) {
+      if (collectionName === Cities.Victoria_2024) {
         const sorted = sortDataByDateAndOrder(response.data);
         return filterRecent(sorted);
+      }
+      if (collectionName === Festivals.PachenaBay) {
+        return sortByPopularity(response.data);
+      }
+      if (collectionName === Festivals.LaketownShakedown_2024) {
+        return sortByPopularity(response.data);
       }
       return sortDataByDateAndOrder(response.data);
     });
