@@ -1,9 +1,7 @@
 import express from "express";
 export const victoriaRouter = express.Router();
-import dbo from "../database/conn";
 
 import { CreateNewPlaylist } from "../helpers/createPlaylist";
-
 import { Cities } from "../enums/Cities";
 import { cachedGigs } from "../cache/gigsCache";
 import { Gig } from "../types/Gig";
@@ -31,36 +29,19 @@ victoriaRouter.route("/artists").get(async (req, response) => {
 });
 
 victoriaRouter.route("/create").post(async (req, response) => {
-  const { token, city, user_id, numTopTracks, days } = req.body;
-
-  let dayQuery;
-  let sortBy;
-
-  if (!days || days.length === 0) {
-    // TODO: can change to 'popularity'
-    sortBy = "date";
-    dayQuery = {};
-  } else {
-    sortBy = "day";
-    dayQuery = {
-      day: {
-        $in: days,
-      },
-    };
-  }
+  const { token, city, user_id, numTopTracks, sortBy } = req.body;
 
   const db_connect = await connectToDatabase();
   const collection: Collection<Gig> = db_connect.collection(`${city}`);
-  const gigs: Gig[] = await collection.find(dayQuery).toArray();
+  const gigs: Gig[] = await collection.find({}).toArray();
 
   const url = await CreateNewPlaylist({
     token: token,
     city: city,
     user_id: user_id,
     numTopTracks: numTopTracks,
-    artists: gigs,
+    gigs: gigs,
     sortBy: sortBy,
-    days: days,
   }).catch((error) => {
     console.log(error);
     response.status(500).json({ error: error.message });

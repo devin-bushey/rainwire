@@ -54,13 +54,13 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
       return;
     }
 
-    const artistsFromDatabase = await getAllGigsFromCollection(collectionName);
-    const sortedArtists = filterRecent(artistsFromDatabase);
+    const gigsFromDatabase = await getAllGigsFromCollection(collectionName);
+    const sortedGigs = filterRecent(gigsFromDatabase);
 
     let tracksFromDatabase = [];
-    for (const artist of sortedArtists) {
-      if (artist.topTrackURIs && artist.topTrackURIs[0]) {
-        tracksFromDatabase.push(artist.topTrackURIs[0]);
+    for (const gig of sortedGigs) {
+      if (gig.artist.topTracks && gig.artist.topTracks[0]) {
+        tracksFromDatabase.push(gig.artist.topTracks[0]);
       }
     }
 
