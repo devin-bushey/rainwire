@@ -27,10 +27,9 @@ export const ArtistsPage = () => {
 
   const [numTopTracks, setNumTopTracks] = useState(1);
   const [showSettings, setShowSettings] = useState(false);
-
-  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
   const { isShaking } = useShakingEffect();
 
+  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
   const [isErrorCreatingPlaylist, setIsErrorCreatingPlaylist] = useState(false);
   const snackBar = useContext(SnackBarContext);
 
