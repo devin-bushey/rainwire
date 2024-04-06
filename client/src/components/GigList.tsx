@@ -2,7 +2,7 @@ import { GigCard } from "./GigCard";
 import { COLOURS } from "../theme/AppStyles";
 import { Gig } from "../types/Gig";
 import { Error } from "./Error";
-import { Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { Loading } from "../pages/Loading";
 
 export const GigList = ({
@@ -34,6 +34,15 @@ export const GigList = ({
           </Grid>
         ))}
       </Grid>
+    );
+  } else if (gigs?.length === 0) {
+    return (
+      <Container sx={{ textAlign: "center" }}>
+        <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
+          We couldn&#39;t find any upcoming events in your area.
+        </Typography>
+        <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>Please select a different area.</Typography>
+      </Container>
     );
   } else {
     return <Error />;
