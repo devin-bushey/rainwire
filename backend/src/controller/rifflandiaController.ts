@@ -1,62 +1,34 @@
 import express from "express";
 import dbo from "../database/conn";
 import { CreateNewPlaylistRifflandia } from "../helpers/rifflandia/createPlaylist";
+import { cachedGigs } from "../cache/gigsCache";
+import { Collection } from "mongodb";
+import { connectToDatabase } from "../database/connectToDatabase";
+import { Gig } from "../types/Gig";
 
 export const rifflandiaRouter = express.Router();
-
-// TODO move to separate shared folder
-const cachedData: {
-  rifflandia_data?: any;
-} = {}; // The in-memory cache object
+const RIFFLANDIA = "rifflandia";
 
 rifflandiaRouter.route("/rifflandia").get(async (req, response) => {
   // Check if data is cached in memory
-  if (cachedData.rifflandia_data) {
+  if (cachedGigs.cachedRifflandiaGigs) {
     // If data is found in cache, return the cached data
-    response.json(cachedData.rifflandia_data);
+    response.json(cachedGigs.cachedRifflandiaGigs);
   } else {
-    console.log("cache not found for /rifflandia: ", cachedData.rifflandia_data);
+    console.log("cache not found for /rifflandia: ", cachedGigs.cachedRifflandiaGigs);
 
-    let db_connect = dbo.getDb();
+    const db_connect = await connectToDatabase();
+    const collection: Collection<Gig> = db_connect.collection(RIFFLANDIA);
+    const gigs: Gig[] = await collection.find({}).toArray();
 
-    if (!db_connect) {
-      console.log("reconnecting to db");
-      await dbo.connectToServer(function (err: any) {
-        if (err) {
-          console.log("reconnecting error");
-          console.error(err);
-        }
-      });
-      db_connect = dbo.getDb();
-    }
-
-    db_connect
-      .collection(`rifflandia`)
-      .find({})
-      .toArray()
-      .then((data: any) => {
-        // Save the fetched data to cache
-        cachedData.rifflandia_data = data;
-        response.json(data);
-      });
+    // Save the fetched data to cache
+    cachedGigs.cachedRifflandiaGigs = gigs;
+    response.json(gigs);
   }
 });
 
 rifflandiaRouter.route("/rifflandia-create").post(async (req, response) => {
   const { token, user_id, numTopTracks, days } = req.body;
-
-  let db_connect = dbo.getDb();
-
-  if (!db_connect) {
-    console.log("reconnecting to db");
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log("reconnecting error");
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
-  }
 
   let dayQuery;
   let sortBy;
@@ -73,13 +45,15 @@ rifflandiaRouter.route("/rifflandia-create").post(async (req, response) => {
     };
   }
 
-  const artists = await db_connect.collection("rifflandia").find(dayQuery).toArray();
+  const db_connect = await connectToDatabase();
+  const collection: Collection<Gig> = db_connect.collection(RIFFLANDIA);
+  const gigs: Gig[] = await collection.find(dayQuery).toArray();
 
   const url = await CreateNewPlaylistRifflandia({
     token: token,
     user_id: user_id,
     numTopTracks: numTopTracks,
-    artists: artists,
+    artists: gigs,
     sortBy: sortBy,
     days: days,
   }).catch((error) => {
