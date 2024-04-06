@@ -2,17 +2,7 @@ import { useState, useEffect } from "react";
 import { CreatePlaylistButton } from "./CreatePlaylistButton";
 import { Box } from "@mui/material";
 
-export const StickyButton = ({
-  handleCreatePlaylist,
-  backgroundColor,
-  hoverColor,
-  barColor,
-}: {
-  handleCreatePlaylist: any;
-  backgroundColor: string;
-  hoverColor: string;
-  barColor: string;
-}) => {
+export const StickyButton = ({ handleCreatePlaylist, barColor }: { handleCreatePlaylist: any; barColor: string }) => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -34,7 +24,6 @@ export const StickyButton = ({
         sx={{
           position: "fixed",
           bottom: "0px",
-          //right: '16px',
           zIndex: 9,
           opacity: showButton ? 1 : 0,
           visibility: showButton ? 1 : "hidden",

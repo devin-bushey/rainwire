@@ -553,12 +553,7 @@ const Artists = ({ token, spotifyInfo, handleRedirectToAuthForBrowser }: Artists
           )}
         </Box>
 
-        <StickyButton
-          handleCreatePlaylist={handleCreatePlaylist}
-          backgroundColor={COLOURS.primaryButton.background}
-          hoverColor={COLOURS.primaryButton.backgroundHover}
-          barColor={COLOURS.stickyButtonBackground}
-        />
+        <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.stickyButtonBackground} />
 
         <SignInModalRifflandia
           isOpen={isSignInModalOpen}

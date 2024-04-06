@@ -41,6 +41,7 @@ export const StickyFadeButton = ({
           backgroundImage: `linear-gradient(${bgFadeColourHex}00, ${bgFadeColourHex})`,
         }}
       >
+        {/* TODO: if mobile, show sign in button; if desktop, show create playlist button (cause tooltip doesn't make sense on mobile) */}
         <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
       </Box>
     </Box>

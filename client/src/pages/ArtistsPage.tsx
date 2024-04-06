@@ -118,7 +118,7 @@ export const ArtistsPage = () => {
                 height: "48px",
               }}
             >
-              {SpotifyIcon}
+              {SpotifyIcon()}
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
 
@@ -146,7 +146,7 @@ export const ArtistsPage = () => {
               height: "48px",
             }}
           >
-            {SpotifyIcon}
+            {SpotifyIcon()}
             <Typography sx={{ paddingBottom: 0 }}>Sign in</Typography>
           </Button>
         ) : (
@@ -162,7 +162,7 @@ export const ArtistsPage = () => {
                 }}
                 disabled
               >
-                {SpotifyIcon}
+                {SpotifyIcon()}
                 <Typography sx={{ paddingBottom: 0, color: "grey" }}>Create playlist</Typography>
               </Button>
             </span>
@@ -229,12 +229,7 @@ export const ArtistsPage = () => {
       </Box>
 
       {isLoggedIntoSpotify() && (
-        <StickyButton
-          handleCreatePlaylist={handleCreatePlaylist}
-          backgroundColor={COLOURS.blue}
-          hoverColor={COLOURS.card_colours[1]}
-          barColor={COLOURS.card_colours[2]}
-        />
+        <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.card_colours[2]} />
       )}
     </>
   );
