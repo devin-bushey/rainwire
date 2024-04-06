@@ -7,6 +7,9 @@ import {
   removePlaylistItems,
 } from "../helpers/spotifyPlaylistHelpers";
 import { filterRecent } from "../helpers/filterRecent";
+import { Collection } from "mongodb";
+import { connectToDatabase } from "../database/connectToDatabase";
+import { Gig } from "../types/Gig";
 
 export const playlistRouter = express.Router();
 
@@ -51,7 +54,7 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
       return;
     }
 
-    const artistsFromDatabase = await getArtistsFromDatabase(collectionName);
+    const artistsFromDatabase = await getAllGigsFromCollection(collectionName);
     const sortedArtists = filterRecent(artistsFromDatabase);
 
     let tracksFromDatabase = [];
@@ -115,19 +118,8 @@ playlistRouter.route("/playlist/track").post(async (req, response) => {
 });
 
 // TODO: this is probably a common function?
-const getArtistsFromDatabase = async (collectionName: string) => {
-  let db_connect = dbo.getDb();
-
-  if (!db_connect) {
-    console.log("reconnecting to db");
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log("reconnecting error");
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
-  }
-
-  return await db_connect.collection(collectionName).find({}).toArray();
+const getAllGigsFromCollection = async (collectionName: string): Promise<Gig[]> => {
+  const db_connect = await connectToDatabase();
+  const collection: Collection<Gig> = db_connect.collection(collectionName);
+  return await collection.find({}).toArray();
 };

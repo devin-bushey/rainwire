@@ -6,6 +6,9 @@ import { CreateNewPlaylist } from "../helpers/createPlaylist";
 
 import { Cities } from "../enums/Cities";
 import { cachedGigs } from "../cache/gigsCache";
+import { Gig } from "../types/Gig";
+import { Collection } from "mongodb";
+import { connectToDatabase } from "../database/connectToDatabase";
 
 victoriaRouter.route("/artists").get(async (req, response) => {
   const { city } = req.query;
@@ -15,48 +18,20 @@ victoriaRouter.route("/artists").get(async (req, response) => {
   } else {
     if (city === Cities.Victoria_2024) console.log("cache not found for /victoria: ", cachedGigs.cachedGigsVictoria);
 
-    let db_connect = dbo.getDb();
+    const db_connect = await connectToDatabase();
+    const collection: Collection<Gig> = db_connect.collection(`${city}`);
+    const gigs: Gig[] = await collection.find({}).toArray();
 
-    if (!db_connect) {
-      console.log("reconnecting to db");
-      await dbo.connectToServer(function (err: any) {
-        if (err) {
-          console.log("reconnecting error");
-          console.error(err);
-        }
-      });
-      db_connect = dbo.getDb();
+    // Save the fetched data to cache
+    if (city === Cities.Victoria_2024) {
+      cachedGigs.cachedGigsVictoria = gigs;
     }
-
-    db_connect
-      .collection(`${city}`)
-      .find({})
-      .toArray()
-      .then((data: any) => {
-        // Save the fetched data to cache
-        if (city === Cities.Victoria_2024) {
-          cachedGigs.cachedGigsVictoria = data;
-        }
-        response.json(data);
-      });
+    response.json(gigs);
   }
 });
 
 victoriaRouter.route("/create").post(async (req, response) => {
   const { token, city, user_id, numTopTracks, days } = req.body;
-
-  let db_connect = dbo.getDb();
-
-  if (!db_connect) {
-    console.log("reconnecting to db");
-    await dbo.connectToServer(function (err: any) {
-      if (err) {
-        console.log("reconnecting error");
-        console.error(err);
-      }
-    });
-    db_connect = dbo.getDb();
-  }
 
   let dayQuery;
   let sortBy;
@@ -74,14 +49,16 @@ victoriaRouter.route("/create").post(async (req, response) => {
     };
   }
 
-  const artists = await db_connect.collection(city).find(dayQuery).toArray();
+  const db_connect = await connectToDatabase();
+  const collection: Collection<Gig> = db_connect.collection(`${city}`);
+  const gigs: Gig[] = await collection.find(dayQuery).toArray();
 
   const url = await CreateNewPlaylist({
     token: token,
     city: city,
     user_id: user_id,
     numTopTracks: numTopTracks,
-    artists: artists,
+    artists: gigs,
     sortBy: sortBy,
     days: days,
   }).catch((error) => {
@@ -95,23 +72,3 @@ victoriaRouter.route("/create").post(async (req, response) => {
     response.status(500).json({ error: "Something went wrong" });
   }
 });
-
-// victoriaRouter.route('/extract').get(async (req, res) => {
-//   const { city } = req.query;
-//   console.log('Starting Web Scraping for ' + city);
-//   let status;
-//   try {
-//     status = await extract(city as Cities | Festivals);
-//   } catch (err) {
-//     console.log('Error /extract: ', err);
-//     status = 400;
-//   }
-//   res.status(status ? 200 : 400).send('Web Scraping Complete for ' + city);
-// });
-
-// victoriaRouter.route('/spotify').get(async (req, res) => {
-//   const { collectionName } = req.query;
-//   console.log('Starting to add spotify data to ' + collectionName + '_simple');
-//   let db_connect = dbo.getDb();
-//   await updateCollectionWithSpotify(collectionName as string, db_connect);
-// });
