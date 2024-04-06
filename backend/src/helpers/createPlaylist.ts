@@ -8,6 +8,7 @@ import { HttpRequestError } from "../http/HttpRequestError";
 import { Cities } from "../enums/Cities";
 import { Festivals } from "../enums/Festivals";
 import { Gig } from "../types/Gig";
+import { IMAGE_PACHENA_BAY } from "../assets/pachenaBayImg";
 
 export const CreateNewPlaylist = async ({
   token,
@@ -31,16 +32,22 @@ export const CreateNewPlaylist = async ({
   });
 
   const playlist_id = playlist_data.new_playlist_id || "";
-  try {
-    await AddCoverArt({ token, playlist_id });
-  } catch (err) {
-    console.log("Error adding cover art");
-  }
 
   let sortedGigs = sortBy === "popularity" ? sortByPopularity(gigs) : sortByDateAndOrder(gigs);
+  let coverArt = PLAYLIST_IMG_RS;
 
   if (city === Cities.Victoria_2024) {
     sortedGigs = filterRecent(sortedGigs);
+  }
+
+  if (city === Festivals.PachenaBay) {
+    coverArt = IMAGE_PACHENA_BAY;
+  }
+
+  try {
+    await AddCoverArt({ token, playlist_id, coverArt });
+  } catch (err) {
+    console.log("Error adding cover art");
   }
 
   let tracks = "";
@@ -141,14 +148,22 @@ export const CreateBlankPlaylist = async ({
     });
 };
 
-export const AddCoverArt = async ({ token, playlist_id }: { token: string; playlist_id: string }) => {
+export const AddCoverArt = async ({
+  token,
+  playlist_id,
+  coverArt,
+}: {
+  token: string;
+  playlist_id: string;
+  coverArt: string;
+}) => {
   return put({
     url: "https://api.spotify.com/v1/playlists/" + playlist_id + "/images",
     headers: {
       Authorization: "Bearer " + token,
       "Content-Type": "image/jpeg",
     },
-    data: PLAYLIST_IMG_RS,
+    data: coverArt,
   }).catch(function (error) {
     const err = error as HttpRequestError;
     console.log("Error: unsuccessfully added cover art to playlist", err);

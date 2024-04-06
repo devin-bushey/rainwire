@@ -1,3 +1,4 @@
+import { PLAYLIST_IMG_RS } from "../../assets/recordshop_img";
 import { get } from "../../http/request";
 import { SpotifyPlaylistDataType } from "../../types/SpotifyTypes";
 import { AddCoverArt, AddTracksToPlaylist, CreateBlankPlaylist } from "../createPlaylist";
@@ -23,7 +24,7 @@ export const CreateNewPlaylistJamBase = async ({
 
   const playlist_id = playlist_data.new_playlist_id || "";
   try {
-    AddCoverArt({ token, playlist_id });
+    AddCoverArt({ token, playlist_id, coverArt: PLAYLIST_IMG_RS });
   } catch (err) {
     console.log("Error adding cover art");
   }
