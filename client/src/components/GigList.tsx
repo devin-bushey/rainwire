@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GigCard } from "./GigCard";
 import { COLOURS } from "../theme/AppStyles";
 import { Gig } from "../types/Gig";
@@ -19,6 +19,10 @@ export const GigList = ({
   const [displayedGigs, setDisplayedGigs] = useState<Gig[]>([]);
   const [showMore, setShowMore] = useState<boolean>(true);
   const LOAD_INTERVAL = 10;
+
+  useEffect(() => {
+    setDisplayedGigs([])
+  }, [gigs])
 
   const handleLoadMore = () => {
     const currentLength = displayedGigs.length;

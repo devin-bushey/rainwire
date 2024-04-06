@@ -1,6 +1,5 @@
-import { Box, Collapse, Container, IconButton, Tooltip } from "@mui/material";
+import { Box, Collapse, Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button/Button";
-import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useState } from "react";
 import { SnackBarContext } from "../App";
 import { LOCATIONS } from "../constants/locations";
