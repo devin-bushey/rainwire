@@ -50,6 +50,8 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
     "axios": "^0.24.0",
+    "browserslist": "^4.23.0",
+    "caniuse-lite": "^1.0.30001606",
     "crypto-js": "^4.1.1",
     "emailjs-com": "^3.2.0",
     "moment": "^2.29.4",
