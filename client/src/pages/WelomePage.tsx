@@ -7,10 +7,14 @@ import spotifyLogo from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
+import { Link } from "react-router-dom";
 
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
+import { useAuth } from "../context/AuthContext";
 
 const WelcomePage = memo(() => {
+  const { isLoggedIntoSpotify } = useAuth();
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -76,49 +80,97 @@ const WelcomePage = memo(() => {
             of choice.
           </Typography>
 
-          <Typography sx={{ paddingTop: "12px" }}>To get started, sign in with Spotify.</Typography>
+          {!isLoggedIntoSpotify() && (
+            <Typography sx={{ paddingTop: "12px" }}>To get started, sign in with Spotify.</Typography>
+          )}
         </Box>
 
-        <Box display="flex" flexDirection="column">
-          <Button
-            onClick={isInAppBrowser}
-            variant="contained"
-            sx={{
-              backgroundColor: COLOURS.blue,
-              ":hover": {
-                backgroundColor: COLOURS.card_colours[0],
-              },
-              color: "black",
-              width: "300px",
-              marginTop: "24px",
-              marginBottom: "16px",
-              justifyContent: "center",
-              height: "48px",
-            }}
-          >
-            <img
-              src={spotifyLogo}
-              alt="spotify_logo"
-              width="20px"
-              height="20px"
-              style={{ marginRight: "8px", marginBottom: "3px" }}
-            />
-            Sign in with Spotify
-          </Button>
-        </Box>
+        {!isLoggedIntoSpotify() && (
+          <>
+            <Box display="flex" flexDirection="column">
+              <Button
+                onClick={isInAppBrowser}
+                variant="contained"
+                sx={{
+                  backgroundColor: COLOURS.blue,
+                  ":hover": {
+                    backgroundColor: COLOURS.card_colours[0],
+                  },
+                  color: "black",
+                  width: "300px",
+                  marginTop: "24px",
+                  marginBottom: "16px",
+                  justifyContent: "center",
+                  height: "48px",
+                }}
+              >
+                <img
+                  src={spotifyLogo}
+                  alt="spotify_logo"
+                  width="20px"
+                  height="20px"
+                  style={{ marginRight: "8px", marginBottom: "3px" }}
+                />
+                Sign in with Spotify
+              </Button>
+            </Box>
 
-        <Box
-          sx={{
-            width: "75%",
-            maxWidth: "700px",
-            "& .MuiTypography-body1": {
-              fontSize: "1rem",
-            },
-            marginTop: "16px",
-          }}
-        >
-          <Typography sx={{ paddingTop: "12px" }}>Don&apos;t want to sign in?</Typography>
-        </Box>
+            <Box
+              sx={{
+                width: "75%",
+                maxWidth: "700px",
+                "& .MuiTypography-body1": {
+                  fontSize: "1rem",
+                },
+                marginTop: "16px",
+              }}
+            >
+              <Typography sx={{ paddingTop: "12px" }}>Don&apos;t want to sign in?</Typography>
+            </Box>
+          </>
+        )}
+
+        {isLoggedIntoSpotify() && (
+          <Box display="flex" flexDirection="column">
+            <Box
+              sx={{
+                width: "75%",
+                maxWidth: "700px",
+                "& .MuiTypography-body1": {
+                  fontSize: "1rem",
+                },
+                marginTop: "16px",
+              }}
+            >
+              <Typography sx={{ paddingTop: "12px" }}>Create a playlist from the Artists page</Typography>
+            </Box>
+            <Button
+              component={Link}
+              to={"/artists"}
+              variant="outlined"
+              sx={{
+                marginTop: "4px",
+                marginBottom: "8px",
+                padding: "8px 16px",
+                width: "300px",
+              }}
+            >
+              Artists
+            </Button>
+            <Box
+              sx={{
+                width: "75%",
+                maxWidth: "700px",
+                "& .MuiTypography-body1": {
+                  fontSize: "1rem",
+                },
+                marginTop: "16px",
+              }}
+            >
+              <Typography sx={{ paddingTop: "12px" }}>Or feel free to ...</Typography>
+            </Box>
+          </Box>
+        )}
 
         <Button
           onClick={() => goToNewTabOnDesktop("https://open.spotify.com/user/31ma23i46a3p3vmxvvq7qmhk7w3q")}
