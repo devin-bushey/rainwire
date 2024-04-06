@@ -4,20 +4,23 @@ import { buildArtist } from "./model/Artist";
 import { Gig } from "./model/Gig";
 const axios = require("axios");
 
-if (process.argv.length !== 4) {
-  console.error("Usage: npx ts-node populateSpotifyArtistData.ts <COLLECTION_NAME> <DATABASE> <SPOTIFY_TOKEN>");
+/**
+ * USAGE
+ *
+ * npx ts-node populateSpotifyArtistData.ts COLLECTION_NAME DATABASE_URL SPOTIFY_TOKEN
+ *
+ * For local DBs, use the DB URL is 'mongodb://root:example@localhost:27017/'
+ *
+ */
+
+if (process.argv.length !== 5) {
+  console.error("Usage: npx ts-node populateSpotifyArtistData.ts <COLLECTION_NAME> <DATABASE_URL> <SPOTIFY_TOKEN>");
   process.exit(-1);
 }
 
 const COLLECTION_NAME = process.argv[2];
 const DATABASE_URL = process.argv[3];
 const SPOTIFY_TOKEN = process.argv[4];
-
-/**
- * USAGE
- *
- * npx ts-node populateSpotifyArtistData.ts COLLECTION_NAME SPOTIFY_TOKEN
- */
 
 export const updateCollectionWithSpotify = async () => {
   const dbConnection = await connectToDatabase();
@@ -154,8 +157,8 @@ const createNewCollection = async (dbConnection: any, gigs: Gig[]) => {
 
 try {
   updateCollectionWithSpotify();
-  process.exit(1);
+  // process.exit(1);
 } catch (err) {
   console.log(err);
-  process.exit(-1);
+  // process.exit(-1);
 }

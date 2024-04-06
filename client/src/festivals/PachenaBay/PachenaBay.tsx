@@ -17,6 +17,7 @@ import { GigList } from "../../components/GigList";
 import { redirectToAuth } from "../../utils/spotifyAuthUtils";
 import { useSettingsState } from "../../hooks/useSettingsCollapse";
 import { Settings } from "../../components/Settings";
+import { StickyFadeButton } from "../../components/StickyFadeButton";
 
 import "./pachenaBayStyles.css";
 
@@ -30,6 +31,7 @@ const PACHENA_PAGE_CLASS = PageClassName.PachenaBay;
 const COLOURS = Object.freeze({
   text: "#FCFCFC",
   cardColours: ["#F1B3B5", "#FFEAC2", "#5C9188", "#F06A48"],
+  stickyFadeButtonBgColour: "#00223C",
 });
 
 export const PachenaBay = () => {
@@ -78,7 +80,7 @@ export const PachenaBay = () => {
         </Grid>
 
         <Grid container justifyContent="center">
-          <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3 }}>
+          <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3, marginBottom: "180px" }}>
             <Grid
               container
               justifyContent={{ xs: "center", sm: "space-between" }}
@@ -125,6 +127,8 @@ export const PachenaBay = () => {
             <Box margin="24px 0">
               <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} cardColours={COLOURS.cardColours} />
             </Box>
+
+            <StickyFadeButton handleCreatePlaylist={() => null} bgFadeColourHex={COLOURS.stickyFadeButtonBgColour} />
 
             {/* {playlist && <MissingGigsList playlist={playlist} missingTracks={missingTracks} />}
               <GigList gigs={gigs} cardColours={COLOURS.cardColours} /> */}

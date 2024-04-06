@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GigCard } from "./GigCard";
 import { COLOURS } from "../theme/AppStyles";
 import { Gig } from "../types/Gig";
-import { Error } from "./Error";
-import { Grid, Button } from "@mui/material";
+import { Grid, Container, Typography, Button } from "@mui/material";
 import { Loading } from "../pages/Loading";
 
 export const GigList = ({
@@ -21,8 +20,8 @@ export const GigList = ({
   const LOAD_INTERVAL = 10;
 
   useEffect(() => {
-    setDisplayedGigs([])
-  }, [gigs])
+    setDisplayedGigs([]);
+  }, [gigs]);
 
   const handleLoadMore = () => {
     const currentLength = displayedGigs.length;
@@ -38,7 +37,14 @@ export const GigList = ({
   }
 
   if (!gigs || gigs.length === 0) {
-    return <Error />;
+    return (
+      <Container sx={{ textAlign: "center" }}>
+        <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
+          We couldn&#39;t find any upcoming events in your area.
+        </Typography>
+        <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>Please select a different area.</Typography>
+      </Container>
+    );
   }
 
   // Display only the first 10 gigs initially
@@ -51,8 +57,8 @@ export const GigList = ({
       <Grid
         container
         justifyContent={{ xs: "center", sm: "space-between" }}
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        rowSpacing={{ xs: 2, md: 3 }}
+        columnSpacing={{ sm: 2, md: 3 }}
       >
         {displayedGigs.map((gig: Gig, index: number) => (
           <Grid item xs={12} sm={6} key={gig._id} display="flex" justifyContent="center">
@@ -61,7 +67,7 @@ export const GigList = ({
         ))}
       </Grid>
       {showMore && (
-        <Button variant="outlined" onClick={handleLoadMore}>
+        <Button variant="outlined" sx={{ marginTop: "32px" }} onClick={handleLoadMore}>
           Load More
         </Button>
       )}
