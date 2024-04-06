@@ -18,7 +18,7 @@ import { StickyButton } from "../../components/StickyButton";
 import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from "../apiManager/API_Rifflandia";
 import { Options } from "../Options";
 import { SelectDays } from "../SelectDays";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../../components/Spinner";
 
 import { SnackBarContext } from "../../App";
 import { SpotifyUserDataType } from "../../types/SpotifyTypes";
