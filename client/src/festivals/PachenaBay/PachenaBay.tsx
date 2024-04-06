@@ -2,8 +2,6 @@ import { Box, Button, Collapse, Grid, IconButton, Typography } from "@mui/materi
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Festivals } from "../../constants/enums";
 import { useGigsQuery } from "../../hooks/useGigsQuery";
-import { usePlaylistQuery } from "../../hooks/usePlaylistQuery";
-import { useMissingTracks } from "../../hooks/useMissingTracks";
 import { useAuth } from "../../context/AuthContext";
 import { setDocumentTitle } from "../../hooks/useDocumentTitleEffect";
 import { WEBSITE_PACHENA_BAY } from "../../constants/locations";
@@ -26,7 +24,6 @@ const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
 const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/0v9ue8L0rG6OqxKc2hbAZh";
 const TICKET_LINK = WEBSITE_PACHENA_BAY;
-const CREATE_PLAYLIST_NAME = "Record Shop Pachena Bay 2024";
 
 const PACHENA_PAGE_CLASS = PageClassName.PachenaBay;
 
@@ -38,8 +35,6 @@ const COLOURS = Object.freeze({
 export const PachenaBay = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
-  const { data: playlist } = usePlaylistQuery(CREATE_PLAYLIST_NAME);
-  const missingTracks = useMissingTracks(playlist, gigs);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
 
   setDocumentTitle("Record Shop | Pachena Bay");

@@ -1,9 +1,6 @@
 import { Modal, Box, Typography, Button } from "@mui/material";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { RIFFLANDIA_COLOURS } from "./constants/colours";
-import { useContext } from "react";
-import { SnackBarContext } from "../App";
-import copy from "../assets/images/copy-solid.svg";
 
 type SignInModalRifflandiaProps = {
   isOpen: boolean;
@@ -12,17 +9,6 @@ type SignInModalRifflandiaProps = {
 };
 
 export const SignInModalRifflandia = ({ isOpen, closeModal, handleRedirectToAuth }: SignInModalRifflandiaProps) => {
-  const snackBar = useContext(SnackBarContext);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("recordshop.cool/rifflandia");
-    snackBar.setSnackBar({
-      showSnackbar: true,
-      setShowSnackbar: () => true,
-      message: "Copied! Please paste URL in a new browser window",
-      isError: false,
-    });
-  };
   return (
     <Modal
       open={isOpen}

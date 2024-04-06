@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography, MenuItem } from "@mui/material";
+import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { COLOURS, primaryButtonColours, secondaryButtonColours } from "../theme/AppStyles";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import { redirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ContactUsModal } from "./ContactUsModal";
 import { ProfileMenu } from "./ProfileMenu";
 
