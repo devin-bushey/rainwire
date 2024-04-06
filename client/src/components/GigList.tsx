@@ -5,6 +5,8 @@ import { Gig } from "../types/Gig";
 import { Grid, Container, Typography, Button } from "@mui/material";
 import { Loading } from "../pages/Loading";
 
+const LOAD_INTERVAL = 10;
+
 export const GigList = ({
   gigs,
   isQueryLoading,
@@ -17,11 +19,8 @@ export const GigList = ({
   const colors = cardColours ? cardColours : COLOURS.card_colours;
   const [displayedGigs, setDisplayedGigs] = useState<Gig[]>([]);
   const [showMore, setShowMore] = useState<boolean>(true);
-  const LOAD_INTERVAL = 10;
 
-  useEffect(() => {
-    setDisplayedGigs([]);
-  }, [gigs]);
+  useEffect(() => setDisplayedGigs([]), [gigs]);
 
   const handleLoadMore = () => {
     const currentLength = displayedGigs.length;
@@ -34,9 +33,7 @@ export const GigList = ({
 
   if (isQueryLoading) {
     return <Loading />;
-  }
-
-  if (!gigs || gigs.length === 0) {
+  } else if (!gigs?.length) {
     return (
       <Container sx={{ textAlign: "center" }}>
         <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
@@ -45,32 +42,33 @@ export const GigList = ({
         <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>Please select a different area.</Typography>
       </Container>
     );
-  }
+  } else {
+    // Display only the first 10 gigs initially
+    if (displayedGigs.length === 0) {
+      setDisplayedGigs(gigs.slice(0, LOAD_INTERVAL));
+    }
 
-  // Display only the first 10 gigs initially
-  if (displayedGigs.length === 0) {
-    setDisplayedGigs(gigs.slice(0, LOAD_INTERVAL));
-  }
+    return (
+      <>
+        <Grid
+          container
+          justifyContent={{ xs: "center", sm: "space-between" }}
+          rowSpacing={{ xs: 2, md: 3 }}
+          columnSpacing={{ sm: 2, md: 3 }}
+        >
+          {displayedGigs.map((gig: Gig, index: number) => (
+            <Grid item xs={12} sm={6} key={gig._id} display="flex" justifyContent="center">
+              <GigCard gig={gig} bgcolor={colors[index % colors.length]} />
+            </Grid>
+          ))}
+        </Grid>
 
-  return (
-    <>
-      <Grid
-        container
-        justifyContent={{ xs: "center", sm: "space-between" }}
-        rowSpacing={{ xs: 2, md: 3 }}
-        columnSpacing={{ sm: 2, md: 3 }}
-      >
-        {displayedGigs.map((gig: Gig, index: number) => (
-          <Grid item xs={12} sm={6} key={gig._id} display="flex" justifyContent="center">
-            <GigCard gig={gig} bgcolor={colors[index % colors.length]} />
-          </Grid>
-        ))}
-      </Grid>
-      {showMore && (
-        <Button variant="outlined" sx={{ marginTop: "32px" }} onClick={handleLoadMore}>
-          Load More
-        </Button>
-      )}
-    </>
-  );
+        {showMore && (
+          <Button className="load-more-button" variant="outlined" sx={{ marginTop: "32px" }} onClick={handleLoadMore}>
+            Load More
+          </Button>
+        )}
+      </>
+    );
+  }
 };

@@ -7,7 +7,7 @@ export const COLOURS = {
   accent_04: "#03312E", // dark jungle green
 
   //card_colours: ['hsl(176, 52%, 80%)', 'hsl(284, 57%, 80%)', 'hsl(20, 49%, 80%)'],
-  card_colours: ["#C76D7E33", "#3772FF33", "hsl(20, 49%, 80%)"],
+  card_colours: ["#C76D7E33", "#3772FF33", "#E5C4B3"],
 
   primary_blue: "#003366",
   white: "#FFFFFF",

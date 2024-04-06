@@ -142,7 +142,9 @@ const WelcomePage = memo(() => {
                 marginTop: "16px",
               }}
             >
-              <Typography sx={{ paddingTop: "12px" }}>Create a playlist from the Artists page</Typography>
+              <Typography sx={{ paddingTop: "12px" }}>
+                Create a playlist based on artists playing at upcoming local events
+              </Typography>
             </Box>
             <Button
               component={Link}
@@ -155,7 +157,7 @@ const WelcomePage = memo(() => {
                 width: "300px",
               }}
             >
-              Artists
+              Local Artists
             </Button>
             <Box
               sx={{

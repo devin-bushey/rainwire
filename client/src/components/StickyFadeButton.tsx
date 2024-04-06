@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
-import { CreatePlaylistButton } from "./CreatePlaylistButton";
 import { Box } from "@mui/material";
 
-export const StickyFadeButton = ({
-  handleCreatePlaylist,
-  bgFadeColourHex,
-}: {
-  handleCreatePlaylist: () => void;
-  bgFadeColourHex: string;
-}) => {
+export const StickyFadeButton = ({ bgFadeColourHex, button }: { bgFadeColourHex: string; button: JSX.Element }) => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -32,17 +25,16 @@ export const StickyFadeButton = ({
           bottom: "0px",
           zIndex: 9,
           opacity: showButton ? 1 : 0,
-          visibility: showButton ? 1 : "hidden",
+          visibility: showButton ? "visible" : "hidden",
           transition: "visibility 1.5s, opacity 1.5s ease",
           padding: "24px",
           width: "100%",
-          height: "20%",
+          height: "150px",
           alignContent: "center",
           backgroundImage: `linear-gradient(${bgFadeColourHex}00, ${bgFadeColourHex})`,
         }}
       >
-        {/* TODO: if mobile, show sign in button; if desktop, show create playlist button (cause tooltip doesn't make sense on mobile) */}
-        <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
+        {button}
       </Box>
     </Box>
   );

@@ -18,6 +18,7 @@ import { useAuth } from "../context/AuthContext";
 import { useShakingEffect } from "../hooks/useShakingEffect";
 import { GigList } from "../components/GigList";
 import { StickyFadeButton } from "../components/StickyFadeButton";
+import { CreatePlaylistButton } from "../components/CreatePlaylistButton";
 
 export const ArtistsPage = () => {
   const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
@@ -221,7 +222,11 @@ export const ArtistsPage = () => {
         </Box>
       </Box>
 
-      <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.card_colours[2]} />
+      <StickyFadeButton
+        bgFadeColourHex="#CBCFE7"
+        // TODO make this a sign in button if on mobile
+        button={<CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />}
+      />
     </>
   );
 };
