@@ -3,6 +3,7 @@ import { filterRecent, sortByPopularity, sortDataByDateAndOrder } from "../utils
 import { Cities, Festivals } from "../constants/enums";
 
 export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> => {
+  // eslint-disable-next-line
   const [_key, { origin }] = queryKey;
 
   return axios
