@@ -1,21 +1,17 @@
 import express from "express";
 import dbo from "../database/conn";
 import { CreateNewPlaylistRifflandia } from "../helpers/rifflandia/createPlaylist";
+import { cachedGigs } from "../cache/gigsCache";
 
 export const rifflandiaRouter = express.Router();
 
-// TODO move to separate shared folder
-const cachedData: {
-  rifflandia_data?: any;
-} = {}; // The in-memory cache object
-
 rifflandiaRouter.route("/rifflandia").get(async (req, response) => {
   // Check if data is cached in memory
-  if (cachedData.rifflandia_data) {
+  if (cachedGigs.cachedRifflandiaGigs) {
     // If data is found in cache, return the cached data
-    response.json(cachedData.rifflandia_data);
+    response.json(cachedGigs.cachedRifflandiaGigs);
   } else {
-    console.log("cache not found for /rifflandia: ", cachedData.rifflandia_data);
+    console.log("cache not found for /rifflandia: ", cachedGigs.cachedRifflandiaGigs);
 
     let db_connect = dbo.getDb();
 
@@ -36,7 +32,7 @@ rifflandiaRouter.route("/rifflandia").get(async (req, response) => {
       .toArray()
       .then((data: any) => {
         // Save the fetched data to cache
-        cachedData.rifflandia_data = data;
+        cachedGigs.cachedRifflandiaGigs = data;
         response.json(data);
       });
   }

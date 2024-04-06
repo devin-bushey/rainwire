@@ -5,18 +5,15 @@ import dbo from "../database/conn";
 import { CreateNewPlaylist } from "../helpers/createPlaylist";
 
 import { Cities } from "../enums/Cities";
-
-const cachedData: {
-  victoria_data?: any;
-} = {}; // The in-memory cache object
+import { cachedGigs } from "../cache/gigsCache";
 
 victoriaRouter.route("/artists").get(async (req, response) => {
   const { city } = req.query;
 
-  if (city === Cities.Victoria_2024 && cachedData.victoria_data) {
-    response.json(cachedData.victoria_data);
+  if (city === Cities.Victoria_2024 && cachedGigs.cachedGigsVictoria) {
+    response.json(cachedGigs.cachedGigsVictoria);
   } else {
-    if (city === Cities.Victoria_2024) console.log("cache not found for /victoria: ", cachedData.victoria_data);
+    if (city === Cities.Victoria_2024) console.log("cache not found for /victoria: ", cachedGigs.cachedGigsVictoria);
 
     let db_connect = dbo.getDb();
 
@@ -38,7 +35,7 @@ victoriaRouter.route("/artists").get(async (req, response) => {
       .then((data: any) => {
         // Save the fetched data to cache
         if (city === Cities.Victoria_2024) {
-          cachedData.victoria_data = data;
+          cachedGigs.cachedGigsVictoria = data;
         }
         response.json(data);
       });
