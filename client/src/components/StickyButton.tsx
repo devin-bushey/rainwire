@@ -8,7 +8,7 @@ export const StickyButton = ({ handleCreatePlaylist, barColor }: { handleCreateP
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setShowButton(scrollPosition >= 800);
+      setShowButton(scrollPosition >= 400);
     };
 
     window.addEventListener("scroll", handleScroll);
