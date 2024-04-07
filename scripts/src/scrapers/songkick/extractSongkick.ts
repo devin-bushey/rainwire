@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { buildArtist } from "../model/Artist";
-import { buildGig } from "../model/Gig";
+import { buildArtist } from "../../model/Artist";
+import { buildGig } from "../../model/Gig";
 require("dotenv").config({ path: "../.env" });
 
 /**
@@ -15,7 +15,6 @@ require("dotenv").config({ path: "../.env" });
 const URL_VICTORIA_PAGE_1 = "https://www.songkick.com/metro-areas/27399-canada-victoria?page=1#metro-area-calendar";
 
 export const extractSongkick = async ({ url = URL_VICTORIA_PAGE_1 }: { url?: string }) => {
-  console.log("Extracting song kick " + url);
   let gigs: any[] = [];
 
   await axios
@@ -58,9 +57,8 @@ export const extractSongkick = async ({ url = URL_VICTORIA_PAGE_1 }: { url?: str
       console.log("Error extracting songkick");
     });
 
-  console.log("data", gigs);
-
-  return gigs;
+  console.log(JSON.stringify(gigs));
+  return JSON.stringify(gigs);
 };
 
 extractSongkick({});

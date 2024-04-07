@@ -45,9 +45,12 @@ jobs:
         working-directory: scripts
         run: npm install
 
+      - name: Delete extractedVicGigs.json
+        run: rm -f ./src/scrapers/songkick/extractedVicGigs.json
+
       - name: Run extractSongkick
         working-directory: scripts
-        run: npx ts-node ./src/scrapers/extractSongkick.ts > gigs.json
+        run: npx ts-node ./src/scrapers/songkick/extractSongkick.ts > ./src/scrapers/songkick/extractedVicGigs.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -60,5 +63,32 @@ jobs:
           branch-suffix: timestamp
           base: main
           files: |
-            gigs.json
+            ./src/scrapers/songkick/extractedVicGigs.json
           labels: weekly-update
+
+  populate_mongodb:
+    needs: [extract_songkick_and_create_pr]
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.12.1"
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: Run MongoDB population script
+        working-directory: scripts/src/scrapers/songkick
+        env:
+          ATLAS_URI: ${{ secrets.ATLAS_URI }}
+          API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
+          SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
+          SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
+          SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
+        run: npx ts-node updateMongoCollection.ts
