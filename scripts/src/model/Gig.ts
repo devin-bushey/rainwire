@@ -5,7 +5,7 @@ export type UnsavedGig = Omit<Gig, "_id">;
 export interface Gig {
   _id: string;
   artist: Artist;
-  date: Date;
+  date: Date | string;
   venue: string;
   isMissing?: boolean;
   popularity?: number;
