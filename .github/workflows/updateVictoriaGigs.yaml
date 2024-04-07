@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * 0" # Runs every Sunday 8am
-  pull_request:
-    types:
-      - closed
 
 jobs:
   direct_jambase_db_update:
@@ -72,7 +69,11 @@ jobs:
 
   populate_mongodb:
     needs: [extract_songkick_and_create_pr]
-    if: github.event.pull_request.merged == true
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
