@@ -13,8 +13,8 @@ import { ProfileMenu } from "../../components/ProfileMenu";
 import { goToNewTab } from "../../utils/browserUtils";
 import { PageClassName } from "../../theme/AppStyles";
 import { GigList } from "../../components/GigList";
-import { redirectToAuth } from "../../utils/spotifyAuthUtils";
-import { useSettingsState } from "../../hooks/useSettingsCollapse";
+import { redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
+import { useSettingsState } from "../../hooks/useSettingsCollapseState";
 import { Settings } from "../../components/Settings";
 import { StickyFadeButton } from "../../components/StickyFadeButton";
 import { Spinner } from "../../components/Spinner";
@@ -22,6 +22,8 @@ import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
 import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
+import { InAppModal } from "../../components/InAppModal";
+import { useInAppModalState } from "../../hooks/useInAppModalState";
 import "./pachenaBayStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
@@ -41,6 +43,7 @@ export const PachenaBay = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
+  const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
   // TODO surface error creating playlist
   const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
@@ -111,14 +114,13 @@ export const PachenaBay = () => {
                   </Button>
                 </Grid>
 
-                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
-              // TODO: make this button work for in-app */}
+                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
                 <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
                   {isLoggedIntoSpotify() ? (
                     <ProfileMenu />
                   ) : (
                     <div style={{ justifySelf: "center" }}>
-                      <SignInButton redirectToAuth={redirectToAuth} />
+                      <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
                     </div>
                   )}
                   <IconButton
@@ -142,12 +144,14 @@ export const PachenaBay = () => {
                 bgFadeColourHex={COLOURS.stickyFadeButtonBgColour}
                 button={
                   isMobile() && !isLoggedIntoSpotify() ? (
-                    <SignInButton redirectToAuth={redirectToAuth} />
+                    <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
                   ) : (
                     <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
                   )
                 }
               />
+
+              <InAppModal isOpen={isInAppModalOpen} closeModal={closeInAppModal} pageClassName={PACHENA_PAGE_CLASS} />
             </Grid>
           </Grid>
         </Box>

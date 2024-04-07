@@ -185,5 +185,9 @@
       background-color: #FCFCFC10;
     }
   }
+
+  .in-app-modal {
+    background-color: var(--popover-bg-color);
+  }
     
 }

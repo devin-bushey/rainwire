@@ -1,23 +1,46 @@
 import { Modal, Box, Typography, Button } from "@mui/material";
+import { useContext } from "react";
+import { SnackBarContext } from "../App";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import copy from "../assets/images/copy-solid.svg";
+import { redirectToAuth } from "../utils/spotifyAuthUtils";
+import { getCurrentUrl, getCurrentUrlWithoutParams } from "../utils/browserUtils";
 
 export const InAppModal = ({
-  open,
-  handleClose,
-  handleRedirectToAuth,
+  isOpen,
+  closeModal,
+  pageClassName,
+  postAuthRedirectUri,
 }: {
-  open: any;
-  handleClose: any;
-  handleRedirectToAuth: any;
+  isOpen: boolean;
+  closeModal: () => void;
+  pageClassName?: string;
+  postAuthRedirectUri?: string;
 }) => {
+  const snackBar = useContext(SnackBarContext);
+
+  const urlToCopy = getCurrentUrlWithoutParams();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(urlToCopy);
+    snackBar.setSnackBar({
+      showSnackbar: true,
+      setShowSnackbar: () => true,
+      message: "Copied! Please paste URL in a new browser window",
+      isError: false,
+    });
+  };
+
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={isOpen}
+      onClose={closeModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      className={pageClassName}
     >
       <Box
+        className="in-app-modal"
         sx={{
           position: "absolute",
           top: "50%",
@@ -35,8 +58,7 @@ export const InAppModal = ({
           Looks like you&apos;re using an in-app browser.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          If you have trouble signing in with Spotify then please try again by opening Record Shop with Chrome, Safari,
-          Firefox, etc.
+          If you have trouble signing into Spotify, please open Record Shop in Chrome, Safari, Firefox, etc.
         </Typography>
         <Box
           sx={{
@@ -47,10 +69,10 @@ export const InAppModal = ({
           }}
         >
           <Button
-            onClick={handleRedirectToAuth}
+            className="secondary-button"
+            onClick={() => redirectToAuth(postAuthRedirectUri)}
             variant="contained"
             color="secondary"
-            //className="btn--click-me"
             sx={{ width: "100%", marginTop: "12px", justifyContent: "center" }}
           >
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
@@ -67,9 +89,9 @@ export const InAppModal = ({
             marginTop: "20px",
           }}
         >
-          <Typography sx={{ paddingBottom: "0px" }}>https://recordshop.cool</Typography>
-          <Button variant="outlined" onClick={() => navigator.clipboard.writeText("recordshop.cool")}>
-            Copy
+          <Typography sx={{ paddingBottom: "0px", fontSize: "14px" }}>{urlToCopy}</Typography>
+          <Button onClick={handleCopy} sx={{ minWidth: "20px" }}>
+            <img src={copy} alt="copy" height="20px" />
           </Button>
         </Box>
       </Box>
