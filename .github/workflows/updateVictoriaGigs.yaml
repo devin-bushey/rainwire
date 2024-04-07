@@ -3,7 +3,7 @@ name: Weekly Victoria Gigs Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/1 * * * *" # Runs every 1 min
+    - cron: "0 8 * * 0" # Runs every Sunday 8am
 
 jobs:
   update_database:
@@ -27,5 +27,5 @@ jobs:
           API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
           SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
-          SP_CLIENT_SECRET: ${{ secrets.SP_CLIENT_SECRET }}
+          SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
         run: node ./scripts/src/updateVictoriaDatabase.js
