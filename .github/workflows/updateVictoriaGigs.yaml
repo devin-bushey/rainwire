@@ -30,7 +30,7 @@ jobs:
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
         run: node ./scripts/src/updateVictoriaDatabase.js
 
-  extract_songkick_and_create_pr_test:
+  extract_songkick_and_create_pr:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -61,69 +61,4 @@ jobs:
           base: main
           files: |
             ./scripts/src/scrapers/songkick/extractedVicGigs.json
-          labels: weekly-update
-
-  extract_songkick_and_create_pr:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20.12.1"
-
-      - name: Install dependencies
-        working-directory: scripts
-        run: npm install
-
-      - name: Delete extractedVicGigs.json
-        run: rm -f ./src/scrapers/songkick/extractedVicGigs.json
-
-      - name: Run extractSongkick
-        working-directory: scripts
-        run: npx ts-node ./src/scrapers/songkick/extractSongkick.ts > ./src/scrapers/songkick/extractedVicGigs.json
-
-      - name: Configure git user
-        run: |
-          git config --global user.email "devin.m.bushey@gmail.com"
-          git config --global user.name "Devin"
-
-      - name: Check if branch exists
-        id: check_branch
-        run: |
-          if git show-ref --quiet refs/heads/weekly-vic-songkick-gigs; then
-            echo "Branch 'weekly-vic-songkick-gigs' already exists. Deleting it."
-            git push origin --delete weekly-vic-songkick-gigs
-          else
-            echo "Branch 'weekly-vic-songkick-gigs' does not exist."
-          fi
-
-      - name: Create new branch
-        run: git checkout -b weekly-vic-songkick-gigs
-
-      - name: Commit changes
-        working-directory: scripts
-        run: |
-          git add .
-          git commit -m "Weekly Update: Extracted Victoria Songkick Data"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: weekly-vic-songkick-gigs
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Weekly Update: Extracted Victoria Songkick Data"
-          title: "Weekly Update: Extracted Victoria Songkick Data"
-          body: "This PR contains the JSON object of the Songkick data extracted this week. It does not include Spotify data"
-          branch: weekly-vic-songkick-gigs
-          base: main
-          files: |
-            ./src/scrapers/songkick/extractedVicGigs.json
           labels: weekly-update
