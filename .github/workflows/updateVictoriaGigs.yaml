@@ -52,6 +52,11 @@ jobs:
         working-directory: scripts
         run: npx ts-node ./src/scrapers/songkick/extractSongkick.ts > ./src/scrapers/songkick/extractedVicGigs.json
 
+      - name: Configure git user
+        run: |
+          git config --global user.email "devin.m.bushey@gmail.com"
+          git config --global user.name "Devin"
+
       - name: Check if branch exists
         id: check_branch
         run: |
