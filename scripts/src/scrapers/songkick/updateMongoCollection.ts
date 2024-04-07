@@ -176,19 +176,7 @@ const updateMongoCollection = async () => {
       // Might be duplicate artists if they play back to back nights, hmmm.
       // But we dont delete them from the database, so I would want to add them if theres a long
       // period of time between shows.
-
-      // TODO: Clean up
-      // Convert gig.date to YYYY/MM/DD format
-      let formattedDate;
-      if (typeof gig.date === "string") {
-        // If gig.date is already a string
-        formattedDate = gig.date;
-      } else {
-        // If gig.date is a Date object
-        formattedDate = gig.date.toISOString().split("T")[0].replace(/-/g, "/");
-      }
-
-      const existingGig = await collection.findOne({ "artist.id": gig.artist.id, date: formattedDate });
+      const existingGig = await collection.findOne({ "artist.id": gig.artist.id, date: gig.date });
       if (!existingGig) {
         await collection.insertOne(gig);
         console.log(`Added concert for ${gig.artist.name} on ${gig.date} to the database`);
