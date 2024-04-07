@@ -69,7 +69,9 @@ jobs:
         run: git add ./src/scrapers/songkick/extractedVicGigs.json
 
       - name: Commit changes
-        run: git commit -m "Weekly Update: Extracted Victoria Songkick Data"
+        run: |
+          git add .
+          git commit -m "Weekly Update: Extracted Victoria Songkick Data"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
