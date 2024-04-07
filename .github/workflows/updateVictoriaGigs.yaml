@@ -70,11 +70,8 @@ jobs:
       - name: Create new branch
         run: git checkout -b weekly-vic-songkick-gigs
 
-      - name: Stage changes
-        working-directory: scripts
-        run: git add ./src/scrapers/songkick/extractedVicGigs.json
-
       - name: Commit changes
+        working-directory: scripts
         run: |
           git add .
           git commit -m "Weekly Update: Extracted Victoria Songkick Data"
