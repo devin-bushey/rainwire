@@ -53,6 +53,7 @@ jobs:
         run: npx ts-node ./src/scrapers/songkick/extractSongkick.ts > ./src/scrapers/songkick/extractedVicGigs.json
 
       - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -71,6 +72,12 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for PR to be merged
+        uses: octokit/wait-for-pull-request-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull-request-number }}
+
       - name: Checkout repository
         uses: actions/checkout@v2
 

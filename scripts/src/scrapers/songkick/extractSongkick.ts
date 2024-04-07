@@ -57,8 +57,8 @@ export const extractSongkick = async ({ url = URL_VICTORIA_PAGE_1 }: { url?: str
       console.log("Error extracting songkick");
     });
 
-  console.log(JSON.stringify(gigs));
-  return JSON.stringify(gigs);
+  console.log(JSON.stringify(gigs, null, 2));
+  return JSON.stringify(gigs, null, 2);
 };
 
 extractSongkick({});
