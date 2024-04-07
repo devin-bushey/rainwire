@@ -35,7 +35,7 @@ const getSpotifyAccessToken = async () => {
     console.log("Yew!! Successfully retrieved the token");
     return response.data.access_token;
   } catch (error) {
-    console.error("Failed to get Spotify token:", error);
+    console.error("Failed to get Spotify token:", error.data);
     process.exit(-1);
   }
 };
