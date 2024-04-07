@@ -29,6 +29,7 @@ export const COLOURS = {
 export enum PageClassName {
   Rifflandia = "rifflandia",
   PachenaBay = "pachena",
+  PhillipsBackyard = "phillips-backyard",
 }
 
 export const primaryButtonColours = {

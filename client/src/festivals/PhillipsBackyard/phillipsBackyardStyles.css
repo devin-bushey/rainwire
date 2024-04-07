@@ -1,0 +1,177 @@
+.phillips-backyard {
+  --main-bg-color-top: #1D3E7B;
+  --main-bg-color-bottom: #002D74;
+  --main-text-color: #FFFFFF;
+
+  /* medium blue #1C66A4 */
+
+  --card-bg-color: #002D74;
+  --card-text-color: #FFFFFF;
+
+  --popover-bg-color: #FFFFFF;
+
+  --primary-button-bg-color: #5ED0DF;
+  --primary-button-text-color: #FFFFFF;
+  --primary-button-hover-bg-color: #FFFFFF;
+  --primary-button-hover-text-color: #030918;
+
+  --secondary-button-bg-color: #F2C536;
+  --secondary-button-text-color: #FFFFFF;
+  --secondary-button-hover-bg-color: #FFFFFF;
+  --secondary-button-hover-text-color: #030918;
+
+  overflow: hidden;
+
+  .phillips-page { 
+    position: relative;
+    background-color: var(--main-bg-color);
+    z-index: 0;
+    height: 100%;
+  }
+
+  .background-top {
+    background-color: var(--main-bg-color-top);
+  }
+
+  .background-bottom {
+    background-color: var(--main-bg-color-bottom);
+  }
+  
+  .phillips-background-icons {
+    position: relative;
+    background-image: url('./assets/backgroundIcons.png');
+    background-size: cover;
+    z-index: 1;
+  }
+
+  
+  /***** BG IMAGES ******/
+  
+  .sidebar {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+  }
+  
+  .sidebar-sparkle-left {
+    background-image: url('./assets/phillipsSparkle.png');
+    width: 150px;
+    height: 150px;
+    top: 15%;
+    left: 15%;
+
+    @media (max-width: 900px) {
+      width: 80px;
+      height: 80px;
+      top: 20%;
+      left: 2%;
+    }
+  }
+
+  .sidebar-sparkle-right {
+    background-image: url('./assets/phillipsBirdLogo.png');
+    width: 100px;
+    height: 100px;
+    top: 25%;
+    right: 20%;
+
+    @media (max-width: 900px) {
+      top: 37%;
+      right: 2%;
+    }
+  }
+  
+  
+  /******* BUTTONS *******/
+  .primary-button {
+    background-color: var(--primary-button-bg-color) !important;
+    color: var(--primary-button-text-color) !important;
+  
+    &:hover {
+      background-color: var(--primary-button-hover-bg-color) !important;
+      color: var(--primary-button-hover-text-color) !important;  
+    }
+  }
+  
+  .secondary-button {
+    background-color: var(--secondary-button-bg-color) !important;
+    color: var(--secondary-button-text-color) !important;
+
+    border: 0;
+    box-shadow: 0 3px 1px -2px rgba(0 0 0 / 0.2);
+  
+    &:hover {
+      background-color: var(--secondary-button-hover-bg-color) !important;
+      color: var(--secondary-button-hover-text-color) !important;  
+
+      border: 0;
+      box-shadow: none;
+    }
+  }
+  
+  
+  
+  /****** CUSTOM COMPONENT COLOURS ******/
+  .preview-playlist {
+    .MuiCard-root {
+      background-color: var(--card-bg-color);
+      color: var(--card-text-color);
+    }
+  
+    .MuiButton-root {
+      background-color: var(--secondary-button-bg-color) !important;
+      color: var(--secondary-button-text-color) !important;
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color) !important;
+        color: var(--secondary-button-hover-text-color) !important;
+      }
+    }
+  }
+  
+  .about-us-popover {
+    button {
+      background-color: var(--secondary-button-bg-color) !important;
+      color: var(--secondary-button-text-color) !important;
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color) !important;
+        color: var(--secondary-button-hover-text-color) !important;
+      }
+    }
+  }
+  
+  .about-us-contents {
+    background-color: var(--popover-bg-color);
+  }
+  
+  .contact-us-modal-contents {
+    background-color: var(--popover-bg-color);
+  }
+
+  .profile-menu-button {
+    button {
+      color: var(--main-text-color);
+    }
+  }
+
+  .settings-container {
+    background-color: var(--popover-bg-color);
+  }
+
+  .load-more-button {
+    color: var(--main-text-color);
+    border-color: var(--main-text-color);
+
+    &:hover {
+      border-color: var(--main-text-color);
+      background-color: #FCFCFC10;
+    }
+  }
+
+  .in-app-modal {
+    background-color: var(--popover-bg-color);
+  }
+    
+}
