@@ -2,7 +2,7 @@ name: Weekly Victoria Gigs Update
 
 on:
   schedule:
-    - cron: "0 5 * * 0" # Runs at 10 PM PDT (5 AM UTC) on Saturday night
+    - cron: "*/5 * * * *" # Runs every 5 mins
 
 jobs:
   update_database:
