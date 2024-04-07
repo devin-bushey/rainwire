@@ -83,7 +83,7 @@ export const PachenaBay = () => {
 
               <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
                 Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                Pachena Bay.
+                Pachena Bay Music Festival 2024.
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} className="preview-playlist" />
