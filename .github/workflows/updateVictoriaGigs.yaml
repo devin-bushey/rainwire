@@ -1,8 +1,9 @@
 name: Weekly Victoria Gigs Update
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: "0 5 * * 0" # Runs at 10 PM PDT (5 AM UTC) on Saturday night
+    - cron: "*/1 * * * *" # Runs every 1 min
 
 jobs:
   update_database:
@@ -17,13 +18,14 @@ jobs:
           node-version: "20.12.1"
 
       - name: Install dependencies
+        working-directory: scripts
         run: npm install
 
       - name: Run script
-        run: node ./scripts/src/updateVictoriaDatabase.js
         env:
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
           SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
           SP_CLIENT_SECRET: ${{ secrets.SP_CLIENT_SECRET }}
+        run: node ./scripts/src/updateVictoriaDatabase.js
