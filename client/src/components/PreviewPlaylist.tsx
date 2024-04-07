@@ -2,9 +2,9 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import { goToNewTabOnDesktop } from "../utils/browserUtils";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 
-export const PreviewPlaylist = ({ playlistUrl, className }: { playlistUrl: string; className: string }) => (
+export const PreviewPlaylist = ({ playlistUrl }: { playlistUrl: string }) => (
   <Box
-    className={className}
+    className="preview-playlist"
     sx={{
       margin: "24px 0",
       display: "flex",

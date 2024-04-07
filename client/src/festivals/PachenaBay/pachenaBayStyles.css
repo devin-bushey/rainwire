@@ -135,7 +135,7 @@
       color: var(--card-text-color);
     }
   
-    button {
+    .MuiButton-root {
       background-color: var(--secondary-button-bg-color) !important;
       color: var(--secondary-button-text-color) !important;
   

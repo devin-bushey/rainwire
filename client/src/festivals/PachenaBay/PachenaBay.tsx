@@ -89,7 +89,7 @@ export const PachenaBay = () => {
                 Pachena Bay Music Festival 2024.
               </Typography>
 
-              <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} className="preview-playlist" />
+              <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
             </Grid>
           </Grid>
 
