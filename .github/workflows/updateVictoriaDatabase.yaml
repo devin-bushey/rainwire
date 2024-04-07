@@ -1,0 +1,37 @@
+name: Victoria Database Update on PR merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  populate_mongodb:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.head.ref == 'weekly-vic-songkick-data'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.12.1"
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: Run MongoDB population script
+        working-directory: scripts/src/scrapers/songkick
+        env:
+          ATLAS_URI: ${{ secrets.ATLAS_URI }}
+          API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
+          SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
+          SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
+          SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
+        run: npx ts-node updateMongoCollection.ts

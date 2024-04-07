@@ -30,8 +30,23 @@ jobs:
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
         run: node ./scripts/src/updateVictoriaDatabase.js
 
+  delete_weekly_vic_songkick_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Delete branch if exists
+        run: |
+          if git show-ref --verify --quiet "refs/heads/weekly-vic-songkick-data"; then
+            git push origin --delete weekly-vic-songkick-data
+          else
+            echo "Branch does not exist"
+          fi
+
   extract_songkick_and_create_pr:
     runs-on: ubuntu-latest
+    needs: [delete_weekly_vic_songkick_branch]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -61,39 +76,7 @@ jobs:
           title: "Weekly Update: Extracted Victoria Songkick Data"
           body: "This PR contains the JSON object of the Songkick data extracted this week. It does not include Spotify data"
           branch: weekly-vic-songkick-data
-          branch-suffix: timestamp
           base: main
           files: |
             ./src/scrapers/songkick/extractedVicGigs.json
           labels: weekly-update
-
-  populate_mongodb:
-    needs: [extract_songkick_and_create_pr]
-    if: |
-      github.event_name == 'pull_request' &&
-      github.event.action == 'closed' &&
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.base.ref == 'main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20.12.1"
-
-      - name: Install dependencies
-        working-directory: scripts
-        run: npm install
-
-      - name: Run MongoDB population script
-        working-directory: scripts/src/scrapers/songkick
-        env:
-          ATLAS_URI: ${{ secrets.ATLAS_URI }}
-          API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
-          SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
-          SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
-          SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
-        run: npx ts-node updateMongoCollection.ts
