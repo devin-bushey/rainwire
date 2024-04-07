@@ -6,7 +6,7 @@ on:
     - cron: "0 8 * * 0" # Runs every Sunday 8am
 
 jobs:
-  update_database:
+  direct_jambase_db_update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,3 +29,36 @@ jobs:
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
         run: node ./scripts/src/updateVictoriaDatabase.js
+
+  extract_songkick_and_create_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.12.1"
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: Run extractSongkick
+        working-directory: scripts
+        run: npx ts-node ./src/scrapers/extractSongkick.ts > gigs.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Weekly Update: Extracted Victoria Songkick Data"
+          title: "Weekly Update: Extracted Victoria Songkick Data"
+          body: "This PR contains the JSON object of the Songkick data extracted this week. It does not include Spotify data"
+          branch: weekly-vic-songkick-data
+          branch-suffix: timestamp
+          base: main
+          files: |
+            gigs.json
+          labels: weekly-update
