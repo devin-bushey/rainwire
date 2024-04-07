@@ -12,10 +12,12 @@ import { victoriaRouter } from "./controller/victoriaController";
 import { rifflandiaRouter } from "./controller/rifflandiaController";
 import { jamBaseRouter } from "./controller/jamBaseController";
 import { playlistRouter } from "./controller/playlistController";
+import { refreshTokenRouter } from "./refreshToken/refreshTokenRouter";
 
 app.use(cors());
 app.use(express.json());
 app.use("/", healthchecker);
+app.use(refreshTokenRouter);
 
 app.use(victoriaRouter);
 app.use(rifflandiaRouter);
