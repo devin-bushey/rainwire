@@ -16,21 +16,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Andrew Hyatt",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-04-09T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 1
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Tyler Joe Miller",
+      "name": "Tyler Joe Miller, Andrew Hyatt, and Shawn Austin",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -72,7 +58,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Blacksmith & Brewer",
+      "name": "Blacksmith & Brewer\n                    Necrosal Noise and Dollhead",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -86,7 +72,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Windser",
+      "name": "Lime Cordiale\n                    Windser",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -100,7 +86,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Daniel Romano's Outfit",
+      "name": "Lime Cordiale\n                    Windser",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-14T00:00:00.000Z",
+    "venue": "Capital Ballroom",
+    "isMissing": false,
+    "popularity": 6
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Daniel Romano's Outfit\n                    Kiwi Jr. and Carson McHone",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -156,7 +156,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Lila Gray",
+      "name": "Lila Gray\n                    Diana Rose and Julianna Laine",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -166,6 +166,34 @@
     "venue": "",
     "isMissing": false,
     "popularity": 11
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Bahamas\n                    Leith Ross",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-20T00:00:00.000Z",
+    "venue": "Royal Theatre",
+    "isMissing": false,
+    "popularity": 12
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Bahamas",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-20T00:00:00.000Z",
+    "venue": "Royal Theatre",
+    "isMissing": false,
+    "popularity": 13
   },
   {
     "artist": {
@@ -226,7 +254,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Merkules",
+      "name": "Ice Cube\n                    Merkules and Peter Jackson",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
