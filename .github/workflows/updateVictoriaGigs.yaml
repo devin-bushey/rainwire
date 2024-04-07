@@ -1,0 +1,29 @@
+name: Weekly Victoria Gigs Update
+
+on:
+  schedule:
+    - cron: "0 5 * * 0" # Runs at 10 PM PDT (5 AM UTC) on Saturday night
+
+jobs:
+  update_database:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.12.1"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script
+        run: node ./scripts/src/updateVictoriaDatabase.js
+        env:
+          ATLAS_URI: ${{ secrets.ATLAS_URI }}
+          API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
+          SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
+          SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
+          SP_CLIENT_SECRET: ${{ secrets.SP_CLIENT_SECRET }}
