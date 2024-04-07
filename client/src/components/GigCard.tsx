@@ -79,8 +79,7 @@ const SpotifyGigName = ({ name }: { name: string }) => {
 
 const Description = ({ gig }: { gig: Gig }) => {
   const dateUnformatted = new Date(gig.date);
-  const date = dateUnformatted.toISOString().split("T")[0];
-  const description = `${date} at ${gig.venue}`;
+  const date = dateUnformatted.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
   return (
     <Box>
       <Typography
@@ -94,7 +93,7 @@ const Description = ({ gig }: { gig: Gig }) => {
           WebkitBoxOrient: "vertical",
         }}
       >
-        {description}
+        {date} at {gig.venue}
       </Typography>
     </Box>
   );

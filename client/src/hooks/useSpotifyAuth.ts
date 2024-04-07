@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { GetSpotifyUserInfo } from "../apiManager/Spotify";
 import { setSpotifyTokenLocalStorage, getSpotifyTokenLocalStorage } from "../utils/tokenHandling";
 import hash from "../utils/hash";
+import { isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 
 type SpotifyUserDataType = {
   firstName: string;
@@ -58,7 +59,7 @@ const useSpotifyAuth = () => {
     initializeSpotifyAuth();
   }, []);
 
-  return { token, spotifyInfo };
+  return { token, spotifyInfo, isLoggedIntoSpotify: isLoggedIntoSpotify() };
 };
 
 export default useSpotifyAuth;

@@ -17,7 +17,8 @@ export const PreviewPlaylist = ({ playlistUrl, className }: { playlistUrl: strin
       <Button
         onClick={() => goToNewTabOnDesktop(playlistUrl)}
         sx={{
-          width: "210px",
+          width: "100%",
+          maxWidth: "210px",
           marginTop: "12px",
           justifyContent: "center",
           height: "36px",

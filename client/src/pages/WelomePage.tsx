@@ -9,37 +9,17 @@ import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 import { Link } from "react-router-dom";
 
-import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../utils/browserUtils";
 import { useAuth } from "../context/AuthContext";
+import { setDocumentTitle } from "../hooks/useDocumentTitleEffect";
+import { useInAppModalState } from "../hooks/useInAppModalState";
+import { redirectToAuth, redirectToAuthForBrowser } from "../utils/spotifyAuthUtils";
 
 const WelcomePage = memo(() => {
   const { isLoggedIntoSpotify } = useAuth();
+  const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const isInAppBrowser = () => {
-    // check if this react app is open within Instagram, LinkedIn, or Facebook's in-app browser
-    if (navigator.userAgent.match(/FBAN|FBAV|Instagram|LinkedIn|Messenger/i)) {
-      // in-app browser detected
-      handleOpen();
-      return true;
-    }
-    handleRedirectToAuth();
-    return false;
-  };
-
-  const handleRedirectToAuth = () => {
-    location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${BASE_REDIRECT_URI}artists&scope=${SCOPES.join(
-      "%20",
-    )}&response_type=token&show_dialog=true`;
-  };
-
-  useEffect(() => {
-    document.title = "Record Shop | Login";
-    scrollToTop();
-  }, []);
+  setDocumentTitle("Record Shop | Login");
 
   return (
     <>
@@ -89,7 +69,7 @@ const WelcomePage = memo(() => {
           <>
             <Box display="flex" flexDirection="column">
               <Button
-                onClick={isInAppBrowser}
+                onClick={redirectToAuthForBrowser(openInAppModal, `${BASE_REDIRECT_URI}artists`)}
                 variant="contained"
                 sx={{
                   backgroundColor: COLOURS.blue,
@@ -142,7 +122,9 @@ const WelcomePage = memo(() => {
                 marginTop: "16px",
               }}
             >
-              <Typography sx={{ paddingTop: "12px" }}>Create a playlist from the Artists page</Typography>
+              <Typography sx={{ paddingTop: "12px" }}>
+                Create a playlist based on artists playing at upcoming local events
+              </Typography>
             </Box>
             <Button
               component={Link}
@@ -155,7 +137,7 @@ const WelcomePage = memo(() => {
                 width: "300px",
               }}
             >
-              Artists
+              Local Artists
             </Button>
             <Box
               sx={{
@@ -196,7 +178,11 @@ const WelcomePage = memo(() => {
           (but its more fun to customize your own)
         </Box>
 
-        <InAppModal open={open} handleClose={handleClose} handleRedirectToAuth={handleRedirectToAuth} />
+        <InAppModal
+          isOpen={isInAppModalOpen}
+          closeModal={closeInAppModal}
+          postAuthRedirectUri={`${BASE_REDIRECT_URI}artists`}
+        />
       </Container>
     </>
   );

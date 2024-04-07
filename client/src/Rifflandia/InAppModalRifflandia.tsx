@@ -48,8 +48,7 @@ export const InAppModalRifflandia = ({ isOpen, closeModal }: InAppModalRifflandi
           Looks like you&apos;re using an in-app browser.
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          If you have trouble signing in with Spotify then please try again by opening Record Shop using Chrome, Safari,
-          Firefox, etc.
+          If you have trouble signing into Spotify, please open Record Shop in Chrome, Safari, Firefox, etc.
         </Typography>
         <Box
           sx={{
@@ -60,7 +59,7 @@ export const InAppModalRifflandia = ({ isOpen, closeModal }: InAppModalRifflandi
           }}
         >
           <Button
-            onClick={() => redirectToAuth()}
+            onClick={redirectToAuth}
             variant="contained"
             sx={{
               width: "100%",

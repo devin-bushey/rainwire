@@ -49,6 +49,11 @@
     left: -150px;
     bottom: 50px;
     background-position: bottom;
+
+    @media (max-width: 900px) {
+      left: -240px;
+      bottom: 20px;  
+    }
   }
   
   .sidebar-coral-pink {
@@ -123,7 +128,7 @@
   
   
   
-  /****** COMPONENT CLASSES ******/
+  /****** CUSTOM COMPONENT COLOURS ******/
   .preview-playlist {
     .MuiCard-root {
       background-color: var(--card-bg-color);
@@ -168,6 +173,20 @@
   }
 
   .settings-container {
+    background-color: var(--popover-bg-color);
+  }
+
+  .load-more-button {
+    color: var(--main-text-color);
+    border-color: var(--main-text-color);
+
+    &:hover {
+      border-color: var(--main-text-color);
+      background-color: #FCFCFC10;
+    }
+  }
+
+  .in-app-modal {
     background-color: var(--popover-bg-color);
   }
     

@@ -21,15 +21,16 @@ export const SpotifyPreviewModal = ({ artistId, setArtistId: setArtistUrl }: Spo
         transform: "translate(-50%, -50%)",
         width: "100%",
         maxWidth: 600,
-        padding: "0px 32px",
+        display: "flex",
+        justifyContent: "center",
         border: 0,
       }}
     >
       <iframe
         title="spotifyPreviewModal"
         src={`https://open.spotify.com/embed/artist/${artistId}?utm_source=generator`}
-        width="100%"
-        height="450"
+        width="92%"
+        height="450px"
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"

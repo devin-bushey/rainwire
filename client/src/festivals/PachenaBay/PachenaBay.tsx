@@ -7,23 +7,24 @@ import { setDocumentTitle } from "../../hooks/useDocumentTitleEffect";
 import { WEBSITE_PACHENA_BAY } from "../../constants/locations";
 import { SignInButton } from "../../components/SignInButton";
 import { RecordShopTitle } from "../../components/RecordShopTitle";
-import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
 import { PreviewPlaylist } from "../../components/PreviewPlaylist";
 import { AboutUsPopover } from "../../components/AboutUsPopover";
 import { ProfileMenu } from "../../components/ProfileMenu";
-import { goToNewTab, goToNewTabOnDesktop } from "../../utils/browserUtils";
+import { goToNewTab } from "../../utils/browserUtils";
 import { PageClassName } from "../../theme/AppStyles";
 import { GigList } from "../../components/GigList";
-import { redirectToAuth } from "../../utils/spotifyAuthUtils";
-import { useSettingsState } from "../../hooks/useSettingsCollapse";
+import { redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
+import { useSettingsState } from "../../hooks/useSettingsCollapseState";
 import { Settings } from "../../components/Settings";
 import { StickyFadeButton } from "../../components/StickyFadeButton";
-
-import "./pachenaBayStyles.css";
-import { useContext, useEffect, useState } from "react";
-import { SnackBarContext } from "../../App";
-import { CreateNewPlaylist } from "../../apiManager/RecordShop";
 import { Spinner } from "../../components/Spinner";
+import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
+import { isMobile } from "../../utils/responsiveUtils";
+import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
+import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
+import { InAppModal } from "../../components/InAppModal";
+import { useInAppModalState } from "../../hooks/useInAppModalState";
+import "./pachenaBayStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
@@ -39,52 +40,16 @@ const COLOURS = Object.freeze({
 });
 
 export const PachenaBay = () => {
-  const { isLoggedIntoSpotify, token, spotifyInfo } = useAuth();
+  const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
+  const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
-  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
-  const [isErrorCreatingPlaylist, setIsErrorCreatingPlaylist] = useState(false);
-  const snackBar = useContext(SnackBarContext);
-
-  useEffect(() => {
-    if (isErrorCreatingPlaylist) {
-      snackBar.setSnackBar({
-        showSnackbar: true,
-        setShowSnackbar: () => true,
-        message: "Error creating playlist. Please try again.",
-        isError: true,
-      });
-    }
-  }, [isErrorCreatingPlaylist]);
-
-  const handleCreatePlaylist = async () => {
-    setIsCreatingPlaylist(true);
-    await CreateNewPlaylist({
-      city: DB_COLLECTION_NAME,
-      token: token,
-      user_id: spotifyInfo.user_id,
-      numTopTracks: numTopTracks,
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          snackBar.setSnackBar({
-            showSnackbar: true,
-            setShowSnackbar: () => true,
-            message: "Successfully created a playlist!",
-            isError: false,
-          });
-          goToNewTabOnDesktop(res.data);
-        } else {
-          setIsErrorCreatingPlaylist(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsErrorCreatingPlaylist(true);
-      });
-    setIsCreatingPlaylist(false);
-  };
+  // TODO surface error creating playlist
+  const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
+    dbCollectionName: DB_COLLECTION_NAME,
+    numTopTracks,
+  });
 
   setDocumentTitle("Record Shop | Pachena Bay");
 
@@ -105,7 +70,7 @@ export const PachenaBay = () => {
             <div className="sidebar sidebar-coral-blue" />
             <div className="sidebar sidebar-pink-googly-eye" />
 
-            <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3 }}>
+            <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
                 container
                 direction="row"
@@ -121,7 +86,7 @@ export const PachenaBay = () => {
 
               <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
                 Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                Pachena Bay.
+                Pachena Bay Music Festival 2024.
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} className="preview-playlist" />
@@ -129,7 +94,7 @@ export const PachenaBay = () => {
           </Grid>
 
           <Grid container justifyContent="center">
-            <Grid item xs={11} sm={10} md={6} sx={{ zIndex: 3, marginBottom: "180px" }}>
+            <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3, marginBottom: "130px" }}>
               <Grid
                 container
                 justifyContent={{ xs: "center", sm: "space-between" }}
@@ -143,26 +108,24 @@ export const PachenaBay = () => {
                     className="secondary-button"
                     onClick={() => goToNewTab(TICKET_LINK)}
                     variant="outlined"
-                    sx={{ width: "180px", margin: "12px 0" }}
+                    sx={{ width: "160px", margin: "12px 0" }}
                   >
                     Buy Tickets
                   </Button>
                 </Grid>
 
-                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard
-              // TODO: make this button work for in-app */}
+                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
                 <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
                   {isLoggedIntoSpotify() ? (
                     <ProfileMenu />
                   ) : (
                     <div style={{ justifySelf: "center" }}>
-                      <SignInButton redirectToAuth={redirectToAuth} className="primary-button" />
+                      <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
                     </div>
                   )}
                   <IconButton
                     sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white" }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
-                    disableRipple={true}
                   >
                     <SettingsIcon fontSize="large" />
                   </IconButton>
@@ -178,9 +141,17 @@ export const PachenaBay = () => {
               </Box>
 
               <StickyFadeButton
-                handleCreatePlaylist={handleCreatePlaylist}
                 bgFadeColourHex={COLOURS.stickyFadeButtonBgColour}
+                button={
+                  isMobile() && !isLoggedIntoSpotify() ? (
+                    <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+                  ) : (
+                    <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
+                  )
+                }
               />
+
+              <InAppModal isOpen={isInAppModalOpen} closeModal={closeInAppModal} pageClassName={PACHENA_PAGE_CLASS} />
             </Grid>
           </Grid>
         </Box>

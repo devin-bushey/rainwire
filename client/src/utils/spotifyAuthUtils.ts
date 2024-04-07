@@ -1,5 +1,5 @@
 import { AUTH_ENDPOINT, CLIENT_ID, SCOPES } from "../constants/auth";
-import { getCurrentUrlWithoutParams, goTo, reloadPage } from "./browserUtils";
+import { getCurrentUrlWithoutParams, goTo, isInAppBrowser, reloadPage } from "./browserUtils";
 
 export const redirectToAuth = (redirectUri?: unknown) => {
   // this fn gets passed a button event in certain cases, hence the type check here
@@ -9,6 +9,9 @@ export const redirectToAuth = (redirectUri?: unknown) => {
     "%20",
   )}&response_type=token&show_dialog=true`;
 };
+
+export const redirectToAuthForBrowser = (openInAppModal: () => void, postRedirectUri?: string) =>
+  isInAppBrowser() ? openInAppModal : () => redirectToAuth(postRedirectUri);
 
 export const logOut = () => {
   localStorage.clear();

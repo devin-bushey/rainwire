@@ -4,9 +4,10 @@ import { AppBar, Toolbar, Button, Container, Box, IconButton, Menu, Typography }
 import MenuIcon from "@mui/icons-material/Menu";
 import { COLOURS, primaryButtonColours, secondaryButtonColours } from "../theme/AppStyles";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { redirectToAuth, isLoggedIntoSpotify, logOut } from "../utils/spotifyAuthUtils";
+import { redirectToAuth, logOut } from "../utils/spotifyAuthUtils";
 import { ContactUsModal } from "./ContactUsModal";
 import { ProfileMenu } from "./ProfileMenu";
+import useSpotifyAuth from "../hooks/useSpotifyAuth";
 
 type MenuProps = {
   openContactUsModal: () => void;
@@ -83,6 +84,8 @@ const HeaderMenu = ({ openContactUsModal }: MenuProps) => {
 };
 
 const ProfileMenuOption = () => {
+  const { isLoggedIntoSpotify } = useSpotifyAuth();
+
   const SignInButton = (
     <Button
       onClick={() => redirectToAuth()}
@@ -107,12 +110,14 @@ const ProfileMenuOption = () => {
         color: COLOURS.black,
       }}
     >
-      {isLoggedIntoSpotify() ? <ProfileMenu /> : SignInButton}
+      {isLoggedIntoSpotify ? <ProfileMenu /> : SignInButton}
     </Box>
   );
 };
 
 const DropdownMenu = ({ openContactUsModal }: MenuProps) => {
+  const { isLoggedIntoSpotify } = useSpotifyAuth();
+
   const [navMenuAnchor, setNavMenuAnchor] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -225,7 +230,7 @@ const DropdownMenu = ({ openContactUsModal }: MenuProps) => {
             Contact me
           </Button>
 
-          {isLoggedIntoSpotify() ? SignOutButton : SignInButton}
+          {isLoggedIntoSpotify ? SignOutButton : SignInButton}
         </Box>
       </Menu>
     </Box>

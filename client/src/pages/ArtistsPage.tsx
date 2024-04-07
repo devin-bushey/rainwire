@@ -7,8 +7,7 @@ import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
 import { CreateNewPlaylist } from "../apiManager/RecordShop";
 import { Spinner } from "../components/Spinner";
-import { StickyButton } from "../components/StickyButton";
-import { COLOURS, primaryButtonColours } from "../theme/AppStyles";
+import { primaryButtonColours } from "../theme/AppStyles";
 import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 import { SpotifyIcon } from "../components/Icons";
 import { isMobile } from "../utils/responsiveUtils";
@@ -17,6 +16,8 @@ import { useGigsQuery } from "../hooks/useGigsQuery";
 import { useAuth } from "../context/AuthContext";
 import { useShakingEffect } from "../hooks/useShakingEffect";
 import { GigList } from "../components/GigList";
+import { StickyFadeButton } from "../components/StickyFadeButton";
+import { CreatePlaylistButton } from "../components/CreatePlaylistButton";
 
 export const ArtistsPage = () => {
   const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
@@ -220,7 +221,11 @@ export const ArtistsPage = () => {
         </Box>
       </Box>
 
-      <StickyButton handleCreatePlaylist={handleCreatePlaylist} barColor={COLOURS.card_colours[2]} />
+      <StickyFadeButton
+        bgFadeColourHex="#CBCFE7"
+        // TODO make this a sign in button if on mobile
+        button={<CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />}
+      />
     </>
   );
 };

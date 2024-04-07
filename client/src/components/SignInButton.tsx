@@ -1,14 +1,14 @@
 import { Button, Typography } from "@mui/material";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 
-export const SignInButton = ({ redirectToAuth, className }: { redirectToAuth: () => void; className?: string }) => (
+export const SignInButton = ({ redirectToAuth }: { redirectToAuth: () => void }) => (
   <Button
     onClick={redirectToAuth}
     variant="contained"
-    className={className}
+    className="primary-button"
     sx={{
       justifyContent: "center",
-      width: "180px",
+      width: "160px",
       height: "48px",
     }}
   >

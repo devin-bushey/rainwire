@@ -27,7 +27,7 @@ import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
 
 import useSpotifyAuth from "../../hooks/useSpotifyAuth";
 import { goToNewTab, goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../../utils/browserUtils";
-import { logOut, redirectToAuth } from "../../utils/spotifyAuthUtils";
+import { logOut, redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
 
 import "../../styles/ClickMe.css";
 import "../styles/styles.css";
@@ -90,7 +90,7 @@ export const Rifflandia = () => {
     scrollToTop();
   }, []);
 
-  const handleRedirectToAuthForBrowser = isInAppBrowser() ? openInAppModal : redirectToAuth;
+  const handleRedirectToAuthForBrowser = redirectToAuthForBrowser(openInAppModal);
 
   return (
     <div className={RIFFLANDIA_PAGE_CLASS}>
