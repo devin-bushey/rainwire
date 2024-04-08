@@ -3,7 +3,7 @@ name: Weekly Victoria Gigs Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 0" # Runs every Sunday 8am
+    - cron: "0 8 * * 0"
 
 jobs:
   direct_jambase_db_update:
@@ -35,28 +35,27 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-  
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "20.12.1"
-  
+
       - name: Install dependencies
         working-directory: scripts
         run: npm install
-  
+
       - name: Run extractSongkick
-        run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > extractedVicGigs.json
-  
+        run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > ./scripts/src/scrapers/songkick/extractedVicGigs.json
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add extractedVicGigs.json"
           title: "Weekly Update: Extracted Victoria Songkick Data"
-          body: "This PR contains the JSON object of the Songkick data extracted this week. It does not include Spotify data"
+          body: "This PR contains the JSON object of the Songkick data extracted this week.\nIt does not include Spotify data\nMerge this PR to trigger the action to add spotify data and update the database."
           branch: weekly-vic-songkick-data
-          branch-suffix: timestamp
           base: main
           files: |
             extractedVicGigs.json
