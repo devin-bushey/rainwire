@@ -352,20 +352,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Kim Churchill",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-03T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 28
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "Limblifter",
       "topTracks": [],
       "uri": "",
