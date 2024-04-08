@@ -142,14 +142,15 @@ const addSpotifyTopTracks = async (gig: Gig, token: string): Promise<Gig | undef
 const updateMongoCollection = async () => {
   console.log("Starting to update mongo ...");
 
-  console.log(SP_CLIENT_ID);
-  console.log(SP_REFRESH_TOKEN);
-
   let gigsSimple: Gig[] = [];
 
   try {
-    const rawData = fs.readFileSync("extractedVicGigs.json", "utf8");
+    const rawData = fs.readFileSync("../../../../extractedVicGigs.json", "utf8");
     gigsSimple = JSON.parse(rawData);
+    if (gigsSimple.length === 0) {
+      console.log("No gigs found in extractedVicGigs.json ");
+      process.exit(-1);
+    }
   } catch (err) {
     console.log("Error reading file: ", err);
     process.exit(-1);
