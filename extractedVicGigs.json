@@ -16,7 +16,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Tyler Joe Miller, Andrew Hyatt, and Shawn Austin",
+      "name": "Tyler Joe Miller",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -58,7 +58,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Blacksmith & Brewer\n                    Necrosal Noise and Dollhead",
+      "name": "Blacksmith & Brewer",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -72,7 +72,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Lime Cordiale\n                    Windser",
+      "name": "Windser",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -86,21 +86,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Lime Cordiale\n                    Windser",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-04-14T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 6
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Daniel Romano's Outfit\n                    Kiwi Jr. and Carson McHone",
+      "name": "Daniel Romano's Outfit",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -156,7 +142,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Lila Gray\n                    Diana Rose and Julianna Laine",
+      "name": "Lila Gray",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -166,20 +152,6 @@
     "venue": "",
     "isMissing": false,
     "popularity": 11
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Bahamas\n                    Leith Ross",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-04-20T00:00:00.000Z",
-    "venue": "Royal Theatre",
-    "isMissing": false,
-    "popularity": 12
   },
   {
     "artist": {
@@ -254,7 +226,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Ice Cube\n                    Merkules and Peter Jackson",
+      "name": "Ice Cube",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -380,7 +352,7 @@
   {
     "artist": {
       "id": "",
-      "name": "night court (canada), The Dumpies, and archivists (canada)",
+      "name": "night court",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -450,21 +422,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Heather Ferguson\n                    Attila Fias, Scott White, Ryan Oliver, and Jae Sinnett",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-10T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 32
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "The Wilderness (Kingston) and Myles From Home",
+      "name": "The Wilderness",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -562,7 +520,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Scenic Route to Alaska and Major Love",
+      "name": "Scenic Route to Alaska",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -618,7 +576,7 @@
   {
     "artist": {
       "id": "",
-      "name": "The Wailers and Rebel Selector",
+      "name": "Rebel Selector",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -646,21 +604,7 @@
   {
     "artist": {
       "id": "",
-      "name": "LOWDOWN BRASS BAND and PHONOSONICS @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Lowdown Brass Band",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-19T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 46
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "FORT KNOX FIVE, APEX BREAKS, Mirage @ Victoria's 25th Anniversary Ska & Reggae Festival 2024",
+      "name": "FORT KNOX FIVE",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -674,7 +618,7 @@
   {
     "artist": {
       "id": "",
-      "name": "THE SUICIDE MACHINES, THE SLACKERS, THE CREEPSHOW, Space Chimp & DJ I-Lot @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    The Suicide Machines and The Slackers",
+      "name": "Space Chimp",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -684,19 +628,5 @@
     "venue": "Victoria Curling Club",
     "isMissing": false,
     "popularity": 48
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "GONDWANA, BIG MOUNTAIN, Batuque Axé & DJ Su Comandante Espinoza @ Victoria's 25th Anniversary Ska & Reggae Festival (SUMMER SOLSTICE REGGAE SPLASH) 2024\n                    Big Mountain",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "Ship Point (Inner Harbour)",
-    "isMissing": false,
-    "popularity": 49
   }
 ]
