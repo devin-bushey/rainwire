@@ -177,7 +177,10 @@ const updateMongoCollection = async () => {
       // Might be duplicate artists if they play back to back nights, hmmm.
       // But we dont delete them from the database, so I would want to add them if theres a long
       // period of time between shows.
-      const existingGig = await collection.findOne({ "artist.id": gig.artist.id, date: gig.date });
+      const existingGig = await collection.findOne({
+        "artist.id": gig.artist.id,
+      });
+
       if (!existingGig) {
         await collection.insertOne(gig);
         console.log(`Added concert for ${gig.artist.name} on ${gig.date} to the database`);
