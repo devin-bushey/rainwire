@@ -16,7 +16,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Tyler Joe Miller",
+      "name": "Tyler Joe Miller, Andrew Hyatt, and Shawn Austin",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -58,7 +58,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Blacksmith & Brewer",
+      "name": "Blacksmith & Brewer\n                    Necrosal Noise and Dollhead",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -72,7 +72,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Windser",
+      "name": "Lime Cordiale\n                    Windser",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -82,6 +82,34 @@
     "venue": "Capital Ballroom",
     "isMissing": false,
     "popularity": 5
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Lime Cordiale\n                    Windser",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-14T00:00:00.000Z",
+    "venue": "Capital Ballroom",
+    "isMissing": false,
+    "popularity": 6
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Daniel Romano's Outfit\n                    Kiwi Jr. and Carson McHone",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-15T00:00:00.000Z",
+    "venue": "Capitol Ballroom",
+    "isMissing": false,
+    "popularity": 7
   },
   {
     "artist": {
@@ -128,7 +156,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Lila Gray",
+      "name": "Lila Gray\n                    Diana Rose and Julianna Laine",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -138,6 +166,20 @@
     "venue": "",
     "isMissing": false,
     "popularity": 11
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Bahamas\n                    Leith Ross",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-20T00:00:00.000Z",
+    "venue": "Royal Theatre",
+    "isMissing": false,
+    "popularity": 12
   },
   {
     "artist": {
@@ -184,7 +226,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Derek Webb",
+      "name": "Derek Webb and Flamy Grant",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -212,7 +254,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Merkules",
+      "name": "Ice Cube\n                    Merkules and Peter Jackson",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -338,7 +380,7 @@
   {
     "artist": {
       "id": "",
-      "name": "night court",
+      "name": "night court (canada), The Dumpies, and archivists (canada)",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -394,7 +436,35 @@
   {
     "artist": {
       "id": "",
-      "name": "The Wilderness",
+      "name": "Richard Garvey and Naomi Kavka",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-05T00:00:00.000Z",
+    "venue": "Little Fernwood",
+    "isMissing": false,
+    "popularity": 31
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Heather Ferguson\n                    Attila Fias, Scott White, Ryan Oliver, and Jae Sinnett",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-10T00:00:00.000Z",
+    "venue": "Hermann's Jazz Club",
+    "isMissing": false,
+    "popularity": 32
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "The Wilderness (Kingston) and Myles From Home",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -436,7 +506,7 @@
   {
     "artist": {
       "id": "",
-      "name": "MOONBEAN",
+      "name": "MOONBEAN and Avro",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -450,7 +520,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Ash",
+      "name": "Ash (CA)",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -492,7 +562,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Scenic Route to Alaska",
+      "name": "Scenic Route to Alaska and Major Love",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -520,6 +590,20 @@
   {
     "artist": {
       "id": "",
+      "name": "Jann Arden and Rick Mercer",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-26T00:00:00.000Z",
+    "venue": "Macpherson Theatre",
+    "isMissing": false,
+    "popularity": 42
+  },
+  {
+    "artist": {
+      "id": "",
       "name": "Cedric Burnside",
       "topTracks": [],
       "uri": "",
@@ -534,7 +618,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Rebel Selector",
+      "name": "The Wailers and Rebel Selector",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -562,7 +646,21 @@
   {
     "artist": {
       "id": "",
-      "name": "FORT KNOX FIVE",
+      "name": "LOWDOWN BRASS BAND and PHONOSONICS @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Lowdown Brass Band",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-19T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 46
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "FORT KNOX FIVE, APEX BREAKS, Mirage @ Victoria's 25th Anniversary Ska & Reggae Festival 2024",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -572,5 +670,33 @@
     "venue": "Wicket Hall",
     "isMissing": false,
     "popularity": 47
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "THE SUICIDE MACHINES, THE SLACKERS, THE CREEPSHOW, Space Chimp & DJ I-Lot @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    The Suicide Machines and The Slackers",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-21T00:00:00.000Z",
+    "venue": "Victoria Curling Club",
+    "isMissing": false,
+    "popularity": 48
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "GONDWANA, BIG MOUNTAIN, Batuque Axé & DJ Su Comandante Espinoza @ Victoria's 25th Anniversary Ska & Reggae Festival (SUMMER SOLSTICE REGGAE SPLASH) 2024\n                    Big Mountain",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-21T00:00:00.000Z",
+    "venue": "Ship Point (Inner Harbour)",
+    "isMissing": false,
+    "popularity": 49
   }
 ]
