@@ -46,7 +46,7 @@ jobs:
         run: npm install
 
       - name: Run extractSongkick
-        run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > ./scripts/src/scrapers/songkick/extractedVicGigs.json
+        run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > extractedVicGigs.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
