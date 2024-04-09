@@ -35,7 +35,7 @@ const PAGE_CLASS = PageClassName.PhillipsBackyard;
 
 const COLOURS = Object.freeze({
   text: "#FCFCFC",
-  cardColours: ["#5ED0DF", "#F2C536", "#002D74"],
+  cardColours: ["#5ED0DF", "#F2C536", "#F2C536", "#5ED0DF"],
   stickyFadeButtonBgColour: "#00223C",
 });
 
@@ -65,7 +65,7 @@ export const PhillipsBackyard = () => {
           }}
         >
           <Grid container justifyContent="center" className="background-top">
-            <div className="sidebar sidebar-sparkle-left" />
+            <div className="sidebar sidebar-darkened-bird" />
             <div className="sidebar sidebar-sparkle-right" />
 
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
@@ -97,10 +97,10 @@ export const PhillipsBackyard = () => {
                 container
                 justifyContent={{ xs: "center", sm: "space-between" }}
                 alignItems="flex-start"
-                sx={{ marginTop: "48px" }}
+                sx={{ marginTop: "24px" }}
                 columnGap={2}
               >
-                <Grid item style={{ maxWidth: "350px" }}>
+                <Grid item style={{ maxWidth: "325px" }}>
                   <img
                     src={phillipsBackyarderTextLogo}
                     alt="Phillips Backyarder Tilt Bay Music Festival"
@@ -117,16 +117,16 @@ export const PhillipsBackyard = () => {
                 </Grid>
 
                 {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
-                <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
-                  {isLoggedIntoSpotify() ? (
-                    <ProfileMenu />
-                  ) : (
-                    <div style={{ justifySelf: "center" }}>
+                <Grid item style={{ display: "grid", alignSelf: "stretch" }} width={{ xs: "100%", sm: "auto" }}>
+                  <div style={{ justifySelf: "center", alignSelf: "center" }}>
+                    {isLoggedIntoSpotify() ? (
+                      <ProfileMenu />
+                    ) : (
                       <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
-                    </div>
-                  )}
+                    )}
+                  </div>
                   <IconButton
-                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white" }}
+                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white", alignSelf: "end" }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
                   >
                     <SettingsIcon fontSize="large" />

@@ -1,22 +1,20 @@
 .phillips-backyard {
-  --main-bg-color-top: #1D3E7B;
+  --main-bg-color-top: #22407C;
   --main-bg-color-bottom: #002D74;
   --main-text-color: #FFFFFF;
-
-  /* medium blue #1C66A4 */
 
   --card-bg-color: #002D74;
   --card-text-color: #FFFFFF;
 
-  --popover-bg-color: #FFFFFF;
+  --popover-bg-color: #FDF4DC;
 
   --primary-button-bg-color: #5ED0DF;
-  --primary-button-text-color: #FFFFFF;
+  --primary-button-text-color: #030918;
   --primary-button-hover-bg-color: #FFFFFF;
   --primary-button-hover-text-color: #030918;
 
   --secondary-button-bg-color: #F2C536;
-  --secondary-button-text-color: #FFFFFF;
+  --secondary-button-text-color: #030918;
   --secondary-button-hover-bg-color: #FFFFFF;
   --secondary-button-hover-text-color: #030918;
 
@@ -40,7 +38,7 @@
   .phillips-background-icons {
     position: relative;
     background-image: url('./assets/backgroundIcons.png');
-    background-size: cover;
+    background-size: auto;
     z-index: 1;
   }
 
@@ -51,33 +49,31 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    z-index: 2;
   }
   
-  .sidebar-sparkle-left {
-    background-image: url('./assets/phillipsSparkle.png');
-    width: 150px;
-    height: 150px;
-    top: 15%;
-    left: 15%;
-
-    @media (max-width: 900px) {
-      width: 80px;
-      height: 80px;
-      top: 20%;
-      left: 2%;
-    }
+  .sidebar-darkened-bird {
+    background-image: url('./assets/phillipsBirdLogoDarkened.png');
+    z-index: 2;
+    width: 450px;
+    height: 450px;
+    top: -64px;
+    left: 6%;
   }
 
   .sidebar-sparkle-right {
-    background-image: url('./assets/phillipsBirdLogo.png');
+    background-image: url('./assets/phillipsSparkle.png');
+    z-index: 4;
     width: 100px;
     height: 100px;
-    top: 25%;
+    top: 265px;
     right: 20%;
 
     @media (max-width: 900px) {
-      top: 37%;
+      right: 6%;
+    }
+
+    @media (max-width: 600px) {
+      top: 465px;
       right: 2%;
     }
   }

@@ -116,13 +116,13 @@ export const PachenaBay = () => {
 
                 {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
                 <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
-                  {isLoggedIntoSpotify() ? (
-                    <ProfileMenu />
-                  ) : (
-                    <div style={{ justifySelf: "center" }}>
+                  <div style={{ justifySelf: "center" }}>
+                    {isLoggedIntoSpotify() ? (
+                      <ProfileMenu />
+                    ) : (
                       <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
-                    </div>
-                  )}
+                    )}
+                  </div>
                   <IconButton
                     sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white" }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
