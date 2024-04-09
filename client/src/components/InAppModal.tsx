@@ -4,7 +4,7 @@ import { SnackBarContext } from "../App";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import copy from "../assets/images/copy-solid.svg";
 import { redirectToAuth } from "../utils/spotifyAuthUtils";
-import { getCurrentUrl, getCurrentUrlWithoutParams } from "../utils/browserUtils";
+import { getCurrentUrlWithoutParams } from "../utils/browserUtils";
 
 export const InAppModal = ({
   isOpen,

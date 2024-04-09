@@ -7,6 +7,7 @@ import { ArtistsPage } from "../pages/ArtistsPage";
 import useAnalytics from "../hooks/useAnalytics";
 import { Rifflandia } from "../Rifflandia/pages/Rifflandia";
 import { PachenaBay } from "../festivals/PachenaBay/PachenaBay";
+import { PhillipsBackyard } from "../festivals/PhillipsBackyard/PhillipsBackyard";
 
 export const AppRoutes = () => {
   useAnalytics();
@@ -21,6 +22,7 @@ export const AppRoutes = () => {
           </Route>
           <Route path="/rifflandia" element={<Rifflandia />} />
           <Route path="/pachenabay" element={<PachenaBay />} />
+          <Route path="/phillipsbackyard" element={<PhillipsBackyard />} />
         </Routes>
       </Box>
     </>

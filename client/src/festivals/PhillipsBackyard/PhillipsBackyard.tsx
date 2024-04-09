@@ -20,25 +20,26 @@ import { Spinner } from "../../components/Spinner";
 import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
-import pachenaBayTextLogo from "./assets/pachenaBayTextLogo.png";
+import phillipsBackyarderTextLogo from "./assets/phillipsBackyarderTextLogo.png";
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
-import "./pachenaBayStyles.css";
+import "./phillipsBackyardStyles.css";
 
-const DB_COLLECTION_NAME = Festivals.PachenaBay;
+const DB_COLLECTION_NAME = Festivals.PhillipsBackyard;
 
+// TODO update this playlist url
 const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/7pUhoAZzuSaVX5UG1za9Ud";
-const TICKET_LINK = "https://www.pachenabaymusicfestival.com/tickets";
+const TICKET_LINK = "https://www.phillipsbackyard.com/tickets-coming-soon";
 
-const PAGE_CLASS = PageClassName.PachenaBay;
+const PAGE_CLASS = PageClassName.PhillipsBackyard;
 
 const COLOURS = Object.freeze({
   text: "#FCFCFC",
-  cardColours: ["#F1B3B5", "#FFEAC2", "#5C9188", "#F06A48"],
+  cardColours: ["#5ED0DF", "#F2C536", "#F2C536", "#5ED0DF"],
   stickyFadeButtonBgColour: "#00223C",
 });
 
-export const PachenaBay = () => {
+export const PhillipsBackyard = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
@@ -49,24 +50,22 @@ export const PachenaBay = () => {
     numTopTracks,
   });
 
-  setDocumentTitle("Record Shop | Pachena Bay");
+  setDocumentTitle("Record Shop | Phillips Backyard");
 
   return (
     <>
       {isCreatingPlaylist && <Spinner />}
       <div className={PAGE_CLASS}>
         <Box
-          className="pachena-page"
+          className="phillips-page"
           sx={{
             minHeight: "100vh",
             textAlign: "center",
           }}
         >
-          <Grid container justifyContent="center" className="pachena-background-swirls">
-            <div className="sidebar sidebar-coral-red" />
-            <div className="sidebar sidebar-coral-pink" />
-            <div className="sidebar sidebar-coral-blue" />
-            <div className="sidebar sidebar-pink-googly-eye" />
+          <Grid container justifyContent="center" className="background-top">
+            <div className="sidebar sidebar-darkened-bird" />
+            <div className="sidebar sidebar-sparkle-right" />
 
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
@@ -84,24 +83,28 @@ export const PachenaBay = () => {
 
               <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
                 Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                Pachena Bay Music Festival 2024.
+                the Phillips Backyard 2024 events.
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="center">
+          <Grid container justifyContent="center" className="phillips-background-icons background-bottom">
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3, marginBottom: "130px" }}>
               <Grid
                 container
                 justifyContent={{ xs: "center", sm: "space-between" }}
                 alignItems="flex-start"
-                sx={{ marginTop: "48px" }}
+                sx={{ marginTop: "24px" }}
                 columnGap={2}
               >
-                <Grid item style={{ maxWidth: "350px" }}>
-                  <img src={pachenaBayTextLogo} alt="Pachena Bay Music Festival" style={{ width: "100%" }} />
+                <Grid item style={{ maxWidth: "325px" }}>
+                  <img
+                    src={phillipsBackyarderTextLogo}
+                    alt="Phillips Backyarder Tilt Bay Music Festival"
+                    style={{ width: "100%" }}
+                  />
                   <Button
                     className="secondary-button"
                     onClick={() => goToNewTab(TICKET_LINK)}
@@ -112,8 +115,9 @@ export const PachenaBay = () => {
                   </Button>
                 </Grid>
 
-                <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
-                  <div style={{ justifySelf: "center" }}>
+                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
+                <Grid item style={{ display: "grid", alignSelf: "stretch" }} width={{ xs: "100%", sm: "auto" }}>
+                  <div style={{ justifySelf: "center", alignSelf: "center" }}>
                     {isLoggedIntoSpotify() ? (
                       <ProfileMenu />
                     ) : (
@@ -121,7 +125,7 @@ export const PachenaBay = () => {
                     )}
                   </div>
                   <IconButton
-                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white" }}
+                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white", alignSelf: "end" }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
                   >
                     <SettingsIcon fontSize="large" />

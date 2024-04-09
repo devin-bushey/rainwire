@@ -17,6 +17,8 @@
   --secondary-button-hover-bg-color: #FCFCFC;
   --secondary-button-hover-text-color: #312F2E;
 
+  --load-more-button-hover-bg-color: #FCFCFC10;
+
   overflow: hidden;
 
   .pachena-page { 
@@ -101,25 +103,25 @@
   
   /******* BUTTONS *******/
   .primary-button {
-    background-color: var(--primary-button-bg-color) !important;
-    color: var(--primary-button-text-color) !important;
+    background-color: var(--primary-button-bg-color);
+    color: var(--primary-button-text-color);
   
     &:hover {
-      background-color: var(--primary-button-hover-bg-color) !important;
-      color: var(--primary-button-hover-text-color) !important;  
+      background-color: var(--primary-button-hover-bg-color);
+      color: var(--primary-button-hover-text-color);  
     }
   }
   
   .secondary-button {
-    background-color: var(--secondary-button-bg-color) !important;
-    color: var(--secondary-button-text-color) !important;
+    background-color: var(--secondary-button-bg-color);
+    color: var(--secondary-button-text-color);
 
     border: 0;
     box-shadow: 0 3px 1px -2px rgba(0 0 0 / 0.2);
   
     &:hover {
-      background-color: var(--secondary-button-hover-bg-color) !important;
-      color: var(--secondary-button-hover-text-color) !important;  
+      background-color: var(--secondary-button-hover-bg-color);
+      color: var(--secondary-button-hover-text-color);  
 
       border: 0;
       box-shadow: none;
@@ -135,25 +137,25 @@
       color: var(--card-text-color);
     }
   
-    button {
-      background-color: var(--secondary-button-bg-color) !important;
-      color: var(--secondary-button-text-color) !important;
+    .MuiButton-root {
+      background-color: var(--secondary-button-bg-color);
+      color: var(--secondary-button-text-color);
   
       &:hover {
-        background-color: var(--secondary-button-hover-bg-color) !important;
-        color: var(--secondary-button-hover-text-color) !important;
+        background-color: var(--secondary-button-hover-bg-color);
+        color: var(--secondary-button-hover-text-color);
       }
     }
   }
   
   .about-us-popover {
     button {
-      background-color: var(--secondary-button-bg-color) !important;
-      color: var(--secondary-button-text-color) !important;
+      background-color: var(--secondary-button-bg-color);
+      color: var(--secondary-button-text-color);
   
       &:hover {
-        background-color: var(--secondary-button-hover-bg-color) !important;
-        color: var(--secondary-button-hover-text-color) !important;
+        background-color: var(--secondary-button-hover-bg-color);
+        color: var(--secondary-button-hover-text-color);
       }
     }
   }
@@ -182,7 +184,7 @@
 
     &:hover {
       border-color: var(--main-text-color);
-      background-color: #FCFCFC10;
+      background-color: var(--load-more-button-hover-bg-color);
     }
   }
 
