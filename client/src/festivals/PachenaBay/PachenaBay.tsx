@@ -27,7 +27,6 @@ import "./pachenaBayStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
-// TODO update this playlist url
 const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/7pUhoAZzuSaVX5UG1za9Ud";
 const TICKET_LINK = "https://www.pachenabaymusicfestival.com/tickets";
 
@@ -45,7 +44,6 @@ export const PachenaBay = () => {
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
   const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
-  // TODO surface error creating playlist
   const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
     dbCollectionName: DB_COLLECTION_NAME,
     numTopTracks,
@@ -114,7 +112,6 @@ export const PachenaBay = () => {
                   </Button>
                 </Grid>
 
-                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
                 <Grid item style={{ display: "grid" }} width={{ xs: "100%", sm: "auto" }}>
                   <div style={{ justifySelf: "center" }}>
                     {isLoggedIntoSpotify() ? (

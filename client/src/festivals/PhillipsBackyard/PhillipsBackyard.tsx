@@ -45,7 +45,6 @@ export const PhillipsBackyard = () => {
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
   const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
-  // TODO surface error creating playlist
   const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
     dbCollectionName: DB_COLLECTION_NAME,
     numTopTracks,
