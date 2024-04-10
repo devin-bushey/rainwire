@@ -31,6 +31,7 @@ export const StickyFadeButton = ({ bgFadeColourHex, button }: { bgFadeColourHex:
           width: "100%",
           height: "150px",
           alignContent: "center",
+          textAlign: "center",
           backgroundImage: `linear-gradient(${bgFadeColourHex}00, ${bgFadeColourHex})`,
         }}
       >

@@ -11,7 +11,7 @@ export const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePla
     width: "300px",
     justifyContent: "center",
     height: "48px",
-    marginTop: "8px",
+    margin: "8px 0",
   };
 
   return (

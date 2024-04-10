@@ -5,11 +5,11 @@ import { goToNewTabOnDesktop } from "../utils/browserUtils";
 import { useAuth } from "../context/AuthContext";
 
 type PlaylistStateProps = {
-  dbCollectionName: string;
+  city: string;
   numTopTracks: number;
 };
 
-export const useCreatePlaylistState = ({ dbCollectionName, numTopTracks }: PlaylistStateProps) => {
+export const useCreatePlaylistState = ({ city, numTopTracks }: PlaylistStateProps) => {
   const { token, spotifyInfo } = useAuth();
 
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
@@ -30,10 +30,10 @@ export const useCreatePlaylistState = ({ dbCollectionName, numTopTracks }: Playl
   const handleCreatePlaylist = async () => {
     setIsCreatingPlaylist(true);
     await CreateNewPlaylist({
-      city: dbCollectionName,
-      token: token,
+      city,
+      token,
       user_id: spotifyInfo.user_id,
-      numTopTracks: numTopTracks,
+      numTopTracks,
     })
       .then((res) => {
         if (res.status === 201) {

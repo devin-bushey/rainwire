@@ -14,6 +14,7 @@ import { SignInModalRifflandia } from "../SignInModalRifflandia";
 import { InAppModalRifflandia } from "../InAppModalRifflandia";
 import { LoadingRifflandia } from "../LoadingRifflandia";
 import { StickyButton } from "../../components/StickyButton";
+import { SpotifyPreviewModal } from "../SpotifyPreviewModal";
 
 import { CreateNewPlaylistRifflandia, GetTicketsRifflandia } from "../apiManager/API_Rifflandia";
 import { Options } from "../Options";
@@ -26,8 +27,9 @@ import { Festivals } from "../../constants/enums";
 import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
 
 import useSpotifyAuth from "../../hooks/useSpotifyAuth";
-import { goToNewTab, goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../../utils/browserUtils";
+import { goToNewTab, goToNewTabOnDesktop, scrollToTop } from "../../utils/browserUtils";
 import { logOut, redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
+import { PageClassName } from "../../theme/AppStyles";
 
 import "../../styles/ClickMe.css";
 import "../styles/styles.css";
@@ -35,8 +37,6 @@ import "../styles/styles.css";
 import TITLE from "../images/title.svg";
 import { ReactComponent as CHERRIES } from "../images/cherries.svg";
 import spotifyIcon from "../../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { SpotifyPreviewModal } from "../SpotifyPreviewModal";
-import { PageClassName } from "../../theme/AppStyles";
 
 const TICKET_LINK = WEBSITE_RIFFLANDIA;
 

@@ -5,6 +5,7 @@ import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import copy from "../assets/images/copy-solid.svg";
 import { redirectToAuth } from "../utils/spotifyAuthUtils";
 import { getCurrentUrlWithoutParams } from "../utils/browserUtils";
+import { COLOURS } from "../theme/AppStyles";
 
 export const InAppModal = ({
   isOpen,
@@ -73,7 +74,12 @@ export const InAppModal = ({
             onClick={() => redirectToAuth(postAuthRedirectUri)}
             variant="contained"
             color="secondary"
-            sx={{ width: "100%", marginTop: "12px", justifyContent: "center" }}
+            sx={{
+              width: "100%",
+              marginTop: "12px",
+              justifyContent: "center",
+              backgroundColor: COLOURS.spotify_green,
+            }}
           >
             <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
             <Typography sx={{ paddingBottom: 0 }}>Continue</Typography>

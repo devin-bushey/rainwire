@@ -24,7 +24,7 @@ export const Origin = ({
           onChange={handleChangeOrigin}
           fullWidth
           sx={{
-            height: "40px",
+            height: "48px",
             border: `1px solid ${COLOURS.accent_04}}`,
           }}
         >

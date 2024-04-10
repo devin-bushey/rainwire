@@ -45,7 +45,7 @@ export const PachenaBay = () => {
   const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
   const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
-    dbCollectionName: DB_COLLECTION_NAME,
+    city: DB_COLLECTION_NAME,
     numTopTracks,
   });
 

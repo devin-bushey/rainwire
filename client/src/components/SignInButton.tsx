@@ -1,4 +1,5 @@
 import { Button, Typography } from "@mui/material";
+import { primaryButtonColours } from "../theme/AppStyles";
 import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 
 export const SignInButton = ({ redirectToAuth }: { redirectToAuth: () => void }) => (
@@ -7,6 +8,8 @@ export const SignInButton = ({ redirectToAuth }: { redirectToAuth: () => void })
     variant="contained"
     className="primary-button"
     sx={{
+      ...primaryButtonColours,
+      color: "black",
       justifyContent: "center",
       width: "160px",
       height: "48px",

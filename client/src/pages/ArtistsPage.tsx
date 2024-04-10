@@ -1,14 +1,11 @@
 import { Box, Collapse, Container, IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button/Button";
-import { useContext, useEffect, useState } from "react";
-import { SnackBarContext } from "../App";
+import { useState } from "react";
 import { LOCATIONS } from "../constants/locations";
 import { Origin } from "../components/Origin";
 import { Settings } from "../components/Settings";
-import { CreateNewPlaylist } from "../apiManager/RecordShop";
 import { Spinner } from "../components/Spinner";
 import { primaryButtonColours } from "../theme/AppStyles";
-import { goToNewTabOnDesktop, scrollToTop } from "../utils/browserUtils";
 import { SpotifyIcon } from "../components/Icons";
 import { isMobile } from "../utils/responsiveUtils";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,74 +15,30 @@ import { useShakingEffect } from "../hooks/useShakingEffect";
 import { GigList } from "../components/GigList";
 import { StickyFadeButton } from "../components/StickyFadeButton";
 import { CreatePlaylistButton } from "../components/CreatePlaylistButton";
+import { redirectToAuthForBrowser } from "../utils/spotifyAuthUtils";
+import { SignInButton } from "../components/SignInButton";
+import { InAppModal } from "../components/InAppModal";
+import { useInAppModalState } from "../hooks/useInAppModalState";
+import { useCreatePlaylistState } from "../hooks/useCreatePlaylistState";
+import { setDocumentTitle } from "../hooks/useDocumentTitleEffect";
+import { useSettingsState } from "../hooks/useSettingsCollapseState";
 
 export const ArtistsPage = () => {
-  const { isLoggedIntoSpotify, redirectToAuth, token, spotifyInfo } = useAuth();
+  const { isLoggedIntoSpotify, redirectToAuth } = useAuth();
+  const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
   const [origin, setOrigin] = useState(LOCATIONS[0].value);
-
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(origin);
+  const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
+  const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
+    city: origin,
+    numTopTracks,
+  });
 
-  const [numTopTracks, setNumTopTracks] = useState(1);
-  const [showSettings, setShowSettings] = useState(false);
-  const { isShaking } = useShakingEffect();
-
-  const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
-  const [isErrorCreatingPlaylist, setIsErrorCreatingPlaylist] = useState(false);
-  const snackBar = useContext(SnackBarContext);
-
-  useEffect(() => {
-    document.title = "Record Shop | Artists";
-    scrollToTop();
-  }, []);
-
-  useEffect(() => {
-    if (isErrorCreatingPlaylist) {
-      snackBar.setSnackBar({
-        showSnackbar: true,
-        setShowSnackbar: () => true,
-        message: "Error creating playlist. Please try again.",
-        isError: true,
-      });
-    }
-  }, [isErrorCreatingPlaylist]);
-
-  const handleSignIn = () => redirectToAuth();
+  setDocumentTitle("Record Shop | Artists");
 
   const handleChangeOrigin = (event: any) => {
     setOrigin(event.target.value);
-  };
-
-  const handleNumTopTracks = (event: any) => {
-    setNumTopTracks(event.target.value);
-  };
-
-  const handleCreatePlaylist = async () => {
-    setIsCreatingPlaylist(true);
-    await CreateNewPlaylist({
-      city: origin,
-      token: token,
-      user_id: spotifyInfo.user_id,
-      numTopTracks: numTopTracks,
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          snackBar.setSnackBar({
-            showSnackbar: true,
-            setShowSnackbar: () => true,
-            message: "Successfully created a playlist!",
-            isError: false,
-          });
-          goToNewTabOnDesktop(res.data);
-        } else {
-          setIsErrorCreatingPlaylist(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsErrorCreatingPlaylist(true);
-      });
-    setIsCreatingPlaylist(false);
   };
 
   const PlaylistCreation = (
@@ -99,27 +52,11 @@ export const ArtistsPage = () => {
       >
         {isLoggedIntoSpotify() ? (
           <Box sx={{ display: "flex" }}>
-            <Button
-              onClick={handleCreatePlaylist}
-              variant="contained"
-              className={`${isShaking ? "shaking" : ""}`}
-              sx={{
-                ...primaryButtonColours,
-                color: "black",
-                width: "100%",
-                justifyContent: "center",
-                height: "48px",
-              }}
-            >
-              {SpotifyIcon()}
-              <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
-            </Button>
+            <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
 
             <IconButton
               sx={{ marginLeft: "8px" }}
-              onClick={() => {
-                setShowSettings(!showSettings);
-              }}
+              onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
               disableRipple={true}
             >
               <SettingsIcon />
@@ -127,9 +64,8 @@ export const ArtistsPage = () => {
           </Box>
         ) : isMobile() ? (
           <Button
-            onClick={handleSignIn}
+            onClick={() => redirectToAuth()}
             variant="contained"
-            className={`${isShaking ? "shaking" : ""}`}
             sx={{
               ...primaryButtonColours,
               color: "black",
@@ -163,8 +99,8 @@ export const ArtistsPage = () => {
         )}
       </Box>
 
-      <Collapse in={showSettings} collapsedSize={0}>
-        <Settings numTopTracks={numTopTracks} setNumTopTracks={handleNumTopTracks} />
+      <Collapse in={isSettingsOpen} collapsedSize={0}>
+        <Settings numTopTracks={numTopTracks} setNumTopTracks={setNumTopTracks} />
       </Collapse>
     </>
   );
@@ -191,6 +127,7 @@ export const ArtistsPage = () => {
                 flexDirection: "row",
                 flexWrap: "wrap",
                 justifyContent: "space-evenly",
+                alignItems: "center",
               }}
             >
               <Box
@@ -223,9 +160,16 @@ export const ArtistsPage = () => {
 
       <StickyFadeButton
         bgFadeColourHex="#CBCFE7"
-        // TODO make this a sign in button if on mobile
-        button={<CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />}
+        button={
+          isMobile() && !isLoggedIntoSpotify() ? (
+            <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+          ) : (
+            <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
+          )
+        }
       />
+
+      <InAppModal isOpen={isInAppModalOpen} closeModal={closeInAppModal} />
     </>
   );
 };

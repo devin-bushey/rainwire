@@ -78,6 +78,7 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
           border: "2px solid #000",
           boxShadow: 24,
           p: 4,
+          width: "90%",
           backgroundColor: DEFAULT_BACKGROUND_COLOUR,
         }}
       >
@@ -87,7 +88,7 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
             placeholder="Your Name"
             value={toSend.from_name}
             onChange={handleChange}
-            sx={{ width: "300px" }}
+            sx={{ width: "100%", maxWidth: "300px" }}
           />
           <br />
           <Input
@@ -96,7 +97,7 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
             placeholder="Your Email"
             value={toSend.reply_to}
             onChange={handleChange}
-            sx={{ width: "300px", marginTop: "8px", marginBottom: "24px" }}
+            sx={{ width: "100%", maxWidth: "300px", marginTop: "8px", marginBottom: "24px" }}
           />
           <br />
           {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
