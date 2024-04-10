@@ -3,7 +3,7 @@ name: Weekly Victoria Gigs Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 0"
+    - cron: "0 2 * * *" # 7pm PDT every night
 
 jobs:
   direct_jambase_db_update:
