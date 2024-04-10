@@ -8,14 +8,15 @@ export const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePla
   const disabled = !isLoggedIntoSpotify();
 
   const commonButtonProps = {
-    width: "300px",
+    width: "100%",
+    maxWidth: "300px",
     justifyContent: "center",
     height: "48px",
     margin: "8px 0",
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ width: "100%", textAlign: "center" }}>
       {disabled ? (
         <Tooltip placement="top" title="Sign in to unlock this feature!">
           <span>

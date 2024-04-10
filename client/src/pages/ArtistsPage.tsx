@@ -1,4 +1,4 @@
-import { Box, Collapse, Container, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Collapse, Container, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import { useState } from "react";
 import { LOCATIONS } from "../constants/locations";
@@ -98,10 +98,6 @@ export const ArtistsPage = () => {
           </Tooltip>
         )}
       </Box>
-
-      <Collapse in={isSettingsOpen} collapsedSize={0}>
-        <Settings numTopTracks={numTopTracks} setNumTopTracks={setNumTopTracks} />
-      </Collapse>
     </>
   );
 
@@ -119,43 +115,33 @@ export const ArtistsPage = () => {
         >
           Record Shop
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box sx={{ maxWidth: "900px" }}>
-            <Container
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
-            >
+
+        <Grid container justifyContent="center">
+          <Grid item xs={11} md={8}>
+            <Grid container justifyContent={{ xs: "center", sm: "space-between" }} alignItems="center">
               <Box
                 sx={{
                   borderRadius: "10px",
-                  width: "300px",
-                  margin: "8px",
+                  width: "100%",
+                  maxWidth: "300px",
+                  margin: "8px 0",
                 }}
               >
                 <Origin origin={origin} handleChangeOrigin={handleChangeOrigin} />
               </Box>
 
               {PlaylistCreation}
-            </Container>
+            </Grid>
 
-            <Container
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-evenly",
-                paddingTop: "24px",
-              }}
-            >
+            <Collapse in={isSettingsOpen} collapsedSize={0}>
+              <Settings numTopTracks={numTopTracks} setNumTopTracks={setNumTopTracks} />
+            </Collapse>
+
+            <Box sx={{ marginTop: "24px" }}>
               <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} />
-            </Container>
-          </Box>
-        </Box>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
 
       <StickyFadeButton
