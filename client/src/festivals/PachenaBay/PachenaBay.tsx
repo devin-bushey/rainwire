@@ -27,7 +27,7 @@ import "./pachenaBayStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PachenaBay;
 
-const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/7pUhoAZzuSaVX5UG1za9Ud";
+const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/6ikQbhMvzqR7g9NoH1ViVR";
 const TICKET_LINK = "https://www.pachenabaymusicfestival.com/tickets";
 
 const PAGE_CLASS = PageClassName.PachenaBay;
