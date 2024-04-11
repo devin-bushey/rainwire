@@ -34,6 +34,29 @@ jobs:
   extract_songkick_and_create_pr:
     runs-on: ubuntu-latest
     steps:
+      - name: Delete existing pull request and branch
+        id: delete_existing_pr_and_branch
+        run: |
+          BRANCH_EXISTS=$(curl -s -X GET -H "Authorization: Bearer $GITHUB_TOKEN" \
+                        "https://api.github.com/repos/${GITHUB_REPOSITORY}/branches/weekly-vic-songkick-data")
+          if [ "$BRANCH_EXISTS" != "Not Found" ]; then
+            PR_NUMBER=$(curl -s -X GET -G -H "Authorization: Bearer $GITHUB_TOKEN" \
+                        "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
+                        -d "head=${GITHUB_REPOSITORY_OWNER}:weekly-vic-songkick-data" \
+                        -d "state=open" \
+                        | jq -r '.[].number')
+            if [ -n "$PR_NUMBER" ]; then
+              curl -s -X DELETE -H "Authorization: Bearer $GITHUB_TOKEN" \
+                "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/$PR_NUMBER"
+            fi
+            curl -s -X DELETE -H "Authorization: Bearer $GITHUB_TOKEN" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs/heads/weekly-vic-songkick-data"
+          fi
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -49,37 +72,7 @@ jobs:
       - name: Run extractSongkick
         run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > extractedVicGigs.json
 
-      - name: Check if PR already exists
-        id: check_pr
-        run: |
-          PR_EXISTS=$(curl -s -X GET -G "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
-                      -d "head=${GITHUB_REPOSITORY_OWNER}:${{ github.ref }}" \
-                      -d "state=open" \
-                      | jq -r '.[].number')
-          if [ -z "$PR_EXISTS" ]; then
-            echo "::set-output name=pr_exists::false"
-          else
-            echo "::set-output name=pr_exists::true"
-            echo "::set-output name=pr_number::$PR_EXISTS"
-          fi
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update or Create Pull Request
-        if: steps.check_pr.outputs.pr_exists == 'true'
-        uses: peter-evans/update-pull-request@v2
-        with:
-          pull-request-number: ${{ steps.check_pr.outputs.pr_number }}
-          commit-message: "Update extractedVicGigs.json in existing PR"
-          files: extractedVicGigs.json
-          branch: weekly-vic-songkick-data
-          base: main
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create Pull Request
-        if: steps.check_pr.outputs.pr_exists != 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
