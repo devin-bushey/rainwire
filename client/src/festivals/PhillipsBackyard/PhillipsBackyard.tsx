@@ -28,7 +28,7 @@ import "./phillipsBackyardStyles.css";
 const DB_COLLECTION_NAME = Festivals.PhillipsBackyard;
 
 // TODO update this playlist url
-const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/7pUhoAZzuSaVX5UG1za9Ud";
+const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/5iuaVGv23g000nOO9tS4UL";
 const TICKET_LINK = "https://www.phillipsbackyard.com/tickets-coming-soon";
 
 const PAGE_CLASS = PageClassName.PhillipsBackyard;
