@@ -3,7 +3,7 @@ name: Weekly Victoria Gigs Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 3 * * *" # 8pm PDT every night
+    - cron: "0 2 * * *" # 7pm PDT every night
 
 jobs:
   direct_jambase_db_update:
@@ -22,7 +22,6 @@ jobs:
         run: npm install
 
       - name: Run script
-        working-directory: scripts
         env:
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
@@ -49,37 +48,7 @@ jobs:
       - name: Run extractSongkick
         run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > extractedVicGigs.json
 
-      - name: Check if PR already exists
-        id: check_pr
-        run: |
-          PR_EXISTS=$(curl -s -X GET -G "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
-                      -d "head=${GITHUB_REPOSITORY_OWNER}:${{ github.ref }}" \
-                      -d "state=open" \
-                      | jq -r '.[].number')
-          if [ -z "$PR_EXISTS" ]; then
-            echo "::set-output name=pr_exists::false"
-          else
-            echo "::set-output name=pr_exists::true"
-            echo "::set-output name=pr_number::$PR_EXISTS"
-          fi
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update or Create Pull Request
-        if: steps.check_pr.outputs.pr_exists == 'true'
-        uses: peter-evans/update-pull-request@v2
-        with:
-          pull-request-number: ${{ steps.check_pr.outputs.pr_number }}
-          commit-message: "Update extractedVicGigs.json in existing PR"
-          files: extractedVicGigs.json
-          branch: weekly-vic-songkick-data
-          base: main
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create Pull Request
-        if: steps.check_pr.outputs.pr_exists != 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
