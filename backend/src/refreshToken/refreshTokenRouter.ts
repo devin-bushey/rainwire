@@ -8,6 +8,16 @@ const CLIENT_SECRET = process.env.SP_CLIENT_S as string;
 const REDIRECT_URI = "http://localhost:5000/callback";
 const SCOPE = ["playlist-modify-public"];
 
+// A refresh token allows client applications to obtain new access tokens without requiring users to reauthorize the application.
+// https://developer.spotify.com/documentation/web-api/tutorials/refreshing-tokens
+
+// Follow these steps to get a refresh token:
+// Run the server (npm run dev)
+// From your browser, go to http://localhost:5000/login
+// Sign in with your account
+// Copy the redirect token
+// Paste it into the root .env as SP_REFRESH_TOKEN
+
 refreshTokenRouter.get("/login", (request: Request, response: Response) => {
   const redirect_url = `https://accounts.spotify.com/authorize?response_type=code&client_id=${CLIENT_ID}&scope=${SCOPE.join("%20")}&state=123456&redirect_uri=${REDIRECT_URI}&prompt=consent`;
   response.redirect(redirect_url);

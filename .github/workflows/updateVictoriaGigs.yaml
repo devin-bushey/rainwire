@@ -3,7 +3,7 @@ name: Weekly Victoria Gigs Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *" # 7pm PDT every night
+    - cron: "0 3 * * *" # 8pm PDT every night
 
 jobs:
   direct_jambase_db_update:
@@ -22,13 +22,14 @@ jobs:
         run: npm install
 
       - name: Run script
+        working-directory: scripts
         env:
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
           SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
-        run: node ./scripts/src/updateVictoriaDatabase.js
+        run: npx ts-node ./src/updateVictoriaDatabase.ts
 
   extract_songkick_and_create_pr:
     runs-on: ubuntu-latest
@@ -48,15 +49,48 @@ jobs:
       - name: Run extractSongkick
         run: npx ts-node ./scripts/src/scrapers/songkick/extractSongkick.ts > extractedVicGigs.json
 
+      - name: Check if PR already exists
+        id: check_pr
+        run: |
+          PR_EXISTS=$(curl -s -X GET -G "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls" \
+                      -d "head=${GITHUB_REPOSITORY_OWNER}:${{ github.ref }}" \
+                      -d "state=open" \
+                      | jq -r '.[].number')
+          if [ -z "$PR_EXISTS" ]; then
+            echo "::set-output name=pr_exists::false"
+          else
+            echo "::set-output name=pr_exists::true"
+            echo "::set-output name=pr_number::$PR_EXISTS"
+          fi
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update or Create Pull Request
+        if: steps.check_pr.outputs.pr_exists == 'true'
+        uses: peter-evans/update-pull-request@v2
+        with:
+          pull-request-number: ${{ steps.check_pr.outputs.pr_number }}
+          commit-message: "Update extractedVicGigs.json in existing PR"
+          files: extractedVicGigs.json
+          branch: weekly-vic-songkick-data
+          base: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Pull Request
+        if: steps.check_pr.outputs.pr_exists != 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add extractedVicGigs.json"
           title: "Weekly Update: Extracted Victoria Songkick Data"
-          body: "This PR contains the JSON object of the Songkick data extracted this week.\nIt does not include Spotify data\nMerge this PR to trigger the action to add spotify data and update the database."
+          body: "This PR contains the JSON array of the Songkick data extracted this week.\n\n
+          It does not include Spotify data\n\n
+          Please go through and edit the artist names!\n\n
+          Then merge this PR to trigger the action to add Spotify data and update the database.\n\n
+          <img src=\"https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDg3Y3BycmJuazM1NHlleG5qcXljZjBmdWgzNDlwNzRrb2oxNGtxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/blSTtZehjAZ8I/giphy.gif\" width=\"340\"/>"
           branch: weekly-vic-songkick-data
           base: main
-          files: |
-            extractedVicGigs.json
+          files: extractedVicGigs.json
           labels: weekly-update

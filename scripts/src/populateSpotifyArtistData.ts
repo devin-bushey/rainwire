@@ -2,7 +2,7 @@ import { findBestMatch } from "string-similarity";
 import { MongoClient } from "mongodb";
 import { buildArtist } from "./model/Artist";
 import { Gig } from "./model/Gig";
-const axios = require("axios");
+import axios from "axios";
 
 /**
  * USAGE
@@ -102,7 +102,8 @@ const addSpotifyMainData = async (gig: Gig): Promise<Gig | undefined> => {
     })
 
     .catch(function (error: any) {
-      console.log(`Error adding Spotify artist data for artist ${artistName}.`, error);
+      console.log(`Error adding Spotify artist data for artist ${artistName}.`);
+      // console.log(error)
       return undefined;
     });
 };
