@@ -2,34 +2,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Taylor Ashton",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-04-07T00:00:00.000Z",
-    "venue": "Home Routes House Concert",
-    "isMissing": false,
-    "popularity": 0
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Tyler Joe Miller",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-04-09T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 1
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "Comeback Kid",
       "topTracks": [],
       "uri": "",
@@ -39,7 +11,7 @@
     "date": "2024-04-10T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 2
+    "popularity": 0
   },
   {
     "artist": {
@@ -53,12 +25,12 @@
     "date": "2024-04-12T00:00:00.000Z",
     "venue": "Victoria Events Centre",
     "isMissing": false,
-    "popularity": 3
+    "popularity": 1
   },
   {
     "artist": {
       "id": "",
-      "name": "Blacksmith & Brewer",
+      "name": "Blacksmith & Brewer\n                    Necrosal Noise and Dollhead",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -67,12 +39,12 @@
     "date": "2024-04-12T00:00:00.000Z",
     "venue": "Phoenix Bar and Grill",
     "isMissing": false,
-    "popularity": 4
+    "popularity": 2
   },
   {
     "artist": {
       "id": "",
-      "name": "Windser",
+      "name": "Lime Cordiale\n                    Windser",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -80,6 +52,34 @@
     },
     "date": "2024-04-13T00:00:00.000Z",
     "venue": "Capital Ballroom",
+    "isMissing": false,
+    "popularity": 3
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Lime Cordiale\n                    Windser",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-14T00:00:00.000Z",
+    "venue": "Capital Ballroom",
+    "isMissing": false,
+    "popularity": 4
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Daniel Romano's Outfit\n                    Kiwi Jr. and Carson McHone",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-15T00:00:00.000Z",
+    "venue": "Capitol Ballroom",
     "isMissing": false,
     "popularity": 5
   },
@@ -95,7 +95,7 @@
     "date": "2024-04-18T00:00:00.000Z",
     "venue": "Lucky Bar",
     "isMissing": false,
-    "popularity": 8
+    "popularity": 6
   },
   {
     "artist": {
@@ -109,7 +109,7 @@
     "date": "2024-04-19T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 9
+    "popularity": 7
   },
   {
     "artist": {
@@ -123,12 +123,12 @@
     "date": "2024-04-19T00:00:00.000Z",
     "venue": "",
     "isMissing": false,
-    "popularity": 10
+    "popularity": 8
   },
   {
     "artist": {
       "id": "",
-      "name": "Lila Gray",
+      "name": "Lila Gray\n                    Diana Rose and Julianna Laine",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -137,7 +137,21 @@
     "date": "2024-04-19T00:00:00.000Z",
     "venue": "",
     "isMissing": false,
-    "popularity": 11
+    "popularity": 9
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Bahamas\n                    Leith Ross",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-20T00:00:00.000Z",
+    "venue": "Royal Theatre",
+    "isMissing": false,
+    "popularity": 10
   },
   {
     "artist": {
@@ -151,7 +165,7 @@
     "date": "2024-04-20T00:00:00.000Z",
     "venue": "Royal Theatre",
     "isMissing": false,
-    "popularity": 13
+    "popularity": 11
   },
   {
     "artist": {
@@ -165,7 +179,7 @@
     "date": "2024-04-20T00:00:00.000Z",
     "venue": "Charlie White Theatre, Mary Winspear Centre",
     "isMissing": false,
-    "popularity": 14
+    "popularity": 12
   },
   {
     "artist": {
@@ -179,12 +193,12 @@
     "date": "2024-04-21T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 15
+    "popularity": 13
   },
   {
     "artist": {
       "id": "",
-      "name": "Derek Webb",
+      "name": "Derek Webb and Flamy Grant",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -193,7 +207,7 @@
     "date": "2024-04-21T00:00:00.000Z",
     "venue": "",
     "isMissing": false,
-    "popularity": 16
+    "popularity": 14
   },
   {
     "artist": {
@@ -207,12 +221,12 @@
     "date": "2024-04-22T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 17
+    "popularity": 15
   },
   {
     "artist": {
       "id": "",
-      "name": "Merkules",
+      "name": "Ice Cube\n                    Merkules and Peter Jackson",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -221,7 +235,21 @@
     "date": "2024-04-23T00:00:00.000Z",
     "venue": "Save-On-Foods Memorial Centre",
     "isMissing": false,
-    "popularity": 18
+    "popularity": 16
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "The Bankes Brothers",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-04-24T00:00:00.000Z",
+    "venue": "The Duke Saloon",
+    "isMissing": false,
+    "popularity": 17
   },
   {
     "artist": {
@@ -235,7 +263,7 @@
     "date": "2024-04-25T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 19
+    "popularity": 18
   },
   {
     "artist": {
@@ -249,7 +277,7 @@
     "date": "2024-04-26T00:00:00.000Z",
     "venue": "Upstairs Cabaret",
     "isMissing": false,
-    "popularity": 20
+    "popularity": 19
   },
   {
     "artist": {
@@ -263,7 +291,7 @@
     "date": "2024-04-27T00:00:00.000Z",
     "venue": "Club Kwench",
     "isMissing": false,
-    "popularity": 21
+    "popularity": 20
   },
   {
     "artist": {
@@ -277,7 +305,7 @@
     "date": "2024-04-27T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 22
+    "popularity": 21
   },
   {
     "artist": {
@@ -291,7 +319,7 @@
     "date": "2024-04-28T00:00:00.000Z",
     "venue": "St. Elizabeth's Church",
     "isMissing": false,
-    "popularity": 23
+    "popularity": 22
   },
   {
     "artist": {
@@ -305,7 +333,7 @@
     "date": "2024-05-01T00:00:00.000Z",
     "venue": "Royal Theatre",
     "isMissing": false,
-    "popularity": 24
+    "popularity": 23
   },
   {
     "artist": {
@@ -319,7 +347,7 @@
     "date": "2024-05-02T00:00:00.000Z",
     "venue": "The 44",
     "isMissing": false,
-    "popularity": 25
+    "popularity": 24
   },
   {
     "artist": {
@@ -333,12 +361,12 @@
     "date": "2024-05-02T00:00:00.000Z",
     "venue": "Hermann's Jazz Club",
     "isMissing": false,
-    "popularity": 26
+    "popularity": 25
   },
   {
     "artist": {
       "id": "",
-      "name": "night court",
+      "name": "night court (canada), The Dumpies, and archivists (canada)",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -346,6 +374,20 @@
     },
     "date": "2024-05-02T00:00:00.000Z",
     "venue": "Wheelies Motorcycles",
+    "isMissing": false,
+    "popularity": 26
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Kim Churchill",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-03T00:00:00.000Z",
+    "venue": "Capital Ballroom",
     "isMissing": false,
     "popularity": 27
   },
@@ -361,7 +403,7 @@
     "date": "2024-05-03T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 29
+    "popularity": 28
   },
   {
     "artist": {
@@ -375,12 +417,40 @@
     "date": "2024-05-04T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
+    "popularity": 29
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Richard Garvey and Naomi Kavka",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-05T00:00:00.000Z",
+    "venue": "Little Fernwood",
+    "isMissing": false,
     "popularity": 30
   },
   {
     "artist": {
       "id": "",
-      "name": "The Wilderness",
+      "name": "Heather Ferguson\n                    Attila Fias, Scott White, Ryan Oliver, and Jae Sinnett",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-10T00:00:00.000Z",
+    "venue": "Hermann's Jazz Club",
+    "isMissing": false,
+    "popularity": 31
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "The Wilderness (Kingston) and Myles From Home",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -389,7 +459,7 @@
     "date": "2024-05-10T00:00:00.000Z",
     "venue": "Phoenix Bar and Grill",
     "isMissing": false,
-    "popularity": 33
+    "popularity": 32
   },
   {
     "artist": {
@@ -403,7 +473,7 @@
     "date": "2024-05-15T00:00:00.000Z",
     "venue": "",
     "isMissing": false,
-    "popularity": 34
+    "popularity": 33
   },
   {
     "artist": {
@@ -417,12 +487,12 @@
     "date": "2024-05-17T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 35
+    "popularity": 34
   },
   {
     "artist": {
       "id": "",
-      "name": "MOONBEAN",
+      "name": "MOONBEAN and Avro",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -431,12 +501,12 @@
     "date": "2024-05-18T00:00:00.000Z",
     "venue": "",
     "isMissing": false,
-    "popularity": 36
+    "popularity": 35
   },
   {
     "artist": {
       "id": "",
-      "name": "Ash",
+      "name": "Ash (CA)",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -445,7 +515,7 @@
     "date": "2024-05-19T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 37
+    "popularity": 36
   },
   {
     "artist": {
@@ -459,7 +529,7 @@
     "date": "2024-05-22T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 38
+    "popularity": 37
   },
   {
     "artist": {
@@ -473,12 +543,12 @@
     "date": "2024-05-24T00:00:00.000Z",
     "venue": "McPherson Playhouse",
     "isMissing": false,
-    "popularity": 39
+    "popularity": 38
   },
   {
     "artist": {
       "id": "",
-      "name": "Scenic Route to Alaska",
+      "name": "Scenic Route to Alaska and Major Love",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -487,7 +557,7 @@
     "date": "2024-05-24T00:00:00.000Z",
     "venue": "The Hallway",
     "isMissing": false,
-    "popularity": 40
+    "popularity": 39
   },
   {
     "artist": {
@@ -500,6 +570,20 @@
     },
     "date": "2024-05-25T00:00:00.000Z",
     "venue": "Wicket Hall",
+    "isMissing": false,
+    "popularity": 40
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Jann Arden and Rick Mercer",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-26T00:00:00.000Z",
+    "venue": "Macpherson Theatre",
     "isMissing": false,
     "popularity": 41
   },
@@ -515,12 +599,12 @@
     "date": "2024-05-26T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 43
+    "popularity": 42
   },
   {
     "artist": {
       "id": "",
-      "name": "Rebel Selector",
+      "name": "The Wailers and Rebel Selector",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -529,7 +613,7 @@
     "date": "2024-05-31T00:00:00.000Z",
     "venue": "Victoria Curling Club",
     "isMissing": false,
-    "popularity": 44
+    "popularity": 43
   },
   {
     "artist": {
@@ -543,12 +627,26 @@
     "date": "2024-06-15T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
+    "popularity": 44
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "LOWDOWN BRASS BAND and PHONOSONICS @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Lowdown Brass Band",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-19T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
     "popularity": 45
   },
   {
     "artist": {
       "id": "",
-      "name": "FORT KNOX FIVE",
+      "name": "FORT KNOX FIVE, APEX BREAKS, Mirage @ Victoria's 25th Anniversary Ska & Reggae Festival 2024",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -557,6 +655,48 @@
     "date": "2024-06-20T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
+    "popularity": 46
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "THE SUICIDE MACHINES, THE SLACKERS, THE CREEPSHOW, Space Chimp & DJ I-Lot @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    The Suicide Machines and The Slackers",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-21T00:00:00.000Z",
+    "venue": "Victoria Curling Club",
+    "isMissing": false,
     "popularity": 47
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "GONDWANA, BIG MOUNTAIN, Batuque Axé & DJ Su Comandante Espinoza @ Victoria's 25th Anniversary Ska & Reggae Festival (SUMMER SOLSTICE REGGAE SPLASH) 2024\n                    Big Mountain",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-21T00:00:00.000Z",
+    "venue": "Ship Point (Inner Harbour)",
+    "isMissing": false,
+    "popularity": 48
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "LESS THAN JAKE, THE PLANET SMASHERS, MEPHISKAPHELES, SweetLeaf & Young Royal @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Less Than Jake and Mephiskapheles",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-22T00:00:00.000Z",
+    "venue": "Victoria Curling Club",
+    "isMissing": false,
+    "popularity": 49
   }
 ]
