@@ -1,32 +1,32 @@
 require("dotenv").config({ path: "../.env" });
 
-const axios = require('axios');
-const { MongoClient } = require('mongodb');
+import axios from "axios";
+import { Collection, MongoClient } from "mongodb";
+import { Gig } from "./model/Gig";
 
 // USAGE:
-// node --env-file=.env ./scripts/src/updateVictoriaDatabase.js
+// npx ts-node ./src/updateVictoriaDatabase.ts
 
-const ATLAS_URI = process.env.ATLAS_URI;
+const ATLAS_URI = process.env.ATLAS_URI || "";
 const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE;
 const SP_REFRESH_TOKEN = process.env.SP_REFRESH_TOKEN;
 const SP_CLIENT_ID = process.env.SP_CLIENT_ID;
 const SP_CLIENT_S = process.env.SP_CLIENT_S;
 
-const COLLECTION_NAME = "victoria_2024"
+const COLLECTION_NAME = "victoria_2024";
 
 const getSpotifyAccessToken = async () => {
-
   const optionsSpotifyAccessToken = {
-    method: 'POST',
+    method: "POST",
     url: "https://accounts.spotify.com/api/token",
     headers: {
-      Authorization: `Basic ${Buffer.from(SP_CLIENT_ID + ":" + SP_CLIENT_S).toString("base64")}`
+      Authorization: `Basic ${Buffer.from(SP_CLIENT_ID + ":" + SP_CLIENT_S).toString("base64")}`,
     },
     params: {
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
       refresh_token: SP_REFRESH_TOKEN,
-      client_id: SP_CLIENT_ID
-    }
+      client_id: SP_CLIENT_ID,
+    },
   };
 
   try {
@@ -34,24 +34,24 @@ const getSpotifyAccessToken = async () => {
     const response = await axios(optionsSpotifyAccessToken);
     console.log("Yew!! Successfully retrieved the token");
     return response.data.access_token;
-  } catch (error) {
-    console.error("Failed to get Spotify token:", error.data);
+  } catch (error: any) {
+    console.error("Failed to get Spotify token");
     process.exit(-1);
   }
 };
 
 const getEventsFromJambase = async () => {
   const optionsJamBase = {
-    method: 'GET',
-    url: 'https://www.jambase.com/jb-api/v1/events',
+    method: "GET",
+    url: "https://www.jambase.com/jb-api/v1/events",
     params: {
-      eventType: 'concerts',
-      geoCityId: 'jambase:382342', // Victoria
-      geoRadiusAmount: '100',
+      eventType: "concerts",
+      geoCityId: "jambase:382342", // Victoria
+      geoRadiusAmount: "100",
       apikey: API_KEY_JAMBASE,
-      expandExternalIdentifiers: true
+      expandExternalIdentifiers: true,
     },
-    headers: { Accept: 'application/json' }
+    headers: { Accept: "application/json" },
   };
 
   try {
@@ -63,21 +63,22 @@ const getEventsFromJambase = async () => {
     console.error("Failed to get events:", error);
     process.exit(-2);
   }
-}
+};
 
-const buildGigListWithSpotifyData = async (events, bearerToken) => {
-
-  const concertData = [];
+const buildGigListWithSpotifyData = async (events: any, bearerToken: string): Promise<Gig[]> => {
+  const concertData: Gig[] = [];
   const existingArtists = new Set();
   for (const event of events) {
     for (const performer of event.performer) {
-      const spotifyId = performer["x-externalIdentifiers"].find(externalIdentifier => externalIdentifier.source === "spotify")?.identifier[0];
+      const spotifyId = performer["x-externalIdentifiers"].find(
+        (externalIdentifier: any) => externalIdentifier.source === "spotify",
+      )?.identifier[0];
       if (spotifyId && !existingArtists.has(spotifyId)) {
         existingArtists.add(spotifyId);
         const optionsSpotify = {
-          method: 'GET',
+          method: "GET",
           url: `https://api.spotify.com/v1/artists/${spotifyId}/top-tracks`,
-          headers: { Accept: 'application/json', 'Authorization': `Bearer ${bearerToken}` }
+          headers: { Accept: "application/json", Authorization: `Bearer ${bearerToken}` },
         };
         const spotifyResponse = await axios(optionsSpotify);
         const topTracks = spotifyResponse.data.tracks;
@@ -85,13 +86,13 @@ const buildGigListWithSpotifyData = async (events, bearerToken) => {
           artist: {
             id: spotifyId,
             name: spotifyResponse.data.tracks[0].album.artists[0].name,
-            topTracks: topTracks.map(track => track.uri),
+            topTracks: topTracks.map((track: any) => track.uri),
             uri: `spotify:artist:${spotifyId}`,
             albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
-            link: `https://open.spotify.com/artist/${spotifyId}`
+            link: `https://open.spotify.com/artist/${spotifyId}`,
           },
           date: new Date(event.endDate),
-          venue: event.location.name
+          venue: event.location.name,
         };
         concertData.push(concertObject);
       }
@@ -99,17 +100,17 @@ const buildGigListWithSpotifyData = async (events, bearerToken) => {
   }
   console.log(`Retrieved ${concertData.length} concerts`);
   return concertData;
-}
+};
 
-const updateMongoDb = async (gigs) => {
+const updateMongoDb = async (gigs: Gig[]) => {
   try {
     console.log("Connecting to MongoDB...");
     const client = new MongoClient(ATLAS_URI);
     await client.connect();
     console.log("Successfully connected to MongoDB");
 
-    const db = client.db('RecordShop');
-    const collection = db.collection(COLLECTION_NAME);
+    const db = client.db("RecordShop");
+    const collection: Collection<Gig> = db.collection(COLLECTION_NAME);
 
     let numGigsAdded = 0;
     for (const gig of gigs) {
@@ -117,9 +118,8 @@ const updateMongoDb = async (gigs) => {
       // Might be duplicate artists if they play back to back nights, hmmm.
       // But we dont delete them from the database, so I would want to add them if theres a long
       // period of time between shows.
-
       const existingGig = await collection.findOne({
-        "artist.id": gig.artist.id
+        "artist.id": gig.artist.id,
       });
 
       if (!existingGig) {
@@ -140,9 +140,9 @@ const updateMongoDb = async (gigs) => {
 const getConcertData = async () => {
   try {
     const spotifyAccessToken = await getSpotifyAccessToken();
-    const jamBaseEvents = await getEventsFromJambase()
-    const gigs = await buildGigListWithSpotifyData(jamBaseEvents, spotifyAccessToken)
-    updateMongoDb(gigs)
+    const jamBaseEvents = await getEventsFromJambase();
+    const gigs = await buildGigListWithSpotifyData(jamBaseEvents, spotifyAccessToken);
+    updateMongoDb(gigs);
   } catch (error) {
     console.error("Whoops, something went wrong :(", error);
   }

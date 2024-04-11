@@ -3,7 +3,7 @@ import { Artist, buildArtist } from "./Artist";
 export type UnsavedGig = Omit<Gig, "_id">;
 
 export interface Gig {
-  _id: string;
+  _id?: string;
   artist: Artist;
   date: Date;
   venue: string;
