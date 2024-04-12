@@ -26,7 +26,7 @@ import { Festivals } from "../../constants/enums";
 import { sortByOrderNum, sortDataByDateAndOrder } from "../../utils/sorter";
 
 import useSpotifyAuth from "../../hooks/useSpotifyAuth";
-import { goToNewTab, goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../../utils/browserUtils";
+import { goToNewTab, goToNewTabOnDesktop, scrollToTop } from "../../utils/browserUtils";
 import { logOut, redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
 
 import "../../styles/ClickMe.css";

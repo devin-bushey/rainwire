@@ -1,7 +1,7 @@
 export enum Cities {
   Victoria = "victoria",
   Victoria_2024 = "victoria_2024",
-  Vancouver = "vancouver",
+  Vancouver = "vancouver_2024",
 }
 
 export enum Festivals {
