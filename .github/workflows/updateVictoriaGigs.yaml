@@ -22,6 +22,7 @@ jobs:
         run: npm install
 
       - name: Run script
+        working-directory: scripts
         env:
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
           API_KEY_JAMBASE: ${{ secrets.API_KEY_JAMBASE }}
