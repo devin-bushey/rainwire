@@ -12,11 +12,15 @@ export const LOCATIONS: LocationType[] = [
     value: Cities.Victoria_2024,
   },
   {
+    name: "Vancouver, BC",
+    value: Cities.Vancouver,
+  },
+  {
     name: "Laketown Shakedown",
     value: Festivals.LaketownShakedown_2024,
   },
-  {
-    name: "Pachena Bay",
-    value: Festivals.PachenaBay,
-  },
+  // {
+  //   name: "Pachena Bay",
+  //   value: Festivals.PachenaBay,
+  // },
 ];

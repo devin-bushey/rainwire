@@ -1,19 +1,19 @@
 import { Box, Container } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import Typography from "@mui/material/Typography";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { COLOURS } from "../theme/AppStyles";
 import spotifyLogo from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
-import { AUTH_ENDPOINT, BASE_REDIRECT_URI, CLIENT_ID, SCOPES } from "../constants/auth";
+import { BASE_REDIRECT_URI } from "../constants/auth";
 import { InAppModal } from "../components/InAppModal";
 import "../styles/Background.css";
 import { Link } from "react-router-dom";
 
-import { goToNewTabOnDesktop, isInAppBrowser, scrollToTop } from "../utils/browserUtils";
+import { goToNewTabOnDesktop } from "../utils/browserUtils";
 import { useAuth } from "../context/AuthContext";
 import { setDocumentTitle } from "../hooks/useDocumentTitleEffect";
 import { useInAppModalState } from "../hooks/useInAppModalState";
-import { redirectToAuth, redirectToAuthForBrowser } from "../utils/spotifyAuthUtils";
+import { redirectToAuthForBrowser } from "../utils/spotifyAuthUtils";
 
 const WelcomePage = memo(() => {
   const { isLoggedIntoSpotify } = useAuth();
