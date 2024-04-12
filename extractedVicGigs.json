@@ -212,7 +212,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Ice Cube\n                    Merkules and Peter Jackson",
+      "name": "Ice Cube",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -352,7 +352,7 @@
   {
     "artist": {
       "id": "",
-      "name": "night court (canada), The Dumpies, and archivists (canada)",
+      "name": "The Dumpies",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -408,35 +408,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Richard Garvey and Naomi Kavka",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-05T00:00:00.000Z",
-    "venue": "Little Fernwood",
-    "isMissing": false,
-    "popularity": 29
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Heather Ferguson\n                    Attila Fias, Scott White, Ryan Oliver, and Jae Sinnett",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-10T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 30
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "The Wilderness (Kingston) and Myles From Home",
+      "name": "Myles From Home",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -478,7 +450,7 @@
   {
     "artist": {
       "id": "",
-      "name": "MOONBEAN and Avro",
+      "name": "Avro",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -488,20 +460,6 @@
     "venue": "",
     "isMissing": false,
     "popularity": 34
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Ash (CA)",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-19T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 35
   },
   {
     "artist": {
@@ -534,7 +492,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Scenic Route to Alaska and Major Love",
+      "name": "Major Love",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -548,7 +506,7 @@
   {
     "artist": {
       "id": "",
-      "name": "FloodGate (CA)",
+      "name": "FloodGate",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -576,7 +534,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Jann Arden and Rick Mercer",
+      "name": "Rick Mercer",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -604,7 +562,7 @@
   {
     "artist": {
       "id": "",
-      "name": "The Wailers and Rebel Selector",
+      "name": "Rebel Selector",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -632,21 +590,7 @@
   {
     "artist": {
       "id": "",
-      "name": "LOWDOWN BRASS BAND and PHONOSONICS @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Lowdown Brass Band",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-19T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 45
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "FORT KNOX FIVE, APEX BREAKS, Mirage @ Victoria's 25th Anniversary Ska & Reggae Festival 2024",
+      "name": "APEX BREAKS",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -660,7 +604,7 @@
   {
     "artist": {
       "id": "",
-      "name": "THE SUICIDE MACHINES, THE SLACKERS, THE CREEPSHOW, Space Chimp & DJ I-Lot @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    The Suicide Machines and The Slackers",
+      "name": "Space Chimp",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -674,7 +618,7 @@
   {
     "artist": {
       "id": "",
-      "name": "GONDWANA, BIG MOUNTAIN, Batuque Axé & DJ Su Comandante Espinoza @ Victoria's 25th Anniversary Ska & Reggae Festival (SUMMER SOLSTICE REGGAE SPLASH) 2024\n                    Big Mountain",
+      "name": "BIG MOUNTAIN",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -688,7 +632,7 @@
   {
     "artist": {
       "id": "",
-      "name": "LESS THAN JAKE, THE PLANET SMASHERS, MEPHISKAPHELES, SweetLeaf & Young Royal @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Less Than Jake and Mephiskapheles",
+      "name": "LESS THAN JAKE",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
