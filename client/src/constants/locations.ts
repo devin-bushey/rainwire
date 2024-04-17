@@ -16,9 +16,21 @@ export const LOCATIONS: LocationType[] = [
     value: Cities.Vancouver,
   },
   {
-    name: "Laketown Shakedown",
-    value: Festivals.LaketownShakedown_2024,
+    name: "Toronto, ON",
+    value: Cities.Toronto,
   },
+  {
+    name: "San Francisco, CA",
+    value: Cities.SanFrancisco,
+  },
+  {
+    name: "Pleasanton, CA",
+    value: Cities.Pleasanton,
+  },
+  // {
+  //   name: "Laketown Shakedown",
+  //   value: Festivals.LaketownShakedown_2024,
+  // },
   // {
   //   name: "Pachena Bay",
   //   value: Festivals.PachenaBay,

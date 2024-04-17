@@ -5,7 +5,7 @@ import { Collection, MongoClient } from "mongodb";
 import { Gig } from "./model/Gig";
 
 // USAGE:
-// npx ts-node ./src/updateVictoriaDatabase.ts
+// npx ts-node ./src/fetchAndAddGigsToDB.ts <city>
 
 const ATLAS_URI = process.env.ATLAS_URI || "";
 const API_KEY_JAMBASE = process.env.API_KEY_JAMBASE;
@@ -13,7 +13,9 @@ const SP_REFRESH_TOKEN = process.env.SP_REFRESH_TOKEN;
 const SP_CLIENT_ID = process.env.SP_CLIENT_ID;
 const SP_CLIENT_S = process.env.SP_CLIENT_S;
 
-const COLLECTION_NAME = "victoria_2024";
+const CITY = process.argv[2];
+
+const COLLECTION_NAME = `${CITY}_2024`;
 
 const getSpotifyAccessToken = async () => {
   const optionsSpotifyAccessToken = {
@@ -40,18 +42,47 @@ const getSpotifyAccessToken = async () => {
   }
 };
 
+const getJambaseGeoId = async () => {
+  let city = CITY;
+  if (city === "sanfrancisco") {
+    return "jambase:4226966";
+  }
+
+  const options = {
+    method: "GET",
+    url: "https://www.jambase.com/jb-api/v1/geographies/cities",
+    params: { geoCityName: `city`, apikey: API_KEY_JAMBASE },
+    headers: { Accept: "application/json" },
+  };
+
+  try {
+    const { data } = await axios(options);
+    console.log(data);
+    const cityId = data.cities[0].identifier;
+    console.log(cityId);
+    return cityId;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getEventsFromJambase = async () => {
+  const geoCityId = await getJambaseGeoId();
+
   const optionsJamBase = {
     method: "GET",
     url: "https://www.jambase.com/jb-api/v1/events",
     params: {
       eventType: "concerts",
-      geoCityId: "jambase:382342", // Victoria
+      geoCityId: geoCityId,
       geoRadiusAmount: "100",
+      // geoCityId: "jambase:382342", // Victoria
       // geoCityId: "jambase:379457", // Vancouver
-      // geoRadiusAmount: "40",
+      // geoCityId: "jambase:380343", // Toronto
+      // geoCityId: "jambase:4226292", // Pleasanton
       apikey: API_KEY_JAMBASE,
       expandExternalIdentifiers: true,
+      perPage: 100,
     },
     headers: { Accept: "application/json" },
   };
