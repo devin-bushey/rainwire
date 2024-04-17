@@ -29,7 +29,7 @@ jobs:
           SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
-        run: npx ts-node ./src/updateVictoriaDatabase.ts
+        run: npx ts-node ./src/fetchAndAddGigsToDB.ts victoria
 
   extract_songkick_and_create_pr:
     runs-on: ubuntu-latest
