@@ -9,9 +9,10 @@ export const FestivalPage = () => {
   }, []);
 
   const festivalList = [
+    { title: "Phillips Backyard 2024", endpoint: "phillipsbackyard2024", colour: "hsl(15.34deg 88% 60.78%)" },
     { title: "Pachena Bay", endpoint: "pachenabay", colour: "#3B6AB3" },
-    { title: "Phillips Backyard", endpoint: "phillipsbackyard", colour: "#F2C536" },
     { title: "Rifflandia", endpoint: "rifflandia", colour: "#f6edb5" },
+    { title: "Phillips Backyard 2023", endpoint: "phillipsbackyard", colour: "#F2C536" },
   ];
 
   return (

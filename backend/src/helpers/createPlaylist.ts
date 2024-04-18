@@ -44,6 +44,10 @@ export const CreateNewPlaylist = async ({
     coverArt = IMAGE_PACHENA_BAY;
   }
 
+  if (city === Festivals.PhilipsBackyard2024) {
+    sortedGigs = sortByPopularity(gigs);
+  }
+
   try {
     await AddCoverArt({ token, playlist_id, coverArt });
   } catch (err) {
@@ -106,6 +110,10 @@ export const CreateBlankPlaylist = async ({
 
   if (city === Festivals.PachenaBay) {
     playlist_name = "record shop pachena bay";
+  }
+
+  if (city === Festivals.PhilipsBackyard2024) {
+    playlist_name = "record shop phillips backyard 2024";
   }
 
   let description = `a mixtape created by recordshop.cool`;

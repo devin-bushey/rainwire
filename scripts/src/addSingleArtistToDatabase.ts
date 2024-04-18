@@ -4,7 +4,7 @@ import axios from "axios";
 
 // USAGE: npx ts-node ./src/addSingleArtistToDatabase.ts <Spotify Artist Id> <Date> <Popularity> <Venue> <DB Collection>
 
-// EXAMPLE: npx ts-node ./src/addSingleArtistToDatabase.ts 1h3omMr7jTuA0Tbuy8fALW "2024/07/19" 14 "Pachena Bay" "pachenaBay"
+// EXAMPLE: npx ts-node ./src/addSingleArtistToDatabase.ts 22Wn2cTdoUftbKvBxaGAyR "2024/08/11" 13100 "Phillips Backyard" "phillipsBackyard_2024"
 
 // # Get the spotify Id from opening up spotify in your browser (easiest to click an artist from record shop)
 // # then search for an artist, then the Id is last in the url (Example: https://open.spotify.com/artist/79JJCxCCfJ8HufX6w8q2k4)

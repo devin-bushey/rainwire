@@ -6,7 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 import { setDocumentTitle } from "../../hooks/useDocumentTitleEffect";
 import { SignInButton } from "../../components/SignInButton";
 import { RecordShopTitle } from "../../components/RecordShopTitle";
-import { PreviewPlaylist } from "../../components/PreviewPlaylist";
 import { AboutUsPopover } from "../../components/AboutUsPopover";
 import { ProfileMenu } from "../../components/ProfileMenu";
 import { goToNewTab } from "../../utils/browserUtils";
@@ -20,26 +19,27 @@ import { Spinner } from "../../components/Spinner";
 import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
-import phillipsBackyarderTextLogo from "./assets/phillipsBackyarderTextLogo.png";
+import phillipsBackyarderSmiley from "./assets/phillipsSmiley.svg";
+
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
 import "./phillipsBackyardStyles.css";
+import { PreviewPlaylist } from "../../components/PreviewPlaylist";
 
-const DB_COLLECTION_NAME = Festivals.PhillipsBackyard;
+const DB_COLLECTION_NAME = Festivals.PhillipsBackyard2024;
 
-// TODO update this playlist url
-const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/5iuaVGv23g000nOO9tS4UL";
-const TICKET_LINK = "https://www.phillipsbackyard.com/tickets-coming-soon";
+const SAMPLE_PLAYLIST_URL = "https://open.spotify.com/playlist/3tW12mqnoqXIHLC3ZTSqJP";
+const TICKET_LINK = "https://www.showpass.com/o/phillips-brewery/";
 
-const PAGE_CLASS = PageClassName.PhillipsBackyard;
+const PAGE_CLASS = PageClassName.PhillipsBackyard2024;
 
 const COLOURS = Object.freeze({
-  text: "#FCFCFC",
-  cardColours: ["#5ED0DF", "#F2C536", "#F2C536", "#5ED0DF"],
-  stickyFadeButtonBgColour: "#00223C",
+  text: "#030918",
+  cardColours: ["#f97fb3", "#fedf21", "#49a7c4", "#f37144"],
+  stickyFadeButtonBgColour: "#f37144",
 });
 
-export const PhillipsBackyard = () => {
+export const PhillipsBackyard2024 = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
@@ -50,7 +50,7 @@ export const PhillipsBackyard = () => {
     numTopTracks,
   });
 
-  setDocumentTitle("Record Shop | Phillips Backyard");
+  setDocumentTitle("Record Shop | Phillips Backyard 2024");
 
   return (
     <>
@@ -64,9 +64,6 @@ export const PhillipsBackyard = () => {
           }}
         >
           <Grid container justifyContent="center" className="background-top">
-            <div className="sidebar sidebar-darkened-bird" />
-            <div className="sidebar sidebar-sparkle-right" />
-
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
                 container
@@ -77,13 +74,12 @@ export const PhillipsBackyard = () => {
                 columnGap={4}
               >
                 <RecordShopTitle textColour={COLOURS.text} />
-
                 <AboutUsPopover pageClassName={PAGE_CLASS} />
               </Grid>
 
               <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
                 Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                the Phillips Backyard 2023 events.
+                the Phillips Backyard 2024 events.
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
@@ -99,17 +95,19 @@ export const PhillipsBackyard = () => {
                 sx={{ marginTop: "24px" }}
                 columnGap={2}
               >
-                <Grid item style={{ maxWidth: "325px" }}>
-                  <img
-                    src={phillipsBackyarderTextLogo}
-                    alt="Phillips Backyarder Tilt Bay Music Festival"
-                    style={{ width: "100%" }}
-                  />
+                <Grid item style={{ marginLeft: "10%", marginRight: "10%", maxWidth: "325px" }}>
+                  <div>
+                    <img
+                      src={phillipsBackyarderSmiley}
+                      alt="Phillips Backyard Smiley"
+                      style={{ maxWidth: "190px", marginBottom: "-22px" }}
+                    />
+                  </div>
                   <Button
                     className="secondary-button"
                     onClick={() => goToNewTab(TICKET_LINK)}
                     variant="outlined"
-                    sx={{ width: "160px", margin: "12px 0" }}
+                    sx={{ width: "200px", margin: "12px 0" }}
                   >
                     Buy Tickets
                   </Button>

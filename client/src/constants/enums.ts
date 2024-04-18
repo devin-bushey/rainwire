@@ -9,6 +9,7 @@ export enum Cities {
 
 export enum Festivals {
   PhillipsBackyard = "phillipsBackyard",
+  PhillipsBackyard2024 = "phillipsBackyard_2024",
   Rifflandia = "rifflandia",
   Whistlemania = "whistlemania",
   LaketownShakedown = "laketownShakedown",
