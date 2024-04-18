@@ -9,9 +9,13 @@ export const FestivalPage = () => {
   }, []);
 
   const festivalList = [
-    { title: "Pachena Bay", endpoint: "pachenabay", colour: "#3B6AB3" },
-    { title: "Phillips Backyard", endpoint: "phillipsbackyard", colour: "#F2C536" },
+    { title: "Phillips Backyard", endpoint: "phillipsbackyard2024", colour: "hsl(15.34deg 88% 60.78%)" },
+    { title: "Pachena Bay", endpoint: "pachenabay", colour: "#3b6ab3" },
+  ];
+
+  const festivalList2023 = [
     { title: "Rifflandia", endpoint: "rifflandia", colour: "#f6edb5" },
+    { title: "Phillips Backyard", endpoint: "phillipsbackyard", colour: "#F2C536" },
   ];
 
   return (
@@ -27,6 +31,9 @@ export const FestivalPage = () => {
         >
           Record Shop
         </Typography>
+
+        <Typography>2024</Typography>
+
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Box sx={{ maxWidth: "900px" }}>
             <Container
@@ -45,6 +52,38 @@ export const FestivalPage = () => {
                 columnSpacing={{ sm: 2, md: 3 }}
               >
                 {festivalList.map((festival) => (
+                  <FestivalCard
+                    key={festival.endpoint}
+                    title={festival.title}
+                    endpoint={festival.endpoint}
+                    colour={festival.colour}
+                  />
+                ))}
+              </Grid>
+            </Container>
+          </Box>
+        </Box>
+
+        <Typography sx={{ marginTop: "48px" }}>2023</Typography>
+
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ maxWidth: "900px" }}>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+                paddingTop: "24px",
+              }}
+            >
+              <Grid
+                container
+                justifyContent={{ xs: "center", sm: "space-between" }}
+                rowSpacing={{ xs: 2, md: 3 }}
+                columnSpacing={{ sm: 2, md: 3 }}
+              >
+                {festivalList2023.map((festival) => (
                   <FestivalCard
                     key={festival.endpoint}
                     title={festival.title}
@@ -78,6 +117,7 @@ const FestivalCard = ({ endpoint, title, colour }: { endpoint: string; title: st
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Typography variant="h5">{title}</Typography>

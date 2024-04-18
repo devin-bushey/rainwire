@@ -15,12 +15,14 @@ export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig
         const sorted = sortDataByDateAndOrder(response.data);
         return filterRecent(sorted);
       }
-      if (collectionName === Festivals.PachenaBay) {
+      if (
+        collectionName === Festivals.PachenaBay ||
+        collectionName === Festivals.PhillipsBackyard2024 ||
+        collectionName === Festivals.LaketownShakedown_2024
+      ) {
         return sortByPopularity(response.data);
       }
-      if (collectionName === Festivals.LaketownShakedown_2024) {
-        return sortByPopularity(response.data);
-      }
+
       return sortDataByDateAndOrder(response.data);
     });
 };
