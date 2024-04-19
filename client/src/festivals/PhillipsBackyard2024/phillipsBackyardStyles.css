@@ -3,7 +3,7 @@
   --main-bg-color-bottom: #f68c2b;
   --main-text-color: #030918;
 
-  --card-bg-color: #f37144;
+  --card-bg-color: #f68c2b;
   --card-text-color: #030918;
 
   --popover-bg-color: #FDF4DC;
@@ -29,31 +29,31 @@
   }
   
   .background {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: 100%;
-    background-image: linear-gradient(  #F78D2B, #f37144, #f37144, #F78D2B );
+    height: 40%;
+    background-image: linear-gradient( #f68c2b,#f179af );
   }
 
-  .background-border {
+  /* .background-border {
     position: absolute;
     width: 100%;
     height: 100%;
     background-image: url('./assets/phillipsBackgroundBorder.svg');
     background-size: auto;
     z-index: 1;
-  }
+  } */
 
 
-  /* .background-footer {
+  .background-footer {
     position: fixed;
     width: 100%;
-    height: 30%;
+    height: 60%;
     background-image: url(/src/festivals/PhillipsBackyard2024/assets/phillipsBackgroundFooter.jpg);
     background-size: cover;
     background-position: top;
     bottom: 0;
-  } */
+  }
 
   
   /***** BG IMAGES ******/

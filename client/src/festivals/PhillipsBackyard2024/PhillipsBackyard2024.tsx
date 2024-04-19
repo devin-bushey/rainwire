@@ -35,7 +35,7 @@ const PAGE_CLASS = PageClassName.PhillipsBackyard2024;
 const COLOURS = Object.freeze({
   text: "#030918",
   cardColours: ["#f97fb3", "#fedf21", "#49a7c4", "#f37144"],
-  stickyFadeButtonBgColour: "#f179af",
+  stickyFadeButtonBgColour: "#f68c2b",
 });
 
 export const PhillipsBackyard2024 = () => {
@@ -63,7 +63,7 @@ export const PhillipsBackyard2024 = () => {
           }}
         >
           <div className="background" />
-          <div className="background-border" />
+          <div className="background-footer" />
 
           <Grid container justifyContent="center">
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
