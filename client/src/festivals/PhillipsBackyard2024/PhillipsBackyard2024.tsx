@@ -19,8 +19,7 @@ import { Spinner } from "../../components/Spinner";
 import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
-import phillipsBackyarderSmiley from "./assets/phillipsSmiley.svg";
-
+import phillipsBackyardLogo from "./assets/phillipsBackyardLogo.png";
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
 import "./phillipsBackyardStyles.css";
@@ -36,7 +35,7 @@ const PAGE_CLASS = PageClassName.PhillipsBackyard2024;
 const COLOURS = Object.freeze({
   text: "#030918",
   cardColours: ["#f97fb3", "#fedf21", "#49a7c4", "#f37144"],
-  stickyFadeButtonBgColour: "#f37144",
+  stickyFadeButtonBgColour: "#f179af",
 });
 
 export const PhillipsBackyard2024 = () => {
@@ -63,7 +62,10 @@ export const PhillipsBackyard2024 = () => {
             textAlign: "center",
           }}
         >
-          <Grid container justifyContent="center" className="background-top">
+          <div className="background" />
+          <div className="background-border" />
+
+          <Grid container justifyContent="center">
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
                 container
@@ -86,7 +88,7 @@ export const PhillipsBackyard2024 = () => {
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="center" className="phillips-background-icons background-bottom">
+          <Grid container justifyContent="center" className=" background-bottom">
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3, marginBottom: "130px" }}>
               <Grid
                 container
@@ -97,11 +99,7 @@ export const PhillipsBackyard2024 = () => {
               >
                 <Grid item style={{ marginLeft: "10%", marginRight: "10%", maxWidth: "325px" }}>
                   <div>
-                    <img
-                      src={phillipsBackyarderSmiley}
-                      alt="Phillips Backyard Smiley"
-                      style={{ maxWidth: "190px", marginBottom: "-22px" }}
-                    />
+                    <img src={phillipsBackyardLogo} alt="Phillips Backyard Logo" style={{ maxWidth: "300px" }} />
                   </div>
                   <Button
                     className="secondary-button"
@@ -123,7 +121,13 @@ export const PhillipsBackyard2024 = () => {
                     )}
                   </div>
                   <IconButton
-                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white", alignSelf: "end" }}
+                    sx={{
+                      marginLeft: "8px",
+                      justifySelf: "end",
+                      marginTop: "12px",
+                      color: "white",
+                      alignSelf: "end",
+                    }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
                   >
                     <SettingsIcon fontSize="large" />
