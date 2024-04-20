@@ -20,6 +20,7 @@ import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
 import phillipsBackyarderSmiley from "./assets/phillipsSmiley.svg";
+import phillipsLogo from "./assets/phillipsLogo.png";
 
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
@@ -64,6 +65,8 @@ export const PhillipsBackyard2024 = () => {
           }}
         >
           <Grid container justifyContent="center" className="background-top">
+            {/* <div className="sidebar sidebar-darkened-bird" /> */}
+            <div className="sidebar sidebar-sparkle-right" />
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
                 container
@@ -79,10 +82,18 @@ export const PhillipsBackyard2024 = () => {
 
               <Typography sx={{ marginTop: "12px", color: COLOURS.text }}>
                 Effortlessly generate a playlist within seconds featuring the top tracks from each artist performing at
-                the Phillips Backyard 2024 events.
+                the <span style={{ fontWeight: "900", fontStyle: "italic" }}>Phillips Backyard 2024</span> events.
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
+
+              <div>
+                <img
+                  src={phillipsLogo}
+                  alt="Phillips Backyard Smiley"
+                  style={{ maxWidth: "300px", marginBottom: "-22px" }}
+                />
+              </div>
             </Grid>
           </Grid>
 
@@ -103,6 +114,7 @@ export const PhillipsBackyard2024 = () => {
                       style={{ maxWidth: "190px", marginBottom: "-22px" }}
                     />
                   </div>
+
                   <Button
                     className="secondary-button"
                     onClick={() => goToNewTab(TICKET_LINK)}
