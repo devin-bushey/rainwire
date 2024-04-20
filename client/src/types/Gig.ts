@@ -7,11 +7,12 @@ export interface Gig {
   popularity?: number;
 }
 
-interface Artist {
+export interface Artist {
   id: string;
   name: string;
   topTracks: string[];
   uri: string;
   albumArtUrl: string;
   link: string;
+  bio?: string;
 }
