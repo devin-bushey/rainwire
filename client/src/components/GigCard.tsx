@@ -13,6 +13,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
     <>
       <Card
         sx={{
+          position: "relative",
           backgroundColor: bgcolor,
           maxWidth: "400px",
           width: "100%",
@@ -27,6 +28,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
           sx={{
             display: "flex",
             alignItems: "center",
+            paddingBottom: "4px",
           }}
         >
           <SpotifyAlbumArt image={gig.artist.albumArtUrl} />
@@ -34,6 +36,20 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
             <SpotifyGigName name={gig.artist.name} />
             <Description gig={gig} />
           </Box>
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "5px",
+            left: "50%", // Center the box horizontally
+            transform: "translateX(-50%)", // Move the box back to the left by 50% of its width
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "0.6rem",
+            }}
+          >{`(click me for a preview)`}</Typography>
         </Box>
       </Card>
       <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
