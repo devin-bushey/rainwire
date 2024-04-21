@@ -18,4 +18,5 @@ export enum Festivals {
   Coachella = "coachella",
   TheFunction = "theFunction",
   PachenaBay = "pachenaBay",
+  Rifflandia2024 = "rifflandia_2024",
 }

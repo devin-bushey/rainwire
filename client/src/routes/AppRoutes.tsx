@@ -11,6 +11,7 @@ import { PachenaBay } from "../festivals/PachenaBay/PachenaBay";
 import { PhillipsBackyard } from "../festivals/PhillipsBackyard/PhillipsBackyard";
 import { PhillipsBackyard2024 } from "../festivals/PhillipsBackyard2024/PhillipsBackyard2024";
 import { LaketownShakedown } from "../festivals/LaketownShakedown/LaketownShakedown";
+import { Rifflandia2024 } from "../festivals/Rifflandia2024/Rifflandia2024";
 
 export const AppRoutes = () => {
   useAnalytics();
@@ -29,6 +30,7 @@ export const AppRoutes = () => {
           <Route path="/phillipsbackyard" element={<PhillipsBackyard />} />
           <Route path="/phillipsbackyard2024" element={<PhillipsBackyard2024 />} />
           <Route path="/laketownShakedown" element={<LaketownShakedown />} />
+          <Route path="/rifflandia2024" element={<Rifflandia2024 />} />
         </Routes>
       </Box>
     </>
