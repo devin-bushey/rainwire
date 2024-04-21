@@ -1,0 +1,8 @@
+
+.record-shop-title {
+  font-size: 56px !important;
+
+  @media (max-width: 600px) {
+    font-size: 36px !important;
+  }  
+}
