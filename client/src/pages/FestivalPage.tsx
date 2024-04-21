@@ -11,6 +11,7 @@ export const FestivalPage = () => {
   const festivalList = [
     { title: "Phillips Backyard", endpoint: "phillipsbackyard2024", colour: "hsl(15.34deg 88% 60.78%)" },
     { title: "Pachena Bay", endpoint: "pachenabay", colour: "#3b6ab3" },
+    { title: "Laketown Shakedown", endpoint: "laketownShakedown", colour: "#41b2cc" },
   ];
 
   const festivalList2023 = [

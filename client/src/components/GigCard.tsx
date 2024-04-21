@@ -5,7 +5,7 @@ import { useAdjustFontSize } from "../hooks/useAdjustFontSize";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { useState } from "react";
 import { SpotifyPreviewModal } from "../Rifflandia/SpotifyPreviewModal";
-import { BioModal } from "../Rifflandia/BioModal";
+import { BioModal } from "./BioModal";
 
 export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
   const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
