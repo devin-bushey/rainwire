@@ -1,10 +1,16 @@
 import { Button, Tooltip, Typography } from "@mui/material";
-import { primaryButtonColours } from "../theme/AppStyles";
+import { SpotifyColour, primaryButtonColours } from "../theme/AppStyles";
 import { isLoggedIntoSpotify } from "../utils/spotifyAuthUtils";
 import { SpotifyIcon } from "./Icons";
 import "../styles/ClickMe.css";
 
-export const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePlaylist: () => void }) => {
+export const CreatePlaylistButton = ({
+  handleCreatePlaylist,
+  iconColour,
+}: {
+  handleCreatePlaylist: () => void;
+  iconColour?: SpotifyColour;
+}) => {
   const disabled = !isLoggedIntoSpotify();
 
   const commonButtonProps = {
@@ -25,7 +31,7 @@ export const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePla
               sx={commonButtonProps}
               style={{ backgroundColor: "#B5B5B5", color: "#696969" }}
             >
-              {SpotifyIcon()}
+              {SpotifyIcon(iconColour)}
               <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
             </Button>
           </span>
@@ -40,7 +46,7 @@ export const CreatePlaylistButton = ({ handleCreatePlaylist }: { handleCreatePla
             ...commonButtonProps,
           }}
         >
-          {SpotifyIcon()}
+          {SpotifyIcon(iconColour)}
           <Typography sx={{ paddingBottom: 0 }}>Create playlist</Typography>
         </Button>
       )}

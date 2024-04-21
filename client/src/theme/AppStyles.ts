@@ -50,3 +50,9 @@ export const secondaryButtonColours = {
     backgroundColor: COLOURS.card_colours[1],
   },
 };
+
+export enum SpotifyColour {
+  Black = "black",
+  White = "white",
+  Green = "green",
+}

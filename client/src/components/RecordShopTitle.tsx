@@ -1,18 +1,20 @@
 import { Typography } from "@mui/material";
 import { goTo } from "../utils/browserUtils";
-import { Block } from "@mui/icons-material";
+import "../styles/RecordShopTitle.css";
 
 export const RecordShopTitle = ({ textColour = "black" }: { textColour?: string }) => (
-  <Typography
-    sx={{
-      fontSize: "56px",
-      fontFamily: "Lobster, cursive",
-      letterSpacing: "2px",
-      color: textColour,
-      cursor: "pointer",
-    }}
-    onClick={() => goTo("/")}
-  >
-    Record Shop
-  </Typography>
+  <>
+    <Typography
+      className="record-shop-title"
+      sx={{
+        fontFamily: "Lobster, cursive",
+        letterSpacing: "2px",
+        color: textColour,
+        cursor: "pointer",
+      }}
+      onClick={() => goTo("/")}
+    >
+      Record Shop
+    </Typography>
+  </>
 );

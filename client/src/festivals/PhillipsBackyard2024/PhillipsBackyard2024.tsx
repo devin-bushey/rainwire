@@ -9,7 +9,7 @@ import { RecordShopTitle } from "../../components/RecordShopTitle";
 import { AboutUsPopover } from "../../components/AboutUsPopover";
 import { ProfileMenu } from "../../components/ProfileMenu";
 import { goToNewTab } from "../../utils/browserUtils";
-import { PageClassName } from "../../theme/AppStyles";
+import { PageClassName, SpotifyColour } from "../../theme/AppStyles";
 import { GigList } from "../../components/GigList";
 import { redirectToAuthForBrowser } from "../../utils/spotifyAuthUtils";
 import { useSettingsState } from "../../hooks/useSettingsCollapseState";
@@ -19,9 +19,7 @@ import { Spinner } from "../../components/Spinner";
 import { CreatePlaylistButton } from "../../components/CreatePlaylistButton";
 import { isMobile } from "../../utils/responsiveUtils";
 import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
-import phillipsBackyarderSmiley from "./assets/phillipsSmiley.svg";
-import phillipsLogo from "./assets/phillipsLogo.png";
-
+import phillipsBackyardLogo from "./assets/phillipsBackyardLogo.png";
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
 import "./phillipsBackyardStyles.css";
@@ -35,9 +33,12 @@ const TICKET_LINK = "https://www.showpass.com/o/phillips-brewery/";
 const PAGE_CLASS = PageClassName.PhillipsBackyard2024;
 
 const COLOURS = Object.freeze({
-  text: "#030918",
+  text: "#FFFFFF",
   cardColours: ["#f97fb3", "#fedf21", "#49a7c4", "#f37144"],
-  stickyFadeButtonBgColour: "#f37144",
+  stickyFadeButtonBgColour: "#f39934",
+  spotifyIcons: {
+    primary: SpotifyColour.White,
+  },
 });
 
 export const PhillipsBackyard2024 = () => {
@@ -71,7 +72,7 @@ export const PhillipsBackyard2024 = () => {
               <Grid
                 container
                 direction="row"
-                justifyContent={{ xs: "center", sm: "space-between" }}
+                justifyContent="space-between"
                 alignItems="center"
                 sx={{ marginTop: "12px" }}
                 columnGap={4}
@@ -85,34 +86,24 @@ export const PhillipsBackyard2024 = () => {
                 the <span style={{ fontWeight: "900", fontStyle: "italic" }}>Phillips Backyard 2024</span> events.
               </Typography>
 
-              <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
-
-              <div>
-                <img
-                  src={phillipsLogo}
-                  alt="Phillips Backyard Smiley"
-                  style={{ maxWidth: "300px", marginBottom: "-22px" }}
-                />
-              </div>
+              <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} pageClassName={PAGE_CLASS} />
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="center" className="phillips-background-icons background-bottom">
+          <Grid container justifyContent="center" className="background-bottom">
+            <div className="phillips-background-icons" />
+
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3, marginBottom: "130px" }}>
               <Grid
                 container
                 justifyContent={{ xs: "center", sm: "space-between" }}
                 alignItems="flex-start"
-                sx={{ marginTop: "24px" }}
+                sx={{ marginTop: "48px" }}
                 columnGap={2}
               >
-                <Grid item style={{ marginLeft: "10%", marginRight: "10%", maxWidth: "325px" }}>
+                <Grid item style={{ maxWidth: "325px" }}>
                   <div>
-                    <img
-                      src={phillipsBackyarderSmiley}
-                      alt="Phillips Backyard Smiley"
-                      style={{ maxWidth: "190px", marginBottom: "-22px" }}
-                    />
+                    <img src={phillipsBackyardLogo} alt="Phillips Backyard Logo" style={{ maxWidth: "300px" }} />
                   </div>
 
                   <Button
@@ -131,11 +122,20 @@ export const PhillipsBackyard2024 = () => {
                     {isLoggedIntoSpotify() ? (
                       <ProfileMenu />
                     ) : (
-                      <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+                      <SignInButton
+                        redirectToAuth={redirectToAuthForBrowser(openInAppModal)}
+                        iconColour={COLOURS.spotifyIcons.primary}
+                      />
                     )}
                   </div>
                   <IconButton
-                    sx={{ marginLeft: "8px", justifySelf: "end", marginTop: "12px", color: "white", alignSelf: "end" }}
+                    sx={{
+                      marginLeft: "8px",
+                      justifySelf: "end",
+                      marginTop: "12px",
+                      color: "white",
+                      alignSelf: "end",
+                    }}
                     onClick={() => (isSettingsOpen ? closeSettings() : openSettings())}
                   >
                     <SettingsIcon fontSize="large" />
@@ -144,7 +144,11 @@ export const PhillipsBackyard2024 = () => {
               </Grid>
 
               <Collapse in={isSettingsOpen} collapsedSize={0}>
-                <Settings numTopTracks={numTopTracks} setNumTopTracks={setNumTopTracks} />
+                <Settings
+                  numTopTracks={numTopTracks}
+                  setNumTopTracks={setNumTopTracks}
+                  iconColour={COLOURS.spotifyIcons.primary}
+                />
               </Collapse>
 
               <Box margin="24px 0">
@@ -155,9 +159,15 @@ export const PhillipsBackyard2024 = () => {
                 bgFadeColourHex={COLOURS.stickyFadeButtonBgColour}
                 button={
                   isMobile() && !isLoggedIntoSpotify() ? (
-                    <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+                    <SignInButton
+                      redirectToAuth={redirectToAuthForBrowser(openInAppModal)}
+                      iconColour={COLOURS.spotifyIcons.primary}
+                    />
                   ) : (
-                    <CreatePlaylistButton handleCreatePlaylist={handleCreatePlaylist} />
+                    <CreatePlaylistButton
+                      handleCreatePlaylist={handleCreatePlaylist}
+                      iconColour={COLOURS.spotifyIcons.primary}
+                    />
                   )
                 }
               />

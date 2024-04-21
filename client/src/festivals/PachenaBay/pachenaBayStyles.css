@@ -6,6 +6,7 @@
   --card-text-color: #FCFCFC;
 
   --popover-bg-color: #FFEAC2;
+  --popover-text-color: #312F2E;
 
   --primary-button-bg-color: #EE97A6;
   --primary-button-text-color: #FCFCFC;
@@ -132,31 +133,9 @@
   
   /****** CUSTOM COMPONENT COLOURS ******/
   .preview-playlist {
-    .MuiCard-root {
+    .preview-playlist-card {
       background-color: var(--card-bg-color);
       color: var(--card-text-color);
-    }
-  
-    .MuiButton-root {
-      background-color: var(--secondary-button-bg-color);
-      color: var(--secondary-button-text-color);
-  
-      &:hover {
-        background-color: var(--secondary-button-hover-bg-color);
-        color: var(--secondary-button-hover-text-color);
-      }
-    }
-  }
-  
-  .about-us-popover {
-    button {
-      background-color: var(--secondary-button-bg-color);
-      color: var(--secondary-button-text-color);
-  
-      &:hover {
-        background-color: var(--secondary-button-hover-bg-color);
-        color: var(--secondary-button-hover-text-color);
-      }
     }
   }
   
@@ -176,6 +155,19 @@
 
   .settings-container {
     background-color: var(--popover-bg-color);
+    color: var(--popover-text-color);
+
+    .top-tracks-slider {
+      color: var(--popover-text-color);
+
+      .MuiSlider-markLabel {
+        color: var(--popover-text-color);
+      }
+    }
+
+    .unsubscribe-label {
+      color: var(--popover-text-color);
+    }
   }
 
   .load-more-button {

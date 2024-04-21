@@ -72,7 +72,7 @@ export const PachenaBay = () => {
               <Grid
                 container
                 direction="row"
-                justifyContent={{ xs: "center", sm: "space-between" }}
+                justifyContent="space-between"
                 alignItems="center"
                 sx={{ marginTop: "12px" }}
                 columnGap={4}

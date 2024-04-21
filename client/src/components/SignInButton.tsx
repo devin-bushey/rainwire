@@ -1,7 +1,14 @@
 import { Button, Typography } from "@mui/material";
-import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import { SpotifyColour } from "../theme/AppStyles";
+import { SpotifyIcon } from "./Icons";
 
-export const SignInButton = ({ redirectToAuth }: { redirectToAuth: () => void }) => (
+export const SignInButton = ({
+  redirectToAuth,
+  iconColour,
+}: {
+  redirectToAuth: () => void;
+  iconColour?: SpotifyColour;
+}) => (
   <Button
     onClick={redirectToAuth}
     variant="contained"
@@ -12,7 +19,7 @@ export const SignInButton = ({ redirectToAuth }: { redirectToAuth: () => void })
       height: "48px",
     }}
   >
-    <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "16px" }} />
+    {SpotifyIcon(iconColour)}
     <Typography sx={{ fontWeight: "700", paddingBottom: 0 }}>Sign in</Typography>
   </Button>
 );

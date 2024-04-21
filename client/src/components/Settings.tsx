@@ -1,15 +1,16 @@
 import { Typography, Slider, Link } from "@mui/material";
 import { Box } from "@mui/system";
-import { COLOURS } from "../theme/AppStyles";
-import spotifyIcon from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import { SpotifyColour } from "../theme/AppStyles";
 import "../styles/Settings.css";
+import { SpotifyIcon } from "./Icons";
 
 type SettingsProps = {
   numTopTracks: number;
   setNumTopTracks: (numTopTracks: number) => void;
+  iconColour?: SpotifyColour;
 };
 
-export const Settings = ({ numTopTracks, setNumTopTracks }: SettingsProps) => {
+export const Settings = ({ numTopTracks, setNumTopTracks, iconColour }: SettingsProps) => {
   const marks = [];
   for (let i = 1; i <= 5; i++) {
     marks.push({
@@ -38,8 +39,8 @@ export const Settings = ({ numTopTracks, setNumTopTracks }: SettingsProps) => {
           marginBottom: "4px",
         }}
       >
-        <Typography variant="h6" sx={{ color: COLOURS.black }}>
-          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+        <Typography variant="h6">
+          {SpotifyIcon(iconColour)}
           Customize
         </Typography>
       </Box>
@@ -51,6 +52,7 @@ export const Settings = ({ numTopTracks, setNumTopTracks }: SettingsProps) => {
             <Slider
               aria-label="Number of tracks per artist"
               valueLabelDisplay="auto"
+              className="top-tracks-slider"
               step={1}
               marks={marks}
               min={1}
@@ -84,7 +86,9 @@ export const Settings = ({ numTopTracks, setNumTopTracks }: SettingsProps) => {
 
       <Box sx={{ marginTop: "24px" }}>
         <Link href="https://www.spotify.com/account/apps">
-          <Typography sx={{ fontSize: "12px" }}>Unsubscribe</Typography>
+          <Typography sx={{ fontSize: "12px" }} className="unsubscribe-label">
+            Unsubscribe
+          </Typography>
         </Link>
       </Box>
     </Box>
