@@ -87,14 +87,6 @@ export const PhillipsBackyard2024 = () => {
               </Typography>
 
               <PreviewPlaylist playlistUrl={SAMPLE_PLAYLIST_URL} />
-
-              <div>
-                <img
-                  src={phillipsLogo}
-                  alt="Phillips Backyard Smiley"
-                  style={{ maxWidth: "300px", marginBottom: "-22px" }}
-                />
-              </div>
             </Grid>
           </Grid>
 
@@ -128,7 +120,7 @@ export const PhillipsBackyard2024 = () => {
                     {isLoggedIntoSpotify() ? (
                       <ProfileMenu />
                     ) : (
-                      <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+                      <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} iconColour="white" />
                     )}
                   </div>
                   <IconButton
