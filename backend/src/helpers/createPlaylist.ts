@@ -116,6 +116,10 @@ export const CreateBlankPlaylist = async ({
     playlist_name = "record shop phillips backyard 2024";
   }
 
+  if (city === Festivals.Rifflandia2024) {
+    playlist_name = "record shop rifflandia 2024";
+  }
+
   let description = `a mixtape created by recordshop.cool`;
 
   return post({
