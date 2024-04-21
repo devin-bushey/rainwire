@@ -1,13 +1,15 @@
-import { Card, Typography, CardMedia } from "@mui/material";
+import { Card, Typography, CardMedia, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { Gig } from "../types/Gig";
+import { Artist, Gig } from "../types/Gig";
 import { useAdjustFontSize } from "../hooks/useAdjustFontSize";
 import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { useState } from "react";
 import { SpotifyPreviewModal } from "../Rifflandia/SpotifyPreviewModal";
+import { BioModal } from "./BioModal";
 
 export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
   const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
+  const [artistBio, setArtistBio] = useState<Artist | undefined>();
 
   return (
     <>
@@ -17,13 +19,32 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
           maxWidth: "400px",
           width: "100%",
           alignItems: "center",
-          cursor: "pointer",
+          // cursor: "pointer",
           marginBottom: "0",
         }}
-        onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
         className="gig-card"
       >
-        <SpotifyLogoLong />
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <SpotifyLogoLong />
+          <Box sx={{ marginTop: "-4px", marginRight: "-12px" }}>
+            {gig.artist.bio && (
+              <Button
+                sx={{ scale: "70%", marginRight: "-12px" }}
+                variant="outlined"
+                onClick={() => setArtistBio(gig.artist)}
+              >
+                Bio
+              </Button>
+            )}
+            <Button
+              sx={{ scale: "70%", padding: "4px 12px" }}
+              variant="outlined"
+              onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
+            >
+              Preview
+            </Button>
+          </Box>
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -38,6 +59,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
         </Box>
       </Card>
       <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
+      <BioModal artistBio={artistBio} setArtistBio={setArtistBio} />
     </>
   );
 };

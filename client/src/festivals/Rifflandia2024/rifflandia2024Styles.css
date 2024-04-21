@@ -1,0 +1,143 @@
+.rifflandia-2024 {
+  --main-bg-color-top: rgb(253 227 226);
+  --main-bg-color-bottom: rgb(253 227 226);
+  --main-text-color: #030918;
+
+  --card-bg-color: rgba(239,180,210,1);
+  --card-text-color: #030918;
+
+  --popover-bg-color: #FDF4DC;
+
+  --primary-button-bg-color: #00AEEF;
+  --primary-button-text-color: #FFFFFF;
+  --primary-button-hover-bg-color: #FFFFFF;
+  --primary-button-hover-text-color: #030918;
+
+  --secondary-button-bg-color: rgba(247,216,173,1);
+  --secondary-button-text-color: #030918;
+  --secondary-button-hover-bg-color: #FFFFFF;
+  --secondary-button-hover-text-color: #030918;
+
+  --load-more-button-hover-bg-color: #FCFCFC10;
+
+  overflow: hidden;
+
+  .main-page { 
+    position: relative;
+    background-color: var(--main-bg-color);
+    z-index: 0;
+    height: 100%;
+  }
+
+  .background-top {
+    background-color: var(--main-bg-color-top);
+  }
+
+  .background-bottom {
+    background-color: var(--main-bg-color-bottom);
+  }
+  
+
+  
+  /***** BG IMAGES ******/
+  
+  .sidebar {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  
+  
+  /******* BUTTONS *******/
+  .primary-button {
+    background-color: var(--primary-button-bg-color);
+    color: var(--primary-button-text-color);
+  
+    &:hover {
+      background-color: var(--primary-button-hover-bg-color) ;
+      color: var(--primary-button-hover-text-color) ;  
+    }
+  }
+  
+  .secondary-button {
+    background-color: var(--secondary-button-bg-color) ;
+    color: var(--secondary-button-text-color) ;
+
+    border: 0;
+    box-shadow: 0 3px 1px -2px rgba(0 0 0 / 0.2);
+  
+    &:hover {
+      background-color: var(--secondary-button-hover-bg-color) ;
+      color: var(--secondary-button-hover-text-color) ;  
+
+      border: 0;
+      box-shadow: none;
+    }
+  }
+  
+  
+  
+  /****** CUSTOM COMPONENT COLOURS ******/
+  .preview-playlist {
+    .MuiCard-root {
+      background-color: var(--card-bg-color);
+      color: var(--card-text-color);
+    }
+  
+    .MuiButton-root {
+      background-color: var(--secondary-button-bg-color);
+      color: var(--secondary-button-text-color);
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color) ;
+        color: var(--secondary-button-hover-text-color) ;
+      }
+    }
+  }
+  
+  .about-us-popover {
+    button {
+      background-color: var(--secondary-button-bg-color);
+      color: var(--secondary-button-text-color);
+  
+      &:hover {
+        background-color: var(--secondary-button-hover-bg-color);
+        color: var(--secondary-button-hover-text-color);
+      }
+    }
+  }
+  
+  .about-us-contents {
+    background-color: var(--popover-bg-color);
+  }
+  
+  .contact-us-modal-contents {
+    background-color: var(--popover-bg-color);
+  }
+
+  .profile-menu-button {
+    button {
+      color: var(--main-text-color);
+    }
+  }
+
+  .settings-container {
+    background-color: var(--popover-bg-color);
+  }
+
+  .load-more-button {
+    color: var(--main-text-color);
+    border-color: var(--main-text-color);
+
+    &:hover {
+      border-color: var(--main-text-color);
+      background-color: var(--load-more-button-hover-bg-color);
+    }
+  }
+
+  .in-app-modal {
+    background-color: var(--popover-bg-color);
+  }
+    
+}
