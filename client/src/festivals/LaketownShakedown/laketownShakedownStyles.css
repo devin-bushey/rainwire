@@ -1,19 +1,19 @@
-.phillips-backyard-2024 {
-  --main-bg-color-top: #f37144;
-  --main-bg-color-bottom: #f68c2b;
-  --main-text-color: #030918;
+.laketown-shakedown {
+  --main-bg-color-top: #bae2e8;
+  --main-bg-color-bottom: #03324e;
+  --main-text-color: #FFFFFF;
 
-  --card-bg-color: #f37144;
-  --card-text-color: #030918;
+  --card-bg-color: #03324e;
+  --card-text-color: #FFFFFF;
 
-  --popover-bg-color: #f37144;
+  --popover-bg-color: #FDF4DC;
 
-  --primary-button-bg-color: #49a7c4;
+  --primary-button-bg-color: #6abcd4;
   --primary-button-text-color: #030918;
   --primary-button-hover-bg-color: #FFFFFF;
   --primary-button-hover-text-color: #030918;
 
-  --secondary-button-bg-color: #fedf21;
+  --secondary-button-bg-color: #dba127;
   --secondary-button-text-color: #030918;
   --secondary-button-hover-bg-color: #FFFFFF;
   --secondary-button-hover-text-color: #030918;
@@ -22,38 +22,21 @@
 
   overflow: hidden;
 
-  .phillips-page { 
+  .main-page { 
     position: relative;
+    background-color: var(--main-bg-color);
     z-index: 0;
     height: 100%;
   }
+
+  .background-top {
+    background-color: var(--main-bg-color-top);
+  }
+
+  .background-bottom {
+    background-color: var(--main-bg-color-bottom);
+  }
   
-  .background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(  #F78D2B, #f37144, #f37144, #F78D2B );
-  }
-
-  .background-border {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('./assets/phillipsBackgroundBorder.svg');
-    background-size: auto;
-    z-index: 1;
-  }
-
-
-  /* .background-footer {
-    position: fixed;
-    width: 100%;
-    height: 30%;
-    background-image: url(/src/festivals/PhillipsBackyard2024/assets/phillipsBackgroundFooter.jpg);
-    background-size: cover;
-    background-position: top;
-    bottom: 0;
-  } */
 
   
   /***** BG IMAGES ******/
@@ -63,33 +46,7 @@
     background-size: contain;
     background-repeat: no-repeat;
   }
-
-  .sidebar-darkened-bird {
-    background-image: url('./assets/phillipsBirdLogoDarkened.png');
-    z-index: 2;
-    width: 450px;
-    height: 450px;
-    top: -64px;
-    left: 1%;
-  }
-
-  .sidebar-sparkle-right {
-    background-image: url('./assets/phillipsSparkle.png');
-    z-index: 4;
-    width: 100px;
-    height: 100px;
-    top: 265px;
-    right: 20%;
-
-    @media (max-width: 900px) {
-      right: 6%;
-    }
-
-    @media (max-width: 600px) {
-      top: 465px;
-      right: 2%;
-    }
-  }
+  
   
   
   /******* BUTTONS *******/
