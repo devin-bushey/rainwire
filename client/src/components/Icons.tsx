@@ -3,19 +3,18 @@ import spotifyIconBlack from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
 import spotifyIconWhite from "../spotifyLogos/Spotify_Icon_RGB_White.png";
 import spotifyIconGreen from "../spotifyLogos/Spotify_Icon_RGB_Green.png";
 
-export const getSpotifyIcon = (colour: SpotifyColour = SpotifyColour.Black) => {
+export const SpotifyIcon = (colour?: SpotifyColour) => {
+  let spotifyIcon;
   switch (colour) {
     case SpotifyColour.White:
-      return spotifyIconWhite;
+      spotifyIcon = spotifyIconWhite;
+      break;
     case SpotifyColour.Green:
-      return spotifyIconGreen;
+      spotifyIcon = spotifyIconGreen;
+      break;
     default:
-      return spotifyIconBlack;
+      spotifyIcon = spotifyIconBlack;
   }
-};
-
-export const SpotifyIcon = (colour?: SpotifyColour) => {
-  const spotifyIcon = getSpotifyIcon(colour);
 
   return <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "12px" }} />;
 };
