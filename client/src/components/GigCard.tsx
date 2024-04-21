@@ -41,7 +41,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
               variant="outlined"
               onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
             >
-              Preview
+              Listen
             </Button>
           </Box>
         </Box>
