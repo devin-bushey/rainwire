@@ -21,6 +21,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
           marginBottom: "0",
         }}
         onClick={() => setSpotifyPreviewArtistId(gig.artist.id)}
+        className="gig-card"
       >
         <SpotifyLogoLong />
         <Box

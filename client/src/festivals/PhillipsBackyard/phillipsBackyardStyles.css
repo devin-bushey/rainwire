@@ -112,7 +112,7 @@
   
   /****** CUSTOM COMPONENT COLOURS ******/
   .preview-playlist {
-    .MuiCard-root {
+    .preview-playlist-card {
       background-color: var(--card-bg-color);
       color: var(--card-text-color);
     }

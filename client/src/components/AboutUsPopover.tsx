@@ -23,8 +23,8 @@ export const AboutUsPopover = ({ pageClassName }: { pageClassName?: PageClassNam
   const open = Boolean(popoverAnchor);
 
   return (
-    <Box className="about-us-popover">
-      <Button onClick={handleClick} sx={DEFAULT_PRIMARY_BUTTON_COLOUR}>
+    <Box className={`about-us-popover ${PageClassName}`}>
+      <Button onClick={handleClick} sx={DEFAULT_PRIMARY_BUTTON_COLOUR} className="secondary-button">
         CREDITS
       </Button>
       <Popover

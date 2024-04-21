@@ -1,3 +1,7 @@
+import spotifyIconBlack from "../spotifyLogos/Spotify_Icon_RGB_Black.png";
+import spotifyIconWhite from "../spotifyLogos/Spotify_Icon_RGB_White.png";
+import spotifyIconGreen from "../spotifyLogos/Spotify_Icon_RGB_Green.png";
+
 export const COLOURS = {
   black: "#3A3335", // jet
   light_mode_white: "#FDF0D5", //papya whip
@@ -47,4 +51,21 @@ export const secondaryButtonColours = {
   ":hover": {
     backgroundColor: COLOURS.card_colours[1],
   },
+};
+
+export enum SpotifyColour {
+  Black = "black",
+  White = "white",
+  Green = "green",
+}
+
+export const getSpotifyIcon = (colour: SpotifyColour = SpotifyColour.Black) => {
+  switch (colour) {
+    case SpotifyColour.White:
+      return spotifyIconWhite;
+    case SpotifyColour.Green:
+      return spotifyIconGreen;
+    default:
+      return spotifyIconBlack;
+  }
 };
