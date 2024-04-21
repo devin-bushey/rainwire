@@ -36,6 +36,9 @@ const COLOURS = Object.freeze({
   text: "#FFFFFF",
   cardColours: ["#f97fb3", "#fedf21", "#49a7c4", "#f37144"],
   stickyFadeButtonBgColour: "#f39934",
+  spotifyIcons: {
+    primary: SpotifyColour.White,
+  },
 });
 
 export const PhillipsBackyard2024 = () => {
@@ -118,7 +121,7 @@ export const PhillipsBackyard2024 = () => {
                     ) : (
                       <SignInButton
                         redirectToAuth={redirectToAuthForBrowser(openInAppModal)}
-                        iconColour={SpotifyColour.White}
+                        iconColour={COLOURS.spotifyIcons.primary}
                       />
                     )}
                   </div>
@@ -141,7 +144,7 @@ export const PhillipsBackyard2024 = () => {
                 <Settings
                   numTopTracks={numTopTracks}
                   setNumTopTracks={setNumTopTracks}
-                  iconColour={SpotifyColour.White}
+                  iconColour={COLOURS.spotifyIcons.primary}
                 />
               </Collapse>
 
@@ -153,11 +156,14 @@ export const PhillipsBackyard2024 = () => {
                 bgFadeColourHex={COLOURS.stickyFadeButtonBgColour}
                 button={
                   isMobile() && !isLoggedIntoSpotify() ? (
-                    <SignInButton redirectToAuth={redirectToAuthForBrowser(openInAppModal)} />
+                    <SignInButton
+                      redirectToAuth={redirectToAuthForBrowser(openInAppModal)}
+                      iconColour={COLOURS.spotifyIcons.primary}
+                    />
                   ) : (
                     <CreatePlaylistButton
                       handleCreatePlaylist={handleCreatePlaylist}
-                      iconColour={SpotifyColour.White}
+                      iconColour={COLOURS.spotifyIcons.primary}
                     />
                   )
                 }

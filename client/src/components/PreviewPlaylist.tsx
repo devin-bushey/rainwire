@@ -1,6 +1,6 @@
 import { Box, Button, Card, Typography } from "@mui/material";
 import { goToNewTabOnDesktop } from "../utils/browserUtils";
-import { PageClassName, SpotifyColour, getSpotifyIcon } from "../theme/AppStyles";
+import { PageClassName, SpotifyColour } from "../theme/AppStyles";
 import { SpotifyIcon } from "./Icons";
 
 export const PreviewPlaylist = ({

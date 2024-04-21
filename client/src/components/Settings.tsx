@@ -1,7 +1,8 @@
 import { Typography, Slider, Link } from "@mui/material";
 import { Box } from "@mui/system";
-import { SpotifyColour, getSpotifyIcon } from "../theme/AppStyles";
+import { SpotifyColour } from "../theme/AppStyles";
 import "../styles/Settings.css";
+import { SpotifyIcon } from "./Icons";
 
 type SettingsProps = {
   numTopTracks: number;
@@ -17,8 +18,6 @@ export const Settings = ({ numTopTracks, setNumTopTracks, iconColour }: Settings
       label: `${i}`,
     });
   }
-
-  const spotifyIcon = getSpotifyIcon(iconColour);
 
   return (
     <Box
@@ -41,7 +40,7 @@ export const Settings = ({ numTopTracks, setNumTopTracks, iconColour }: Settings
         }}
       >
         <Typography variant="h6">
-          <img src={spotifyIcon} alt="spotify_logo" width="20px" height="20px" style={{ marginRight: "8px" }} />
+          {SpotifyIcon(iconColour)}
           Customize
         </Typography>
       </Box>
