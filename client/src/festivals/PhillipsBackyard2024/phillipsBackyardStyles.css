@@ -172,5 +172,9 @@
   .in-app-modal {
     background-color: var(--popover-bg-color);
   }
+
+  .artist-bio-modal {
+    color: var(--main-text-color);
+  }
     
 }
