@@ -32,13 +32,7 @@ export const InAppModal = ({
   };
 
   return (
-    <Modal
-      open={isOpen}
-      onClose={closeModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      className={pageClassName}
-    >
+    <Modal open={isOpen} onClose={closeModal} className={pageClassName}>
       <Box
         className="in-app-modal"
         sx={{
@@ -50,6 +44,7 @@ export const InAppModal = ({
           maxWidth: 400,
           bgcolor: "background.paper",
           border: "2px solid #000",
+          borderRadius: "10px",
           boxShadow: 24,
           p: 4,
         }}
@@ -89,7 +84,7 @@ export const InAppModal = ({
             marginTop: "20px",
           }}
         >
-          <Typography sx={{ paddingBottom: "0px", fontSize: "14px" }}>{urlToCopy}</Typography>
+          <Typography sx={{ paddingBottom: "0px", fontSize: "14px", overflowWrap: "anywhere" }}>{urlToCopy}</Typography>
           <Button onClick={handleCopy} sx={{ minWidth: "20px" }}>
             <img src={copy} alt="copy" height="20px" />
           </Button>

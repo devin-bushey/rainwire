@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import { goToNewTabOnDesktop } from "../utils/browserUtils";
 import { PageClassName, SpotifyColour } from "../theme/AppStyles";
 import { SpotifyIcon } from "./Icons";
@@ -12,39 +12,42 @@ export const PreviewPlaylist = ({
   pageClassName?: PageClassName;
   iconColour?: SpotifyColour;
 }) => (
-  <Box
+  <Grid
+    container
     className={`preview-playlist ${pageClassName}`}
+    justifyContent="center"
     sx={{
       margin: "24px 0",
       display: "flex",
-      justifyContent: "center",
     }}
   >
-    <Card sx={{ maxWidth: "70%", padding: "24px" }} className="preview-playlist-card">
-      <Typography>Not sure where to start? We&#39;ve created a sample playlist for you to check out!</Typography>
+    <Grid item xs={11} sm={9} lg={9} xl={8}>
+      <Card sx={{ padding: "24px" }} className="preview-playlist-card">
+        <Typography>Not sure where to start? We&#39;ve created a sample playlist for you to check out!</Typography>
 
-      <Button
-        onClick={() => goToNewTabOnDesktop(playlistUrl)}
-        sx={{
-          width: "100%",
-          maxWidth: "210px",
-          marginTop: "12px",
-          justifyContent: "center",
-          height: "36px",
-        }}
-        className="secondary-button"
-      >
-        {SpotifyIcon(iconColour)}
-        <Typography
+        <Button
+          onClick={() => goToNewTabOnDesktop(playlistUrl)}
           sx={{
-            fontSize: "12px",
-            fontWeight: "700",
-            paddingBottom: 0,
+            width: "100%",
+            maxWidth: "210px",
+            marginTop: "12px",
+            justifyContent: "center",
+            height: "36px",
           }}
+          className="secondary-button"
         >
-          Preview a Playlist
-        </Typography>
-      </Button>
-    </Card>
-  </Box>
+          {SpotifyIcon(iconColour)}
+          <Typography
+            sx={{
+              fontSize: "12px",
+              fontWeight: "700",
+              paddingBottom: 0,
+            }}
+          >
+            Preview a Playlist
+          </Typography>
+        </Button>
+      </Card>
+    </Grid>
+  </Grid>
 );

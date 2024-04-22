@@ -6,7 +6,7 @@
   --card-bg-color: #49a7c4;
   --card-text-color: #FFFFFF;
 
-  --popover-bg-color: #49a7c4;
+  --popover-bg-color: #f39934;
   --popover-text-color: #FFFFFF;
 
   --primary-button-bg-color: #000000;
@@ -123,12 +123,13 @@
 
   .about-us-contents {
     background-color: var(--popover-bg-color);
-    border: 2px var(--card-text-color) solid;
+    color: var(--popover-text-color);
+    border: 2px var(--popover-text-color) solid;
     border-radius: 10px;
   }
   
   .contact-us-modal-contents {
-    background-color: var(--popover-bg-color);
+    background-color: var(--card-bg-color);
   }
 
   .profile-menu-button {
@@ -138,20 +139,20 @@
   }
 
   .settings-container {
-    background-color: var(--popover-bg-color);
-    color: var(--popover-text-color);
-    border: 2px var(--popover-text-color) solid;
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    border: 2px var(--card-text-color) solid;
 
     .top-tracks-slider {
-      color: var(--popover-text-color);
+      color: var(--card-text-color);
 
       .MuiSlider-markLabel {
-        color: var(--popover-text-color);
+        color: var(--card-text-color);
       }
     }
 
     .unsubscribe-label {
-      color: var(--popover-text-color);
+      color: var(--card-text-color);
     }
   }
 
@@ -170,11 +171,15 @@
   }
 
   .in-app-modal {
-    background-color: var(--popover-bg-color);
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    border: 2px var(--card-text-color) solid;
   }
 
-  .artist-bio-modal {
-    color: var(--main-text-color);
+  .artist-bio {
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    border: 2px var(--card-text-color) solid;
   }
     
 }
