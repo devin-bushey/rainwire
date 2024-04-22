@@ -1,0 +1,570 @@
+[
+    {
+        "artist": {
+            "id": "2dI9IuajQnLR5dLxHjTTqU",
+            "name": "The Polish Ambassador",
+            "topTracks": [
+                "spotify:track:68MsVSVZO8eSPdqPfhG83A",
+                "spotify:track:5pVaqd2X1JmZAReIljMjVm",
+                "spotify:track:0wiGl5R8KnqSUnZMgtB8uK",
+                "spotify:track:122hMjwC3yTOrtCFRcy0nc",
+                "spotify:track:4Isy6e1SbR2Bpfz0W8fLfK",
+                "spotify:track:07R7SoUA9UIuwkoqUyf8rB",
+                "spotify:track:6eY0AwLoWnicdvpWq94CSU",
+                "spotify:track:6EitoVRZLAURNDLFK1iUCI",
+                "spotify:track:5l6KAvKyHPpQla22UBHOAp",
+                "spotify:track:46KN2vho91ax2TcHgLVWBt"
+            ],
+            "uri": "spotify:artist:2dI9IuajQnLR5dLxHjTTqU",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0264cf30947858f762126f59c3",
+            "link": "https://open.spotify.com/artist/2dI9IuajQnLR5dLxHjTTqU"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 0
+    },
+    {
+        "artist": {
+            "id": "3inEFPs8hBxrt26sERpSoD",
+            "name": "The Gaff",
+            "topTracks": [
+                "spotify:track:3xPvxLbX0lSGgiFF9wY3y5",
+                "spotify:track:01k1DGVdlNM7earszsx4Z6",
+                "spotify:track:7noxfCNVXrTQ0YV6JGuscU",
+                "spotify:track:5t7kkGyfV56VVRBEUOS0zM",
+                "spotify:track:1UDQMvMVF75LIR4O3f7Q5m",
+                "spotify:track:5N67lR5Je4vAO1Vfj2Smyn",
+                "spotify:track:0TvyEDyyJZmTsoM5Vpo8M8",
+                "spotify:track:1TzmntsyHqsMinRgI1syct",
+                "spotify:track:09FDQTwkJkYSFrxUwzQHbm",
+                "spotify:track:4Wkutb0PpJQsEoLvmX4xJz"
+            ],
+            "uri": "spotify:artist:3inEFPs8hBxrt26sERpSoD",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02acefc8cd9e6c8f2c9847c248",
+            "link": "https://open.spotify.com/artist/3inEFPs8hBxrt26sERpSoD"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 7
+    },
+    {
+        "artist": {
+            "id": "5F8FbH4EdvOZrM8DyFOad3",
+            "name": "Dana Sipos",
+            "topTracks": [
+                "spotify:track:21R9Won9H1eCm6MLlQx7FV",
+                "spotify:track:6sFku3wiGQROJou4bZNaot",
+                "spotify:track:3dzjeamoe5d6TrzbVPztqg",
+                "spotify:track:5pvi6v8VMx7Obzctt2APYN",
+                "spotify:track:1kYx9jeKbPPxoxqaNjuCWN",
+                "spotify:track:7EptTfBOxlTHmfn29CT54E",
+                "spotify:track:5i1thSHrGnZGWdivTzhRd9",
+                "spotify:track:50YADExIerrU0f0jXroqNH",
+                "spotify:track:0dCEk5mG9GIrY6pMT9DBi6",
+                "spotify:track:5wo6Nr51xVFLXL5DoCsj3W"
+            ],
+            "uri": "spotify:artist:5F8FbH4EdvOZrM8DyFOad3",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0206a63d91a16434dbb19e73e5",
+            "link": "https://open.spotify.com/artist/5F8FbH4EdvOZrM8DyFOad3"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 16
+    },
+    {
+        "artist": {
+            "id": "6PiLK6bnlImDxUJxYoBJFL",
+            "name": "Space Junk Removal Service",
+            "topTracks": [
+                "spotify:track:6bvbA3CRrpqmbQRFcrO5Ea",
+                "spotify:track:58foxZxZrWCTO3KCDzzL7b",
+                "spotify:track:0zVo8EDJ0qwUQgcSTaB72C",
+                "spotify:track:2kpFrbZwunjplds3k8UdQx",
+                "spotify:track:0hsmk2kKFXcbrJqB7215i3",
+                "spotify:track:2QXshSkDGobmw2wMZ60jqX",
+                "spotify:track:7cn9sThk9PamAgdXAnowYj"
+            ],
+            "uri": "spotify:artist:6PiLK6bnlImDxUJxYoBJFL",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e027e4884cb2883c9f89c282d7a",
+            "link": "https://open.spotify.com/artist/6PiLK6bnlImDxUJxYoBJFL"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 21
+    },
+    {
+        "artist": {
+            "id": "5zGxDbn1y4SOXaA1BnuBLp",
+            "name": "Tsimka",
+            "topTracks": [
+                "spotify:track:6iDm1HWMBqtgLfCaaFTlh1",
+                "spotify:track:3jaifOEGgUvVRekaASQWJ7",
+                "spotify:track:4OwHwPwMfe2y5a5HWs3ha7",
+                "spotify:track:5h13gdadoomKWBmhdeSTvs",
+                "spotify:track:7p6hek1wJUm8mNlB3KZvyF",
+                "spotify:track:6xIAs0qv5si07qJngB3rXW",
+                "spotify:track:4ERdv9VUaw0rSOMDnhwDqA"
+            ],
+            "uri": "spotify:artist:5zGxDbn1y4SOXaA1BnuBLp",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0232ad2a2dd0a3ec71b21370df",
+            "link": "https://open.spotify.com/artist/5zGxDbn1y4SOXaA1BnuBLp"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 25
+    },
+    {
+        "artist": {
+            "id": "4FN8WHqUbwkd97WEjoCu7B",
+            "name": "Justin Martin",
+            "topTracks": [
+                "spotify:track:1utIIuIYIvQAjUdkdxiX8j",
+                "spotify:track:4hLYzmObqNcO0YBUXCI41c",
+                "spotify:track:100m5H7AWP78qoou9Eb8DF",
+                "spotify:track:37xNgM3oHq4l8ax6I8uveb",
+                "spotify:track:6clvR3OmV7nW9YGe4K6OTr",
+                "spotify:track:3U23fmr36vUY4Qkf41rQOX",
+                "spotify:track:788Nt0ULoPf0F497rQw6bU",
+                "spotify:track:5ROkVcgsHOtlzv1SKuAikA",
+                "spotify:track:45DV4BzaTrovOzvAmZACzg",
+                "spotify:track:3ypjXT60dysqdW9kDhXPKd"
+            ],
+            "uri": "spotify:artist:4FN8WHqUbwkd97WEjoCu7B",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02205cf2bc89f9c007196c3652",
+            "link": "https://open.spotify.com/artist/4FN8WHqUbwkd97WEjoCu7B"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 2
+    },
+    {
+        "artist": {
+            "id": "0gFzQiEIlENf0KHENee3dt",
+            "name": "Lazy Syrup Orchestra",
+            "topTracks": [
+                "spotify:track:1blchaRCDsurGAzsizzUex",
+                "spotify:track:05riGImJSST0MLEbsPtfrT",
+                "spotify:track:3HneHnRlV0A6boltpbkuAQ",
+                "spotify:track:1SaK0McbvuAUq9EavN80p0",
+                "spotify:track:69NKidpBnrETDiXMgCuDVd",
+                "spotify:track:5OdPYKY9cA1j3aDeUYQrXN",
+                "spotify:track:3LIDP1Nib3bc98bzPaMzkd",
+                "spotify:track:6GlhF9HX8jklASibSB5j5B",
+                "spotify:track:4JNQyLldrqfrFc1puul6La",
+                "spotify:track:5sDtuhaYh9tZaTU5Q2IuO4"
+            ],
+            "uri": "spotify:artist:0gFzQiEIlENf0KHENee3dt",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0212bddf34045d5dfe624191fb",
+            "link": "https://open.spotify.com/artist/0gFzQiEIlENf0KHENee3dt"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 5
+    },
+    {
+        "artist": {
+            "id": "6lbS1Q3LolPIqklbHywcAX",
+            "name": "Tarran the Tailor",
+            "topTracks": [
+                "spotify:track:0AJJpbujbSpgx2c4tvhODI",
+                "spotify:track:11CreJJtY4CbfQHo13Oowp",
+                "spotify:track:4p2S6WDyX9NbMOognUggNn",
+                "spotify:track:5Nh0LwlbyQrjagzwJPXZq7",
+                "spotify:track:703f3ZP2yVYK3A3TeEMO7G",
+                "spotify:track:6VHxTzP3fPxyZqlO3FsAKi",
+                "spotify:track:5OnrCGQOTfTJV1iSIYNOla",
+                "spotify:track:0PMI2gEz5Byc1iidqbRQC6",
+                "spotify:track:78iHaHXxfn6pQNvQOFdQ0Z",
+                "spotify:track:0w8QY19RrwwryFihpyDh7b"
+            ],
+            "uri": "spotify:artist:6lbS1Q3LolPIqklbHywcAX",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0268e349d3038c86406faafe13",
+            "link": "https://open.spotify.com/artist/6lbS1Q3LolPIqklbHywcAX"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 10
+    },
+    {
+        "artist": {
+            "id": "2f3YVIAhqzUy7etvZGwTGU",
+            "name": "Hannah Epperson",
+            "topTracks": [
+                "spotify:track:3JC9XoOevBnq6M8wztlzt5",
+                "spotify:track:4OicYJDRUyp2u1fBKztZw2",
+                "spotify:track:5l8Chr8XO2hk0AsfkjR7uX",
+                "spotify:track:0eyst8qVpufanRBfdNJvrJ",
+                "spotify:track:25Ij3vO4MWgOumlmosx2Ug",
+                "spotify:track:0HL826816TsbucL6VOWGNu",
+                "spotify:track:5yQQprs0WfAPK2OVhvABLg",
+                "spotify:track:0Ky63NVCfSPotPdGkKc3hu",
+                "spotify:track:6Uks3YTHQkl2H7toODYJCk",
+                "spotify:track:59XFO74oVWWSnkWZfkQW4z"
+            ],
+            "uri": "spotify:artist:2f3YVIAhqzUy7etvZGwTGU",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0208e793d568e964041013093d",
+            "link": "https://open.spotify.com/artist/2f3YVIAhqzUy7etvZGwTGU"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 13
+    },
+    {
+        "artist": {
+            "id": "5o4KPAWdA7kclMgpgtRMVh",
+            "name": "KILBOURNE",
+            "topTracks": [
+                "spotify:track:4OMpjhoIoLWFaEQYBQ3HGm",
+                "spotify:track:4tsesYyOpbb9rAx400OSIO",
+                "spotify:track:6jRxKPCbtPZF5HOdzyIx7r",
+                "spotify:track:4JASn0LjOBIdn8wZcQHLf1",
+                "spotify:track:3Fuvnh4qxM3ezEL679T9kB",
+                "spotify:track:32dceocrQoyKCFqu10IPtj",
+                "spotify:track:5wMb1qq2TuC0BWPeCJ2yZx",
+                "spotify:track:1B7pBIaxklWn9nsH6xV8Le",
+                "spotify:track:5i35NwGflPpEgv1grLZDHM",
+                "spotify:track:0olUNIdEbqQWKbwX4AjWhj"
+            ],
+            "uri": "spotify:artist:5o4KPAWdA7kclMgpgtRMVh",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02cabec4ae860cc5e877a4d93b",
+            "link": "https://open.spotify.com/artist/5o4KPAWdA7kclMgpgtRMVh"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 17
+    },
+    {
+        "artist": {
+            "id": "4XWSzAtdCP6ZPPSC2r4Fcl",
+            "name": "Mr.Dr.Brotherman",
+            "topTracks": [
+                "spotify:track:5NRQfzcSA2KdTvXvWtchy5",
+                "spotify:track:4aNodPWiT2I9xokRLk40uk",
+                "spotify:track:6BCgAfpZorfP6Jv2fEGWXQ",
+                "spotify:track:2m5tfzZAYaPZfZH6DwpDFR",
+                "spotify:track:5J2h5GAwtSQvhNy0uU1px4",
+                "spotify:track:6KQh0EnpwEd2OpgpEkcU7P"
+            ],
+            "uri": "spotify:artist:4XWSzAtdCP6ZPPSC2r4Fcl",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02565c33fd757b08d407f2efea",
+            "link": "https://open.spotify.com/artist/4XWSzAtdCP6ZPPSC2r4Fcl"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 19
+    },
+    {
+        "artist": {
+            "id": "58hdrLmqYVsT0K29qF236n",
+            "name": "Ofcosmos",
+            "topTracks": [
+                "spotify:track:73PvlJiT2pCXVZSYye1vPw",
+                "spotify:track:2dYJQqmj4kqmZqynsnDzHg",
+                "spotify:track:6Upijs4ujso7DCJloCVFys",
+                "spotify:track:6cDZ1OYz2M1MtkLSX7LGVo",
+                "spotify:track:54zuLhNLhuKC3k155Evq1G",
+                "spotify:track:2492I4VqE6hDml8IVz7ZPO"
+            ],
+            "uri": "spotify:artist:58hdrLmqYVsT0K29qF236n",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0208b4d730b7c3ae5a659958ca",
+            "link": "https://open.spotify.com/artist/58hdrLmqYVsT0K29qF236n"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 20
+    },
+    {
+        "artist": {
+            "id": "1B9AU344ULytzn9V9FolEs",
+            "name": "Sarah Orton",
+            "topTracks": [
+                "spotify:track:2Ot59qXtQWnDeaadizYCWQ",
+                "spotify:track:2HM8bNkB5xLUFXnTKAGXBx",
+                "spotify:track:5vKxkSrmzXbA9qaGdLPfVb",
+                "spotify:track:79EsIk2lxR5dDCSnXeO4em"
+            ],
+            "uri": "spotify:artist:1B9AU344ULytzn9V9FolEs",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e026890432dcde8879974f1cacc",
+            "link": "https://open.spotify.com/artist/1B9AU344ULytzn9V9FolEs"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 21
+    },
+    {
+        "artist": {
+            "id": "6nNP7Cm5qEpkL9sHNR5Zgk",
+            "name": "Stund",
+            "topTracks": [
+                "spotify:track:21tFF6pgDdmDDXINzduA5t",
+                "spotify:track:0j6ASjXDZ95nCkOh4B5Zic",
+                "spotify:track:3g99jLEJC91xEgdug3RGth",
+                "spotify:track:4RtqeYjskYdGWIXmXWsGAw",
+                "spotify:track:4FGcSAvLukcFIJsZYEtGl0",
+                "spotify:track:0xAjCLCwfRUZQe6t2G2Ywe",
+                "spotify:track:1xAVKJxnoIjh1u7PBfBab4",
+                "spotify:track:4Vwc0eFcF0bB8bZxw5445r",
+                "spotify:track:0XymbFxLcMhG1oNuwczvMV",
+                "spotify:track:7g3FJ3VMdnZZg1bkMkVipX"
+            ],
+            "uri": "spotify:artist:6nNP7Cm5qEpkL9sHNR5Zgk",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0226ed096d94315e6f9234eeab",
+            "link": "https://open.spotify.com/artist/6nNP7Cm5qEpkL9sHNR5Zgk"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 23
+    },
+    {
+        "artist": {
+            "id": "3QzPu2JtW8FwT7ayEAvmu9",
+            "name": "The Pseudos",
+            "topTracks": [
+                "spotify:track:1vWmjvU3FISerEvGliKlbb",
+                "spotify:track:5m1av27T14vz1irJiFHSZD",
+                "spotify:track:4kEjNg7u7kY9AeGENbUkd1",
+                "spotify:track:0LppjWFekfrY7CMH4QihPw",
+                "spotify:track:5Pg4cTAuIv9MujvMN2JHGb",
+                "spotify:track:5hOi6bhgG7n9tWtLqq3gyK",
+                "spotify:track:4FgeQSoqBbF87hhKUfj7t7",
+                "spotify:track:1gd2x2pnvTt8RYUUnqqR5D",
+                "spotify:track:2dumOTICDQuBQWQeLt64q9",
+                "spotify:track:6GXcbsVhZ9OyJSeDh5qqjl"
+            ],
+            "uri": "spotify:artist:3QzPu2JtW8FwT7ayEAvmu9",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0206d5c4ee8611a2ca323a77c0",
+            "link": "https://open.spotify.com/artist/3QzPu2JtW8FwT7ayEAvmu9"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 24
+    },
+    {
+        "artist": {
+            "id": "1JvPesW1isf5BqIZSCaCPK",
+            "name": "bedtime snack",
+            "topTracks": [
+                "spotify:track:6acaCodSTSTbsrqZsYmkw0"
+            ],
+            "uri": "spotify:artist:1JvPesW1isf5BqIZSCaCPK",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0283b5a3550046d0dfbe2cc29d",
+            "link": "https://open.spotify.com/artist/1JvPesW1isf5BqIZSCaCPK"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 26
+    },
+    {
+        "artist": {
+            "id": "3abRKajGbb3kLMy9AWzfMA",
+            "name": "BIJOU",
+            "topTracks": [
+                "spotify:track:6a7Vnxz6aezPxdKPTF72Yb",
+                "spotify:track:31W5YClrYctLHB9RWslEGR",
+                "spotify:track:0iaIB0L80Ri5kBR6KNhsuZ",
+                "spotify:track:2ELNk9cJH9SytjQauwZq0V",
+                "spotify:track:694l2zv6a2jjUgjz5eyX6g",
+                "spotify:track:4leBPYgRKj82Ce8ENp4Jxf",
+                "spotify:track:5EcjyWe86Qf5dWRL3Hnp3g",
+                "spotify:track:2Lpx0t3sXZGuxhcbLHNzwZ",
+                "spotify:track:7qZ5eBzlVn2NHNyj5vy44Q",
+                "spotify:track:02Xhb7ERUJORHLrC5fdc7k"
+            ],
+            "uri": "spotify:artist:3abRKajGbb3kLMy9AWzfMA",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02afd02367594683792773156e",
+            "link": "https://open.spotify.com/artist/3abRKajGbb3kLMy9AWzfMA"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 3
+    },
+    {
+        "artist": {
+            "id": "3lMWHuHMujmxcqiARgu7Eu",
+            "name": "Max Ulis",
+            "topTracks": [
+                "spotify:track:5L0RRpSI1mKExcxqMfgFlG",
+                "spotify:track:3TtlbQFJjyS7ZDLa4zR6ib",
+                "spotify:track:7ecUJaZJnhY42GiwSw5UyT",
+                "spotify:track:4S64kreVfpsKV2bad6HnSG",
+                "spotify:track:4zBbQKB5FxHcNb6jbrAFqO",
+                "spotify:track:0Jfs3IybVnOdkAZ6YQUKeC",
+                "spotify:track:5MNteCOqww5NxJH0PXiCkd",
+                "spotify:track:3JtOAOzMeTZjs4ighBXd01",
+                "spotify:track:4ePo6Y4mTkf8f0rPT4bPML",
+                "spotify:track:3NkYa5vSFKSOlrWa3XoVeu"
+            ],
+            "uri": "spotify:artist:3lMWHuHMujmxcqiARgu7Eu",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0267b1cad96e4889823dbd83f3",
+            "link": "https://open.spotify.com/artist/3lMWHuHMujmxcqiARgu7Eu"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 6
+    },
+    {
+        "artist": {
+            "id": "5mse6hwiW0xtsv1XCPN4sU",
+            "name": "Handsome Tiger",
+            "topTracks": [
+                "spotify:track:3vMZvXjkzFvjnS7pj1efgF",
+                "spotify:track:1CJfrrx8EZqttaBnZi6xX0",
+                "spotify:track:4ixFmWvnOcL23bvrnHD7cs",
+                "spotify:track:3fjP3XIqXJV1o5dkyBNmZi",
+                "spotify:track:6ZnwLK8UyF0gaHhYR1AeZ6",
+                "spotify:track:7cUBdgVrVQ2TdUaMh135vL",
+                "spotify:track:10AoP1qOEWhCKkG8GJSBhf",
+                "spotify:track:6KOKimzncD3R5brEFjYx8x",
+                "spotify:track:2gwhDGa3Edo7ooHNXY4Uhb",
+                "spotify:track:6EwcnWMd4Qm8gikzvX0H5R"
+            ],
+            "uri": "spotify:artist:5mse6hwiW0xtsv1XCPN4sU",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02ec09f35a7013d17e80cb57dc",
+            "link": "https://open.spotify.com/artist/5mse6hwiW0xtsv1XCPN4sU"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 9
+    },
+    {
+        "artist": {
+            "id": "1qiFhOuYVuw15jZgziYGlr",
+            "name": "Michael Red",
+            "topTracks": [
+                "spotify:track:2x7KIocMXF9SKj1e9qig10",
+                "spotify:track:2j6M5LZOvK84dl0biwWTuu",
+                "spotify:track:39NLYDmheeuMs2CGm6ohXn",
+                "spotify:track:6IyG0NdyqaBnCmARzi5kVM",
+                "spotify:track:4t5g3PIzGiGtrX0qXAXpB1",
+                "spotify:track:29P7mEbVg8b2GVUrVlXE0M",
+                "spotify:track:6iDm1HWMBqtgLfCaaFTlh1",
+                "spotify:track:3DpFKYh1hlBKkrL1hTMeRe",
+                "spotify:track:5AKyyX8fbReOs74zxY6E79",
+                "spotify:track:01tk5ju3qyLPkbKuJm0X0V"
+            ],
+            "uri": "spotify:artist:1qiFhOuYVuw15jZgziYGlr",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0211c0ee39e905eef35a0b5a59",
+            "link": "https://open.spotify.com/artist/1qiFhOuYVuw15jZgziYGlr"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 12
+    },
+    {
+        "artist": {
+            "id": "1xpctlT8q9I3WTlfvFkjl5",
+            "name": "Lady ArcLight",
+            "topTracks": [
+                "spotify:track:5NcXovR6F8nOFIlvtjnQyD",
+                "spotify:track:7GwqB7ANJbz21WbiABy9nZ",
+                "spotify:track:6fNvJ79zk44D8PFqcR0NsK",
+                "spotify:track:37ryUpWqeUoruxayN4ewIT",
+                "spotify:track:0XDcYauNIBBcBzvK9FYRiB",
+                "spotify:track:3KlH643KpMMUYyCSNzHn6y",
+                "spotify:track:4HDiZn3axsMZIjyI3Q0fs2",
+                "spotify:track:533VtWaxLSFw5J4zVg3X2J",
+                "spotify:track:6oLok3dZxMlcVHpVRBSkAC",
+                "spotify:track:1C6WDrDeDK4OTh16dobLgI"
+            ],
+            "uri": "spotify:artist:1xpctlT8q9I3WTlfvFkjl5",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02e213d2feed9ae03e8a2ae896",
+            "link": "https://open.spotify.com/artist/1xpctlT8q9I3WTlfvFkjl5"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "isMissing": false,
+        "popularity": 17
+    },
+    {
+        "artist": {
+            "id": "6umvpaTwCk83m9jNjLyvXi",
+            "name": "SirReal",
+            "topTracks": [
+                "spotify:track:6eXXcuCxxkZKpHVjqkMyiX",
+                "spotify:track:1y6SiisJjwy840OwjVA3rc",
+                "spotify:track:0T2Xg3UufLKSSHlknE4SG9",
+                "spotify:track:2R1Ey7sD1CFRaTMlv7ME7U",
+                "spotify:track:6TpqqSuQNtNGRHamcsSDKC",
+                "spotify:track:27SZu8eIJ4LsegS64bKG8p",
+                "spotify:track:25cNZyN5ibaK4jkLfWaQms",
+                "spotify:track:0ZDNW0bnwHq9j2siGAWMhO",
+                "spotify:track:7BNHnIp5AFNJqbrMhowxt2",
+                "spotify:track:34sjfVihALMBt7jACjm1F8"
+            ],
+            "uri": "spotify:artist:6umvpaTwCk83m9jNjLyvXi",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02415ed07f0140c6b9e5eeb2a3",
+            "link": "https://open.spotify.com/artist/6umvpaTwCk83m9jNjLyvXi"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "popularity": "14"
+    },
+    {
+        "artist": {
+            "id": "1h3omMr7jTuA0Tbuy8fALW",
+            "name": "Garret T. Willie",
+            "topTracks": [
+                "spotify:track:2nwaYi6wjlKuAFTGP6jzSf",
+                "spotify:track:2gi6NR6Uhu1tZGC3myfP7x",
+                "spotify:track:5Y3u6SNUI9dJtAlJ34VaBh",
+                "spotify:track:5kMJbVzpCMxtJRrw5fkDA2",
+                "spotify:track:7MMh7Vh2p2EqboYOqlDhrf",
+                "spotify:track:58PW1VONWvXXloK8s5eWYp",
+                "spotify:track:1mcDutR0GhbIYmTGpe6CDv",
+                "spotify:track:43772m40KRWMU84YBAh9op",
+                "spotify:track:3LfmN0aAz0byeh0VS9kZKv",
+                "spotify:track:3FA3q9cgLD6goNHsAITGzt"
+            ],
+            "uri": "spotify:artist:1h3omMr7jTuA0Tbuy8fALW",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02d29711ce3140afb31bf04e5f",
+            "link": "https://open.spotify.com/artist/1h3omMr7jTuA0Tbuy8fALW"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "popularity": "14"
+    },
+    {
+        "artist": {
+            "id": "5uUrWEa9xUJALbC1By35rT",
+            "name": "Blasé Blasé",
+            "topTracks": [
+                "spotify:track:0XVpNWtLWWuZdLbROeErpe",
+                "spotify:track:5ovIfg6uzKiPOvvbYbWFbm",
+                "spotify:track:2U65DbOaLsX8cUtRWDALUp",
+                "spotify:track:1RmBWQBM5vLuAPk5H7VkPw",
+                "spotify:track:40bkcKCLJYwpbih56gHEBd",
+                "spotify:track:7LG5HEqK2XryPt9N9b7Yaq",
+                "spotify:track:3BCxA6QvygwMVVVEDPOLO9",
+                "spotify:track:1V88yErD6gqpL5fvFAaCKv",
+                "spotify:track:2KT17l6xGfyvKA5FPcoj56",
+                "spotify:track:1SiikkcZnUurHaMoHwYytG"
+            ],
+            "uri": "spotify:artist:5uUrWEa9xUJALbC1By35rT",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0292362fe4f9e86858032b70a6",
+            "link": "https://open.spotify.com/artist/5uUrWEa9xUJALbC1By35rT"
+        },
+        "date": "2024-07-19T07:00:00.000Z",
+        "venue": "Pachena Bay",
+        "popularity": "14"
+    }
+]
