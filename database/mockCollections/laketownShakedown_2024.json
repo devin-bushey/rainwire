@@ -1,0 +1,828 @@
+[
+    {
+        "artist": {
+            "id": "4yiQZ8tQPux8cPriYMWUFP",
+            "name": "Gwen Stefani",
+            "topTracks": [
+                "spotify:track:66ZcOcouenzZEnzTJvoFmH",
+                "spotify:track:0LzrhCZFXW94Y8nwtTuRlw",
+                "spotify:track:2Y2q7PkD7lvuWr8YaZfWuv",
+                "spotify:track:7bZsx7Zif6FIhrcZrh0LVm",
+                "spotify:track:3UQmoVQJqBYauTZLVPs3uo",
+                "spotify:track:2bx879t8gUpxkQ0avl8xTf",
+                "spotify:track:6d3edMXJpns1A0zGKkmlGw",
+                "spotify:track:4sQmCQUZcnBPaVm4dEUKv7",
+                "spotify:track:469RmLzEsicj8VSn9aIuKV",
+                "spotify:track:2986J0T5CGwJGY3aqgANtE"
+            ],
+            "uri": "spotify:artist:4yiQZ8tQPux8cPriYMWUFP",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e028dd53da15b55d402dfc3a20e",
+            "link": "https://open.spotify.com/artist/4yiQZ8tQPux8cPriYMWUFP"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "100000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "4yiQZ8tQPux8cPriYMWUFP",
+        "sp_band_name": "Gwen Stefani",
+        "link": "https://open.spotify.com/artist/4yiQZ8tQPux8cPriYMWUFP",
+        "uri": "spotify:artist:4yiQZ8tQPux8cPriYMWUFP",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e028dd53da15b55d402dfc3a20e",
+        "topTrackURIs": [
+            "spotify:track:66ZcOcouenzZEnzTJvoFmH",
+            "spotify:track:0LzrhCZFXW94Y8nwtTuRlw",
+            "spotify:track:2Y2q7PkD7lvuWr8YaZfWuv",
+            "spotify:track:7bZsx7Zif6FIhrcZrh0LVm",
+            "spotify:track:3UQmoVQJqBYauTZLVPs3uo",
+            "spotify:track:2bx879t8gUpxkQ0avl8xTf",
+            "spotify:track:6d3edMXJpns1A0zGKkmlGw",
+            "spotify:track:4sQmCQUZcnBPaVm4dEUKv7",
+            "spotify:track:469RmLzEsicj8VSn9aIuKV",
+            "spotify:track:2986J0T5CGwJGY3aqgANtE"
+        ]
+    },
+    {
+        "artist": {
+            "id": "41X1TR6hrK8Q2ZCpp2EqCz",
+            "name": "bbno$",
+            "topTracks": [
+                "spotify:track:1golLrmqyxDWedF7YUHCOD",
+                "spotify:track:51Fjme0JiitpyXKuyQiCDo",
+                "spotify:track:3QqOcLtTU8zzlQRJCZzttP",
+                "spotify:track:4bdzlt280luOgFi0ZlkTvR",
+                "spotify:track:3PdcxgzpWzAsUGgkmykIFc",
+                "spotify:track:4YMc3A256xFBS0xcT77Qce",
+                "spotify:track:313j2aNbdQRcWZq7JOo0ro",
+                "spotify:track:3FwzAQ2kVYHhaACqh79trJ",
+                "spotify:track:1QwLR9LauBPSIdhSCmwTqY",
+                "spotify:track:7FQhRfLwklMayNW3MC27up"
+            ],
+            "uri": "spotify:artist:41X1TR6hrK8Q2ZCpp2EqCz",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0290e72fba2f3f0f9889091c15",
+            "link": "https://open.spotify.com/artist/41X1TR6hrK8Q2ZCpp2EqCz"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "103000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "41X1TR6hrK8Q2ZCpp2EqCz",
+        "sp_band_name": "bbno$",
+        "link": "https://open.spotify.com/artist/41X1TR6hrK8Q2ZCpp2EqCz",
+        "uri": "spotify:artist:41X1TR6hrK8Q2ZCpp2EqCz",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0290e72fba2f3f0f9889091c15",
+        "topTrackURIs": [
+            "spotify:track:1golLrmqyxDWedF7YUHCOD",
+            "spotify:track:51Fjme0JiitpyXKuyQiCDo",
+            "spotify:track:3QqOcLtTU8zzlQRJCZzttP",
+            "spotify:track:4bdzlt280luOgFi0ZlkTvR",
+            "spotify:track:3PdcxgzpWzAsUGgkmykIFc",
+            "spotify:track:4YMc3A256xFBS0xcT77Qce",
+            "spotify:track:313j2aNbdQRcWZq7JOo0ro",
+            "spotify:track:3FwzAQ2kVYHhaACqh79trJ",
+            "spotify:track:1QwLR9LauBPSIdhSCmwTqY",
+            "spotify:track:7FQhRfLwklMayNW3MC27up"
+        ]
+    },
+    {
+        "artist": {
+            "id": "2be45mouasgEeyH4Tgm4fB",
+            "name": "Miina",
+            "topTracks": [
+                "spotify:track:1idPrmJk9PlmFsupge2Xrf",
+                "spotify:track:2R3lSZ2AHGA7EPFgmsdFdy",
+                "spotify:track:0SvDIepkDTQvseFXwcnjPi",
+                "spotify:track:1gMJlkYo6IZF3QGJ6n78HO",
+                "spotify:track:3jlM9gSxFFBIv2TgAbxxzU",
+                "spotify:track:748FveD8ji9ptDwtnYgmz0"
+            ],
+            "uri": "spotify:artist:2be45mouasgEeyH4Tgm4fB",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e022d8f905c060b0dfad6065198",
+            "link": "https://open.spotify.com/artist/2be45mouasgEeyH4Tgm4fB"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "107000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "2be45mouasgEeyH4Tgm4fB",
+        "sp_band_name": "Miina",
+        "link": "https://open.spotify.com/artist/2be45mouasgEeyH4Tgm4fB",
+        "uri": "spotify:artist:2be45mouasgEeyH4Tgm4fB",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e022d8f905c060b0dfad6065198",
+        "topTrackURIs": [
+            "spotify:track:1idPrmJk9PlmFsupge2Xrf",
+            "spotify:track:2R3lSZ2AHGA7EPFgmsdFdy",
+            "spotify:track:0SvDIepkDTQvseFXwcnjPi",
+            "spotify:track:1gMJlkYo6IZF3QGJ6n78HO",
+            "spotify:track:3jlM9gSxFFBIv2TgAbxxzU",
+            "spotify:track:748FveD8ji9ptDwtnYgmz0"
+        ]
+    },
+    {
+        "artist": {
+            "id": "1lFtG5wRwRF53st8KhjuoP",
+            "name": "Illvis Freshly",
+            "topTracks": [
+                "spotify:track:1thVA6ddatLKqnjg7GY04X",
+                "spotify:track:1HWC275yYP4lwfuNbpF3gh",
+                "spotify:track:2KcWsPWoSwt5GZRPiT1oUb",
+                "spotify:track:0UlHOuVhIznfX9Rid6Vs6O",
+                "spotify:track:3VC2F2peM1ZH7VidtQMG5l",
+                "spotify:track:2OU9tstoH0LYBGSr6KMppz",
+                "spotify:track:3yJjwClWtrLxHqPngPslmv",
+                "spotify:track:6wuv0j5MZf0LAdmqlUYUR1",
+                "spotify:track:7fULnebZF0qloHDDBhb3ux",
+                "spotify:track:0XrwiVhzkLz58Dsadp0pma"
+            ],
+            "uri": "spotify:artist:1lFtG5wRwRF53st8KhjuoP",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02da496961fbc4d995b6789cb6",
+            "link": "https://open.spotify.com/artist/1lFtG5wRwRF53st8KhjuoP"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "1011000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "1lFtG5wRwRF53st8KhjuoP",
+        "sp_band_name": "Illvis Freshly",
+        "link": "https://open.spotify.com/artist/1lFtG5wRwRF53st8KhjuoP",
+        "uri": "spotify:artist:1lFtG5wRwRF53st8KhjuoP",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02da496961fbc4d995b6789cb6",
+        "topTrackURIs": [
+            "spotify:track:1thVA6ddatLKqnjg7GY04X",
+            "spotify:track:1HWC275yYP4lwfuNbpF3gh",
+            "spotify:track:2KcWsPWoSwt5GZRPiT1oUb",
+            "spotify:track:0UlHOuVhIznfX9Rid6Vs6O",
+            "spotify:track:3VC2F2peM1ZH7VidtQMG5l",
+            "spotify:track:2OU9tstoH0LYBGSr6KMppz",
+            "spotify:track:3yJjwClWtrLxHqPngPslmv",
+            "spotify:track:6wuv0j5MZf0LAdmqlUYUR1",
+            "spotify:track:7fULnebZF0qloHDDBhb3ux",
+            "spotify:track:0XrwiVhzkLz58Dsadp0pma"
+        ]
+    },
+    {
+        "artist": {
+            "id": "2hIC3SrKsZcL7acAkSUe5K",
+            "name": "The New Groovement",
+            "topTracks": [
+                "spotify:track:6o5urX376ZQ6ZYDpNWhR7V",
+                "spotify:track:4KCJXXsRPRtLW2vlmanP2C",
+                "spotify:track:7p7cV1SSKrWJLDckvScOMe",
+                "spotify:track:4kNmMacKqI4m9akBz9u5Fb",
+                "spotify:track:0i86VISeuekuhU02JbI1Ql",
+                "spotify:track:3oDixR9KvMdlXYP1Zqeyud",
+                "spotify:track:6sD2tUarPQXgi72Xj5Icm4",
+                "spotify:track:7APNINcOWgErFh7a2tjiKH",
+                "spotify:track:2jYgJA7wonDE6LuYpwA3qP",
+                "spotify:track:2anf1gliMYOJHgBpZ8yHKV"
+            ],
+            "uri": "spotify:artist:2hIC3SrKsZcL7acAkSUe5K",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e025d9d0cc2bd0330817604f200",
+            "link": "https://open.spotify.com/artist/2hIC3SrKsZcL7acAkSUe5K"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "117000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "2hIC3SrKsZcL7acAkSUe5K",
+        "sp_band_name": "The New Groovement",
+        "link": "https://open.spotify.com/artist/2hIC3SrKsZcL7acAkSUe5K",
+        "uri": "spotify:artist:2hIC3SrKsZcL7acAkSUe5K",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e025d9d0cc2bd0330817604f200",
+        "topTrackURIs": [
+            "spotify:track:6o5urX376ZQ6ZYDpNWhR7V",
+            "spotify:track:4KCJXXsRPRtLW2vlmanP2C",
+            "spotify:track:7p7cV1SSKrWJLDckvScOMe",
+            "spotify:track:4kNmMacKqI4m9akBz9u5Fb",
+            "spotify:track:0i86VISeuekuhU02JbI1Ql",
+            "spotify:track:3oDixR9KvMdlXYP1Zqeyud",
+            "spotify:track:6sD2tUarPQXgi72Xj5Icm4",
+            "spotify:track:7APNINcOWgErFh7a2tjiKH",
+            "spotify:track:2jYgJA7wonDE6LuYpwA3qP",
+            "spotify:track:2anf1gliMYOJHgBpZ8yHKV"
+        ]
+    },
+    {
+        "artist": {
+            "id": "5uUrWEa9xUJALbC1By35rT",
+            "name": "Blasé Blasé",
+            "topTracks": [
+                "spotify:track:0XVpNWtLWWuZdLbROeErpe",
+                "spotify:track:5ovIfg6uzKiPOvvbYbWFbm",
+                "spotify:track:2U65DbOaLsX8cUtRWDALUp",
+                "spotify:track:1RmBWQBM5vLuAPk5H7VkPw",
+                "spotify:track:40bkcKCLJYwpbih56gHEBd",
+                "spotify:track:7LG5HEqK2XryPt9N9b7Yaq",
+                "spotify:track:3BCxA6QvygwMVVVEDPOLO9",
+                "spotify:track:1V88yErD6gqpL5fvFAaCKv",
+                "spotify:track:2KT17l6xGfyvKA5FPcoj56",
+                "spotify:track:1SiikkcZnUurHaMoHwYytG"
+            ],
+            "uri": "spotify:artist:5uUrWEa9xUJALbC1By35rT",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0292362fe4f9e86858032b70a6",
+            "link": "https://open.spotify.com/artist/5uUrWEa9xUJALbC1By35rT"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "106000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "5uUrWEa9xUJALbC1By35rT",
+        "sp_band_name": "Blasé Blasé",
+        "link": "https://open.spotify.com/artist/5uUrWEa9xUJALbC1By35rT",
+        "uri": "spotify:artist:5uUrWEa9xUJALbC1By35rT",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0292362fe4f9e86858032b70a6",
+        "topTrackURIs": [
+            "spotify:track:0XVpNWtLWWuZdLbROeErpe",
+            "spotify:track:5ovIfg6uzKiPOvvbYbWFbm",
+            "spotify:track:2U65DbOaLsX8cUtRWDALUp",
+            "spotify:track:1RmBWQBM5vLuAPk5H7VkPw",
+            "spotify:track:40bkcKCLJYwpbih56gHEBd",
+            "spotify:track:7LG5HEqK2XryPt9N9b7Yaq",
+            "spotify:track:3BCxA6QvygwMVVVEDPOLO9",
+            "spotify:track:1V88yErD6gqpL5fvFAaCKv",
+            "spotify:track:2KT17l6xGfyvKA5FPcoj56",
+            "spotify:track:1SiikkcZnUurHaMoHwYytG"
+        ]
+    },
+    {
+        "artist": {
+            "id": "1reVyks3lelns5DkSdZNsb",
+            "name": "Base Collective",
+            "topTracks": [
+                "spotify:track:1iTv1xcva2bd6CVleiFkJX",
+                "spotify:track:0AO6wQ1YoKnLpZXGdunwyK",
+                "spotify:track:7m2AVxcoACcTnSbqZGfOIC",
+                "spotify:track:5aXdLLUuEzvitzexTa15gM",
+                "spotify:track:4jOgEfLAmpKM2NsNktAtke"
+            ],
+            "uri": "spotify:artist:1reVyks3lelns5DkSdZNsb",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e023bc7d4518bf4601a1af3e259",
+            "link": "https://open.spotify.com/artist/1reVyks3lelns5DkSdZNsb"
+        },
+        "date": "2024-06-30",
+        "venue": "Laketown Ranch",
+        "popularity": "107000",
+        "ticket_date": "2024-06-30 at Laketown Ranch",
+        "band_id": "1reVyks3lelns5DkSdZNsb",
+        "sp_band_name": "Base Collective",
+        "link": "https://open.spotify.com/artist/1reVyks3lelns5DkSdZNsb",
+        "uri": "spotify:artist:1reVyks3lelns5DkSdZNsb",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e023bc7d4518bf4601a1af3e259",
+        "topTrackURIs": [
+            "spotify:track:1iTv1xcva2bd6CVleiFkJX",
+            "spotify:track:0AO6wQ1YoKnLpZXGdunwyK",
+            "spotify:track:7m2AVxcoACcTnSbqZGfOIC",
+            "spotify:track:5aXdLLUuEzvitzexTa15gM",
+            "spotify:track:4jOgEfLAmpKM2NsNktAtke"
+        ]
+    },
+    {
+        "artist": {
+            "id": "1YfEcTuGvBQ8xSD1f53UnK",
+            "name": "Busta Rhymes",
+            "topTracks": [
+                "spotify:track:1gZ7i4qxXkHZb1r6eioaAP",
+                "spotify:track:3oairMMtNVnUppKwroxou4",
+                "spotify:track:7gKgd0P3dAAePiSQQBqrlf",
+                "spotify:track:1NHwvBmrUje4L1dxfWnXCH",
+                "spotify:track:47wZfF4OdME3xkIPhhpSSF",
+                "spotify:track:3HVJbdz0V402U5YggQK4Ao",
+                "spotify:track:0xDxS2g775ttrfrwDQl9f8",
+                "spotify:track:0bzX26mfmUi0djOLemE2b8",
+                "spotify:track:4SnTf4ixVZCfQtxHNhky0T",
+                "spotify:track:1c2aazzNHc0UPwNPd3kSe0"
+            ],
+            "uri": "spotify:artist:1YfEcTuGvBQ8xSD1f53UnK",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e028cc44129c3b11adec74058d6",
+            "link": "https://open.spotify.com/artist/1YfEcTuGvBQ8xSD1f53UnK"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "100100",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "1YfEcTuGvBQ8xSD1f53UnK",
+        "sp_band_name": "Busta Rhymes",
+        "link": "https://open.spotify.com/artist/1YfEcTuGvBQ8xSD1f53UnK",
+        "uri": "spotify:artist:1YfEcTuGvBQ8xSD1f53UnK",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e028cc44129c3b11adec74058d6",
+        "topTrackURIs": [
+            "spotify:track:1gZ7i4qxXkHZb1r6eioaAP",
+            "spotify:track:3oairMMtNVnUppKwroxou4",
+            "spotify:track:7gKgd0P3dAAePiSQQBqrlf",
+            "spotify:track:1NHwvBmrUje4L1dxfWnXCH",
+            "spotify:track:47wZfF4OdME3xkIPhhpSSF",
+            "spotify:track:3HVJbdz0V402U5YggQK4Ao",
+            "spotify:track:0xDxS2g775ttrfrwDQl9f8",
+            "spotify:track:0bzX26mfmUi0djOLemE2b8",
+            "spotify:track:4SnTf4ixVZCfQtxHNhky0T",
+            "spotify:track:1c2aazzNHc0UPwNPd3kSe0"
+        ]
+    },
+    {
+        "artist": {
+            "id": "4ZgQDCtRqZlhLswVS6MHN4",
+            "name": "grandson",
+            "topTracks": [
+                "spotify:track:0AUyNF6iFxMNQsNx2nhtrw",
+                "spotify:track:3pShTDa5E1bPBkrc1mxxGY",
+                "spotify:track:6gi7qsHSH2JWZsTRHndxqm",
+                "spotify:track:3JyvSSU0VnlMUsQckyEVfX",
+                "spotify:track:1vhNd2F1bNKV7DN4Moa8z2",
+                "spotify:track:7yWOt3C6vOEOcGl3Sf1rTP",
+                "spotify:track:0LSzBkkQZZkwV656r6etLg",
+                "spotify:track:1rjZicKSpIJ3WYffIK9Fuy",
+                "spotify:track:5IPT4Noqvo7bsfbWUOHcG4",
+                "spotify:track:1CmhkiXegdbj3Ewizvdg2Q"
+            ],
+            "uri": "spotify:artist:4ZgQDCtRqZlhLswVS6MHN4",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0297d11a89e5fd70347099f7c9",
+            "link": "https://open.spotify.com/artist/4ZgQDCtRqZlhLswVS6MHN4"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "104000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "4ZgQDCtRqZlhLswVS6MHN4",
+        "sp_band_name": "grandson",
+        "link": "https://open.spotify.com/artist/4ZgQDCtRqZlhLswVS6MHN4",
+        "uri": "spotify:artist:4ZgQDCtRqZlhLswVS6MHN4",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0297d11a89e5fd70347099f7c9",
+        "topTrackURIs": [
+            "spotify:track:0AUyNF6iFxMNQsNx2nhtrw",
+            "spotify:track:3pShTDa5E1bPBkrc1mxxGY",
+            "spotify:track:6gi7qsHSH2JWZsTRHndxqm",
+            "spotify:track:3JyvSSU0VnlMUsQckyEVfX",
+            "spotify:track:1vhNd2F1bNKV7DN4Moa8z2",
+            "spotify:track:7yWOt3C6vOEOcGl3Sf1rTP",
+            "spotify:track:0LSzBkkQZZkwV656r6etLg",
+            "spotify:track:1rjZicKSpIJ3WYffIK9Fuy",
+            "spotify:track:5IPT4Noqvo7bsfbWUOHcG4",
+            "spotify:track:1CmhkiXegdbj3Ewizvdg2Q"
+        ]
+    },
+    {
+        "artist": {
+            "id": "5spEJXLwD1sKUdC2bnOHPg",
+            "name": "Bone Thugs-N-Harmony",
+            "topTracks": [
+                "spotify:track:7qHAjAL7CpadaZLamuBZRm",
+                "spotify:track:5KSJ9k1FYjFLnIRlJT2wF8",
+                "spotify:track:1dF5Y2dd7Wm4wZKvVjWBpr",
+                "spotify:track:1muLq1kBLWIT3pmNC2xl0g",
+                "spotify:track:2elA6JLRaQ6iB7hxiuTKN4",
+                "spotify:track:3qVQZmK9iIXUYZknHG4EYQ",
+                "spotify:track:62SqHqTAndm0pqZ8oVvlkb",
+                "spotify:track:3PYtlkObLFZ2SaFjS4TyJR",
+                "spotify:track:55RXcZ0Mpwt97vj2Angnn1",
+                "spotify:track:0sKJExQWRKxd76gSSwrsaI"
+            ],
+            "uri": "spotify:artist:5spEJXLwD1sKUdC2bnOHPg",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e024265ced59f64378b8a1904ad",
+            "link": "https://open.spotify.com/artist/5spEJXLwD1sKUdC2bnOHPg"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "105000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "5spEJXLwD1sKUdC2bnOHPg",
+        "sp_band_name": "Bone Thugs-N-Harmony",
+        "link": "https://open.spotify.com/artist/5spEJXLwD1sKUdC2bnOHPg",
+        "uri": "spotify:artist:5spEJXLwD1sKUdC2bnOHPg",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e024265ced59f64378b8a1904ad",
+        "topTrackURIs": [
+            "spotify:track:7qHAjAL7CpadaZLamuBZRm",
+            "spotify:track:5KSJ9k1FYjFLnIRlJT2wF8",
+            "spotify:track:1dF5Y2dd7Wm4wZKvVjWBpr",
+            "spotify:track:1muLq1kBLWIT3pmNC2xl0g",
+            "spotify:track:2elA6JLRaQ6iB7hxiuTKN4",
+            "spotify:track:3qVQZmK9iIXUYZknHG4EYQ",
+            "spotify:track:62SqHqTAndm0pqZ8oVvlkb",
+            "spotify:track:3PYtlkObLFZ2SaFjS4TyJR",
+            "spotify:track:55RXcZ0Mpwt97vj2Angnn1",
+            "spotify:track:0sKJExQWRKxd76gSSwrsaI"
+        ]
+    },
+    {
+        "artist": {
+            "id": "1CNO980Lk9CaBWBnM1MZXi",
+            "name": "Marten Hørger",
+            "topTracks": [
+                "spotify:track:0g3wIOS5bf02UcjK33xUoB",
+                "spotify:track:5v8Gce3zzKorqTnldjxB7G",
+                "spotify:track:0ZflVxcHweYxD4Dm5xt6KS",
+                "spotify:track:0M2b3w9y8lsKqm4r8cq3Sw",
+                "spotify:track:0f9liolDC29UQajPuFBiWU",
+                "spotify:track:3WF2mMA1gBkSRnucT9Qm23",
+                "spotify:track:0qADRubjESvkiuMxqRH35j",
+                "spotify:track:7jIOOtHgZRstHL5CiLuwHi",
+                "spotify:track:7pV752OB7nN6l9QjDqpVCH",
+                "spotify:track:2xIyDaZ4LRw7j5DG6pDFmV"
+            ],
+            "uri": "spotify:artist:1CNO980Lk9CaBWBnM1MZXi",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02d5a3f4bda9343aff9c35c935",
+            "link": "https://open.spotify.com/artist/1CNO980Lk9CaBWBnM1MZXi"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "106000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "1CNO980Lk9CaBWBnM1MZXi",
+        "sp_band_name": "Neon Steve",
+        "link": "https://open.spotify.com/artist/1CNO980Lk9CaBWBnM1MZXi",
+        "uri": "spotify:artist:1CNO980Lk9CaBWBnM1MZXi",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02d5a3f4bda9343aff9c35c935",
+        "topTrackURIs": [
+            "spotify:track:0g3wIOS5bf02UcjK33xUoB",
+            "spotify:track:5v8Gce3zzKorqTnldjxB7G",
+            "spotify:track:0ZflVxcHweYxD4Dm5xt6KS",
+            "spotify:track:0M2b3w9y8lsKqm4r8cq3Sw",
+            "spotify:track:0f9liolDC29UQajPuFBiWU",
+            "spotify:track:3WF2mMA1gBkSRnucT9Qm23",
+            "spotify:track:0qADRubjESvkiuMxqRH35j",
+            "spotify:track:7jIOOtHgZRstHL5CiLuwHi",
+            "spotify:track:7pV752OB7nN6l9QjDqpVCH",
+            "spotify:track:2xIyDaZ4LRw7j5DG6pDFmV"
+        ]
+    },
+    {
+        "artist": {
+            "id": "4YOL2g6AwphwsB1dOZZSOr",
+            "name": "The Free Label",
+            "topTracks": [
+                "spotify:track:2fkAbl3FCAj9BKc4Z5GIdr",
+                "spotify:track:0iIHi4PR5RNS97qDFDYEzG",
+                "spotify:track:3VmY2C6byvLaFcAszV6WPD",
+                "spotify:track:0XSrtPRwUsoKH264DFP8kZ",
+                "spotify:track:4ZVNCrYStmGn546kpAS1I2",
+                "spotify:track:2z7ZjAeR8Ze0f4f8Oo4P6G",
+                "spotify:track:6v0dtoiBpSPp2PvaJJ6rXS",
+                "spotify:track:2BViTrHZ8DrNUq6z4E8C7R",
+                "spotify:track:2TsyZpcaHxhRDhurZTjVlx",
+                "spotify:track:2HkMVxONbZTbRmVaWDHryx"
+            ],
+            "uri": "spotify:artist:4YOL2g6AwphwsB1dOZZSOr",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e024cb5b8ac7334dedb7fcec65f",
+            "link": "https://open.spotify.com/artist/4YOL2g6AwphwsB1dOZZSOr"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "110000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "4YOL2g6AwphwsB1dOZZSOr",
+        "sp_band_name": "The Free Label",
+        "link": "https://open.spotify.com/artist/4YOL2g6AwphwsB1dOZZSOr",
+        "uri": "spotify:artist:4YOL2g6AwphwsB1dOZZSOr",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e024cb5b8ac7334dedb7fcec65f",
+        "topTrackURIs": [
+            "spotify:track:2fkAbl3FCAj9BKc4Z5GIdr",
+            "spotify:track:0iIHi4PR5RNS97qDFDYEzG",
+            "spotify:track:3VmY2C6byvLaFcAszV6WPD",
+            "spotify:track:0XSrtPRwUsoKH264DFP8kZ",
+            "spotify:track:4ZVNCrYStmGn546kpAS1I2",
+            "spotify:track:2z7ZjAeR8Ze0f4f8Oo4P6G",
+            "spotify:track:6v0dtoiBpSPp2PvaJJ6rXS",
+            "spotify:track:2BViTrHZ8DrNUq6z4E8C7R",
+            "spotify:track:2TsyZpcaHxhRDhurZTjVlx",
+            "spotify:track:2HkMVxONbZTbRmVaWDHryx"
+        ]
+    },
+    {
+        "artist": {
+            "id": "2P53jbMUZyUxstKlkoX7yd",
+            "name": "Downtown Mischief",
+            "topTracks": [
+                "spotify:track:0zNO5W5JurEv8Z0fyTOhtt",
+                "spotify:track:0xhg2bgCcPFZgK0ELfXfWu",
+                "spotify:track:4q4Z171Q5UuF5PISM4PlI3",
+                "spotify:track:55qsly5DXVqQhsN3prQCWI",
+                "spotify:track:2hbwDu1tNOXNRP5UIGmiJa",
+                "spotify:track:0le2JATJlhkhQEDC7Gok7s",
+                "spotify:track:4Uj28zL34KTjoncZACPtGg",
+                "spotify:track:2QadsxRRzl8KNcMoZzym1V",
+                "spotify:track:0OiQgO8cyMDnIDwYG5mmPS",
+                "spotify:track:1ALx06QDMV4WpsCUpNt9Wq"
+            ],
+            "uri": "spotify:artist:2P53jbMUZyUxstKlkoX7yd",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0257fc517d539e4f2ae1eff0b0",
+            "link": "https://open.spotify.com/artist/2P53jbMUZyUxstKlkoX7yd"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "113000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "2P53jbMUZyUxstKlkoX7yd",
+        "sp_band_name": "Downtown Mischief",
+        "link": "https://open.spotify.com/artist/2P53jbMUZyUxstKlkoX7yd",
+        "uri": "spotify:artist:2P53jbMUZyUxstKlkoX7yd",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0257fc517d539e4f2ae1eff0b0",
+        "topTrackURIs": [
+            "spotify:track:0zNO5W5JurEv8Z0fyTOhtt",
+            "spotify:track:0xhg2bgCcPFZgK0ELfXfWu",
+            "spotify:track:4q4Z171Q5UuF5PISM4PlI3",
+            "spotify:track:55qsly5DXVqQhsN3prQCWI",
+            "spotify:track:2hbwDu1tNOXNRP5UIGmiJa",
+            "spotify:track:0le2JATJlhkhQEDC7Gok7s",
+            "spotify:track:4Uj28zL34KTjoncZACPtGg",
+            "spotify:track:2QadsxRRzl8KNcMoZzym1V",
+            "spotify:track:0OiQgO8cyMDnIDwYG5mmPS",
+            "spotify:track:1ALx06QDMV4WpsCUpNt9Wq"
+        ]
+    },
+    {
+        "artist": {
+            "id": "1fvChPs4ym0o7xg4qumWLS",
+            "name": "Lost Octave",
+            "topTracks": [
+                "spotify:track:4kNL7RB3RvUa0dAueuTTT4",
+                "spotify:track:638xRVM8QRxAFrqGJLHNSf",
+                "spotify:track:55UiEM8UirCoZgzkvfxAvp",
+                "spotify:track:64YnmD8a69hAgJC6sNoFwW",
+                "spotify:track:0VUgLzlKiayuNIm1jWbZQz",
+                "spotify:track:6fhqT6zRMXCEJ5uXzgKTIj",
+                "spotify:track:1aNWqG1Y7o5QMv4XYDY2Sh",
+                "spotify:track:759jHorAoY20NucWuY9j40",
+                "spotify:track:68GhJ9lxHF9vPOPKG2sJGS"
+            ],
+            "uri": "spotify:artist:1fvChPs4ym0o7xg4qumWLS",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02fd715afffcbb684a251e6cc0",
+            "link": "https://open.spotify.com/artist/1fvChPs4ym0o7xg4qumWLS"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "126000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "1fvChPs4ym0o7xg4qumWLS",
+        "sp_band_name": "Lost Octave",
+        "link": "https://open.spotify.com/artist/1fvChPs4ym0o7xg4qumWLS",
+        "uri": "spotify:artist:1fvChPs4ym0o7xg4qumWLS",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02fd715afffcbb684a251e6cc0",
+        "topTrackURIs": [
+            "spotify:track:4kNL7RB3RvUa0dAueuTTT4",
+            "spotify:track:638xRVM8QRxAFrqGJLHNSf",
+            "spotify:track:55UiEM8UirCoZgzkvfxAvp",
+            "spotify:track:64YnmD8a69hAgJC6sNoFwW",
+            "spotify:track:0VUgLzlKiayuNIm1jWbZQz",
+            "spotify:track:6fhqT6zRMXCEJ5uXzgKTIj",
+            "spotify:track:1aNWqG1Y7o5QMv4XYDY2Sh",
+            "spotify:track:759jHorAoY20NucWuY9j40",
+            "spotify:track:68GhJ9lxHF9vPOPKG2sJGS"
+        ]
+    },
+    {
+        "artist": {
+            "id": "2mwUK2oKJlP5pCzRNsJcT4",
+            "name": "I.M. Fast",
+            "topTracks": [
+                "spotify:track:7Amcy3mnpjiVtbjOYjwAPL",
+                "spotify:track:0IWeEmExqaJdfks4ZvZm4F",
+                "spotify:track:05EEK5KmVmunYLRli11g99",
+                "spotify:track:3wqmmwn9bZyHSdBleVfion"
+            ],
+            "uri": "spotify:artist:2mwUK2oKJlP5pCzRNsJcT4",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e021ad7919c57ca30b5298b1b33",
+            "link": "https://open.spotify.com/artist/2mwUK2oKJlP5pCzRNsJcT4"
+        },
+        "date": "2024-06-29",
+        "venue": "Laketown Ranch",
+        "popularity": "129000",
+        "ticket_date": "2024-06-29 at Laketown Ranch",
+        "band_id": "2mwUK2oKJlP5pCzRNsJcT4",
+        "sp_band_name": "I.M. Fast",
+        "link": "https://open.spotify.com/artist/2mwUK2oKJlP5pCzRNsJcT4",
+        "uri": "spotify:artist:2mwUK2oKJlP5pCzRNsJcT4",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e021ad7919c57ca30b5298b1b33",
+        "topTrackURIs": [
+            "spotify:track:7Amcy3mnpjiVtbjOYjwAPL",
+            "spotify:track:0IWeEmExqaJdfks4ZvZm4F",
+            "spotify:track:05EEK5KmVmunYLRli11g99",
+            "spotify:track:3wqmmwn9bZyHSdBleVfion"
+        ]
+    },
+    {
+        "artist": {
+            "id": "0YnrslYN9hfy5ZRCQUjMMt",
+            "name": "Jesse Roper",
+            "topTracks": [
+                "spotify:track:68hRjnbmGNKjGObSdmB5ZL",
+                "spotify:track:6BJRVmgiOWmDUSJUXhjomI",
+                "spotify:track:1MbszgW431CEH2bik2ct6J",
+                "spotify:track:19FzdCwxA7hIsbmF8DLac5",
+                "spotify:track:5u3Ix27LxPWXQsOdigfTga",
+                "spotify:track:3r7uAxNgdeLJ36O9u9SK8M",
+                "spotify:track:1OUnlmlJ6FT4PpJMAqlVyc",
+                "spotify:track:1AbzihR3bhDonO8mNidgEb",
+                "spotify:track:2EjBESJjzqaHljKWHaAVvq",
+                "spotify:track:6aKJ4qetnBL4hTArVsibmA"
+            ],
+            "uri": "spotify:artist:0YnrslYN9hfy5ZRCQUjMMt",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0228f03ae6f3f334b97218975a",
+            "link": "https://open.spotify.com/artist/0YnrslYN9hfy5ZRCQUjMMt"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "100100",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "0YnrslYN9hfy5ZRCQUjMMt",
+        "sp_band_name": "Jesse Roper",
+        "link": "https://open.spotify.com/artist/0YnrslYN9hfy5ZRCQUjMMt",
+        "uri": "spotify:artist:0YnrslYN9hfy5ZRCQUjMMt",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0228f03ae6f3f334b97218975a",
+        "topTrackURIs": [
+            "spotify:track:68hRjnbmGNKjGObSdmB5ZL",
+            "spotify:track:6BJRVmgiOWmDUSJUXhjomI",
+            "spotify:track:1MbszgW431CEH2bik2ct6J",
+            "spotify:track:19FzdCwxA7hIsbmF8DLac5",
+            "spotify:track:5u3Ix27LxPWXQsOdigfTga",
+            "spotify:track:3r7uAxNgdeLJ36O9u9SK8M",
+            "spotify:track:1OUnlmlJ6FT4PpJMAqlVyc",
+            "spotify:track:1AbzihR3bhDonO8mNidgEb",
+            "spotify:track:2EjBESJjzqaHljKWHaAVvq",
+            "spotify:track:6aKJ4qetnBL4hTArVsibmA"
+        ]
+    },
+    {
+        "artist": {
+            "id": "63NJf4MSV6H56QfpEkUZoy",
+            "name": "Slimkid3",
+            "topTracks": [
+                "spotify:track:0BWX95tlAxo2R6PAs2AXjc",
+                "spotify:track:2mUPQqzyNSeMsYRfYgyBD9",
+                "spotify:track:2zeUxZLz0uwWobz2Ui9SIq",
+                "spotify:track:2rwnzMZ8PGOwlg50DVKAcx",
+                "spotify:track:3h3Sreo7oUA17A6ulgn171",
+                "spotify:track:2EIgFL4qZ8ANuqTKYWM2Ga",
+                "spotify:track:5u97AoG0kuxe9YSsB8SCtk",
+                "spotify:track:2vuePDOy8NYddhPjbLiLn4",
+                "spotify:track:7GKv75iripPM08ZFjr3GTr",
+                "spotify:track:66Tu9oRkEJUVd1g3vk1TQU"
+            ],
+            "uri": "spotify:artist:63NJf4MSV6H56QfpEkUZoy",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02e54c12d735d8bf53cd6cd4ab",
+            "link": "https://open.spotify.com/artist/63NJf4MSV6H56QfpEkUZoy"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "100200",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "63NJf4MSV6H56QfpEkUZoy",
+        "sp_band_name": "DJ Nu-Mark",
+        "link": "https://open.spotify.com/artist/63NJf4MSV6H56QfpEkUZoy",
+        "uri": "spotify:artist:63NJf4MSV6H56QfpEkUZoy",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02e54c12d735d8bf53cd6cd4ab",
+        "topTrackURIs": [
+            "spotify:track:0BWX95tlAxo2R6PAs2AXjc",
+            "spotify:track:2mUPQqzyNSeMsYRfYgyBD9",
+            "spotify:track:2zeUxZLz0uwWobz2Ui9SIq",
+            "spotify:track:2rwnzMZ8PGOwlg50DVKAcx",
+            "spotify:track:3h3Sreo7oUA17A6ulgn171",
+            "spotify:track:2EIgFL4qZ8ANuqTKYWM2Ga",
+            "spotify:track:5u97AoG0kuxe9YSsB8SCtk",
+            "spotify:track:2vuePDOy8NYddhPjbLiLn4",
+            "spotify:track:7GKv75iripPM08ZFjr3GTr",
+            "spotify:track:66Tu9oRkEJUVd1g3vk1TQU"
+        ]
+    },
+    {
+        "artist": {
+            "id": "3O4NBsokz0M9tv0vGzpv4o",
+            "name": "The Bankes Brothers",
+            "topTracks": [
+                "spotify:track:4jzyx3zU5WmqzcNtOSw7u7",
+                "spotify:track:2fgRdZiaPdUa99k94kV8eR",
+                "spotify:track:36BDh5QGFCFFiDWryZ0aaC",
+                "spotify:track:3gpFkPSSpDWsKkgMcyqGqU",
+                "spotify:track:79jjCy5nc4hSjvJsKYp69w",
+                "spotify:track:4HPKgyTgLtnRNMURI4Z2KP"
+            ],
+            "uri": "spotify:artist:3O4NBsokz0M9tv0vGzpv4o",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0263143774ff0dd6fb211d967a",
+            "link": "https://open.spotify.com/artist/3O4NBsokz0M9tv0vGzpv4o"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "109000",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "3O4NBsokz0M9tv0vGzpv4o",
+        "sp_band_name": "The Bankes Brothers",
+        "link": "https://open.spotify.com/artist/3O4NBsokz0M9tv0vGzpv4o",
+        "uri": "spotify:artist:3O4NBsokz0M9tv0vGzpv4o",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0263143774ff0dd6fb211d967a",
+        "topTrackURIs": [
+            "spotify:track:4jzyx3zU5WmqzcNtOSw7u7",
+            "spotify:track:2fgRdZiaPdUa99k94kV8eR",
+            "spotify:track:36BDh5QGFCFFiDWryZ0aaC",
+            "spotify:track:3gpFkPSSpDWsKkgMcyqGqU",
+            "spotify:track:79jjCy5nc4hSjvJsKYp69w",
+            "spotify:track:4HPKgyTgLtnRNMURI4Z2KP"
+        ]
+    },
+    {
+        "artist": {
+            "id": "149qI3YQHoTrM0oSimXTqf",
+            "name": "Darrian Gerard",
+            "topTracks": [
+                "spotify:track:3UJXSElHVhPYB0ElsXALA3",
+                "spotify:track:0v0GaIfFVhZ53bmSm1w6e2",
+                "spotify:track:3vDLH5vEaepFw0dJOXh6d9",
+                "spotify:track:6LGVNvvgAOsicqanH44oZh",
+                "spotify:track:7hq3vkhv7BaiTPB6uwQO3b",
+                "spotify:track:4Sq0p66t3NiJSnkNUiTUjR",
+                "spotify:track:6wHKvYvrb3a3BrAlXWp8AP",
+                "spotify:track:4tblmwpTza9iDISEERf4ta",
+                "spotify:track:2bOUMEoMRyZf49jT6V2X5u",
+                "spotify:track:0NEy4XWNCACoz2ldx8Auno"
+            ],
+            "uri": "spotify:artist:149qI3YQHoTrM0oSimXTqf",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e021aaeea3650cdabb0446c4413",
+            "link": "https://open.spotify.com/artist/149qI3YQHoTrM0oSimXTqf"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "118000",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "149qI3YQHoTrM0oSimXTqf",
+        "sp_band_name": "Darrian Gerard",
+        "link": "https://open.spotify.com/artist/149qI3YQHoTrM0oSimXTqf",
+        "uri": "spotify:artist:149qI3YQHoTrM0oSimXTqf",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e021aaeea3650cdabb0446c4413",
+        "topTrackURIs": [
+            "spotify:track:3UJXSElHVhPYB0ElsXALA3",
+            "spotify:track:0v0GaIfFVhZ53bmSm1w6e2",
+            "spotify:track:3vDLH5vEaepFw0dJOXh6d9",
+            "spotify:track:6LGVNvvgAOsicqanH44oZh",
+            "spotify:track:7hq3vkhv7BaiTPB6uwQO3b",
+            "spotify:track:4Sq0p66t3NiJSnkNUiTUjR",
+            "spotify:track:6wHKvYvrb3a3BrAlXWp8AP",
+            "spotify:track:4tblmwpTza9iDISEERf4ta",
+            "spotify:track:2bOUMEoMRyZf49jT6V2X5u",
+            "spotify:track:0NEy4XWNCACoz2ldx8Auno"
+        ]
+    },
+    {
+        "artist": {
+            "id": "10bwYbNUGiwUcPSq4BgDxz",
+            "name": "Trophy Dad",
+            "topTracks": [
+                "spotify:track:5wIv3wzIhicc6o6pLhgNHu",
+                "spotify:track:0MB87kAG2xysVtcEY5Diml",
+                "spotify:track:0eUZOrvfFGinabLWb0F2Np",
+                "spotify:track:0oPQeV3HmOftmJUEsp1qb3",
+                "spotify:track:6rhwm7o6H9yeQtwkybsKcG",
+                "spotify:track:6PLpWt0IJ9XFQSwNkNixM6",
+                "spotify:track:2Cdzyywm9XFPfhYgMXAFa9",
+                "spotify:track:2IzYWIcy75naEQJdQMFxbv"
+            ],
+            "uri": "spotify:artist:10bwYbNUGiwUcPSq4BgDxz",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e027d41c50f79844edb5823acd7",
+            "link": "https://open.spotify.com/artist/10bwYbNUGiwUcPSq4BgDxz"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "125000",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "10bwYbNUGiwUcPSq4BgDxz",
+        "sp_band_name": "Trophy Dad",
+        "link": "https://open.spotify.com/artist/10bwYbNUGiwUcPSq4BgDxz",
+        "uri": "spotify:artist:10bwYbNUGiwUcPSq4BgDxz",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e027d41c50f79844edb5823acd7",
+        "topTrackURIs": [
+            "spotify:track:5wIv3wzIhicc6o6pLhgNHu",
+            "spotify:track:0MB87kAG2xysVtcEY5Diml",
+            "spotify:track:0eUZOrvfFGinabLWb0F2Np",
+            "spotify:track:0oPQeV3HmOftmJUEsp1qb3",
+            "spotify:track:6rhwm7o6H9yeQtwkybsKcG",
+            "spotify:track:6PLpWt0IJ9XFQSwNkNixM6",
+            "spotify:track:2Cdzyywm9XFPfhYgMXAFa9",
+            "spotify:track:2IzYWIcy75naEQJdQMFxbv"
+        ]
+    },
+    {
+        "artist": {
+            "id": "76dqKzGoMQbvLTM8DPibWa",
+            "name": "Sport Mode",
+            "topTracks": [
+                "spotify:track:0r4L5AXigGa4wBq1kDVB1w",
+                "spotify:track:4qyBNxi0Rr4Eq1p9udyr9s",
+                "spotify:track:14NqVhFWL6jr3KHPahaaEb",
+                "spotify:track:51d47yMzMRn26EXQvEPZJa"
+            ],
+            "uri": "spotify:artist:76dqKzGoMQbvLTM8DPibWa",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e020160db50e11e14639b5b8874",
+            "link": "https://open.spotify.com/artist/76dqKzGoMQbvLTM8DPibWa"
+        },
+        "date": "2024-06-28",
+        "venue": "Laketown Ranch",
+        "popularity": "120000",
+        "ticket_date": "2024-06-28 at Laketown Ranch",
+        "band_id": "76dqKzGoMQbvLTM8DPibWa",
+        "sp_band_name": "Sport Mode",
+        "link": "https://open.spotify.com/artist/76dqKzGoMQbvLTM8DPibWa",
+        "uri": "spotify:artist:76dqKzGoMQbvLTM8DPibWa",
+        "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e020160db50e11e14639b5b8874",
+        "topTrackURIs": [
+            "spotify:track:0r4L5AXigGa4wBq1kDVB1w",
+            "spotify:track:4qyBNxi0Rr4Eq1p9udyr9s",
+            "spotify:track:14NqVhFWL6jr3KHPahaaEb",
+            "spotify:track:51d47yMzMRn26EXQvEPZJa"
+        ]
+    }
+]
