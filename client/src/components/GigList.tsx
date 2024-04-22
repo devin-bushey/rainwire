@@ -20,7 +20,10 @@ export const GigList = ({
   const [displayedGigs, setDisplayedGigs] = useState<Gig[]>([]);
   const [showMore, setShowMore] = useState<boolean>(true);
 
-  useEffect(() => setDisplayedGigs([]), [gigs]);
+  useEffect(() => {
+    setDisplayedGigs([]);
+    setShowMore(gigs ? gigs.length > LOAD_INTERVAL : false);
+  }, [gigs]);
 
   const handleLoadMore = () => {
     const currentLength = displayedGigs.length;

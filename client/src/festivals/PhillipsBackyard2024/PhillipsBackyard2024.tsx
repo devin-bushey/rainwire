@@ -22,8 +22,9 @@ import { useCreatePlaylistState } from "../../hooks/useCreatePlaylistState";
 import phillipsBackyardLogo from "./assets/phillipsBackyardLogo.png";
 import { InAppModal } from "../../components/InAppModal";
 import { useInAppModalState } from "../../hooks/useInAppModalState";
-import "./phillipsBackyardStyles.css";
 import { PreviewPlaylist } from "../../components/PreviewPlaylist";
+import { CustomPhillipsGigFilters } from "./components/CustomPhillipsGigFilters";
+import "./phillipsBackyardStyles.css";
 
 const DB_COLLECTION_NAME = Festivals.PhillipsBackyard2024;
 
@@ -43,7 +44,8 @@ const COLOURS = Object.freeze({
 
 export const PhillipsBackyard2024 = () => {
   const { isLoggedIntoSpotify } = useAuth();
-  const { data: gigs, isLoading: isGigsQueryLoading } = useGigsQuery(DB_COLLECTION_NAME);
+  const { data: gigs } = useGigsQuery(DB_COLLECTION_NAME);
+  const { filteredGigs, isFilteredGigsLoading, CustomWeekendPicker } = CustomPhillipsGigFilters(gigs);
   const { isSettingsOpen, openSettings, closeSettings, numTopTracks, setNumTopTracks } = useSettingsState();
   const { isInAppModalOpen, openInAppModal, closeInAppModal } = useInAppModalState();
 
@@ -148,11 +150,12 @@ export const PhillipsBackyard2024 = () => {
                   numTopTracks={numTopTracks}
                   setNumTopTracks={setNumTopTracks}
                   iconColour={COLOURS.spotifyIcons.primary}
+                  customSettings={[CustomWeekendPicker]}
                 />
               </Collapse>
 
               <Box margin="24px 0">
-                <GigList gigs={gigs} isQueryLoading={isGigsQueryLoading} cardColours={COLOURS.cardColours} />
+                <GigList gigs={filteredGigs} isQueryLoading={isFilteredGigsLoading} cardColours={COLOURS.cardColours} />
               </Box>
 
               <StickyFadeButton
