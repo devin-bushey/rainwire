@@ -76,8 +76,8 @@ export const CustomPhillipsGigFilters = (gigs: Gig[] | undefined) => {
           label="weekend"
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} sx={{ backgroundColor: "#FFFFFF" }} />
+              {selected.map((key) => (
+                <Chip key={key} label={key} sx={{ backgroundColor: "#FFFFFF" }} />
               ))}
             </Box>
           )}

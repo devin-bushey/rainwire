@@ -23,17 +23,18 @@ export const GigList = ({
   const [showMore, setShowMore] = useState<boolean>(true);
 
   useEffect(() => {
-    setDisplayedGigs([]);
+    setDisplayedGigs(gigs?.slice(0, LOAD_INTERVAL) ?? []);
     setShowMore(gigs ? gigs.length > LOAD_INTERVAL : false);
   }, [gigs]);
 
   const handleLoadMore = () => {
-    const currentLength = displayedGigs.length;
-    const nextGigs = gigs?.slice(currentLength, currentLength + LOAD_INTERVAL) || [];
-    if (nextGigs.length < LOAD_INTERVAL) {
-      setShowMore(false); // Hide the "Load More" button if there are no more gigs to load
+    if (gigs) {
+      const gigsToShow = gigs.slice(0, displayedGigs.length + LOAD_INTERVAL);
+      if (gigs.length - gigsToShow.length === 0) {
+        setShowMore(false); // Hide the "Load More" button if there are no more gigs to load
+      }
+      setDisplayedGigs(gigsToShow);
     }
-    setDisplayedGigs([...displayedGigs, ...nextGigs]);
   };
 
   if (isQueryLoading) {
@@ -47,11 +48,6 @@ export const GigList = ({
       </Container>
     );
   } else {
-    // Display only the first 10 gigs initially
-    if (displayedGigs.length === 0) {
-      setDisplayedGigs(gigs.slice(0, LOAD_INTERVAL));
-    }
-
     return (
       <>
         <Grid
