@@ -26,7 +26,8 @@
   .phillips-page { 
     position: relative;
   }
-
+  
+  /***** BG IMAGES ******/
   .background-top {
     background-color: var(--main-bg-color-top);
     border-bottom: 2px white solid;
@@ -34,48 +35,16 @@
 
   .background-bottom {
     background-image: linear-gradient(var(--main-bg-color-bottom), var(--main-bg-color-top));
-  }
-
-  .phillips-background-icons {
-    background-image: url('./assets/phillipsBackgroundBorder.svg');
     width: 100%;
     height: 100%;
     position: absolute;
   }
-  
-  /***** BG IMAGES ******/
-  
-  .sidebar {
+
+  .phillips-bg-border {
+    background-image: url('./assets/phillipsBackgroundBorder.svg');
+    width: 100%;
+    height: 100%;
     position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  .sidebar-darkened-bird {
-    background-image: url('./assets/phillipsBirdLogoDarkened.png');
-    z-index: 2;
-    width: 450px;
-    height: 450px;
-    top: -64px;
-    left: 1%;
-  }
-
-  .sidebar-sparkle-right {
-    background-image: url('./assets/phillipsSparkle.png');
-    z-index: 4;
-    width: 100px;
-    height: 100px;
-    top: 265px;
-    right: 20%;
-
-    @media (max-width: 900px) {
-      right: 6%;
-    }
-
-    @media (max-width: 600px) {
-      top: 465px;
-      right: 2%;
-    }
   }
   
   
@@ -105,7 +74,6 @@
       box-shadow: none;
     }
   }
-  
   
   
   /****** CUSTOM COMPONENT COLOURS ******/

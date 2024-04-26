@@ -1,6 +1,5 @@
 import { Typography, Slider, Link, Grid } from "@mui/material";
 import { SpotifyColour } from "../theme/AppStyles";
-import "../styles/Settings.css";
 import { SpotifyIcon } from "./Icons";
 
 type SettingsProps = {

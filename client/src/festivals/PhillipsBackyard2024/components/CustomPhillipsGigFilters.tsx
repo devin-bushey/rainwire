@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { Gig } from "../../../types/Gig";
-import { Box, Checkbox, FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Chip,
+  FormControl,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from "@mui/material";
 
 type WeekendDetails = {
   label: string;
@@ -34,7 +44,6 @@ export const CustomPhillipsGigFilters = (gigs: Gig[] | undefined) => {
       gigs?.forEach((gig) => {
         selectedDates.forEach((date) => {
           if (gig.date.includes(date)) {
-            console.log("found a matched gig", gig);
             filteredGigs.push(gig);
             return;
           }
@@ -55,7 +64,9 @@ export const CustomPhillipsGigFilters = (gigs: Gig[] | undefined) => {
   const CustomWeekendPicker = (
     <Box>
       <FormControl fullWidth>
-        <InputLabel id="weekend-select-label">Weekend</InputLabel>
+        <InputLabel id="weekend-select-label" sx={{ color: "#FFFFFF" }}>
+          Weekend
+        </InputLabel>
         <Select
           id="weekend-select"
           labelId="weekend-select-label"
@@ -63,7 +74,13 @@ export const CustomPhillipsGigFilters = (gigs: Gig[] | undefined) => {
           value={selectedWeekends}
           input={<OutlinedInput label="Weekend" />}
           label="weekend"
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} sx={{ backgroundColor: "#FFFFFF" }} />
+              ))}
+            </Box>
+          )}
           onChange={changeWeekend}
         >
           {Object.keys(WEEKEND_OPTIONS).map((key) => (

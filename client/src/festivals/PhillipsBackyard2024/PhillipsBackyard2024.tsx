@@ -42,6 +42,9 @@ const COLOURS = Object.freeze({
   },
 });
 
+// todo stephg - update the "no events found in your area" text
+// todo stephg - figure out why the gradient background isn't full height
+
 export const PhillipsBackyard2024 = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs } = useGigsQuery(DB_COLLECTION_NAME);
@@ -68,8 +71,6 @@ export const PhillipsBackyard2024 = () => {
           }}
         >
           <Grid container justifyContent="center" className="background-top">
-            {/* <div className="sidebar sidebar-darkened-bird" /> */}
-            <div className="sidebar sidebar-sparkle-right" />
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3 }}>
               <Grid
                 container
@@ -92,8 +93,9 @@ export const PhillipsBackyard2024 = () => {
             </Grid>
           </Grid>
 
-          <Grid container justifyContent="center" className="background-bottom">
-            <div className="phillips-background-icons" />
+          <Grid container justifyContent="center">
+            <div className="background-bottom" />
+            <div className="phillips-bg-border" />
 
             <Grid item xs={11} md={8} lg={7} xl={6} sx={{ zIndex: 3, marginBottom: "130px" }}>
               <Grid
