@@ -42,9 +42,6 @@ const COLOURS = Object.freeze({
   },
 });
 
-// todo stephg - update the "no events found in your area" text
-// todo stephg - figure out why the gradient background isn't full height
-
 export const PhillipsBackyard2024 = () => {
   const { isLoggedIntoSpotify } = useAuth();
   const { data: gigs } = useGigsQuery(DB_COLLECTION_NAME);

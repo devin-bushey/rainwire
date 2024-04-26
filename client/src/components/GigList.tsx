@@ -40,9 +40,8 @@ export const GigList = ({
     return (
       <Container sx={{ textAlign: "center" }}>
         <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
-          We couldn&#39;t find any upcoming events in your area.
+          We couldn&#39;t find any events that match your search.
         </Typography>
-        <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>Please select a different area.</Typography>
       </Container>
     );
   } else {
