@@ -6,8 +6,17 @@ import spotifyLogoBlack from "../spotifyLogos/Spotify_Logo_RGB_Black.png";
 import { useState } from "react";
 import { SpotifyPreviewModal } from "../Rifflandia/SpotifyPreviewModal";
 import { BioModal } from "./BioModal";
+import { PageClassName } from "../theme/AppStyles";
 
-export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
+export const GigCard = ({
+  gig,
+  bgcolor,
+  pageClassName,
+}: {
+  gig: Gig;
+  bgcolor: string;
+  pageClassName?: PageClassName;
+}) => {
   const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
   const [artistBio, setArtistBio] = useState<Artist | undefined>();
 
@@ -19,7 +28,6 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
           maxWidth: "400px",
           width: "100%",
           alignItems: "center",
-          // cursor: "pointer",
           marginBottom: "0",
         }}
         className="gig-card"
@@ -59,7 +67,7 @@ export const GigCard = ({ gig, bgcolor }: { gig: Gig; bgcolor: string }) => {
         </Box>
       </Card>
       <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
-      <BioModal artistBio={artistBio} setArtistBio={setArtistBio} />
+      <BioModal artistBio={artistBio} setArtistBio={setArtistBio} pageClassName={pageClassName} />
     </>
   );
 };

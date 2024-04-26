@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GigCard } from "./GigCard";
-import { COLOURS } from "../theme/AppStyles";
+import { COLOURS, PageClassName } from "../theme/AppStyles";
 import { Gig } from "../types/Gig";
 import { Grid, Container, Typography, Button } from "@mui/material";
 import { Loading } from "../pages/Loading";
@@ -11,10 +11,12 @@ export const GigList = ({
   gigs,
   isQueryLoading,
   cardColours,
+  pageClassName,
 }: {
   gigs: Gig[] | undefined;
   isQueryLoading: boolean;
   cardColours?: string[];
+  pageClassName?: PageClassName;
 }) => {
   const colors = cardColours ? cardColours : COLOURS.card_colours;
   const [displayedGigs, setDisplayedGigs] = useState<Gig[]>([]);
@@ -60,7 +62,7 @@ export const GigList = ({
         >
           {displayedGigs.map((gig: Gig, index: number) => (
             <Grid item xs={12} sm={6} key={gig._id} display="flex" justifyContent="center">
-              <GigCard gig={gig} bgcolor={colors[index % colors.length]} />
+              <GigCard gig={gig} bgcolor={colors[index % colors.length]} pageClassName={pageClassName} />
             </Grid>
           ))}
         </Grid>

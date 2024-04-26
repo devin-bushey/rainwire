@@ -59,13 +59,7 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
   };
 
   return (
-    <Modal
-      open={isOpen}
-      onClose={closeModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      className={`${pageClassName}`}
-    >
+    <Modal open={isOpen} onClose={closeModal} className={`${pageClassName}`}>
       <Box
         className="contact-us-modal-contents"
         sx={{
@@ -73,9 +67,11 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
+          width: "90%",
           minWidth: "300px",
           maxWidth: "550px",
           border: "2px solid #000",
+          borderRadius: "10px",
           boxShadow: 24,
           p: 4,
           backgroundColor: DEFAULT_BACKGROUND_COLOUR,
@@ -87,7 +83,7 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
             placeholder="Your Name"
             value={toSend.from_name}
             onChange={handleChange}
-            sx={{ width: "300px" }}
+            sx={{ width: "100%", maxWidth: "300px" }}
           />
           <br />
           <Input
@@ -96,10 +92,9 @@ export const ContactUsModal = ({ isOpen, closeModal, pageClassName }: ContactUsM
             placeholder="Your Email"
             value={toSend.reply_to}
             onChange={handleChange}
-            sx={{ width: "300px", marginTop: "8px", marginBottom: "24px" }}
+            sx={{ width: "100%", maxWidth: "300px", marginTop: "8px", marginBottom: "24px" }}
           />
           <br />
-          {/* <Typography sx={{ marginBottom: '8px' }}>To devin.m.bushey@gmail.com</Typography> */}
           <TextField placeholder="Message" onChange={(e) => setMessage(e.target.value)} multiline fullWidth />
           <br />
           <br />

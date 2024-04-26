@@ -117,7 +117,6 @@ export const PhillipsBackyard2024 = () => {
                   </Button>
                 </Grid>
 
-                {/* // TODO: Temp redirect - have to add actaul url to allow list in spotify dev dashboard */}
                 <Grid item style={{ display: "grid", alignSelf: "stretch" }} width={{ xs: "100%", sm: "auto" }}>
                   <div style={{ justifySelf: "center", alignSelf: "center" }}>
                     {isLoggedIntoSpotify() ? (
@@ -154,7 +153,12 @@ export const PhillipsBackyard2024 = () => {
               </Collapse>
 
               <Box margin="24px 0">
-                <GigList gigs={filteredGigs} isQueryLoading={isFilteredGigsLoading} cardColours={COLOURS.cardColours} />
+                <GigList
+                  gigs={filteredGigs}
+                  isQueryLoading={isFilteredGigsLoading}
+                  cardColours={COLOURS.cardColours}
+                  pageClassName={PAGE_CLASS}
+                />
               </Box>
 
               <StickyFadeButton

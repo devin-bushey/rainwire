@@ -1,0 +1,266 @@
+[
+    {
+        "artist": {
+            "id": "4aKdmOXdUKX07HVd3sGgzw",
+            "name": "Rezz",
+            "topTracks": [
+                "spotify:track:6JsidMhbuAQV5QPBEibouw",
+                "spotify:track:7wa5lBm1Nl0kcXb9psV2Sj",
+                "spotify:track:5EhnuLMer8qAXEDwmLtyrW",
+                "spotify:track:4hR3hQKELrARHNZJ51D14s",
+                "spotify:track:44bbIyM2FEwwwMfxptIoTZ",
+                "spotify:track:6H3uEl6cwtz6w8w1vTbAxE",
+                "spotify:track:04oBrVYURdwGA2aAwcxtrV",
+                "spotify:track:2SYTcbHJyInGyG09ssoTPU",
+                "spotify:track:0JJy85tdn2EOhIaEdHVivf",
+                "spotify:track:478zKvO5SlAMJ1dNSn9Dcu"
+            ],
+            "uri": "spotify:artist:4aKdmOXdUKX07HVd3sGgzw",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e026c65c9a96c54a01be2396a93",
+            "link": "https://open.spotify.com/artist/4aKdmOXdUKX07HVd3sGgzw"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10000"
+    },
+    {
+        "artist": {
+            "id": "1J2VVASYAamtQ3Bt8wGgA6",
+            "name": "Ja Rule",
+            "topTracks": [
+                "spotify:track:4YA7nxDtAVE2R1Eryx7uRu",
+                "spotify:track:2iclfHORMqpR3TxuhwVRhD",
+                "spotify:track:4ToZV7r72wSbVrljaLSp13",
+                "spotify:track:1bl99Q4umnPomYGv3dQP67",
+                "spotify:track:0OvwzS8FX73Bw7ykMRmffU",
+                "spotify:track:1FK0sZfZzCAIDUn7htCemp",
+                "spotify:track:7xXvPyOiFCsB5SSpio5g38",
+                "spotify:track:4xwRtK6tfMp4yZwcDvY0gT",
+                "spotify:track:4Uq7Fs7a1HUep9E6nwz59I",
+                "spotify:track:2EhZdDMJBk529B7I57vJb8"
+            ],
+            "uri": "spotify:artist:1J2VVASYAamtQ3Bt8wGgA6",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0204c74480e6ede95a8dc30743",
+            "link": "https://open.spotify.com/artist/1J2VVASYAamtQ3Bt8wGgA6"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10100"
+    },
+    {
+        "artist": {
+            "id": "4cUkGQyhLFqKHBtL58HYVp",
+            "name": "Channel Tres",
+            "topTracks": [
+                "spotify:track:7j3zZ2jAjzFD60UjhldhHo",
+                "spotify:track:5ZIdh9iejek7OGcmdOz3yP",
+                "spotify:track:6KflfPD0qIbbB1PQyAHla5",
+                "spotify:track:4at0npP4QkdIUulFZIsYft",
+                "spotify:track:2TfHuXx68GAVR71kUQttvJ",
+                "spotify:track:3YQNUCe3btF2wUQpzfaodu",
+                "spotify:track:5lSfq3EFWwD9yylL0zaqqj",
+                "spotify:track:7yhBhI7yNA7hb4Vi0ROsQA",
+                "spotify:track:1lx452Y4CLMvIois88vwBr",
+                "spotify:track:5wJdEqkWqCuIUky1rTzMjt"
+            ],
+            "uri": "spotify:artist:4cUkGQyhLFqKHBtL58HYVp",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0277619f14cb03e11baf5761d1",
+            "link": "https://open.spotify.com/artist/4cUkGQyhLFqKHBtL58HYVp"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10300"
+    },
+    {
+        "artist": {
+            "id": "7krx6UBDKLwE0q3s3fesqF",
+            "name": "C & C Music Factory",
+            "topTracks": [
+                "spotify:track:7eheoW4hxrH51ww2QePVwF",
+                "spotify:track:6FILwyPbXeky71RrwByhQq",
+                "spotify:track:4QWU4b9viti7aUefIHrccZ",
+                "spotify:track:5KtBCESYv8hn5Ku62ITDxl",
+                "spotify:track:12ivWHaFhaQBqWavvSERQi",
+                "spotify:track:37pwuRTOrveRxongpOWlgn",
+                "spotify:track:7Aw400xYfxX0tDLC4dV7CI",
+                "spotify:track:2z809doWJXQWxioqg6kczt",
+                "spotify:track:1n4j2exddSK9PC8oU1e7gj",
+                "spotify:track:6RWMrl5JFUBtLLxGMs4Fk9"
+            ],
+            "uri": "spotify:artist:7krx6UBDKLwE0q3s3fesqF",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02bf6cc1130a676e73730f6311",
+            "link": "https://open.spotify.com/artist/7krx6UBDKLwE0q3s3fesqF"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10400"
+    },
+    {
+        "artist": {
+            "id": "3wyfo3svXNWnszGAEVey11",
+            "name": "Tokyo Police Club",
+            "topTracks": [
+                "spotify:track:1WuqoIcFUzOMUxL0K0bPak",
+                "spotify:track:0A4W1mAnTMVnq4v6SEyAwa",
+                "spotify:track:3relJ5bU3ZnhrakliYT4fj",
+                "spotify:track:2y8GngH2Gn7OGm7qRuzRh0",
+                "spotify:track:3yad4Bfxw3hS6IfevPWxBT",
+                "spotify:track:2whvrSXw8eiOuL7BssFsMU",
+                "spotify:track:7EiIEp88FYEouFtTUioMaR",
+                "spotify:track:7C6vGbKOKYKDJm9VMQKGtL",
+                "spotify:track:5nyezzUosswePMS34C0GJ9",
+                "spotify:track:0dq4hs5R6xA3gnpeNVQbqf"
+            ],
+            "uri": "spotify:artist:3wyfo3svXNWnszGAEVey11",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e0220b13cf0e358fe1b785dd894",
+            "link": "https://open.spotify.com/artist/3wyfo3svXNWnszGAEVey11"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10500"
+    },
+    {
+        "artist": {
+            "id": "4QM5QCHicznALtX885CnZC",
+            "name": "Slayyyter",
+            "topTracks": [
+                "spotify:track:0HMco7zpjdsloHqToLjiLK",
+                "spotify:track:3fWZObJDFUGnah8Q7ukiT4",
+                "spotify:track:1HBOsPD7SbbShkxh1qfTRn",
+                "spotify:track:2nxR4gpUbRufqBEtIZuwSg",
+                "spotify:track:7ApJURvlGE97peCgQsJgXZ",
+                "spotify:track:1KjNzRdThQJ2MDtN4nKDFL",
+                "spotify:track:5wn3nqc8vCGoNJU96N0fDb",
+                "spotify:track:2Pjv8xp8CKSQRR57s17mHN",
+                "spotify:track:0w2YzYzleND7wp3ib0zxXc",
+                "spotify:track:2EZHO9OoxZoaBs669GtWZv"
+            ],
+            "uri": "spotify:artist:4QM5QCHicznALtX885CnZC",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02c33c08b84a81b72d0e6bbd81",
+            "link": "https://open.spotify.com/artist/4QM5QCHicznALtX885CnZC"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10600"
+    },
+    {
+        "artist": {
+            "id": "6CarTAUaWnQb6bp7yjP0Zz",
+            "name": "Nostalgix",
+            "topTracks": [
+                "spotify:track:6EdnmlpuR9O7ZpUwonIih4",
+                "spotify:track:4lb8Lp96diNynBi5yri1dC",
+                "spotify:track:05MXGePoWINGgdNpxfuyzT",
+                "spotify:track:4zndIOEwqNne000JFuaGoD",
+                "spotify:track:4KKbFhWTG5tstCC1g5cOVy",
+                "spotify:track:76IbCTgkgm0t8PaX5x488g",
+                "spotify:track:0OIr6KOWCt5C6VxLJq08vy",
+                "spotify:track:6MCsbkXWaDDa408N1pUky7",
+                "spotify:track:7opSc1BeR7P8v0i3QYUi0W",
+                "spotify:track:02teKCLbOxKUIVg7DPoWCE"
+            ],
+            "uri": "spotify:artist:6CarTAUaWnQb6bp7yjP0Zz",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e025213e687688e812ae64b15e4",
+            "link": "https://open.spotify.com/artist/6CarTAUaWnQb6bp7yjP0Zz"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10700"
+    },
+    {
+        "artist": {
+            "id": "5LVcxojBbX8xI4mGpQ5Zck",
+            "name": "SkiiTour",
+            "topTracks": [
+                "spotify:track:2NjeiZqZSRyCdL8xbQehNL",
+                "spotify:track:6v7cbutEjikUA3hj6xbWSP",
+                "spotify:track:7IXGEcfdOB2ZYoXtR2zwZp",
+                "spotify:track:7kNErAKTHPUrduunxRg5eR",
+                "spotify:track:090GxD5crh6hKq85xAQp4l",
+                "spotify:track:2xvYYOE1Yglm2483jqiGCz",
+                "spotify:track:0MxXEPGhe1xTQFeuHSIU6m",
+                "spotify:track:4Wr7SkLSeRXdMZpyjoBAQU",
+                "spotify:track:5nr7v3tnr4ZwhBg1BFjjTi",
+                "spotify:track:0BhMxDZYggpPjUrVZYCltF"
+            ],
+            "uri": "spotify:artist:5LVcxojBbX8xI4mGpQ5Zck",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02a70c39875c38d543d8649aac",
+            "link": "https://open.spotify.com/artist/5LVcxojBbX8xI4mGpQ5Zck"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10800"
+    },
+    {
+        "artist": {
+            "id": "7wGrLSB3v7jkV3fSsjYwtv",
+            "name": "Born Ruffians",
+            "topTracks": [
+                "spotify:track:1FPw1OB78jQ7pKPs4JKO2E",
+                "spotify:track:03yGCvDbx90znjtC1E8rzh",
+                "spotify:track:34HfKwYqEfUNyBHz9BZbqD",
+                "spotify:track:2jOnBMPY88OwEHnJIVjMuY",
+                "spotify:track:5uIrUNycXZ06nUSWBrsYWp",
+                "spotify:track:0phMd5UEf56pVec8EOMd4G",
+                "spotify:track:3cjy8SthZarHYyqTtHbA4s",
+                "spotify:track:0mtXIK2eEsiaCvCaxlmrEB",
+                "spotify:track:1yrvWcFsTbpfaNfe6ZH8aY",
+                "spotify:track:4iVJMTRYNu1cJ4OIYhYuyo"
+            ],
+            "uri": "spotify:artist:7wGrLSB3v7jkV3fSsjYwtv",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e024253259ac704ad7b0b52149c",
+            "link": "https://open.spotify.com/artist/7wGrLSB3v7jkV3fSsjYwtv"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10800"
+    },
+    {
+        "artist": {
+            "id": "1h3omMr7jTuA0Tbuy8fALW",
+            "name": "Garret T. Willie",
+            "topTracks": [
+                "spotify:track:2nwaYi6wjlKuAFTGP6jzSf",
+                "spotify:track:2gi6NR6Uhu1tZGC3myfP7x",
+                "spotify:track:5Y3u6SNUI9dJtAlJ34VaBh",
+                "spotify:track:7MMh7Vh2p2EqboYOqlDhrf",
+                "spotify:track:5kMJbVzpCMxtJRrw5fkDA2",
+                "spotify:track:58PW1VONWvXXloK8s5eWYp",
+                "spotify:track:1mcDutR0GhbIYmTGpe6CDv",
+                "spotify:track:43772m40KRWMU84YBAh9op",
+                "spotify:track:3LfmN0aAz0byeh0VS9kZKv",
+                "spotify:track:3FA3q9cgLD6goNHsAITGzt"
+            ],
+            "uri": "spotify:artist:1h3omMr7jTuA0Tbuy8fALW",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02d29711ce3140afb31bf04e5f",
+            "link": "https://open.spotify.com/artist/1h3omMr7jTuA0Tbuy8fALW"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "10900"
+    },
+    {
+        "artist": {
+            "id": "3QvVwM4jqnOtzctJZr2Bch",
+            "name": "Mia Kelly",
+            "topTracks": [
+                "spotify:track:4nPJr4CDbh1be6LJaoQGpJ",
+                "spotify:track:1cCqJiuWIwtYUQM2HeZHJl",
+                "spotify:track:2sdXnPfP6iAyY9Jzq7JNSr",
+                "spotify:track:0Vs4hZoecLu4Ijo4insqlQ",
+                "spotify:track:2oQbeC9WC33LkraXVZOICF",
+                "spotify:track:1WYFysPe0qgc45IGtwLZ2e",
+                "spotify:track:5WssYH9hQ3J9UGuDkqB6PJ",
+                "spotify:track:6XoeOgbRMqF0LG00LumhlN",
+                "spotify:track:7jX8T4VtfHkgirltAn8k3f",
+                "spotify:track:4kHtSC8JEAVMFpBXsLvEVy"
+            ],
+            "uri": "spotify:artist:3QvVwM4jqnOtzctJZr2Bch",
+            "albumArtUrl": "https://i.scdn.co/image/ab67616d00001e02df007a74662f3e674eadcc39",
+            "link": "https://open.spotify.com/artist/3QvVwM4jqnOtzctJZr2Bch"
+        },
+        "date": "2024-09-13T07:00:00.000Z",
+        "venue": "Rock Bay, Victoria",
+        "popularity": "11000"
+    }
+]
