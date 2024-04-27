@@ -17,19 +17,24 @@ victoriaRouter.route("/artists").get(async (req, response) => {
 });
 
 victoriaRouter.route("/create").post(async (req, response) => {
-  const { token, city, user_id, numTopTracks, sortBy } = req.body;
+  const { token, city, user_id, numTopTracks, sortBy, overrideGigs } = req.body;
 
-  const db_connect = await connectToDatabase();
-  const collection: Collection<Gig> = db_connect.collection(`${city}`);
-  const gigs: Gig[] = await collection.find({}).toArray();
+  let gigs: Gig[] = [];
+  if (overrideGigs) {
+    gigs = overrideGigs;
+  } else {
+    const db_connect = await connectToDatabase();
+    const collection: Collection<Gig> = db_connect.collection(`${city}`);
+    gigs = await collection.find({}).toArray();
+  }
 
   const url = await CreateNewPlaylist({
-    token: token,
-    city: city,
-    user_id: user_id,
-    numTopTracks: numTopTracks,
-    gigs: gigs,
-    sortBy: sortBy,
+    token,
+    city,
+    user_id,
+    numTopTracks,
+    gigs,
+    sortBy,
   }).catch((error) => {
     console.log(error);
     response.status(500).json({ error: error.message });

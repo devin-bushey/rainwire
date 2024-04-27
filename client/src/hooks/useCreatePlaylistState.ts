@@ -3,13 +3,15 @@ import { CreateNewPlaylist } from "../apiManager/RecordShop";
 import { SnackBarContext } from "../App";
 import { goToNewTabOnDesktop } from "../utils/browserUtils";
 import { useAuth } from "../context/AuthContext";
+import { Gig } from "../types/Gig";
 
 type PlaylistStateProps = {
   dbCollectionName: string;
   numTopTracks: number;
+  overrideGigs?: Gig[];
 };
 
-export const useCreatePlaylistState = ({ dbCollectionName, numTopTracks }: PlaylistStateProps) => {
+export const useCreatePlaylistState = ({ dbCollectionName, numTopTracks, overrideGigs }: PlaylistStateProps) => {
   const { token, spotifyInfo } = useAuth();
 
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
@@ -31,9 +33,10 @@ export const useCreatePlaylistState = ({ dbCollectionName, numTopTracks }: Playl
     setIsCreatingPlaylist(true);
     await CreateNewPlaylist({
       city: dbCollectionName,
-      token: token,
+      token,
       user_id: spotifyInfo.user_id,
-      numTopTracks: numTopTracks,
+      numTopTracks,
+      overrideGigs,
     })
       .then((res) => {
         if (res.status === 201) {

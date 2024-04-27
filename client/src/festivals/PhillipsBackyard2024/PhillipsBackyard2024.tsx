@@ -52,6 +52,7 @@ export const PhillipsBackyard2024 = () => {
   const { isCreatingPlaylist, handleCreatePlaylist } = useCreatePlaylistState({
     dbCollectionName: DB_COLLECTION_NAME,
     numTopTracks,
+    overrideGigs: filteredGigs,
   });
 
   setDocumentTitle("Record Shop | Phillips Backyard 2024");

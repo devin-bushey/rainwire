@@ -1,6 +1,7 @@
 import axios from "axios";
 import { filterRecent, sortByPopularity, sortDataByDateAndOrder } from "../utils/sorter";
 import { Cities, Festivals } from "../constants/enums";
+import { Gig } from "../types/Gig";
 
 export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> => {
   // eslint-disable-next-line
@@ -30,20 +31,22 @@ export const CreateNewPlaylist = async ({
   city,
   user_id,
   numTopTracks,
+  overrideGigs,
   sortBy = "date",
 }: {
   token: string;
   city: string;
   user_id: string;
   numTopTracks?: number;
+  overrideGigs?: Gig[];
   sortBy?: "popularity" | "date";
 }) => {
-  const reqBody = {
-    token: token,
-    user_id: user_id,
-    city: city,
-    numTopTracks: numTopTracks,
-    sortBy: sortBy,
-  };
-  return await axios.post(import.meta.env.VITE_SITE_URL_DB + "create/", reqBody);
+  return await axios.post(import.meta.env.VITE_SITE_URL_DB + "create/", {
+    token,
+    user_id,
+    city,
+    numTopTracks,
+    sortBy,
+    overrideGigs,
+  });
 };
