@@ -22,15 +22,19 @@ export const GigList = ({
   const [displayedGigs, setDisplayedGigs] = useState<Gig[]>([]);
   const [showMore, setShowMore] = useState<boolean>(true);
 
-  useEffect(() => setDisplayedGigs([]), [gigs]);
+  useEffect(() => {
+    setDisplayedGigs(gigs?.slice(0, LOAD_INTERVAL) ?? []);
+    setShowMore(gigs ? gigs.length > LOAD_INTERVAL : false);
+  }, [gigs]);
 
   const handleLoadMore = () => {
-    const currentLength = displayedGigs.length;
-    const nextGigs = gigs?.slice(currentLength, currentLength + LOAD_INTERVAL) || [];
-    if (nextGigs.length < LOAD_INTERVAL) {
-      setShowMore(false); // Hide the "Load More" button if there are no more gigs to load
+    if (gigs) {
+      const gigsToShow = gigs.slice(0, displayedGigs.length + LOAD_INTERVAL);
+      if (gigs.length - gigsToShow.length === 0) {
+        setShowMore(false); // Hide the "Load More" button if there are no more gigs to load
+      }
+      setDisplayedGigs(gigsToShow);
     }
-    setDisplayedGigs([...displayedGigs, ...nextGigs]);
   };
 
   if (isQueryLoading) {
@@ -39,17 +43,11 @@ export const GigList = ({
     return (
       <Container sx={{ textAlign: "center" }}>
         <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "8px" }}>
-          We couldn&#39;t find any upcoming events in your area.
+          We couldn&#39;t find any events that match your search.
         </Typography>
-        <Typography sx={{ textAlign: "center", marginBottom: "8px" }}>Please select a different area.</Typography>
       </Container>
     );
   } else {
-    // Display only the first 10 gigs initially
-    if (displayedGigs.length === 0) {
-      setDisplayedGigs(gigs.slice(0, LOAD_INTERVAL));
-    }
-
     return (
       <>
         <Grid
