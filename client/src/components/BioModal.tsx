@@ -43,7 +43,7 @@ export const BioModal = ({ artist, setArtist, pageClassName }: BioModalProps) =>
 );
 
 const SocialLinks = ({ artist }: { artist?: Artist }) => {
-  if (!artist?.website && !artist?.instagram) return;
+  if (!artist?.website && !artist?.instagram) return <></>;
 
   return (
     <Box sx={{ marginBottom: "12px" }}>
@@ -54,7 +54,7 @@ const SocialLinks = ({ artist }: { artist?: Artist }) => {
 };
 
 const Website = ({ website }: { website?: string }) => {
-  if (!website) return;
+  if (!website) return <></>;
   return (
     <Link href={website} underline="hover" rel="noopener" target="_blank" sx={{ marginRight: "12px" }}>
       Website
@@ -63,7 +63,7 @@ const Website = ({ website }: { website?: string }) => {
 };
 
 const Instagram = ({ instagram }: { instagram?: string }) => {
-  if (!instagram) return;
+  if (!instagram) return <></>;
   return (
     <Link href={instagram} rel="noopener" target="_blank" underline="hover">
       Instagram
