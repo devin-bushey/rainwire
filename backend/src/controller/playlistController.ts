@@ -52,12 +52,16 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
       return;
     }
 
+    console.log(`Found playlist: ${playlistName}`);
+
     // remove all existing tracks from playlist
     const tracksFromUsersPlaylist = await getPlaylistItems({ token: token, playlistId: playlist.id });
     await removePlaylistItems({ token: token, playlistId: playlist.id, tracks: tracksFromUsersPlaylist });
 
     // add all future gig tracks to playlist
     const gigsFromDatabase = await getAllFutureGigsFromCollection(collectionName);
+    console.log(`Found ${gigsFromDatabase?.length} in db collection`);
+
     const addedTracksCount = await addPlaylistItems({
       token: token,
       playlistId: playlist.id,
