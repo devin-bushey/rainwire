@@ -107,7 +107,7 @@
       "link": ""
     },
     "date": "2024-05-15T00:00:00.000Z",
-    "venue": "",
+    "venue": "House Party",
     "isMissing": false,
     "popularity": 7
   },
@@ -135,7 +135,7 @@
       "link": ""
     },
     "date": "2024-05-18T00:00:00.000Z",
-    "venue": "",
+    "venue": "unknown",
     "isMissing": false,
     "popularity": 9
   },
@@ -149,7 +149,7 @@
       "link": ""
     },
     "date": "2024-05-18T00:00:00.000Z",
-    "venue": "",
+    "venue": "unknown",
     "isMissing": false,
     "popularity": 9
   },
@@ -334,6 +334,20 @@
     "venue": "Capital Ballroom",
     "isMissing": false,
     "popularity": 21
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Scenic Route to Alaska",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-05-24T00:00:00.000Z",
+    "venue": "The Hallway",
+    "isMissing": false,
+    "popularity": 12
   },
   {
     "artist": {
