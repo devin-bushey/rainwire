@@ -14,7 +14,13 @@ export const GetTickets = async ({ queryKey }: { queryKey: any }): Promise<any> 
       },
     })
     .then(async (response) => {
-      if (origin === Cities.Victoria_2024) {
+      if (
+        origin === Cities.Victoria_2024 ||
+        origin === Cities.Vancouver ||
+        origin === Cities.Toronto ||
+        origin === Cities.Pleasanton ||
+        origin === Cities.SanFrancisco
+      ) {
         const sorted = sortDataByDateAndOrder(response.data);
         return filterRecent(sorted);
       }

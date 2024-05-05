@@ -74,9 +74,9 @@ const getEventsFromJambase = async () => {
     url: "https://www.jambase.com/jb-api/v1/events",
     params: {
       eventType: "concerts",
-      // geoCityId: geoCityId,
+      geoCityId: geoCityId,
       geoRadiusAmount: "100",
-      geoCityId: "jambase:382342", // Victoria
+      // geoCityId: "jambase:382342", // Victoria
       // geoCityId: "jambase:379457", // Vancouver
       // geoCityId: "jambase:380343", // Toronto
       // geoCityId: "jambase:4226292", // Pleasanton
@@ -118,10 +118,10 @@ const buildGigListWithSpotifyData = async (events: any, bearerToken: string): Pr
         const concertObject = {
           artist: {
             id: spotifyId,
-            name: spotifyResponse.data.tracks[0].album.artists[0].name,
+            name: spotifyResponse.data.tracks[0]?.album.artists[0].name || "",
             topTracks: topTracks.map((track: any) => track.uri),
             uri: `spotify:artist:${spotifyId}`,
-            albumArtUrl: spotifyResponse.data.tracks[0].album.images[1].url,
+            albumArtUrl: spotifyResponse.data.tracks[0]?.album.images[1].url || "",
             link: `https://open.spotify.com/artist/${spotifyId}`,
           },
           date: new Date(event.endDate),
