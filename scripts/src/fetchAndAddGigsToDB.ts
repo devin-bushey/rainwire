@@ -76,8 +76,8 @@ const getEventsFromJambase = async () => {
       eventType: "concerts",
       // geoCityId: geoCityId,
       geoRadiusAmount: "100",
-      geoCityId: "jambase:382342", // Victoria
-      // geoCityId: "jambase:379457", // Vancouver
+      // geoCityId: "jambase:382342", // Victoria
+      geoCityId: "jambase:379457", // Vancouver
       // geoCityId: "jambase:380343", // Toronto
       // geoCityId: "jambase:4226292", // Pleasanton
       apikey: API_KEY_JAMBASE,
