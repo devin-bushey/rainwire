@@ -1,12 +1,10 @@
 import express from "express";
-import dbo from "../database/conn";
 import {
   addPlaylistItems,
   getPlaylist,
   getPlaylistItems,
   removePlaylistItems,
 } from "../helpers/spotifyPlaylistHelpers";
-import { filterRecent } from "../helpers/filterRecent";
 import { Collection } from "mongodb";
 import { connectToDatabase } from "../database/connectToDatabase";
 import { Gig } from "../types/Gig";
@@ -54,23 +52,25 @@ playlistRouter.route("/playlist/update").put(async (req, response) => {
       return;
     }
 
-    const gigsFromDatabase = await getAllGigsFromCollection(collectionName);
-    const sortedGigs = filterRecent(gigsFromDatabase);
+    console.log(`Found playlist: ${playlistName}`);
 
-    let tracksFromDatabase = [];
-    for (const gig of sortedGigs) {
-      if (gig.artist.topTracks && gig.artist.topTracks[0]) {
-        tracksFromDatabase.push(gig.artist.topTracks[0]);
-      }
-    }
-
+    // remove all existing tracks from playlist
     const tracksFromUsersPlaylist = await getPlaylistItems({ token: token, playlistId: playlist.id });
     await removePlaylistItems({ token: token, playlistId: playlist.id, tracks: tracksFromUsersPlaylist });
-    await addPlaylistItems({ token: token, playlistId: playlist.id, tracks: tracksFromDatabase });
+
+    // add all future gig tracks to playlist
+    const gigsFromDatabase = await getAllFutureGigsFromCollection(collectionName);
+    console.log(`Found ${gigsFromDatabase?.length} in db collection`);
+
+    const addedTracksCount = await addPlaylistItems({
+      token: token,
+      playlistId: playlist.id,
+      tracks: gigsFromDatabase,
+    });
 
     response
       .status(200)
-      .json(`Yassss! Successfully updated the playlist: ${playlistName} with ${tracksFromDatabase.length} tracks.`);
+      .json(`Yassss! Successfully updated the playlist: ${playlistName} with ${addedTracksCount} tracks.`);
   } catch (err) {
     response.status(400).json(`Whoops! Something went wrong :(`);
   }
@@ -118,8 +118,9 @@ playlistRouter.route("/playlist/track").post(async (req, response) => {
 });
 
 // TODO: this is probably a common function?
-const getAllGigsFromCollection = async (collectionName: string): Promise<Gig[]> => {
+const getAllFutureGigsFromCollection = async (collectionName: string): Promise<Gig[]> => {
   const db_connect = await connectToDatabase();
   const collection: Collection<Gig> = db_connect.collection(collectionName);
-  return await collection.find({}).toArray();
+
+  return await collection.find({ date: { $gte: new Date() } }).toArray();
 };
