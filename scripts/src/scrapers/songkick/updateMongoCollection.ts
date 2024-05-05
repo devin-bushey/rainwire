@@ -53,6 +53,7 @@ async function addSpotifyData(gigsSimple: Gig[]) {
   for (let gig of gigsSimple) {
     let populatedGig = await addSpotifyMainData(gig, token);
     populatedGig = await addSpotifyTopTracks(gig, token);
+    gig.date = new Date(gig.date);
     if (populatedGig) populatedGigs.push(gig);
   }
 
