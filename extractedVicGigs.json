@@ -1,5 +1,4 @@
-[
-  {
+[{
     "artist": {
       "id": "",
       "name": "Scenic Route To Alaska",
@@ -12,5 +11,4 @@
     "venue": "The Hallway",
     "isMissing": false,
     "popularity": 14
-  },
-]
+  }]
