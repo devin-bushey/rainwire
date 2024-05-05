@@ -36,3 +36,14 @@ jobs:
           SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
           SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
         run: npx ts-node updateMongoCollection.ts
+
+      - name: Update Record Shop spotify playlist
+        working-directory: scripts
+        env:
+          ATLAS_URI: ${{ secrets.ATLAS_URI }}
+          SP_REFRESH_TOKEN: ${{ secrets.SP_REFRESH_TOKEN }}
+          SP_CLIENT_ID: ${{ secrets.SP_CLIENT_ID }}
+          SP_CLIENT_S: ${{ secrets.SP_CLIENT_S }}
+          VITE_SITE_URL_DB: ${{ secrets.VITE_SITE_URL_DB }}
+          SP_RECORDSHOP_USER_ID: ${{ secrets.SP_RECORDSHOP_USER_ID }}
+        run: npx ts-node ./src/playlists/updatePlaylist.ts
