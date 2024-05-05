@@ -36,7 +36,13 @@ export const CreateNewPlaylist = async ({
   let sortedGigs = sortBy === "popularity" ? sortByPopularity(gigs) : sortByDateAndOrder(gigs);
   let coverArt = PLAYLIST_IMG_RS;
 
-  if (city === Cities.Victoria_2024) {
+  if (
+    city === Cities.Victoria_2024 ||
+    city === Cities.Vancouver ||
+    city === Cities.Toronto ||
+    city === Cities.Pleasanton ||
+    city === Cities.Sanfrancisco
+  ) {
     sortedGigs = filterRecent(sortedGigs);
   }
 
