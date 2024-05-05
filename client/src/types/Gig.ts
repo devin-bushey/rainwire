@@ -15,4 +15,6 @@ export interface Artist {
   albumArtUrl: string;
   link: string;
   bio?: string;
+  website?: string;
+  instagram?: string;
 }

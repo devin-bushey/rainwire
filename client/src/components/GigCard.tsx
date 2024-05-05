@@ -18,7 +18,7 @@ export const GigCard = ({
   pageClassName?: PageClassName;
 }) => {
   const [spotifyPreviewArtistId, setSpotifyPreviewArtistId] = useState<string | undefined>();
-  const [artistBio, setArtistBio] = useState<Artist | undefined>();
+  const [artist, setArtist] = useState<Artist | undefined>();
 
   return (
     <>
@@ -39,7 +39,7 @@ export const GigCard = ({
               <Button
                 sx={{ scale: "70%", marginRight: "-12px" }}
                 variant="outlined"
-                onClick={() => setArtistBio(gig.artist)}
+                onClick={() => setArtist(gig.artist)}
               >
                 Bio
               </Button>
@@ -67,7 +67,7 @@ export const GigCard = ({
         </Box>
       </Card>
       <SpotifyPreviewModal artistId={spotifyPreviewArtistId} setArtistId={setSpotifyPreviewArtistId} />
-      <BioModal artistBio={artistBio} setArtistBio={setArtistBio} pageClassName={pageClassName} />
+      <BioModal artist={artist} setArtist={setArtist} pageClassName={pageClassName} />
     </>
   );
 };
