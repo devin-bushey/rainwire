@@ -24,7 +24,8 @@ export const getGigsFromRecordShop = async (collectionName: string): Promise<Gig
       if (
         collectionName === Festivals.PachenaBay ||
         collectionName === Festivals.PhillipsBackyard2024 ||
-        collectionName === Festivals.LaketownShakedown_2024
+        collectionName === Festivals.LaketownShakedown_2024 ||
+        collectionName === Festivals.Rifflandia2024
       ) {
         return sortByPopularity(response.data);
       }
