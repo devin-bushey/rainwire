@@ -50,7 +50,7 @@ export const CreateNewPlaylist = async ({
     coverArt = IMAGE_PACHENA_BAY;
   }
 
-  if (city === Festivals.PhilipsBackyard2024) {
+  if (city === Festivals.PhilipsBackyard2024 || city === Festivals.Rifflandia2024) {
     sortedGigs = sortByPopularity(gigs);
   }
 
