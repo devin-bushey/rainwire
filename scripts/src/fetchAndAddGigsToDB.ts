@@ -44,8 +44,15 @@ const getSpotifyAccessToken = async () => {
 
 const getJambaseGeoId = async () => {
   let city = CITY;
+
   if (city === "sanfrancisco") {
     return "jambase:4226966";
+  } else if (CITY === "victoria") {
+    return "jambase:382342";
+  } else if (CITY === "vancouver") {
+    return "jambase:379457";
+  } else if (CITY === "toronto") {
+    return "jambase:380343";
   }
 
   const options = {
@@ -75,7 +82,7 @@ const getEventsFromJambase = async () => {
     params: {
       eventType: "concerts",
       geoCityId: geoCityId,
-      geoRadiusAmount: "100",
+      geoRadiusAmount: "50",
       // geoCityId: "jambase:382342", // Victoria
       // geoCityId: "jambase:379457", // Vancouver
       // geoCityId: "jambase:380343", // Toronto
@@ -99,6 +106,7 @@ const getEventsFromJambase = async () => {
 };
 
 const buildGigListWithSpotifyData = async (events: any, bearerToken: string): Promise<Gig[]> => {
+  console.log("Building gig list with spotify data ...");
   const concertData: Gig[] = [];
   const existingArtists = new Set();
   for (const event of events) {
