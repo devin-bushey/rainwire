@@ -2,90 +2,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Scenic Route to Alaska and Major Love",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-24T00:00:00.000Z",
-    "venue": "The Hallway",
-    "isMissing": false,
-    "popularity": 0
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Drew Lynch",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-24T00:00:00.000Z",
-    "venue": "McPherson Playhouse",
-    "isMissing": false,
-    "popularity": 1
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "FloodGate (CA)",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-24T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 2
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Iron Kingdom",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-25T00:00:00.000Z",
-    "venue": "Wicket Hall",
-    "isMissing": false,
-    "popularity": 3
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Jann Arden and Rick Mercer",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-26T00:00:00.000Z",
-    "venue": "Macpherson Theatre",
-    "isMissing": false,
-    "popularity": 4
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Cedric Burnside",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-05-26T00:00:00.000Z",
-    "venue": "Wicket Hall",
-    "isMissing": false,
-    "popularity": 5
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "Alec Shaw",
       "topTracks": [],
       "uri": "",
@@ -100,7 +16,7 @@
   {
     "artist": {
       "id": "",
-      "name": "The Wailers and Rebel Selector",
+      "name": "Rebel Selector",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -156,34 +72,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Advance Base\n                    Karima Walker and Dan wriggins",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-03T00:00:00.000Z",
-    "venue": "Little Fernwood",
-    "isMissing": false,
-    "popularity": 11
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Leeroy Stagger",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-07T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 12
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "Decryptor",
       "topTracks": [],
       "uri": "",
@@ -194,34 +82,6 @@
     "venue": "Quadratic Sound",
     "isMissing": false,
     "popularity": 13
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Fernfest 2024\n                    Petunia & the Vipers",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-14T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 14
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Kevin James Thornton",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-15T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 15
   },
   {
     "artist": {
@@ -237,10 +97,24 @@
     "isMissing": false,
     "popularity": 16
   },
-  {
+    {
     "artist": {
       "id": "",
-      "name": "Orchid Orchestra\n                    Shark Bite Spite and Savannah Read",
+      "name": "Orchid Orchestra",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-15T00:00:00.000Z",
+    "venue": "Rebel Company Garage",
+    "isMissing": false,
+    "popularity": 17
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Shark Bite Spite",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -254,35 +128,21 @@
   {
     "artist": {
       "id": "",
-      "name": "LOWDOWN BRASS BAND and PHONOSONICS @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Lowdown Brass Band",
+      "name": "Savannah Read",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-19T00:00:00.000Z",
-    "venue": "Lucky Bar",
+    "date": "2024-06-15T00:00:00.000Z",
+    "venue": "Rebel Company Garage",
     "isMissing": false,
-    "popularity": 18
+    "popularity": 17
   },
   {
     "artist": {
       "id": "",
-      "name": "FORT KNOX FIVE, APEX BREAKS, Mirage @ Victoria's 25th Anniversary Ska & Reggae Festival 2024",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-20T00:00:00.000Z",
-    "venue": "Wicket Hall",
-    "isMissing": false,
-    "popularity": 19
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "THE SUICIDE MACHINES, THE SLACKERS, THE CREEPSHOW, Space Chimp & DJ I-Lot @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    The Suicide Machines and The Slackers",
+      "name": "The Slackers",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -296,7 +156,7 @@
   {
     "artist": {
       "id": "",
-      "name": "GONDWANA, BIG MOUNTAIN, Batuque Axé & DJ Su Comandante Espinoza @ Victoria's 25th Anniversary Ska & Reggae Festival (SUMMER SOLSTICE REGGAE SPLASH) 2024\n                    Big Mountain",
+      "name": "Batuque Axé",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -310,7 +170,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Campbell Bay Music Festival 2024\n                    Pony Girl and Madeleine Roger",
+      "name": "Madeleine Roger",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -324,7 +184,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Campbell Bay music fest 2024\n                    Y La Bamba",
+      "name": "Y La Bamba",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -338,7 +198,7 @@
   {
     "artist": {
       "id": "",
-      "name": "TD Victoria International JazzFest 2024\n                    LA LOM",
+      "name": "LA LOM",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -366,7 +226,7 @@
   {
     "artist": {
       "id": "",
-      "name": "LESS THAN JAKE, THE PLANET SMASHERS, MEPHISKAPHELES, SweetLeaf & Young Royal @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Less Than Jake and Mephiskapheles",
+      "name": "Mephiskapheles",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -377,10 +237,10 @@
     "isMissing": false,
     "popularity": 26
   },
-  {
+    {
     "artist": {
       "id": "",
-      "name": "DEAD PREZ, MACKA B & THE ROOTS RAGGA BAND, MUNGO'S HI FI with MARINA P, Blasé Blasé, Tank Gyal & DJ Arems @ Victoria's 25th Anniversary Ska & Reggae Festival 2024\n                    Dead Prez, Mungo's Hi Fi, Macka B, and Marina P",
+      "name": "Tank Gyal",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -394,7 +254,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Ziggy Alberts\n                    Garrett Kato",
+      "name": "Marina P",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-22T00:00:00.000Z",
+    "venue": "Ship Point (Inner Harbour)",
+    "isMissing": false,
+    "popularity": 27
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Garrett Kato",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -408,48 +282,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Laura Anglade",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-24T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 29
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "The Umbrellas",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-25T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 30
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "TD Victoria International JazzFest 2024\n                    Morgan James",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-26T00:00:00.000Z",
-    "venue": "Royal Theatre",
-    "isMissing": false,
-    "popularity": 31
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "SNAK THE RIPPER",
       "topTracks": [],
       "uri": "",
@@ -457,177 +289,9 @@
       "link": ""
     },
     "date": "2024-06-28T00:00:00.000Z",
-    "venue": "Capitol Ballroom",
+    "venue": "Capital Ballroom",
     "isMissing": false,
     "popularity": 32
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Victoria Jazz Festival 2024\n                    Sunny Jain",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-28T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 33
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Hollow Coves\n                    Billianne",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-30T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 34
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Five Alarm Funk",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-30T00:00:00.000Z",
-    "venue": "Bullen Park",
-    "isMissing": false,
-    "popularity": 35
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Heather Ferguson\n                    Tony Genge and Joey smith",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-30T00:00:00.000Z",
-    "venue": "Cameron Bandshell, Beacon Hill Park",
-    "isMissing": false,
-    "popularity": 36
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Half Moon Run",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-05T00:00:00.000Z",
-    "venue": "Phillips Backyard (at Phillips Brewery)",
-    "isMissing": false,
-    "popularity": 37
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Mike Edel",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-05T00:00:00.000Z",
-    "venue": "Victoria Backyard Show",
-    "isMissing": false,
-    "popularity": 38
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Ian Fisher, Claire Coupland, and Sammy Volkov",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-05T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 39
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Phillips Backyard 2024\n                    Saint Motel and Vox Rea",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-05T00:00:00.000Z",
-    "venue": "Phillips Backyard (at Phillips Brewery)",
-    "isMissing": false,
-    "popularity": 40
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Phillips Tilt Backyard Music Festival 2024\n                    Noah Cyrus, Jessie Reyez, Saint Motel, Half Moon Run, Orville Peck, SonReal, Flyana Boss, and Hotel Mira",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-06T00:00:00.000Z",
-    "venue": "Phillips Brewery",
-    "isMissing": false,
-    "popularity": 41
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Steph Strings",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-19T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 42
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "James Vincent McMorrow",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-21T00:00:00.000Z",
-    "venue": "Charlie White Theatre, Mary Winspear Centre",
-    "isMissing": false,
-    "popularity": 43
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Sway Wild",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-28T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 44
   },
   {
     "artist": {
@@ -642,61 +306,5 @@
     "venue": "Pender Island Community Hall",
     "isMissing": false,
     "popularity": 45
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Phillips Backyard Music Festival 2024\n                    Jungle and DRAMA",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-09T00:00:00.000Z",
-    "venue": "Phillips Brewery",
-    "isMissing": false,
-    "popularity": 46
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Sons of the East",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-14T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 47
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Belfountain",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-15T00:00:00.000Z",
-    "venue": "Caffe Fantastico Roastery",
-    "isMissing": false,
-    "popularity": 48
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Tia Brazda",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-17T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 49
   }
 ]
