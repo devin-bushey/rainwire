@@ -8,6 +8,8 @@ import {
 import { Collection } from "mongodb";
 import { connectToDatabase } from "../database/connectToDatabase";
 import { Gig } from "../types/Gig";
+import { filterRecent } from "../helpers/filterRecent";
+import { sortByDate } from "../helpers/sortByDate";
 
 export const playlistRouter = express.Router();
 
@@ -117,10 +119,10 @@ playlistRouter.route("/playlist/track").post(async (req, response) => {
   }
 });
 
-// TODO: this is probably a common function?
 const getAllFutureGigsFromCollection = async (collectionName: string): Promise<Gig[]> => {
   const db_connect = await connectToDatabase();
   const collection: Collection<Gig> = db_connect.collection(collectionName);
-
-  return await collection.find({ date: { $gte: new Date() } }).toArray();
+  const gigs = await collection.find({ date: { $gte: new Date() } }).toArray();
+  const sortedGigs = sortByDate(gigs);
+  return sortedGigs;
 };
