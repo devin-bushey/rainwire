@@ -2,309 +2,183 @@
   {
     "artist": {
       "id": "",
-      "name": "Alec Shaw",
+      "name": "Petunia and the Vipers",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-05-30T00:00:00.000Z",
-    "venue": "Wheelies Motorcycles",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 6
+    "popularity": 100100
   },
   {
     "artist": {
       "id": "",
-      "name": "Rebel Selector",
+      "name": "Ayla Tesler-Mabe",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-05-31T00:00:00.000Z",
-    "venue": "Victoria Curling Club",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 7
+    "popularity": 100200
   },
   {
     "artist": {
       "id": "",
-      "name": "Nikki Nair",
+      "name": "Neighbourly",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-05-31T00:00:00.000Z",
-    "venue": "Capital Ballroom",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 8
+    "popularity": 100300
   },
   {
     "artist": {
       "id": "",
-      "name": "Attila Fias",
+      "name": "Lady Phyl",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-01T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 9
+    "popularity": 100400
   },
   {
     "artist": {
       "id": "",
-      "name": "Spencer Hiemstra",
+      "name": "Bucan Bucan",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-01T00:00:00.000Z",
-    "venue": "Merridale Cider",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 10
+    "popularity": 100500
   },
   {
     "artist": {
       "id": "",
-      "name": "Decryptor",
+      "name": "Bu VonBlume",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-07T00:00:00.000Z",
-    "venue": "Quadratic Sound",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 13
+    "popularity": 100600
   },
   {
     "artist": {
       "id": "",
-      "name": "Suzie Ungerleider",
+      "name": "Cara Bateman",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-15T00:00:00.000Z",
-    "venue": "Victoria House",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 16
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Orchid Orchestra",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-15T00:00:00.000Z",
-    "venue": "Rebel Company Garage",
-    "isMissing": false,
-    "popularity": 17
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Shark Bite Spite",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-15T00:00:00.000Z",
-    "venue": "Rebel Company Garage",
-    "isMissing": false,
-    "popularity": 17
+    "popularity": 100700
   },
   {
     "artist": {
       "id": "",
-      "name": "Savannah Read",
+      "name": "Blase Blase",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-15T00:00:00.000Z",
-    "venue": "Rebel Company Garage",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 17
+    "popularity": 100800
   },
   {
     "artist": {
       "id": "",
-      "name": "The Slackers",
+      "name": "Davers",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "Victoria Curling Club",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 20
+    "popularity": 100900
   },
   {
     "artist": {
       "id": "",
-      "name": "Batuque Axé",
+      "name": "Posh Coat",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "Ship Point (Inner Harbour)",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 21
+    "popularity": 101000
   },
   {
     "artist": {
       "id": "",
-      "name": "Madeleine Roger",
+      "name": "Jacob Weil",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 22
+    "popularity": 101100
   },
   {
     "artist": {
       "id": "",
-      "name": "Y La Bamba",
+      "name": "Ghostly Hounds",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "Campbell Bay",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 23
+    "popularity": 101200
   },
   {
     "artist": {
       "id": "",
-      "name": "LA LOM",
+      "name": "Grapefruit is Impossible",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-21T00:00:00.000Z",
-    "venue": "",
+    "date": "2024-06-14T00:00:00.000Z",
+    "venue": "Fernwood Square",
     "isMissing": false,
-    "popularity": 24
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "The Planet Smashers",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-22T00:00:00.000Z",
-    "venue": "Victoria Ska Festival",
-    "isMissing": false,
-    "popularity": 25
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Mephiskapheles",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-22T00:00:00.000Z",
-    "venue": "Victoria Curling Club",
-    "isMissing": false,
-    "popularity": 26
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Tank Gyal",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-22T00:00:00.000Z",
-    "venue": "Ship Point (Inner Harbour)",
-    "isMissing": false,
-    "popularity": 27
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Marina P",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-22T00:00:00.000Z",
-    "venue": "Ship Point (Inner Harbour)",
-    "isMissing": false,
-    "popularity": 27
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Garrett Kato",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-23T00:00:00.000Z",
-    "venue": "Victoria Jazz Festival",
-    "isMissing": false,
-    "popularity": 28
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "SNAK THE RIPPER",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-06-28T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 32
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Mike Edel",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-03T00:00:00.000Z",
-    "venue": "Pender Island Community Hall",
-    "isMissing": false,
-    "popularity": 45
+    "popularity": 101300
   }
 ]
