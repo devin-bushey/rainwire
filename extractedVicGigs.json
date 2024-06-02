@@ -2,15 +2,267 @@
   {
     "artist": {
       "id": "",
-      "name": "Ranger",
+      "name": "Attila Fias",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-06-14T00:00:00.000Z",
-    "venue": "Fernwood Square",
+    "date": "2024-06-01T00:00:00.000Z",
+    "venue": "Hermann's Jazz Club",
     "isMissing": false,
     "popularity": 0
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Spencer Hiemstra",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-01T00:00:00.000Z",
+    "venue": "Merridale Cider",
+    "isMissing": false,
+    "popularity": 1
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Dan wriggins",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-03T00:00:00.000Z",
+    "venue": "Little Fernwood",
+    "isMissing": false,
+    "popularity": 2
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Leeroy Stagger",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-07T00:00:00.000Z",
+    "venue": "Hermann's Jazz Club",
+    "isMissing": false,
+    "popularity": 3
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Decryptor",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-07T00:00:00.000Z",
+    "venue": "Quadratic Sound",
+    "isMissing": false,
+    "popularity": 4
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Vampires and Leeches",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-07T00:00:00.000Z",
+    "venue": "Quadratic Sound",
+    "isMissing": false,
+    "popularity": 4
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Dissolver",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-07T00:00:00.000Z",
+    "venue": "Quadratic Sound",
+    "isMissing": false,
+    "popularity": 4
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Orchid Orchestra",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-15T00:00:00.000Z",
+    "venue": "Rebel Company Garage",
+    "isMissing": false,
+    "popularity": 10
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Summer's Brother",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-20T00:00:00.000Z",
+    "venue": "Victoria Events Centre",
+    "isMissing": false,
+    "popularity": 12
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Hot Pot",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-20T00:00:00.000Z",
+    "venue": "Victoria Events Centre",
+    "isMissing": false,
+    "popularity": 12
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Silverware",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-06-20T00:00:00.000Z",
+    "venue": "Victoria Events Centre",
+    "isMissing": false,
+    "popularity": 12
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Ghostly Hounds",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-18T00:00:00.000Z",
+    "venue": "Willow's Beach Concert Series",
+    "isMissing": false,
+    "popularity": 38
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "HAWKING",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-26T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 42
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Invisible Hands",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-27T00:00:00.000Z",
+    "venue": "Artistree Festival",
+    "isMissing": false,
+    "popularity": 43
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Slim Sandy",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-27T00:00:00.000Z",
+    "venue": "Artistree Festival",
+    "isMissing": false,
+    "popularity": 43
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "DJ Primitive",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-27T00:00:00.000Z",
+    "venue": "Artistree Festivale",
+    "isMissing": false,
+    "popularity": 43
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Pony Gold",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-27T00:00:00.000Z",
+    "venue": "Artistree Festivale",
+    "isMissing": false,
+    "popularity": 43
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Takahashi",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-27T00:00:00.000Z",
+    "venue": "Artistree Festivale",
+    "isMissing": false,
+    "popularity": 43
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "The Harpoonist",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-08-03T00:00:00.000Z",
+    "venue": "Pender Island Community Hall",
+    "isMissing": false,
+    "popularity": 46
   }
 ]
