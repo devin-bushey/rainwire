@@ -16,21 +16,35 @@
   {
     "artist": {
       "id": "",
-      "name": "Ghostly Hounds",
+      "name": "bratboy",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
     "date": "2024-07-18T00:00:00.000Z",
-    "venue": "Willow's Beach Concert Series",
+    "venue": "Lucky Bar",
     "isMissing": false,
-    "popularity": 1
+    "popularity": 2
   },
-  {
+    {
     "artist": {
       "id": "",
-      "name": "bratboy\n                    Blush. (Canada) and Shoplifter",
+      "name": "Blush",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-18T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 2
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Shoplifter",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -44,7 +58,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Hannah Epperson and KRUT",
+      "name": "Hannah Epperson",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-18T00:00:00.000Z",
+    "venue": "First Metropolitan United Church",
+    "isMissing": false,
+    "popularity": 3
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "KRUT",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -114,7 +142,35 @@
   {
     "artist": {
       "id": "",
-      "name": "HAWKING and Cliffside\n                    ENDR and Lucid Karma",
+      "name": "ENDR",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-26T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 8
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "HAWKING and Cliffside",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-07-26T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 8
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Lucid Karma",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -128,7 +184,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Artistree Festival 2024\n                    Invisible Hands, Slim Sandy, DJ Primitive, Pony Gold, and Takahashi",
+      "name": "Pony Gold",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -184,7 +240,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Sister Ray (CA)",
+      "name": "Sister Ray",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -212,7 +268,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Mosaic Festival 2024\n                    The Harpoonist",
+      "name": "The Harpoonist",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -240,7 +296,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Phillips Backyard Music Festival 2024\n                    Jungle and DRAMA",
+      "name": "Jungle",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -268,7 +324,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Transitional Alien\n                    Conjure Hand",
+      "name": "Transitional Alien",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -394,7 +450,21 @@
   {
     "artist": {
       "id": "",
-      "name": "John Fogerty and Hearty Har",
+      "name": "John Fogerty",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-08-23T00:00:00.000Z",
+    "venue": "Save-On-Foods Memorial Centre",
+    "isMissing": false,
+    "popularity": 28
+  }, 
+  {
+    "artist": {
+      "id": "",
+      "name": "Hearty Har",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -422,7 +492,7 @@
   {
     "artist": {
       "id": "",
-      "name": "CUBE (oakland, ca) and Hen House (oakland, ca)",
+      "name": "CUBE",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -432,20 +502,6 @@
     "venue": "Oaklands Community Centre",
     "isMissing": false,
     "popularity": 30
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Golden Hour 2024",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-24T00:00:00.000Z",
-    "venue": "The 44 Collective -",
-    "isMissing": false,
-    "popularity": 31
   },
   {
     "artist": {
@@ -464,7 +520,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Boy & Bear\n                    Boo Seeka",
+      "name": "Boy & Bear",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-01T00:00:00.000Z",
+    "venue": "Capitol Ballroom",
+    "isMissing": false,
+    "popularity": 33
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Boo Seeka",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -534,20 +604,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Rifflandia 2024\n                    Rezz, Bensley, ATYYA, Nostalgix, SkiiTour, Glass Petals, Aysanabee, and Suray Sertin",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-13T00:00:00.000Z",
-    "venue": "Rifflandia Festival Site",
-    "isMissing": false,
-    "popularity": 38
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "MEMBA",
       "topTracks": [],
       "uri": "",
@@ -562,7 +618,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Allah-Las\n                    Maston",
+      "name": "Allah-Las",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-19T00:00:00.000Z",
+    "venue": "Wicket Hall",
+    "isMissing": false,
+    "popularity": 40
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Maston",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -576,7 +646,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Fucked Up\n                    Chastity",
+      "name": "Fucked Up",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-23T00:00:00.000Z",
+    "venue": "Capital Ballroom",
+    "isMissing": false,
+    "popularity": 41
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Chastity",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -618,7 +702,21 @@
   {
     "artist": {
       "id": "",
-      "name": "Paula Abdul\n                    Taylor Dayne and Tiffany",
+      "name": "Paula Abdul",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-25T00:00:00.000Z",
+    "venue": "Save-On-Foods Memorial Centre",
+    "isMissing": false,
+    "popularity": 44
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Taylor Dayne and Tiffany",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -660,7 +758,7 @@
   {
     "artist": {
       "id": "",
-      "name": "Donovan Woods\n                    Billianne",
+      "name": "Donovan Woods",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
@@ -674,7 +772,21 @@
   {
     "artist": {
       "id": "",
-      "name": "The Crisp 2024\n                    Dan Mangan and Astrocolor",
+      "name": "Dan Mangan",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-10-04T00:00:00.000Z",
+    "venue": "Pender Island Community Hall",
+    "isMissing": false,
+    "popularity": 48
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Astrocolor",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
