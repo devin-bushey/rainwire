@@ -2,286 +2,6 @@
   {
     "artist": {
       "id": "",
-      "name": "Ghostly Hounds",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-17T00:00:00.000Z",
-    "venue": "Oaklands Sunset Market",
-    "isMissing": false,
-    "popularity": 0
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "bratboy",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-18T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 2
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Blush",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-18T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 2
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Shoplifter",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-18T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 2
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Hannah Epperson",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-18T00:00:00.000Z",
-    "venue": "First Metropolitan United Church",
-    "isMissing": false,
-    "popularity": 3
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "KRUT",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-18T00:00:00.000Z",
-    "venue": "First Metropolitan United Church",
-    "isMissing": false,
-    "popularity": 3
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Steph Strings",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-19T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 4
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "James Vincent McMorrow",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-21T00:00:00.000Z",
-    "venue": "Charlie White Theatre, Mary Winspear Centre",
-    "isMissing": false,
-    "popularity": 5
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Brenda Morie",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-21T00:00:00.000Z",
-    "venue": "Hermann's Jazz Club",
-    "isMissing": false,
-    "popularity": 6
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Compactor, Mot, Fussing, and Pseudo 73",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-22T00:00:00.000Z",
-    "venue": "Intrepid Theatre",
-    "isMissing": false,
-    "popularity": 7
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "ENDR",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-26T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 8
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "HAWKING and Cliffside",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-26T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 8
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Lucid Karma",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-26T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 8
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Pony Gold",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-27T00:00:00.000Z",
-    "venue": "Government House",
-    "isMissing": false,
-    "popularity": 9
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Sway Wild",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-28T00:00:00.000Z",
-    "venue": "",
-    "isMissing": false,
-    "popularity": 10
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Charis Tazumi",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-30T00:00:00.000Z",
-    "venue": "Cameron Bandshell, Beacon Hill Park",
-    "isMissing": false,
-    "popularity": 11
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Leeroy Stagger",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-07-31T00:00:00.000Z",
-    "venue": "Pioneer Park",
-    "isMissing": false,
-    "popularity": 12
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Sister Ray",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-01T00:00:00.000Z",
-    "venue": "Lucky Bar",
-    "isMissing": false,
-    "popularity": 13
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Mike Edel",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-03T00:00:00.000Z",
-    "venue": "Pender Island Community Hall",
-    "isMissing": false,
-    "popularity": 14
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "The Harpoonist",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-03T00:00:00.000Z",
-    "venue": "Pender Island Community Hall",
-    "isMissing": false,
-    "popularity": 15
-  },
-  {
-    "artist": {
-      "id": "",
       "name": "The McDades",
       "topTracks": [],
       "uri": "",
@@ -291,21 +11,7 @@
     "date": "2024-08-07T00:00:00.000Z",
     "venue": "Butchart Gardens",
     "isMissing": false,
-    "popularity": 16
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Jungle",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-09T00:00:00.000Z",
-    "venue": "Phillips Brewery",
-    "isMissing": false,
-    "popularity": 17
+    "popularity": 0
   },
   {
     "artist": {
@@ -319,9 +25,9 @@
     "date": "2024-08-10T00:00:00.000Z",
     "venue": "Upper Fort StreetFest",
     "isMissing": false,
-    "popularity": 18
+    "popularity": 3
   },
-  {
+    {
     "artist": {
       "id": "",
       "name": "Transitional Alien",
@@ -333,7 +39,21 @@
     "date": "2024-08-10T00:00:00.000Z",
     "venue": "Phoenix Bar and Grill",
     "isMissing": false,
-    "popularity": 19
+    "popularity": 4
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Conjure Hand",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-08-10T00:00:00.000Z",
+    "venue": "Phoenix Bar and Grill",
+    "isMissing": false,
+    "popularity": 4
   },
   {
     "artist": {
@@ -347,7 +67,7 @@
     "date": "2024-08-13T00:00:00.000Z",
     "venue": "Cameron Bandshell, Beacon Hill Park",
     "isMissing": false,
-    "popularity": 20
+    "popularity": 5
   },
   {
     "artist": {
@@ -361,7 +81,7 @@
     "date": "2024-08-14T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 21
+    "popularity": 6
   },
   {
     "artist": {
@@ -375,7 +95,7 @@
     "date": "2024-08-15T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 22
+    "popularity": 7
   },
   {
     "artist": {
@@ -389,7 +109,7 @@
     "date": "2024-08-15T00:00:00.000Z",
     "venue": "Caffe Fantastico Roastery",
     "isMissing": false,
-    "popularity": 23
+    "popularity": 8
   },
   {
     "artist": {
@@ -403,7 +123,7 @@
     "date": "2024-08-15T00:00:00.000Z",
     "venue": "Hermann's Jazz Club",
     "isMissing": false,
-    "popularity": 24
+    "popularity": 9
   },
   {
     "artist": {
@@ -417,7 +137,7 @@
     "date": "2024-08-16T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 25
+    "popularity": 10
   },
   {
     "artist": {
@@ -431,7 +151,7 @@
     "date": "2024-08-17T00:00:00.000Z",
     "venue": "Hermann's Jazz Club",
     "isMissing": false,
-    "popularity": 26
+    "popularity": 11
   },
   {
     "artist": {
@@ -445,35 +165,21 @@
     "date": "2024-08-22T00:00:00.000Z",
     "venue": "Fort Common",
     "isMissing": false,
-    "popularity": 27
+    "popularity": 13
   },
   {
     "artist": {
       "id": "",
-      "name": "John Fogerty",
+      "name": "Matt Storm",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-08-23T00:00:00.000Z",
-    "venue": "Save-On-Foods Memorial Centre",
+    "date": "2024-08-22T00:00:00.000Z",
+    "venue": "Paul Phillips Hall",
     "isMissing": false,
-    "popularity": 28
-  }, 
-  {
-    "artist": {
-      "id": "",
-      "name": "Hearty Har",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-23T00:00:00.000Z",
-    "venue": "Save-On-Foods Memorial Centre",
-    "isMissing": false,
-    "popularity": 28
+    "popularity": 14
   },
   {
     "artist": {
@@ -487,21 +193,7 @@
     "date": "2024-08-23T00:00:00.000Z",
     "venue": "Ship Point (Inner Harbour)",
     "isMissing": false,
-    "popularity": 29
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "CUBE",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-08-23T00:00:00.000Z",
-    "venue": "Oaklands Community Centre",
-    "isMissing": false,
-    "popularity": 30
+    "popularity": 15
   },
   {
     "artist": {
@@ -515,9 +207,9 @@
     "date": "2024-08-29T00:00:00.000Z",
     "venue": "Upstairs Cabaret",
     "isMissing": false,
-    "popularity": 32
+    "popularity": 22
   },
-  {
+    {
     "artist": {
       "id": "",
       "name": "Boy & Bear",
@@ -529,9 +221,9 @@
     "date": "2024-09-01T00:00:00.000Z",
     "venue": "Capitol Ballroom",
     "isMissing": false,
-    "popularity": 33
+    "popularity": 23
   },
-    {
+  {
     "artist": {
       "id": "",
       "name": "Boo Seeka",
@@ -543,7 +235,7 @@
     "date": "2024-09-01T00:00:00.000Z",
     "venue": "Capitol Ballroom",
     "isMissing": false,
-    "popularity": 33
+    "popularity": 23
   },
   {
     "artist": {
@@ -557,7 +249,77 @@
     "date": "2024-09-01T00:00:00.000Z",
     "venue": "Lucky Bar",
     "isMissing": false,
-    "popularity": 34
+    "popularity": 24
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Poor Sport",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-01T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 25
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "Razorvoice",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-01T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 25
+  },
+    {
+    "artist": {
+      "id": "",
+      "name": "King Bob",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-01T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 25
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Calling All Captains",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-01T00:00:00.000Z",
+    "venue": "Lucky Bar",
+    "isMissing": false,
+    "popularity": 25
+  },
+  {
+    "artist": {
+      "id": "",
+      "name": "Flo Rida",
+      "topTracks": [],
+      "uri": "",
+      "albumArtUrl": "",
+      "link": ""
+    },
+    "date": "2024-09-04T00:00:00.000Z",
+    "venue": "Save-On-Foods Memorial Centre",
+    "isMissing": false,
+    "popularity": 26
   },
   {
     "artist": {
@@ -571,7 +333,7 @@
     "date": "2024-09-08T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 35
+    "popularity": 27
   },
   {
     "artist": {
@@ -585,7 +347,7 @@
     "date": "2024-09-12T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 36
+    "popularity": 28
   },
   {
     "artist": {
@@ -599,37 +361,10 @@
     "date": "2024-09-13T00:00:00.000Z",
     "venue": "The 44 Collective -",
     "isMissing": false,
-    "popularity": 37
+    "popularity": 29
   },
+
   {
-    "artist": {
-      "id": "",
-      "name": "MEMBA",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-15T00:00:00.000Z",
-    "venue": "Rifflandia",
-    "isMissing": false,
-    "popularity": 39
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Allah-Las",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-19T00:00:00.000Z",
-    "venue": "Wicket Hall",
-    "isMissing": false,
-    "popularity": 40
-  },
-    {
     "artist": {
       "id": "",
       "name": "Maston",
@@ -641,35 +376,7 @@
     "date": "2024-09-19T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 40
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Fucked Up",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-23T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 41
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Chastity",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-23T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 41
+    "popularity": 32
   },
   {
     "artist": {
@@ -683,7 +390,7 @@
     "date": "2024-09-24T00:00:00.000Z",
     "venue": "Wicket Hall",
     "isMissing": false,
-    "popularity": 42
+    "popularity": 34
   },
   {
     "artist": {
@@ -697,117 +404,20 @@
     "date": "2024-09-25T00:00:00.000Z",
     "venue": "Capital Ballroom",
     "isMissing": false,
-    "popularity": 43
+    "popularity": 35
   },
+
   {
     "artist": {
       "id": "",
-      "name": "Paula Abdul",
+      "name": "Jim Cuddy",
       "topTracks": [],
       "uri": "",
       "albumArtUrl": "",
       "link": ""
     },
-    "date": "2024-09-25T00:00:00.000Z",
-    "venue": "Save-On-Foods Memorial Centre",
-    "isMissing": false,
-    "popularity": 44
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Taylor Dayne and Tiffany",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-25T00:00:00.000Z",
-    "venue": "Save-On-Foods Memorial Centre",
-    "isMissing": false,
-    "popularity": 44
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Ruby Waters",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-09-26T00:00:00.000Z",
-    "venue": "Capital Ballroom",
-    "isMissing": false,
-    "popularity": 45
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Billianne",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-10-03T00:00:00.000Z",
+    "date": "2024-11-13T00:00:00.000Z",
     "venue": "McPherson Playhouse",
-    "isMissing": false,
-    "popularity": 46
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Donovan Woods",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-10-03T00:00:00.000Z",
-    "venue": "McPherson Playhouse",
-    "isMissing": false,
-    "popularity": 47
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Dan Mangan",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-10-04T00:00:00.000Z",
-    "venue": "Pender Island Community Hall",
-    "isMissing": false,
-    "popularity": 48
-  },
-    {
-    "artist": {
-      "id": "",
-      "name": "Astrocolor",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-10-04T00:00:00.000Z",
-    "venue": "Pender Island Community Hall",
-    "isMissing": false,
-    "popularity": 48
-  },
-  {
-    "artist": {
-      "id": "",
-      "name": "Boy Golden",
-      "topTracks": [],
-      "uri": "",
-      "albumArtUrl": "",
-      "link": ""
-    },
-    "date": "2024-10-09T00:00:00.000Z",
-    "venue": "Wicket Hall",
     "isMissing": false,
     "popularity": 49
   }
